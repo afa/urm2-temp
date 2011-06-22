@@ -14,6 +14,7 @@ gem 'unicorn'
 gem "haml-rails"
 gem "sass"
 gem "jquery-rails"
+gem "clearance"
 
 # Deploy with Capistrano
 # gem 'capistrano'
