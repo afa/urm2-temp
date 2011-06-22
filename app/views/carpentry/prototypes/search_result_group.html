@@ -1,0 +1,941 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ПБС - партнерская бизнес-система | Результаты поиска</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" />
+<link rel="stylesheet" href="css/layout.css" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.4.3.min.js"></script>
+<script type="text/javascript" src="js/jquery.header.js"></script>
+<script type="text/javascript" src="js/jquery.table.js"></script>
+<script type="text/javascript" src="js/jquery.controls.js"></script>
+<script type="text/javascript" src="js/jquery.hint.js"></script>
+<script type="text/javascript" src="js/jquery.lightbox.js"></script>
+<script type="text/javascript" src="js/jquery.validationEngine-ru.js"></script>
+<script type="text/javascript" src="js/jquery.validationEngine.js"></script>
+<script type="text/javascript">
+
+	//Настройки интерфейса
+	var settings = {
+			animation: true, //Включить/выключить анимацию элементов интерфейса
+			header: { //Шапка
+				hide: true, //Показать/скрыть
+				//static: false, //Статическая/фиксированная (прижата к верхней границе браузера)
+				speedAnimation: 500 //Скорость анимации
+			},
+			cartBox: { //Блок с корзиной в шапке
+				hide: true, //Показать/скрыть
+				speedAnimation: 500  //Скорость анимации
+			},
+			searchBox: { //Блок поиска
+				hide: false //Показать/скрыть
+			},
+			controls: { //Элементы управления
+				inputInCart: { //Поле ввода "Добавить в корзину" для таблицы вывода списка продукции
+					speedIconShow: true, //Наличие иконки быстрого оформления заказа
+					speedIconTimeShow: 2000, //Время показа иконки быстрого оформления заказа
+					speedIconAnimate: 400 //Скорость появления иконки быстрого оформления заказа
+				},
+				dropDown: { //Раскрывающийся блок
+					speed: 500 //Скорость анимации
+				}
+			}
+		}
+	
+	$(function(){
+		
+		//Шапка (файл: jquery.header.js)
+		$('#header').header();
+		
+		//Корзина в шапке (файл: jquery.header.js)
+		$('.cart-block-slider').cartBox();
+		
+		//Поиск в шапке (файл: jquery.header.js)
+		$('.search-block').searchBox();
+		
+		//Таблица результатов поиска
+		$('.table-navigation-block').table();
+		
+		//Скроллинг таблиц
+		tableScroller.refresh();
+		
+		//Выпадающие списки (файл: jquery.controls.js)
+		$('.select').selectList();
+		
+		//Кнопки
+		$('.button-style').button();
+		
+		//Фильтры
+		$('.switch').switchControl();
+		
+		// Хинты
+		$('.hint').hint();
+		
+		// Всплывающие окна
+		$('.cart-block .cart-popup').lightbox({
+			title:'В корзине',
+			titleClass:'cart'
+		});
+		
+	});
+	
+</script>
+</head>
+<body>
+<div class="all">
+	
+	<div class="scroller-table"><div class="scroll-content-width"></div></div>
+	
+	<!-- Попап корзины -->
+	<div style="display:none"><div class="popap" id="cart-popup">
+		<div class="cart-popup">
+			<div class="popup-content-stand">
+				<span class="switch radio">Показать: <a href="#" class="active"><span>Все</span></a> <a href="#"><span>Заказ</span></a> <a href="#"><span>ДМС</span></a> <a href="#"><span>Запрос</span></a></span>
+			</div>
+			<div class="popup-content-scroll">
+				<div class="table-navigation-block">
+					<table class="table-style cart-min">
+						<tr>
+							<th>&nbsp;</th>
+							<th>Тип</th>
+							<th class="text-left">Наименование</th>
+							<th class="text-left">Произв. </th>
+							<th class="bold">В корзину</th>
+							<th>Склад</th>
+							<th>Цена</th>
+							<th>ROHS</th>
+						</tr>
+						<tr>
+							<td class="icons"><div class="icon"><a href="#" class="delete delete-from-cart"></a></div></td>
+							<td class="icons type"><div class="icon order"></div></td>
+							<td class="text-left">TDA2003</td>
+							<td class="text-left">ST</td>
+							<td class="input-in-cart exist"><div><a href="#" class="speed-cart-button"><span><span>&nbsp;</span></span></a><input type="text" value="280" /><a href="#" class="count">280</a></div></td>
+							<td>CENTER</td>
+							<td class="green">0,5435</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="icons"><div class="icon"><a href="#" class="delete delete-from-cart"></a></div></td>
+							<td class="icons type">Запрос</td>
+							<td class="text-left">NXP34093485</td>
+							<td class="text-left">Orbita</td>
+							<td class="input-in-cart exist"><div><a href="#" class="speed-cart-button"><span><span>&nbsp;</span></span></a><input type="text" value="20" /><a href="#" class="count">20</a></div></td>
+							<td>CENTER</td>
+							<td class="green">0,5435</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="icons"><div class="icon"><a href="#" class="delete delete-from-cart"></a></div></td>
+							<td class="icons type"><div class="icon dms"></div></td>
+							<td class="text-left">TDA2003</td>
+							<td class="text-left">Orbita</td>
+							<td class="input-in-cart exist"><div><a href="#" class="speed-cart-button"><span><span>&nbsp;</span></span></a><input type="text" value="5" /><a href="#" class="count">5</a></div></td>
+							<td>CENTER</td>
+							<td class="green">0,5435</td>
+							<td></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="popup-content-stand">
+				<a href="cart.html" class="button-style">
+					<i class="t">&nbsp;</i><i class="b">&nbsp;</i><i class="tl">&nbsp;</i><i class="tr">&nbsp;</i>
+					<span class="icon pointer"><span class="icon cart"><span class="icon text">К оформлению</span></span></span>
+					<i class="bl">&nbsp;</i><i class="br">&nbsp;</i>							</a>
+				<div class="total">
+					Итого позиций: <span class="red">3; Общая сумма:  $456</span>
+					<br /><span class="grey">ДМС:</span> $44,96<span class="grey">, В заказ: </span>$53,18 <span class="grey">Вес:</span> 0,20кг							</div>
+			</div>
+		</div>
+	</div></div>
+	<!-- //end Попап корзины -->
+	
+	<!-- Шапка -->
+	<div id="header-height" style="display:none;"></div>
+	<div id="header" class="header-static"><div class="header-hid"><div class="header-wrap">
+		
+		<div class="header-panel"><div class="back-hp1"><div class="back-hp2"><div class="back-hp3">
+			<div class="logo-name"><img src="images/header_name.gif" alt="Партнерская бизнес-система" /></div>
+			<div class="logo-company"><img src="images/header_logo.gif" alt="Компэл" /></div>
+			<div class="info-block">
+				<div class="informer">
+					<div class="today">Сегодня:</div>
+					<div class="date">Вторник,<br />11 мая 2010 г.</div>
+					<div class="rate">Курс $ = 30,3450 р.</div>
+				</div>
+				<div class="line"></div>
+				<div class="user-block">
+					<span class="name">Петров Николай Васильевич</span>
+					<div class="comp">ООО "Рога и копыта.РУ"</div>
+					<a href="#">Настройки</a><a href="#" class="quite">Выход из системы</a>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div></div></div></div>
+		
+		<div class="button-slide-panel"><a href="#" class="button-slide up"></a></div>
+		
+		<div class="main-menu">
+			<div class="corner-l"></div>
+			<div class="corner-r"></div>
+			<div class="button">
+				<div class="button-shadow"><i class="b1"></i><i class="b2"></i><i class="b3"><i></i></i><a href="index.html" class="link">Главная</a></div>
+			</div>
+			<div class="button">
+				<div class="button-shadow"><i class="b1"></i><i class="b2"></i><i class="b3"><i></i></i><a href="#" class="link">Бизнес</a></div>
+				<div class="submenu-shadow">
+					<i class="b1"></i><i class="b2"></i><i class="b3"></i><i class="b4"><i></i></i><i class="b5"><i></i></i><i class="b6"></i><i class="b7"></i><i class="b8"></i>
+					<ul class="submenu">
+						<li><a href="#"><span>Запросы</span></a></li>
+						<li><a href="orders.html" class="order"><span>Заказы</span></a></li>
+						<li><a href="#"><span>Грузы</span></a></li>
+						<li>
+							<a href="#"><span>Исходящие грузы</span></a>
+							<ul>
+								<li><a href="#"><span>Строки заказа</span></a></li>
+								<li><a href="#"><span>Контроль продолжительности резервирования</span></a></li>
+								<li><a href="#"><span>Открытые строки заказов</span></a></li>
+								<li><a href="#"><span>Строки заказа клиента</span></a></li>
+							</ul>
+						</li>
+						<li class="active"><a href="#"><span>Накладные</span></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="button">
+				<div class="button-shadow"><i class="b1"></i><i class="b2"></i><i class="b3"><i></i></i><a href="#" class="link">Аналитика</a></div>
+			</div>
+			<div class="button">
+				<div class="button-shadow"><i class="b1"></i><i class="b2"></i><i class="b3"><i></i></i><a href="#" class="link">Сообщения &nbsp; <span class="counter"><i class="c1"></i><i class="c2"></i>327</span></a></div>
+			</div>
+		</div>
+		
+		<div class="tabs-block">
+			<a href="#" class="tab tab-search" style="display:none">Поиск</a>
+		</div>
+		
+		<div class="cart-block"><div class="cart-block-wrap">
+			<div class="cart-block-slider">
+				<div class="info">
+					<div class="item">ДМС: $44,96 </div>
+					<div class="item">В заказ: $53,18</div>
+					<div class="item">Вес: 0,20кг </div>
+					<div class="item"><a href="#cart-popup" class="cart-popup">В корзине: 215</a></div>
+				</div>
+				<div class="title"><div class="back-l"><div class="back-r">
+					<a href="cart.html" class="order"><span class="icon-pointer"><span class="icon">&nbsp;</span></span></a>
+					<a href="#" class="panel close">Корзина</a>
+				</div></div></div>
+			</div>
+		</div></div>
+		
+		<div class="clear"></div>
+		
+		<div class="search-block">
+			<div class="back-x"><div class="back-l"><div class="back-r">
+				<a href="#" class="close-link"><span>свернуть</span></a>
+				<div class="search-tabs">
+					<a href="#"><span><span>Список</span></span></a>
+					<a href="#" class="active"><span><span>Поиск по наименованию</span></span></a>
+					<a href="#"><span><span>Артикул ДМС (Farnel, Newark)</span></span></a>
+					<a href="#"><span><span>По параметрам</span></span></a>
+					<a href="#" class="more">Еще</a>				</div>
+				<div class="search-tab-block" style="display:none">
+					<form action=" ">
+						<div class="field">
+							<textarea class="list-area" cols="1" rows="1">
+TDA2003;OR;300
+OPA129U;TI;1
+IRFP044;;3
+215035;50
+189566;50
+OPA129U;TI;1
+IRFP044;;3
+215035;50
+189566;50
+							</textarea>
+						</div>
+						<div class="button">
+							<a href="#" class="button-style">
+								<i class="t">&nbsp;</i><i class="b">&nbsp;</i><i class="tl">&nbsp;</i><i class="tr">&nbsp;</i>
+								<span>Найти!</span>
+								<i class="bl">&nbsp;</i><i class="br">&nbsp;</i>
+							</a>
+						</div>
+						<div class="clear"></div>
+					</form>
+				</div>
+				<div class="search-tab-block">
+					<form action=" ">
+						<div class="field">
+							<input type="text" value="TDA2003;OR;300" />
+						</div>
+						<div class="button">
+							<a href="#" class="button-style">
+								<i class="t">&nbsp;</i><i class="b">&nbsp;</i><i class="tl">&nbsp;</i><i class="tr">&nbsp;</i>
+								<span>Найти!</span>
+								<i class="bl">&nbsp;</i><i class="br">&nbsp;</i>
+							</a>
+						</div>
+						<div class="clear"></div>
+					</form>
+				</div>
+				<div class="search-tab-block" style="display:none">
+					<form action=" ">
+						<div class="field">
+							<input type="text" value="TDA2003;OR;400" />
+						</div>
+						<div class="button">
+							<a href="#" class="button-style">
+								<i class="t">&nbsp;</i><i class="b">&nbsp;</i><i class="tl">&nbsp;</i><i class="tr">&nbsp;</i>
+								<span>Найти!</span>
+								<i class="bl">&nbsp;</i><i class="br">&nbsp;</i>
+							</a>
+						</div>
+						<div class="clear"></div>
+					</form>
+				</div>
+				<div class="search-tab-block" style="display:none">
+					<form action=" ">
+						<div class="field">
+							<input type="text" value="TDA2003;OR;500" />
+						</div>
+						<div class="button">
+							<a href="#" class="button-style">
+								<i class="t">&nbsp;</i><i class="b">&nbsp;</i><i class="tl">&nbsp;</i><i class="tr">&nbsp;</i>
+								<span>Найти!</span>
+								<i class="bl">&nbsp;</i><i class="br">&nbsp;</i>
+							</a>
+						</div>
+						<div class="clear"></div>
+					</form>
+				</div>
+			</div></div></div>
+		</div>
+		
+		<div class="search-result-block">
+			<div class="main-title">Результаты поиска</div>
+			<div class="filters">
+				<span class="switch radio">Цены: <a href="#" class="active"><span>USD</span></a> <a href="#"><span>RUB</span></a></span>
+				<span class="switch check">Показать: <a href="#" class="active"><span>Только в наличии</span></a></span>
+				<span class="switch radio">Упорядочить по: <a href="#" class="active"><span>Цене</span></a> <a href="#"><span>Наличию</span></a></span>
+				<span class="switch check none">Показать: <a href="index.html" class="active"><span>Прогноз поставки</span></a></span>
+			</div>
+		</div>
+		
+		<div class="scroll-content-block"><div class="scroll-show">
+			<div class="line"><div class="button"><a href="#"><span>&nbsp;</span></a></div></div>
+			<div class="shadow"></div>
+		</div></div>
+		<div class="global-error" style="display:none"></div>
+		
+	</div></div></div>
+	<!-- //end Шапка -->
+	
+	<!-- Контент -->
+	<div id="content"><div class="content-wrap">
+		<div id="info-ajax" style="display:none">
+			<table>
+				<tr class="sub-row-block">
+					<th class="icons border-l"><div class="icon"><a href="#" class="plus hide"></a></div></th>
+					<th colspan="19" class="border-r info">
+						<table>
+							<tr>
+								<td>
+									<div class="item-f"><a href="#">Описание</a></div>
+									<div class="item">Регистрационная позиция: <span class="color-black">Да</span></div>
+									<div class="item">Снято с производства: <span class="color-black">НЕТ</span></div>
+									<div class="item">Сегмент: <span class="color-black">Ремонт</span></div>
+								</td>
+								<td>
+									<div class="item">Брутто-объём в кубических мм: <span class="color-black">20</span></div> 
+									<div class="item">Упаковочное количество: <span class="color-black">50</span></div>
+									<div class="item">Вес брутто, г:  <span class="color-black">40</span></div>
+									<div class="item">Вид упаковки:  <span class="color-black">Линейки</span></div>
+								</td>
+								<td>
+									<div class="item"><a href="#">Комплементарные товары</a></div>
+								</td>
+								<td>
+									<a href="#"><img src="images/temp/product1.gif" alt="" /></a>
+								</td>
+							</tr>
+						</table>
+					</th>
+				</tr>
+			</table>
+		</div>
+		<div id="replacement-ajax" style="display:none">
+			<table>
+				<tr class="sub-row-table yel-back">
+					<th class="icons border-l border-bn"><div class="icon"><a href="#" class="plus hide"></a></div></th>
+					<th class="text-left border-bn name">Замены</th>
+					<th class="text-left">Произв.</th>
+					<th class="bold">К заказу</th>
+					<th class="double-first-cell">Min</th>
+					<th class="double-last-cell">Max</th>
+					<th>Прогноз</th>
+					<th>Цена1</th>
+					<th>К2</th>
+					<th>Ц2</th>
+					<th>К3</th>
+					<th>Ц3</th>
+					<th>К4</th>
+					<th>Ц4</th>
+					<th>Корпус</th>
+					<th>Упак.</th>
+					<th>Рег. позиция</th>
+					<th>Снято с произв.</th>
+					<th>Сегмент</th>
+					<th class="border-r">Цена конеч.<br />потребителя</th>
+				</tr>
+				<tr class="sub-row-table">
+					<td class="icons border-l"><div class="icon"></div><div class="icon"><a href="#" class="pp"></a></div></td>
+					<td class="name text-left"><a href="#">TDA2003</a></td>
+					<td class="producer text-left"><a href="#">UTC</a></td>
+					<td class="input-in-cart"><div><a href="#" class="speed-cart-button"><span><span>&nbsp;</span></span></a><input type="text" class="validate[custom[onlyNumber],max[10000]]" /><a href="#" class="count"></a></div></td>
+					<td class="double-first-cell"></td>
+					<td class="double-last-cell">558</td>
+					<td>1-2 дня</td>
+					<td>0,2505</td>
+					<td class="green">24</td>
+					<td>0,3086</td>
+					<td class="green">160</td>
+					<td>0,2808</td>
+					<td class="green">300</td>
+					<td>0,1405</td>
+					<td><a href="#">TO-220</a></td>
+					<td class="grey">50</td>
+					<td>да</td>
+					<td>да</td>
+					<td><a href="#">Ремонт</a></td>
+					<td class="border-r full-price"><a href="data/full_price.html">$<small>$</small></a></td>
+				</tr>
+				<tr class="sub-row-table">
+					<td class="icons border-l"><div class="icon"></div><div class="icon"><a href="#" class="pp"></a></div></td>
+					<td class="name text-left"><a href="#">TDA2003</a></td>
+					<td class="producer text-left"><a href="#">UTC</a></td>
+					<td class="input-in-cart"><div><a href="#" class="speed-cart-button"><span><span>&nbsp;</span></span></a><input type="text" class="validate[custom[onlyNumber],max[10000]]" /><a href="#" class="count"></a></div></td>
+					<td class="double-first-cell"></td>
+					<td class="double-last-cell">558</td>
+					<td>1-2 дня</td>
+					<td>0,2505</td>
+					<td class="green">24</td>
+					<td>0,3086</td>
+					<td class="green">160</td>
+					<td>0,2808</td>
+					<td class="green">300</td>
+					<td>0,1405</td>
+					<td><a href="#">TO-220</a></td>
+					<td class="grey">50</td>
+					<td>да</td>
+					<td>да</td>
+					<td><a href="#">Ремонт</a></td>
+					<td class="border-r full-price"><a href="data/full_price.html">$<small>$</small></a></td>
+				</tr>
+			</table>
+		</div>
+		<div id="dms-ajax" style="display:none">
+			<table>
+				<tr class="sub-row-table blue-back">
+					<th class="icons border-l border-bn"><div class="icon"><a href="#" class="plus hide"></a></div></th>
+					<th class="text-left border-bn name" colspan="2">ДМС</th>
+					<th class="bold">К заказу</th>
+					<th class="double-first-cell">Min</th>
+					<th class="double-last-cell">Max</th>
+					<th>Прогноз</th>
+					<th>Цена1</th>
+					<th>К2</th>
+					<th>Ц2</th>
+					<th>К3</th>
+					<th>Ц3</th>
+					<th>К4</th>
+					<th>Ц4</th>
+					<th>Корпус</th>
+					<th>Кратн.</th>
+					<th>Обновлено</th>
+					<th></th>
+					<th></th>
+					<th class="border-r"></th>
+				</tr>
+				<tr class="sub-row-table">
+					<td class="icons border-l"></td>
+					<td class="text-left font-small" colspan="2"><a href="#">все цены по предложению</a></td>
+					<td class="input-in-cart"><div><a href="#" class="speed-cart-button"><span><span>&nbsp;</span></span></a><input type="text" class="validate[custom[onlyNumber],max[10000]]" /><a href="#" class="count"></a></div></td>
+					<td class="double-first-cell">480</td>
+					<td class="double-last-cell">1038</td>
+					<td>1-2 дня</td>
+					<td>0,2505</td>
+					<td class="green">24</td>
+					<td>0,3086</td>
+					<td class="green">160</td>
+					<td>0,2808</td>
+					<td class="green">300</td>
+					<td>0,1405</td>
+					<td><a href="#">TO-220</a></td>
+					<td class="grey">1</td>
+					<td class="font-small"><span class="color-red">! 20.11.2009</span></td>
+					<td></td>
+					<td></td>
+					<td class="border-r"></td>
+				</tr>
+				<tr class="sub-row-table">
+					<td class="icons border-l"></td>
+					<td class="text-left font-small" colspan="2"><a href="#">все цены по предложению</a></td>
+					<td class="input-in-cart"><div><a href="#" class="speed-cart-button"><span><span>&nbsp;</span></span></a><input type="text" class="validate[custom[onlyNumber],max[10000]]" /><a href="#" class="count"></a></div></td>
+					<td class="double-first-cell">15</td>
+					<td class="double-last-cell">1038</td>
+					<td>1-2 дня</td>
+					<td>0,2505</td>
+					<td class="green">24</td>
+					<td>0,3086</td>
+					<td class="green">160</td>
+					<td>0,2808</td>
+					<td class="green">300</td>
+					<td>0,1405</td>
+					<td><a href="#">TO-220</a></td>
+					<td class="grey">1</td>
+					<td class="font-small"><span class="color-red">! 20.11.2009</span></td>
+					<td></td>
+					<td></td>
+					<td class="border-r"></td>
+				</tr>
+				<tr class="sub-row-table">
+					<td class="icons border-l"></td>
+					<td class="text-left font-small" colspan="2"></td>
+					<td class="input-in-cart"><div><a href="#" class="speed-cart-button"><span><span>&nbsp;</span></span></a><input type="text" class="validate[custom[onlyNumber],max[10000]]" /><a href="#" class="count"></a></div></td>
+					<td class="double-first-cell">15</td>
+					<td class="double-last-cell">1038</td>
+					<td>1-2 дня</td>
+					<td>0,2505</td>
+					<td class="green">24</td>
+					<td>0,3086</td>
+					<td class="green">160</td>
+					<td>0,2808</td>
+					<td class="green">300</td>
+					<td>0,1405</td>
+					<td><a href="#">TO-220</a></td>
+					<td class="grey">1</td>
+					<td class="font-small"><span class="color-red">!</span> 20.11.2009</td>
+					<td></td>
+					<td></td>
+					<td class="border-r"></td>
+				</tr>
+			</table>
+		</div>
+		<div class="table-title speed-max">Сток - срок поставки 1-2 дня</div>
+		<div class="table-navigation-block scroll">
+			<div class="table-block"><div class="table-scrolling">
+				<table class="table-style search-products">
+					<tr>
+						<th rowspan="2" class="two-icons"><img src="images/spacer.gif" alt="" /></th>
+						<th class="text-left" rowspan="2">Наименование</th>
+						<th class="text-left" rowspan="2">Произв. </th>
+						<th class="bold" rowspan="2">К заказу</th>
+						<th colspan="2" class="double-cell">Доступно</th>
+						<th rowspan="2">Прогноз</th>
+						<th rowspan="2">Цена1</th>
+						<th rowspan="2">К2</th>
+						<th rowspan="2">Ц2</th>
+						<th rowspan="2">К3</th>
+						<th rowspan="2">Ц3</th>
+						<th rowspan="2">К4</th>
+						<th rowspan="2">Ц4</th>
+						<th rowspan="2">Корпус</th>
+						<th rowspan="2">Упак.</th>
+						<th rowspan="2">Рег. позиция</th>
+						<th rowspan="2">Снято с произв.</th>
+						<th rowspan="2">Сегмент</th>
+						<th rowspan="2">Цена конеч.<br />потребителя</th>
+					</tr>
+					<tr>
+						<th class="bold double-first-cell">Min</th>
+						<th class="bold double-last-cell">Max</th>
+					</tr>
+					<tr>
+						<td class="icons"><div class="icon"><a href="#" class="replacement"></a></div><div class="icon"><a href="#" class="dms"></a></div></td>
+						<td class="name text-left"><a href="#"><strong>TDA2003</strong></a></td>
+						<td class="producer text-left"><a href="#">ОРБИТА</a></td>
+						<td class="input-in-cart"><div><a href="#" class="speed-cart-button"><span><span>&nbsp;</span></span></a><input type="text" class="validate[custom[onlyNumber],max[10000]]" /><a href="#" class="count"></a></div></td>
+						<td class="double-first-cell"></td>
+						<td class="double-last-cell"></td>
+						<td>1-2 дня</td>
+						<td>0,3086</td>
+						<td class="green">24</td>
+						<td>0,3086</td>
+						<td class="green">160</td>
+						<td>0,2808</td>
+						<td class="green">300</td>
+						<td>0,1405</td>
+						<td><a href="#">TO-220</a></td>
+						<td class="grey">50</td>
+						<td>да</td>
+						<td>да</td>
+						<td><a href="#">Ремонт</a></td>
+						<td class="full-price"><a href="data/full_price.html">$<small>$</small></a></td>
+					</tr>
+					<tr>
+						<td class="icons"><div class="icon"><a href="#" class="replacement"></a></div><div class="icon"><a href="#" class="dms"></a></div></td>
+						<td class="name text-left"><a href="#"><strong>TDA2003</strong></a></td>
+						<td class="producer text-left"><a href="#">ОРБИТА</a></td>
+						<td class="input-in-cart"><div><a href="#" class="speed-cart-button"><span><span>&nbsp;</span></span></a><input type="text" class="validate[custom[onlyNumber],max[10000]]" /><a href="#" class="count"></a></div></td>
+						<td class="double-first-cell"></td>
+						<td class="double-last-cell"></td>
+						<td>1-2 дня</td>
+						<td>0,3086</td>
+						<td class="green">24</td>
+						<td>0,3086</td>
+						<td class="green">160</td>
+						<td>0,2808</td>
+						<td class="green">300</td>
+						<td>0,1405</td>
+						<td><a href="#">TO-220</a></td>
+						<td class="grey">50</td>
+						<td>да</td>
+						<td>да</td>
+						<td><a href="#">Ремонт</a></td>
+						<td class="full-price"><a href="data/full_price.html">$<small>$</small></a></td>
+					</tr>
+					<tr>
+						<td class="icons"><div class="icon"><a href="#" class="replacement"></a></div><div class="icon"><a href="#" class="dms"></a></div></td>
+						<td class="name text-left"><a href="#"><strong>TDA2003</strong></a></td>
+						<td class="producer text-left"><a href="#">ОРБИТА</a></td>
+						<td class="input-in-cart"><div><a href="#" class="speed-cart-button"><span><span>&nbsp;</span></span></a><input type="text" class="validate[custom[onlyNumber],max[10000]]" /><a href="#" class="count"></a></div></td>
+						<td class="double-first-cell"></td>
+						<td class="double-last-cell"></td>
+						<td>1-2 дня</td>
+						<td>0,3086</td>
+						<td class="green">24</td>
+						<td>0,3086</td>
+						<td class="green">160</td>
+						<td>0,2808</td>
+						<td class="green">300</td>
+						<td>0,1405</td>
+						<td><a href="#">TO-220</a></td>
+						<td class="grey">50</td>
+						<td>да</td>
+						<td>да</td>
+						<td><a href="#">Ремонт</a></td>
+						<td class="full-price"><img src="images/spacer.gif" width="800" height="1" /></td>
+					</tr>
+					<tr class="title-header-bottom">
+						<th rowspan="2">&nbsp;</th>
+						<th class="text-left" rowspan="2">Наименование</th>
+						<th class="text-left" rowspan="2">Произв. </th>
+						<th class="bold" rowspan="2">К заказу</th>
+						<th class="bold double-first-cell">Min</th>
+						<th class="bold double-last-cell">Max</th>
+						<th rowspan="2">Прогноз</th>
+						<th rowspan="2">Цена1</th>
+						<th rowspan="2">К2</th>
+						<th rowspan="2">Ц2</th>
+						<th rowspan="2">К3</th>
+						<th rowspan="2">Ц3</th>
+						<th rowspan="2">К4</th>
+						<th rowspan="2">Ц4</th>
+						<th rowspan="2">Корпус</th>
+						<th rowspan="2">Упак.</th>
+						<th rowspan="2">Рег. позиция</th>
+						<th rowspan="2">Снято с произв.</th>
+						<th rowspan="2">Сегмент</th>
+						<th rowspan="2">Цена конеч.<br />потребителя</th>
+					</tr>
+					<tr class="title-header-bottom">
+						<th colspan="2" class="double-cell">Доступно</th>
+					</tr>
+				</table>
+			</div></div>
+			<!--<div class="navigation-block">
+				<div class="scroll-block"><div class="scroll-content"></div></div>
+			</div>-->
+		</div>
+		<div class="table-title speed-mid">Поставка от 7 дней</div>
+		<div class="table-navigation-block scroll">
+			<div class="table-block"><div class="table-scrolling">
+				<table class="table-style search-products">
+					<tr>
+						<th rowspan="2" class="two-icons"><img src="images/spacer.gif" alt="" /></th>
+						<th class="text-left" rowspan="2">Наименование</th>
+						<th class="text-left" rowspan="2">Произв. </th>
+						<th class="bold" rowspan="2">К заказу</th>
+						<th colspan="2" class="double-cell">Доступно</th>
+						<th rowspan="2">Прогноз</th>
+						<th rowspan="2">Цена1</th>
+						<th rowspan="2">К2</th>
+						<th rowspan="2">Ц2</th>
+						<th rowspan="2">К3</th>
+						<th rowspan="2">Ц3</th>
+						<th rowspan="2">К4</th>
+						<th rowspan="2">Ц4</th>
+						<th rowspan="2">Корпус</th>
+						<th rowspan="2">Упак.</th>
+						<th rowspan="2">Рег. позиция</th>
+						<th rowspan="2">Снято с произв.</th>
+						<th rowspan="2">Сегмент</th>
+						<th rowspan="2">Цена конеч.<br />потребителя</th>
+					</tr>
+					<tr>
+						<th class="bold double-first-cell">Min</th>
+						<th class="bold double-last-cell">Max</th>
+					</tr>
+					<tr>
+						<td class="icons"><div class="icon"><a href="#" class="replacement"></a></div><div class="icon"><a href="#" class="dms"></a></div></td>
+						<td class="name text-left"><a href="#"><strong>TDA2003</strong></a></td>
+						<td class="producer text-left"><a href="#">ОРБИТА</a></td>
+						<td class="input-in-cart"><div><a href="#" class="speed-cart-button"><span><span>&nbsp;</span></span></a><input type="text" class="validate[custom[onlyNumber],max[10000]]" /><a href="#" class="count"></a></div></td>
+						<td class="double-first-cell"></td>
+						<td class="double-last-cell"></td>
+						<td>1-2 дня</td>
+						<td>0,3086</td>
+						<td class="green">24</td>
+						<td>0,3086</td>
+						<td class="green">160</td>
+						<td>0,2808</td>
+						<td class="green">300</td>
+						<td>0,1405</td>
+						<td><a href="#">TO-220</a></td>
+						<td class="grey">50</td>
+						<td>да</td>
+						<td>да</td>
+						<td><a href="#">Ремонт</a></td>
+						<td class="full-price"><a href="data/full_price.html">$<small>$</small></a></td>
+					</tr>
+					<tr>
+						<td class="icons"><div class="icon"><a href="#" class="replacement"></a></div><div class="icon"><a href="#" class="dms"></a></div></td>
+						<td class="name text-left"><a href="#"><strong>TDA2003</strong></a></td>
+						<td class="producer text-left"><a href="#">ОРБИТА</a></td>
+						<td class="input-in-cart"><div><a href="#" class="speed-cart-button"><span><span>&nbsp;</span></span></a><input type="text" class="validate[custom[onlyNumber],max[10000]]" /><a href="#" class="count"></a></div></td>
+						<td class="double-first-cell"></td>
+						<td class="double-last-cell"></td>
+						<td>1-2 дня</td>
+						<td>0,3086</td>
+						<td class="green">24</td>
+						<td>0,3086</td>
+						<td class="green">160</td>
+						<td>0,2808</td>
+						<td class="green">300</td>
+						<td>0,1405</td>
+						<td><a href="#">TO-220</a></td>
+						<td class="grey">50</td>
+						<td>да</td>
+						<td>да</td>
+						<td><a href="#">Ремонт</a></td>
+						<td class="full-price"><a href="data/full_price.html">$<small>$</small></a></td>
+					</tr>
+					<tr>
+						<td class="icons"><div class="icon"><a href="#" class="replacement"></a></div><div class="icon"><a href="#" class="dms"></a></div></td>
+						<td class="name text-left"><a href="#"><strong>TDA2003</strong></a></td>
+						<td class="producer text-left"><a href="#">ОРБИТА</a></td>
+						<td class="input-in-cart"><div><a href="#" class="speed-cart-button"><span><span>&nbsp;</span></span></a><input type="text" class="validate[custom[onlyNumber],max[10000]]" /><a href="#" class="count"></a></div></td>
+						<td class="double-first-cell"></td>
+						<td class="double-last-cell"></td>
+						<td>1-2 дня</td>
+						<td>0,3086</td>
+						<td class="green">24</td>
+						<td>0,3086</td>
+						<td class="green">160</td>
+						<td>0,2808</td>
+						<td class="green">300</td>
+						<td>0,1405</td>
+						<td><a href="#">TO-220</a></td>
+						<td class="grey">50</td>
+						<td>да</td>
+						<td>да</td>
+						<td><a href="#">Ремонт</a></td>
+						<td class="full-price"><img src="images/spacer.gif" width="400" height="1" /></td>
+					</tr>
+					<tr class="title-header-bottom">
+						<th rowspan="2">&nbsp;</th>
+						<th class="text-left" rowspan="2">Наименование</th>
+						<th class="text-left" rowspan="2">Произв. </th>
+						<th class="bold" rowspan="2">К заказу</th>
+						<th class="bold double-first-cell">Min</th>
+						<th class="bold double-last-cell">Max</th>
+						<th rowspan="2">Прогноз</th>
+						<th rowspan="2">Цена1</th>
+						<th rowspan="2">К2</th>
+						<th rowspan="2">Ц2</th>
+						<th rowspan="2">К3</th>
+						<th rowspan="2">Ц3</th>
+						<th rowspan="2">К4</th>
+						<th rowspan="2">Ц4</th>
+						<th rowspan="2">Корпус</th>
+						<th rowspan="2">Упак.</th>
+						<th rowspan="2">Рег. позиция</th>
+						<th rowspan="2">Снято с произв.</th>
+						<th rowspan="2">Сегмент</th>
+						<th rowspan="2">Цена конеч.<br />потребителя</th>
+					</tr>
+					<tr class="title-header-bottom">
+						<th colspan="2" class="double-cell">Доступно</th>
+					</tr>
+				</table>
+			</div></div>
+			<!--<div class="navigation-block">
+				<div class="scroll-block"><div class="scroll-content"></div></div>
+			</div>-->
+		</div>
+		<div class="table-title speed-min">Поставка от 14-60 дней</div>
+		<div class="table-navigation-block scroll">
+			<div class="table-block"><div class="table-scrolling">
+				<table class="table-style search-products">
+					<tr>
+						<th rowspan="2" class="two-icons"><img src="images/spacer.gif" alt="" /></th>
+						<th class="text-left" rowspan="2">Наименование</th>
+						<th class="text-left" rowspan="2">Произв. </th>
+						<th class="bold" rowspan="2">К заказу</th>
+						<th colspan="2" class="double-cell">Доступно</th>
+						<th rowspan="2">Прогноз</th>
+						<th rowspan="2">Цена1</th>
+						<th rowspan="2">К2</th>
+						<th rowspan="2">Ц2</th>
+						<th rowspan="2">К3</th>
+						<th rowspan="2">Ц3</th>
+						<th rowspan="2">К4</th>
+						<th rowspan="2">Ц4</th>
+						<th rowspan="2">Корпус</th>
+						<th rowspan="2">Упак.</th>
+						<th rowspan="2">Рег. позиция</th>
+						<th rowspan="2">Снято с произв.</th>
+						<th rowspan="2">Сегмент</th>
+						<th rowspan="2">Цена конеч.<br />потребителя</th>
+					</tr>
+					<tr>
+						<th class="bold double-first-cell">Min</th>
+						<th class="bold double-last-cell">Max</th>
+					</tr>
+					<tr>
+						<td class="icons"><div class="icon"><a href="#" class="replacement"></a></div><div class="icon"><a href="#" class="dms"></a></div></td>
+						<td class="name text-left"><a href="#"><strong>TDA2003</strong></a></td>
+						<td class="producer text-left"><a href="#">ОРБИТА</a></td>
+						<td class="input-in-cart"><div><a href="#" class="speed-cart-button"><span><span>&nbsp;</span></span></a><input type="text" class="validate[custom[onlyNumber],max[10000]]" /><a href="#" class="count"></a></div></td>
+						<td class="double-first-cell"></td>
+						<td class="double-last-cell"></td>
+						<td>1-2 дня</td>
+						<td>0,3086</td>
+						<td class="green">24</td>
+						<td>0,3086</td>
+						<td class="green">160</td>
+						<td>0,2808</td>
+						<td class="green">300</td>
+						<td>0,1405</td>
+						<td><a href="#">TO-220</a></td>
+						<td class="grey">50</td>
+						<td>да</td>
+						<td>да</td>
+						<td><a href="#">Ремонт</a></td>
+						<td class="full-price"><a href="data/full_price.html">$<small>$</small></a></td>
+					</tr>
+					<tr>
+						<td class="icons"><div class="icon"><a href="#" class="replacement"></a></div><div class="icon"><a href="#" class="dms"></a></div></td>
+						<td class="name text-left"><a href="#"><strong>TDA2003</strong></a></td>
+						<td class="producer text-left"><a href="#">ОРБИТА</a></td>
+						<td class="input-in-cart"><div><a href="#" class="speed-cart-button"><span><span>&nbsp;</span></span></a><input type="text" class="validate[custom[onlyNumber],max[10000]]" /><a href="#" class="count"></a></div></td>
+						<td class="double-first-cell"></td>
+						<td class="double-last-cell"></td>
+						<td>1-2 дня</td>
+						<td>0,3086</td>
+						<td class="green">24</td>
+						<td>0,3086</td>
+						<td class="green">160</td>
+						<td>0,2808</td>
+						<td class="green">300</td>
+						<td>0,1405</td>
+						<td><a href="#">TO-220</a></td>
+						<td class="grey">50</td>
+						<td>да</td>
+						<td>да</td>
+						<td><a href="#">Ремонт</a></td>
+						<td class="full-price"><a href="data/full_price.html">$<small>$</small></a></td>
+					</tr>
+					<tr>
+						<td class="icons"><div class="icon"><a href="#" class="replacement"></a></div><div class="icon"><a href="#" class="dms"></a></div></td>
+						<td class="name text-left"><a href="#"><strong>TDA2003</strong></a></td>
+						<td class="producer text-left"><a href="#">ОРБИТА</a></td>
+						<td class="input-in-cart"><div><a href="#" class="speed-cart-button"><span><span>&nbsp;</span></span></a><input type="text" class="validate[custom[onlyNumber],max[10000]]" /><a href="#" class="count"></a></div></td>
+						<td class="double-first-cell"></td>
+						<td class="double-last-cell"></td>
+						<td>1-2 дня</td>
+						<td>0,3086</td>
+						<td class="green">24</td>
+						<td>0,3086</td>
+						<td class="green">160</td>
+						<td>0,2808</td>
+						<td class="green">300</td>
+						<td>0,1405</td>
+						<td><a href="#">TO-220</a></td>
+						<td class="grey">50</td>
+						<td>да</td>
+						<td>да</td>
+						<td><a href="#">Ремонт</a></td>
+						<td class="full-price"><a href="data/full_price.html">$<small>$</small></a></td>
+					</tr>
+					<tr class="title-header-bottom">
+						<th rowspan="2">&nbsp;</th>
+						<th class="text-left" rowspan="2">Наименование</th>
+						<th class="text-left" rowspan="2">Произв. </th>
+						<th class="bold" rowspan="2">К заказу</th>
+						<th class="bold double-first-cell">Min</th>
+						<th class="bold double-last-cell">Max</th>
+						<th rowspan="2">Прогноз</th>
+						<th rowspan="2">Цена1</th>
+						<th rowspan="2">К2</th>
+						<th rowspan="2">Ц2</th>
+						<th rowspan="2">К3</th>
+						<th rowspan="2">Ц3</th>
+						<th rowspan="2">К4</th>
+						<th rowspan="2">Ц4</th>
+						<th rowspan="2">Корпус</th>
+						<th rowspan="2">Упак.</th>
+						<th rowspan="2">Рег. позиция</th>
+						<th rowspan="2">Снято с произв.</th>
+						<th rowspan="2">Сегмент</th>
+						<th rowspan="2">Цена конеч.<br />потребителя</th>
+					</tr>
+					<tr class="title-header-bottom">
+						<th colspan="2" class="double-cell">Доступно</th>
+					</tr>
+				</table>
+			</div></div>
+			<!--<div class="navigation-block">
+				<div class="scroll-block"><div class="scroll-content"></div></div>
+			</div>-->
+		</div>
+		<div style=" height:500px; border:1px solid #CCCCCC; margin-top:20px; padding:35px;">
+			<div id="test"></div>
+			<div class="main-title">Test panel</div>
+			<div><label><input type="checkbox" checked="checked" onclick="if(this.checked){settings.animation = true;} else {settings.animation = false;}" /> Анимация</label></div>
+			<!--<div><label><input type="checkbox" checked="checked" onclick="if(this.checked){header.fixed();} else {header.static();}" id="st-dn" /> Фиксированная шапка</label></div>-->
+			<br />
+			<div><label><input type="checkbox" onclick="if(this.checked){globalError.set('<strong>Глобальная ошибка!</strong>  Вы идиот, идите в сад...');} else {globalError.clear();}" /> НЕ ВКЛЮЧАТЬ!!</label></div>
+			<br />
+			<div><style>#error-input{border:1px solid;}</style><input type="text" id="error-input" value="Не трогать" onblur="if(this.value != 'Не трогать') $(this).setError({text:'Ну что вы за люди такие........'});" /></div>
+			<div style="padding-top:5px;"><input type="submit" value="Отремонтировать" onclick="$('#error-input').clearError().val('Не трогать');" /></div>
+		</div>
+	</div></div>
+	<!-- //end Контент -->
+	
+	<!-- Подвал -->
+	<div id="footer-height"></div>
+	<div id="footer"><div><div class="footer-wrap">
+		<div class="left-cell">
+			<div class="logoes"><img src="images/footer_name.gif" alt="Партнерская бизнес-система" /><img src="images/footer_logo.gif" alt="Компэл" /></div>
+			<div class="copyright">&copy; 2010</div>
+		</div>
+		<div class="right-cell">
+			<ul class="footer-menu">
+				<li><a href="index.html">Главная</a></li>
+				<li><a href="#">Бизнес</a></li>
+				<li><a href="#">Аналитика</a></li>
+				<li><a href="#">Планирование</a></li>
+				<li><a href="#">Статистика</a></li>
+			</ul>
+		</div>
+		<div class="clear"></div>
+	</div></div></div>
+	<!-- //end Подвал -->
+	
+</div>
+</body>
+</html>
