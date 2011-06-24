@@ -1,0 +1,2 @@
+#! /usr/local/bin/zsh
+cd /mnt/data/www/urm2&&bundle exec unicorn_rails -Dc config/unicorn.rb

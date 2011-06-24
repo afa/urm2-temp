@@ -2,9 +2,14 @@ Factory.sequence :email do |n|
   "user#{n}@example.com"
 end
 
+Factory.sequence :username do |n|
+  "user#{n}"
+end
+
 Factory.define :user do |user|
   user.email    { Factory.next :email }
   user.password { "password" }
+  user.username { Factory.next :username }
 end
 
 Factory.define :email_confirmed_user, :parent => :user do |user|
