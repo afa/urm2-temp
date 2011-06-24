@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe UsersController do
 
+  let(:user){Factory(:user)}
   describe "GET 'index'" do
     it "should be successful" do
       get 'index'
@@ -11,7 +12,7 @@ describe UsersController do
 
   describe "GET 'show'" do
     it "should be successful" do
-      get 'show'
+      get 'show', :id => user.id
       response.should be_success
     end
   end
@@ -25,7 +26,7 @@ describe UsersController do
 
   describe "GET 'edit'" do
     it "should be successful" do
-      get 'edit'
+      get 'edit', :id => user.id
       response.should be_success
     end
   end
