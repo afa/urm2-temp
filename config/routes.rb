@@ -1,5 +1,8 @@
 Urm::Application.routes.draw do
  
+  resources :users do
+   resources :accounts
+  end
   get "main/index"
 
   root :to => "Main#index"
