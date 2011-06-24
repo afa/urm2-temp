@@ -34,6 +34,7 @@ gem "cells"
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 gem "bullet", :group => :development
+gem "sqlite3", :group => :test
 group :development, :test do
  gem "rspec-rails"
  gem "cucumber-rails"

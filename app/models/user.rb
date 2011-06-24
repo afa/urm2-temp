@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+
+ has_many :accounts
  include Clearance::User
 
  def email_optional?
