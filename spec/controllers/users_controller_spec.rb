@@ -31,23 +31,23 @@ describe UsersController do
     end
   end
 
-  describe "GET 'create'" do
+  describe "POST 'create'" do
     it "should be successful" do
-      get 'create'
+      post 'create', :id => user.id
       response.should be_success
     end
   end
 
-  describe "GET 'update'" do
+  describe "PUT 'update'" do
     it "should be successful" do
-      get 'update'
+      put 'update', :id => user.id
       response.should be_success
     end
   end
 
-  describe "GET 'destroy'" do
+  describe "DELETE 'destroy'" do
     it "should be successful" do
-      get 'destroy'
+      delete 'destroy', :id => user.id
       response.should be_success
     end
   end

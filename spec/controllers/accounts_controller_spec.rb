@@ -1,52 +1,53 @@
 require 'spec_helper'
 
 describe AccountsController do
-
+ let(:user){Factory(:user)}
+ let(:account){Factory(:account)}
   describe "GET 'index'" do
     it "should be successful" do
-      get 'index'
+      get 'index', :user_id => user.id
       response.should be_success
     end
   end
 
   describe "GET 'show'" do
     it "should be successful" do
-      get 'show'
+      get 'show', :user_id => account.user.id, :id => account.id
       response.should be_success
     end
   end
 
   describe "GET 'new'" do
     it "should be successful" do
-      get 'new'
+      get 'new', :user_id => account.user.id
       response.should be_success
     end
   end
 
   describe "GET 'edit'" do
     it "should be successful" do
-      get 'edit'
+      get 'edit', :user_id => account.user.id, :id => account.id
       response.should be_success
     end
   end
 
-  describe "GET 'create'" do
+  describe "POST 'create'" do
     it "should be successful" do
-      get 'create'
+      post 'create', :user_id => account.user.id, :id => account.id
       response.should be_success
     end
   end
 
-  describe "GET 'update'" do
+  describe "PUT 'update'" do
     it "should be successful" do
-      get 'update'
+      put 'update', :user_id => account.user.id, :id => account.id
       response.should be_success
     end
   end
 
-  describe "GET 'destroy'" do
+  describe "DELETE 'destroy'" do
     it "should be successful" do
-      get 'destroy'
+      delete 'destroy', :user_id => account.user.id, :id => account.id
       response.should be_success
     end
   end
