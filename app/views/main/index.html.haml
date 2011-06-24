@@ -1,10 +1,14 @@
-.user-block
- %span.name
-  Петров Николай Васильевич
- .comp
-  ООО "Рога и копыта.РУ"
- %a{:href=>"#"}
-  Настройки
- %a.quite{:href=>"#"}
-  Выход из системы
+- if signed_in?
+ .user-block
+  %span.name
+   Петров Николай Васильевич
+  .comp
+   ООО "Рога и копыта.РУ"
+  %a{:href=>"#"}
+   Настройки
+  %a.quite{:href=>"#"}
+   Выход из системы
+- else
+ = form_tag session_path do
+  = text_field_tag :username
 .clear
