@@ -1,2 +1,7 @@
-%h1 Users#create
-%p Find me in app/views/users/create.html.haml
+.field
+ username
+ = @user.username
+.field
+ password
+ = @user.password
+= link_to "продолжить работу", root_path

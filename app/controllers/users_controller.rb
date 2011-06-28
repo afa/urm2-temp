@@ -12,6 +12,13 @@ class UsersController < ApplicationController
   end
 
   def create
+   @user = User.create(params[:user])
+   if @user.valid?
+    flash[:info] = "ok"
+   else
+    flash[:error] = "fail"
+    render :new
+   end
   end
 
   def update

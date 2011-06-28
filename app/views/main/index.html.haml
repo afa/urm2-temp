@@ -1,4 +1,4 @@
-- if signed_in?
+-# if signed_in?
  .user-block
   %span.name
    Петров Николай Васильевич
@@ -8,7 +8,7 @@
    Настройки
   %a.quite{:href=>"#"}
    Выход из системы
-- else
+-# else
  = form_tag session_path do
-  = text_field_tag :username
+  = text_field_tag "session[username]"
 .clear

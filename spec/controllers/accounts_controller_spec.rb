@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe AccountsController do
- let(:user){Factory(:user)}
- let(:account){Factory(:account)}
+ let(:user){mock_model(User)}
+ let(:account){mock_model(Account, :user => user)}
   describe "GET 'index'" do
     it "should be successful" do
       get 'index', :user_id => user.id

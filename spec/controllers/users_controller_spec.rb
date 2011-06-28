@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe UsersController do
 
-  let(:user){Factory(:user)}
+  let(:user){mock_model(User)}
   describe "GET 'index'" do
     it "should be successful" do
       get 'index'
@@ -33,7 +33,11 @@ describe UsersController do
 
   describe "POST 'create'" do
     it "should be successful" do
-      post 'create', :id => user.id
+      #assigns[:user] = {:user_name => "test", :ext_hash => 'asd'}
+      User.any_instance.stub(:valid?).and_return(true)
+      User.any_instance.stub(:unique_hash).and_return(true)
+      Account.any_instance.stub(:validates_uniqueness_of).and_return(true)
+      post 'create', :user=>{:username => "test", :ext_hash => 'asd'}
       response.should be_success
     end
   end
