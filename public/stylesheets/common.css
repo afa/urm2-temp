@@ -384,3 +384,6 @@ td.input-in-cart.speed .speed-cart-button span span{ background:url(../images/ic
 
 .table-style .icons .favorite{ background:url(../images/icon_star.gif) no-repeat -16px 0px;}
 
+.field_with_errors {
+ background-color: red;
+}
