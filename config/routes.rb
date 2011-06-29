@@ -1,22 +1,10 @@
 Urm::Application.routes.draw do
  
-  get "passwords/new"
-
-  get "passwords/create"
-
-  get "passwords/edit"
-
-  get "passwords/update"
-
-  get "sessions/new"
-
-  get "sessions/create"
-
-  get "sessions/destroy"
-
   resources :users do
    resources :accounts
   end
+  resource :sessions, :only => [:new, :create, :destroy]
+  resource :passwords, :only => [:new, :create, :edit, :update]
   get "main/index"
 
   root :to => "Main#index"
