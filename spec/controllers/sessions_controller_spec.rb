@@ -2,6 +2,13 @@ require 'spec_helper'
 
 describe SessionsController do
 
+  before do
+   User.any_instance.stub(:valid?).and_return(true)
+   @user = Factory.build(:user, :username => "test", :ext_hash => 'aaa')
+   @pass = @user.send(:calc_pass)
+   @user.stub(:calc_pass).and_return(@pass)
+   @user.save
+  end
   describe "GET 'new'" do
     it "should be successful" do
       get 'new'
@@ -11,15 +18,18 @@ describe SessionsController do
 
   describe "GET 'create'" do
     it "should be successful" do
-      get 'create'
-      response.should be_success
+      post 'create', "session" =>{"username" => @user.username, "password" => @pass}
+      response.should redirect_to(root_path)
+      session[:user].should == @user.id
     end
   end
 
-  describe "GET 'destroy'" do
+  describe "DELETE 'destroy'" do
     it "should be successful" do
-      get 'destroy'
-      response.should be_success
+      session[:user] = @user.id
+      delete 'destroy'
+      response.should redirect_to(root_path)
+      session[:user].should be_nil
     end
   end
 
