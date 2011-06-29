@@ -20,16 +20,16 @@ describe SessionsController do
     it "should be successful" do
       post 'create', "session" =>{"username" => @user.username, "password" => @pass}
       response.should redirect_to(root_path)
-      session[:user].should == @user.id
+      session["user"].should == @user.id
     end
   end
 
   describe "DELETE 'destroy'" do
     it "should be successful" do
-      session[:user] = @user.id
+      session["user"] = @user.id
       delete 'destroy'
       response.should redirect_to(root_path)
-      session[:user].should be_nil
+      session["user"].should be_nil
     end
   end
 
