@@ -18,18 +18,27 @@ class User < ActiveRecord::Base
   return user if     user.authenticated?(password)
  end
 
+  def self.make_recover_pass
+   self.base62(Digest::MD5.hexdigest([self.base62(rand(62**8)), Time.now.strftime("%Y%m%d%H%M%S"), Time.now.usec.to_s].join).to_i(16), 20)
+  end
+
+  def self.locate_recoverable(email)
+   
+  end
+
   def authenticated?(password)
    Digest::MD5.hexdigest([salt, password].join) == encrypted_password
   end
 
  protected
   def make_salt
-   self.salt = Digest::MD5.hexdigest([Time.now.strftime("%Y%m%d%H%M%S"), Time.now.usec.to_s, ext_hash].join) unless salt
+   self.salt = Digest::MD5.hexdigest([Time.now.strftime("%Y%m%d%H%M%S"), Time.now.usec.to_s, ext_hash].join) unless self.salt
   end
 
   def check_axapta_validity
    begin
     axapta_params = Axapta.user_info(ext_hash)
+    logger.info axapta_params.inspect
    rescue Exception => e
     errors.add(:ext_hash, "#{e.type}:#{e.message}")
    end
@@ -46,10 +55,10 @@ class User < ActiveRecord::Base
    ext_hash = nil
   end
 
-  def base62(bin)
+  def self.base62(bin, max_length = 8)
    dig = []
    chrs = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-   8.times do
+   max_length.times do
     dig << chrs[bin % 62]
     bin /= 62
    end
@@ -57,6 +66,6 @@ class User < ActiveRecord::Base
   end
 
   def calc_pass
-   base62(Digest::MD5.hexdigest([salt, Time.now.strftime("%Y%m%d%H%M%S"), Time.now.usec.to_s].join).to_i(16))
+   User.base62(Digest::MD5.hexdigest([salt, Time.now.strftime("%Y%m%d%H%M%S"), Time.now.usec.to_s].join).to_i(16))
   end
 end

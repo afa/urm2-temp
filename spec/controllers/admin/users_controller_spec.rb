@@ -1,13 +1,6 @@
 require 'spec_helper'
 
-describe PasswordsController do
-
-  describe "GET 'new'" do
-    it "should be successful" do
-      get 'new'
-      response.should be_success
-    end
-  end
+describe Admin::UsersController do
 
   describe "GET 'index'" do
     it "should be successful" do
@@ -16,23 +9,23 @@ describe PasswordsController do
     end
   end
 
-  describe "POST 'create'" do
+  describe "GET 'show'" do
     it "should be successful" do
-      post 'create'
+      get 'show', :id => 0
       response.should be_success
     end
   end
 
   describe "GET 'edit'" do
     it "should be successful" do
-      get 'edit', :id => 1
+      get 'edit', :id => 0
       response.should be_success
     end
   end
 
   describe "PUT 'update'" do
     it "should be successful" do
-      put 'update', :id => 1
+      put 'update', :id => 0
       response.should be_success
     end
   end

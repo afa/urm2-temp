@@ -1,12 +1,25 @@
 Urm::Application.routes.draw do
- 
+
   resources :users do
    resources :accounts
   end
   resource :sessions, :only => [:new, :create, :destroy]
-  resource :passwords, :only => [:new, :create, :edit, :update]
+  resources :passwords, :only => [:new, :create, :edit, :update, :index]
   get "main/index"
 
+  namespace :admin do
+   resources :main, :only => [:index]
+   root :to => "Main#index"
+   resources :users do
+    resources :passwords, :only => [:index, :edit, :update] do
+     collection do
+      get :edit
+      put :update
+     end
+    end
+   end
+   resources :managers
+  end
   root :to => "Main#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.
