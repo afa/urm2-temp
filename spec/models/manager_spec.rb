@@ -1,5 +1,7 @@
 require 'spec_helper'
 
 describe Manager do
-  pending "add some examples to (or delete) #{__FILE__}"
+ context "when creating new" do
+  pending "fastly add xamples"
+ end
 end
