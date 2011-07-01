@@ -19,6 +19,11 @@ Urm::Application.routes.draw do
     end
    end
    resources :managers
+   resources :sessions, :only => [:new, :create] do
+    collection do
+     delete :destroy
+    end
+   end
   end
   root :to => "Main#index"
   # The priority is based upon order of creation:

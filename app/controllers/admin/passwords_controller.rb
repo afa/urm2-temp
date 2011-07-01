@@ -1,4 +1,4 @@
-class Admin::PasswordsController < ApplicationController
+class Admin::PasswordsController < Admin::ApplicationController
   def index
   end
 
