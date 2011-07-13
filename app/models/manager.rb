@@ -18,4 +18,7 @@ class Manager < ActiveRecord::Base
    self.salt = Digest::MD5.hexdigest([Time.now.strftime("%Y%m%d%H%M%S"), Time.now.usec.to_s, sprintf("%x", rand(2**24))].join) unless self.salt
   end
 
+  def encrypt_password
+   self.encrypted_password = Digest::MD5.hexdigest([salt, password].join)
+  end
 end
