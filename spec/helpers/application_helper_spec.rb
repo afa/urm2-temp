@@ -15,7 +15,8 @@ describe ApplicationHelper do
   context "when user valid" do
    before do
     User.any_instance.stub(:valid?).and_return(true)
-    @user = Factory(:user, :ext_hash => 'aaa')
+    User.any_instance.stub(:create_axapta_account).and_return(true)
+    @user = FactoryGirl.create(:user, :ext_hash => 'aaa')
     session[:user] = @user.id
    end
    it "should locate logged user" do
