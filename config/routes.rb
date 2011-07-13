@@ -8,8 +8,9 @@ Urm::Application.routes.draw do
   get "main/index"
 
   namespace :admin do
-   resources :main, :only => [:index]
-   root :to => "Main#index"
+   #resources :main, :only => [:index]
+   get "main/index"
+   root :to => "main#index"
    resources :users do
     resources :passwords, :only => [:index, :edit, :update] do
      collection do
@@ -25,7 +26,7 @@ Urm::Application.routes.draw do
     end
    end
   end
-  root :to => "Main#index"
+  root :to => "main#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
