@@ -1,22 +1,13 @@
 require 'spec_helper'
 
-# Specs in this file have access to a helper object that includes
-# the MainHelper. For example:
-#
-# describe MainHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       helper.concat_strings("this","that").should == "this that"
-#     end
-#   end
-# end
 describe ApplicationHelper do
  describe "current_user" do
   context "when user valid" do
    before do
     User.any_instance.stub(:valid?).and_return(true)
     User.any_instance.stub(:create_axapta_account).and_return(true)
-    @user = FactoryGirl.create(:user, :ext_hash => 'aaa')
+    @user = FactoryGirl.build(:user, :ext_hash => 'aaa')
+    @user.save!
     session[:user] = @user.id
    end
    it "should locate logged user" do
