@@ -1,5 +1,8 @@
 require 'spec_helper'
 
-describe "users/index.html.haml" do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe "admin/users/index.html.haml" do
+ before do
+  render
+ end
+ it { response.should render_template("admin/users/_list") }
 end

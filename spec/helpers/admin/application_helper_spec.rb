@@ -33,8 +33,25 @@ describe Admin::ApplicationHelper do
    session[:manager] = @manager.id
   end
   context "when valid user" do
-   it "return user" do
+   it "say ok" do
+    logged_in?.should be_true
    end 
+  end
+  context "when unknown user" do
+   before do
+    session[:manager] = 0
+   end
+   it "say no" do
+    logged_in?.should_not be_true
+   end
+  end
+  context "when no user" do
+   before do
+    session[:manager] = nil
+   end
+   it "say no" do
+    logged_in?.should_not be_true
+   end
   end
  end
 

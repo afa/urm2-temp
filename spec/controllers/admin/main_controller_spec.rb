@@ -13,10 +13,14 @@ describe Admin::MainController do
     session[:manager] = manager.id
    end
    let(:manager) { Factory(:manager) }
-    it "should be successful" do
-      get 'index'
-      response.should be_success
-    end
+   it "should be successful" do
+    get 'index'
+    response.should be_success
+   end
+   it "should prepare users list" do
+    get "index"
+    assigns["users"].should_not be_empty
+   end
   end
 
 end
