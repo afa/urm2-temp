@@ -9,10 +9,10 @@ class Admin::ManagersController < Admin::ApplicationController
   end
 
   def create
-   if Manager.create(params[:manager])
+   if current_user.super && Manager.create(params[:manager])
     redirect_to admin_managers_path
    else
-    render :action => :new
+    render :template => "admin/managers/new"
    end
   end
 

@@ -37,9 +37,9 @@ describe Admin::ManagersController do
    end
 
    describe "POST 'create'" do
-     it "should be successful" do
+     it "should reshow new" do
        post 'create'
-       should render_template("/admin/managers/new")
+       response.should render_template("admin/managers/new")
      end
    end
 

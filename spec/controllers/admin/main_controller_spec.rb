@@ -11,6 +11,10 @@ describe Admin::MainController do
   describe "GET 'index'" do
    before do
     session[:manager] = manager.id
+    @ulist = FactoryGirl.build_list(:user, 5)
+    @ulist.each{|u| u.stub!(:check_axapta_validity).and_return(true) }
+    @ulist.each{|u| u.stub!(:create_axapta_account).and_return(true) }
+    @ulist.each {|u| u.save! }
    end
    let(:manager) { Factory(:manager) }
    it "should be successful" do
@@ -20,6 +24,7 @@ describe Admin::MainController do
    it "should prepare users list" do
     get "index"
     assigns["users"].should_not be_empty
+    @ulist.each {|u| assigns["users"].should include(u) }
    end
   end
 
