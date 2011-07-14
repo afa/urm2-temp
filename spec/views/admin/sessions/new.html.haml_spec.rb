@@ -1,5 +1,9 @@
 require 'spec_helper'
 
-describe "sessions/new.html.haml" do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe "admin/sessions/new.html.haml" do
+ before do
+  render
+ end
+ it { rendered.should have_xpath("//form[@action='/admin/sessions']//input[@type='text' and @name='session[name]']") }
+ it { rendered.should have_xpath("//form[@action='/admin/sessions']//input[@type='password' and @name='session[password]']") }
 end

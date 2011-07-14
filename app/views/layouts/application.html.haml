@@ -1,0 +1,16 @@
+!!!
+%html
+ %head
+  %title Urm
+  = stylesheet_link_tag :all
+  = javascript_include_tag :defaults
+  = csrf_meta_tag
+ %body
+  #header
+   - flash.each do |key, value|
+    .flash{ :class => key}= value
+   -# if signed_in? -%>
+    = link_to "Sign out", sign_out_path, :method => :delete
+   -#- else
+    = link_to "Sign in", sign_in_path
+  = yield
