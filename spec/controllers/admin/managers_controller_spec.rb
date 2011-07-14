@@ -39,7 +39,7 @@ describe Admin::ManagersController do
    describe "POST 'create'" do
      it "should be successful" do
        post 'create'
-       response.should be_success
+       response.should render_template("/admin/managers/new")
      end
    end
 
@@ -53,7 +53,7 @@ describe Admin::ManagersController do
    describe "PUT 'update'" do
      it "should be successful" do
        put 'update', :id => 0
-       response.should be_success
+       response.should be_redirected
      end
    end
   end
