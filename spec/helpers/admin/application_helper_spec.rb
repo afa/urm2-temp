@@ -34,7 +34,7 @@ describe Admin::ApplicationHelper do
   end
   context "when valid user" do
    it "return user" do
-    
+   end 
   end
  end
 
