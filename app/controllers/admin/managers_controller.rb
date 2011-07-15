@@ -1,4 +1,6 @@
 class Admin::ManagersController < Admin::ApplicationController
+
+ before_filter :take_manager, :only => [:show, :edit, :update]
   def index
   end
 
@@ -20,6 +22,15 @@ class Admin::ManagersController < Admin::ApplicationController
   end
 
   def update
+   if current_user.super && @manager.update_attributes(params[:manager])
+    redirect_to admin_managers_path
+   else
+    render :template => "admin/managers/edit"
+   end
   end
 
+ protected
+  def take_manager
+   @manager = Manager.find(params[:id])
+  end
 end

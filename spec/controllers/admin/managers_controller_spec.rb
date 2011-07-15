@@ -13,8 +13,8 @@ describe Admin::ManagersController do
    before do
     session[:manager] = manager.id
    end
-   let(:manager) { Factory(:manager) }
-
+   let(:manager) { FactoryGirl.create(:manager) }
+   let(:p_man) { FactoryGirl.create(:manager) }
    describe "GET 'index'" do
      it "should be successful" do
        get 'index'
@@ -24,7 +24,7 @@ describe Admin::ManagersController do
 
    describe "GET 'show'" do
      it "should be successful" do
-       get 'show', :id => 0
+       get 'show', :id => p_man.id
        response.should be_success
      end
    end
@@ -37,24 +37,39 @@ describe Admin::ManagersController do
    end
 
    describe "POST 'create'" do
-     it "should reshow new" do
-       post 'create'
-       response.should render_template("admin/managers/new")
+    it "should reshow new" do
+     post 'create'
+     response.should render_template("admin/managers/new")
+    end
+
+    context "with allowed params" do
+     let(:manager) {FactoryGirl.create(:manager, :super => true)}
+     it "should redirect to list" do
+      post 'create', :manager => {:name => 'test', :password => 'test'}
+      response.should redirect_to(admin_managers_path)
      end
+    end
    end
 
    describe "GET 'edit'" do
      it "should be successful" do
-       get 'edit', :id => 0
+       get 'edit', :id => p_man.id
        response.should be_success
      end
    end
 
    describe "PUT 'update'" do
-     it "should be successful" do
-       put 'update', :id => 0
-       response.should be_redirected
+    it "should reshow edit" do
+     put 'update', :id => p_man.id
+     response.should render_template("admin/managers/edit")
+    end
+    context "with allowed params" do
+     let(:manager) {FactoryGirl.create(:manager, :super => true)}
+     it "should redirect to list" do
+      put 'update', :id => p_man.id, :manager => {:password => 'test'}
+      response.should redirect_to(admin_managers_path)
      end
+    end
    end
   end
 end
