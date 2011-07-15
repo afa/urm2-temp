@@ -1,2 +1,9 @@
-%h1 Admin::Managers#edit
-%p Find me in app/views/admin/managers/edit.html.haml
+%h1 Редактирование менеджера
+- form_for :manager, :url => admin_managers_path do |form|
+ .form_field
+  = form.label :name
+  = form.text_field :name, :disabled => true
+ .form_field
+  = form.label :password
+  = form.password_field :password
+ = form.submit "Сохранить"

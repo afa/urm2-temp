@@ -22,7 +22,7 @@ class Admin::ManagersController < Admin::ApplicationController
   end
 
   def update
-   if current_user.super && @manager.update_attributes(params[:manager])
+   if (current_user.super || current_user == @manager) && @manager.update_attributes(params[:manager])
     redirect_to admin_managers_path
    else
     render :template => "admin/managers/edit"

@@ -70,6 +70,13 @@ describe Admin::ManagersController do
       response.should redirect_to(admin_managers_path)
      end
     end
+    context "with allowed params for himself" do
+     let(:manager) {FactoryGirl.create(:manager, :super => false)}
+     it "should redirect to list" do
+      put 'update', :id => manager.id, :manager => {:password => 'test'}
+      response.should redirect_to(admin_managers_path)
+     end
+    end
    end
   end
 end

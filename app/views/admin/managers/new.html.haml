@@ -1,2 +1,9 @@
-%h1 Admin::Managers#new
-%p Find me in app/views/admin/managers/new.html.haml
+%h1 Новый менеджер
+- form_for :manager, :url => admin_managers_path do |form|
+ .form_field
+  = form.label :name
+  = form.text_field :name
+ .form_field
+  = form.label :password
+  = form.password_field :password
+ = form.submit "Сохранить"
