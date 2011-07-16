@@ -1,2 +1,3 @@
-%h1 Admin::Managers#index
-%p Find me in app/views/admin/managers/index.html.haml
+- @managers.each do |manager|
+ .field_line
+  = link_to manager.name, edit_admin_manager_path(manager)

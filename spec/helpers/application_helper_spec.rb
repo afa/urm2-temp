@@ -4,9 +4,9 @@ describe ApplicationHelper do
  describe "current_user" do
   context "when user valid" do
    before do
-    User.any_instance.stub(:valid?).and_return(true)
-    User.any_instance.stub(:create_axapta_account).and_return(true)
     @user = FactoryGirl.build(:user, :ext_hash => 'aaa')
+    @user.stub!(:valid?).and_return(true)
+    @user.stub!(:create_axapta_account).and_return(true)
     @user.save!
     session[:user] = @user.id
    end
