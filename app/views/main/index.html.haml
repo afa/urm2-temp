@@ -1,14 +1,16 @@
--# if signed_in?
+- if logged_in?
  .user-block
   %span.name
-   Петров Николай Васильевич
-  .comp
+   = current_user.name
+  -# .comp
    ООО "Рога и копыта.РУ"
   %a{:href=>"#"}
    Настройки
-  %a.quite{:href=>"#"}
-   Выход из системы
--# else
- = form_tag session_path do
+  = link_to "Выход из системы", sessions_path, :method => :delete, :class => "quite"
+   
+- else
+ = form_tag sessions_path do
   = text_field_tag "session[username]"
+  = submit_tag "Войти"
+ = link_to "Регистрация", new_user_path
 .clear
