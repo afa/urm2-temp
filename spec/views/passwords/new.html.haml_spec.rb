@@ -1,5 +1,17 @@
 require 'spec_helper'
 
 describe "passwords/new.html.haml" do
-  pending "add some examples to (or delete) #{__FILE__}"
+ before do
+  @login = FactoryGirl.build(:user)
+  @login.stub!(:valid?).and_return(true)
+  @login.save!
+  assign(:user, @login)
+  render
+ end
+ it "should render current password field" do
+  rendered.should have_xpath("//input[@type='password']")
+ end
+ it "should render check password form" do
+  rendered.should have_xpath("//form[@action='#{passwords_path}']")
+ end
 end

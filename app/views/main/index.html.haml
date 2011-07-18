@@ -1,16 +1,13 @@
-- if logged_in?
- .user-block
-  %span.name
-   = current_user.name
-  -# .comp
-   ООО "Рога и копыта.РУ"
-  %a{:href=>"#"}
-   Настройки
-  = link_to "Выход из системы", sessions_path, :method => :delete, :class => "quite"
-   
-- else
- = form_tag sessions_path do
-  = text_field_tag "session[username]"
-  = submit_tag "Войти"
- = link_to "Регистрация", new_user_path
+.user-block
+ %span.name
+  = current_user.username
+ -# .comp
+  ООО "Рога и копыта.РУ"
+ %a{:href=>"#"}
+  Настройки
+ = link_to "Выход из системы", sessions_path, :method => :delete, :class => "quite"
 .clear
+%h1 Пользователи
+- @users.each do |user|
+ .line
+  = link_to user.username, edit_user_path(user)

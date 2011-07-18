@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+ skip_filter :authenticate!, :only => [:new, :create]
   def index
   end
 

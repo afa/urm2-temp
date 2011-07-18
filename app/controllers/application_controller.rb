@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
  protected
   def authenticate!
    unless logged_in?
-    redirect_to new_admin_session_path
+    redirect_to new_sessions_path
    end
   end
 

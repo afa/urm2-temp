@@ -3,8 +3,13 @@ Urm::Application.routes.draw do
   resources :users do
    resources :accounts
   end
-  resource :sessions, :only => [:new, :create, :destroy]
-  resources :passwords, :only => [:new, :create, :edit, :update, :index]
+  #resources :passwords, :only => [:new, :create, :edit, :update, :index]
+  resources :passwords, :only => [:new, :create]
+  resource :sessions, :only => [:new, :create] do
+   collection do
+    delete :destroy
+   end
+  end
   get "main/index"
 
   namespace :admin do
