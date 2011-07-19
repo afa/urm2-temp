@@ -36,7 +36,11 @@ describe PasswordsController do
     assigns["password"].should_not == 'password'
     assigns["password"].should_not be_blank
    end
-   it "should fail on invalid password"
+   it "should fail on invalid password" do
+    session[:user] = @user.id
+    post 'create', :user => { :password => 'xpassword' }
+    response.should render_template(:new)
+   end
   end
 
 #  describe "GET 'edit'" do
