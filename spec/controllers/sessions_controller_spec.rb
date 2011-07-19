@@ -28,7 +28,7 @@ describe SessionsController do
     it "should be successful" do
       session["user"] = @user.id
       delete 'destroy'
-      response.should redirect_to(new_sessions_path)
+      response.should be_redirect
       session["user"].should be_nil
     end
   end
