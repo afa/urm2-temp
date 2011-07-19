@@ -1,2 +1,5 @@
-%h1 Passwords#create
-%p Find me in app/views/passwords/create.html.haml
+%h1 Пользователь #{current_user.username},
+%div
+ email: #{current_user.email}
+%div
+ Сгенерирован новый пароль: #{@password}

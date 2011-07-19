@@ -56,11 +56,11 @@ describe UsersController do
     end
   end
 
-  describe "DELETE 'destroy'" do
-    it "should be successful" do
-      delete 'destroy', :id => user.id
-      response.should be_success
-    end
-  end
+#  describe "DELETE 'destroy'" do
+#    it "should be successful" do
+#      delete 'destroy', :id => user.id
+#      response.should be_success
+#    end
+#  end
 
 end

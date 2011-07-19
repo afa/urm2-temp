@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe PasswordsController do
  before do
-  @user = FactoryGirl.build(:user)
+  @user = User.new(FactoryGirl.attributes_for(:user))
   @user.stub!(:valid?).and_return(true)
+  @user.stub!(:calc_pass).and_return('password')
   @user.save!
  end
 
@@ -29,8 +30,12 @@ describe PasswordsController do
     response.should be_success
    end
 
-   it "should regenerate encrypted password"
-   it "should send new password to view"
+   it "should regenerate encrypted password" do
+    session[:user] = @user.id
+    post 'create', :user => { :password => 'password' }
+    assigns["password"].should_not == 'password'
+    assigns["password"].should_not be_blank
+   end
    it "should fail on invalid password"
   end
 

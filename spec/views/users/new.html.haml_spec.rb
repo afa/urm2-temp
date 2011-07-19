@@ -8,8 +8,10 @@ describe "users/new.html.haml" do
   @list.each{|u| u.stub!(:unique_hash).and_return(true) }
   @list.each{|u| u.save! }
   @login = @list.first
-  assign(:users, @list)
-  session[:user] = @login.id
+  #assign(:users, @list)
+  #session[:user] = @login.id
  end
-  pending "add some examples to (or delete) #{__FILE__}"
+ it "should show registration form"
+ it "should show username field"
+ it "should show ext_hash field"
 end
