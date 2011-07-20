@@ -34,4 +34,31 @@ class Admin::ManagersController < Admin::ApplicationController
   def take_manager
    @manager = Manager.find(params[:id])
   end
+
+    def sign_in(user)
+      if user
+        cookies[:remember_token] = {
+          :value   => user.remember_token,
+          :expires => 1.year.from_now.utc
+        }
+        self.current_user = user
+      end
+    end
+
+    def sign_out
+      current_user.reset_remember_token! if current_user
+      cookies.delete(:remember_token)
+      self.current_user = nil
+    end
+
+    protected
+
+    def user_from_cookie
+      if token = cookies[:manager_remember_token]
+        Manager.find_by_remember_token(token)
+      end
+    end
+
+
+
 end

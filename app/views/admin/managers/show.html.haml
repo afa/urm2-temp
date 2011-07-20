@@ -1,5 +1,5 @@
 %h1 #{current_user.super? ? "Супер" : ""}Менеджер #{@manager.name}
 = link_to "Редактировать", edit_admin_manager_path(@manager)
 = link_to "Новый менеджер", new_admin_manager_path if current_user.super?
-= link_to "Список пользователей", users_path
+= link_to "Список пользователей", admin_users_path
 

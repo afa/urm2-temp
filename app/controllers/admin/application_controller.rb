@@ -2,14 +2,31 @@ class Admin::ApplicationController < ActionController::Base
   layout "admin/application"
   helper Admin::ApplicationHelper
   before_filter :authenticate!
- #include Clearance::Authentication
-
- #def authenticate(params)
- # User.authenticate(params[:session][:username],
- #                   params[:session][:password])
- #end
   protect_from_forgery
- protected
+    def sign_in(user)
+      if user
+        cookies[:manager_remember_token] = {
+          :value   => user.remember_token,
+          :expires => 1.year.from_now.utc
+        }
+        self.current_user = user
+      end
+    end
+
+    def sign_out
+      current_user.reset_remember_token! if current_user
+      cookies.delete(:remember_token)
+      self.current_user = nil
+    end
+
+    protected
+
+    def user_from_cookie
+      if token = cookies[:manager_remember_token]
+        Manager.find_by_remember_token(token)
+      end
+    end
+
   def authenticate!
    unless logged_in?
     redirect_to new_admin_session_path
@@ -17,7 +34,7 @@ class Admin::ApplicationController < ActionController::Base
   end
 
  def current_user
-  @current_user ||= Manager.find_by_id(session[:manager]) #fix for remember-token use
+  @current_user ||= user_from_cookie
  end
 
  def logged_in?

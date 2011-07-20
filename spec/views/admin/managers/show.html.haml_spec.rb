@@ -31,7 +31,7 @@ describe "admin/managers/show.html.haml" do
    rendered.should have_xpath("//a[@href='#{edit_admin_manager_path(@manager)}']")
   end
   it "should render link to users list" do
-   rendered.should have_xpath("//a[@href='#{users_path}']")
+   rendered.should have_xpath("//a[@href='#{admin_users_path}']")
   end
  end
 end

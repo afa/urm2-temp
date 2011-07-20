@@ -31,6 +31,7 @@ describe Manager do
     @manager = FactoryGirl.build :manager, :password => "password"
    end
    it "should prepare encrypted_password" do
+    p @manager
     @manager.encrypted_password.should be_blank
     @manager.save.should be
     @manager.encrypted_password.should_not be_blank
