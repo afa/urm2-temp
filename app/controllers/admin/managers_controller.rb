@@ -2,6 +2,7 @@ class Admin::ManagersController < Admin::ApplicationController
 
  before_filter :take_manager, :only => [:show, :edit, :update]
   def index
+   @managers = Manager.all
   end
 
   def show
