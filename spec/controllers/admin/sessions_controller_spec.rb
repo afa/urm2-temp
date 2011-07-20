@@ -28,7 +28,10 @@ describe Admin::SessionsController do
 
   describe "logged manager" do
    before do
-    session[:manager] = manager.id
+    cookies[:manager_remember_token] = {
+          :value   => manager.remember_token,
+          :expires => 1.year.from_now.utc
+        }
    end
    let(:manager) { Factory(:manager) }
 
@@ -44,7 +47,9 @@ describe Admin::SessionsController do
      it "should be successful" do
        delete 'destroy'
        response.should redirect_to(new_admin_session_path)
-       session[:manager].should be_nil
+       assigns["current_user"].should be_nil
+       controller.send(:current_user).should be_nil
+       #session[:manager].should be_nil
      end
    end
   end
