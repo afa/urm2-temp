@@ -11,6 +11,8 @@ FactoryGirl.define do
 
  factory :manager do
   name { Factory.next :manager_name }
+  password "password"
+  after_build {|m| m.send(:make_salt) }
  end
 
  sequence :email do |n|
@@ -26,10 +28,11 @@ FactoryGirl.define do
  end
 
  factory :user do
-   email#    { Factory.next :email }
-   password "password"
-   username# { Factory.next :username }
-   ext_hash
+  email
+  password "password"
+  username
+  ext_hash
+  after_build {|m| m.send(:make_salt) }
  end
 end
 
