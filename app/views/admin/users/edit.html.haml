@@ -1,2 +1,4 @@
-%h1 Admin::Users#edit
-%p Find me in app/views/admin/users/edit.html.haml
+- form_for :user, :url => admin_user_path(@user), :html => {:method => :put} do |form|
+ = form.label :username
+ = form.text_field :username
+ = form.submit "Save"
