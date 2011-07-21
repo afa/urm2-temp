@@ -2,7 +2,7 @@ class Manager < ActiveRecord::Base
  validates_uniqueness_of :name
  before_validation :make_salt, :if => lambda{ self.salt.blank? }
  attr_accessor :password
- before_create :generate_remember_token
+ before_validation :reset_remember_token!, :if => lambda{ self.remember_token.blank? }
  before_save :encrypt_password, :unless => lambda{ self.password.blank? }
 
   def self.authenticate(username, password)
@@ -18,7 +18,6 @@ class Manager < ActiveRecord::Base
    self.encrypted_password == self.encrypt(pwd)
   end
 
- protected
   def make_salt
    self.salt = Digest::MD5.hexdigest([Time.now.strftime("%Y%m%d%H%M%S"), Time.now.usec.to_s, sprintf("%x", rand(2**24))].join) unless self.salt
   end
@@ -43,7 +42,7 @@ class Manager < ActiveRecord::Base
     # @example
     #   user.reset_remember_token!
     def reset_remember_token!
-      generate_remember_token
+      self.generate_remember_token
       save(:validate => false)
     end
 

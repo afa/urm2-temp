@@ -12,8 +12,6 @@ class Admin::SessionsController < Admin::ApplicationController
 
   def destroy
    sign_out
-   #current_user.reset_remember_token!
-   #session[:manager] = nil
    redirect_to new_admin_session_path
   end
 

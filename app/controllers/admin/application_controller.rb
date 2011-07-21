@@ -14,7 +14,7 @@ class Admin::ApplicationController < ActionController::Base
     end
 
     def sign_out
-      current_user.reset_remember_token! if current_user
+      self.current_user.reset_remember_token! if self.current_user
       cookies.delete(:remember_token)
       self.current_user = nil
     end

@@ -11,37 +11,53 @@ describe Admin::UsersController do
   describe "logged manager" do
    before do
     controller.sign_in manager
+    Axapta.stub!(:user_info).and_return({})
+    @users = FactoryGirl.create_list(:user, 5)
+    @user = @users.first
    end
    let(:manager) { Factory(:manager) }
 
 
 
    describe "GET 'index'" do
-     it "should be successful" do
-       get 'index'
-       response.should be_success
-     end
+    before do
+     get 'index'
+    end
+    it "should be successful" do
+     response.should be_success
+    end
+    
+    specify { @users.each {|u| assigns[:users].should include(u)} }
    end
 
    describe "GET 'show'" do
-     it "should be successful" do
-       get 'show', :id => 0
-       response.should be_success
-     end
+    before do
+     get 'show', :id => @user.id
+    end
+    it "should be successful" do
+     response.should be_success
+    end
+    specify { assigns[:user].should eq @user }
    end
 
    describe "GET 'edit'" do
-     it "should be successful" do
-       get 'edit', :id => 0
-       response.should be_success
-     end
+    before do
+     get 'edit', :id => @user.id
+    end
+    it "should be successful" do
+     response.should be_success
+    end
+    specify { assigns[:user].should eq @user }
    end
 
    describe "PUT 'update'" do
-     it "should be successful" do
-       put 'update', :id => 0
-       response.should be_success
-     end
+    before do
+     put 'update', :id => @user.id
+    end
+    it "should be successful" do
+     response.should be_redirect
+    end
+    specify { assigns[:user].should eq @user }
    end
   end
 end
