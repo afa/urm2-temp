@@ -37,6 +37,10 @@ class Admin::ApplicationController < ActionController::Base
   @current_user ||= user_from_cookie
  end
 
+ def current_user=(user)
+  @current_user = user
+ end
+
  def logged_in?
   not current_user.blank?
  end

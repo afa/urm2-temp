@@ -28,18 +28,19 @@ describe Admin::SessionsController do
 
   describe "logged manager" do
    before do
+    @manager = FactoryGirl.create(:manager)
     cookies[:manager_remember_token] = {
-          :value   => manager.remember_token,
+          :value   => @manager.remember_token,
           :expires => 1.year.from_now.utc
         }
    end
-   let(:manager) { Factory(:manager) }
 
 
    describe "POST 'create'" do
      it "should be successful" do
-       post 'create'
+       post 'create', :session => {:name => @manager.name, :password => "password"}
        response.should redirect_to(admin_root_path)
+       controller.send(:current_user).should be_is_a(Manager)
      end
    end
 

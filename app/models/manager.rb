@@ -2,6 +2,7 @@ class Manager < ActiveRecord::Base
  validates_uniqueness_of :name
  before_validation :make_salt, :if => lambda{ self.salt.blank? }
  attr_accessor :password
+ before_create :generate_remember_token
  before_save :encrypt_password, :unless => lambda{ self.password.blank? }
 
   def self.authenticate(username, password)

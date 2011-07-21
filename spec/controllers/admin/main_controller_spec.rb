@@ -10,7 +10,8 @@ describe Admin::MainController do
   end
   describe "GET 'index'" do
    before do
-    session[:manager] = manager.id
+    controller.sign_in manager
+    #session[:manager] = manager.id
     @ulist = FactoryGirl.build_list(:user, 5)
     @ulist.each{|u| u.stub!(:check_axapta_validity).and_return(true) }
     @ulist.each{|u| u.stub!(:create_axapta_account).and_return(true) }

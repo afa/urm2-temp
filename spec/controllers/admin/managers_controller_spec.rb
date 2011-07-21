@@ -11,7 +11,7 @@ describe Admin::ManagersController do
   end
   describe "logged manager" do
    before do
-    session[:manager] = manager.id
+    controller.sign_in manager
    end
    let(:manager) { FactoryGirl.create(:manager) }
    let(:p_man) { FactoryGirl.create(:manager) }

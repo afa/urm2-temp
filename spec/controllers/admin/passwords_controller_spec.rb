@@ -11,7 +11,7 @@ describe Admin::PasswordsController do
   end
   describe "logged manager" do
    before do
-    session[:manager] = manager.id
+    controller.sign_in manager
    end
    let(:manager) { Factory(:manager) }
    describe "GET 'index'" do
