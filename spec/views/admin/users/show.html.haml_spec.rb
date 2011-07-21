@@ -9,4 +9,5 @@ describe "admin/users/show.html.haml" do
  end
  specify { rendered.should have_content(@user.username) }
  specify { rendered.should have_xpath("//a[@href='#{edit_admin_user_path(@user)}']") }
+ specify { rendered.should have_xpath("//a[@href='#{edit_admin_user_passwords_path(@user)}']") }
 end

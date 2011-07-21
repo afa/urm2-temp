@@ -8,4 +8,5 @@ describe "admin/users/edit.html.haml" do
   render
  end
  specify { rendered.should have_xpath("//form[@action='#{admin_user_path(@user)}']") }
+ specify { rendered.should have_xpath("//form//input[@type='text' and @name='user[username]' and @value='#{@user.username}']") }
 end

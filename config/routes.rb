@@ -17,7 +17,7 @@ Urm::Application.routes.draw do
    get "main/index"
    root :to => "main#index"
    resources :users do
-    resources :passwords, :only => [:index, :edit, :update] do
+    resources :passwords, :only => [:index] do
      collection do
       get :edit
       put :update
