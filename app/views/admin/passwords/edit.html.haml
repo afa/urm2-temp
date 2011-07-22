@@ -1,2 +1,4 @@
-%h1 Admin::Passwords#edit
-%p Find me in app/views/admin/passwords/edit.html.haml
+= form_for :password, :url => admin_user_passwords_path(@user), :html => {:method => :put} do |form|
+ = form.label :confirmed, "Обновить пароль"
+ = form.check_box :confirmed
+ = form.submit "renew"
