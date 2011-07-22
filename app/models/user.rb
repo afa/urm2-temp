@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
    Digest::MD5.hexdigest([salt, password].join) == encrypted_password
   end
 
+  def calc_pass
+   User.base62(Digest::MD5.hexdigest([salt, Time.now.strftime("%Y%m%d%H%M%S"), Time.now.usec.to_s].join).to_i(16))
+  end
+
  protected
   def make_salt
    self.salt = Digest::MD5.hexdigest([Time.now.strftime("%Y%m%d%H%M%S"), Time.now.usec.to_s, ext_hash].join) unless self.salt
@@ -65,7 +69,4 @@ class User < ActiveRecord::Base
    dig.map{|i| sprintf("%c", i) }.join
   end
 
-  def calc_pass
-   User.base62(Digest::MD5.hexdigest([salt, Time.now.strftime("%Y%m%d%H%M%S"), Time.now.usec.to_s].join).to_i(16))
-  end
 end

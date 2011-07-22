@@ -1,5 +1,11 @@
 require 'spec_helper'
 
-describe "passwords/update.html.haml" do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe "admin/passwords/update.html.haml" do
+ before do
+  Axapta.stub!(:user_info).and_return({})
+  @user = FactoryGirl.create(:user)
+  assign(:user, @user)
+  render
+ end
+ it { rendered.should have_content(@user.password) }
 end
