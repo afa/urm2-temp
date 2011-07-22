@@ -1,2 +1,3 @@
-%h1 Admin::Passwords#index
-%p Find me in app/views/admin/passwords/index.html.haml
+%h1 Пароли для #{@user.username} #{@user.email || "(нет почтового адреса)"}
+Axapta hash: #{@user.ext_hash}
+= link_to "Обновить пароль", edit_admin_user_passwords_path(@user)
