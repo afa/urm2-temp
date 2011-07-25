@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
 
  has_many :accounts
+ belongs_to :parent, :class_name => self.name, :foreign_key => :parent_id
+ has_many :children, :class_name => self.name, :foreign_key => :parent_id
  validates_uniqueness_of :username
  validate :unique_hash, :on => :create
  validate :check_axapta_validity, :on => :create
@@ -12,6 +14,10 @@ class User < ActiveRecord::Base
  #def email_optional?
  #   true
  #end
+
+  def accounts_children
+   accounts.inject({}){|res, account| res.merge(account.hash => account.children) }
+  end
 
  def self.authenticate(username, password)
   return nil  unless user = find_by_username(username)

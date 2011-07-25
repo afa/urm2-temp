@@ -3,12 +3,13 @@ require 'spec_helper'
 describe AccountsController do
  before do
   @login = FactoryGirl.build(:user)
+  @accounts = FactoryGirl.create_list(:account, 5, :user => user)
   @login.stub!(:valid?).and_return(true)
   @login.save!
   session[:user] = @login.id
  end
  let(:user){mock_model(User)}
- let(:account){mock_model(Account, :user => user)}
+ let(:account){ FactoryGirl.create(:account, :user => user) }
   describe "GET 'index'" do
     it "should be successful" do
       get 'index', :user_id => user.id
