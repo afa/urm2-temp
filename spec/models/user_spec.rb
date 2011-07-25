@@ -11,5 +11,11 @@ describe User do
   specify { @user.should respond_to :parent}
   specify { @user.should respond_to :children}
   specify { @user.should respond_to(:accounts_children) }
+  context "#accounts_children" do
+   before do
+    
+   end
+   it "should select groupped children"
+  end
 # end
 end
