@@ -13,6 +13,7 @@ describe User do
   specify { @user.should respond_to(:accounts_children) }
   context "#accounts_children" do
    before do
+    Axapta.stub!(:user_info).and_return({})
     User.any_instance.stub(:valid?).and_return(true)
     @accounts = FactoryGirl.create_list(:account, 5, :user => @user)
     @accounts.first.children << FactoryGirl.create_list(:account, 2)

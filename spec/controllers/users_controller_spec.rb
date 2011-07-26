@@ -4,9 +4,11 @@ describe UsersController do
 
   before do
    User.any_instance.stub(:valid?).and_return(true)
-   @user2 = FactoryGirl.create(:user, :ext_hash => '1234')
-   @user = FactoryGirl.create(:user, :ext_hash => '123', :parent => @user2)
+   Axapta.stub!(:user_info).and_return({})
+   @user2 = FactoryGirl.create(:user)
+   @user = FactoryGirl.create(:user, :parent => @user2)
    @chlds = FactoryGirl.create_list(:user, 2, :parent => @user)
+   @chlds.each{|u| u.accounts.first.update_attributes :parent_id => @user.accounts.first.id }
    session[:user] = @user
   end
 
@@ -18,7 +20,7 @@ describe UsersController do
     end
     it "should assign @children" do
      get :index
-     assigns[:children].should == @chlds
+     assigns[:children].sort_by{|u| u.id}.should == @chlds.sort_by{|u| u.id}
     end
     it "should assign @parent" do
      get :index
