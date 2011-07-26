@@ -3,12 +3,10 @@ require 'spec_helper'
 describe UsersController do
 
   before do
-   @user2 = FactoryGirl.build(:user, :ext_hash => '1234')
-   @user2.stub!(:valid?).and_return(true)
-   @user2.save!
-   @user = FactoryGirl.build(:user, :ext_hash => '123', :parent => @user2)
-   @user.stub!(:valid?).and_return(true)
-   @user.save!
+   User.any_instance.stub(:valid?).and_return(true)
+   @user2 = FactoryGirl.create(:user, :ext_hash => '1234')
+   @user = FactoryGirl.create(:user, :ext_hash => '123', :parent => @user2)
+   @chlds = FactoryGirl.create_list(:user, 2, :parent => @user)
    session[:user] = @user
   end
 
@@ -20,7 +18,7 @@ describe UsersController do
     end
     it "should assign @children" do
      get :index
-     assigns[:children].should be_is_a Array
+     assigns[:children].should == @chlds
     end
     it "should assign @parent" do
      get :index
