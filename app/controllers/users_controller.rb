@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
  skip_filter :authenticate!, :only => [:new, :create]
   def index
+   @children = current_user.axapta_children
+   @parent = current_user.parent
   end
 
   def show

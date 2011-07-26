@@ -19,6 +19,9 @@ class User < ActiveRecord::Base
    accounts.inject({}){|res, account| res.merge(account.hash => account.children) }
   end
 
+  def axapta_children
+   accounts_children.values.flatten.map(&:user).uniq
+  end
  def self.authenticate(username, password)
   return nil  unless user = find_by_username(username)
   return user if     user.authenticated?(password)
