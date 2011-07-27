@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
  skip_filter :authenticate!, :only => [:new, :create]
+ before_filter :get_user, :only => [:edit, :update, :show, :destroy]
+ before_filter :check_user, :only => [:edit, :update, :show, :destroy]
   def index
    @children = current_user.axapta_children
    @parent = current_user.parent
@@ -26,9 +28,23 @@ class UsersController < ApplicationController
   end
 
   def update
+   if @user.update_attributes params[:user]
+    redirect_to users_path
+   else
+    flash.now[:error] = 'fail'
+    render :edit
+   end
   end
 
   def destroy
   end
 
+ protected
+  def get_user
+   @user = User.find(params[:id])
+  end
+
+  def check_user
+   redirect_to users_path, :flash => {:error => 'denied'} unless current_user == @user || current_user == @user.parent || @user.axapta_children.include?(current_user)
+  end
 end
