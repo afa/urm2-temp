@@ -15,10 +15,11 @@ describe Account do
  context "on renew_structure" do
   before do
    User.any_instance.stub!(:valid?).and_return(true)
-   Axapta.stub(:user_info).and_return(:blocked => '0', :business => "КОМПЭЛ", :empl_name=>"КАШИНА НАТАЛЬЯ ЛЬВОВНА", :empl_email => 'datis@compel.ru', :contact_email => 'datis@compel.ru', :contact_first_name => 'Владимир', :contact_last_name => 'Ластовка', :contact_middle_name => 'Владимирович', :parent_user_id => '', :user_name => 'УРМ-2 Тест')
+   Axapta.stub(:user_info).and_return(:blocked => '0', :business => "КОМПЭЛ", :empl_name=>"КАШИНА НАТАЛЬЯ ЛЬВОВНА", :empl_email => 'datis@compel.ru', :contact_email => 'datis@compel.ru', :contact_first_name => 'Владимир', :contact_last_name => 'Ластовка', :contact_middle_name => 'Владимирович', :parent_user_id => '', :user_name => 'УРМ-2 Тест', :user_id => 1)
    @user = FactoryGirl.create(:user)
    @account = Account.find_by_axapta_hash(@user.ext_hash)
    #@account = FactoryGirl.create(:account, :user => @user, :axapta_hash => 'asdfg')
+   Axapta.stub!(:load_child_hashes).with(@user.ext_hash).and_return([])
    Axapta.renew_structure(@user.ext_hash)
   end
   subject { @account }

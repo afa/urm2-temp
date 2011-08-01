@@ -7,4 +7,7 @@ class Account < ActiveRecord::Base
    %w(blocked business empl_name empl_email contact_first_name contact_last_name contact_middle_name)
   end
 
+  def self.axapta_renames
+   {"user_id" => "axapta_user_id"}
+  end
 end
