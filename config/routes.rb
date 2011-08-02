@@ -11,6 +11,9 @@ Urm::Application.routes.draw do
    end
   end
   get "main/index"
+  root :to => "main#index"
+  post "main/search"
+  match "/search" => "main#search"
 
   namespace :admin do
    #resources :main, :only => [:index]
@@ -31,7 +34,6 @@ Urm::Application.routes.draw do
     end
    end
   end
-  root :to => "main#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
