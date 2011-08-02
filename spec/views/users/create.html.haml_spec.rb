@@ -6,6 +6,7 @@ describe "users/create.html.haml" do
   @user = FactoryGirl.build(:user, :password => "password")
   @user.stub!(:valid?).and_return(true)
   @user.stub!(:unique_hash).and_return(true)
+  Axapta.stub!(:user_info).with(@user.ext_hash).and_return({})
   @user.save!
   assign(:user, @user)
   #session[:user] = @login.id

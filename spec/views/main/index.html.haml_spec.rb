@@ -6,6 +6,7 @@ describe "main/index.html.haml" do
   @list = FactoryGirl.build_list(:user, 5)
   @list.each{|u| u.stub!(:valid?).and_return(true) }
   @list.each{|u| u.stub!(:unique_hash).and_return(true) }
+  @list.each{|u| Axapta.stub!(:user_info).with(u.ext_hash).and_return({}) }
   @list.each{|u| u.save! }
   @login = @list.first
   assign(:users, @list)

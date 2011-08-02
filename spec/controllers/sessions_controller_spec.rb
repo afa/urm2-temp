@@ -7,6 +7,7 @@ describe SessionsController do
    @user = Factory.build(:user, :username => "test", :ext_hash => 'aaa')
    @pass = @user.send(:calc_pass)
    @user.stub(:calc_pass).and_return(@pass)
+   Axapta.stub!(:user_info).with(@user.ext_hash).and_return({})
    @user.save
   end
   describe "GET 'new'" do

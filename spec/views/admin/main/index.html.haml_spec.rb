@@ -9,6 +9,7 @@ describe "admin/main/index.html.haml" do
   @users.each do |u|
   u.stub!(:valid?).and_return(true)
   u.stub!(:unique_hash).and_return(true)
+  Axapta.stub!(:user_info).with(u.ext_hash).and_return({})
   u.save!
   end
   session[:manager] = FactoryGirl.create(:manager).id

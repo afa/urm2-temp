@@ -74,8 +74,13 @@ describe UsersController do
     @next_name = Factory.next(:username)
    end
    it "should be redirect" do
-    put 'update', :id => @user.id, :user => {:username => @next_name, :ext_hash => @next_hash}
+    #put 'update', :id => @user.id, :user => {:username => @next_name, :ext_hash => @next_hash}
+    put 'update', :id => @user.id, :user => {:username => @next_name}
     response.should be_redirect
+   end
+   it "should update params" do
+    put 'update', :id => @user.id, :user => {:username => @next_name}
+    User.find(@user.id).username.should == @next_name
    end
   end
 

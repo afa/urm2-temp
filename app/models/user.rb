@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
   def create_axapta_account
    self.password = calc_pass
    self.update_attributes :encrypted_password => Digest::MD5.hexdigest([self.salt, self.password].join)
-   accounts << Account.create(:axapta_hash => self.ext_hash)
+   accounts << Account.create({:axapta_hash => self.ext_hash}.merge(Axapta.user_info(self.ext_hash).inject({}){|r, a| r.merge(Account.axapta_renames[a[0]].nil? ? {a[0] => a[1]}: {Account.axapta_renames[a[0]] => a[1]}) }.delete_if{|k, v| not Account.axapta_attributes.include?(k.to_s) }))
    ext_hash = nil
   end
 
