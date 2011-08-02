@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe "main/search.html.haml" do
  before do
-  Account.any_instance.stub(:validates_uniqueness_of).and_return(true)
+  #Account.any_instance.stub(:validates_uniqueness_of).and_return(true)
   @login = FactoryGirl.build(:user)
   @login.stub!(:valid?).and_return(true)
-  @login.stub!(:unique_hash).and_return(true)
+  #@login.stub!(:unique_hash).and_return(true)
   @login.save!
   assign(:items, [])
   session[:user] = @login.id
