@@ -5,6 +5,7 @@ describe PasswordsController do
   @user = User.new(FactoryGirl.attributes_for(:user))
   @user.stub!(:valid?).and_return(true)
   @user.stub!(:calc_pass).and_return('password')
+  Axapta.stub!(:user_info).with(@user.ext_hash).and_return({})
   @user.save!
  end
 

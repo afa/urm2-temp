@@ -69,9 +69,17 @@ describe UsersController do
   end
 
   describe "PUT 'update'" do
-   it "should be successful" do
-    put 'update', :id => @user.id, :user => {:username => "test", :ext_hash => 'asd'}
+   before do
+    @next_hash = Factory.next(:ext_hash)
+    @next_name = Factory.next(:username)
+   end
+   it "should be redirect" do
+    put 'update', :id => @user.id, :user => {:username => @next_name}
     response.should be_redirect
+   end
+   it "should update params" do
+    put 'update', :id => @user.id, :user => {:username => @next_name}
+    User.find(@user.id).username.should == @next_name
    end
   end
 

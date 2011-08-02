@@ -6,6 +6,7 @@ describe MainController do
     before do
      @user = FactoryGirl.build(:user, :ext_hash => '123')
      @user.stub!(:valid?).and_return(true)
+     Axapta.stub!(:user_info).with(@user.ext_hash).and_return({})
      @user.save!
      session[:user] = @user
     end

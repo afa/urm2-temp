@@ -5,6 +5,7 @@ describe AccountsController do
   @login = FactoryGirl.build(:user)
   @accounts = FactoryGirl.create_list(:account, 5, :user => user)
   @login.stub!(:valid?).and_return(true)
+  Axapta.stub!(:user_info).with(@login.ext_hash).and_return({})
   @login.save!
   session[:user] = @login.id
  end
@@ -12,6 +13,7 @@ describe AccountsController do
  let(:account){ FactoryGirl.create(:account, :user => user) }
   describe "GET 'index'" do
     it "should be successful" do
+      #Axapta.stub!(:user_info).with(@user.ext_hash).and_return({})
       get 'index', :user_id => user.id
       response.should be_success
     end
