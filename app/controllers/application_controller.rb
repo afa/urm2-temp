@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
 
  protected
   def user_from_cookie
-   if token = cookies[:manager_remember_token]
+   if token = cookies[:user_remember_token]
     User.find_by_remember_token(token)
    end
   end
