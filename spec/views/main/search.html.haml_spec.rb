@@ -36,7 +36,7 @@ describe "main/search.html.haml" do
   rendered.should have_xpath("//form//input[@name='extended[calc_price]' and @type='checkbox']")
  end
  it "should show account selection form" do
-  rendered.should have_xpath("//")
+  rendered.should have_xpath("//select[@name='hash']")
  end
  it "should show render all items"
  #it "should show link to "
