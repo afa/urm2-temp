@@ -1,18 +1,18 @@
 class SessionsController < ApplicationController
- skip_filter :authenticate!, :except => :destroy
+ #skip_filter :authenticate!, :except => :destroy
+ skip_before_filter :authenticate!, :only => [:new, :create]
+
   def new
   end
 
   def create
-   if @current_user = User.authenticate(params["session"]["username"], params["session"]["password"])
-    session[:user] = @current_user.id
-   end
-   redirect_to root_path
+   sign_in(User.authenticate(params[:session].try(:[], :name), params[:session].try(:[], :password))) unless logged_in?
+   redirect_to root_path if logged_in?
+   redirect_to new_session_path unless logged_in?
   end
 
   def destroy
-   session[:user] = nil
-   redirect_to root_path
+   sign_out
+   redirect_to new_session_path
   end
-
 end

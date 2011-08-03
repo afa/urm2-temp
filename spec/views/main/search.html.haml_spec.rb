@@ -5,6 +5,7 @@ describe "main/search.html.haml" do
   #Account.any_instance.stub(:validates_uniqueness_of).and_return(true)
   @login = FactoryGirl.build(:user)
   @login.stub!(:valid?).and_return(true)
+  Axapta.stub!(:user_info).with(@login.ext_hash).and_return({})
   #@login.stub!(:unique_hash).and_return(true)
   @login.save!
   assign(:items, [])
