@@ -6,6 +6,7 @@ describe "main/search.html.haml" do
   @login = FactoryGirl.build(:user)
   @login.stub!(:valid?).and_return(true)
   #@login.stub!(:unique_hash).and_return(true)
+  Axapta.stub!(:user_info).with(@login.ext_hash).and_return({})
   @login.save!
   assign(:items, [])
   session[:user] = @login.id
