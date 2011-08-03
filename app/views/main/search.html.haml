@@ -11,4 +11,41 @@
  = form_for :search, :url => search_path do |f|
   = f.label :query
   = f.text_field :query
+  = f.submit "find"
+
+.extended{:class => :search}
+ = form_for :extended, :url => extended_path do |f|
+  = f.label :only_available
+  = f.check_box :only_available
+  = f.label :invent_location_id
+  = f.text_field :invent_location_id
+  = f.label :cust_account
+  = f.text_field :cust_account
+  = f.label :query_string
+  = f.text_field :query_string
+  = f.label :search_brend
+  = f.text_field :search_brend
+  = f.label :item_id_search
+  = f.text_field :item_id_search
+  = f.label :calc_qty
+  = f.check_box :calc_qty
+  = f.label :user_hash
+  = f.text_field :user_hash
+  = f.label :show_delivery_prognosis
+  = f.check_box :show_delivery_prognosis
+  = f.label :calc_price
+  = f.check_box :calc_price
+  = f.submit "find"
+
+-#  rendered.should have_xpath("//form[@action='/extended' and @method='post']")
+-#  rendered.should have_xpath("//form//input[@name='extended[only_available]' and @type='checkbox']")
+-#  rendered.should have_xpath("//form//input[@name='extended[invent_location_id]' and @type='text']")
+-#  rendered.should have_xpath("//form//input[@name='extended[cust_account]' and @type='text']")
+-#  rendered.should have_xpath("//form//input[@name='extended[query_string]' and @type='text']")
+-#  rendered.should have_xpath("//form//input[@name='extended[search_brend]' and @type='text']")
+-#  rendered.should have_xpath("//form//input[@name='extended[item_id_search]' and @type='text']")
+-#  rendered.should have_xpath("//form//input[@name='extended[calc_qty]' and @type='checkbox']")
+-#  rendered.should have_xpath("//form//input[@name='extended[user_hash]' and @type='text']")
+-#  rendered.should have_xpath("//form//input[@name='extended[show_delivery_prognosis]' and @type='checkbox']")
+-#  rendered.should have_xpath("//form//input[@name='extended[calc_price]' and @type='checkbox']")
 
