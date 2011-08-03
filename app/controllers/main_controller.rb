@@ -6,6 +6,7 @@ class MainController < ApplicationController
 
   def search
    @search = OpenStruct.new(params[:search]) if params[:search]
+   @items = []
   end
  protected
   def get_users
