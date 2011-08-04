@@ -10,7 +10,8 @@ describe "main/search.html.haml" do
   Axapta.stub!(:user_info).with(@login.ext_hash).and_return({})
   @login.save!
   assign(:items, [])
-  session[:user] = @login.id
+  assign(:accounts, @login.accounts)
+  controller.send(:current_user=, @login)
   render
  end
  #no anonymous in view. anon - redirected in controller

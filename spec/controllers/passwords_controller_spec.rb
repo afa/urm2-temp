@@ -11,7 +11,7 @@ describe PasswordsController do
 
   describe "GET 'new'" do
    it "should be successful" do
-    session[:user] = @user.id
+    controller.sign_in @user
     get 'new'
     response.should be_success
    end
@@ -26,19 +26,20 @@ describe PasswordsController do
 
   describe "POST 'create'" do
    it "should be successful when password valid" do
-    session[:user] = @user.id
+    controller.sign_in @user
     post 'create', :user => { :password => 'password' }
     response.should be_success
    end
 
    it "should regenerate encrypted password" do
-    session[:user] = @user.id
+    controller.sign_in @user
+    @user.stub!(:calc_pass).and_return('ipassword')
     post 'create', :user => { :password => 'password' }
-    assigns["password"].should_not == 'password'
+    assigns["password"].should == 'ipassword'
     assigns["password"].should_not be_blank
    end
    it "should fail on invalid password" do
-    session[:user] = @user.id
+    controller.sign_in @user
     post 'create', :user => { :password => 'xpassword' }
     response.should render_template(:new)
    end

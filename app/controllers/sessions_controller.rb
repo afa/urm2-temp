@@ -8,11 +8,11 @@ class SessionsController < ApplicationController
   def create
    sign_in(User.authenticate(params[:session].try(:[], :name), params[:session].try(:[], :password))) unless logged_in?
    redirect_to root_path if logged_in?
-   redirect_to new_session_path unless logged_in?
+   redirect_to new_sessions_path unless logged_in?
   end
 
   def destroy
    sign_out
-   redirect_to new_session_path
+   redirect_to new_sessions_path
   end
 end

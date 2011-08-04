@@ -9,7 +9,7 @@ describe UsersController do
    @user = FactoryGirl.create(:user, :parent => @parent)
    @chlds = FactoryGirl.create_list(:user, 2, :parent => @user)
    @chlds.each{|u| u.accounts.first.update_attributes :parent_id => @user.accounts.first.id }
-   session[:user] = @user
+   controller.sign_in @user
    @invalid = FactoryGirl.create(:user)
   end
 

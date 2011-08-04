@@ -7,7 +7,7 @@ describe AccountsController do
   @login.stub!(:valid?).and_return(true)
   Axapta.stub!(:user_info).with(@login.ext_hash).and_return({})
   @login.save!
-  session[:user] = @login.id
+  controller.sign_in @login
  end
  let(:user){mock_model(User)}
  let(:account){ FactoryGirl.create(:account, :user => user) }

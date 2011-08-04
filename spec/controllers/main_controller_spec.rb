@@ -6,7 +6,7 @@ describe MainController do
   @user.stub!(:valid?).and_return(true)
   Axapta.stub!(:user_info).with(@user.ext_hash).and_return({})
   @user.save!
-  session[:user] = @user
+  controller.sign_in @user
  end
 
  describe "GET 'index'" do

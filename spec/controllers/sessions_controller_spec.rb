@@ -19,7 +19,7 @@ describe SessionsController do
 
   describe "POST 'create'" do
     it "should be successful" do
-      post 'create', "session" =>{"username" => @user.username, "password" => @pass}
+      post 'create', "session" =>{"name" => @user.username, "password" => @pass}
       response.should redirect_to(root_path)
       controller.send(:current_user).should be_is_a(User)
       #session["user"].should == @user.id

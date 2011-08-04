@@ -7,6 +7,8 @@
   Настройки
  = link_to "Выход из системы", sessions_path, :method => :delete, :class => "quite"
 .clear
+.select_account
+ = select_tag :hash, options_from_collection_for_select(@accounts, "id", "name")
 .search
  = form_for :search, :url => search_path do |f|
   = f.label :query
