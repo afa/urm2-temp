@@ -3,21 +3,21 @@ class Admin::ApplicationController < ActionController::Base
   helper Admin::ApplicationHelper
   before_filter :authenticate!
   protect_from_forgery
-    def sign_in(user)
-      if user
-        cookies[:manager_remember_token] = {
-          :value   => user.remember_token,
-          :expires => 1.year.from_now.utc
-        }
-        self.current_user = user
-      end
+   def sign_in(user)
+    if user
+     cookies[:manager_remember_token] = {
+      :value   => user.remember_token,
+      :expires => 1.year.from_now.utc
+     }
+     self.current_user = user
     end
+   end
 
-    def sign_out
-      self.current_user.reset_remember_token! if self.current_user
-      cookies.delete(:remember_token)
-      self.current_user = nil
-    end
+   def sign_out
+    self.current_user.reset_remember_token! if self.current_user
+    cookies.delete(:remember_token)
+    self.current_user = nil
+   end
 
     protected
 

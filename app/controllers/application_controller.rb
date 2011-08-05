@@ -4,9 +4,9 @@ class ApplicationController < ActionController::Base
 
   def sign_in(user)
    if user
-    cookies[:manager_remember_token] = {
+    cookies[:user_remember_token] = {
       :value   => user.remember_token,
-      :expires => 1.year.from_now.utc
+      :expires => 1.day.from_now.utc
     }
     self.current_user = user
    end
@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   def sign_out
    self.current_user.reset_remember_token! if self.current_user
-   cookies.delete(:remember_token)
+   cookies.delete(:user_remember_token)
    self.current_user = nil
   end
 
