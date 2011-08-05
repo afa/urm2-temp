@@ -11,7 +11,8 @@ describe "main/search.html.haml" do
   @login.save!
   assign(:items, [])
   assign(:accounts, @login.accounts)
-  controller.send(:current_user=, @login)
+  assign(:current_user, @login)
+  #controller.send(:current_user=, @login)
   render
  end
  #no anonymous in view. anon - redirected in controller
