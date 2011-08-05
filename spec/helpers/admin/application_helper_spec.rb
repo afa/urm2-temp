@@ -7,7 +7,7 @@ describe Admin::ApplicationHelper do
     @manager = FactoryGirl.build(:manager)
     @manager.stub!(:valid?).and_return(true)
     @manager.save!
-    assign(:current_user, @manager)
+    assigns[:current_user] = @manager
     #session[:manager] = @manager.id
    end
    it "should locate logged user" do
@@ -21,7 +21,7 @@ describe Admin::ApplicationHelper do
    @manager = FactoryGirl.build(:manager)
    @manager.stub!(:valid?).and_return(true)
    @manager.save!
-   assign(:current_user, @manager)
+   assigns[:current_user] = @manager
    #session[:manager] = @manager.id
   end
   context "when valid user" do
@@ -31,7 +31,7 @@ describe Admin::ApplicationHelper do
   end
   context "when unknown user" do
    before do
-    controller.current_user = 0
+    assigns[:current_user] = 0
     #session[:manager] = 0
    end
    it "say no" do
@@ -40,7 +40,8 @@ describe Admin::ApplicationHelper do
   end
   context "when no user" do
    before do
-    controller.sign_out
+    assigns[:current_user] = nil
+    #controller.sign_out
     #session[:manager] = nil
    end
    it "say no" do
