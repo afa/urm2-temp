@@ -5,6 +5,7 @@ describe "admin/passwords/index.html.haml" do
   Axapta.stub!(:user_info).and_return({})
   @user = FactoryGirl.create(:user)
   assign(:user, @user)
+  assign(:current_user, @user)
   render
  end
 

@@ -26,12 +26,14 @@ describe Admin::ApplicationHelper do
   end
   context "when valid user" do
    it "say ok" do
-    logged_in?.should be_true
+    logged_in?.should be
    end 
   end
   context "when unknown user" do
    before do
     assigns[:current_user] = 0
+   #assign(:current_user, 0)
+    #controller.current_user = 0
     #session[:manager] = 0
    end
    it "say no" do
@@ -41,6 +43,7 @@ describe Admin::ApplicationHelper do
   context "when no user" do
    before do
     assigns[:current_user] = nil
+   #assign(:current_user, nil)
     #controller.sign_out
     #session[:manager] = nil
    end
