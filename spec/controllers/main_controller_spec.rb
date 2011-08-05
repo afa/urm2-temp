@@ -2,9 +2,12 @@ require 'spec_helper'
 
 describe MainController do
  before do
-  @user = FactoryGirl.build(:user, :ext_hash => '123')
+  @user = FactoryGirl.build(:user)
+  #@user = FactoryGirl.build(:user, :ext_hash => '123')
   @user.stub!(:valid?).and_return(true)
-  Axapta.stub!(:user_info).with(@user.ext_hash).and_return({})
+  @user.stub!(:create_axapta_account).and_return(true)
+  Axapta.stub!(:user_info).and_return({})
+  #Axapta.stub!(:user_info).with(@user.ext_hash).and_return({})
   @user.save!
   controller.sign_in @user
  end

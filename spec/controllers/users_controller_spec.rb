@@ -63,7 +63,8 @@ describe UsersController do
     User.any_instance.stub(:valid?).and_return(true)
     User.any_instance.stub(:unique_hash).and_return(true)
     Account.any_instance.stub(:validates_uniqueness_of).and_return(true)
-    post 'create', :user=>{:username => "test", :ext_hash => 'asd'}
+    @hpass = Factory.next(:ext_hash)
+    post 'create', :user=>{:username => "test", :ext_hash => @hpass}
     response.should be_success
    end
   end

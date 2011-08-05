@@ -38,9 +38,11 @@ FactoryGirl.define do
  factory :user do
   email
   password "password"
-  username
-  ext_hash
+  username { Factory.next(:username) }
+  ext_hash { Factory.next(:ext_hash)  }
   after_build {|m| m.send(:make_salt) }
+  after_build {|m| m.encrypt_password }
+  after_build {|m| m.send :generate_remember_token }
  end
 end
 
