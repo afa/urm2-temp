@@ -1,5 +1,7 @@
 require 'spec_helper'
 
 describe "accounts/new.html.haml" do
-  pending "add some examples to (or delete) #{__FILE__}"
+ it "should render form"
+ it "should render assigned fields"
+ it "should ask for axapta hash"
 end

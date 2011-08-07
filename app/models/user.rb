@@ -107,7 +107,6 @@ class User < ActiveRecord::Base
   end
 
   def unique_hash
-   p "hsh", self.ext_hash
    errors.add(:ext_hash, "account already exist, try recover password") if Account.find_by_axapta_hash(self.ext_hash)
   end
 

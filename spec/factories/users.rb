@@ -1,7 +1,10 @@
 FactoryGirl.define do
-
  sequence :axapta_user_id do |n|
   n
+ end
+
+ sequence :word do |n|
+  "word#{n}"
  end
 
  factory :account do
@@ -9,6 +12,9 @@ FactoryGirl.define do
   #association :user
   axapta_hash { Factory.next(:ext_hash) }
   axapta_user_id
+  contact_first_name { Factory.next(:word) }
+  contact_middle_name { Factory.next(:word) }
+  contact_last_name { Factory.next(:word) }
   after_build {|a| a.axapta_hash = a.user.ext_hash if defined?(a.user.ext_hash) && a.user.ext_hash }
   after_build {|a| a.axapta_parent_id = a.parent.axapta_user_id if a.parent.try(:axapta_user_id) }
  end
