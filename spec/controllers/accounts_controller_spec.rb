@@ -43,21 +43,21 @@ describe AccountsController do
   describe "POST 'create'" do
     it "should be successful" do
       post 'create', :user_id => account.user.id, :id => account.id
-      response.should be_success
+      response.should be_redirect
     end
   end
 
   describe "PUT 'update'" do
     it "should be successful" do
       put 'update', :user_id => account.user.id, :id => account.id
-      response.should be_success
+      response.should be_redirect
     end
   end
 
   describe "DELETE 'destroy'" do
     it "should be successful" do
       delete 'destroy', :user_id => account.user.id, :id => account.id
-      response.should be_success
+      response.should be_redirect
     end
   end
 
