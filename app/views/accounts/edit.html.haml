@@ -1,2 +1,19 @@
-%h1 Accounts#edit
-%p Find me in app/views/accounts/edit.html.haml
+= form_for :account, :url => user_account_path(@user, @account) do |f|
+ .form_line
+  = f.label :axapta_hash
+  = f.text_field :axapta_hash, :disabled => true
+ .form_line
+  = f.label :contact_first_name
+  = f.text_field :contact_first_name
+ .form_line
+  = f.label :contact_middle_name
+  = f.text_field :contact_middle_name
+ .form_line
+  = f.label :contact_last_name
+  = f.text_field :contact_last_name
+ .form_line
+  = f.label :blocked
+  = f.check_box :blocked
+ -#.form_line
+  = f.label :contact_mail
+  = f.text_field :contact_mail
