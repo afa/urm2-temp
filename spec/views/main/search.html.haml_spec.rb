@@ -41,6 +41,6 @@ describe "main/search.html.haml" do
  it "should show account selection form" do
   rendered.should have_xpath("//select[@name='hash']")
  end
- it "should show render all items"
+ it "should show render all items" 
  #it "should show link to "
 end

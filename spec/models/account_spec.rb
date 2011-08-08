@@ -48,7 +48,7 @@ describe Account do
    before do
     #User.any_instance.stub!(:valid?).and_return(true)
     #Axapta.stub(:user_info).with('asdfg').and_return(:blocked => '0', :business => "КОМПЭЛ", :empl_name=>"КАШИНА НАТАЛЬЯ ЛЬВОВНА", :empl_email => 'datis@compel.ru', :contact_email => 'datis@compel.ru', :contact_first_name => 'Владимир', :contact_last_name => 'Ластовка', :contact_middle_name => 'Владимирович', :parent_user_id => '', :user_name => 'УРМ-2 Тест')
-    p FactoryGirl.create(:user).accounts
+    #p FactoryGirl.create(:user).accounts
     @uchld = FactoryGirl.create_list(:user, 2)
     @chld = @uchld.map{|u| Account.find_by_axapta_hash(u.ext_hash)}
     @account.children << @chld
@@ -59,7 +59,6 @@ describe Account do
     Axapta.renew_structure(@user.ext_hash)
    end
    it "with hash" do
-    p @chld.map{|a| Account.find a.id }
     @chld.each{|a| Account.find(a.id).business.should == 'tst' }
    end
   end

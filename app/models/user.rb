@@ -100,7 +100,6 @@ class User < ActiveRecord::Base
   def check_axapta_validity
    begin
     axapta_params = Axapta.user_info(ext_hash)
-    logger.info axapta_params.inspect
    rescue Exception => e
     errors.add(:ext_hash, "#{e.type}:#{e.message}")
    end

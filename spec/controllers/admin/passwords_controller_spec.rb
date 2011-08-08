@@ -4,7 +4,6 @@ describe Admin::PasswordsController do
  before do
   Axapta.stub!(:user_info).and_return({})
   @user = FactoryGirl.build(:user)
-  p @user.ext_hash
   @user.save!
  end
 

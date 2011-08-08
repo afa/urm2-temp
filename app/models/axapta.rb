@@ -33,7 +33,6 @@ class Axapta
    accnt.parent.update_attributes self.user_info(accnt.parent.axapta_hash).inject({}){|r, a| r.merge(Account.axapta_renames[a[0]].nil? ? {a[0] => a[1]}: {Account.axapta_renames[a[0]] => a[1]}) }.delete_if{|k, v| not Account.axapta_attributes.include?(k.to_s) } if accnt.parent
    non_registered = []
    self.load_child_hashes(hash).each do |hsh| 
-    p hsh
     acc = Account.find_by_axapta_user_id(hsh["user_id"])
     if acc
      acc.update_attributes req.inject({}){|r, a| r.merge(Account.axapta_renames[a[0]].nil? ? {a[0] => a[1]}: {Account.axapta_renames[a[0]] => a[1]}) }.delete_if{|k, v| not Account.axapta_attributes.include?(k.to_s) }

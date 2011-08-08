@@ -1,2 +1,4 @@
-%h1 Accounts#new
-%p Find me in app/views/accounts/new.html.haml
+= form_for :account, :url => user_accounts_path(@user) do |f|
+ = f.label :axapta_hash
+ = f.text_field :axapta_hash
+ = f.submit :save
