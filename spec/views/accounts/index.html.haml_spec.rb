@@ -22,4 +22,7 @@ describe "accounts/index.html.haml" do
  it "should show name of each account" do
   @user.accounts.each {|a| rendered.should have_content([a.contact_first_name, a.contact_middle_name, a.contact_last_name, ].compact.join(' ')) }
  end
+ it "should show new account link" do
+  rendered.should have_xpath("//a[@href='#{new_user_account_path(@user)}']")
+ end
 end

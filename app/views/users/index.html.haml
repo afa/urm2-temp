@@ -1,6 +1,7 @@
 %div
  = current_user.username
 %div= link_to :edit, edit_user_path(current_user)
+%div
  = render :partial => "accounts/info", :collection => current_user.accounts
 %div
  parent:
