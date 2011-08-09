@@ -31,5 +31,7 @@ describe "users/index.html.haml" do
   rendered.should have_content(@parent.username)
  end
  
- it "should show edit link"
+ it "should show edit link" do
+  rendered.should have_xpath("//a[@href='#{edit_user_path(@user)}']")
+ end
 end

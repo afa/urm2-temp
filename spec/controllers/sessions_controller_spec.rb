@@ -1,14 +1,23 @@
 require 'spec_helper'
 
 describe SessionsController do
+ #before do
+ # @login = FactoryGirl.build(:user)
+ # @accounts = FactoryGirl.create_list(:account, 5, :user => user)
+ # @login.stub!(:valid?).and_return(true)
+ # Axapta.stub!(:user_info).with(@login.ext_hash).and_return({})
+ # @login.save!
+ # controller.sign_in @login
+ #end
+
 
   before do
-   @user = Factory.build(:user, :username => "test", :ext_hash => 'aaa')
+   @user = Factory.build(:user)
    @user.stub!(:valid?).and_return(true)
-   @pass = @user.send(:calc_pass)
+   @pass = "password" #@user.send(:calc_pass)
    @user.stub(:calc_pass).and_return(@pass)
    Axapta.stub!(:user_info).with(@user.ext_hash).and_return({})
-   @user.save
+   @user.save!
   end
   describe "GET 'new'" do
     it "should be successful" do
@@ -21,7 +30,8 @@ describe SessionsController do
     it "should be successful" do
       post 'create', "session" =>{"username" => @user.username, "password" => @pass}
       response.should redirect_to(root_path)
-      controller.send(:current_user).should be_is_a(User)
+      assigns[:current_user].should_not be_nil
+      #controller.send(:current_user).should be_is_a(User)
       #session["user"].should == @user.id
     end
   end
