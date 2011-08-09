@@ -1,4 +1,5 @@
 = form_for :account, :url => user_accounts_path(@user) do |f|
- = f.label :axapta_hash
- = f.text_field :axapta_hash
+ .field_line
+  = f.label :axapta_hash
+  = f.text_field :axapta_hash
  = f.submit :save
