@@ -39,6 +39,12 @@
   = f.check_box :calc_price
   = f.submit "find"
 
+.items
+ %table
+  - @items.each do |item|
+   %tr
+    %td= item.item_brend
+
 -#  rendered.should have_xpath("//form[@action='/extended' and @method='post']")
 -#  rendered.should have_xpath("//form//input[@name='extended[only_available]' and @type='checkbox']")
 -#  rendered.should have_xpath("//form//input[@name='extended[invent_location_id]' and @type='text']")
