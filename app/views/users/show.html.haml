@@ -1,1 +1,3 @@
 = @user.username
+= link_to :edit, edit_user_path(@user)
+= render :partial => "accounts/info", :collection => @user.accounts
