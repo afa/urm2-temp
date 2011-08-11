@@ -31,6 +31,7 @@ class Axapta
 
   def self.renew_structure(hash)
    accnt = Account.find_by_axapta_hash(hash)
+   p accnt
    req = self.user_info(hash)
    
    accnt.update_attributes self.filter_account_attributes(req)
@@ -44,6 +45,7 @@ class Axapta
      non_registered << hsh
     end
    end
+   p non_registered
   end
 
   def self.load_child_hashes(hash)
