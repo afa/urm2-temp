@@ -16,7 +16,7 @@ describe Account do
    let(:ui) { {:blocked => '0', :business => "КОМПЭЛ", :empl_name=>"КАШИНА НАТАЛЬЯ ЛЬВОВНА", :empl_email => 'datis@compel.ru', :contact_email => 'datis@compel.ru', :contact_first_name => 'Владимир', :contact_last_name => 'Ластовка', :contact_middle_name => 'Владимирович', :user_name => 'УРМ-2 Тест', :axapta_user_id => Factory.next(:axapta_user_id) } } #, :user_id => 1
   before do
    User.any_instance.stub!(:valid?).and_return(true)
-   #Axapta.stub(:user_info).and_return(ui)#, :user_id => 1
+   Axapta.stub!(:user_info).and_return(ui)#, :user_id => 1
    @user = FactoryGirl.create(:user)
    @account = Account.find_by_axapta_hash(@user.ext_hash)
    #@account = FactoryGirl.create(:account, :user => @user, :axapta_hash => 'asdfg')
@@ -56,6 +56,7 @@ describe Account do
     #@chld.each{|u| Axapta.stub!(:user_info).with(u.axapta_hash).and_return({:business => 'test'}) }
     Axapta.stub!(:load_child_hashes).with(@user.ext_hash).and_return(@user.accounts.first.children.map{|c| {"business" => 'tst', "user_id" => c.axapta_user_id} })
     #p @user.children.map{|c| {"business" => 'tst', "user_id" => c.axapta_user_id} }
+    @chld.each {|c| Axapta.stub!(:user_info).with(c.axapta_hash).and_return(:business => 'tst') }
     Axapta.renew_structure(@user.ext_hash)
    end
    it "with hash" do
