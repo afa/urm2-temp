@@ -50,7 +50,8 @@ class Axapta
    AxaptaRequest.user_list("user_hash" => hash)["users"].map{|u| u["user_id"] }.map{|u| self.user_info(hash, u) }
   end
 
-  def self.search_items_by_name(name) #search_item_name_h
+  #def self.search_items_by_name(name) #search_item_name_h
+  def self.search_names(*args)
    
   end
 end
