@@ -21,6 +21,7 @@ describe MainController do
 
  describe "POST 'search'" do
   before do
+   Axapta.stub!(:search_names).and_return([])
    post "search", :search => {:query => '21'}
   end
   it "should be success" do
