@@ -16,7 +16,7 @@ FactoryGirl.define do
   contact_middle_name { Factory.next(:word) }
   contact_last_name { Factory.next(:word) }
   after_build {|a| a.axapta_hash = a.user.ext_hash if defined?(a.user.ext_hash) && a.user.ext_hash }
-  after_build {|a| a.axapta_parent_id = a.parent.axapta_user_id if a.parent.try(:axapta_user_id) }
+  #after_build {|a| a.axapta_parent_id = a.parent.axapta_user_id if a.parent.try(:axapta_user_id) }
  end
 
  sequence :manager_name do |n|

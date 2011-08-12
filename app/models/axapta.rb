@@ -25,13 +25,12 @@ class Axapta
    AxaptaRequest.user_info(args)
   end
 
-  def self.filter_account_attributes(*args)
+  def self.filter_account_attributes(args)
    args.inject({}){|r, a| r.merge(Account.axapta_renames[a[0]].nil? ? {a[0] => a[1]}: {Account.axapta_renames[a[0]] => a[1]}) }.delete_if{|k, v| not Account.axapta_attributes.include?(k.to_s) }
   end
 
   def self.renew_structure(hash)
    accnt = Account.find_by_axapta_hash(hash)
-   p accnt
    req = self.user_info(hash)
    
    accnt.update_attributes self.filter_account_attributes(req)
@@ -45,7 +44,6 @@ class Axapta
      non_registered << hsh
     end
    end
-   p non_registered
   end
 
   def self.load_child_hashes(hash)
