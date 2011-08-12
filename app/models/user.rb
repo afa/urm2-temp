@@ -101,7 +101,7 @@ class User < ActiveRecord::Base
    begin
     axapta_params = Axapta.user_info(ext_hash)
    rescue Exception => e
-    errors.add(:ext_hash, "#{e.type}:#{e.message}")
+    errors.add(:ext_hash, "#{e.class.name}:#{e.message}")
    end
   end
 
