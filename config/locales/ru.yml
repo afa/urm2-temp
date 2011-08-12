@@ -1,0 +1,11 @@
+ru:
+ date:
+  formats:
+   default: "%Y-%m-%d"
+
+ activerecord:
+  models:
+   user: Пользователь
+  attributes:
+   user:
+    username: Имя
