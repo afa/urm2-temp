@@ -9,3 +9,14 @@ ru:
   attributes:
    user:
     username: Имя
+
+
+ activerecord:
+  errors:
+   models:
+    account:
+     attributes:
+      axapta_hash:
+       blank: не может быть пустым
+       taken: уже используется. Воспользуйтесь восстановлением пароля
+
