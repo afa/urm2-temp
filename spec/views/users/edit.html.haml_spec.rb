@@ -1,5 +1,5 @@
 require 'spec_helper'
 
 describe "users/edit.html.haml" do
-  pending "add some examples to (or delete) #{__FILE__}"
+ it "should render form"
 end
