@@ -49,6 +49,7 @@ class User < ActiveRecord::Base
 
  def self.authenticate(username, password)
   return nil  unless user = find_by_username(username)
+  return nil  if     user.accounts.all.all? {|a| a.blocked? }
   return user if     user.authenticated?(password)
  end
 

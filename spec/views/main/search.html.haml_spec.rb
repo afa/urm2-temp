@@ -42,7 +42,7 @@ describe "main/search.html.haml" do
  it "should show account selection form" do
   rendered.should have_xpath("//select[@name='hash']")
  end
- it "should show render all items" do
+ it "should render all items" do
   @items.each do |i|
    rendered.should have_xpath("//td", :text => i.item_brend)
   end

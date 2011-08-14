@@ -12,6 +12,7 @@ FactoryGirl.define do
   #association :user
   axapta_hash { Factory.next(:ext_hash) }
   axapta_user_id
+  blocked false
   contact_first_name { Factory.next(:word) }
   contact_middle_name { Factory.next(:word) }
   contact_last_name { Factory.next(:word) }
