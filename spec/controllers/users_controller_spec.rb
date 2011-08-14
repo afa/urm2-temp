@@ -82,6 +82,7 @@ describe UsersController do
    it "should update params" do
     put 'update', :id => @user.id, :user => {:username => @next_name}
     User.find(@user.id).username.should == @next_name
+    assigns[:accounts].should_not be_blank
    end
   end
 

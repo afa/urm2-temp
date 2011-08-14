@@ -10,6 +10,7 @@ describe "users/update.html.haml" do
   @user.save!
   assign(:current_user, @user)
   assign(:user, @user)
+  assign(:accounts, @user.accounts)
   #session[:user] = @login.id
   render #_template "main/index.html.haml"
  end

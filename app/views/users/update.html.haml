@@ -1,2 +1,5 @@
-%h1 Users#update
-%p Find me in app/views/users/update.html.haml
+- @accounts.each do |account|
+ %div
+  = account.axapta_hash
+
+= link_to "Продолжить работу", users_path
