@@ -55,7 +55,9 @@
 .items
  %table
   %tr
-   %th= t :item_brend
+   %th{:rowspan => 2}= t :item_brend
+   %th{:rowspan => 2}= t :item_id
+   %th{:rowspan => 2}= t :item_name
   - @items.each do |item|
    %tr
     %td= item["item_brend"]
