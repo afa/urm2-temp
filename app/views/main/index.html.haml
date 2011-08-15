@@ -9,8 +9,8 @@
 .clear
 .search
  = form_for :search, :url => search_path do |f|
-  = f.label :query
-  = f.text_field :query
+  = f.label :query_string
+  = f.text_field :query_string
 %h1 Пользователи
 - @users.each do |user|
  .line
