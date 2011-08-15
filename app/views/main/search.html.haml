@@ -113,17 +113,7 @@
     %td= item["qty_in_pack"]
     %td= item["rohs"]
     %td= item["segment_rus"]
-    %td= link_to t(:expand), extended_path, :remote => true
-
--#  rendered.should have_xpath("//form[@action='/extended' and @method='post']")
--#  rendered.should have_xpath("//form//input[@name='extended[only_available]' and @type='checkbox']")
--#  rendered.should have_xpath("//form//input[@name='extended[invent_location_id]' and @type='text']")
--#  rendered.should have_xpath("//form//input[@name='extended[cust_account]' and @type='text']")
--#  rendered.should have_xpath("//form//input[@name='extended[query_string]' and @type='text']")
--#  rendered.should have_xpath("//form//input[@name='extended[search_brend]' and @type='text']")
--#  rendered.should have_xpath("//form//input[@name='extended[item_id_search]' and @type='text']")
--#  rendered.should have_xpath("//form//input[@name='extended[calc_qty]' and @type='checkbox']")
--#  rendered.should have_xpath("//form//input[@name='extended[user_hash]' and @type='text']")
--#  rendered.should have_xpath("//form//input[@name='extended[show_delivery_prognosis]' and @type='checkbox']")
--#  rendered.should have_xpath("//form//input[@name='extended[calc_price]' and @type='checkbox']")
+    %td
+     = link_to t(:expand), extended_path, :remote => true
+     = link_to t(:dms), extended_path, :remote => true
 
