@@ -1,6 +1,6 @@
 require "ostruct"
 class MainController < ApplicationController
- before_filter :get_hash, :only => [:search, :extended]
+ before_filter :get_hash, :only => [:search, :extended, :index]
  before_filter :get_users, :only => [:index]
  before_filter :get_accounts, :only => [:index, :search, :extended]
   def index
@@ -19,6 +19,7 @@ class MainController < ApplicationController
   end
  protected
   def get_hash
+   p params[:hash]
    @user_hash = params[:hash]
   end
 
