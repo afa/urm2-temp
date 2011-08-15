@@ -81,35 +81,29 @@
     %td= item["item_brend"]
     %td= item["item_id"]
     %td= item["item_name"]
-    %td
-     %table
-      - if item["locations"].empty?
-       %td{:colspan=>8} &nbsp;
-      - else
-       -# item["locations"].each do |location|
-       - location = item["locations"].first
-       %td
-        %table
-         - if location["delivery_prognosis"].empty?
-          %td{:colspan=>2} &nbsp;
-         - else
-          -# location["delivery_prognosis"].each do |prognos|
-          - prognos = location["delivery_prognosis"].first
-          %td= prognos["delivery_date"]
-          %td= prognos["delivery_qty"]
-       %td= location["location_id"]
-       %td
-        %table
-         - if location["price_qty"].empty?
-          %td{:colspan=>4} &nbsp;
-         - else
-          -# location["price_qty"].each do |price|
-          - price = location["price_qty"].first
-          %td= price["max_qty"]
-          %td= price["min_qty"]
-          %td= price["price"]
-          %td= price["price_ref"]
-       %td= location["vend_qty"]
+    - if item["locations"].empty?
+     %td{:colspan=>8} &nbsp;
+    - else
+     -# item["locations"].each do |location|
+     - location = item["locations"].first
+     - if location["delivery_prognosis"].empty?
+      %td{:colspan=>2} &nbsp;
+     - else
+      -# location["delivery_prognosis"].each do |prognos|
+      - prognos = location["delivery_prognosis"].first
+      %td= prognos["delivery_date"]
+      %td= prognos["delivery_qty"]
+     %td= location["location_id"]
+     - if location["price_qty"].empty?
+      %td{:colspan=>4} &nbsp;
+     - else
+      -# location["price_qty"].each do |price|
+      - price = location["price_qty"].first
+      %td= price["max_qty"]
+      %td= price["min_qty"]
+      %td= price["price"]
+      %td= price["price_ref"]
+     %td= location["vend_qty"]
     %td= item["min_qty"]
     %td= item["package_name"]
     %td= item["qty_in_pack"]
