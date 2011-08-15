@@ -83,10 +83,16 @@
     %td= item["item_name"]
     %td
      %table
+      - if item["locations"].empty?
+       %tr
+        %td{:colspan=>8} &nbsp;
       - item["locations"].each do |location|
        %tr
         %td
          %table
+          - if location["delivery_prognosis"].empty?
+           %tr
+            %td{:colspan=>2} &nbsp;
           -location["delivery_prognosis"].each do |prognos|
            %tr
             %td= prognos["delivery_date"]
@@ -94,6 +100,9 @@
         %td= location["location_id"]
         %td
          %table
+          - if item["locations"].empty?
+           %tr
+            %td{:colspan=>8} &nbsp;
           - location["price_qty"].each do |price|
            %tr
             %td= price["max_qty"]
