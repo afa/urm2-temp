@@ -2,6 +2,7 @@ require "ostruct"
 class MainController < ApplicationController
  before_filter :get_hash, :only => [:search, :extended]
  before_filter :get_users, :only => [:index]
+ before_filter :get_accounts, :only => [:index, :search, :extended]
   def index
   end
 
@@ -23,5 +24,9 @@ class MainController < ApplicationController
 
   def get_users
    @users = User.all
+  end
+
+  def get_accounts
+   @accounts = current_user.accounts.where(:blocked => false)
   end
 end

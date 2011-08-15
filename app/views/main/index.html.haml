@@ -6,6 +6,8 @@
  %a{:href=>"#"}
   Настройки
  = link_to "Выход из системы", sessions_path, :method => :delete, :class => "quite"
+%div
+ = select_tag :hash, options_from_collection_for_select(@accounts, :id, :name, @hash)
 .clear
 .search
  = form_for :search, :url => search_path do |f|
