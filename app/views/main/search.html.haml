@@ -19,27 +19,38 @@
 .extended{:class => :search}
  = form_for :extended, :url => extended_path do |f|
   = f.select :user_hash, options_from_collection_for_select(@accounts, :axapta_hash, :id, @hash)
-  = f.label :only_available
-  = f.check_box :only_available
-  = f.label :invent_location_id
-  = f.text_field :invent_location_id
-  = f.label :cust_account
-  = f.text_field :cust_account
-  = f.label :query_string
-  = f.text_field :query_string
-  = f.label :search_brend
-  = f.text_field :search_brend
-  = f.label :item_id_search
-  = f.text_field :item_id_search
-  = f.label :calc_qty
-  = f.check_box :calc_qty
-  = f.label :user_hash
-  = f.text_field :user_hash
-  = f.label :show_delivery_prognosis
-  = f.check_box :show_delivery_prognosis
-  = f.label :calc_price
-  = f.check_box :calc_price
-  = f.submit "find"
+  .line
+   = f.label :only_available
+   = f.check_box :only_available
+  .line
+   = f.label :invent_location_id
+   = f.text_field :invent_location_id
+  .line
+   = f.label :cust_account
+   = f.text_field :cust_account
+  .line
+   = f.label :query_string
+   = f.text_field :query_string
+  .line
+   = f.label :search_brend
+   = f.text_field :search_brend
+  .line
+   = f.label :item_id_search
+   = f.text_field :item_id_search
+  .line
+   = f.label :calc_qty
+   = f.check_box :calc_qty
+  .line
+   = f.label :user_hash
+   = f.text_field :user_hash
+  .line
+   = f.label :show_delivery_prognosis
+   = f.check_box :show_delivery_prognosis
+  .line
+   = f.label :calc_price
+   = f.check_box :calc_price
+  .line
+   = f.submit "find"
 
 .items
  %table
