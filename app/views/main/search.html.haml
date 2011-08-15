@@ -53,11 +53,29 @@
    = f.submit "find"
 
 .items
- %table
+ %table{:style=>"border: 2px black solid;"}
   %tr
-   %th{:rowspan => 2}= t :item_brend
-   %th{:rowspan => 2}= t :item_id
-   %th{:rowspan => 2}= t :item_name
+   %th{:rowspan => 3}= t :item_brend
+   %th{:rowspan => 3}= t :item_id
+   %th{:rowspan => 3}= t :item_name
+   %th{:colspan=>8}= t :locations
+   %th{:rowspan => 3}= t :min_qty
+   %th{:rowspan => 3}= t :package_name
+   %th{:rowspan => 3}= t :qty_in_pack
+   %th{:rowspan => 3}= t :rohs
+   %th{:rowspan => 3}= t :segment_rus
+  %tr
+   %th{:colspan => 2}= t :delivery_prognosis
+   %th{:rowspan => 2}= t :location_id
+   %th{:colspan=>4}= t :price_qty
+   %th{:rowspan=>2}= t :vend_qty
+  %tr
+   %th= t :delivery_date
+   %th= t :delivery_qty
+   %th= t :max_qty
+   %th= t :min_qty
+   %th= t :price
+   %th= t :price_ref
   - @items.each do |item|
    %tr
     %td= item["item_brend"]
