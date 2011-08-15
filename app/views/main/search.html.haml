@@ -64,6 +64,7 @@
    %th{:rowspan => 3}= t :qty_in_pack
    %th{:rowspan => 3}= t :rohs
    %th{:rowspan => 3}= t :segment_rus
+   %th{:rowspan => 3}= t :another_actions
   %tr
    %th{:colspan => 2}= t :delivery_prognosis
    %th{:rowspan => 2}= t :location_id
@@ -109,6 +110,7 @@
     %td= item["qty_in_pack"]
     %td= item["rohs"]
     %td= item["segment_rus"]
+    %td= link_to t(:expand), extended_path, :remote => true
 
 -#  rendered.should have_xpath("//form[@action='/extended' and @method='post']")
 -#  rendered.should have_xpath("//form//input[@name='extended[only_available]' and @type='checkbox']")
