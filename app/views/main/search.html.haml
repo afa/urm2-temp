@@ -85,16 +85,16 @@
      %table
       - if item["locations"].empty?
        %td{:colspan=>8} &nbsp;
-      -# item["locations"].each do |location|
-      - location = item["locations"].first
-      - begin
+      - else
+       -# item["locations"].each do |location|
+       - location = item["locations"].first
        %td
         %table
          - if location["delivery_prognosis"].empty?
           %td{:colspan=>2} &nbsp;
-         -# location["delivery_prognosis"].each do |prognos|
-         - prognos = location["delivery_prognosis"].first
-         - begin
+         - else
+          -# location["delivery_prognosis"].each do |prognos|
+          - prognos = location["delivery_prognosis"].first
           %td= prognos["delivery_date"]
           %td= prognos["delivery_qty"]
        %td= location["location_id"]
@@ -102,9 +102,9 @@
         %table
          - if location["price_qty"].empty?
           %td{:colspan=>4} &nbsp;
-         -# location["price_qty"].each do |price|
-         - price = location["price_qty"].first
-         - begin
+         - else
+          -# location["price_qty"].each do |price|
+          - price = location["price_qty"].first
           %td= price["max_qty"]
           %td= price["min_qty"]
           %td= price["price"]
