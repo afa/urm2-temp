@@ -51,7 +51,7 @@ class Axapta
   end
 
   #def self.search_items_by_name(name) #search_item_name_h
-  def self.search_names(args)
-   AxaptaRequest.search_item_names_h(args)
+  def self.search_names(*args)
+   AxaptaRequest.search_item_names_h(*args)
   end
 end
