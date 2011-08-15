@@ -11,12 +11,14 @@
  = select_tag :hash, options_from_collection_for_select(@accounts, "id", "name")
 .search
  = form_for :search, :url => search_path do |f|
-  = f.label :query
+  = f.select :user_hash, options_from_collection_for_select(@accounts, :axapta_hash, :id, @hash)
+  = f.label :query_string
   = f.text_field :query
   = f.submit "find"
 
 .extended{:class => :search}
  = form_for :extended, :url => extended_path do |f|
+  = f.select :user_hash, options_from_collection_for_select(@accounts, :axapta_hash, :id, @hash)
   = f.label :only_available
   = f.check_box :only_available
   = f.label :invent_location_id
@@ -43,7 +45,7 @@
  %table
   - @items.each do |item|
    %tr
-    %td= item.item_brend
+    %td= item["item_brend"]
 
 -#  rendered.should have_xpath("//form[@action='/extended' and @method='post']")
 -#  rendered.should have_xpath("//form//input[@name='extended[only_available]' and @type='checkbox']")
