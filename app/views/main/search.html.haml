@@ -65,14 +65,14 @@
        %tr
         %td
          %table
-          -location["delivery_prognosis"]["content"].each do |prognos|
+          -location["delivery_prognosis"].each do |prognos|
            %tr
             %td= prognos["delivery_date"]
             %td= prognos["delivery_qty"]
         %td= location["location_id"]
         %td
          %table
-          - location["price_qty"]["content"].each do |price|
+          - location["price_qty"].each do |price|
            %tr
             %td= price["max_qty"]
             %td= price["min_qty"]
