@@ -6,11 +6,12 @@
  %a{:href=>"#"}
   Настройки
  = link_to "Выход из системы", sessions_path, :method => :delete, :class => "quite"
-%div
+-#%div
  = select_tag :hash, options_from_collection_for_select(@accounts, :id, :axapta_hash, @hash)
 .clear
 .search
  = form_for :search, :url => search_path do |f|
+  = select :user_hash, options_from_collection_for_select(@accounts, :id, :axapta_hash, @hash)
   = f.label :query_string
   = f.text_field :query_string
 %h1 Пользователи
