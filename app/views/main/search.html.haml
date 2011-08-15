@@ -87,11 +87,13 @@
     - else
      -# item["locations"].each do |location|
      - location = item["locations"].first
+     - p location
      - if location["delivery_prognosis"].empty?
       %td{:colspan=>2} &nbsp;
      - else
       -# location["delivery_prognosis"].each do |prognos|
       - prognos = location["delivery_prognosis"].first
+      - p prognos
       %td= prognos["delivery_date"]
       %td= prognos["delivery_qty"]
      %td= location["location_id"]
@@ -100,6 +102,7 @@
      - else
       -# location["price_qty"].each do |price|
       - price = location["price_qty"].first
+      - p price
       %td= price["max_qty"]
       %td= price["min_qty"]
       %td= price["price"]
