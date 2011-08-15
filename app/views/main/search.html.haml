@@ -57,6 +57,33 @@
   - @items.each do |item|
    %tr
     %td= item["item_brend"]
+    %td= item["item_id"]
+    %td= item["item_name"]
+    %td
+     %table
+      - item["locations"]["content"].each do |location|
+       %tr
+        %td
+         %table
+          -location["delivery_prognosis"]["content"].each do |prognos|
+           %tr
+            %td= prognos["delivery_date"]
+            %td= prognos["delivery_qty"]
+        %td= location["location_id"]
+        %td
+         %table
+          - location["price_qty"]["content"].each do |price|
+           %tr
+            %td= price["max_qty"]
+            %td= price["min_qty"]
+            %td= price["price"]
+            %td= price["price_ref"]
+        %td= location["vend_qty"]
+    %td= item["min_qty"]
+    %td= item["package_name"]
+    %td= item["qty_in_pack"]
+    %td= item["rohs"]
+    %td= item["segment_rus"]
 
 -#  rendered.should have_xpath("//form[@action='/extended' and @method='post']")
 -#  rendered.should have_xpath("//form//input[@name='extended[only_available]' and @type='checkbox']")
