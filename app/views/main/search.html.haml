@@ -112,7 +112,7 @@
     %td= item["segment_rus"]
     %td
      = link_to t(:expand), extended_path, :remote => true
-     = link_to t(:dms), main_dms_path, :class=>"js", :remote => true
+     = link_to t(:dms), main_dms_path(:acc => @hash.id, :name => item.item_name), :class=>"js", :remote => true
 #tst &nbsp;
 :javascript
  $('.js').bind('ajax:complete', function(evt, xhr, status){
