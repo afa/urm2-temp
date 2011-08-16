@@ -25,9 +25,10 @@ describe SessionsController do
 
   describe "POST 'create'" do
     it "should be successful" do
-      post 'create', "session" =>{"username" => @user.username, "password" => @pass}
-      response.should redirect_to(root_path)
-      assigns[:current_user].should_not be_nil
+     User.any_instance.stub(:reload_accounts).once
+     post 'create', "session" =>{"username" => @user.username, "password" => @pass}
+     response.should redirect_to(root_path)
+     assigns[:current_user].should_not be_nil
     end
 
    it "should deny blocked user" do

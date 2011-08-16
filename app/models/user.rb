@@ -69,6 +69,12 @@ class User < ActiveRecord::Base
    User.base62(Digest::MD5.hexdigest([salt, Time.now.strftime("%Y%m%d%H%M%S"), Time.now.usec.to_s].join).to_i(16))
   end
 
+  def reload_accounts
+   self.accounts.each do |account|
+    Axapta.renew_structure(account.axapta_hash)
+   end
+  end
+
  protected
   def generate_hash(string)
    if RUBY_VERSION >= '1.9'
