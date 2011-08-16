@@ -23,6 +23,7 @@ class MainController < ApplicationController
    logger.info @hash.inspect
    logger.info @seek.inspect
    @items = Axapta.search_dms_names(:user_hash => @hash, :query_string => @seek)
+   logger.info @items.inspect
    respond_with do |format|
     format.js { render :layout => false } #do
     # render(:update) {|page| page.replace_html 'div.tst', '<div>asd</div>'.html_safe }
