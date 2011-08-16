@@ -25,7 +25,8 @@ describe SessionsController do
 
   describe "POST 'create'" do
     it "should be successful" do
-     User.any_instance.stub(:reload_accounts).once
+     #User.any_instance.stub(:reload_accounts).and_return(nil)
+     @user.accounts.each{|a| Axapta.stub!(:renew_structure).with(a.axapta_hash).and_return(true) }
      post 'create', "session" =>{"username" => @user.username, "password" => @pass}
      response.should redirect_to(root_path)
      assigns[:current_user].should_not be_nil
