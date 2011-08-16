@@ -19,9 +19,9 @@ class MainController < ApplicationController
 
   def dms
    respond_with do |format|
-    format.js do
-     render(:update) {|page| page.replace_html 'div.tst', '<div>asd</div>'.html_safe }
-    end
+    format.js #do
+    # render(:update) {|page| page.replace_html 'div.tst', '<div>asd</div>'.html_safe }
+    #end
     format.html do
      redirect_to root_path
     end
