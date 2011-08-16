@@ -54,4 +54,7 @@ class Axapta
   def self.search_names(*args)
    AxaptaRequest.search_item_name_h(*args).try(:[], "items") || []
   end
+  def self.search_dms_names(*args)
+   AxaptaRequest.search_item_name_dms_h(*args).try(:[], "items") || []
+  end
 end

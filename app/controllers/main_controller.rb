@@ -18,6 +18,9 @@ class MainController < ApplicationController
   end
 
   def dms
+   @seek = params[:name]
+   @hash = Account.find(params[:acc]).try(:axapta_hash)
+   @items = Axapta.search_dms_names(:user_hash => @hash, :query_string => @seek)
    respond_with do |format|
     format.js { render :layout => false } #do
     # render(:update) {|page| page.replace_html 'div.tst', '<div>asd</div>'.html_safe }
