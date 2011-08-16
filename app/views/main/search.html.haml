@@ -82,27 +82,24 @@
     %td= item["item_brend"]
     %td= item["item_id"]
     %td= item["item_name"]
-    - if item["locations"].empty?
+    - if item["locations"].blank?
      %td{:colspan=>8} &nbsp;
     - else
      -# item["locations"].each do |location|
      - location = item["locations"].first
-     - p location
-     - if location["delivery_prognosis"].empty?
+     - if location["delivery_prognosis"].blank?
       %td{:colspan=>2} &nbsp;
      - else
       -# location["delivery_prognosis"].each do |prognos|
       - prognos = location["delivery_prognosis"].first
-      - p prognos
       %td= prognos["delivery_date"]
       %td= prognos["delivery_qty"]
      %td= location["location_id"]
-     - if location["price_qty"].empty?
+     - if location["price_qty"].blank?
       %td{:colspan=>4} &nbsp;
      - else
       -# location["price_qty"].each do |price|
       - price = location["price_qty"].first
-      - p price
       %td= price["max_qty"]
       %td= price["min_qty"]
       %td= price["price"]
@@ -115,5 +112,9 @@
     %td= item["segment_rus"]
     %td
      = link_to t(:expand), extended_path, :remote => true
-     = link_to t(:dms), extended_path, :remote => true
-
+     = link_to t(:dms), main_dms_path(:name => item["item_name"]), :class=>"js", :remote => true
+#tst &nbsp;
+:javascript
+ $('.js').bind('ajax:complete', function(evt, xhr, status){
+  eval(xhr.responseText);
+ });
