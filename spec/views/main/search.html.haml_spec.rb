@@ -9,7 +9,7 @@ describe "main/search.html.haml" do
   #@login.stub!(:unique_hash).and_return(true)
   Axapta.stub!(:user_info).with(@login.ext_hash).and_return({})
   @login.save!
-  @items = [OpenStruct.new(:item_id => 123, :item_name => 'ttt')]
+  @items = [{:item_id => 123, :item_name => 'ttt'}]
   assign(:items, @items)
   assign(:accounts, @login.accounts)
   assign(:current_user, @login)
@@ -44,7 +44,7 @@ describe "main/search.html.haml" do
  end
  it "should render all items" do
   @items.each do |i|
-   rendered.should have_xpath("//td", :text => i.item_brend)
+   rendered.should have_xpath("//td", :text => i["item_brend"])
   end
  end
  #it "should show link to "

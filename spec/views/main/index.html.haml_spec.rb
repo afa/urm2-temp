@@ -11,6 +11,7 @@ describe "main/index.html.haml" do
   @login = @list.first
   assign(:users, @list)
   session[:user] = @login.id
+  assign(:accounts, @login.accounts)
   render #_template "main/index.html.haml"
  end
  #no anonymous in view. anon - redirected in controller
@@ -23,6 +24,6 @@ describe "main/index.html.haml" do
 
  it "should show search form" do
   rendered.should have_xpath("//form[@action='/search' and @method='post']")
-  rendered.should have_xpath("//form//input[@type='text' and @name='search[query]']")
+  rendered.should have_xpath("//form//input[@type='text' and @name='search[query_string]']")
  end
 end

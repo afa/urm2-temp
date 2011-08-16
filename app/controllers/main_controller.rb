@@ -9,9 +9,9 @@ class MainController < ApplicationController
   def search
    @search = OpenStruct.new(params[:search]) if params[:search]
    
-   @items = Axapta.search_names(params[:search]) #.merge(:user_hash => @user_hash))
-   @accounts = current_user.accounts
-   @extended = OpenStruct.new(params[:extended])
+   @items = Axapta.search_names({:calc_price=>true, :calc_qty => true}.merge(params[:search] || {})) #.merge(:user_hash => @user_hash))
+   #@accounts = current_user.accounts
+   @extended = OpenStruct.new({:calc_price=>true, :calc_qty => true}.merge(params[:extended] || {}))
   end
 
   def extended
@@ -19,7 +19,6 @@ class MainController < ApplicationController
   end
  protected
   def get_hash
-   p params[:hash]
    @user_hash = params[:hash]
   end
 
