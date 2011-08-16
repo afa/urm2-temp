@@ -1,7 +1,7 @@
 require "ostruct"
 class MainController < ApplicationController
 
- respond_to :html, :js
+ respond_to :js, :html
 
  before_filter :get_hash, :only => [:search, :extended, :index]
  before_filter :get_users, :only => [:index]
@@ -19,11 +19,11 @@ class MainController < ApplicationController
 
   def dms
    respond_with do |format|
-    format.html do
-     redirect_to root_path
-    end
     format.js do
      render(:update) {|page| page.replace_html 'tst', '<div>asd</div>'.safe_html }
+    end
+    format.html do
+     redirect_to root_path
     end
    end
   end
