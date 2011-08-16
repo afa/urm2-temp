@@ -22,7 +22,9 @@ class MainController < ApplicationController
     format.html do
      redirect_to root_path
     end
-    format.js
+    format.js do
+     render(:update) {|page| page.replace_html 'tst', '<div>asd</div>'.safe_html }
+    end
    end
   end
 
