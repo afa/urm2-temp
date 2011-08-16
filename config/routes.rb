@@ -16,6 +16,7 @@ Urm::Application.routes.draw do
   match "/search" => "main#search"
   post "main/extended"
   match "/extended" => "main#extended"
+  get "main/dms"
 
   namespace :admin do
    #resources :main, :only => [:index]
