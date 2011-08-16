@@ -19,7 +19,7 @@ class MainController < ApplicationController
 
   def dms
    respond_with do |format|
-    format.js #do
+    format.js { render :layout => false } #do
     # render(:update) {|page| page.replace_html 'div.tst', '<div>asd</div>'.html_safe }
     #end
     format.html do
