@@ -1,4 +1,4 @@
-%tr{:id => "item_#{items_line["item_id"]}_#{items_line["item_name"]}"}
+%tr{need_links ? {:id => "item_#{items_line["item_id"]}_#{items_line["item_name"]}"} : {}}
  %td= items_line["item_brend"]
  %td= items_line["item_id"]
  %td= items_line["item_name"]
