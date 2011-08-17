@@ -1,4 +1,45 @@
-%tr{need_links ? {:id => "item_#{items_line["item_id"]}_#{items_line["item_name"]}"} : {}}
+  -#%tr
+   %th{:rowspan => 2}= t :actions
+   %th{:rowspan => 2}= t :item_name
+   %th{:rowspan => 2}= t :item_brend
+   %th{:rowspan => 2}= t :to_cart
+   %th{:colspan => 2}= t :avail
+   %th{:rowspan => 2}= t :prognosis
+   %th{:rowspan => 2}= t :price1
+   %th{:rowspan => 2}= t :count2
+   %th{:rowspan => 2}= t :price2
+   %th{:rowspan => 2}= t :count3
+   %th{:rowspan => 2}= t :price3
+   %th{:rowspan => 2}= t :count4
+   %th{:rowspan => 2}= t :price4
+   %th{:rowspan => 2}= t :location
+   %th{:rowspan => 2}= t :quantity
+  -#%tr
+   %th= t :avail_min
+   %th= t :avail_max
+
+%tr{:id => "item_#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}"}
+ %td
+ %td= items_line["item_name"]
+ %td= items_line["item_brend"]
+ %td 
+ %td= items_line["item_name"]
+ %td= items_line["item_name"]
+ %td= items_line["item_name"]
+ %td= items_line["item_name"]
+ %td= items_line["item_name"]
+ %td= items_line["item_name"]
+ %td= items_line["item_name"]
+ %td= items_line["item_name"]
+ %td= items_line["item_name"]
+ %td= items_line["item_name"]
+ %td= items_line["item_name"]
+ %td= items_line["item_name"]
+ %td= items_line["item_name"]
+ %td= items_line["item_name"]
+ 
+
+-# %tr{need_links ? {:id => "item_#{items_line["item_id"]}_#{items_line["item_name"]}"} : {}}
  %td= items_line["item_brend"]
  %td= items_line["item_id"]
  %td= items_line["item_name"]

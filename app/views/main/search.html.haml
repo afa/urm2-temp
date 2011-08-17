@@ -54,7 +54,7 @@
 
 .items
  %table{:border => '2', :style=>"border: 2px black solid;cellspacing:2px;cellpadding:2px;"}
-  %tr
+  -#%tr
    %th{:rowspan => 3}= t :item_brend
    %th{:rowspan => 3}= t :item_id
    %th{:rowspan => 3}= t :item_name
@@ -65,18 +65,37 @@
    %th{:rowspan => 3}= t :rohs
    %th{:rowspan => 3}= t :segment_rus
    %th{:rowspan => 3}= t :another_actions
-  %tr
+  -#%tr
    %th{:colspan => 2}= t :delivery_prognosis
    %th{:rowspan => 2}= t :location_id
    %th{:colspan=>4}= t :price_qty
    %th{:rowspan=>2}= t :vend_qty
-  %tr
+  -#%tr
    %th= t :delivery_date
    %th= t :delivery_qty
    %th= t :max_qty
    %th= t :min_qty
    %th= t :price
    %th= t :price_ref
+  %tr
+   %th{:rowspan => 2}= t :actions
+   %th{:rowspan => 2}= t :item_name
+   %th{:rowspan => 2}= t :item_brend
+   %th{:rowspan => 2}= t :to_cart
+   %th{:colspan => 2}= t :avail
+   %th{:rowspan => 2}= t :prognosis
+   %th{:rowspan => 2}= t :price1
+   %th{:rowspan => 2}= t :count2
+   %th{:rowspan => 2}= t :price2
+   %th{:rowspan => 2}= t :count3
+   %th{:rowspan => 2}= t :price3
+   %th{:rowspan => 2}= t :count4
+   %th{:rowspan => 2}= t :price4
+   %th{:rowspan => 2}= t :location
+   %th{:rowspan => 2}= t :quantity
+  %tr
+   %th= t :avail_min
+   %th= t :avail_max
   - @items.each do |item|
    = render :partial => "items_line", :locals => {:items_line => item, :need_links => true}
    -# %tr
