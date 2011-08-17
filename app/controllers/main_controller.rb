@@ -18,12 +18,11 @@ class MainController < ApplicationController
   end
 
   def dms
+   @after = params[:after]
    @seek = params[:name]
+   @brend = params[:brend]
    @hash = current_user.accounts.first.try(:axapta_hash)
-   logger.info @hash.inspect
-   logger.info @seek.inspect
-   @items = Axapta.search_dms_names(:user_hash => @hash, :query_string => @seek)
-   logger.info @items.inspect
+   @items = Axapta.search_dms_names(:user_hash => @hash, :query_string => @seek, :search_brend => @brend)
    respond_with do |format|
     format.js { render :layout => false } #do
     # render(:update) {|page| page.replace_html 'div.tst', '<div>asd</div>'.html_safe }

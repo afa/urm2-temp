@@ -1,4 +1,4 @@
-%tr
+%tr{:id => "item_#{items_line["item_id"]}_#{items_line["item_name"]}"}
  %td= items_line["item_brend"]
  %td= items_line["item_id"]
  %td= items_line["item_name"]
@@ -33,4 +33,4 @@
  %td
   - if need_links
    = link_to t(:expand), extended_path, :remote => true
-   = link_to t(:dms), main_dms_path(:name => items_line["item_name"], :brend => items_line["item_brend"]), :class=>"js", :remote => true
+   = link_to t(:dms), main_dms_path(:name => items_line["item_name"], :brend => items_line["item_brend"], :after => "item_#{items_line["item_id"]}_#{items_line["item_name"]}"), :class=>"js", :remote => true
