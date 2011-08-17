@@ -1,1 +1,1 @@
-$("#tst").html("<div>#{@items}</div>");
+$("#tst").html("<table>#{render :partial => "items_line", :collection => @items, :locals => {:need_links => false}}</table>");
