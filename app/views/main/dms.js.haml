@@ -1,1 +1,1 @@
-$("#{escape_javascript(render :partial => "items_line", :collection => @items, :locals => {:need_links => false})}").insertAfter("tr##{@ident}");
+$("#{escape_javascript(render :partial => "items_line", :collection => @items, :locals => {:need_links => false})}").insertAfter("tr##{@after}");
