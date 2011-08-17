@@ -1,1 +1,1 @@
-$("#tst").html(escape_javascript("<table><tbody>#{render :partial => "items_line", :collection => @items, :locals => {:need_links => false}}</tbody></table>"));
+$("#tst").html(("<table><tbody>#{escape_javascript(render :partial => "items_line", :collection => @items, :locals => {:need_links => false}}</tbody></table>"));
