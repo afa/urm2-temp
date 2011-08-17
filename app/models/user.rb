@@ -1,11 +1,13 @@
 class User < ActiveRecord::Base
 
  has_many :accounts
+ belongs_to :current_account, :class_name => 'Account'
  belongs_to :parent, :class_name => self.name, :foreign_key => :parent_id
  has_many :children, :class_name => self.name, :foreign_key => :parent_id
  validates_uniqueness_of :username
  validate :unique_hash, :on => :create
  validate :check_axapta_validity, :on => :create
+ before_validation :check_current_account_activity
  attr_accessor :ext_hash, :password
  before_validation :make_salt, :if => lambda{ self.salt.blank? }
  before_validation :calc_password, :on => :create
@@ -134,6 +136,12 @@ class User < ActiveRecord::Base
     bin /= 62
    end
    dig.map{|i| sprintf("%c", i) }.join
+  end
+
+  def check_current_account_activity
+   if current_account.try(:blocked?)
+    current_account = nil
+   end
   end
 
 end

@@ -24,4 +24,6 @@ describe User do
    specify{ @user.axapta_children.compact.sort_by{|u| u.id}.should == @user.accounts.map(&:children).flatten.map(&:user).compact.uniq.sort_by{|u| u.id} }
   end
 # end
+
+  it "should validate current_account"
 end

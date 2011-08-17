@@ -9,6 +9,11 @@
   #header
    - flash.each do |key, value|
     .flash{ :class => key}= value
+   .account_selector
+    - form_for :current_account do |form|
+     = form.label :account
+     = form.select :account, options_from_collection_for_select(current_user.accounts.where(:blocked => false))
+     = form.submit :select
    -# if signed_in? -%>
     = link_to "Sign out", sign_out_path, :method => :delete
    -#- else
