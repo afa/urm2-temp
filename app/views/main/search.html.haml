@@ -78,7 +78,8 @@
    %th= t :price
    %th= t :price_ref
   - @items.each do |item|
-   %tr
+   = render :partial => "items_line", :locals => {:items_line => item, :need_links => true}
+   -# %tr
     %td= item["item_brend"]
     %td= item["item_id"]
     %td= item["item_name"]
@@ -112,7 +113,7 @@
     %td= item["segment_rus"]
     %td
      = link_to t(:expand), extended_path, :remote => true
-     = link_to t(:dms), main_dms_path(:name => item["item_name"]), :class=>"js", :remote => true
+     = link_to t(:dms), main_dms_path(:name => item["item_name"], :brend => item["item_brend"]), :class=>"js", :remote => true
 #tst &nbsp;
 :javascript
  $('.js').bind('ajax:complete', function(evt, xhr, status){
