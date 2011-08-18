@@ -17,6 +17,7 @@ class MainController < ApplicationController
      a = {"item_name" => i["item_name"], "item_brend" => i["item_brend"], "qty_in_pack" => i["qty_in_pack"], "location_id" => loc["location_id"]}
      r << a
     end
+    r
    end
    #@accounts = current_user.accounts
    @extended = OpenStruct.new({:calc_price=>true, :calc_qty => true}.merge(params[:extended] || {}))
