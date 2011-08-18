@@ -75,6 +75,12 @@ class User < ActiveRecord::Base
    self.accounts.each do |account|
     Axapta.renew_structure(account.axapta_hash)
    end
+   if self.current_account
+    if self.current_account.blocked?
+     self.current_account = nil
+     self.save!
+    end
+   end
   end
 
  protected

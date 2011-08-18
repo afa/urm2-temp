@@ -7,18 +7,14 @@
   Настройки
  = link_to "Выход из системы", sessions_path, :method => :delete, :class => "quite"
 .clear
-.select_account
- = select_tag :hash, options_from_collection_for_select(@accounts, "id", "name")
 .search
  = form_for :search, :url => search_path do |f|
-  = f.select :user_hash, options_from_collection_for_select(@accounts, :axapta_hash, :id, @hash)
   = f.label :query_string
   = f.text_field :query
   = f.submit "find"
 
 .extended{:class => :search}
  = form_for :extended, :url => extended_path do |f|
-  = f.select :user_hash, options_from_collection_for_select(@accounts, :axapta_hash, :id, @hash)
   .line
    = f.label :only_available
    = f.check_box :only_available
@@ -40,9 +36,6 @@
   .line
    = f.label :calc_qty
    = f.check_box :calc_qty
-  .line
-   = f.label :user_hash
-   = f.text_field :user_hash
   .line
    = f.label :show_delivery_prognosis
    = f.check_box :show_delivery_prognosis
