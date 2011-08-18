@@ -10,7 +10,7 @@
    - flash.each do |key, value|
     .flash{ :class => key}= value
    .account_selector
-    - form_for :current_account, :url => current_account_users_path, :method => :get do |form|
+    - form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
      = form.label :account
      = form.select :account, options_from_collection_for_select(current_user.accounts.where(:blocked => false), :contact_first_name, :id, current_user.current_account), :include_blank => t(:select_account)
      = form.submit :select
