@@ -5,6 +5,7 @@ class MainController < ApplicationController
 
  before_filter :get_users, :only => [:index]
  before_filter :get_accounts, :only => [:index, :search, :extended]
+ before_filter :check_account, :only => [:search, :extended, :dms]
   def index
   end
 
@@ -42,5 +43,15 @@ class MainController < ApplicationController
 
   def get_accounts
    @accounts = current_user.accounts.where(:blocked => false)
+  end
+
+  def check_account
+   if current_user.current_account
+    if current_user.current_account.blocked?
+     redirect_to root_path
+    end
+   else
+    redirect_to root_path
+   end
   end
 end
