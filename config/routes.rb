@@ -1,6 +1,9 @@
 Urm::Application.routes.draw do
 
   resources :users do
+   collection do
+    get :current_account
+   end
    resources :accounts
   end
   #resources :passwords, :only => [:new, :create, :edit, :update, :index]

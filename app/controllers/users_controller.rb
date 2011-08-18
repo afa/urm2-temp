@@ -40,6 +40,11 @@ class UsersController < ApplicationController
   def destroy
   end
 
+  def current_account
+   current_user.update_attributes :current_account_id => current_user.accounts.where(:blocked => false).find(params[:current_account][:account])
+   redirect_to :back
+  end
+
  protected
   def get_user
    @user = User.find(params[:id])
