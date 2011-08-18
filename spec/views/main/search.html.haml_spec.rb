@@ -35,12 +35,8 @@ describe "main/search.html.haml" do
   rendered.should have_xpath("//form//input[@name='extended[search_brend]' and @type='text']")
   rendered.should have_xpath("//form//input[@name='extended[item_id_search]' and @type='text']")
   rendered.should have_xpath("//form//input[@name='extended[calc_qty]' and @type='checkbox']")
-  rendered.should have_xpath("//form//input[@name='extended[user_hash]' and @type='text']")
   rendered.should have_xpath("//form//input[@name='extended[show_delivery_prognosis]' and @type='checkbox']")
   rendered.should have_xpath("//form//input[@name='extended[calc_price]' and @type='checkbox']")
- end
- it "should show account selection form" do
-  rendered.should have_xpath("//select[@name='hash']")
  end
  it "should render all items" do
   @items.each do |i|
