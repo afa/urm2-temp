@@ -46,7 +46,8 @@
    = f.submit "find"
 
 .items
- %table{:border => '2', :style=>"border: 2px black solid;cellspacing:2px;cellpadding:2px;"}
+ %table.table-style
+  -#{:border => '2', :style=>"border: 2px black solid;cellspacing:2px;cellpadding:2px;"}
   -#%tr
    %th{:rowspan => 3}= t :item_brend
    %th{:rowspan => 3}= t :item_id
