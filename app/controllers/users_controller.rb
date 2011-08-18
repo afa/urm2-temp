@@ -41,8 +41,13 @@ class UsersController < ApplicationController
   end
 
   def current_account
-   current_user.update_attributes :current_account_id => current_user.accounts.where(:blocked => false).find(params[:current_account][:account])
-   redirect_to :back
+   account_id = params[:current_account][:account]
+   account = current_user.accounts.where(:blocked => false).find(account_id) unless account_id.blank?
+   if current_user.update_attributes :current_account_id => account if account
+    redirect_to :back
+   else
+    redirect_to :back, :flash => t(:error_selecting_account)
+   end
   end
 
  protected
