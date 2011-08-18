@@ -12,7 +12,7 @@
    .account_selector
     - form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
      = form.label :account
-     = form.select :account, options_from_collection_for_select(current_user.accounts.where(:blocked => false), :contact_first_name, :id, current_user.current_account), :include_blank => t(:select_account)
+     = form.select :account, options_from_collection_for_select(current_user.accounts.where(:blocked => false), :id, :contact_first_name, current_user.current_account), :include_blank => t(:select_account)
      = form.submit :select
    -# if signed_in? -%>
     = link_to "Sign out", sign_out_path, :method => :delete
