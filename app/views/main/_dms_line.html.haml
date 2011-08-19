@@ -1,0 +1,155 @@
+%tr{:id => "dms_#{dms_line["item_name"]}_#{dms_line["item_brend"]}_#{dms_line["rohs"]}_#{}"}
+ %td.icons
+  -#.icon
+   = link_to "", main_dms_path(:name => items_line["item_name"], :brend => items_line["item_brend"], :after => "item_#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}"), :class => "dms js", :remote => true
+   -#= link_to t(:dms), main_dms_path(:name => items_line["item_name"], :brend => items_line["item_brend"], :after => "item_#{items_line["item_id"]}_#{items_line["item_name"]}"), :class=>"js", :remote => true
+
+ %td.text-left= dms_line["item_name"]
+ %td.text-left= dms_line["item_brend"]
+ %td 
+ %td= dms_line["min_qty"]
+ %td= dms_line["max_qty"]
+ %td= dms_line["prognoz"]
+ %td= dms_line["price1"]
+ %td.green= dms_line["count2"]
+ %td= dms_line["price2"]
+ %td.green= dms_line["count3"]
+ %td= dms_line["price3"]
+ %td.green= dms_line["count4"]
+ %td= dms_line["price4"]
+ %td= dms_line["location_id"]
+ %td.grey= dms_line["qty_in_pack"]
+
+
+-#
+ --- 
+ class: cmpECommerce_InventSearchStock
+ input: 
+  calc_price: 
+    setter: setcalcPrice
+    title: "флаг. вычислять цены"
+    type: boolean
+  calc_qty: 
+    setter: setcalcQty
+    title: "флаг. вычислять количества"
+    type: boolean
+  cust_account: 
+    setter: setParCustAccount
+    title: "код клиента"
+  invent_location_id: 
+    setter: setInventLocationId
+    title: склад
+    type: string
+  item_id_search: 
+    setter: setItemIdSearch
+    title: "код ном-ры"
+    type: string
+  only_available: 
+    description: "флаг. только в наличии"
+    setter: setonlyAvailable
+    title: ""
+    type: boolean
+  query_string: 
+    description: "Поддерживаются спеццсимволы * и ?"
+    minlen: 3
+    setter: setQuery
+    title: "Поисковая строка"
+    type: string
+  search_brend: 
+    setter: setSearchBrendAlias
+    title: производитель
+    type: string
+  show_delivery_prognosis: 
+    setter: setShowDeliveryPrognosis
+    title: "флаг. выводить прогноз поставки"
+    type: boolean
+  user_hash: 
+    mandatory: true
+    maxlen: 32
+    minlen: 32
+    setter: setcmpHashCode
+    type: string
+ output: 
+  items: 
+    content: 
+      item_brend: 
+        getter: getinvcBrendAlias
+        title: производитель
+        type: string
+      item_id: 
+        getter: getItemId
+        title: код
+        type: string
+      item_name: 
+        getter: getInventItemName
+        title: наименование
+        type: string
+      locations: 
+        content: 
+          delivery_prognosis: 
+            content: 
+              delivery_date: 
+                getter: getDeliverydate
+                type: date
+              delivery_qty: 
+                getter: getDeliveryQty
+                type: integer
+            iterator: nextPrognosis
+            type: array
+          location_id: 
+            getter: getInventLocationId
+            title: склады
+            type: string
+          price_qty: 
+            content: 
+              max_qty: 
+                getter: getMaxSalesQty
+                options: hide_if_empty
+                title: "макс. кол-во для цены"
+                type: integer
+              min_qty: 
+                getter: getMinSalesQty
+                title: "мин. кол-во для цены"
+                type: integer
+              price: 
+                getter: getPrice
+                title: цена
+                type: real
+              price_ref: 
+                getter: getPriceRef
+                options: hide_if_empty
+                title: "цена продажи"
+            iterator: nextPrice
+            title: "цены - количества"
+            type: array
+          vend_qty: 
+            getter: getAvailableQty
+            title: "всего в наличии"
+            type: integer
+        iterator: nextLocation
+        title: склады
+        type: array
+      min_qty: 
+        getter: getMinQty
+        title: "минимальное кол-во"
+        type: integer
+      package_name: 
+        getter: getinvcPackageName
+        title: корпус
+        type: string
+      qty_in_pack: 
+        getter: getwmscQtyInPackReq
+        title: "кол-во в упаковке"
+        type: integer
+      rohs: 
+        getter: getinvcInventItemPrefix
+        title: ROHS
+        type: string
+      segment_rus: 
+        getter: getcmpSegmentEnum
+        title: сегмент
+        type: segment_rus
+    iterator: nextItem
+    title: "результаты поиска"
+    type: array
+ title: "Поиск номенклатуры на складах"
