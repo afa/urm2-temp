@@ -1,2 +1,21 @@
-%div
- = info.axapta_hash
+.account{:class => :info}
+ .line
+  = t :account_name
+  = info.name
+ .line
+  = t :account_status
+  = info.blocked? ? t(:account_blocked) : t(:account_active)
+ .line
+  = t :account_first_name
+  = info.contact_first_name
+ .line
+  = t :account_middle_name
+  = info.contact_middle_name
+ .line
+  = t :account_last_name
+  = info.contact_last_name
+ .line
+  = t :account_email
+  = info.contact_email
+ .line
+  = info.axapta_hash? ? t(:axapta_hash_set) : t(:axapta_hash_empty)

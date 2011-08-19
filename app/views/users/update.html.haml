@@ -1,5 +1,9 @@
-- @accounts.each do |account|
- %div
-  = account.axapta_hash
+.line
+ = t :user_name
+ = @user.username
+.line
+ = t :user_email
+ = @user.email
+= render :partial => "accounts/info", :collection => @user.accounts
 
 = link_to "Продолжить работу", users_path

@@ -8,23 +8,4 @@
   = f.text_field :email
  = f.submit :save
 .accounts
- - @user.accounts.each do |account|
-  .account{:class => :info}
-   .line
-    = t :account_name
-    = account.name
-   .line
-    = t :account_status
-    = account.blocked? ? t(:account_blocked) : t(:account_active)
-   .line
-    = t :account_first_name
-    = account.contact_first_name
-   .line
-    = t :account_middle_name
-    = account.contact_middle_name
-   .line
-    = t :account_last_name
-    = account.contact_last_name
-   .line
-    = t :account_email
-    = account.contact_email
+ = render :partial => "accounts/info", :collection => @user.accounts

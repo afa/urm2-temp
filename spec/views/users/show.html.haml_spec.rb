@@ -16,6 +16,7 @@ describe "users/show.html.haml" do
   rendered.should have_xpath("//a[@href='#{edit_user_path(@user)}']")
  end
  it "should render accounts" do
-  @user.accounts.each {|a| rendered.should have_content(a.axapta_hash) }
+  @user.accounts.each {|a| rendered.should have_content(a.name) }
+  @user.accounts.each {|a| rendered.should have_content(a.contact_email) }
  end
 end

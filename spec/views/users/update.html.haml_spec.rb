@@ -18,9 +18,20 @@ describe "users/update.html.haml" do
   rendered.should have_xpath("//a[@href='#{users_path}']")
  end
 
- it "should show axapta_hash" do
-  rendered.should have_content(@user.accounts.first.axapta_hash)
+ it "should render fields" do
+  rendered.should have_content(@user.username)
+  rendered.should have_content(@user.email)
  end
 
- it "should render fields"
+ it "should show accounts info" do
+  @user.accounts.each do |a|
+   rendered.should have_content(a.contact_first_name)
+   rendered.should have_content(a.contact_middle_name)
+   rendered.should have_content(a.contact_last_name)
+   rendered.should have_content(a.contact_email)
+   rendered.should have_content(a.name)
+   rendered.should have_content(a.blocked? ? t(:account_blocked) : t(:account_active))
+  end
+ end
+
 end
