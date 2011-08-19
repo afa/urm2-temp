@@ -11,8 +11,7 @@ describe "users/update.html.haml" do
   assign(:current_user, @user)
   assign(:user, @user)
   assign(:accounts, @user.accounts)
-  #session[:user] = @login.id
-  render #_template "main/index.html.haml"
+  render
  end
 
  it "should render link to users" do

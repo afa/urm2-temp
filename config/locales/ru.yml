@@ -21,3 +21,5 @@ ru:
        taken: уже используется. Воспользуйтесь восстановлением пароля
 
  locations: Склады
+ account_active: Активен
+ account_blocked: Заблокирован

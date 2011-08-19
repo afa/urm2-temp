@@ -1,2 +1,30 @@
-%h1 Users#edit
-%p Find me in app/views/users/edit.html.haml
+= link_to :change_password, new_password_path
+= form_for :user, :url => user_path(@user), :method => :put do |f|
+ .form_field
+  = f.label :username
+  = f.text_field :username
+ .form_field
+  = f.label :email
+  = f.text_field :email
+ = f.submit :save
+.accounts
+ - @user.accounts.each do |account|
+  .account{:class => :info}
+   .line
+    = t :account_name
+    = account.name
+   .line
+    = t :account_status
+    = account.blocked? ? t(:account_blocked) : t(:account_active)
+   .line
+    = t :account_first_name
+    = account.contact_first_name
+   .line
+    = t :account_middle_name
+    = account.contact_middle_name
+   .line
+    = t :account_last_name
+    = account.contact_last_name
+   .line
+    = t :account_email
+    = account.contact_email
