@@ -4,11 +4,11 @@
 %div
  = render :partial => "accounts/info", :collection => current_user.accounts
 %div
- parent:
+ t :parent
  %div
-  = @parent.username
+  = @parent.try :username
 %div
- children:
+ t :children
  - @children.each do |u|
   %div
    = u.username
