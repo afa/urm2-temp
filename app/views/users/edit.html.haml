@@ -1,5 +1,5 @@
 = link_to :change_password, new_password_path
-= form_for :user, :url => user_path(@user), :method => :put do |f|
+= form_for :user, :url => user_path(@user), :html => {:method => :put} do |f|
  .form_field
   = f.label :username
   = f.text_field :username
