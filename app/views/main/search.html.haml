@@ -47,30 +47,6 @@
 
 .items
  %table.table-style
-  -#{:border => '2', :style=>"border: 2px black solid;cellspacing:2px;cellpadding:2px;"}
-  -#%tr
-   %th{:rowspan => 3}= t :item_brend
-   %th{:rowspan => 3}= t :item_id
-   %th{:rowspan => 3}= t :item_name
-   %th{:colspan=>8}= t :locations
-   %th{:rowspan => 3}= t :min_qty
-   %th{:rowspan => 3}= t :package_name
-   %th{:rowspan => 3}= t :qty_in_pack
-   %th{:rowspan => 3}= t :rohs
-   %th{:rowspan => 3}= t :segment_rus
-   %th{:rowspan => 3}= t :another_actions
-  -#%tr
-   %th{:colspan => 2}= t :delivery_prognosis
-   %th{:rowspan => 2}= t :location_id
-   %th{:colspan=>4}= t :price_qty
-   %th{:rowspan=>2}= t :vend_qty
-  -#%tr
-   %th= t :delivery_date
-   %th= t :delivery_qty
-   %th= t :max_qty
-   %th= t :min_qty
-   %th= t :price
-   %th= t :price_ref
   %tr
    %th{:rowspan => 2}= t :actions
    %th{:rowspan => 2}= t :item_name
@@ -92,42 +68,6 @@
    %th= t :avail_max
   - @items.each do |item|
    = render :partial => "items_line", :locals => {:items_line => item, :need_links => true}
-   -# %tr
-    %td= item["item_brend"]
-    %td= item["item_id"]
-    %td= item["item_name"]
-    - if item["locations"].blank?
-     %td{:colspan=>8} &nbsp;
-    - else
-     -# item["locations"].each do |location|
-     - location = item["locations"].first
-     - if location["delivery_prognosis"].blank?
-      %td{:colspan=>2} &nbsp;
-     - else
-      -# location["delivery_prognosis"].each do |prognos|
-      - prognos = location["delivery_prognosis"].first
-      %td= prognos["delivery_date"]
-      %td= prognos["delivery_qty"]
-     %td= location["location_id"]
-     - if location["price_qty"].blank?
-      %td{:colspan=>4} &nbsp;
-     - else
-      -# location["price_qty"].each do |price|
-      - price = location["price_qty"].first
-      %td= price["max_qty"]
-      %td= price["min_qty"]
-      %td= price["price"]
-      %td= price["price_ref"]
-     %td= location["vend_qty"]
-    %td= item["min_qty"]
-    %td= item["package_name"]
-    %td= item["qty_in_pack"]
-    %td= item["rohs"]
-    %td= item["segment_rus"]
-    %td
-     = link_to t(:expand), extended_path, :remote => true
-     = link_to t(:dms), main_dms_path(:name => item["item_name"], :brend => item["item_brend"]), :class=>"js", :remote => true
-#tst &nbsp;
 :javascript
  $('.js').bind('ajax:complete', function(evt, xhr, status){
   eval(xhr.responseText);
