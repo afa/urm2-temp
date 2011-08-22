@@ -25,14 +25,14 @@
         .informer
          .today= t :informer_today
          .date= Date.new.to_s(:long)
-         .rate Курс $ = 30,3450 р.
+         -#.rate Курс $ = 30,3450 р.
 
         .line
         - if logged_in?
          .user-block
           %span.name= [current_user.current_account.try(:contact_first_name), current_user.current_account.try(:contact_middle_name),current_user.current_account.try(:contact_last_name)].compact.join(' ')
           .comp= current_user.current_account.try(:business)
-          %a{:href=>user_path(current_user)} Настройки
+          -#%a{:href=>user_path(current_user)} Настройки
           %a.quite{:href=>sessions_path, :method => :delete} Выход из системы
 
          .clear
