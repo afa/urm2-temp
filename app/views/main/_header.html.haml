@@ -24,7 +24,7 @@
         %img{:src=>"/images/header_logo.gif", :alt=>"Компэл"}
        .info-block
         .informer
-         .today Сегодня:
+         .today= t :informer_today
          .date 
           Вторник,
           %br
@@ -33,10 +33,10 @@
 
         .line
         .user-block
-         %span.name Петров Николай Васильевич
-         .comp ООО "Рога и копыта.РУ"
-         %a{:href=>"#"} Настройки
-         %a.quite{:href=>"#"} Выход из системы
+         %span.name= [current_user.current_account.try(:contact_first_name), current_user.current_account.try(:contact_middle_name),current_user.current_account.try(:contact_last_name)].compact.join(' ')
+         .comp= current_user.current_account.try(:business)
+         %a{:href=>user_path(current_user)} Настройки
+         %a.quite{:href=>sessions_path, :method => :delete} Выход из системы
 
         .clear
    .button-slide-panel
