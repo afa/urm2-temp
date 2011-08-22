@@ -4,7 +4,6 @@ ru:
    default: "%Y-%m-%d"
    long: "%A, %d %B %Y"
    short: "%d.%m.%Y"
-
  activerecord:
   models:
    user: Пользователь
@@ -12,8 +11,6 @@ ru:
    user:
     username: Имя
     password: Пароль
-
-
  activerecord:
   errors:
    models:
@@ -22,8 +19,8 @@ ru:
       axapta_hash:
        blank: не может быть пустым
        taken: уже используется. Воспользуйтесь восстановлением пароля
-
  locations: Склады
  account_active: Активен
  account_blocked: Заблокирован
- informer_today: Сегодня:
+ informer_today: Сегодня
+
