@@ -9,6 +9,7 @@ ru:
   attributes:
    user:
     username: Имя
+    password: Пароль
 
 
  activerecord:
