@@ -1,4 +1,4 @@
-#header
+#header1
  - flash.each do |key, value|
   .flash{ :class => key}= value
  - if logged_in?
@@ -13,7 +13,6 @@
 #header.header-static
  .header-hid
   .header-wrap
-
    .header-panel
     .back-hp1
      .back-hp2
@@ -25,10 +24,7 @@
        .info-block
         .informer
          .today= t :informer_today
-         .date 
-          Вторник,
-          %br
-          11 мая 2010 г.
+         .date= Date.new.to_s(:long)
          .rate Курс $ = 30,3450 р.
 
         .line
