@@ -6,17 +6,5 @@
   = javascript_include_tag "jquery", "jquery_ujs", :defaults
   = csrf_meta_tag
  %body
-  #header
-   - flash.each do |key, value|
-    .flash{ :class => key}= value
-   - if logged_in?
-    .account_selector
-     - form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
-      = form.label :account
-      = form.select :account, options_from_collection_for_select(current_user.accounts.where(:blocked => false), :id, :contact_first_name, current_user.current_account.try(:id)), :include_blank => t(:select_account)
-      = form.submit :select
-   -# if signed_in? -%>
-    = link_to "Sign out", sign_out_path, :method => :delete
-   -#- else
-    = link_to "Sign in", sign_in_path
+  = render :partial => "main/header"
   = yield

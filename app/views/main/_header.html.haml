@@ -1,0 +1,124 @@
+#header
+ - flash.each do |key, value|
+  .flash{ :class => key}= value
+ - if logged_in?
+  .account_selector
+   - form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
+    = form.label :account
+    = form.select :account, options_from_collection_for_select(current_user.accounts.where(:blocked => false), :id, :contact_first_name, current_user.current_account.try(:id)), :include_blank => t(:select_account)
+    = form.submit :select
+
+#header-height{:style=>"display:none;"}
+
+#header.header-static
+ .header-hid
+  .header-wrap
+
+   .header-panel
+    .back-hp1
+     .back-hp2
+      .back-hp3
+       .logo-name
+        %img{:src=>"/images/header_name.gif", :alt=>"Партнерская бизнес-система"}
+       .logo-company
+        %img{:src=>"/images/header_logo.gif", :alt=>"Компэл"}
+       .info-block
+        .informer
+         .today Сегодня:
+         .date 
+          Вторник,
+          %br
+          11 мая 2010 г.
+         .rate Курс $ = 30,3450 р.
+
+        .line
+        .user-block
+         %span.name Петров Николай Васильевич
+         .comp ООО "Рога и копыта.РУ"
+         %a{:href=>"#"} Настройки
+         %a.quite{:href="#"} Выход из системы
+
+        .clear
+   .button-slide-panel
+    %a.button-slide{:href=>"#", :class => "up"}
+
+
+   .main-menu
+    .corner-l
+    .corner-r
+    .button{:class => "active"}
+     .button-shadow
+      %i.b1
+      %i.b2
+      %i.b3
+       %i
+      %a.link{:href=>"index.html"} Главная
+    .button
+     .button-shadow
+      %i.b1
+      %i.b2
+      %i.b3
+       %i
+      %a.link{:href=>"#"} Бизнес
+     .submenu-shadow
+      %i.b1
+      %i.b2
+      %i.b3
+      %i.b4
+       %i
+      %i.b5
+       %i
+      %i.b6
+      %i.b7
+      %i.b8
+      %ul.submenu
+       %li
+        %a{:href=>"#"}
+         %span Запросы
+       %li
+        %a.order{:href=>"orders.html"}
+         %span Заказы
+       %li
+        %a{:href="#"}
+         %span Грузы
+       %li
+        %a{:href="#"}
+         %span Исходящие грузы
+        %ul
+         %li
+          %a{:href=>"#"}
+           %span Строки заказа
+         %li
+          %a{:href=>"#"}
+           %span Контроль продолжительности резервирования
+         %li
+          %a{:href=>"#"}
+           %span Открытые строки заказов
+         %li
+          %a{:href=>"#"}
+           %span Строки заказа клиента
+       %li.active
+        %a{:href=>"#"}
+         %span Накладные
+    .button
+     .button-shadow
+      %i.b1
+      %i.b2
+      %i.b3
+       %i
+      %a.link{:href=>"#"} Аналитика
+    .button
+     .button-shadow
+      %i.b1
+      %i.b2
+      %i.b3
+       %i
+      %a.link{:href=>"#"}
+       Сообщения &nbsp; 
+        %span.counter
+         %i.c1
+         %i.c2
+         327
+                        </div>
+                </div>
+
