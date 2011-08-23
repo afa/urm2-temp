@@ -24,7 +24,7 @@
        .info-block
         .informer
          .today= t :informer_today
-         .date= l Date.today, :format => :long
+         .date= l Date.today, :format => :short
          .rate
 
         .line
@@ -33,7 +33,8 @@
           %span.name= [current_user.current_account.try(:contact_first_name), current_user.current_account.try(:contact_middle_name),current_user.current_account.try(:contact_last_name)].compact.join(' ')
           .comp= current_user.current_account.try(:business)
           -#%a{:href=>user_path(current_user)} Настройки
-          %a.quite{:href=>sessions_path, :method => :delete} Выход из системы
+          = link_to t(:logout), sessions_path, :method => :delete, :class => "quite"
+          -#%a.quite{:href=>sessions_path, :method => :delete} Выход из системы
 
          .clear
    .button-slide-panel
@@ -116,4 +117,4 @@
         %i.c1
         %i.c2
         327
-
+.clear

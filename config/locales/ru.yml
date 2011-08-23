@@ -2,7 +2,7 @@ ru:
  date:
   formats:
    default: "%Y-%m-%d"
-   long: "%A, %e %B %Y"
+   inform: "%a, %e %b %Y"
    short: "%d.%m.%Y"
  activerecord:
   models:
@@ -23,4 +23,5 @@ ru:
  account_active: Активен
  account_blocked: Заблокирован
  informer_today: Сегодня
+ logout: Выход из системы
 
