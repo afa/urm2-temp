@@ -24,7 +24,7 @@
        .info-block
         .informer
          .today= t :informer_today
-         .date= Date.today.to_s(:long)
+         .date= l Date.today, :format => :long
          .rate
 
         .line
