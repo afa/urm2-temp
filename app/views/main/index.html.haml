@@ -1,12 +1,3 @@
-.user-block
- %span.name
-  = current_user.username
- -# .comp
-  ООО "Рога и копыта.РУ"
- %a{:href=>"#"}
-  Настройки
- = link_to "Выход из системы", sessions_path, :method => :delete, :class => "quite"
-.clear
 .search
  = form_for :search, :url => search_path do |f|
   = f.label :query_string
