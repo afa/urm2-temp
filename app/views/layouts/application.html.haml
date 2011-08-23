@@ -5,6 +5,32 @@
   = stylesheet_link_tag :all
   = javascript_include_tag "jquery", "jquery_ujs", :defaults
   = csrf_meta_tag
+  :javascript
+   $(function(){
+    //Шапка (файл: jquery.header.js)
+    $('#header').header();
+    //Корзина в шапке (файл: jquery.header.js)
+    $('.cart-block-slider').cartBox();
+    //Поиск в шапке (файл: jquery.header.js)
+    $('.search-block').searchBox();
+    //Таблица результатов поиска
+    $('.table-navigation-block').table();
+    //Скроллинг таблиц
+    tableScroller.refresh();
+    //Выпадающие списки (файл: jquery.controls.js)
+    $('.select').selectList();
+    //Кнопки
+    $('.button-style').button();
+    //Фильтры
+    $('.switch').switchControl();
+    // Хинты
+    $('.hint').hint();
+    // Всплывающие окна
+    $('.cart-block .cart-popup').lightbox({
+      title:'В корзине',
+      titleClass:'cart'
+    });
+   });
  %body
   = render :partial => "main/header"
   .content
