@@ -1,3 +1,91 @@
+.search-block
+ .back-x
+  .back-l
+   .back-r
+    %a.close-link{:href=>"#"}
+     %span свернуть
+    .search-tabs
+     %a{:href=>"#"}
+      %span
+       %span Список
+     %a.active{:href=>"#"}
+      %span
+       %span Поиск по наименованию
+     %a{:href=>"#"}
+      %span
+       %span Артикул ДМС (Farnel, Newark)
+     %a{:href=>"#"}
+      %span
+       %span По параметрам
+     %a.more{:href=>"#"} Еще
+    .search-tab-block{:style=>"display:none;"}
+     %form{:action=>" "}
+      .field
+       %textarea.list-area{:cols=>"1", :rows=>"1"}
+        TDA2003;OR;300
+        OPA129U;TI;1
+        IRFP044;;3
+        215035;50
+        189566;50
+        OPA129U;TI;1
+        IRFP044;;3
+        215035;50
+        189566;50
+      .button
+       %a.button-style{:href=>"#"}
+        %i.t &nbsp;
+        %i.b &nbsp;
+        %i.tl &nbsp;
+        %i.tr &nbsp;
+        %span Найти!
+        %i.bl &nbsp;
+        %i.br &nbsp;
+      .clear
+    .search-tab-block">
+     %form{:action=>" "}
+      .field
+       %input{:type=>"text", :value=>"TDA2003;OR;300"}
+      .button
+       %a.button-style{:href=>"#"}
+        %i.t &nbsp;
+        %i.b &nbsp;
+        %i.tl &nbsp;
+        %i.tr &nbsp;
+        %span Найти!
+        %i.bl &nbsp;
+        %i.br &nbsp;
+      .clear
+    .search-tab-block{:style=>"display:none;"}
+     %form{:action=>" "}
+      .field
+       %input{:type=>"text", :value=>"TDA2003;OR;400"}
+      .button
+       %a.button-style{:href=>"#"}
+        %i.t &nbsp;
+        %i.b &nbsp;
+        %i.tl &nbsp;
+        %i.tr &nbsp;
+        %span Найти!
+        %i.bl &nbsp;
+        %i.br &nbsp;
+      .clear
+    .search-tab-block{:style=>"display:none;"}
+     %form{:action=>" "}
+      .field
+       .input{:type=>"text", :value="TDA2003;OR;500"}
+      .button
+       %a.button-style{:href=>"#"}
+        %i.t &nbsp;
+        %i.b &nbsp;
+        %i.tl &nbsp;
+        %i.tr &nbsp;
+        %span Найти!
+        %i.bl &nbsp;
+        %i.br &nbsp;
+      .clear
+
+
+
 .search
  = form_for :search, :url => search_path do |f|
   = f.label :query_string
