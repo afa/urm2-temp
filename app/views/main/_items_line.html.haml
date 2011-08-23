@@ -18,10 +18,10 @@
  %th= t :avail_min
  %th= t :avail_max
 
-%tr{:id => "item_#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}"}
+%tr{:id => "item_#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}_#{items_line["location_id"]}"}
  %td.icons
   .icon
-   = link_to "", main_dms_path(:name => items_line["item_name"], :brend => items_line["item_brend"], :after => "item_#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}"), :class => "dms js", :remote => true
+   = link_to "", main_dms_path(:name => items_line["item_name"], :brend => items_line["item_brend"], :after => "item_#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}_#{items_line["location_id"]}"), :class => "dms js", :remote => true
    -#= link_to t(:dms), main_dms_path(:name => items_line["item_name"], :brend => items_line["item_brend"], :after => "item_#{items_line["item_id"]}_#{items_line["item_name"]}"), :class=>"js", :remote => true
 
  %td.text-left= items_line["item_name"]
