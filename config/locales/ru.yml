@@ -2,7 +2,7 @@ ru:
  date:
   formats:
    default: "%Y-%m-%d"
-   long: "%A, %d %B %Y"
+   long: "%A, %e %B %Y"
    short: "%d.%m.%Y"
  activerecord:
   models:
