@@ -6,6 +6,32 @@
   = javascript_include_tag "jquery", "jquery_ujs", "jquery.header", :defaults
   = csrf_meta_tag
   :javascript
+   var settings = {
+    animation: true, //Включить/выключить анимацию элементов интерфейса
+    header: { //Шапка
+     hide: true, //Показать/скрыть
+     //static: false, //Статическая/фиксированная (прижата к верхней границе браузера)
+     speedAnimation: 500 //Скорость анимации
+    },
+    cartBox: { //Блок с корзиной в шапке
+     hide: true, //Показать/скрыть
+     speedAnimation: 500  //Скорость анимации
+    },
+    searchBox: { //Блок поиска
+     hide: false //Показать/скрыть
+    },
+    controls: { //Элементы управления
+     inputInCart: { //Поле ввода "Добавить в корзину" для таблицы вывода списка продукции
+      speedIconShow: true, //Наличие иконки быстрого оформления заказа
+      speedIconTimeShow: 2000, //Время показа иконки быстрого оформления заказа
+      speedIconAnimate: 400 //Скорость появления иконки быстрого оформления заказа
+     },
+     dropDown: { //Раскрывающийся блок
+      speed: 500 //Скорость анимации
+     }
+    }
+   }
+
    $(function(){
     //Шапка (файл: jquery.header.js)
     $('#header').header();
