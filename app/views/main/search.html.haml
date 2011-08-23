@@ -1,17 +1,8 @@
-.user-block
- %span.name
-  = current_user.username
- -# .comp
-  ООО "Рога и копыта.РУ"
- %a{:href=>"#"}
-  Настройки
- = link_to "Выход из системы", sessions_path, :method => :delete, :class => "quite"
-.clear
 .search
  = form_for :search, :url => search_path do |f|
   = f.label :query_string
   = f.text_field :query
-  = f.submit "find"
+  = f.submit :find
 
 .extended{:class => :search}
  = form_for :extended, :url => extended_path do |f|
@@ -43,7 +34,7 @@
    = f.label :calc_price
    = f.check_box :calc_price
   .line
-   = f.submit "find"
+   = f.submit :find
 
 .items
  %table.table-style
