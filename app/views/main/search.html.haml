@@ -145,12 +145,13 @@
   %tr
    %th= t :avail_min
    %th= t :avail_max
-  - @items.each do |item|
-   = render :partial => "items_line", :locals => {:items_line => item, :need_links => true}
+  = render :partial => "items_line", :collection => @items, :locals => {:need_links => true}
 :javascript
  $('.slider').hide();
- $('.js').bind('ajax:complete', function(evt, xhr, status){
+ $('.js').bind('ajax:success', function(evt, xhr, status){
   eval(xhr.responseText);
+ });
+ $('.js').bind('ajax:complete', function(evt, xhr, status){
   $(this).parents('.icons').find('.slider').hide();
  });
  $('.icon .js').bind('ajax:beforeSend', function(evt, xhr, status){

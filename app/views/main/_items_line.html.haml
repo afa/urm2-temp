@@ -1,23 +1,3 @@
--#%tr
- %th{:rowspan => 2}= t :actions
- %th{:rowspan => 2}= t :item_name
- %th{:rowspan => 2}= t :item_brend
- %th{:rowspan => 2}= t :to_cart
- %th{:colspan => 2}= t :avail
- %th{:rowspan => 2}= t :prognosis
- %th{:rowspan => 2}= t :price1
- %th{:rowspan => 2}= t :count2
- %th{:rowspan => 2}= t :price2
- %th{:rowspan => 2}= t :count3
- %th{:rowspan => 2}= t :price3
- %th{:rowspan => 2}= t :count4
- %th{:rowspan => 2}= t :price4
- %th{:rowspan => 2}= t :location
- %th{:rowspan => 2}= t :quantity
--#%tr
- %th= t :avail_min
- %th= t :avail_max
-
 %tr{:id => "item_#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}_#{items_line["location_id"]}"}
  %td.icons
   .icon
@@ -40,40 +20,3 @@
  %td= items_line["location_id"]
  %td.grey= items_line["qty_in_pack"]
  
-
--# %tr{need_links ? {:id => "item_#{items_line["item_id"]}_#{items_line["item_name"]}"} : {}}
- %td= items_line["item_brend"]
- %td= items_line["item_id"]
- %td= items_line["item_name"]
- - if items_line["locations"].blank?
-  %td{:colspan=>8} &nbsp;
- - else
-  -# items_line["locations"].each do |location|
-  - location = items_line["locations"].first
-  - if location["delivery_prognosis"].blank?
-   %td{:colspan=>2} &nbsp;
-  - else
-   -# location["delivery_prognosis"].each do |prognos|
-   - prognos = location["delivery_prognosis"].first
-   %td= prognos["delivery_date"]
-   %td= prognos["delivery_qty"]
-  %td= location["location_id"]
-  - if location["price_qty"].blank?
-   %td{:colspan=>4} &nbsp;
-  - else
-   -# location["price_qty"].each do |price|
-   - price = location["price_qty"].first
-   %td= price["max_qty"]
-   %td= price["min_qty"]
-   %td= price["price"]
-   %td= price["price_ref"]
-  %td= location["vend_qty"]
- %td= items_line["min_qty"]
- %td= items_line["package_name"]
- %td= items_line["qty_in_pack"]
- %td= items_line["rohs"]
- %td= items_line["segment_rus"]
- %td
-  - if need_links
-   = link_to t(:expand), extended_path, :remote => true
-   = link_to t(:dms), main_dms_path(:name => items_line["item_name"], :brend => items_line["item_brend"], :after => "item_#{items_line["item_id"]}_#{items_line["item_name"]}"), :class=>"js", :remote => true
