@@ -152,7 +152,7 @@
   eval(xhr.responseText);
   $(this).parent('.icons .slider').hide();
  });
- $('.icon:has(.js)').bind('ajax.before', function(evt, xhr, status){
+ $('.icon:has(.js)').bind('ajax:beforeSend', function(evt, xhr, status){
   $(this).parent('.icon').hide();
-  $(this).parent('.icons .slider').show();
+  $(this).parent('.icons').find('slider').show();
  });
