@@ -1,2 +1,2 @@
 $("#{escape_javascript(@items.empty? ? render(:partial => "empty_line") : render( :partial => "dms_line", :collection => @items, :locals => {:need_links => false}))}").insertAfter("tr##{@after}");
-$("tr##{@after} td:first a[href*=\"\dms"]").hide();
+$("tr##{@after} td:first a[href*=\"\dms\"]").hide();
