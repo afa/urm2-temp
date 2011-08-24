@@ -150,9 +150,9 @@
 :javascript
  $('.js').bind('ajax:complete', function(evt, xhr, status){
   eval(xhr.responseText);
-  $(this).parent('.icons').find('.slider').hide();
+  $(this).parents('.icons').find('.slider').hide();
  });
  $('.icon .js').bind('ajax:beforeSend', function(evt, xhr, status){
-  $(this).parent('.icon').hide();
-  $(this).parent('.icons').find('slider').show();
+  $(this).parents('.icon').hide();
+  $(this).parents('.icons').find('slider').show();
  });
