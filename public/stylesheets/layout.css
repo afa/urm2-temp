@@ -69,7 +69,7 @@
 .edit-comment textarea{ width:273px; height:123px; border:1px solid #9E9E9E; overflow:auto; padding:2px; margin-bottom:15px;}
 .edit-comment .button-save{ float:right; position:relative;}
 .edit-comment .button-clear{ padding-top:7px;}
-.edit-comment .button-clear a{ color:#9F0022; text-decoration:none; background:url(../images/icon_delete.gif) no-repeat 0px -16px; padding-left:20px;}
+.edit-comment .button-clear a{ color:#9F0022; text-decoration:none; background:url(/images/icon_delete.gif) no-repeat 0px -16px; padding-left:20px;}
 .edit-comment .button-clear a:hover{ color:#9F0022 !important; text-decoration:underline;}
 
 
@@ -101,9 +101,9 @@
 .header-panel .info-block .informer .rate{ padding-left:7px; clear:both;}
 .header-panel .info-block .line{ height:50px; width:30px; float:left; margin-top:4px; border-left:1px solid #DFDFDF;}
 .header-panel .info-block .user-block{ width:17.4em; float:left; font-size:0.92em; text-align:right;}
-.header-panel .info-block .user-block .name{ font-weight:bold; padding:1px 0 2px 23px; background:url(../images/icon_user.gif) no-repeat 0px 0px; }
+.header-panel .info-block .user-block .name{ font-weight:bold; padding:1px 0 2px 23px; background:url(/images/icon_user.gif) no-repeat 0px 0px; }
 .header-panel .info-block .user-block .comp{ padding:2px 0 14px 0;}
-.header-panel .info-block .user-block .quite{ color:#9F0022; padding:0 10px 0 0; margin-left:30px; background:url(../images/icon_pointer_down_red.gif) no-repeat 100% 6px;}
+.header-panel .info-block .user-block .quite{ color:#9F0022; padding:0 10px 0 0; margin-left:30px; background:url(/images/icon_pointer_down_red.gif) no-repeat 100% 6px;}
 
 /* Кнопка, скрывающая шапку */
 .button-slide-panel{ width:17px; position:relative; float:left; margin-right:-17px; left:-17px; padding-top:7px;}
@@ -153,9 +153,9 @@
 .main-menu .submenu ul li a span{ padding-left:46px; background-position:21px 5px;}
 .main-menu .submenu ul li a:hover span{ background-position:21px -107px;}
 
-.main-menu .submenu a.order span{ background-image:url(../images/icon_order.gif);}
-.main-menu .submenu a.dms span{ background-image:url(../images/icon_dms.gif);}
-.main-menu .submenu a.replacement span{ background-image:url(../images/icon_replacement.gif);}
+.main-menu .submenu a.order span{ background-image:url(/images/icon_order.gif);}
+.main-menu .submenu a.dms span{ background-image:url(/images/icon_dms.gif);}
+.main-menu .submenu a.replacement span{ background-image:url(/images/icon_replacement.gif);}
 
 
 /* Табы */
@@ -175,8 +175,8 @@
 .cart-block .title a{ color:#FFFFFF; text-decoration:none; border-bottom:1px dotted; outline:0;}
 .cart-block .title a:hover{ color:#FFFFFF !important;}
 .cart-block .order{ display:block; float:right; border:0px !important; width:45px; height:20px; background:url(../images/cart_panel_button_back.gif) no-repeat 0px 0px;}
-.cart-block .order .icon-pointer{ display:block; height:19px; background:url(../images/icon_pointer_button.gif) no-repeat 7px 2px;}
-.cart-block .order .icon{ display:block; height:19px; background:url(../images/icon_cart_button.gif) no-repeat 24px 2px;}
+.cart-block .order .icon-pointer{ display:block; height:19px; background:url(/images/icon_pointer_button.gif) no-repeat 7px 2px;}
+.cart-block .order .icon{ display:block; height:19px; background:url(/images/icon_cart_button.gif) no-repeat 24px 2px;}
 
 /* Поиск */
 .search-block{ padding-bottom:20px; width:740px; _display:inline-block; position:relative; z-index:4;}
@@ -192,9 +192,9 @@
 .search-block .search-tabs a.active:hover{ color:#FFFFFF !important;}
 .search-block .search-tabs a.active span{ background-position:0px 0px;}
 .search-block .search-tabs a.active span span{ background-position:100% 0px;}
-.search-block .search-tabs a.more{ background:url(../images/icon_pointer_blue.gif) no-repeat 100% 5px; padding:6px 18px 7px 12px; font-weight:bold;}
+.search-block .search-tabs a.more{ background:url(/images/icon_pointer_blue.gif) no-repeat 100% 5px; padding:6px 18px 7px 12px; font-weight:bold;}
 
-.search-block .close-link{ float:right; position:relative; top:-7px; margin-bottom:-13px; font-size:0.83em; background:url(../images/search_block_icon_close.gif) no-repeat 100% 2px; color:#7D7D7D; padding:0 18px 3px 0; text-decoration:none;}
+.search-block .close-link{ float:right; position:relative; top:-7px; margin-bottom:-13px; font-size:0.83em; background:url(/images/search_block_icon_close.gif) no-repeat 100% 2px; color:#7D7D7D; padding:0 18px 3px 0; text-decoration:none;}
 .search-block .close-link span{ border-bottom:1px dotted; padding-bottom:1px;}
 .search-block .close-link:hover{ background-position:100% -22px; color:#3A96D9 !important;}
 
