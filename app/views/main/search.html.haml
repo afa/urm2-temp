@@ -152,7 +152,7 @@
   eval(xhr.responseText);
  });
  $('.js').bind('ajax:complete', function(evt, xhr, status){
-  $(this).parents('.icons').find('.slider').hide();
+  $(this).parents('.icons').find('.slider').hide('1000');
  });
  $('.icon .js').bind('ajax:beforeSend', function(evt, xhr, status){
   $(this).parents('.icon').hide();
