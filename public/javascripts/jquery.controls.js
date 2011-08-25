@@ -1,86 +1,86 @@
 (function($){
-	
-	/*-----------------------------------------
-	  Поле ввода "Добавить в корзину" для таблицы вывода списка продукции
-	-----------------------------------------*/
-	$.fn.inputInCart = function(){
-		
-		return this.each(function(){
-			
-			var cell = $(this), //Ячейка с контроллом
-				speedLink = $('.speed-cart-button',cell), //Иконка быстрого оформления заказа
-				input = $('input',cell), //Вввод колличества продукции
-				countLink = $('.count',cell), //Изменение колличества продукции
-				timer = false //Таймер появления иконки быстрого оформления заказа
-				//eventBody = true;
-				;
-			//Вввод/изменнение колличества продукции в поле ввода
-			$('input',cell).blur(function(){
-				//eventBody = false;
-				var val = $(this).val();
-				//if(!$(this).hasClass('invalid') && parseInt(val)>0){
-				if($(this).validate({returnIsValid:true}) && parseInt(val)>0){
-					countLink.text(val);
-					if(settings.controls.inputInCart.speedIconShow){
-						cell.addClass('speed');
-						if(settings.animation) speedLink.fadeIn(settings.controls.inputInCart.speedIconAnimate); else speedLink.show();
-						timer = setTimeout(function(){cell.removeClass('speed').addClass('exist'); speedLink.hide();},settings.controls.inputInCart.speedIconTimeShow);
-					}
-					else{
-						cell.addClass('exist');
-					}
-				}
-				else{
-					if(this.value == '0') this.value='';
-					cell.removeClass('edit speed');
-					speedLink.hide();
-					if(timer) clearTimeout(timer);
-				}
-			})
-			.keydown(function(e){ // по нажатию на клавишу Enter
-				if(e.keyCode==13){
-					$(this).blur();
-				}				   
-			});
-			
-			//Показать поле ввода для изменнения колличества продукции
-			countLink.click(function(e){
-				cell.removeClass('exist speed').addClass('edit');
-				speedLink.hide();
-				input.focus().select();
-				e.preventDefault();
-			});
-			
-			
-			if(settings.controls.inputInCart.speedIconShow){
-				
-				//Показать иконку быстрого оформления заказа при наведении на ячейку
-				cell.hover(function(){
-					if(timer) clearTimeout(timer);
-					if(cell.hasClass('exist')){
-						cell.addClass('speed');
-						if(settings.animation) speedLink.fadeIn(settings.controls.inputInCart.speedIconAnimate); else speedLink.show();
-					}
-				},function(){
-					if(cell.hasClass('speed')){
-						cell.removeClass('speed').addClass('exist');
-						speedLink.hide();
-					}
-				})
-				.click(function(e){e.stopPropagation();});
-				
-				//Скрыть иконку быстрого оформления заказа при клике в пустом месте
-				/*$('body').click(function(){
-					if(eventBody && cell.hasClass('speed')){
-						cell.removeClass('speed').addClass('exist');
-						speedLink.hide();
-					}
-					eventBody = true;
-				});*/
-			}
-		});
-	
-	};
+
+ /*-----------------------------------------
+  Поле ввода "Добавить в корзину" для таблицы вывода списка продукции
+ -----------------------------------------*/
+ $.fn.inputInCart = function(){
+
+  return this.each(function(){
+
+   var cell = $(this), //Ячейка с контроллом
+    speedLink = $('.speed-cart-button',cell), //Иконка быстрого оформления заказа
+    input = $('input',cell), //Вввод колличества продукции
+    countLink = $('.count',cell), //Изменение колличества продукции
+    timer = false //Таймер появления иконки быстрого оформления заказа
+    //eventBody = true;
+    ;
+   //Вввод/изменнение колличества продукции в поле ввода
+   $('input',cell).blur(function(){
+    //eventBody = false;
+    var val = $(this).val();
+    //if(!$(this).hasClass('invalid') && parseInt(val)>0){
+    if($(this).validate({returnIsValid:true}) && parseInt(val)>0){
+     countLink.text(val);
+     if(settings.controls.inputInCart.speedIconShow){
+      cell.addClass('speed');
+      if(settings.animation) speedLink.fadeIn(settings.controls.inputInCart.speedIconAnimate); else speedLink.show();
+      timer = setTimeout(function(){cell.removeClass('speed').addClass('exist'); speedLink.hide();},settings.controls.inputInCart.speedIconTimeShow);
+     }
+     else{
+      cell.addClass('exist');
+     }
+    }
+    else{
+     if(this.value == '0') this.value='';
+     cell.removeClass('edit speed');
+     speedLink.hide();
+     if(timer) clearTimeout(timer);
+    }
+   })
+   .keydown(function(e){ // по нажатию на клавишу Enter
+    if(e.keyCode==13){
+     $(this).blur();
+    }				   
+   });
+
+   //Показать поле ввода для изменнения колличества продукции
+   countLink.click(function(e){
+    cell.removeClass('exist speed').addClass('edit');
+    speedLink.hide();
+    input.focus().select();
+    e.preventDefault();
+   });
+
+
+   if(settings.controls.inputInCart.speedIconShow){
+
+    //Показать иконку быстрого оформления заказа при наведении на ячейку
+    cell.hover(function(){
+     if(timer) clearTimeout(timer);
+     if(cell.hasClass('exist')){
+      cell.addClass('speed');
+      if(settings.animation) speedLink.fadeIn(settings.controls.inputInCart.speedIconAnimate); else speedLink.show();
+     }
+    },function(){
+     if(cell.hasClass('speed')){
+      cell.removeClass('speed').addClass('exist');
+      speedLink.hide();
+     }
+    })
+    .click(function(e){e.stopPropagation();});
+
+    //Скрыть иконку быстрого оформления заказа при клике в пустом месте
+    /*$('body').click(function(){
+     if(eventBody && cell.hasClass('speed')){
+      cell.removeClass('speed').addClass('exist');
+      speedLink.hide();
+     }
+     eventBody = true;
+    });*/
+   }
+  });
+
+ };
 	
 	/*-----------------------------------------
 	  Выпадающий список

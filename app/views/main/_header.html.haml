@@ -2,11 +2,6 @@
  - flash.each do |key, value|
   .flash{ :class => key}= value
  - if logged_in?
-  .account_selector
-   - form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
-    = form.label :account
-    = form.select :account, options_from_collection_for_select(current_user.accounts.where(:blocked => false), :id, :contact_first_name, current_user.current_account.try(:id)), :include_blank => t(:select_account)
-    = form.submit :select
 
 #header-height{:style=>"display:none;"}
 
@@ -32,6 +27,11 @@
          .user-block
           %span.name= [current_user.current_account.try(:contact_first_name), current_user.current_account.try(:contact_middle_name),current_user.current_account.try(:contact_last_name)].compact.join(' ')
           .comp= current_user.current_account.try(:business)
+          .account_selector
+           - form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
+            = form.label :account
+            = form.select :account, options_from_collection_for_select(current_user.accounts.where(:blocked => false), :id, :contact_first_name, current_user.current_account.try(:id)), :include_blank => t(:select_account)
+            = form.submit :select
           -#%a{:href=>user_path(current_user)} Настройки
           = link_to t(:logout), sessions_path, :method => :delete, :class => "quite"
           -#%a.quite{:href=>sessions_path, :method => :delete} Выход из системы
