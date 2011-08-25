@@ -5,7 +5,7 @@
     %a.close-link{:href=>"#"}
      %span свернуть
     .search-tabs
-     -#% a{:href=>"#"}
+     -# %a{:href=>"#"}
       %span
        %span Список
      %a.active{:href=>"#"}
@@ -41,15 +41,16 @@
         %i.bl &nbsp;
         %i.br &nbsp;
       .clear
+
     .search-tab-block
      -# %form{:action=>" "}
-     = form_for :search, :url => search_path do |f|
-      .field
+     .field
+      = form_for :search, :url => search_path do |f|
        -# = f.label :query_string
        = f.text_field :query
-        -# = f.submit :find
-       -# %input{:type=>"text", :value=>"TDA2003;OR;300"}
-      .button
+       -# = f.submit :find
+      -# %input{:type=>"text", :value=>"TDA2003;OR;300"}
+      -# .button
        %a.button-style{:href=>"#"}
         %i.t &nbsp;
         %i.b &nbsp;
@@ -58,7 +59,7 @@
         %span Найти!
         %i.bl &nbsp;
         %i.br &nbsp;
-     .clear
+     -# .clear
     -# .search-tab-block{:style=>"display:none;"}
      %form{:action=>" "}
       .field
@@ -146,6 +147,7 @@
    %th= t :avail_min
    %th= t :avail_max
   = render :partial => "items_line", :collection => @items, :locals => {:need_links => true}
+
 :javascript
  $('.slider').hide();
  $('.js').bind('ajax:success', function(evt, xhr, status){
