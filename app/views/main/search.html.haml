@@ -44,6 +44,10 @@
     .search-tab-block
      %form{:action=>" "}
       .field
+       = form_for :search, :url => search_path do |f|
+        = f.label :query_string
+        = f.text_field :query
+        -#= f.submit :find
        %input{:type=>"text", :value=>"TDA2003;OR;300"}
       .button
        %a.button-style{:href=>"#"}
@@ -87,10 +91,6 @@
 
 
 .search
- = form_for :search, :url => search_path do |f|
-  = f.label :query_string
-  = f.text_field :query
-  = f.submit :find
 
 .extended{:class => :search}
  = form_for :extended, :url => extended_path do |f|
