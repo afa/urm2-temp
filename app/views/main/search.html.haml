@@ -42,13 +42,13 @@
         %i.br &nbsp;
       .clear
     .search-tab-block
-     %form{:action=>" "}
+     -#%form{:action=>" "}
+     = form_for :search, :url => search_path do |f|
       .field
-       = form_for :search, :url => search_path do |f|
         = f.label :query_string
         = f.text_field :query
         -#= f.submit :find
-       %input{:type=>"text", :value=>"TDA2003;OR;300"}
+       -#%input{:type=>"text", :value=>"TDA2003;OR;300"}
       .button
        %a.button-style{:href=>"#"}
         %i.t &nbsp;
