@@ -160,3 +160,7 @@
   $(this).parents('.icon').hide();
   $(this).parents('.icons').find('.slider').show();
  });
+ $('a.button-style').click(function(){
+  $(this).parents('form').submit();
+  return false;
+ });
