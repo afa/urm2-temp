@@ -43,7 +43,7 @@
       .clear
     .search-tab-block
      -#%form{:action=>" "}
-     = form_for :search, :url => search_path do |f|
+     - form_for :search, :url => search_path do |f|
       .field
        = f.label :query_string
        = f.text_field :query
