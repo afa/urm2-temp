@@ -5,20 +5,20 @@
     %a.close-link{:href=>"#"}
      %span свернуть
     .search-tabs
-     -#%a{:href=>"#"}
+     -#% a{:href=>"#"}
       %span
        %span Список
      %a.active{:href=>"#"}
       %span
        %span Поиск по наименованию
-     -#%a{:href=>"#"}
+     -# %a{:href=>"#"}
       %span
        %span Артикул ДМС (Farnel, Newark)
-     -#%a{:href=>"#"}
+     -# %a{:href=>"#"}
       %span
        %span По параметрам
      %a.more{:href=>"#"} Еще
-    -#.search-tab-block{:style=>"display:none;"}
+    -# .search-tab-block{:style=>"display:none;"}
      %form{:action=>" "}
       .field
        %textarea.list-area{:cols=>"1", :rows=>"1"}
@@ -42,13 +42,13 @@
         %i.br &nbsp;
       .clear
     .search-tab-block
-     -#%form{:action=>" "}
+     -# %form{:action=>" "}
      - form_for :search, :url => search_path do |f|
       .field
-       -#= f.label :query_string
+       -# = f.label :query_string
        = f.text_field :query
-        -#= f.submit :find
-       -#%input{:type=>"text", :value=>"TDA2003;OR;300"}
+        -# = f.submit :find
+       -# %input{:type=>"text", :value=>"TDA2003;OR;300"}
       .button
        %a.button-style{:href=>"#"}
         %i.t &nbsp;
@@ -59,7 +59,7 @@
         %i.bl &nbsp;
         %i.br &nbsp;
      .clear
-    -#.search-tab-block{:style=>"display:none;"}
+    -# .search-tab-block{:style=>"display:none;"}
      %form{:action=>" "}
       .field
        %input{:type=>"text", :value=>"TDA2003;OR;400"}
@@ -73,7 +73,7 @@
         %i.bl &nbsp;
         %i.br &nbsp;
       .clear
-    -#.search-tab-block{:style=>"display:none;"}
+    -# .search-tab-block{:style=>"display:none;"}
      %form{:action=>" "}
       .field
        .input{:type=>"text", :value=>"TDA2003;OR;500"}
@@ -90,9 +90,9 @@
 
 
 
--#.search
+-# .search
 
--#.extended{:class => :search}
+-# .extended{:class => :search}
  = form_for :extended, :url => extended_path do |f|
   .line
    = f.label :only_available
