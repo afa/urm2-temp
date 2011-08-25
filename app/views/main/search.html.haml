@@ -45,7 +45,7 @@
      -#%form{:action=>" "}
      - form_for :search, :url => search_path do |f|
       .field
-       = f.label :query_string
+       -#= f.label :query_string
        = f.text_field :query
         -#= f.submit :find
        -#%input{:type=>"text", :value=>"TDA2003;OR;300"}
@@ -90,7 +90,7 @@
 
 
 
-.search
+-#.search
 
 .extended{:class => :search}
  = form_for :extended, :url => extended_path do |f|
