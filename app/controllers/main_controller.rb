@@ -14,6 +14,7 @@ class MainController < ApplicationController
    
    data = Axapta.search_names({:calc_price=>true, :calc_qty => true}.merge(params[:search] || {}).merge(:user_hash => current_user.current_account.try(:axapta_hash)))
    logger.info "--- request_hash: #{data.inspect}"
+   logger.info "--- request_acc: #{current_user.current_account.id}"
    @items = data.inject([]) do |r, i|
     i["locations"].each do |loc|
      a = {"item_name" => i["item_name"], "item_brend" => i["item_brend"], "qty_in_pack" => i["qty_in_pack"], "location_id" => loc["location_id"], "min_qty" => i["min_qty"], "max_qty" => loc["vend_qty"]}
