@@ -12,6 +12,7 @@ class MainController < ApplicationController
   def search
    @search = OpenStruct.new(params[:search]) if params[:search]
    
+   logger.info "--- request_start: #{Time.now}"
    data = Axapta.search_names({:calc_price=>true, :calc_qty => true}.merge(params[:search] || {}).merge(:user_hash => current_user.current_account.try(:axapta_hash)))
    logger.info "--- request_hash: #{data.inspect}"
    logger.info "--- request_acc: #{current_user.current_account.id}"
