@@ -4,7 +4,7 @@ prefix = "/mnt/data/www/urm2"
 worker_processes(3)
 preload_app true
 user('www','devel')
-timeout 40
+timeout 90
 listen "/tmp/unicorn_urm2.sock"
 #listen '/var/sockets/cup-of.cup-of.sock'
 working_directory "#{prefix}"
