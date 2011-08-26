@@ -49,10 +49,12 @@ class Axapta
   end
 
   def self.search_names(*args)
+   p "---names#{Time.now}", args
    AxaptaRequest.search_item_name_h(*args).try(:[], "items") || []
   end
 
   def self.search_dms_names(*args)
+   p "---dmsnames#{Time.now}", args
    AxaptaRequest.search_item_name_dms_h(*args).try(:[], "items") || []
   end
 end
