@@ -18,9 +18,6 @@ describe "main/index.html.haml" do
  it "should show userlist" do
   @list.each{|u| rendered.should have_xpath("//a[@href='#{edit_user_path(u)}']", :text => u.username) }
  end
- it "should show link to logout" do
-  rendered.should have_xpath("//a[@href='/sessions' and @data-method='delete']")
- end
 
  it "should show search form" do
   rendered.should have_xpath("//form[@action='/search' and @method='post']")
