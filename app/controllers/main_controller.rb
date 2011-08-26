@@ -16,6 +16,7 @@ class MainController < ApplicationController
    begin
     data = Axapta.search_names({:calc_price=>true, :calc_qty => true}.merge(params[:search] || {}).merge(:user_hash => current_user.current_account.try(:axapta_hash)))
    rescue Exception => e
+    p e
     logger.info e.to_s
    end
    logger.info "--- request_hash: #{data.inspect}"
