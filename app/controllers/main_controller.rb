@@ -16,7 +16,7 @@ class MainController < ApplicationController
    begin
     data = Axapta.search_names({:calc_price=>true, :calc_qty => true}.merge(params[:search] || {}).merge(:user_hash => current_user.current_account.try(:axapta_hash)))
    rescue Exception => e
-    p e
+    p "---exc in search #{Time.now}", e
     logger.info e.to_s
    end
    logger.info "--- request_hash: #{data.inspect}"
@@ -55,6 +55,7 @@ class MainController < ApplicationController
     end
     r
    end
+   p "---dms-resp#{Time.now}", @items
    respond_with do |format|
     format.js { render :layout => false } #do
     # render(:update) {|page| page.replace_html 'div.tst', '<div>asd</div>'.html_safe }
@@ -79,7 +80,7 @@ class MainController < ApplicationController
 
   def check_account
    if current_user.current_account
-    if current_user.current_account.blocked?
+    if current_user.current_account.blocked? or current_user.accounts.where(:id => current_user.current_account_id).count == 0
      redirect_to root_path
     end
    else
