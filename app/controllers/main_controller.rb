@@ -43,9 +43,9 @@ class MainController < ApplicationController
    @items = Axapta.search_dms_names(:user_hash => @hash, :item_id_search => @code, :query_string => @seek, :search_brend => @brend).inject([]) do |r, i|
     p i
     i["prognosis"].each do |loc|
-     a = {"item_name" => i["item_name"], "item_brend" => i["item_brend"], "qty_in_pack" => loc["qty_multiplies"], "max_qty" => loc["vend_qty"], "rohs" => i["rohs"]}#, "min_qty" => i["min_qty"], "location_id" => loc["location_id"]
+     a = {"item_name" => i["item_name"], "item_brend" => i["item_brend"], "qty_in_pack" => loc["qty_multiples"], "max_qty" => loc["vend_qty"], "rohs" => i["rohs"]}#, "min_qty" => i["min_qty"], "location_id" => loc["location_id"]
      locs = loc["price_qty"].sort_by{|l| l["min_qty"] }[0, 4]
-     a.merge!("price1" => locs[0]["price"]) if locs[0]
+     a.merge!("price1" => locs[0]["price"], "min_qty" => locs[0]["min_qty"]) if locs[0]
      a.merge!("price2" => locs[1]["price"], "count2" => locs[1]["min_qty"]) if locs[1]
      a.merge!("price3" => locs[2]["price"], "count3" => locs[2]["min_qty"]) if locs[2]
      a.merge!("price4" => locs[3]["price"], "count4" => locs[3]["min_qty"]) if locs[3]
@@ -56,9 +56,7 @@ class MainController < ApplicationController
    end
    p "---dms-resp#{Time.now}", @items
    respond_with do |format|
-    format.js { render :layout => false } #do
-    # render(:update) {|page| page.replace_html 'div.tst', '<div>asd</div>'.html_safe }
-    #end
+    format.js { render :layout => false }
     format.html do
      redirect_to root_path
     end
