@@ -16,7 +16,7 @@
    %a.count{:href=>"#"}
  %td.double-first-cell= dms_line["min_qty"]
  %td.double-last-cell= dms_line["max_qty"]
- %td= dms_line["prognoz"]
+ %td= dms_line["prognoz"]= dms_line["prognosis_id"]
  %td= dms_line["price1"]
  %td.green= dms_line["count2"]
  %td= dms_line["price2"]
@@ -27,7 +27,7 @@
  %td= dms_line["location_id"]
  %td.grey= dms_line["qty_in_pack"]
  %td.font-small
-  %span.color-red
+  %span.color-red= dms_line["vend_proposal_date"]
  %td
  %td
  %td.border-r
