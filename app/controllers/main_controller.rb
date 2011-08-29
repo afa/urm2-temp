@@ -37,9 +37,10 @@ class MainController < ApplicationController
   def dms
    @after = params[:after]
    @seek = params[:name]
+   @code = params[:code]
    @brend = params[:brend]
    @hash = current_user.current_account.try(:axapta_hash)
-   @items = Axapta.search_dms_names(:user_hash => @hash, :query_string => @seek, :search_brend => @brend).inject([]) do |r, i|
+   @items = Axapta.search_dms_names(:user_hash => @hash, :item_id_search => @code, :query_string => @seek, :search_brend => @brend).inject([]) do |r, i|
     p i
     i["prognosis"].each do |loc|
      a = {"item_name" => i["item_name"], "item_brend" => i["item_brend"], "qty_in_pack" => loc["qty_multiplies"], "max_qty" => loc["vend_qty"], "rohs" => i["rohs"]}#, "min_qty" => i["min_qty"], "location_id" => loc["location_id"]
