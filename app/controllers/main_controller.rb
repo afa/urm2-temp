@@ -19,11 +19,9 @@ class MainController < ApplicationController
     p "---exc in search #{Time.now}", e
     logger.info e.to_s
    end
-   logger.info "--- request_hash: #{data.inspect}"
-   logger.info "--- request_acc: #{current_user.current_account.id}"
    @items = data.inject([]) do |r, i|
     i["locations"].each do |loc|
-     a = {"item_name" => i["item_name"], "item_brend" => i["item_brend"], "qty_in_pack" => i["qty_in_pack"], "location_id" => loc["location_id"], "min_qty" => i["min_qty"], "max_qty" => loc["vend_qty"]}
+     a = {"item_name" => i["item_name"], "item_brend" => i["item_brend"], "qty_in_pack" => i["qty_in_pack"], "location_id" => loc["location_id"], "min_qty" => i["min_qty"], "max_qty" => loc["vend_qty"], "rohs" => i["rohs"]}
      locs = loc["price_qty"].sort_by{|l| l["min_qty"] }[0, 4]
      a.merge!("price1" => locs[0]["price"]) if locs[0]
      a.merge!("price2" => locs[1]["price"], "count2" => locs[1]["min_qty"]) if locs[1]
@@ -33,7 +31,6 @@ class MainController < ApplicationController
     end
     r
    end
-   #@accounts = current_user.accounts
    @extended = OpenStruct.new({:calc_price=>true, :calc_qty => true}.merge(params[:extended] || {}))
   end
 
@@ -45,12 +42,13 @@ class MainController < ApplicationController
    @items = Axapta.search_dms_names(:user_hash => @hash, :query_string => @seek, :search_brend => @brend).inject([]) do |r, i|
     p i
     i["prognosis"].each do |loc|
-     a = {"item_name" => i["item_name"], "item_brend" => i["item_brend"], "qty_in_pack" => loc["qty_multiplies"], "max_qty" => loc["vend_qty"]}#, "min_qty" => i["min_qty"], "location_id" => loc["location_id"]
+     a = {"item_name" => i["item_name"], "item_brend" => i["item_brend"], "qty_in_pack" => loc["qty_multiplies"], "max_qty" => loc["vend_qty"], "rohs" => i["rohs"]}#, "min_qty" => i["min_qty"], "location_id" => loc["location_id"]
      locs = loc["price_qty"].sort_by{|l| l["min_qty"] }[0, 4]
      a.merge!("price1" => locs[0]["price"]) if locs[0]
      a.merge!("price2" => locs[1]["price"], "count2" => locs[1]["min_qty"]) if locs[1]
      a.merge!("price3" => locs[2]["price"], "count3" => locs[2]["min_qty"]) if locs[2]
      a.merge!("price4" => locs[3]["price"], "count4" => locs[3]["min_qty"]) if locs[3]
+     a.merge!("need_more" => true) if loc["price_qty"].size > 4
      r << a
     end
     r

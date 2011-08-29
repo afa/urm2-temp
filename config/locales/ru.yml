@@ -27,3 +27,4 @@ ru:
  find: Найти
  query_string: Поиск
  not_found_dms: На данный момент предложений ДМС не найдено
+ need_all_prices_for_offer: все цены по предложению
