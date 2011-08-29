@@ -1,2 +1,2 @@
-$("#{escape_javascript(render(:partial => "dms_header"))}").insertAfter("tr##{@after}");
 $("#{escape_javascript(@items.empty? ? render(:partial => "empty_line") : render( :partial => "dms_line", :collection => @items, :locals => {:need_links => false}))}").insertAfter("tr##{@after}");
+$("#{escape_javascript(render(:partial => "dms_header"))}").insertAfter("tr##{@after}");
