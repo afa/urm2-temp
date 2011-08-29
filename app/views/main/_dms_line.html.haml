@@ -1,14 +1,20 @@
-%tr{:id => "dms_#{dms_line["item_name"]}_#{dms_line["item_brend"]}_#{dms_line["location_id"]}_#{dms_line["rohs"]}"}
- %td.icons
+%tr.sub-row-table{:id => "dms_#{dms_line["item_name"]}_#{dms_line["item_brend"]}_#{dms_line["location_id"]}_#{dms_line["rohs"]}"}
+ %td.icons{:class => "border-l"}
   -#.icon
    = link_to "", main_dms_path(:name => items_line["item_name"], :brend => items_line["item_brend"], :after => "item_#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}"), :class => "dms js", :remote => true
    -#= link_to t(:dms), main_dms_path(:name => items_line["item_name"], :brend => items_line["item_brend"], :after => "item_#{items_line["item_id"]}_#{items_line["item_name"]}"), :class=>"js", :remote => true
 
- %td.text-left= dms_line["item_name"]
- %td.text-left= dms_line["item_brend"]
- %td 
- %td= dms_line["min_qty"]
- %td= dms_line["max_qty"]
+ %td.text-left{:class => "font-small", :colspan => 2}
+  %a{:href => "#"} все цены по предложению
+ %td.input-in-cart
+  %div
+   %a.speed-cart-button{:href=>"#"}
+    %span
+     %span &nbsp;
+   %input{:type=>"text", :class="validate[custom[onlyNumber],max[10000]]"}
+   %a.count{:href=>"#"}
+ %td.double-first-cell= dms_line["min_qty"]
+ %td.double-last-cell= dms_line["max_qty"]
  %td= dms_line["prognoz"]
  %td= dms_line["price1"]
  %td.green= dms_line["count2"]
@@ -19,5 +25,9 @@
  %td= dms_line["price4"]
  %td= dms_line["location_id"]
  %td.grey= dms_line["qty_in_pack"]
-
+ %td.font-small
+  %span.color-red
+ %td
+ %td
+ %td.border-r
 
