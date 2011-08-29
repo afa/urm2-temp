@@ -4,7 +4,7 @@
    = link_to "", main_dms_path(:name => items_line["item_name"], :brend => items_line["item_brend"], :after => "item_#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}"), :class => "dms js", :remote => true
    -#= link_to t(:dms), main_dms_path(:name => items_line["item_name"], :brend => items_line["item_brend"], :after => "item_#{items_line["item_id"]}_#{items_line["item_name"]}"), :class=>"js", :remote => true
 
- %td.text-left{:class => "font-small", :colspan => 2}
+ %td.text-left{:class => "font-small", :colspan => 3}
   %a{:href => "#"}= t(:need_all_prices_for_offer) if dms_line["need_more"]
  %td= dms_line["rohs"]
  %td.input-in-cart
