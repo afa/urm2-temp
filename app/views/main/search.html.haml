@@ -126,36 +126,39 @@
    = f.submit :find
 
 .items
- %table.table-style
-  %tr
-   %th{:rowspan => 2}= t :actions
-   %th.text-left{:rowspan => 2}= t :item_name
-   %th.text-left{:rowspan => 2}= t :item_brend
-   %th{:rowspan => 2} ROHS
-   %th{:rowspan => 2}= t :to_cart
-   %th.bold{:colspan => 2}= t :avail
-   %th{:rowspan => 2}= t :prognosis
-   %th{:rowspan => 2}= t :price1
-   %th{:rowspan => 2}= t :count2
-   %th{:rowspan => 2}= t :price2
-   %th{:rowspan => 2}= t :count3
-   %th{:rowspan => 2}= t :price3
-   %th{:rowspan => 2}= t :count4
-   %th{:rowspan => 2}= t :price4
-   %th{:rowspan => 2}= t :location
-   %th{:rowspan => 2}= t :quantity
-   %th{:rowspan=>"2"} Рег. позиция
-   %th{:rowspan=>"2"} Снято с произв.
-   %th{:rowspan=>"2"} Сегмент
-   %th{:rowspan=>"2"}
-    Цена конеч.
-    %br
-    потребителя
+ .table-navigation-block{:class => "scroll"}
+  .table-block
+   .table-scrolling
+    %table.table-style{:class => "search-products"}
+     %tr
+      %th{:rowspan => 2}= t :actions
+      %th.text-left{:rowspan => 2}= t :item_name
+      %th.text-left{:rowspan => 2}= t :item_brend
+      %th{:rowspan => 2} ROHS
+      %th{:rowspan => 2}= t :to_cart
+      %th.bold{:colspan => 2}= t :avail
+      %th{:rowspan => 2}= t :prognosis
+      %th{:rowspan => 2}= t :price1
+      %th{:rowspan => 2}= t :count2
+      %th{:rowspan => 2}= t :price2
+      %th{:rowspan => 2}= t :count3
+      %th{:rowspan => 2}= t :price3
+      %th{:rowspan => 2}= t :count4
+      %th{:rowspan => 2}= t :price4
+      %th{:rowspan => 2}= t :location
+      %th{:rowspan => 2}= t :quantity
+      %th{:rowspan=>"2"} Рег. позиция
+      %th{:rowspan=>"2"} Снято с произв.
+      %th{:rowspan=>"2"} Сегмент
+      %th{:rowspan=>"2"}
+       Цена конеч.
+       %br
+       потребителя
 
-  %tr
-   %th= t :avail_min
-   %th= t :avail_max
-  = render :partial => "items_line", :collection => @items, :locals => {:need_links => true}
+     %tr
+      %th= t :avail_min
+      %th= t :avail_max
+     = render :partial => "items_line", :collection => @items, :locals => {:need_links => true}
 
 :javascript
  $('.slider').hide();
