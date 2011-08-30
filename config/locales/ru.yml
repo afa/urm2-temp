@@ -20,13 +20,14 @@ ru:
        blank: не может быть пустым
        taken: уже используется. Воспользуйтесь восстановлением пароля
 #search page
- actions: 
  item_name: Наименование
  item_brend: Произв.
  body_name: Корпус
  rohs: ROHS
  to_cart: К заказу
  avail: Доступно
+ avail_min: Min
+ avail_max: Max
  prognosis: Прогноз
  price1: Цена1
  count2: К2
