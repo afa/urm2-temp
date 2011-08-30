@@ -20,7 +20,7 @@ ru:
        blank: не может быть пустым
        taken: уже используется. Воспользуйтесь восстановлением пароля
 #search page
- actions: &nbsp;
+ actions: 
  item_name: Наименование
  item_brend: Произв.
  body_name: Корпус
