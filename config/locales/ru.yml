@@ -19,12 +19,31 @@ ru:
       axapta_hash:
        blank: не может быть пустым
        taken: уже используется. Воспользуйтесь восстановлением пароля
+#search page
+ actions: &nbsp;
+ item_name: Наименование
+ item_brend: Произв.
+ body_name: Корпус
+ rohs: ROHS
+ to_cart: К заказу
+ avail: Доступно
+ prognosis: Прогноз
+ price1: Цена1
+ count2: К2
+ price2: Ц2
+ count2: К3
+ price2: Ц3
+ count2: К4
+ price2: Ц4
+ quantity: Упак.
  locations: Склады
+ not_found_dms: На данный момент предложений ДМС не найдено
+ need_all_prices_for_offer: все цены по предложению
  account_active: Активен
  account_blocked: Заблокирован
  informer_today: Сегодня
  logout: Выход из системы
  find: Найти
  query_string: Поиск
- not_found_dms: На данный момент предложений ДМС не найдено
- need_all_prices_for_offer: все цены по предложению
+
+
