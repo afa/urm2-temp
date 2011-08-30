@@ -32,10 +32,10 @@ ru:
  price1: Цена1
  count2: К2
  price2: Ц2
- count2: К3
- price2: Ц3
- count2: К4
- price2: Ц4
+ count3: К3
+ price3: Ц3
+ count4: К4
+ price4: Ц4
  quantity: Упак.
  locations: Склады
  not_found_dms: На данный момент предложений ДМС не найдено
