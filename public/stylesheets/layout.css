@@ -182,7 +182,7 @@
 .search-block{ padding-bottom:20px; width:740px; _display:inline-block; position:relative; z-index:4;}
 .search-block .back-x{ background:url(../images/search_block_back_x.gif) repeat-x 0px 0px; height:100%;}
 .search-block .back-l{ background:url(../images/search_block_back_l.gif) no-repeat 0px 0px; height:100%;}
-.search-block .back-r{ background:url(../images/search_block_back_r.gif) no-repeat 100% 0px; padding:12px 13px 0 13px;}
+.search-block .back-r{ background:url(../images/search_block_back_r.gif) no-repeat 100% 0px; padding:12px 13px 0 2em;}
 
 .search-block .search-tabs{ width:100%; overflow:hidden;}
 .search-block .search-tabs a{ display:block; float:left; text-decoration:none; cursor:pointer;}
