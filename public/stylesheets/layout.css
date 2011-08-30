@@ -19,7 +19,7 @@
   Контент
 -----------------------------------------*/
 #content{ position:relative; z-index:99; display:inline-block; width:100%;}
-#content .content-wrap{ padding:0 2% 0px 2%;}
+#content .content-wrap{ padding:0 1em 0px 1em;}
 .table-scroll-additional #content .content-wrap{ padding:0px 20px 0px 20px;}
 
 /* Прокрутка таблиц */
@@ -80,7 +80,7 @@
 .header-static{ z-index:150; background:#FFFFFF; position:relative; width:100%; min-width:1000px; _top:0px !important;}
 #header-height{ height:237px;}
 #header .header-hid{ position:relative;}
-#header .header-wrap{ padding:0px 2%;}
+#header .header-wrap{ padding:0px 1em;}
 .table-scroll-additional #header .header-wrap{ padding:0px 20px;}
 
 /* Скрывающаяся панель в шапке*/
@@ -159,7 +159,7 @@
 
 
 /* Табы */
-.tabs-block{ float:left; margin-left:2%;}
+.tabs-block{ float:left; margin-left:1em;} /* вернуть 2% если шо  */
 .tabs-block .tab{ display:block; float:left; _display:inline-block; text-decoration:none; border:1px solid #6BB0E3; border-top:0px; padding:4px 17px 6px 17px; font-size:0.92em;}
 .tabs-block .tab:hover{ color:#FFFFFF !important; background:#3A99DB; border-color:#3A99DB;}
 
@@ -223,7 +223,7 @@
 -----------------------------------------*/
 #footer-height{ height:120px;}
 #footer{ width:100%; position:absolute; bottom:0px; font-size:0.92em; z-index:98;}
-#footer .footer-wrap{ margin:0 2% 0 2%; border-top:2px solid #3EA2EB; padding:10px 5px 0 5px; height:85px;}
+#footer .footer-wrap{ margin:0 1em 0 1em; border-top:2px solid #3EA2EB; padding:10px 5px 0 5px; height:85px;}
 .table-scroll-additional #footer .footer-wrap{ margin:0 20px;}
 
 #footer .left-cell{ float:left;}
