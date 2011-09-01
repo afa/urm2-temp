@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_filter :authenticate!
+  before_filter :take_search
   protect_from_forgery
 
   def sign_in(user)
@@ -41,5 +42,9 @@ class ApplicationController < ActionController::Base
 
   def logged_in?
    not current_user.blank?
+  end
+
+  def take_search
+   @search = OpenStruct.new(params[:search] || {})
   end
 end

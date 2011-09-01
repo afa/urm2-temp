@@ -10,7 +10,7 @@ class MainController < ApplicationController
   end
 
   def search
-   @search = OpenStruct.new(params[:search]) if params[:search]
+   #@search = OpenStruct.new(params[:search]) if params[:search]
    
    logger.info "--- request_start: #{Time.now}"
    begin
@@ -31,7 +31,7 @@ class MainController < ApplicationController
     end
     r
    end
-   @extended = OpenStruct.new({:calc_price=>true, :calc_qty => true}.merge(params[:extended] || {}))
+   #@extended = OpenStruct.new({:calc_price=>true, :calc_qty => true}.merge(params[:extended] || {}))
   end
 
   def dms
@@ -63,9 +63,9 @@ class MainController < ApplicationController
    end
   end
 
-  def extended
-
-  end
+  #def extended
+  #
+  #end
  protected
   def get_users
    @users = User.all
