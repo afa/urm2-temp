@@ -31,7 +31,7 @@
             .sub
              - @accounts.each do |a|
               = link_to a.contact_first_name, "#", :name => a.id
-           = form.hidden :account
+           = form.hidden_field :account
           .account_selector
            -# form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
             = form.label :account
