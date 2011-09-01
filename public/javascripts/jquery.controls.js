@@ -105,7 +105,8 @@
 			 sel.prepend(subLinks.eq(0).hide().clone().show().addClass('active'));
                          active = $('.active', sel);
                         } else {
-			 sel.prepend(active.eq(0).hide().clone().show());
+			 sel.prepend(active.eq(0).hide().removeClass('active').clone().show().addClass('active'));
+                         active = $('.active', sel);
                         }
 			
 			input.val(active.get(0).name);
