@@ -101,7 +101,7 @@
 			
 			//Активный пункт из списка
 			var active = $('.active',sel);
-                        if active.length == 0 {
+                        if (active.length == 0){
 			 sel.prepend(subLinks.eq(0).hide().clone().show().addClass('active'));
                          active = $('.active', sel);
                         } else {
