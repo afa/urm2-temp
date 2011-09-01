@@ -100,7 +100,7 @@
 				subLinks = $('a',subList);
 			
 			//Активный пункт из списка
-			var active = $('a:name:' + input.eq(0).val())
+			var active = $('a[name|=' + input.eq(0).val()+'])
                         if (active.length == 0){
 			 sel.prepend(subLinks.eq(0).hide().clone().show().addClass('active'));
                          active = $('.active', sel);
