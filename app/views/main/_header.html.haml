@@ -29,11 +29,11 @@
           - form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
            .select
             .sub
-             - opt = !(current_user.try(:current_account)) ? ({:class => "active"}) : ({})
-             = link_to "-----", "#", :name => "0", *opt
+             - opt = current_user.try(:current_account).nil? ? ({:class => "active"}) : ({})
+             = link_to "-----", "#", {:name => "0"}.merge(opt)
              - @accounts.each do |a|
               - opt = (current_user.try(:current_account) && current_user.current_account.id == a.id) ? ({:class => "active"}) : ({})
-              = link_to a.contact_first_name, "#", :name => a.id, *opt
+              = link_to a.contact_first_name, "#", {:name => a.id}.merge(opt)
             = form.hidden_field :account
           .account_selector
            -# form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
