@@ -29,7 +29,7 @@
           - form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
            .select
             .sub
-             opt = !(current_user.try(:current_account) ? ({:class => "active"}) : ({})
+             opt = !(current_user.try(:current_account)) ? ({:class => "active"}) : ({})
              = link_to "-----", "#", :name => "0", *opt
              - @accounts.each do |a|
               - opt = (current_user.try(:current_account) && current_user.current_account.id == a.id) ? ({:class => "active"}) : ({})
