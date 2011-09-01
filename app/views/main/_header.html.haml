@@ -31,7 +31,8 @@
             .sub
              = link_to "-----", "#", :name => "0"
              - @accounts.each do |a|
-              = link_to a.contact_first_name, "#", :name => a.id
+              - opt = current_user.try(:current_account) && current_user.current_account.id == a.id ? {:class => "active"} : {}
+              = link_to a.contact_first_name, "#", :name => a.id, opt
            = form.hidden_field :account
           .account_selector
            -# form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
