@@ -22,4 +22,9 @@ describe "layouts/application.html.haml" do
  it "should show link to logout" do
   rendered.should have_xpath("//a[@href='/sessions' and @data-method='delete']")
  end
+
+ it "should show search form" do
+  rendered.should have_xpath("//form[@action='/search' and @method='post']")
+  rendered.should have_xpath("//form//input[@type='text' and @name='search[query_string]']")
+ end
 end

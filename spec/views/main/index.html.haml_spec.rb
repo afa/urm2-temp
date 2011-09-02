@@ -19,8 +19,4 @@ describe "main/index.html.haml" do
   @list.each{|u| rendered.should have_xpath("//a[@href='#{edit_user_path(u)}']", :text => u.username) }
  end
 
- it "should show search form" do
-  rendered.should have_xpath("//form[@action='/search' and @method='post']")
-  rendered.should have_xpath("//form//input[@type='text' and @name='search[query_string]']")
- end
 end
