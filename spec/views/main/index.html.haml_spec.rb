@@ -9,14 +9,11 @@ describe "main/index.html.haml" do
   @list.each{|u| Axapta.stub!(:user_info).with(u.ext_hash).and_return({}) }
   @list.each{|u| u.save! }
   @login = @list.first
-  assign(:users, @list)
+#  assign(:users, @list)
   session[:user] = @login.id
   assign(:accounts, @login.accounts)
   render #_template "main/index.html.haml"
  end
  #no anonymous in view. anon - redirected in controller
- it "should show userlist" do
-  @list.each{|u| rendered.should have_xpath("//a[@href='#{edit_user_path(u)}']", :text => u.username) }
- end
 
 end

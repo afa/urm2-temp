@@ -3,7 +3,7 @@
   = f.label :query_string
   = f.text_field :query_string
   = f.submit :find
-%h1= t :users_header
-- @users.each do |user|
+-# %h1= t :users_header
+-# - @users.each do |user|
  .line
   = link_to user.username, edit_user_path(user)
