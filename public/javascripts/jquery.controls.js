@@ -133,6 +133,7 @@
 				subList.hide();
 				sel.removeClass('hover');
 				e.preventDefault();
+                                active.parents("form").eq(0).submit();
 			});
 			
 		});

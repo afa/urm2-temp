@@ -16,7 +16,7 @@ describe "layouts/application.html.haml" do
   render
  end
  it "should show account selection form" do
-  rendered.should have_xpath("//select[@name='current_account[account]']")
+  rendered.should have_xpath("//form[@action='#{current_account_users_path}']//div[@class='select']")
  end
 
  it "should show link to logout" do
