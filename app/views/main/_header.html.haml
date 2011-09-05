@@ -24,7 +24,7 @@
         .line
         - if logged_in?
          .user-block
-          - if current_user.current_account?
+          - if current_user.current_account
            %span.name= [current_user.current_account.try(:contact_first_name), current_user.current_account.try(:contact_middle_name),current_user.current_account.try(:contact_last_name)].compact.join(' ')
            .comp= current_user.current_account.try(:business)
           - else
@@ -32,7 +32,7 @@
           - form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
            .select
             .sub
-             = link_to "-----", "#", :name => "0" unless current_user.current_account?
+             = link_to "-----", "#", :name => "0" unless current_user.current_account
              - @accounts.each do |a|
               = link_to a.cust_account, "#", :name => a.id
             = form.hidden_field :account, :value => current_user.try(:current_account).try(:id) || 0
