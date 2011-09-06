@@ -50,11 +50,24 @@ class Axapta
 
   def self.search_names(*args)
    res = AxaptaRequest.search_item_name_h(*args).try(:[], "items") || []
+<<<<<<< HEAD:app/models/axapta.rb
    res
+=======
+   #res
+>>>>>>> 862e9acd95780d900ac50c5c8c188c077181fa3b:app/models/axapta.rb
   end
 
   def self.search_dms_names(*args)
    res = AxaptaRequest.search_item_name_dms_h(*args).try(:[], "items") || []
+<<<<<<< HEAD:app/models/axapta.rb
+   #res
+=======
+   res
+>>>>>>> 862e9acd95780d900ac50c5c8c188c077181fa3b:app/models/axapta.rb
+  end
+
+  def self.search_analogs(*args)
+   res = AxaptaRequest.search_item_an_h(*args).try(:[], "items") || []
    #res
   end
 end

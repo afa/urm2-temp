@@ -102,10 +102,10 @@
 			//Активный пункт из списка
 			var active = $('a[name|=' + input.eq(0).val()+']');
                         if (active.length == 0){
-			 sel.prepend(subLinks.eq(0).hide().clone().show().addClass('active'));
+			 sel.prepend(subLinks.eq(0).hide().clone().show().addClass('active').addClass("showed"));
                          active = $('.active', sel);
                         } else {
-			 sel.prepend(active.eq(0).hide().removeClass('active').clone().show().addClass('active'));
+			 sel.prepend(active.eq(0).hide().removeClass('active').clone().show().addClass('active').addClass('showed'));
                          active = $('.active', sel);
                         }
 			

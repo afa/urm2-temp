@@ -34,7 +34,7 @@
             .sub
              = link_to "-----", "#", :name => "0" unless current_user.current_account
              - @accounts.each do |a|
-              = link_to a.cust_account, "#", :name => a.id
+              = link_to a.cust_account, "#", :name => a.id, :class => "showed"
             = form.hidden_field :account, :value => current_user.try(:current_account).try(:id) || 0
           .account_selector
            -# form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
@@ -129,6 +129,7 @@
         327
    .tabs-block
     %a.tab{:href=>"#", :class=>"tab-search", :style=>"display:none"} Поиск
+.clear
 .search-block
  .back-x
   .back-l
