@@ -41,7 +41,6 @@ class MainController < ApplicationController
    @brend = params[:brend]
    @hash = current_user.current_account.try(:axapta_hash)
    @items = Axapta.search_dms_names(:user_hash => @hash, :item_id_search => @code, :query_string => @seek, :search_brend => @brend).inject([]) do |r, i|
-    p i
     i["prognosis"].each do |loc|
      a = {"item_name" => i["item_name"], "item_brend" => i["item_brend"], "qty_in_pack" => loc["qty_multiples"], "max_qty" => loc["vend_qty"], "rohs" => i["rohs"], "prognosis_id" => loc["prognosis_id"]}#, "min_qty" => i["min_qty"], "location_id" => loc["location_id"]
      locs = loc["price_qty"].sort_by{|l| l["min_qty"] }[0, 4]
@@ -54,13 +53,40 @@ class MainController < ApplicationController
     end
     r
    end
-   p "---dms-resp#{Time.now}", @items
    respond_with do |format|
     format.js { render :layout => false }
     format.html do
      redirect_to root_path
     end
    end
+  end
+
+  def analog
+   @after = params[:after]
+   @code = params[:code]
+   @hash = current_user.current_account.try(:axapta_hash)
+   #@search = OpenStruct.new(params[:search]) if params[:search]
+   
+   logger.info "--- request_start: #{Time.now}"
+   begin
+    data = Axapta.search_analogs({:calc_price=>true, :calc_qty => true, :user_hash => @hash, :item_id_search => @code})
+   rescue Exception => e
+    p "---exc in search #{Time.now}", e
+    logger.info e.to_s
+   end
+   @items = data.inject([]) do |r, i|
+    i["locations"].each do |loc|
+     a = {"item_name" => i["item_name"], "item_brend" => i["item_brend"], "qty_in_pack" => i["qty_in_pack"], "location_id" => loc["location_id"], "min_qty" => i["min_qty"], "max_qty" => loc["vend_qty"], "rohs" => i["rohs"], "item_id" => i["item_id"], "segment_rus" => i["segment_rus"], "body_name" => i["package_name"]}
+     locs = loc["price_qty"].sort_by{|l| l["min_qty"] }[0, 4]
+     a.merge!("price1" => locs[0]["price"]) if locs[0]
+     a.merge!("price2" => locs[1]["price"], "count2" => locs[1]["min_qty"]) if locs[1]
+     a.merge!("price3" => locs[2]["price"], "count3" => locs[2]["min_qty"]) if locs[2]
+     a.merge!("price4" => locs[3]["price"], "count4" => locs[3]["min_qty"]) if locs[3]
+     r << a
+    end
+    r
+   end
+   #@extended = OpenStruct.new({:calc_price=>true, :calc_qty => true}.merge(params[:extended] || {}))
   end
 
   #def extended

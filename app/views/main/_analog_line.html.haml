@@ -1,0 +1,40 @@
+%tr.sub-row-table{:id => "dms_line_#{dms_line["item_name"]}_#{dms_line["item_brend"]}_#{dms_line["location_id"]}_#{dms_line["rohs"]}"}
+ %td.icons{:class => "border-l"}
+  .icon
+   %a.pp{:href => "#"}
+  -#.icon
+   = link_to "", main_dms_path(:name => items_line["item_name"], :brend => items_line["item_brend"], :after => "item_#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}"), :class => "dms js", :remote => true
+   -#= link_to t(:dms), main_dms_path(:name => items_line["item_name"], :brend => items_line["item_brend"], :after => "item_#{items_line["item_id"]}_#{items_line["item_name"]}"), :class=>"js", :remote => true
+
+ -# %td.text-left{:class => "font-small", :colspan => 3}
+ %td.text-left{:class => "name"}
+  %a{:href => "#"}= analog_line["item_name"]
+ %td.text-left{:class => "producer"}= analog_line["item_brend"]
+ %td= analog_line["rohs"]
+ %td.input-in-cart
+  %div
+   %a.speed-cart-button{:href=>"#"}
+    %span
+     %span &nbsp;
+   %input{:type=>"text", :class=>"validate[custom[onlyNumber],max[10000]]"}
+   %a.count{:href=>"#"}
+ %td.double-first-cell= analog_line["min_qty"]
+ %td.double-last-cell= analog_line["max_qty"]
+ %td= analog_line["prognosis_id"]
+ %td= analog_line["price1"]
+ %td.green= analog_line["count2"]
+ %td= analog_line["price2"]
+ %td.green= analog_line["count3"]
+ %td= analog_line["price3"]
+ %td.green= analog_line["count4"]
+ %td= analog_line["price4"]
+ %td= analog_line["location_id"]
+ %td.grey= analog_line["qty_in_pack"]
+ %td.font-small
+  %span.color-red= analog_line["vend_proposal_date"]
+ %td
+ %td
+ %td.border-r{:class=>"full-price"}
+  %a{:href => "#"}
+   $
+   %small $

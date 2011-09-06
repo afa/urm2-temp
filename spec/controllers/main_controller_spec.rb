@@ -35,4 +35,16 @@ describe MainController do
    assigns[:items].should be_kind_of Array
   end
  end
+
+ describe "GET search" do
+
+ end
+
+ describe "ajax get dms" do
+
+ end
+
+ describe "ajax get analog" do
+
+ end
 end
