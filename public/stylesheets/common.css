@@ -295,6 +295,7 @@ td.input-in-cart.speed .speed-cart-button span span{ background:url(../images/ic
 .select.hover .active, .select .active:hover{ background-position:100% 0px; background-color:#FFFFFF; color:#3A96D9 !important;}
 .select .sub a{ cursor:pointer; padding:1px 16px 3px 7px; color:#3A96D9; text-decoration:none; outline:0;}
 .select .sub a:hover{ background:#3A96D9; color:#FFFFFF !important;}
+.user_block .select a{ color: white; }
 
 
 /*-----------------------------------------
