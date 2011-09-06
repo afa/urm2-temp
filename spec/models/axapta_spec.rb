@@ -14,7 +14,7 @@ describe Axapta do
 
  context "on #search_analogs" do
   it "should return array" do
-   AxaptaRequest.stub!(:search_item_name_an_h).and_return({"items"=>[]})
+   AxaptaRequest.stub!(:search_item_an_h).and_return({"items"=>[]})
    Axapta.search_analogs(:user_hash => 'asd').should be_is_a(Array)
   end
   it "should skip rows with requested item_id (doubles)"

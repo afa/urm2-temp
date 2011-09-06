@@ -59,7 +59,7 @@ class Axapta
   end
 
   def self.search_analogs(*args)
-   res = AxaptaRequest.search_item_name_an_h(*args).try(:[], "items") || []
+   res = AxaptaRequest.search_item_an_h(*args).try(:[], "items") || []
    #res
   end
 end
