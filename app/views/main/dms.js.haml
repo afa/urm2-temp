@@ -1,3 +1,10 @@
+- unless @items.empty?
+ if($("tr.analog_#{@after}").length == 0  ){
+  $("#{escape_javascript(render(:partial => "gap_line"))}").insertAfter("tr##{@after}");
+ }
 $("#{escape_javascript(@items.empty? ? render(:partial => "dms_empty") : render( :partial => "dms_line", :collection => @items, :locals => {:need_links => false}))}").insertAfter("tr##{@after}");
 - unless @items.empty?
+ if($("tr.dms_#{@after}").length > 0){
+  $("tr.dms_#{@after}").remove();
+ }
  $("#{escape_javascript(render(:partial => "dms_header"))}").insertAfter("tr##{@after}");
