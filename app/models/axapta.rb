@@ -59,7 +59,11 @@ class Axapta
   end
 
   def self.search_analogs(*args)
+   return [] unless args.first.has_key?("item_id_search") || args.first.has_key?(:item_id_search)
+   srch = args.first["item_id_search"]
+   srch = args.first[:item_id_search] unless srch
    res = AxaptaRequest.search_item_an_h(*args).try(:[], "items") || []
+   res.select{|i| i.has_key?("item_id") && i["item_id"] != srch }
    #res
   end
 end
