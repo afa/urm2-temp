@@ -6,6 +6,6 @@ $("#{escape_javascript(@items.empty? ? render(:partial => "dms_empty") : render(
  $("#{escape_javascript(render(:partial => "dms_header"))}").insertAfter("tr##{@after}");
 - unless @items.empty?
  if($("tr.analog_#{@after}").length == 0  ){
- $("#{escape_javascript(render(:partial => "gap_line"))}").insertAfter($(["tr.dms_#{@after}", "tr.analog_#{@after}"]).last());
+ $("#{escape_javascript(render(:partial => "gap_line"))}").insertAfter($("tr.dms_#{@after}").add("tr.analog_#{@after}").last());
  }
 
