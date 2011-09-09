@@ -125,6 +125,37 @@
   .line
    = f.submit :find
 
+.content-in-header
+ .search-result-block
+  .main-title Результаты поиска
+  .filters
+   %span.switch{:class=>"radio"}
+    Цены: 
+    %a{:href=>"#", :class=>"active"}
+     %span USD
+    %a{:href=>"#"}
+     %span RUB
+   %span.switch{:class=>"check"}
+    Показать: 
+    %a{:href=>"#", :class=>"active"}
+     %span Только в наличии
+   %span.switch{:class=>"radio"}
+    Упорядочить по: 
+    %a{:href=>"#", :class=>"active"}
+     %span Цене
+    %a{:href=>"#"}
+     %span Наличию
+                                        <span class="switch check none">Показать: <a href="search_result_group.html"><span>Прогноз поставки</span></a></span>
+                                </div>
+                        </div>
+                </div>
+
+                <div class="scroll-content-block"><div class="scroll-show">
+                        <div class="line"><div class="button"><a href="#"><span>&nbsp;</span></a></div></div>
+                        <div class="shadow"></div>
+                </div></div>
+                <div class="global-error" style="display:none"></div>
+
 #content
  .content-wrap
   .table-navigation-block{:class => "scroll"}
