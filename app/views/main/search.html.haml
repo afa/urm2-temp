@@ -160,7 +160,39 @@
       %tr
        %th= t :avail_min
        %th= t :avail_max
+
       = render :partial => "items_line", :collection => @items, :locals => {:need_links => true}
+
+      %tr.title-header-bottom
+       %th{:rowspan => 2} &nbsp;
+       %th.text-left{:rowspan => 2}= t :item_name
+       %th.text-left{:rowspan => 2}= t :item_brend
+       %th{:rowspan=>2}= t :body_name
+       %th{:rowspan => 2} ROHS
+       %th{:rowspan => 2}= t :to_cart
+       %th.bold{:class=>"double-first-cell"}= t :avail_min
+       %th.bold{:class => "double-last-cell"}= t :avail_max
+       %th{:rowspan => 2}= t :prognosis
+       %th{:rowspan => 2}= t :price1
+       %th{:rowspan => 2}= t :count2
+       %th{:rowspan => 2}= t :price2
+       %th{:rowspan => 2}= t :count3
+       %th{:rowspan => 2}= t :price3
+       %th{:rowspan => 2}= t :count4
+       %th{:rowspan => 2}= t :price4
+       %th{:rowspan => 2}= t :location
+       %th{:rowspan => 2}= t :quantity
+       %th{:rowspan=>"2"} Рег. позиция
+       %th{:rowspan=>"2"} Снято с произв.
+       %th{:rowspan=>"2"} Сегмент
+       %th{:rowspan=>"2"}
+        Цена конеч.
+        %br
+        потребителя
+
+      %tr.title-header-bottom
+       %th.double-cell{:colspan => 2}= t :avail
+
 
 :javascript
  $('.slider').hide();
