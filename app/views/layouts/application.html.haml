@@ -63,8 +63,9 @@
     //});
    });
  %body
-  = render :partial => "main/header"
-  .content
-   = yield
-  .clear!&nbsp;
-  = render :partial => "main/footer"
+  .all
+   = render :partial => "main/header"
+   .content
+    = yield
+   .clear!&nbsp;
+   = render :partial => "main/footer"
