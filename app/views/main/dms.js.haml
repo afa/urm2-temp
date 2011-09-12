@@ -10,7 +10,7 @@ $("#{escape_javascript(@items.empty? ? render(:partial => "dms_empty") : render(
  }
  $("tr.dms_#{@after} th .plus").click(function(){
  $("tr.dms_#{@after}").hide();
- if($("tr.analog_#{@after}").length > 0){
+ if($("tr.analog_#{@after}").length == 0){
  $("tr.gap_#{@after}").remove();
  }
  });
