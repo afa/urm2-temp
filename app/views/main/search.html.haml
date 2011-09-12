@@ -240,7 +240,7 @@
   //$(this).parents('.icons').find('.slider').hide('1000');
  });
  $('.icon .js').bind('ajax:beforeSend', function(evt, xhr, status){
-  $(this).parents('.icon a').hide();
+  $(this).parents('.icon').find('a').hide();
   //$(this).parents('.icons').find('.slider').show();
   $(this).parents('.icon').find('.slider').show();
  });
