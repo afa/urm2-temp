@@ -8,3 +8,9 @@ $("#{escape_javascript(@items.empty? ? render(:partial => "analog_empty") : rend
  if($("tr.gap_#{@after}").length == 0  ){
  $("#{escape_javascript(render(:partial => "gap_line"))}").insertAfter($("tr.dms_#{@after}").add("tr.analog_#{@after}").last());
  }
+ $("tr.analog_#{@after} th .plus").click(function(){
+ $("tr.analog_#{@after}").remove();
+ if($("tr.dms_#{@after}").length == 0){
+ $("tr.gap_#{@after}").remove();
+ }
+ });
