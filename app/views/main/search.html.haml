@@ -235,11 +235,14 @@
   eval(xhr.responseText);
  });
  $('.js').bind('ajax:complete', function(evt, xhr, status){
-  $(this).parents('.icons').find('.slider').hide('1000');
+  $(this).parents('.icon').find('.slider').hide();
+  $(this).parents('.icon').find('a').show();
+  //$(this).parents('.icons').find('.slider').hide('1000');
  });
  $('.icon .js').bind('ajax:beforeSend', function(evt, xhr, status){
-  $(this).parents('.icon').hide();
-  $(this).parents('.icons').find('.slider').show();
+  $(this).parents('.icon a').hide();
+  //$(this).parents('.icons').find('.slider').show();
+  $(this).parents('.icon').find('.slider').show();
  });
  var table = $('.table-style');
  // Активная строка в таблице

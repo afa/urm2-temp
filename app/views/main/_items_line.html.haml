@@ -3,10 +3,12 @@
  %td.icons
   .icon
    = link_to "", main_dms_path(:code => items_line["item_id"], :after => WebUtils.escape_name("item_#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}_#{items_line["location_id"]}")), :class => "dms js", :remote => true
+   .slider &nbsp;
   .icon
    = link_to "", main_analog_path(:code => items_line["item_id"], :after => WebUtils.escape_name("item_#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}_#{items_line["location_id"]}")), :class => "replacement js", :remote => true
+   .slider &nbsp;
    -# = link_to "", main_dms_path(:name => items_line["item_name"], :brend => items_line["item_brend"], :after => WebUtils.escape_name("item_#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}_#{items_line["location_id"]}")), :class => "dms js", :remote => true
-  .slider &nbsp;
+  -# .slider &nbsp;
 
  %td.text-left= items_line["item_name"]
  %td.text-left= items_line["item_brend"]
