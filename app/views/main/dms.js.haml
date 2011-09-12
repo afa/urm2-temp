@@ -8,4 +8,6 @@ $("#{escape_javascript(@items.empty? ? render(:partial => "dms_empty") : render(
  if($("tr.gap_#{@after}").length == 0  ){
  $("#{escape_javascript(render(:partial => "gap_line"))}").insertAfter($("tr.dms_#{@after}").add("tr.analog_#{@after}").last());
  }
-
+ $("tr.dms_#{@after} th .plus").click(function(){
+ $("tr.dms_#{@after}").hide();
+ });

@@ -40,6 +40,7 @@ ru:
  quantity: Упак.
  locations: Склады
  not_found_dms: На данный момент предложений ДМС не найдено
+ not_found_analog: На данный момент аналогов не найдено
  need_all_prices_for_offer: все цены по предложению
  account_active: Активен
  account_blocked: Заблокирован
