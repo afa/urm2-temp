@@ -193,9 +193,12 @@
      .clear
      .fields
       %span.switch{:class=>"check"}
-       Показать:
-       %a{:href=>"#", :class=>"active"}
+       Искать:
+       %a{:href=>"#", :class=>"none"}
         %span Только в наличии
+      %span.switch{:class=>"check"}
+       %a{:href=>"#", :class=>"none"}
+        %span Только склад
     -# .search-tab-block{:style=>"display:none;"}
      %form{:action=>" "}
       .field
