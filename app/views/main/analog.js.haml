@@ -1,16 +1,15 @@
-- unless @items.empty?
- if($("tr.analog_#{@after}").length > 0){
- $("tr.analog_#{@after}").remove();
- }
+if($("tr.analog_#{@after}").length > 0){
+$("tr.analog_#{@after}").remove();
+}
 $("#{escape_javascript(@items.empty? ? render(:partial => "analog_empty") : render( :partial => "analog_line", :collection => @items, :locals => {:need_links => false}))}").insertAfter("tr##{@after}");
 - unless @items.empty?
  $("#{escape_javascript(render(:partial => "analog_header"))}").insertAfter("tr##{@after}");
  if($("tr.gap_#{@after}").length == 0  ){
  $("#{escape_javascript(render(:partial => "gap_line"))}").insertAfter($("tr.dms_#{@after}").add("tr.analog_#{@after}").last());
  }
- $("tr.analog_#{@after} th .plus").click(function(){
- $("tr.analog_#{@after}").remove();
- if($("tr.dms_#{@after}").length == 0){
- $("tr.gap_#{@after}").remove();
- }
- });
+$("tr.analog_#{@after} th .plus").click(function(){
+$("tr.analog_#{@after}").remove();
+if($("tr.dms_#{@after}").length == 0){
+$("tr.gap_#{@after}").remove();
+}
+});
