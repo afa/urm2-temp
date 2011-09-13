@@ -179,6 +179,8 @@
       .field
        -# = f.label :query_string
        = f.text_field :query_string
+       = f.hidden_field :only_available
+       = f.hidden_field :only_store
        -# = f.submit :find
       -# %input{:type=>"text", :value=>"TDA2003;OR;300"}
       .button

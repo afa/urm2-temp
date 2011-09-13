@@ -85,184 +85,185 @@
 	/*-----------------------------------------
 	  Выпадающий список
 	-----------------------------------------*/
-	$.fn.selectList = function(o){
-		
-		//Возможно придется в будущем добавить в настойки функцию, которая вызывается при изменении активного пункта
-		/* var o = $.extend({
-			shange:function(){}
-		},o); */
-		
-		return this.each(function(){
-			
-			var sel = $(this),
-				subList = $('.sub',sel),
-				input = $('input',sel),
-				subLinks = $('a',subList);
-			
-			//Активный пункт из списка
-			var active = $('a[name|=' + input.eq(0).val()+']');
-                        if (active.length == 0){
-			 sel.prepend(subLinks.eq(0).hide().clone().show().addClass('active').addClass("showed"));
-                         active = $('.active', sel);
-                        } else {
-			 sel.prepend(active.eq(0).hide().removeClass('active').clone().show().addClass('active').addClass('showed'));
-                         active = $('.active', sel);
-                        }
-			
-			input.val(active.get(0).name);
-			
-			//Показать/скрыть список
-			active.click(function(){
-				subList.toggle();
-				sel.toggleClass('hover');
-				return false;
-			});
-			
-			//Клик в пустом месте закрывает список
-			$('body').click(function(){
-				subList.hide();
-				sel.removeClass('hover');
-			});
-			
-			//Выбрать пункт из списка
-			subLinks.click(function(e){
-				input.val(this.name);
-				subLinks.show();
-				$(this).hide();
-				active.attr('name',this.name).text(this.innerHTML);
-				subList.hide();
-				sel.removeClass('hover');
-				e.preventDefault();
-                                active.parents("form").eq(0).submit();
-			});
-			
-		});
-		
-	};
-	
-	
-	/*-----------------------------------------
-	  Раскрывающийся блок
-	-----------------------------------------*/
-	$.fn.dropDown = function(o){
-		
-		return this.each(function(){
-			
-			var name = $('.name a',$(this)),
-				hideBlock = $('.hide',$(this));
-			
-			name.click( function(e){
-				if(settings.animation){
-					hideBlock.slideToggle(settings.controls.dropDown.speed);	
-				}else{
-					hideBlock.toggle();
-				}
-				e.preventDefault();
-			});
-			
-			
-		});
-		
-	};
-	
-	
-	/*-----------------------------------------
-	  Стандартная кнопка
-	-----------------------------------------*/
-	$.fn.button = function(){
-		
-		return this.each(function(){
-			
-			$(this).mousedown(function(){
-				$(this).addClass('click');
-			})
-			.mouseup(function(){
-				$(this).removeClass('click'); 
-			});
-			
-			
-		});
-		
-	};
-	
-	
-	/*-----------------------------------------
-	  Выпадающее меню для стандартной кнопки
-	-----------------------------------------*/
-	$.fn.buttonMenu = function(){
-		
-		return this.each(function(){
-			
-			var buttonMenu = $(this),
-				button = $('.button-style',buttonMenu),
-				subMenu = $('.button-style-sub',buttonMenu);
-			
-			button.unbind();
-			
-			if( $.browser.msie && $.browser.version < 7){
-				subMenu.css('width',button.width());
-			}
-			
-			buttonMenu.click(function(e){e.stopPropagation()});
-			
-			$('body').click(function(){
-				buttonMenu.removeClass('hover');
-				button.removeClass('hover click');
-				subMenu.hide();					 
-			});
-			
-			button.click(function(e){
-				if(buttonMenu.hasClass('hover')){
-					buttonMenu.removeClass('hover');
-					button.removeClass('hover click');
-					subMenu.hide();
-				}else{
-					buttonMenu.addClass('hover');
-					button.addClass('click');
-					if(settings.animation) subMenu.slideDown(150); else subMenu.show();
-				}
-				e.preventDefault();
-			});
-			
-		});
-		
-	};
-	
-	
-	/*-----------------------------------------
-	  Фильтры
-	-----------------------------------------*/
-	$.fn.switchControl = function(){
-		
-		return this.each(function(){
-			
-			var switchControl = $(this),
-				links = $('a',switchControl);
-			
-			//none
-			if(switchControl.hasClass('none')) return;
-			
-			//radio
-			if(switchControl.hasClass('radio')){
-				links.click(function(e){
-					links.removeClass('active');
-					$(this).addClass('active');
-					e.preventDefault();
-				});
-			}
-			
-			//check
-			if(switchControl.hasClass('check')){
-				links.click(function(e){
-					$(this).toggleClass('active');
-					e.preventDefault();
-				});
-			}
-			
-			
-		});
-		
-	};
+ $.fn.selectList = function(o){
+
+  //Возможно придется в будущем добавить в настойки функцию, которая вызывается при изменении активного пункта
+  /* var o = $.extend({
+   shange:function(){}
+  },o); */
+
+  return this.each(function(){
+
+   var sel = $(this),
+    subList = $('.sub',sel),
+    input = $('input',sel),
+    subLinks = $('a',subList);
+
+   //Активный пункт из списка
+   var active = $('a[name|=' + input.eq(0).val()+']');
+   if (active.length == 0){
+    sel.prepend(subLinks.eq(0).hide().clone().show().addClass('active').addClass("showed"));
+    active = $('.active', sel);
+   } else {
+    sel.prepend(active.eq(0).hide().removeClass('active').clone().show().addClass('active').addClass('showed'));
+    active = $('.active', sel);
+   }
+
+   input.val(active.get(0).name);
+
+   //Показать/скрыть список
+   active.click(function(){
+    subList.toggle();
+    sel.toggleClass('hover');
+    return false;
+   });
+
+   //Клик в пустом месте закрывает список
+   $('body').click(function(){
+    subList.hide();
+    sel.removeClass('hover');
+   });
+
+   //Выбрать пункт из списка
+   subLinks.click(function(e){
+    input.val(this.name);
+    subLinks.show();
+    $(this).hide();
+    active.attr('name',this.name).text(this.innerHTML);
+    subList.hide();
+    sel.removeClass('hover');
+    e.preventDefault();
+    active.parents("form").eq(0).submit();
+   });
+
+  });
+
+ };
+
+
+ /*-----------------------------------------
+   Раскрывающийся блок
+ -----------------------------------------*/
+ $.fn.dropDown = function(o){
+
+  return this.each(function(){
+
+   var name = $('.name a',$(this)),
+    hideBlock = $('.hide',$(this));
+
+   name.click( function(e){
+    if(settings.animation){
+     hideBlock.slideToggle(settings.controls.dropDown.speed);	
+    }else{
+     hideBlock.toggle();
+    }
+    e.preventDefault();
+   });
+
+
+  });
+
+ };
+
+
+ /*-----------------------------------------
+   Стандартная кнопка
+ -----------------------------------------*/
+ $.fn.button = function(){
+
+  return this.each(function(){
+
+   $(this).mousedown(function(){
+    $(this).addClass('click');
+   })
+   .mouseup(function(){
+    $(this).removeClass('click'); 
+   });
+
+
+  });
+
+ };
+
+
+ /*-----------------------------------------
+   Выпадающее меню для стандартной кнопки
+ -----------------------------------------*/
+ $.fn.buttonMenu = function(){
+
+  return this.each(function(){
+
+   var buttonMenu = $(this),
+    button = $('.button-style',buttonMenu),
+    subMenu = $('.button-style-sub',buttonMenu);
+
+   button.unbind();
+
+   if( $.browser.msie && $.browser.version < 7){
+    subMenu.css('width',button.width());
+   }
+
+   buttonMenu.click(function(e){e.stopPropagation()});
+
+   $('body').click(function(){
+    buttonMenu.removeClass('hover');
+    button.removeClass('hover click');
+    subMenu.hide();					 
+   });
+
+   button.click(function(e){
+    if(buttonMenu.hasClass('hover')){
+     buttonMenu.removeClass('hover');
+     button.removeClass('hover click');
+     subMenu.hide();
+    }else{
+     buttonMenu.addClass('hover');
+     button.addClass('click');
+     if(settings.animation) subMenu.slideDown(150); else subMenu.show();
+    }
+    e.preventDefault();
+   });
+
+  });
+
+ };
+
+
+ /*-----------------------------------------
+   Фильтры
+ -----------------------------------------*/
+ $.fn.switchControl = function(){
+
+  return this.each(function(){
+
+   var switchControl = $(this),
+    links = $('a',switchControl);
+
+   //none
+   if(switchControl.hasClass('none')) return;
+
+   //radio
+   if(switchControl.hasClass('radio')){
+    links.click(function(e){
+     links.removeClass('active');
+     $(this).addClass('active');
+     e.preventDefault();
+    });
+   }
+
+   //check
+   if(switchControl.hasClass('check')){
+    links.click(function(e){
+     $(this).toggleClass('active');
+     $('input[name="'+ $(this).attr("name") +'"]').attr("value", $(this).hasClass("active") ? '1' : '0');
+     e.preventDefault();
+    });
+   }
+
+
+  });
+
+ };
 
 })(jQuery);
 
