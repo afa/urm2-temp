@@ -81,6 +81,7 @@
 #header-height{ height:237px;}
 #header .header-hid{ position:relative;}
 #header .header-wrap{ padding:0px 2em;}
+.header .header-wrap{ padding:0px 2em;}
 .table-scroll-additional #header .header-wrap{ padding:0px 20px;}
 
 /* Скрывающаяся панель в шапке*/
