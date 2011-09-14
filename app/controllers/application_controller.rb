@@ -45,6 +45,9 @@ class ApplicationController < ActionController::Base
   end
 
   def take_search
-   @search = OpenStruct.new(params[:search] || {})
+   srch = params[:search] || {}
+   srch[:only_available] = current_user.settings.where(:name => 'search.only_available').first.try(:value) if srch[:only_available].nil?
+   srch[:only_store] = current_user.settings.where(:name => 'search.only_store').first.try(:value) if srch[:only_store].nil?
+   @search = OpenStruct.new(srch)
   end
 end
