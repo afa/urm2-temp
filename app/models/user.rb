@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
  has_many :accounts
  belongs_to :current_account, :class_name => 'Account'
  belongs_to :parent, :class_name => self.name, :foreign_key => :parent_id
+ has_many :settings, :as => :settingable
  has_many :children, :class_name => self.name, :foreign_key => :parent_id
  validates_uniqueness_of :username
  validate :unique_hash, :on => :create

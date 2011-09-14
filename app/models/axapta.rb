@@ -49,7 +49,11 @@ class Axapta
   end
 
   def self.search_names(*args)
-   res = AxaptaRequest.search_item_name_h(*args).try(:[], "items") || []
+   ar = *args.dup
+   ar["search_query"] += '*' if ar.has_key?("search_query") && ar["search_query"].last != '*'
+   ar[:search_query] += '*' if ar.has_key?(:search_query) && ar[:search_query].last != '*'
+   res = AxaptaRequest.search_item_name_h(ar).try(:[], "items") || []
+   #res = AxaptaRequest.search_item_name_h((*args).map{|k, v| (k.to_s == "search_string" && v.last != "*") ? ( k => v + "*" ) : (k => v) }).try(:[], "items") || []
    #res
   end
 
