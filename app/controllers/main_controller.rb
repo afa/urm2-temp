@@ -13,6 +13,10 @@ class MainController < ApplicationController
    #@search = OpenStruct.new(params[:search]) if params[:search]
    
    logger.info "--- request_start: #{Time.now}"
+   @only_store = params[:search].try(:[], :only_store) || false
+   stor = current_user.settings.where(:name => "search.only_store").first || current_user.settings.where(:name => "search.only_store").new
+   stor.value = @only_store
+   stor.save!
    begin
     data = Axapta.search_names({:calc_price=>true, :calc_qty => true}.merge(params[:search] || {}).merge(:user_hash => current_user.current_account.try(:axapta_hash)))
    rescue Exception => e
@@ -31,7 +35,6 @@ class MainController < ApplicationController
     end
     r
    end
-   #@extended = OpenStruct.new({:calc_price=>true, :calc_qty => true}.merge(params[:extended] || {}))
   end
 
   def dms
@@ -65,7 +68,6 @@ class MainController < ApplicationController
    @after = params[:after]
    @code = params[:code]
    @hash = current_user.current_account.try(:axapta_hash)
-   #@search = OpenStruct.new(params[:search]) if params[:search]
    
    logger.info "--- request_start: #{Time.now}"
    begin
@@ -86,17 +88,9 @@ class MainController < ApplicationController
     end
     r
    end
-   #@extended = OpenStruct.new({:calc_price=>true, :calc_qty => true}.merge(params[:extended] || {}))
   end
 
-  #def extended
-  #
-  #end
  protected
-  #def get_users
-  # @users = User.all
-  #end
-
   def get_accounts
    @accounts = current_user.accounts.where(:blocked => false)
   end
