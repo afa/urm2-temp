@@ -91,66 +91,30 @@
 
 
 
--# .search
-
--# .extended{:class => :search}
- = form_for :extended, :url => extended_path do |f|
-  .line
-   = f.label :only_available
-   = f.check_box :only_available
-  .line
-   = f.label :invent_location_id
-   = f.text_field :invent_location_id
-  .line
-   = f.label :cust_account
-   = f.text_field :cust_account
-  .line
-   = f.label :query_string
-   = f.text_field :query_string
-  .line
-   = f.label :search_brend
-   = f.text_field :search_brend
-  .line
-   = f.label :item_id_search
-   = f.text_field :item_id_search
-  .line
-   = f.label :calc_qty
-   = f.check_box :calc_qty
-  .line
-   = f.label :show_delivery_prognosis
-   = f.check_box :show_delivery_prognosis
-  .line
-   = f.label :calc_price
-   = f.check_box :calc_price
-  .line
-   = f.submit :find
-
-.header
- .header-wrap
-  .content-in-header
-   .search-result-block
-    .main-title Результаты поиска
-    .filters
-     %span.switch{:class=>"radio"}
-      Цены: 
-      %a{:href=>"#", :class=>"active"}
-       %span USD
-      %a{:href=>"#"}
-       %span RUB
-     %span.switch{:class=>"check"}
-      Показать: 
-      %a{:href=>"#", :class=>"active"}
-       %span Только в наличии
-     %span.switch{:class=>"radio"}
-      Упорядочить по: 
-      %a{:href=>"#", :class=>"active"}
-       %span Цене
-      %a{:href=>"#"}
-       %span Наличию
-     -# %span.switch{:class=>"check none"}
-      Показать: 
-      %a{:href=>"search_result_group.html"}
-       %span Прогноз поставки
+.content-in-header
+ .search-result-block
+  .main-title Результаты поиска
+  .filters
+   %span.switch{:class=>"radio"}
+    Цены: 
+    %a{:href=>"#", :class=>"active"}
+     %span USD
+    %a{:href=>"#"}
+     %span RUB
+   %span.switch{:class=>"check"}
+    Показать: 
+    %a{:href=>"#", :class=>"active"}
+     %span Только в наличии
+   %span.switch{:class=>"radio"}
+    Упорядочить по: 
+    %a{:href=>"#", :class=>"active"}
+     %span Цене
+    %a{:href=>"#"}
+     %span Наличию
+   -# %span.switch{:class=>"check none"}
+    Показать: 
+    %a{:href=>"search_result_group.html"}
+     %span Прогноз поставки
 
 .scroll-content-block
  .scroll-show

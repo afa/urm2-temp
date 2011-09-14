@@ -17,6 +17,10 @@ class MainController < ApplicationController
    stor = current_user.settings.where(:name => "search.only_store").first || current_user.settings.where(:name => "search.only_store").new
    stor.value = @only_store
    stor.save!
+   @only_available = params[:search].try(:[], :only_available) || false
+   avail = current_user.settings.where(:name => "search.only_available").first || current_user.settings.where(:name => "search.only_available").new
+   avail.value = @only_available
+   avail.save!
    begin
     data = Axapta.search_names({:calc_price=>true, :calc_qty => true}.merge(params[:search] || {}).merge(:user_hash => current_user.current_account.try(:axapta_hash)))
    rescue Exception => e
