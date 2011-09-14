@@ -253,6 +253,11 @@
 
    //check
    if(switchControl.hasClass('check')){
+    if($('input[name="' + links.attr("name") + '"]').attr("value") == "1") {
+     links.addClass("active");
+    } else {
+     links.removeClass("active");
+    }
     links.click(function(e){
      $(this).toggleClass('active');
      $('input[name="'+ $(this).attr("name") +'"]').attr("value", $(this).hasClass("active") ? '1' : '0');
