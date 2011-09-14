@@ -64,8 +64,16 @@
    });
  %body
   .all
-   = render :partial => "main/header"
+   #header.header-static
+    .header-hid
+     .header-wrap
+      = render :partial => "main/header"
    .content
-    = yield
+    .content-wrap
+     = yield
    .clear!&nbsp;
-   = render :partial => "main/footer"
+   #footer-height
+   #footer
+    %div
+     .footer-wrap
+      = render :partial => "main/footer"
