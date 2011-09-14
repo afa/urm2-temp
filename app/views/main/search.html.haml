@@ -1,198 +1,91 @@
--#.search-block
- .back-x
-  .back-l
-   .back-r
-    %a.close-link{:href=>"#"}
-     %span свернуть
-    .search-tabs
-     -# %a{:href=>"#"}
-      %span
-       %span Список
-     %a.active{:href=>"#"}
-      %span
-       %span Поиск по наименованию
-     -# %a{:href=>"#"}
-      %span
-       %span Артикул ДМС (Farnel, Newark)
-     -# %a{:href=>"#"}
-      %span
-       %span По параметрам
-     %a.more{:href=>"#"} Еще
-    -# .search-tab-block{:style=>"display:none;"}
-     %form{:action=>" "}
-      .field
-       %textarea.list-area{:cols=>"1", :rows=>"1"}
-        TDA2003;OR;300
-        OPA129U;TI;1
-        IRFP044;;3
-        215035;50
-        189566;50
-        OPA129U;TI;1
-        IRFP044;;3
-        215035;50
-        189566;50
-      .button
-       %a.button-style{:href=>"#"}
-        %i.t &nbsp;
-        %i.b &nbsp;
-        %i.tl &nbsp;
-        %i.tr &nbsp;
-        %span Найти!
-        %i.bl &nbsp;
-        %i.br &nbsp;
-      .clear
+.search-result-block
+ .main-title Результаты поиска
+ .filters
+  %span.switch{:class=>"radio"}
+   Цены: 
+   %a{:href=>"#", :class=>"active"}
+    %span USD
+   %a{:href=>"#"}
+    %span RUB
+  %span.switch{:class=>"check"}
+   Показать: 
+   %a{:href=>"#", :class=>"active"}
+    %span Только в наличии
+  %span.switch{:class=>"radio"}
+   Упорядочить по: 
+   %a{:href=>"#", :class=>"active"}
+    %span Цене
+   %a{:href=>"#"}
+    %span Наличию
+  -# %span.switch{:class=>"check none"}
+   Показать: 
+   %a{:href=>"search_result_group.html"}
+    %span Прогноз поставки
+.table-navigation-block{:class => "scroll"}
+ .table-block
+  .table-scrolling
+   %table.table-style{:class => "search-products"}
+    %tr
+     %th{:rowspan => 2} &nbsp;
+     %th.text-left{:rowspan => 2}= t :item_name
+     %th.text-left{:rowspan => 2}= t :item_brend
+     %th{:rowspan=>2}= t :body_name
+     %th{:rowspan => 2} ROHS
+     %th{:rowspan => 2}= t :to_cart
+     %th.bold{:colspan => 2}= t :avail
+     %th{:rowspan => 2}= t :prognosis
+     %th{:rowspan => 2}= t :price1
+     %th{:rowspan => 2}= t :count2
+     %th{:rowspan => 2}= t :price2
+     %th{:rowspan => 2}= t :count3
+     %th{:rowspan => 2}= t :price3
+     %th{:rowspan => 2}= t :count4
+     %th{:rowspan => 2}= t :price4
+     %th{:rowspan => 2}= t :location
+     %th{:rowspan => 2}= t :quantity
+     %th{:rowspan=>"2"} Рег. позиция
+     %th{:rowspan=>"2"} Снято с произв.
+     %th{:rowspan=>"2"} Сегмент
+     %th{:rowspan=>"2"}
+      Цена конеч.
+      %br
+      потребителя
 
-    .search-tab-block
-     -# %form{:action=>" "}
-     = form_for :search, :url => search_path do |f|
-      .field
-       -# = f.label :query_string
-       = f.text_field :query_string
-       -# = f.submit :find
-      -# %input{:type=>"text", :value=>"TDA2003;OR;300"}
-      .button
-       %a.button-style{:href=>"#"}
-        %i.t &nbsp;
-        %i.b &nbsp;
-        %i.tl &nbsp;
-        %i.tr &nbsp;
-        %span Найти!
-        %i.bl &nbsp;
-        %i.br &nbsp;
-     -# .clear
-    -# .search-tab-block{:style=>"display:none;"}
-     %form{:action=>" "}
-      .field
-       %input{:type=>"text", :value=>"TDA2003;OR;400"}
-      .button
-       %a.button-style{:href=>"#"}
-        %i.t &nbsp;
-        %i.b &nbsp;
-        %i.tl &nbsp;
-        %i.tr &nbsp;
-        %span Найти!
-        %i.bl &nbsp;
-        %i.br &nbsp;
-      .clear
-    -# .search-tab-block{:style=>"display:none;"}
-     %form{:action=>" "}
-      .field
-       .input{:type=>"text", :value=>"TDA2003;OR;500"}
-      .button
-       %a.button-style{:href=>"#"}
-        %i.t &nbsp;
-        %i.b &nbsp;
-        %i.tl &nbsp;
-        %i.tr &nbsp;
-        %span Найти!
-        %i.bl &nbsp;
-        %i.br &nbsp;
-      .clear
+    %tr
+     %th= t :avail_min
+     %th= t :avail_max
 
+    = render :partial => "items_line", :collection => @items, :locals => {:need_links => true}
 
+    %tr.title-header-bottom
+     %th{:rowspan => 2} &nbsp;
+     %th.text-left{:rowspan => 2}= t :item_name
+     %th.text-left{:rowspan => 2}= t :item_brend
+     %th{:rowspan=>2}= t :body_name
+     %th{:rowspan => 2} ROHS
+     %th{:rowspan => 2}= t :to_cart
+     %th.bold{:class=>"double-first-cell"}= t :avail_min
+     %th.bold{:class => "double-last-cell"}= t :avail_max
+     %th{:rowspan => 2}= t :prognosis
+     %th{:rowspan => 2}= t :price1
+     %th{:rowspan => 2}= t :count2
+     %th{:rowspan => 2}= t :price2
+     %th{:rowspan => 2}= t :count3
+     %th{:rowspan => 2}= t :price3
+     %th{:rowspan => 2}= t :count4
+     %th{:rowspan => 2}= t :price4
+     %th{:rowspan => 2}= t :location
+     %th{:rowspan => 2}= t :quantity
+     %th{:rowspan=>"2"} Рег. позиция
+     %th{:rowspan=>"2"} Снято с произв.
+     %th{:rowspan=>"2"} Сегмент
+     %th{:rowspan=>"2"}
+      Цена конеч.
+      %br
+      потребителя
 
-.content-in-header
-
-.scroll-content-block
- .scroll-show
-  .line
-   .button
-    %a{:href=>"#"}
-     %span &nbsp;
-  .shadow
-
-.global-error{:style=>"display:none"}
-
-#content
- .content-wrap
-  .search-result-block
-   .main-title Результаты поиска
-   .filters
-    %span.switch{:class=>"radio"}
-     Цены: 
-     %a{:href=>"#", :class=>"active"}
-      %span USD
-     %a{:href=>"#"}
-      %span RUB
-    %span.switch{:class=>"check"}
-     Показать: 
-     %a{:href=>"#", :class=>"active"}
-      %span Только в наличии
-    %span.switch{:class=>"radio"}
-     Упорядочить по: 
-     %a{:href=>"#", :class=>"active"}
-      %span Цене
-     %a{:href=>"#"}
-      %span Наличию
-    -# %span.switch{:class=>"check none"}
-     Показать: 
-     %a{:href=>"search_result_group.html"}
-      %span Прогноз поставки
-  .table-navigation-block{:class => "scroll"}
-   .table-block
-    .table-scrolling
-     %table.table-style{:class => "search-products"}
-      %tr
-       %th{:rowspan => 2} &nbsp;
-       %th.text-left{:rowspan => 2}= t :item_name
-       %th.text-left{:rowspan => 2}= t :item_brend
-       %th{:rowspan=>2}= t :body_name
-       %th{:rowspan => 2} ROHS
-       %th{:rowspan => 2}= t :to_cart
-       %th.bold{:colspan => 2}= t :avail
-       %th{:rowspan => 2}= t :prognosis
-       %th{:rowspan => 2}= t :price1
-       %th{:rowspan => 2}= t :count2
-       %th{:rowspan => 2}= t :price2
-       %th{:rowspan => 2}= t :count3
-       %th{:rowspan => 2}= t :price3
-       %th{:rowspan => 2}= t :count4
-       %th{:rowspan => 2}= t :price4
-       %th{:rowspan => 2}= t :location
-       %th{:rowspan => 2}= t :quantity
-       %th{:rowspan=>"2"} Рег. позиция
-       %th{:rowspan=>"2"} Снято с произв.
-       %th{:rowspan=>"2"} Сегмент
-       %th{:rowspan=>"2"}
-        Цена конеч.
-        %br
-        потребителя
-
-      %tr
-       %th= t :avail_min
-       %th= t :avail_max
-
-      = render :partial => "items_line", :collection => @items, :locals => {:need_links => true}
-
-      %tr.title-header-bottom
-       %th{:rowspan => 2} &nbsp;
-       %th.text-left{:rowspan => 2}= t :item_name
-       %th.text-left{:rowspan => 2}= t :item_brend
-       %th{:rowspan=>2}= t :body_name
-       %th{:rowspan => 2} ROHS
-       %th{:rowspan => 2}= t :to_cart
-       %th.bold{:class=>"double-first-cell"}= t :avail_min
-       %th.bold{:class => "double-last-cell"}= t :avail_max
-       %th{:rowspan => 2}= t :prognosis
-       %th{:rowspan => 2}= t :price1
-       %th{:rowspan => 2}= t :count2
-       %th{:rowspan => 2}= t :price2
-       %th{:rowspan => 2}= t :count3
-       %th{:rowspan => 2}= t :price3
-       %th{:rowspan => 2}= t :count4
-       %th{:rowspan => 2}= t :price4
-       %th{:rowspan => 2}= t :location
-       %th{:rowspan => 2}= t :quantity
-       %th{:rowspan=>"2"} Рег. позиция
-       %th{:rowspan=>"2"} Снято с произв.
-       %th{:rowspan=>"2"} Сегмент
-       %th{:rowspan=>"2"}
-        Цена конеч.
-        %br
-        потребителя
-
-      %tr.title-header-bottom
-       %th.double-cell{:colspan => 2}= t :avail
+    %tr.title-header-bottom
+     %th.double-cell{:colspan => 2}= t :avail
 
 
 :javascript
