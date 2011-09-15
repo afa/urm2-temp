@@ -195,6 +195,27 @@
       %span.switch{:class=>"check"}
        %a{:href=>"#", :name => "search[only_store]"}
         %span Только склад
+      %span.switch{:class=>"radio"}
+       Цены:
+       %a{:href=>"#", :class=>"active"}
+        %span USD
+       %a{:href=>"#"}
+        %span RUB
+      -# %span.switch{:class=>"check"}
+       Показать:
+       %a{:href=>"#", :class=>"active"}
+        %span Только в наличии
+      %span.switch{:class=>"radio"}
+       Упорядочить по:
+       %a{:href=>"#", :class=>"active"}
+        %span Цене
+       %a{:href=>"#"}
+        %span Наличию
+      -# %span.switch{:class=>"check none"}
+       Показать:
+       %a{:href=>"search_result_group.html"}
+        %span Прогноз поставки
+
     -# .search-tab-block{:style=>"display:none;"}
      %form{:action=>" "}
       .field
