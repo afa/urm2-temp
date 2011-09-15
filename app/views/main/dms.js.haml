@@ -1,9 +1,9 @@
 if($("tr.dms_#{@after}").length > 0){
 $("tr.dms_#{@after}").remove();
 }
-$("#{escape_javascript(@items.empty? ? render(:partial => "dms_empty") : render( :partial => "dms_line", :collection => @items, :locals => {:after => @after}))}").insertAfter("tr##{@after}");
+$("#{escape_javascript(@items.empty? ? render(:partial => "dms_empty") : render( :partial => "dms_line", :collection => @items, :locals => {:after => @after}))}").insertAfter($("tr.#{@after}").last());
 - unless @items.empty?
- $("#{escape_javascript(render(:partial => "dms_header"))}").insertAfter("tr##{@after}");
+ $("#{escape_javascript(render(:partial => "dms_header"))}").insertAfter($("tr.#{@after}").last());
  if($("tr.gap_#{@after}").length == 0  ){
  $("#{escape_javascript(render(:partial => "gap_line"))}").insertAfter($("tr.dms_#{@after}").add("tr.analog_#{@after}").last());
  }

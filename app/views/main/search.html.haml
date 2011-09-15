@@ -120,7 +120,7 @@
  $.getJSON("#{main_mass_dms_url(:query_string => @search.query_string)}", "", function(data){
   $("div.dms_loader").hide();
   for(var kk in data){
-   $(data[kk]).insertAfter("#" + kk);
+   $(data[kk]).insertAfter($("tr." + kk).last());
   }
  });
 
