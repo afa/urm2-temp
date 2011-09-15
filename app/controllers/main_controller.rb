@@ -1,7 +1,7 @@
 require "ostruct"
 class MainController < ApplicationController
 
- respond_to :js, :html
+ respond_to :js, :html, :json
 
  #before_filter :get_users, :only => [:index]
  before_filter :get_accounts, :only => [:index, :search, :extended]
