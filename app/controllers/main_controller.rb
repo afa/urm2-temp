@@ -1,4 +1,5 @@
 require "ostruct"
+require "web_utils"
 class MainController < ApplicationController
 
  respond_to :js, :html, :json
@@ -81,8 +82,19 @@ class MainController < ApplicationController
     end
     r
    end
+   hsh = @items.inject({}) do |r, item|
+    i = WebUtils.escape_name("item_#{item["item_name"]}_#{item["item_brend"]}_#{item["rohs"]}_#{item["location_id"]}")
+    unless r.has_key?(i)
+     r[i] = []
+    end
+    r[i] << item
+   end
+   dat = {}
+   hsh.keys.each do |k|
+    dat[k] = render :partial => "main/dms_line", :collection => hsh[k]
+   end
    respond_with do |format|
-    format.json { render :json => @items }
+    format.json { render :json => dat }
    end
   end
 
