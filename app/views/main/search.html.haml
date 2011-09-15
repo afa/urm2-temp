@@ -55,7 +55,11 @@
      %th= t :avail_min
      %th= t :avail_max
 
-    = render :partial => "items_line", :collection => @items, :locals => {:need_links => true}
+    - if @items.empty?
+     %tr
+      %td{:colspan => 22}= t :items_not_found
+    - else
+     = render :partial => "items_line", :collection => @items, :locals => {:need_links => true}
 
     %tr.title-header-bottom
      %th{:rowspan => 2} &nbsp;
