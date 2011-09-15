@@ -24,6 +24,9 @@
 .table-navigation-block{:class => "scroll"}
  .table-block
   .table-scrolling
+   - if @need_dms
+    .dms_loader{:align=>"center"}
+     %img{:href => image_path('ajax-loader.gif')}
    %table.table-style{:class => "search-products"}
     %tr
      %th{:rowspan => 2} &nbsp;
@@ -32,7 +35,7 @@
      %th{:rowspan=>2}= t :body_name
      %th{:rowspan => 2} ROHS
      %th{:rowspan => 2}= t :to_cart
-     %th.bold{:colspan => 2}= t :avail
+     %th{:colspan => 2}= t :avail
      %th{:rowspan => 2}= t :prognosis
      %th{:rowspan => 2}= t :price1
      %th{:rowspan => 2}= t :count2
@@ -52,8 +55,8 @@
       потребителя
 
     %tr
-     %th= t :avail_min
-     %th= t :avail_max
+     %th.bold= t :avail_min
+     %th.bold= t :avail_max
 
     - if @items.empty?
      %tr
@@ -114,6 +117,7 @@
   },function(){
    $(this).removeClass('hover');
  });
+ 
 
  /*$('a.button-style').click(function(){
   $(this).parents('form').submit();
