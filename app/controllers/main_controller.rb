@@ -10,8 +10,6 @@ class MainController < ApplicationController
   end
 
   def search
-   #@search = OpenStruct.new(params[:search]) if params[:search]
-   
    logger.info "--- request_start: #{Time.now}"
    @only_store = params[:search].try(:[], :only_store) || false
    stor = current_user.settings.where(:name => "search.only_store").first || current_user.settings.where(:name => "search.only_store").new
@@ -65,6 +63,26 @@ class MainController < ApplicationController
     format.html do
      redirect_to root_path
     end
+   end
+  end
+
+  def mass_dms
+   @hash = current_user.current_account.try(:axapta_hash)
+   @items = Axapta.search_dms_names(:user_hash => @hash, :query_string => @search.query_string).inject([]) do |r, i|
+    i["prognosis"].each do |loc|
+     a = {"item_name" => i["item_name"], "item_brend" => i["item_brend"], "qty_in_pack" => loc["qty_multiples"], "max_qty" => loc["vend_qty"], "rohs" => i["rohs"], "prognosis_id" => loc["prognosis_id"]}#, "min_qty" => i["min_qty"], "location_id" => loc["location_id"]
+     locs = loc["price_qty"].sort_by{|l| l["min_qty"] }[0, 4]
+     a.merge!("price1" => locs[0]["price"], "min_qty" => locs[0]["min_qty"], "vend_proposal_date" => locs[0]["vend_proposal_date"]) if locs[0]
+     a.merge!("price2" => locs[1]["price"], "count2" => locs[1]["min_qty"]) if locs[1]
+     a.merge!("price3" => locs[2]["price"], "count3" => locs[2]["min_qty"]) if locs[2]
+     a.merge!("price4" => locs[3]["price"], "count4" => locs[3]["min_qty"]) if locs[3]
+     a.merge!("need_more" => true) if loc["price_qty"].size > 4
+     r << a
+    end
+    r
+   end
+   respond_with do |format|
+    format.json { @items.to_json }
    end
   end
 
