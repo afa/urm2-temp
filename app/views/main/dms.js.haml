@@ -1,7 +1,7 @@
 if($("tr.dms_#{@after}").length > 0){
 $("tr.dms_#{@after}").remove();
 }
-$("#{escape_javascript(@items.empty? ? render(:partial => "dms_empty") : render( :partial => "dms_line", :collection => @items, :locals => {:need_links => false}))}").insertAfter("tr##{@after}");
+$("#{escape_javascript(@items.empty? ? render(:partial => "dms_empty") : render( :partial => "dms_line", :collection => @items, :locals => {:after => @after}))}").insertAfter("tr##{@after}");
 - unless @items.empty?
  $("#{escape_javascript(render(:partial => "dms_header"))}").insertAfter("tr##{@after}");
  if($("tr.gap_#{@after}").length == 0  ){
