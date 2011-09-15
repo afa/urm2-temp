@@ -82,7 +82,7 @@ class MainController < ApplicationController
     r
    end
    respond_with do |format|
-    format.json { @items.to_json }
+    format.json { render :json => @items }
    end
   end
 
