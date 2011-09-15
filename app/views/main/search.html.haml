@@ -24,7 +24,7 @@
 .table-navigation-block{:class => "scroll"}
  .table-block
   .table-scrolling
-   - if @need_dms
+   - if true || @need_dms
     .dms_loader{:align=>"center"}
      %img{:href => image_path('ajax-loader.gif')}
    %table.table-style{:class => "search-products"}
