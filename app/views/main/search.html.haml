@@ -117,7 +117,9 @@
   },function(){
    $(this).removeClass('hover');
  });
- $.getJSON("#{main_mass_dms_url(:query_string => @search.query_string)}", "", function(data){alert(data);});
+ $.getJSON("#{main_mass_dms_url(:query_string => @search.query_string)}", "", function(data){
+  $("div.dms_loader").hide();
+ });
 
  /*$('a.button-style').click(function(){
   $(this).parents('form').submit();
