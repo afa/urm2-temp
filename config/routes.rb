@@ -20,6 +20,7 @@ Urm::Application.routes.draw do
   #post "main/extended"
   #match "/extended" => "main#extended"
   get "main/dms"
+  get "main/mass_dms"
   get "main/analog"
 
   namespace :admin do
