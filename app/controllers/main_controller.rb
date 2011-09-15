@@ -68,6 +68,7 @@ class MainController < ApplicationController
   end
 
   def mass_dms
+   puts "---mass dms start #{Time.now}"
    @hash = current_user.current_account.try(:axapta_hash)
    @items = Axapta.search_dms_names(:user_hash => @hash, :query_string => params[:query_string]).inject([]) do |r, i|
     i["prognosis"].each do |loc|
@@ -88,6 +89,7 @@ class MainController < ApplicationController
      r[i] = []
     end
     r[i] << item
+    r
    end
    dat = {}
    hsh.keys.each do |k|
