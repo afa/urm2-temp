@@ -88,7 +88,7 @@ class MainController < ApplicationController
    puts "---mass dms start #{Time.now}"
    @hash = current_user.current_account.try(:axapta_hash)
    #@items = Axapta.search_dms_names(:user_hash => @hash, :query_string => params[:query_string]).inject([]) do |r, i|
-   @items = conv_dms_names(Axapta.search_dms_names(:user_hash => @hash, :query_string => params[:query_string]))
+   @items = conv_dms_items(Axapta.search_dms_names(:user_hash => @hash, :query_string => params[:query_string]))
    # i["prognosis"].each do |loc|
    #  a = {"item_name" => i["item_name"], "item_brend" => i["item_brend"], "qty_in_pack" => loc["qty_multiples"], "max_qty" => loc["vend_qty"], "rohs" => i["rohs"], "prognosis_id" => loc["prognosis_id"]}#, "min_qty" => i["min_qty"], "location_id" => loc["location_id"]
    #  locs = loc["price_qty"].sort_by{|l| l["min_qty"] }[0, 4]
