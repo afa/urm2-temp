@@ -1,0 +1,4 @@
+- unless items.empty?
+ = render :partial => "main/dms_header", :locals => {:after => after}
+ = render :partial => "main/dms_line", :collection => items, :locals => {:after => after}
+ = render :partial => "main/gap_line", :locals => {:after => after}

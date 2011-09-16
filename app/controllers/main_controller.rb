@@ -86,7 +86,7 @@ class MainController < ApplicationController
    end
    dat = {}
    hsh.keys.each do |k|
-    dat[k] = render_to_string :partial => "main/dms_line.html", :collection => hsh[k], :locals => {:after => 0}
+    dat[k] = render_to_string :partial => "main/dms_block.html", :locals => {:items => hsh[k], :after => 0}
    end
    respond_with do |format|
     format.json { render :json => dat }
