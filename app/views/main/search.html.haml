@@ -96,36 +96,20 @@
 
 
 :javascript
- $('.slider').hide();
- $('.js').bind('ajax:success', function(evt, xhr, status){
-  eval(xhr.responseText);
- });
- $('.js').bind('ajax:complete', function(evt, xhr, status){
-  $(this).parents('.icon').find('.slider').hide();
-  $(this).parents('.icon').find('a').show();
-  //$(this).parents('.icons').find('.slider').hide('1000');
- });
- $('.icon .js').bind('ajax:beforeSend', function(evt, xhr, status){
-  $(this).parents('.icon').find('a').hide();
-  //$(this).parents('.icons').find('.slider').show();
-  $(this).parents('.icon').find('.slider').show();
- });
- var table = $('.table-style');
- // Активная строка в таблице
- $('>tbody>tr:has(>td):not(.sub-row-line)',table).hover(function(){
-   $(this).addClass('hover');
-  },function(){
-   $(this).removeClass('hover');
- });
- if(#{not to_bool(@only_store)}){
-  $.getJSON("#{main_mass_dms_url(:query_string => @search.query_string)}", "", function(data){
-   $("div.dms_loader").hide();
-   for(var kk in data){
-    $(data[kk]).insertAfter($("tr." + kk).last());
-   }
-  });
- }
+ $(document).load(function(){
+  $('.slider').hide();
+  search_icons_handle();
+  apply_hover_in_table_on_mmove();
+  if(#{not to_bool(@only_store)}){
+   $.getJSON("#{main_mass_dms_url(:query_string => @search.query_string)}", "", function(data){
+    $("div.dms_loader").hide();
+    for(var kk in data){
+     $(data[kk]).insertAfter($("tr." + kk).last());
+    }
+   });
+  }
  /*$('a.button-style').click(function(){
   $(this).parents('form').submit();
   return false;
  });*/
+ });
