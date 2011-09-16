@@ -24,7 +24,7 @@
 .table-navigation-block{:class => "scroll"}
  .table-block
   .table-scrolling
-   - if true || @need_dms
+   - unless @only_store
     .dms_loader{:align=>"center"}
      %img{:src => image_path('ajax-loader.gif')}
    %table.table-style{:class => "search-products"}
@@ -117,13 +117,14 @@
   },function(){
    $(this).removeClass('hover');
  });
- $.getJSON("#{main_mass_dms_url(:query_string => @search.query_string)}", "", function(data){
-  $("div.dms_loader").hide();
-  for(var kk in data){
-   $(data[kk]).insertAfter($("tr." + kk).last());
-  }
- });
-
+ if(#{@only_store || false}){
+  $.getJSON("#{main_mass_dms_url(:query_string => @search.query_string)}", "", function(data){
+   $("div.dms_loader").hide();
+   for(var kk in data){
+    $(data[kk]).insertAfter($("tr." + kk).last());
+   }
+  });
+ }
  /*$('a.button-style').click(function(){
   $(this).parents('form').submit();
   return false;
