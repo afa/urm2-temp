@@ -24,7 +24,7 @@
 .table-navigation-block{:class => "scroll"}
  .table-block
   .table-scrolling
-   - unless @only_store
+   - unless to_bool(@only_store)
     .dms_loader{:align=>"center"}
      %img{:src => image_path('ajax-loader.gif')}
    %table.table-style{:class => "search-products"}
