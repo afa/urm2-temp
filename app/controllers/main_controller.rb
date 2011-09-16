@@ -46,19 +46,7 @@ class MainController < ApplicationController
    @code = params[:code]
    @brend = params[:brend]
    @hash = current_user.current_account.try(:axapta_hash)
-   @items = Axapta.search_dms_names(:user_hash => @hash, :item_id_search => @code, :query_string => @seek, :search_brend => @brend).inject([]) do |r, i|
-    i["prognosis"].each do |loc|
-     a = {"item_name" => i["item_name"], "item_brend" => i["item_brend"], "qty_in_pack" => loc["qty_multiples"], "max_qty" => loc["vend_qty"], "rohs" => i["rohs"], "prognosis_id" => loc["prognosis_id"]}#, "min_qty" => i["min_qty"], "location_id" => loc["location_id"]
-     locs = loc["price_qty"].sort_by{|l| l["min_qty"] }[0, 4]
-     a.merge!("price1" => locs[0]["price"], "min_qty" => locs[0]["min_qty"], "vend_proposal_date" => locs[0]["vend_proposal_date"]) if locs[0]
-     a.merge!("price2" => locs[1]["price"], "count2" => locs[1]["min_qty"]) if locs[1]
-     a.merge!("price3" => locs[2]["price"], "count3" => locs[2]["min_qty"]) if locs[2]
-     a.merge!("price4" => locs[3]["price"], "count4" => locs[3]["min_qty"]) if locs[3]
-     a.merge!("need_more" => true) if loc["price_qty"].size > 4
-     r << a
-    end
-    r
-   end
+   @items = conv_dms_items(Axapta.search_dms_names(:user_hash => @hash, :item_id_search => @code, :query_string => @seek, :search_brend => @brend))
    respond_with do |format|
     format.js { render :layout => false }
     format.html do
@@ -87,20 +75,7 @@ class MainController < ApplicationController
   def mass_dms
    puts "---mass dms start #{Time.now}"
    @hash = current_user.current_account.try(:axapta_hash)
-   #@items = Axapta.search_dms_names(:user_hash => @hash, :query_string => params[:query_string]).inject([]) do |r, i|
    @items = conv_dms_items(Axapta.search_dms_names(:user_hash => @hash, :query_string => params[:query_string]))
-   # i["prognosis"].each do |loc|
-   #  a = {"item_name" => i["item_name"], "item_brend" => i["item_brend"], "qty_in_pack" => loc["qty_multiples"], "max_qty" => loc["vend_qty"], "rohs" => i["rohs"], "prognosis_id" => loc["prognosis_id"]}#, "min_qty" => i["min_qty"], "location_id" => loc["location_id"]
-   #  locs = loc["price_qty"].sort_by{|l| l["min_qty"] }[0, 4]
-   #  a.merge!("price1" => locs[0]["price"], "min_qty" => locs[0]["min_qty"], "vend_proposal_date" => locs[0]["vend_proposal_date"]) if locs[0]
-   #  a.merge!("price2" => locs[1]["price"], "count2" => locs[1]["min_qty"]) if locs[1]
-   #  a.merge!("price3" => locs[2]["price"], "count3" => locs[2]["min_qty"]) if locs[2]
-   #  a.merge!("price4" => locs[3]["price"], "count4" => locs[3]["min_qty"]) if locs[3]
-   #  a.merge!("need_more" => true) if loc["price_qty"].size > 4
-   #  r << a
-   # end
-   # r
-   #end
    hsh = @items.inject({}) do |r, item|
     i = WebUtils.escape_name("item_#{item["item_name"]}_#{item["item_brend"]}_#{item["rohs"]}")
     unless r.has_key?(i)
