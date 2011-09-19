@@ -75,7 +75,11 @@ class MainController < ApplicationController
   def mass_dms
    puts "---mass dms start #{Time.now}"
    @hash = current_user.current_account.try(:axapta_hash)
-   @items = conv_dms_items(Axapta.search_dms_names(:user_hash => @hash, :query_string => params[:query_string]))
+   begin
+    @items = conv_dms_items(Axapta.search_dms_names(:user_hash => @hash, :query_string => params[:query_string]))
+   rescue Exception
+    @items = []
+   end
    hsh = @items.inject({}) do |r, item|
     i = WebUtils.escape_name("item_#{item["item_name"]}_#{item["item_brend"]}_#{item["rohs"]}")
     unless r.has_key?(i)
