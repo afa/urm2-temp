@@ -13,6 +13,7 @@ describe "main/search.html.haml" do
   assign(:items, @items)
   assign(:accounts, @login.accounts)
   assign(:current_user, @login)
+  assign(:search, OpenStruct.new(:query_string => 'tst'))
   #controller.send(:current_user=, @login)
   render
  end
