@@ -19,7 +19,7 @@
    %a.speed-cart-button{:href=>"#"}
     %span
      %span &nbsp;
-   %input{:type=>"text", :class=>"validate[custom[onlyNumber],max[10000]]"}
+   %input{:type=>"text", :class=>"validate[custom[onlyNumber],max[#{items_line["max_qty"] || 0}]]"}
    %a.count{:href=>"#"}
  
  %td= items_line["min_qty"]
