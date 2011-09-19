@@ -14,7 +14,14 @@
  %td.text-left= items_line["item_brend"]
  %td= items_line["body_name"]
  %td= items_line["rohs"]
- %td 
+ %td.input-in-cart
+  %div
+   %a.speed-cart-button{:href=>"#"}
+    %span
+     %span &nbsp;
+   %input{:type=>"text", :class=>"validate[custom[onlyNumber],max[10000]]"}
+   %a.count{:href=>"#"}
+ 
  %td= items_line["min_qty"]
  %td= items_line["max_qty"]
  %td= items_line["prognoz"]
