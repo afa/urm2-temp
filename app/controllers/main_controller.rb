@@ -133,6 +133,10 @@ class MainController < ApplicationController
    rescue Exception => e
     p "---exc in info #{Time.now}", e
     logger.info e.to_s
+    @data = {}
+   end
+   respond_with do |format|
+    format.js { render :layout => false }
    end
 
   end
