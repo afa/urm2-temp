@@ -10,30 +10,30 @@
       %a{:href=>"#"}Описание
      .item
       Регистрационная позиция:
-      %span.color-black Да
+      %span.color-black= info_block["regulations"]
      .item
       Снято с производства:
-      %span.color-black НЕТ
-     .item
+      %span.color-black= info_block["discontinued"]
+     -# .item
       Сегмент:
       %span.color-black Ремонт
     %td
      .item
       Брутто-объём в кубических мм:
-      %span.color-black 20
+      %span.color-black= info_block["volume"]
      .item
       Упаковочное количество:
-      %span.color-black 50
+      %span.color-black= info_block["qty_in_pack"]
      .item
       Вес брутто, г:
-      %span.color-black 40
+      %span.color-black= info_block["weight"]
      .item
       Вид упаковки:
-      %span.color-black Линейки
-    %td
+      %span.color-black= info_block["packing_type"]
+    -# %td
      .item
       %a{:href=>"#"} Комплементарные товары
-    %td
+    -# %td
      %a{:href=>"#"}
       %img{:src=>"/images/temp/product1.gif", :alt=>""
 

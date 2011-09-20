@@ -123,6 +123,19 @@ class MainController < ApplicationController
    end
   end
 
+  def info
+   @after = params[:after]
+   @code = params[:code]
+   @hash = current_user.current_account.try(:axapta_hash)
+   logger.info "--- request_start: #{Time.now}"
+   begin
+    @data = Axapta.item_info({:user_hash => @hash, :item_id => @code})
+   rescue Exception => e
+    p "---exc in info #{Time.now}", e
+    logger.info e.to_s
+   end
+
+  end
  protected
   def get_accounts
    @accounts = current_user.accounts.where(:blocked => false)

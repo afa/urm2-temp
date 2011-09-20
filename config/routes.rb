@@ -22,6 +22,7 @@ Urm::Application.routes.draw do
   get "main/dms"
   get "main/mass_dms"
   get "main/analog"
+  get "main/info"
 
   namespace :admin do
    #resources :main, :only => [:index]
