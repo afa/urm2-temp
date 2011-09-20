@@ -35,3 +35,17 @@ function load_dms_bundle(from_where, need_load){
   });
  }
 }
+
+function insertGap(after, gap){
+ if($("tr.gap_" + after).length == 0){
+  var clctn = $("tr.dms_" + after).add("tr.info_" + after).add("tr.analog_" + after);
+  if(clctn.length > 0){
+   $(gap).insertAfter(clctn.last());
+  }
+ }
+ $("tr.gap_" + after).show();
+}
+
+function insertBlock(blkType, val, after){
+ $(val).insertAfter();
+}
