@@ -54,5 +54,13 @@ function insertGap(after, gap){
 }
 
 function insertBlock(blkType, val, after){
- $(val).insertAfter();
+ if($("tr." + blkType + "_" + after).length == 0){
+  var clctn = $("tr.dms_" + after).add("tr.info_" + after).add("tr.analog_" + after);
+  if(clctn.length > 0){
+   $(val).insertAfter(clctn.last());
+  } else {
+   $(val).insertAfter($("tr." + after).last());
+  }
+ }
+ $("tr." + blkType + "_" + after).show();
 }
