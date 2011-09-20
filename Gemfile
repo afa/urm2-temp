@@ -42,5 +42,6 @@ group :development, :test do
  gem "rspec-cells"
  gem "rcov"
  gem "jasmine"
+ gem "capybara"
 # gem 'webrat'
 end

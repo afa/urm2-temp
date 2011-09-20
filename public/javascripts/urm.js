@@ -31,7 +31,14 @@ function load_dms_bundle(from_where, need_load){
    $("div.dms_loader").hide();
    for(var kk in data){
     $(data[kk]).insertAfter($("tr." + kk).last());
+    $("tr.dms_" + kk + " th .plus").click(function(){
+     $("tr.dms_" + kk).remove();
+     if($("tr.analog_" + kk).length == 0){
+      $("tr.gap_" + kk).remove();
+     }
+    });
    }
+
   });
  }
 }

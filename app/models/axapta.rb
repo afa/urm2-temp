@@ -65,6 +65,12 @@ class Axapta
    #res
   end
 
+  def self.item_info(*args)
+   ar = *args.dup
+   res = AxaptaRequest.item_info(ar) || []
+   #res
+  end
+
   def self.search_analogs(*args)
    return [] unless args.first.has_key?("item_id_search") || args.first.has_key?(:item_id_search)
    srch = args.first["item_id_search"]
