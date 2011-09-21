@@ -43,5 +43,7 @@ group :development, :test do
  gem "rcov"
  gem "jasmine"
  gem "capybara"
+ gem "selenium-webdriver"
+ gem "selenium-rails"
 # gem 'webrat'
 end
