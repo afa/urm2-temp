@@ -34,9 +34,9 @@ function load_dms_bundle(from_where, need_load){
     $("tr.dms_item_" + kk + " th .plus").click(function(){
      var obj = $(this).parents("tr").find("th .icon input.after").first().val();
      alert("click "+obj+" " + $(this).parents("tr").first().prop("class"));
-     $("tr.dms_" + obj).remove();
-     if($("tr.analog_" + obj).add("tr.info_" + obj).length == 0){
-      $("tr.gap_" + obj).remove();
+     $("tr.dms_item_" + obj).remove();
+     if($("tr.analog_item_" + obj).add("tr.info_item_" + obj).length == 0){
+      $("tr.gap_item_" + obj).remove();
      }
     });
    }
