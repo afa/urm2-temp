@@ -32,10 +32,11 @@ function load_dms_bundle(from_where, need_load){
    for(var kk in data){
     $(data[kk]).insertAfter($("tr." + kk).last());
     $("tr.dms_" + kk + " th .plus").click(function(){
-     alert("click "+kk+" " + $(this).parents("tr").first().prop("class"));
-     $("tr.dms_" + kk).remove();
-     if($("tr.analog_" + kk).add("tr.info_" + kk).length == 0){
-      $("tr.gap_" + kk).remove();
+     var obj = kk;
+     alert("click "+obj+" " + $(this).parents("tr").first().prop("class"));
+     $("tr.dms_" + obj).remove();
+     if($("tr.analog_" + obj).add("tr.info_" + obj).length == 0){
+      $("tr.gap_" + obj).remove();
      }
     });
    }
