@@ -95,11 +95,11 @@
 				$(this).removeClass('hover');
 			});
 			
-			// Пагинация
+			/*// Пагинация
 			$('.table-pagination a',mainWrapper).click(function(e){
 				// Подгружаем новую таблицу, ссылка для запроса хранится в href
 				e.preventDefault();
-			});
+			});*/
 			
 			/*-----------------------------------------
 			  События для корзины (в попапе и на отдельной странице)
@@ -161,7 +161,7 @@
 				});
 				
 				// Разделитель
-				var trLine = $('<tr class="sub-row-line"><td colspan="'+ $('tr:has(td)',table).first().children('td').size() +'">&nbsp;</td></tr>');
+				// !!! var trLine = $('<tr class="sub-row-line"><td colspan="'+ $('tr:has(td)',table).first().children('td').size() +'">&nbsp;</td></tr>');
 				
 				// Выпадающий блок "Замены"
 				$('.icons .replacement',table).click( function(e){
@@ -190,7 +190,7 @@
 						trM.addClass('title-back');
 						curLink.addClass('active');
 						
-						if(!$('.sub-block-'+idTr,table).size() && !$('.sub-table-dms-'+idTr,table).size())  tr.after(trLine.clone().addClass('sub-line-'+idTr));
+						// !!! if(!$('.sub-block-'+idTr,table).size() && !$('.sub-table-dms-'+idTr,table).size())  tr.after(trLine.clone().addClass('sub-line-'+idTr));
 						
 						// События для строк с заменами
 						tr.after(
@@ -296,7 +296,7 @@
 						trM.addClass('title-back');
 						curLink.addClass('active');
 						
-						if(!$('.sub-block-'+idTr,table).size() && !$('.sub-table-'+idTr,table).size())  tr.after(trLine.clone().addClass('sub-line-'+idTr));
+						// !!! if(!$('.sub-block-'+idTr,table).size() && !$('.sub-table-'+idTr,table).size())  tr.after(trLine.clone().addClass('sub-line-'+idTr));
 						
 						// События для строк ДМС
 						tr.after(
@@ -356,7 +356,7 @@
 					}else{// Открываем блок
 						tr.addClass('title-back');
 						
-						if(!$('.sub-table-'+idTr,table).size() && !$('.sub-table-dms-'+idTr,table).size()) tr.after(trLine.clone().addClass('sub-line-'+idTr));
+						// !!! if(!$('.sub-table-'+idTr,table).size() && !$('.sub-table-dms-'+idTr,table).size()) tr.after(trLine.clone().addClass('sub-line-'+idTr));
 						
 						// События для блока с описанием
 						tr.after(
