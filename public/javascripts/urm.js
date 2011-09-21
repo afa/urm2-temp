@@ -30,8 +30,8 @@ function load_dms_bundle(from_where, need_load){
   $.getJSON(from_where, "", function(data){
    $("div.dms_loader").hide();
    for(var kk in data){
-    $(data[kk]).insertAfter($("tr." + kk).last());
-    $("tr.dms_" + kk + " th .plus").click(function(){
+    $(data[kk]).insertAfter($("tr.item_" + kk).last());
+    $("tr.dms_item_" + kk + " th .plus").click(function(){
      var obj = kk;
      alert("click "+obj+" " + $(this).parents("tr").first().prop("class"));
      $("tr.dms_" + obj).remove();
