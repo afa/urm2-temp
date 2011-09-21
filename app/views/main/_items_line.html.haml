@@ -1,16 +1,14 @@
 - require "web_utils"
-%tr{:class => WebUtils.escape_name("item_#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}")}
+%tr{:class => WebUtils.escape_name("#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}", "item_")}
  %td.icons
   .icon
-   = link_to "", main_dms_path(:code => items_line["item_id"], :after => WebUtils.escape_name("item_#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}")), :class => "dms js", :remote => true
+   = link_to "", main_dms_path(:code => items_line["item_id"], :after => WebUtils.escape_name("#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}", "item_")), :class => "dms js", :remote => true
    .slider &nbsp;
   .icon
-   = link_to "", main_analog_path(:code => items_line["item_id"], :after => WebUtils.escape_name("item_#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}")), :class => "replacement js", :remote => true
+   = link_to "", main_analog_path(:code => items_line["item_id"], :after => WebUtils.escape_name("#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}", "item_")), :class => "replacement js", :remote => true
    .slider &nbsp;
-   -# = link_to "", main_dms_path(:name => items_line["item_name"], :brend => items_line["item_brend"], :after => WebUtils.escape_name("item_#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}_#{items_line["location_id"]}")), :class => "dms js", :remote => true
-  -# .slider &nbsp;
 
- %td.text-left= link_to items_line["item_name"], main_info_path(:code => items_line["item_id"], :after => WebUtils.escape_name("item_#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}")), :class => "dms js", :remote => true
+ %td.text-left= link_to items_line["item_name"], main_info_path(:code => items_line["item_id"], :after => WebUtils.escape_name("#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}", "item_")), :class => "dms js", :remote => true
 
  %td.text-left= items_line["item_brend"]
  %td= items_line["body_name"]
