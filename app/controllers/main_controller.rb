@@ -81,7 +81,7 @@ class MainController < ApplicationController
     @items = []
    end
    hsh = @items.inject({}) do |r, item|
-    i = WebUtils.escape_name("#{item["item_name"]}_#{item["item_brend"]}_#{item["rohs"]}", "item_")
+    i = WebUtils.escape_name("#{item["item_name"]}_#{item["item_brend"]}_#{item["rohs"]}")
     unless r.has_key?(i)
      r[i] = []
     end
