@@ -5,7 +5,7 @@ $("#{escape_javascript(@items.empty? ? render(:partial => "dms_empty", :locals =
 - unless @items.empty?
  $("#{escape_javascript(render(:partial => "dms_header", :locals => {:after => @after}))}").insertAfter($("tr.#{@after}").last());
  if($("tr.gap_#{@after}").length == 0  ){
- $("#{escape_javascript(render(:partial => "gap_line"))}").insertAfter($("tr.dms_#{@after}").add("tr.analog_#{@after}").add("tr.info_#{@after}").last());
+ $("#{escape_javascript(render(:partial => "gap_line", :locals => {:after => @after}))}").insertAfter($("tr.dms_#{@after}").add("tr.analog_#{@after}").add("tr.info_#{@after}").last());
  }
 $("tr.dms_#{@after} th .plus").click(function(){
 $("tr.dms_#{@after}").remove();
