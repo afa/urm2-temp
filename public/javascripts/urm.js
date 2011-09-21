@@ -32,7 +32,7 @@ function load_dms_bundle(from_where, need_load){
    for(var kk in data){
     $(data[kk]).insertAfter($("tr.item_" + kk).last());
     $("tr.dms_item_" + kk + " th .plus").click(function(){
-     var obj = kk;
+     var obj = $(this).parents("tr").find("th .icon input.after").first().val();
      alert("click "+obj+" " + $(this).parents("tr").first().prop("class"));
      $("tr.dms_" + obj).remove();
      if($("tr.analog_" + obj).add("tr.info_" + obj).length == 0){
