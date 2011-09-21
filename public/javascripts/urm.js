@@ -36,7 +36,7 @@ function load_dms_bundle(from_where, need_load){
      alert("click "+obj+" " + $(this).parents("tr").first().prop("class"));
      $("tr.dms_item_" + obj).remove();
      if($("tr.analog_item_" + obj).add("tr.info_item_" + obj).length == 0){
-      $("tr.gap_item_" + obj).remove();
+      $("tr.gap_" + obj).remove();
      }
     });
    }
