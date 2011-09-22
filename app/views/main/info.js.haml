@@ -1,13 +1,13 @@
-if($("tr.info_#{@after}").length > 0){
-$("tr.info_#{@after}").remove();
+if($("tr.info_item_#{@after}").length > 0){
+$("tr.info_item_#{@after}").remove();
 } /* clean old */
-$("#{escape_javascript(render( :partial => "info_block", :locals => {:after => @after, :info_block => @data}))}").insertAfter($("tr.#{@after}").last());
+$("#{escape_javascript(render( :partial => "info_block", :locals => {:after => @after, :info_block => @data}))}").insertAfter($("tr.item_#{@after}").last());
 if($("tr.gap_#{@after}").length == 0  ){
-$("#{escape_javascript(render(:partial => "gap_line", :locals => {:after => @after}))}").insertAfter($("tr.dms_#{@after}").add("tr.analog_#{@after}").add("tr.info_#{@after}").last());
+$("#{escape_javascript(render(:partial => "gap_line", :locals => {:after => @after}))}").insertAfter($("tr.dms_item_#{@after}").add("tr.analog_item_#{@after}").add("tr.info_item_#{@after}").last());
 }
-$("tr.info_#{@after} th .plus").click(function(){
-$("tr.info_#{@after}").remove();
-if($("tr.analog_#{@after}").add("tr.dms_#{@after}").length == 0){
+$("tr.info_item_#{@after} th .plus").click(function(){
+$("tr.info_item_#{@after}").remove();
+if($("tr.analog_item_#{@after}").add("tr.dms_item_#{@after}").length == 0){
 $("tr.gap_#{@after}").remove();
 }
 });
