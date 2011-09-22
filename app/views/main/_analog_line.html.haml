@@ -1,12 +1,7 @@
-%tr.sub-row-table{:id => "analog_line_#{analog_line["item_name"]}_#{analog_line["item_brend"]}_#{analog_line["location_id"]}_#{analog_line["rohs"]}", :class => "analog_#{@after}"}
+%tr.sub-row-table{:class => "analog_item_#{after}"}
  %td.icons{:class => "border-l"}
   .icon
    %a.pp{:href => "#"}
-  -#.icon
-   = link_to "", main_dms_path(:name => items_line["item_name"], :brend => items_line["item_brend"], :after => "item_#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}"), :class => "dms js", :remote => true
-   -#= link_to t(:dms), main_dms_path(:name => items_line["item_name"], :brend => items_line["item_brend"], :after => "item_#{items_line["item_id"]}_#{items_line["item_name"]}"), :class=>"js", :remote => true
-
- -# %td.text-left{:class => "font-small", :colspan => 3}
  %td.text-left{:class => "name"}
   %a{:href => "#"}= analog_line["item_name"]
  %td.text-left{:class => "producer"}= analog_line["item_brend"]
