@@ -24,7 +24,8 @@
  
  %td= items_line["min_qty"]
  %td= items_line["max_qty"]
- %td= items_line["prognoz"]
+ %td= items_line["location_id"]
+ -# %td= items_line["prognoz"]
  %td= items_line["price1"]
  %td.green= items_line["count2"]
  %td= items_line["price2"]
@@ -32,10 +33,9 @@
  %td= items_line["price3"]
  %td.green= items_line["count4"]
  %td= items_line["price4"]
- %td= items_line["location_id"]
  %td.grey= items_line["qty_in_pack"]
- %td
- %td
- %td= items_line["segment_rus"]
- %td
+ -# %td
+ -# %td
+ -# %td= items_line["segment_rus"]
+ -# %td
   %a{:href => "#"}! $<small>$</small>
