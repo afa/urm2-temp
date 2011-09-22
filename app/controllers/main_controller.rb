@@ -21,14 +21,14 @@ class MainController < ApplicationController
    avail.value = @only_available
    avail.save!
    begin
-    data = Axapta.search_names({:calc_price=>true, :calc_qty => true}.merge(params[:search] || {}).merge(:user_hash => current_user.current_account.try(:axapta_hash)))
+    data = Axapta.search_names({:show_forecast_availability => true, :show_analog_existence => true, :calc_price=>true, :calc_qty => true}.merge(params[:search] || {}).merge(:user_hash => current_user.current_account.try(:axapta_hash)))
    rescue Exception => e
     p "---exc in search #{Time.now}", e
     logger.info e.to_s
    end
    @items = (data || []).inject([]) do |r, i|
     i["locations"].each do |loc|
-     a = {"item_name" => i["item_name"], "item_brend" => i["item_brend"], "qty_in_pack" => i["qty_in_pack"], "location_id" => loc["location_id"], "min_qty" => i["min_qty"], "max_qty" => loc["vend_qty"], "rohs" => i["rohs"], "item_id" => i["item_id"], "segment_rus" => i["segment_rus"], "body_name" => i["package_name"]}
+     a = {"item_name" => i["item_name"], "item_brend" => i["item_brend"], "qty_in_pack" => i["qty_in_pack"], "location_id" => loc["location_id"], "min_qty" => i["min_qty"], "max_qty" => loc["vend_qty"], "rohs" => i["rohs"], "item_id" => i["item_id"], "segment_rus" => i["segment_rus"], "body_name" => i["package_name"], "analog_exists" => i["analog_exists"], "forecast_available" => loc["forecast_available"]}
      locs = loc["price_qty"].sort_by{|l| l["min_qty"] }[0, 4]
      a.merge!("price1" => locs[0]["price"]) if locs[0]
      a.merge!("price2" => locs[1]["price"], "count2" => locs[1]["min_qty"]) if locs[1]
