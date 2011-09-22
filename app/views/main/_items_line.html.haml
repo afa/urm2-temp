@@ -8,7 +8,7 @@
    - if items_line["analog_exists"]
     = link_to "", main_analog_path(:code => items_line["item_id"], :after => WebUtils.escape_name("#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}")), :class => "replacement js active", :remote => true
    - else
-    &nbsp;
+    .replacement
    .slider &nbsp;
 
  %td.text-left= link_to items_line["item_name"], main_info_path(:code => items_line["item_id"], :after => WebUtils.escape_name("#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}")), :class => "dms js", :remote => true
