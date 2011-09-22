@@ -16,7 +16,8 @@
    %a.count{:href=>"#"}
  %td.double-first-cell= analog_line["min_qty"]
  %td.double-last-cell= analog_line["max_qty"]
- %td= analog_line["prognosis_id"]
+ -# %td= analog_line["prognosis_id"]
+ %td= analog_line["location_id"]
  %td= analog_line["price1"]
  %td.green= analog_line["count2"]
  %td= analog_line["price2"]
@@ -24,11 +25,10 @@
  %td= analog_line["price3"]
  %td.green= analog_line["count4"]
  %td= analog_line["price4"]
- %td= analog_line["location_id"]
  %td.grey= analog_line["qty_in_pack"]
  %td.font-small
   %span.color-red= analog_line["vend_proposal_date"]
- %td
- %td= analog_line["segment_rus"]
- %td.border-r{:class=>"full-price"}
+ -# %td
+ -# %td= analog_line["segment_rus"]
+ -# %td.border-r{:class=>"full-price"}
   %a{:href => "#"}! $<small>$</small>
