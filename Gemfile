@@ -41,7 +41,8 @@ group :development, :test do
  gem "factory_girl_rails", "~>1.1.rc1"
  gem "rspec-cells"
  gem "rcov"
- gem "jasmine"
+ #gem "jasmine"
+ gem "jasmine-headless-webkit"
  gem "capybara"
  gem "selenium-webdriver"
 # gem 'webrat'
