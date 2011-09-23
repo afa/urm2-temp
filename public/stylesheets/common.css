@@ -373,8 +373,8 @@ td.input-in-cart.speed .speed-cart-button span span{ background:url(../images/ic
 /*.table-style .hover .icons .replacement, .table-style .icons .replacement.active{ background-position:0px -112px;}*/
 .table-style .icons .replacement.active{ background-position:0px -112px;}
 
-.table-style .icon .delivery{ background:url(/images/zil130m.gif) no-repeat 0px 0px;}
-.table-style .icon .delivery.active{ background-position:0px -112px;}
+.table-style .icons .delivery{ background:url(/images/zil130m.gif) no-repeat 0px 0px;}
+.table-style .icons .delivery.active{ background-position:0px -112px;}
 
 .table-style .icons .pp{ background:url(../images/icon_pp.gif) no-repeat 0px 0px;}
 
