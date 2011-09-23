@@ -6,7 +6,7 @@ module WebUtils
  end
 
  def self.parse_bool(str)
-  return true if %w(1 T t y Y true).include?(str)
+  return true if %w(1 T t y Y true).include?(str.to_s)
   false
  end
 end
