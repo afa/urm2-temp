@@ -13,7 +13,15 @@
 
  %td.text-left= link_to items_line["item_name"], main_info_path(:code => items_line["item_id"], :after => WebUtils.escape_name("#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}")), :class => "dms js", :remote => true
 
- %td.text-left= items_line["item_brend"] #добавить бренднэйм
+ %td.text-left
+  - if items_line["item_brend_url"].blank?
+   - if items_line["item_brend_name"].blank?
+    #{items_line["item_brend"]}
+   - else
+    %abbr{:title => items_line["item_brend_name"]}= items_line["item_brend"]
+  - else
+   %a{:href => items_line["item_brend_url"], :title => items_line["item_brend_name"]}= items_line["item_brend"]
+  = items_line["item_brend"] #добавить бренднэйм
  %td= items_line["body_name"]
  %td= items_line["rohs"]
  %td.input-in-cart
