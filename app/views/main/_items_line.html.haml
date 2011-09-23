@@ -30,7 +30,7 @@
  %td
   .icons 
    .icon
-    - if items_line["forecast_available"]
+    - if WebUtils.parse_bool(items_line["forecast_available"])
      = link_to "", main_info_path(:code => items_line["item_id"], :after => WebUtils.escape_name("#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}")), :class => "info js delivery active", :remote => true
     - else
      .delivery &nbsp;
