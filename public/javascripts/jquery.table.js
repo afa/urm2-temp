@@ -164,7 +164,7 @@
 				// !!! var trLine = $('<tr class="sub-row-line"><td colspan="'+ $('tr:has(td)',table).first().children('td').size() +'">&nbsp;</td></tr>');
 				
 				// Выпадающий блок "Замены"
-				$('.icons .replacement',table).click( function(e){
+				$('.icons .replacement DISABLE',table).click( function(e){
 					var curLink = $(this);
 					var tr = curLink.parents('tr:first');
 					var trM = tr;
