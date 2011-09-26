@@ -2,7 +2,7 @@ if($("tr.analog_item_#{@after}").length > 0){
 $("tr.analog_item_#{@after}").remove();
 }
 - if @items.empty?
- $("#{escape_javascript(render(:partial => "analog_empty", :locals => {:after => @after}))}").insertAfter($("tr.item_#{@after}").add("tr.info_item_#{@after}").add("dms_item_#{@after}").last());
+ $("#{escape_javascript(render(:partial => "analog_empty", :locals => {:after => @after}))}").insertAfter($("tr.item_#{@after}").add("tr.info_item_#{@after}").add("tr.dms_item_#{@after}").last());
 - else
  $("#{escape_javascript(render(:partial => "analog_header", :locals => {:after => @after}))}").insertAfter($("tr.item_#{@after}").add("tr.info_item_#{@after}").add("tr.dms_item_#{@after}").last());
  $("#{escape_javascript(render( :partial => "analog_line", :collection => @items, :locals => {:after => @after}))}").insertAfter($("tr.analog_item_#{@after}.heading").last());
