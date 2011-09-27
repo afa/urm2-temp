@@ -6,3 +6,4 @@ db/schema.rb
 config/database.yml
 Gemfile.lock
 coverage/
+.jhw-cache/
