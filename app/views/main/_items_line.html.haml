@@ -1,17 +1,19 @@
 - require "web_utils"
-%tr{:class => WebUtils.escape_name("#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}", "item_")}
+- line_code = WebUtils.escape_name("#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}")
+%tr{:class => "item_#{line_code}"}
  %td.icons
+  %input.item-code{:id => "code_#{line_code}", :type => "hidden", :value => items_line["item_id"]}
   .icon
-   = link_to "", main_dms_path(:code => items_line["item_id"], :after => WebUtils.escape_name("#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}")), :class => "dms js", :remote => true
+   = link_to "", main_dms_path(:code => items_line["item_id"], :after => line_code), :class => "dms js", :remote => true
    .slider &nbsp;
   .icon
    - if items_line["analog_exists"]
-    = link_to "", main_analog_path(:code => items_line["item_id"], :after => WebUtils.escape_name("#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}")), :class => "replacement js active", :remote => true
+    = link_to "", main_analog_path(:code => items_line["item_id"], :after => line_code), :class => "replacement js active", :remote => true
    - else
     .replacement &nbsp;
    .slider &nbsp;
 
- %td.text-left= link_to items_line["item_name"], main_info_path(:code => items_line["item_id"], :after => WebUtils.escape_name("#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}")), :class => "dms js", :remote => true
+ %td.text-left= link_to items_line["item_name"], main_info_path(:code => items_line["item_id"], :after => line_code), :class => "dms js", :remote => true
 
  %td.text-left
   - if items_line["item_brend_url"].blank?
@@ -38,7 +40,7 @@
   .icons 
    .icon
     - if items_line["forecast_available"]
-     = link_to "", main_info_path(:code => items_line["item_id"], :after => WebUtils.escape_name("#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}")), :class => "info js delivery active", :remote => true
+     = link_to "", main_info_path(:code => items_line["item_id"], :after => line_code), :class => "info js delivery active", :remote => true
     - else
      .delivery &nbsp;
   = items_line["location_id"]
