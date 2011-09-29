@@ -65,7 +65,7 @@ function insertGap(after, gap){
 // on-click for dms button
 function showDms(evt){
  var row_id = $(this).parents("tr").prop("class").match(/\bitem_(\w+)\b/)[1];
- var code = $(this).parents("tr").find("input#code_" + row_id);
+ var code = $(this).parents("tr").find("input#code_" + row_id).val();
  $(this).parents(".dms").hide();
  $(this).parents(".icon").find(".slider").show();
  if($("tr.dms_item_" + row_id).length == 0){
