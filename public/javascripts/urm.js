@@ -7,7 +7,6 @@ function search_icons_handle(){
  $('.js').bind('ajax:complete', function(evt, xhr, status){
   $(this).parents('.icon').find('.slider').hide();
   $(this).parents('.icon').find('a').show();
-  //$(this).parents('.icons').find('.slider').hide('1000');
  });
  $('.icon .js').bind('ajax:beforeSend', function(evt, xhr, status){
   $(this).parents('.icon').find('a').hide();
@@ -31,6 +30,15 @@ function load_dms_each(need_load){
  }
 }
 
+function fix_visibility(){
+ var hsh = new Hash;
+ $("tr:has(.dms.js)").each(function(idx){
+  hsh[$(this).attr("class").match(/\bitem_/)] = 1;
+ });
+ for(var i in hsh){
+  $("tr:visible." + i).not(":first").children(".dms.js").hide();
+ }
+}
 function load_dms_bundle(from_where, need_load){
  if(need_load){
   $.getJSON(from_where, "", function(data){
