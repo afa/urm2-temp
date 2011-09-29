@@ -6,6 +6,7 @@
     #config.after_build Proc.new { |build, project| `touch ~/Desktop/actually_built`}
     config.environment_variables = {"RAILS_ENV" => "test"}
     config.timeout = 10.minutes
-    config.command = 'RAILS_ENV=test rake db:migrate&&RAILS_ENV=test rake spec' #to be used if you're using anything other than rake
+    config.command = 'rake db:migrate&&rake spec' #to be used if you're using anything other than rake
+    config.use_bundle_exec = true
   end
 
