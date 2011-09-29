@@ -11,9 +11,9 @@ function search_icons_handle(){
  });
  $('.icon .js').bind('ajax:beforeSend', function(evt, xhr, status){
   $(this).parents('.icon').find('a').hide();
-  //$(this).parents('.icons').find('.slider').show();
   $(this).parents('.icon').find('.slider').show();
  });
+ $(".icon .dms.js").click(showDms);
 }
 
 function apply_hover_in_table_on_mmove(){

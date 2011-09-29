@@ -4,6 +4,8 @@
  %td.icons
   %input.item-code{:id => "code_#{line_code}", :type => "hidden", :value => items_line["item_id"]}
   .icon
+   -# = link_to "", main_dms_path(:code => items_line["item_id"], :after => line_code), :class => "dms js", :remote => true
+   .dms{:class => "js"}
    = link_to "", main_dms_path(:code => items_line["item_id"], :after => line_code), :class => "dms js", :remote => true
    .slider &nbsp;
   .icon
