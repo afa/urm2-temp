@@ -32,8 +32,8 @@ function load_dms_each(need_load){
 
 function fix_visibility(){
  var hsh = new Array();
- $("tr:has(.dms.js)").each(function(idx){
-  hsh[$(this).attr("class").match(/\bitem_\w+\b/)] = 1;
+ $("tr:has(.dms.js)").each(function(idx, el){
+  hsh[$(el).attr("class").match(/\bitem_\w+\b/)] = 1;
  });
  for(var i in hsh){
   $("tr:visible." + i).not(":first").children(".dms.js").hide();
