@@ -66,7 +66,6 @@ function insertGap(after, gap){
 function showDms(evt){
  var row_id = $(this).parents("tr").prop("class").match(/\bitem_(\w+)\b/)[1];
  var code = $(this).parents("tr").find("input#code_" + row_id).val();
- $(this).parents(".dms").hide();
  $(this).parents(".icon").find(".dms").hide();
  $(this).parents(".icon").find(".slider").show();
  if($("tr.dms_item_" + row_id).length == 0){
@@ -86,6 +85,8 @@ function showDms(evt){
    $("tr.gap_" + row_id).show();
    $("tr.gap_" + row_id).removeClass("hidden");
   }
+   $("tr.item_" + row_id + " .icon .slider").hide();
+   $("tr.item_" + row_id + " .icon .dms").show();
  }
  evt.preventDefault();
 }
