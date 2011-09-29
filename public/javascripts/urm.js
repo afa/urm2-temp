@@ -67,6 +67,7 @@ function showDms(evt){
  var row_id = $(this).parents("tr").prop("class").match(/\bitem_(\w+)\b/)[1];
  var code = $(this).parents("tr").find("input#code_" + row_id).val();
  $(this).parents(".dms").hide();
+ $(this).parents(".icon").find(".dms").hide();
  $(this).parents(".icon").find(".slider").show();
  if($("tr.dms_item_" + row_id).length == 0){
   $.getJSON("/main/dms?code=" + code + "&after=" + row_id, "", function(data){
