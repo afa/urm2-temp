@@ -71,9 +71,9 @@ function showDms(evt){
  $(this).parents(".icon").find(".slider").show();
  if($("tr.dms_item_" + row_id).length == 0){
   $.getJSON("/main/dms?code=" + code + "&after=" + row_id, "", function(data){
-   $("tr.dms_item_" + row_id + " .icon .slider").hide();
-   $("tr.dms_item_" + row_id + " .icon .dms").show();
-   $(data["dms"]).insertAfter($("tr.info_item_" + row_id).add("tr.item_" + row_id));
+   $("tr.item_" + row_id + " .icon .slider").hide();
+   $("tr.item_" + row_id + " .icon .dms").show();
+   $(data["dms"]).insertAfter($("tr.info_item_" + row_id).add("tr.item_" + row_id).last());
    $(data["gap"]).insertAfter($("tr.info_item_" + row_id).add("tr.analog_item_" + row_id).add("tr.dms_item_" + row_id).last());
   });
  } else {
