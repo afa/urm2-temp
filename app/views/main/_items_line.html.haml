@@ -37,14 +37,14 @@
  
  %td= items_line["min_qty"]
  %td= items_line["max_qty"]
- %td.with-icons
+ %td.with-icons{:class => "text-left"}
+  = items_line["location_id"]
   .icons 
    .icon
     - if items_line["forecast_available"]
      = link_to "", main_info_path(:code => items_line["item_id"], :after => line_code), :class => "info js delivery active", :remote => true
     - else
      .delivery &nbsp;
-  = items_line["location_id"]
  -# %td= items_line["prognoz"]
  %td= items_line["price1"]
  %td.green= items_line["count2"]
