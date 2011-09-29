@@ -31,7 +31,7 @@ function load_dms_each(need_load){
 }
 
 function fix_visibility(){
- var hsh = new Hash;
+ var hsh = new Array();
  $("tr:has(.dms.js)").each(function(idx){
   hsh[$(this).attr("class").match(/\bitem_/)] = 1;
  });
