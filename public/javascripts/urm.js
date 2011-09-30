@@ -91,6 +91,7 @@ function showDms(evt){
  } else {
   $("tr.dms_item_" + row_id).toggle();
   $("tr.dms_item_" + row_id).toggleClass("hidden");
+   insertGap(row_id, data["gap"]);
   /*if($("tr.dms_item_" + row_id).add("tr.analog_item_" + row_id).add("tr.info_item_" + row_id).not(".hidden").length == 0){
    $("tr.gap_" + row_id).hide();
    $("tr.gap_" + row_id).addClass("hidden");

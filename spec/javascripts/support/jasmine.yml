@@ -54,6 +54,7 @@ stylesheets:
 #
 helpers:
   - "helpers/jasmine-jquery-1.3.1.js"
+  - "helpers/mock-ajax.js"
   - "helpers/**/*.js"
 
 # spec_files
