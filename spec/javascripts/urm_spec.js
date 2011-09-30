@@ -44,3 +44,7 @@ describe("showDms", function(){
 
  });
 });
+
+describe("search_icons_handle", function(){
+
+});
