@@ -1,13 +1,22 @@
 /* helper for URM2 */
 
+Array.prototype.getUnique = function () {
+var o = new Object();
+var i, e;
+for (i = 0; e = this[i]; i++) {o[e] = 1};
+var a = new Array();
+for (e in o) {a.push (e)};
+return a;
+} 
+
 function search_icons_handle(){
  var uniq = new Array();
  var ins = $(".icons input.item-code");
  $.each(ins, function(idx, val){
-  uniq[$(val).val()]=1;
-  alert($(val).val());
+  uniq.push($(val).val();
  });
- $.each(uniq, function(idx, val){
+ $.each(uniq.getUnique(), function(idx, val){
+  alert(val);
   $(".icons input[value='" + idx + "']").parents(".icons").find("div.dms-req:first").addClass("dms").addClass("js");
   //$("tr.item_" + i + " .icons .dms-req:first").addClass("js");
  });
