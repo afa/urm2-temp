@@ -4,7 +4,7 @@ function search_icons_handle(){
  var uniq = new Array();
  var ins = $(".icons input");
  for(var i in ins){
-  alert($(ins[i]);
+  alert($(ins[i]));
   uniq[$(ins[i]).val()]=1;
 
  }
