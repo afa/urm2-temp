@@ -6,7 +6,8 @@ function search_icons_handle(){
   uniq[$(i).val()]=1;
  }
  for(var i in uniq){
-  $("tr.item_" + i + " .icons .dms-req").first().addClass("dms").addClass("js");
+  $("tr.item_" + i + " .icons .dms-req").first().addClass("dms");
+  $("tr.item_" + i + " .icons .dms-req").first().addClass("js");
  }
  $(".dms-req").removeClass("dms-req");
  $('.js').bind('ajax:success', function(evt, xhr, status){
