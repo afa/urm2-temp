@@ -1,7 +1,7 @@
 /* helper for URM2 */
 
 function search_icons_handle(){
- var uniq = {};
+ var uniq = new Array();
  for(var i in $(".icons input")){
   uniq[$(i).val()]=1;
  }
