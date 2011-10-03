@@ -2,8 +2,9 @@
 
 function search_icons_handle(){
  var uniq = new Array();
- for(var i in $(".icons input")){
-  uniq[$(i).val()]=1;
+ var ins = $(".icons input");
+ for(var i in ins){
+  uniq[$(ins[i]).val()]=1;
  }
  for(var i in uniq){
   $("tr.item_" + i + " .icons .dms-req:first").addClass("dms");
