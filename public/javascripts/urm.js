@@ -16,7 +16,7 @@ function search_icons_handle(){
   uniq.push($(val).val());
  });
  $.each(uniq.getUnique(), function(idx, val){
-  $(".icons input[value='" + val + "']").parents(".icons").find("div.dms-req:first").addClass("dms").addClass("js");
+  $(".icons input[value='" + val + "']:first").parents(".icons").find("div.dms-req:first").addClass("dms").addClass("js");
   //$("tr.item_" + i + " .icons .dms-req:first").addClass("js");
  });
  $(".dms-req").removeClass("dms-req");
