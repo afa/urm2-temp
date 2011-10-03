@@ -4,10 +4,12 @@ function search_icons_handle(){
  var uniq = new Array();
  var ins = $(".icons input");
  for(var i in ins){
+  alert($(ins[i]);
   uniq[$(ins[i]).val()]=1;
+
  }
  for(var i in uniq){
-  $(".icons input[value='" + i + "']").parents(".icons").find(".dms-req").first().addClass("dms").addClass("js");
+  $(".icons input[value='" + i + "']").parents(".icons").find("div.dms-req:first").addClass("dms").addClass("js");
   //$("tr.item_" + i + " .icons .dms-req:first").addClass("js");
  }
  $(".dms-req").removeClass("dms-req");
