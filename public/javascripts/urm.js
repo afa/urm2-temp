@@ -3,13 +3,13 @@
 function search_icons_handle(){
  var uniq = new Array();
  var ins = $(".icons input.item-code");
- for(var i in ins){
-  uniq[$(ins[i]).val()]=1;
-
- }
+ $.each(ins, function(idx, val){
+  uniq[val.val()]=1;
+  alert(val.val());
+ });
  $.each(uniq, function(idx, val){
  //for(var i in uniq){
-  alert(idx);
+  //alert(idx);
   //$(".icons input[value='" + i + "']").parents(".icons").find("div.dms-req:first").addClass("dms").addClass("js");
   //$("tr.item_" + i + " .icons .dms-req:first").addClass("js");
  });
