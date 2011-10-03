@@ -13,7 +13,7 @@ function search_icons_handle(){
  var uniq = new Array();
  var ins = $(".icons input.item-code");
  $.each(ins, function(idx, val){
-  uniq.push($(val).val();
+  uniq.push($(val).val());
  });
  $.each(uniq.getUnique(), function(idx, val){
   alert(val);
