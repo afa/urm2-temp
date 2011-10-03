@@ -8,9 +8,7 @@ function search_icons_handle(){
   alert($(val).val());
  });
  $.each(uniq, function(idx, val){
- //for(var i in uniq){
-  //alert(idx);
-  //$(".icons input[value='" + i + "']").parents(".icons").find("div.dms-req:first").addClass("dms").addClass("js");
+  $(".icons input[value='" + idx + "']").parents(".icons").find("div.dms-req:first").addClass("dms").addClass("js");
   //$("tr.item_" + i + " .icons .dms-req:first").addClass("js");
  });
  $(".dms-req").removeClass("dms-req");
