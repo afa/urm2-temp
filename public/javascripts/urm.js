@@ -1,6 +1,14 @@
 /* helper for URM2 */
 
 function search_icons_handle(){
+ var uniq = {};
+ for(var i in $(".icons input")){
+  uniq[i.val()]=1;
+ }
+ for(var i in hsh){
+  $("tr.item_" + i + " .icons .dms-req").first().addClass("dms").addClass("js");
+ }
+ $(".dms-req").removeClass("dms-req");
  $('.js').bind('ajax:success', function(evt, xhr, status){
   eval(xhr.responseText);
  });
