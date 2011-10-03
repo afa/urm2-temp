@@ -4,8 +4,8 @@ function search_icons_handle(){
  var uniq = new Array();
  var ins = $(".icons input.item-code");
  $.each(ins, function(idx, val){
-  uniq[val.val()]=1;
-  alert(val.val());
+  uniq[$(val).val()]=1;
+  alert($(val).val());
  });
  $.each(uniq, function(idx, val){
  //for(var i in uniq){
