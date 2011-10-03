@@ -2,7 +2,7 @@
 - line_code = WebUtils.escape_name("#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}")
 %tr{:class => "item_#{line_code}"}
  %td.icons
-  %input.item-code{:id => "code_#{line_code}", :type => "hidden", :value => items_line["item_id"]}
+  %input.item-code{:id => "code_#{line_code}", :type => "hidden", :value => items_line["item_id"], :name => "code_#{line_code}"}
   .icon
    -# = link_to "", main_dms_path(:code => items_line["item_id"], :after => line_code), :class => "dms js", :remote => true
    .dms-req &nbsp;
