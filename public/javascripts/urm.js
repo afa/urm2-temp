@@ -5,7 +5,7 @@ function search_icons_handle(){
  for(var i in $(".icons input")){
   uniq[$(i).val()]=1;
  }
- for(var i in hsh){
+ for(var i in uniq){
   $("tr.item_" + i + " .icons .dms-req").first().addClass("dms").addClass("js");
  }
  $(".dms-req").removeClass("dms-req");
