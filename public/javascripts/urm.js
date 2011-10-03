@@ -3,7 +3,7 @@
 function search_icons_handle(){
  var uniq = {};
  for(var i in $(".icons input")){
-  uniq[i.val()]=1;
+  uniq[$(i).val()]=1;
  }
  for(var i in hsh){
   $("tr.item_" + i + " .icons .dms-req").first().addClass("dms").addClass("js");
