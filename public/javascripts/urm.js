@@ -7,8 +7,7 @@ function search_icons_handle(){
   uniq[$(ins[i]).val()]=1;
  }
  for(var i in uniq){
-  var v = $(".icons input[value='" + i + "']").parents(".icons").find(".dms-req").first();
-  v.addClass("dms").addClass("js")
+  $(".icons input[value='" + i + "']").parents(".icons").find(".dms-req").first().addClass("dms").addClass("js");
   //$("tr.item_" + i + " .icons .dms-req:first").addClass("js");
  }
  $(".dms-req").removeClass("dms-req");
