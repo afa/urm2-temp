@@ -7,7 +7,7 @@ function search_icons_handle(){
   uniq[$(ins[i]).val()]=1;
  }
  for(var i in uniq){
-  $("tr.item_" + i + " .icons .dms-req:first").addClass("dms");
+  $(".icons :has(input[value=" + i + "]) .dms-req:first").addClass("dms");
   $("tr.item_" + i + " .icons .dms-req:first").addClass("js");
  }
  $(".dms-req").removeClass("dms-req");
