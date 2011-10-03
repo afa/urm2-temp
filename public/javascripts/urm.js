@@ -1,6 +1,25 @@
 /* helper for URM2 */
 
+Array.prototype.getUnique = function () {
+var o = new Object();
+var i, e;
+for (i = 0; e = this[i]; i++) {o[e] = 1};
+var a = new Array();
+for (e in o) {a.push (e)};
+return a;
+} 
+
 function search_icons_handle(){
+ var uniq = new Array();
+ var ins = $(".icons input.item-code");
+ $.each(ins, function(idx, val){
+  uniq.push($(val).val());
+ });
+ $.each(uniq.getUnique(), function(idx, val){
+  $(".icons input[value='" + val + "']:first").parents(".icons").find("div.dms-req:first").addClass("dms").addClass("js");
+  //$("tr.item_" + i + " .icons .dms-req:first").addClass("js");
+ });
+ $(".dms-req").removeClass("dms-req");
  $('.js').bind('ajax:success', function(evt, xhr, status){
   eval(xhr.responseText);
  });
@@ -77,7 +96,7 @@ function insertGap(after, gap){
 // on-click for dms button
 function showDms(evt){
  var row_id = $(this).parents("tr").prop("class").match(/\bitem_(\w+)\b/)[1];
- var code = $(this).parents("tr").find("input#code_" + row_id).val();
+ var code = $(this).parents("tr").find(".icons input.item-code").val();
  $(this).parents(".icon").find(".dms").hide();
  $(this).parents(".icon").find(".slider").show();
  if($("tr.dms_item_" + row_id).length == 0){
