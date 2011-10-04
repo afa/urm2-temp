@@ -391,7 +391,8 @@ td.input-in-cart.speed .speed-cart-button span span{ background:url(../images/ic
  /*margin-left: 4px;*/
 }
 .table-style .icons .dms{ background:url(../images/icon_dms.gif) no-repeat 0px 0px;}
-.table-style .hover .icons .dms, .table-style .icons .dms.active{ background-position:0px -112px;}
+/*.table-style .hover .icons .dms, .table-style .icons .dms.active{ background-position:0px -112px;}*/
+.table-style .icons .dms.active{ background-position:0px -112px;}
 
 .table-style .icons .favorite{ background:url(../images/icon_star.gif) no-repeat -16px 0px;}
 

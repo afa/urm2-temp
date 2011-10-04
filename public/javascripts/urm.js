@@ -9,6 +9,18 @@ for (e in o) {a.push (e)};
 return a;
 } 
 
+function makeAjaxCall(ajaxUrl, functionSuccess, functionFailure){
+ $.ajax({
+  type: "GET",
+  url: ajaxUrl,
+  contentType: "application/json; charset=utf-8",
+  data: {},
+  dataType: "json",
+  success: functionSuccess,
+  error: functionFailure
+ });
+}
+
 function search_icons_handle(){
  var uniq = new Array();
  var ins = $(".icons input.item-code");
