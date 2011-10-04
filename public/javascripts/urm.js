@@ -107,6 +107,7 @@ function showDms(evt){
    insertGap(row_id, data["gap"]);
    //$(data["gap"]).insertAfter($("tr.info_item_" + row_id).add("tr.analog_item_" + row_id).add("tr.dms_item_" + row_id).last());
   });
+  return preventDefault();
  } else {
   $("tr.dms_item_" + row_id).toggle();
   $("tr.dms_item_" + row_id).toggleClass("hidden");

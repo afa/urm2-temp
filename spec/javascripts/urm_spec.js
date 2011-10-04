@@ -43,6 +43,19 @@ describe("showDms", function(){
   });
 
  });
+ describe("when dms only exists and visible", function(){
+  beforeEach(function(){
+   onSuccess = jasmine.createSpy('onSuccess');
+   onFailure = jasmine.createSpy('onFailure');
+   setFixtures("<table><tr class='item_tst'><td><div class='icons'><div class='icon'><div class='dms js'> </div></div></div></td></tr><tr class='info_item_tst'><td></td></tr><tr class='dms_item_tst'><td> </td></tr><tr class='gap_tst'><td><td></tr></table>");
+   jasmine.Ajax.useMock();
+   search_icons_handle();
+   $(".icon .dms.js").click();
+   request = mostRecentAjaxRequest();
+  });
+  it("should hide dms");
+  it("should hide gap");
+ });
 });
 
 describe("search_icons_handle", function(){
