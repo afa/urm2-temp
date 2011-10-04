@@ -29,17 +29,16 @@ function search_icons_handle(){
  });
  $.each(uniq.getUnique(), function(idx, val){
   $(".icons input[value='" + val + "']:first").parents(".icons").find("div.dms-req:first").addClass("dms").addClass("js");
-  //$("tr.item_" + i + " .icons .dms-req:first").addClass("js");
  });
  $(".dms-req").removeClass("dms-req");
  $('.js').bind('ajax:success', function(evt, xhr, status){
   eval(xhr.responseText);
  });
- $('.js').bind('ajax:complete', function(evt, xhr, status){
+ $('.js.replacement').add(".js.delivery").bind('ajax:complete', function(evt, xhr, status){
   $(this).parents('.icon').find('.slider').hide();
   $(this).parents('.icon').find('a').show();
  });
- $('.icon .js').bind('ajax:beforeSend', function(evt, xhr, status){
+ $('.icon .js.replacement').add(".icon .js.delivery").bind('ajax:beforeSend', function(evt, xhr, status){
   $(this).parents('.icon').find('a').hide();
   $(this).parents('.icon').find('.slider').show();
  });
