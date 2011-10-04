@@ -80,18 +80,22 @@ function load_dms_bundle(from_where, need_load){
  }
 }
 
-function insertGap(after, gap){
- if($("tr.gap_" + after).length == 0){
-  var clctn = $("tr.dms_item_" + after).add("tr.info_item_" + after).add("tr.analog_item_" + after);
-  if(clctn.length > 0){
-   $(gap).insertAfter(clctn.last());
-  }
- }
- if(clctn.find(":visible").length > 0){
+function toggleGap(after){
+ if($("tr.dms_item_" + after).add("tr.info_item_" + after).add("tr.analog_item_" + after).find(":visible").length > 0){
   $("tr.gap_" + after).show();
  } else {
   $("tr.gap_" + after).hide();
  }
+}
+
+function insertGap(after, gap){
+ var clctn = $("tr.dms_item_" + after).add("tr.info_item_" + after).add("tr.analog_item_" + after);
+ if($("tr.gap_" + after).length == 0){
+  if(clctn.length > 0){
+   $(gap).insertAfter(clctn.last());
+  }
+ }
+ toggleGap(after);
 }
 // on-click for dms button
 function showDms(evt){
@@ -107,11 +111,11 @@ function showDms(evt){
    insertGap(row_id, data["gap"]);
    //$(data["gap"]).insertAfter($("tr.info_item_" + row_id).add("tr.analog_item_" + row_id).add("tr.dms_item_" + row_id).last());
   });
-  return preventDefault();
+  return; 
  } else {
   $("tr.dms_item_" + row_id).toggle();
   $("tr.dms_item_" + row_id).toggleClass("hidden");
-   insertGap(row_id, data["gap"]);
+  toggleGap(row_id);
   /*if($("tr.dms_item_" + row_id).add("tr.analog_item_" + row_id).add("tr.info_item_" + row_id).not(".hidden").length == 0){
    $("tr.gap_" + row_id).hide();
    $("tr.gap_" + row_id).addClass("hidden");
