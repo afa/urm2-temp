@@ -46,5 +46,11 @@ describe("showDms", function(){
 });
 
 describe("search_icons_handle", function(){
+ beforeEach(function(){
+  loadFixtures("fixtures/urm_search_icons_handle.html");
+ });
 
+ it("should init dms icons for only first locations", function(){
+  expect($(".dms")).not.toBeEmpty();
+ });
 });
