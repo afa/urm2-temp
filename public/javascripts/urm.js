@@ -115,12 +115,21 @@ function showDms(evt){
  $(this).parents(".icon").find(".dms").hide();
  $(this).parents(".icon").find(".slider").show();
  if($("tr.dms_item_" + row_id).length == 0){
-  $.getJSON("/main/dms?code=" + code + "&after=" + row_id, "", function(data){
+  makeAjaxCall("/main/dms?code=" + code + "&after=" + row_id, function(data){
+  //$.getJSON("/main/dms?code=" + code + "&after=" + row_id, "", function(data){
    $("tr.item_" + row_id + " .icon .slider").hide();
-   $("tr.item_" + row_id + " .icon .dms").show();
-   $(data["dms"]).insertAfter($("tr.info_item_" + row_id).add("tr.item_" + row_id).last());
-   insertGap(row_id, data["gap"]);
+   $("tr.item_" + row_id + " .icon .dms").show().addClass("active");
+   if(/^\s*$/.test(data["dms"])){
+    $(data["empty"]).insertAfter($("tr.info_item_" + row_id).add("tr.item_" + row_id).last());
+    $("tr.item_" + row_id + " .icon .dms").removeClass("active");
+   } else {
+    $(data["dms"]).insertAfter($("tr.info_item_" + row_id).add("tr.item_" + row_id).last());
+    insertGap(row_id, data["gap"]);
+   }
    //$(data["gap"]).insertAfter($("tr.info_item_" + row_id).add("tr.analog_item_" + row_id).add("tr.dms_item_" + row_id).last());
+  }, function(data){
+   $("tr.item_" + row_id + " .icon .slider").hide();
+   $("tr.item_" + row_id + " .icon .dms").show().removeClass("active");
   });
   return; 
  } else {
