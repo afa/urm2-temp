@@ -79,4 +79,18 @@ class Axapta
    res.select{|i| i.has_key?("item_id") && i["item_id"] != srch }
    #res
   end
+
+  def self.retail_price(*args)
+   return [] unless args.first.has_key?("item_id") || args.first.has_key?(:item_id)
+   srch = args.first["item_id"]
+   srch = args.first[:item_id] unless srch
+   res = AxaptaRequest.retail_price(*args).try(:[], "items") || []
+   a = {}
+   locs = res["prices"].sort_by{|l| l["min_qty"] }[0, 4]
+   a.merge!("price1" => locs[0]["price"]) if locs[0]
+   a.merge!("price2" => locs[1]["price"], "count2" => locs[1]["min_qty"]) if locs[1]
+   a.merge!("price3" => locs[2]["price"], "count3" => locs[2]["min_qty"]) if locs[2]
+   a.merge!("price4" => locs[3]["price"], "count4" => locs[3]["min_qty"]) if locs[3]
+   a
+  end
 end
