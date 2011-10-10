@@ -1,5 +1,10 @@
 Urm::Application.routes.draw do
 
+  #get "orders/index"
+
+  #get "orders/show"
+
+  resources :orders
   resources :users do
    collection do
     get :current_account
