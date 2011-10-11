@@ -93,4 +93,15 @@ class Axapta
    a.merge!("price4" => locs[3]["price"], "count4" => locs[3]["min_qty"]) if locs[3]
    a
   end
+
+  def self.sales_info(*args)
+   res = AxaptaRequest.sales_info(*args)
+  end
+
+  def self.sales_lines(*args)
+   res = AxaptaRequest.sales_lines(*args)
+   (res.try(:[], "sales") || []).map do |sale|
+    OpenStruct.new sale
+   end
+  end
 end

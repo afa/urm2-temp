@@ -16,18 +16,36 @@ describe OrdersController do
  end
 
 
-  describe "GET 'index'" do
-    it "should be successful" do
-      get 'index'
-      response.should be_success
-    end
+ describe "GET 'index'" do
+  before do
+   @orders = [{}]
+   Axapta.stub!(:sales_info).and_return(@orders)
+  end
+  it "should be successful" do
+   get 'index'
+   response.should be_success
   end
 
-  describe "GET 'show'" do
-    it "should be successful" do
-      get 'show', :id => 0
-      response.should be_success
-    end
+  it "should assign orders" do
+   get 'index'
+   assigns[:orders].should == @orders
   end
+ end
+
+ describe "GET 'show'" do
+  before do
+   @orders = [{:sales_id => '01'}, {:sales_id => '02'}].map{|s| OpenStruct.new s }
+   AxaptaRequest.stub!(:sales_lines).and_return({:sales_id => '01'})
+   get 'show', :id => @orders.first.sales_id
+  end
+
+  it "should be successful" do
+   response.should be_success
+  end
+
+  it "should assign order" do
+   assigns[:order].should == @orders.first
+  end
+ end
 
 end

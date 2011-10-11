@@ -22,4 +22,28 @@ describe Axapta do
    Axapta.search_analogs(:user_hash => 'asd', :item_id_search => "tst").size.should == 1
   end
  end
+
+ context "on #sales_info" do
+  before do
+   AxaptaRequest.stub!(:sales_info).and_return([{:sales_id => '01'}])
+  end
+
+  it "should return array" do
+   Axapta.sales_info().should be_is_a(Array)
+  end
+  it "should return empty array on exception"
+  it "should return array of openstructs" do
+   Axapta.sales_info().should_not be_empty
+   Axapta.sales_info().each{|s| s.should be_is_a(OpenStruct) }
+  end
+  it "should set sales_id for items"
+ end
+
+ context "on #sales_lines" do
+  before do
+   AxaptaRequest.stub!(:sales_lines).and_return({:sales_id => '01'})
+  end
+  it "should return openstruct" 
+ end
+
 end
