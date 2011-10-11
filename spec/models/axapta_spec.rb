@@ -36,7 +36,10 @@ describe Axapta do
    Axapta.sales_info().should_not be_empty
    Axapta.sales_info().each{|s| s.should be_is_a(OpenStruct) }
   end
-  it "should set sales_id for items"
+  it "should set sales_id for items" do
+   Axapta.sales_info().should_not be_empty
+   Axapta.sales_info().each{|s| s.should be_respond_to(:sales_id) }
+  end
  end
 
  context "on #sales_lines" do
