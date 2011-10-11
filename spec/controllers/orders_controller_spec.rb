@@ -35,7 +35,7 @@ describe OrdersController do
  describe "GET 'show'" do
   before do
    @orders = [{:sales_id => '01'}, {:sales_id => '02'}].map{|s| OpenStruct.new s }
-   AxaptaRequest.stub!(:sales_lines).and_return({:sales_id => '01'})
+   Axapta.stub!(:sales_lines).and_return([OpenStruct.new({:sales_id => '01'})])
    get 'show', :id => @orders.first.sales_id
   end
 
@@ -44,7 +44,7 @@ describe OrdersController do
   end
 
   it "should assign order" do
-   assigns[:order].should == @orders.first
+   assigns[:order].should == [@orders.first]
   end
  end
 

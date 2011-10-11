@@ -25,7 +25,7 @@ describe Axapta do
 
  context "on #sales_info" do
   before do
-   AxaptaRequest.stub!(:sales_info).and_return([{:sales_id => '01'}])
+   AxaptaRequest.stub!(:sales_info).and_return("sales" => [{:sales_id => '01'}])
   end
 
   it "should return array" do
