@@ -11,7 +11,7 @@ describe OrdersController do
 
   describe "GET 'show'" do
     it "should be successful" do
-      get 'show'
+      get 'show', :id => 0
       response.should be_success
     end
   end
