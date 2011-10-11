@@ -5,7 +5,7 @@ class MainController < ApplicationController
  respond_to :js, :html, :json
 
  #before_filter :get_users, :only => [:index]
- before_filter :get_accounts, :only => [:index, :search, :extended]
+ #before_filter :get_accounts, :only => [:index, :search, :extended]
  before_filter :check_account, :only => [:search, :extended, :dms]
   def index
   end
@@ -145,9 +145,9 @@ class MainController < ApplicationController
 
   end
  protected
-  def get_accounts
-   @accounts = current_user.accounts.where(:blocked => false)
-  end
+  #def get_accounts
+  # @accounts = current_user.accounts.where(:blocked => false)
+  #end
 
   def check_account
    if current_user.current_account

@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_filter :authenticate!
+  before_filter :get_accounts
   before_filter :take_search
   protect_from_forgery
 
@@ -44,6 +45,14 @@ class ApplicationController < ActionController::Base
 
   def logged_in?
    not current_user.blank?
+  end
+
+  def get_accounts
+   if logged_in?
+    @accounts = current_user.accounts.where(:blocked => false)
+   else
+    @accounts = []
+   end
   end
 
   def take_search
