@@ -103,7 +103,7 @@ class Axapta
 
   def self.sales_lines(*args)
    res = AxaptaRequest.sales_lines(*args)
-   (res.try(:[], "sales") || []).map do |sale|
+   (res.try(:[], "sales_lines") || []).map do |sale|
     OpenStruct.new sale
    end
   end

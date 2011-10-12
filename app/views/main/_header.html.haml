@@ -55,13 +55,13 @@
    %i.b3
     %i
    %a.link{:href=>root_path} Главная
- -# .button
+ .button
   .button-shadow
    %i.b1
    %i.b2
    %i.b3
     %i
-   %a.link{:href=>"#"} Бизнес
+   %a.link{:href=>"#"} Заказы
   .submenu-shadow
    %i.b1
    %i.b2
@@ -76,14 +76,14 @@
    %ul.submenu
     %li
      %a{:href=>"#"}
-      %span Запросы
+      %span Список заказов
     %li
      %a.order{:href=>"orders.html"}
-      %span Заказы
-    %li
+      %span Открытые строки
+    -# %li
      %a{:href=>"#"}
       %span Грузы
-    %li
+    -# %li
      %a{:href=>"#"}
       %span Исходящие грузы
      %ul
@@ -99,7 +99,7 @@
       %li
        %a{:href=>"#"}
         %span Строки заказа клиента
-    %li.active
+    -# %li.active
      %a{:href=>"#"}
       %span Накладные
  -# .button
