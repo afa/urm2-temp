@@ -1,6 +1,6 @@
 %tr
  %td= list_line.this_sales_origin
- %td= list_line.sales_id
+ %td= link_to list_line.sales_id, order_path(list_line.sales_id)
  %td= list_line.official_number
  %td= list_line.amount
  -# %td= list_line.
