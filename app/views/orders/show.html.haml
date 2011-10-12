@@ -1,2 +1,44 @@
-%h1 Orders#show
-%p Find me in app/views/orders/show.html.haml
+-# Фильтры
+
+-# Дата отгрузки: даты c/по (см. календарик в шаблоне 008, compel_html_008/orders.html), params.date_from, params.date_to
+-# Наименование: строка, params.item_name
+-# Только мои позиции: вкл/выкл, params.only_my
+-# Только ДМС: вкл/выкл, params.only_dms
+-# Таблица:
+
+%table
+ %tr
+  %th ROHS
+  %th Наименование
+  %th Производитель
+  %th Количество
+  %th Цена
+  %th Сумма
+  %th Поставка
+  %th Резерв
+  %th В обработке складом
+  %th Получено
+  %th Продано
+  %th Дата готовности
+  %th Ожидаемая дата поставки
+  %th Заказ
+  %th Контактное лицо
+  %th Проект
+
+ = render :partial => "orders/item_line", :collection => @order
+-# "ROHS": sales_lines[].rohs
+-# "Наименование": sales_lines[].item_name
+-# "Производитель": sales_lines[].brend
+-# "Количество": sales_lines[].sales_qty
+-# "Цена": sales_lines[].price
+-# "Сумма": sales_lines[].amount
+-# "Поставка": sales_lines[].qty_in_debt
+-# "Резерв": sales_lines[].reserve_qty
+-# "В обработке складом": sales_lines[].qty_in_processing
+-# "Получено": sales_lines[].qty_receive
+-# "Продано": sales_lines[].invoiced_in_total
+-# "Дата готовности": sales_lines[].date_dead_line
+-# "Ожидаемая дата поставки": sales_lines[].confirmed_dlv_date
+-# "Заказ": sales_lines[].sales_id
+-# "Контактное лицо": todo
+-# "Проект": todo
