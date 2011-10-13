@@ -1,18 +1,22 @@
-%h3 Список заказов
--# filters sales_id, official_number, this_sales_origin, only_my
+.content-wrap
 
-%table
- %tr
-  %th УРМ
-  %th Номер заказа
-  %th Офиц. номер
-  %th Сумма
-  %th Дата создания
-  %th Статус
-  %th Примечание
-  %th Контактное лицо
-  %th Дата готовности
-  %th Код способа доставки
-  %th Счет
-  %th Сумма по счету
- = render :partial => "orders/list_line", :collection => @orders
+ .table-title{:class=>"favorite"}Список заказов
+ .table-navigation-block{:class => "scroll"}
+  .table-block
+   .table-scrolling
+    %table.table-style{:class => "order-list"}
+     %tr
+      %th УРМ
+      %th.text-left Номер заказа
+      %th.text-left Офиц. номер
+      %th Сумма
+      %th Дата создания
+      %th Статус
+      %th Примечание
+      %th.text-right Контактное лицо
+      %th.text-right Дата готовности
+      %th.text-right Код способа доставки
+      %th.text-right Счет
+      %th.text-right Сумма по счету
+     = render :partial => "orders/list_line", :collection => @orders
+-# filters sales_id, official_number, this_sales_origin, only_my
