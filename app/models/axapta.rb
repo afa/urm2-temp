@@ -97,6 +97,7 @@ class Axapta
   def self.sales_info(*args)
    p *args
    res = AxaptaRequest.sales_info(*args)
+   p res
    (res.try(:[], "sales") || []).map do |sale|
     OpenStruct.new sale
    end
