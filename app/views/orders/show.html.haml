@@ -6,26 +6,32 @@
 -# Только ДМС: вкл/выкл, params.only_dms
 -# Таблица:
 
-%table
- %tr
-  %th ROHS
-  %th Наименование
-  %th Производитель
-  %th Количество
-  %th Цена
-  %th Сумма
-  %th Поставка
-  %th Резерв
-  %th В обработке складом
-  %th Получено
-  %th Продано
-  %th Дата готовности
-  %th Ожидаемая дата поставки
-  %th Заказ
-  %th Контактное лицо
-  %th Проект
+.content-wrap
 
- = render :partial => "orders/item_line", :collection => @order
+ .table-title{:class=>"favorite"}
+ .table-navigation-block{:class => "scroll"}
+  .table-block
+   .table-scrolling
+    %table.table-style{:class => "order-list"}
+     %tr
+      %th ROHS
+      %th.text-left Наименование
+      %th.text-left Производитель
+      %th.text-right Количество
+      %th.text-right Цена
+      %th.text-right Сумма
+      %th Поставка
+      %th Резерв
+      %th В обработке складом
+      %th Получено
+      %th Продано
+      %th Дата готовности
+      %th Ожидаемая дата поставки
+      %th Заказ
+      %th Контактное лицо
+      %th Проект
+
+     = render :partial => "orders/item_line", :collection => @order
 -# "ROHS": sales_lines[].rohs
 -# "Наименование": sales_lines[].item_name
 -# "Производитель": sales_lines[].brend
