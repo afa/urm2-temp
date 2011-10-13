@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
   end
 
   def show
-   @order = Axapta.sales_lines(:sales_id => params[:id], :user_hash => current_user.current_account.axapta_hash, :only_open => true)
+   @order = Axapta.sales_lines(:sales_id => params[:id], :user_hash => current_user.current_account.axapta_hash)#, :only_open => true)
 # 2. Строки заказа
  
 # Меню: Заказы - Открытые строки
