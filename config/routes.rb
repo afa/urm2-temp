@@ -4,7 +4,11 @@ Urm::Application.routes.draw do
 
   #get "orders/show"
 
-  resources :orders, :only => [:index, :show]
+  resources :orders, :only => [:index, :show] do
+   collection do
+    get :lines
+   end
+  end
   resources :users do
    collection do
     get :current_account
