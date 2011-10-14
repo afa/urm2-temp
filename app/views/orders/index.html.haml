@@ -30,12 +30,12 @@
  .fields
   %span.switch{:class=>"check"}
    Искать:
-   %a{:href=>"#", :name => "search[only_available]"}
-    %span Только в наличии
+   %a{:href=>"#", :name => "filter[this_sales_origin]"}
+    %span= t :this_sales_origin
   %span.switch{:class=>"check"}
-   %a{:href=>"#", :name => "search[only_store]"}
-    %span Только склад
-  %span.switch{:class=>"radio"}
+   %a{:href=>"#", :name => "filter[only_my]"}
+    %span= t :only_my
+  -# %span.switch{:class=>"radio"}
    Цены:
    %a{:href=>"#", :class=>"active"}
     %span USD
