@@ -1,4 +1,7 @@
 class OrdersController < ApplicationController
+
+ before_filter :get_filter
+
   def index
    @orders = Axapta.sales_info(:user_hash => current_user.current_account.axapta_hash)
 # Фильтры:
@@ -67,4 +70,9 @@ class OrdersController < ApplicationController
 # "Проект": todo
   end
 
+
+ protected
+  def get_filter
+   @filter = OpenStruct.new(params[:filter] || {})
+  end
 end
