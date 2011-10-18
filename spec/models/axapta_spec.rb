@@ -31,7 +31,10 @@ describe Axapta do
   it "should return array" do
    Axapta.sales_info().should be_is_a(Array)
   end
-  it "should return empty array on exception"
+  it "should return empty array on exception" do
+   AxaptaRequest.stub!(:sales_info).and_raise(Exception)
+   Axapta.sales_info().should == []
+  end
   it "should return array of openstructs" do
    Axapta.sales_info().should_not be_empty
    Axapta.sales_info().each{|s| s.should be_is_a(OpenStruct) }

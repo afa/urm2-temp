@@ -95,9 +95,11 @@ class Axapta
   end
 
   def self.sales_info(*args)
-   p *args
-   res = AxaptaRequest.sales_info(*args)
-   p res
+   begin
+    res = AxaptaRequest.sales_info(*args)
+   rescue Exception => e
+    return []
+   end
    (res.try(:[], "sales") || []).map do |sale|
     OpenStruct.new sale
    end
