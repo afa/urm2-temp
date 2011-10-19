@@ -32,6 +32,7 @@
 .search-result-block .filters{ }
 
 .filter-block .fields{ padding-top: 1em; }
+.search-block .fields{ padding-top: 1em; }
 
 /* Корзина */
 .cart-page .add-in h4{ padding-bottom:17px;}
