@@ -5,46 +5,47 @@
  Только УРМ bool this_sales_origin
  Только мои заказы bool only_my
 
-.filter-tab-block
- -# %form{:action=>" "}
- = form_for :filter, :url => orders_path, :html => {:method => :get} do |f|
-  .field
-   = f.label :sales_id
-   = f.text_field :sales_id
-  .field
-   = f.label :official_number
-   = f.text_field :official_number
-   = f.hidden_field :this_sales_origin
-   = f.hidden_field :only_my
-   -# = f.submit :find
-  -# %input{:type=>"text", :value=>"TDA2003;OR;300"}
-  .button
-   %a.button-style{:href=>"#"}
-    %i.t &nbsp;
-    %i.b &nbsp;
-    %i.tl &nbsp;
-    %i.tr &nbsp;
-    %span Найти!
-    %i.bl &nbsp;
-    %i.br &nbsp;
- .clear
- .fields
-  %span.switch{:class=>"check"}
-   Искать:
-   %a{:href=>"#", :name => "filter[this_sales_origin]"}
-    %span= t :this_sales_origin
-  %span.switch{:class=>"check"}
-   %a{:href=>"#", :name => "filter[only_my]"}
-    %span= t :only_my
-  -# %span.switch{:class=>"radio"}
-   Цены:
-   %a{:href=>"#", :class=>"active"}
-    %span USD
-   %a{:href=>"#"}
-    %span RUB
-
-
 .content-wrap
+ .filter-block
+  -# %form{:action=>" "}
+  = form_for :filter, :url => orders_path, :html => {:method => :get} do |f|
+   .fields
+    .field
+     = f.label :sales_id
+     = f.text_field :sales_id
+    .field
+     = f.label :official_number
+     = f.text_field :official_number
+     = f.hidden_field :this_sales_origin
+     = f.hidden_field :only_my
+     -# = f.submit :find
+    -# %input{:type=>"text", :value=>"TDA2003;OR;300"}
+    .button
+     %a.button-style{:href=>"#"}
+      %i.t &nbsp;
+      %i.b &nbsp;
+      %i.tl &nbsp;
+      %i.tr &nbsp;
+      %span Найти!
+      %i.bl &nbsp;
+      %i.br &nbsp;
+  .clear
+  .fields
+   %span.switch{:class=>"check"}
+    Искать:
+    %a{:href=>"#", :name => "filter[this_sales_origin]"}
+     %span= t :this_sales_origin
+   %span.switch{:class=>"check"}
+    %a{:href=>"#", :name => "filter[only_my]"}
+     %span= t :only_my
+   -# %span.switch{:class=>"radio"}
+    Цены:
+    %a{:href=>"#", :class=>"active"}
+     %span USD
+    %a{:href=>"#"}
+     %span RUB
+
+
  .table-title{:class=>"favorite"}Список заказов
  .table-navigation-block{:class => "scroll"}
   .table-block
