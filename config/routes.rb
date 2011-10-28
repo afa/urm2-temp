@@ -1,9 +1,6 @@
 Urm::Application.routes.draw do
 
-  #get "orders/index"
-
-  #get "orders/show"
-
+  resources :carts, :except => [:show]
   resources :orders, :only => [:index, :show] do
    collection do
     get :lines

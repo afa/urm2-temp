@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Account do
  context "new" do
   before do
-   User.any_instance.stub!(:valid?).and_return(true)
+   User.any_instance.stub(:valid?).and_return(true)
    Axapta.stub!(:user_info).and_return({})
    @account = FactoryGirl.create(:account)
   end
@@ -15,7 +15,7 @@ describe Account do
  context "on renew_structure" do
    let(:ui) { {:blocked => '0', :business => "КОМПЭЛ", :empl_name=>"КАШИНА НАТАЛЬЯ ЛЬВОВНА", :empl_email => 'datis@compel.ru', :contact_email => 'datis@compel.ru', :contact_first_name => 'Владимир', :contact_last_name => 'Ластовка', :contact_middle_name => 'Владимирович', :user_name => 'УРМ-2 Тест' } } #, :user_id => 1
   before do
-   User.any_instance.stub!(:valid?).and_return(true)
+   User.any_instance.stub(:valid?).and_return(true)
    Axapta.stub!(:user_info).and_return(ui)#, :user_id => 1
    @user = FactoryGirl.create(:user)
    @account = Account.find_by_axapta_hash(@user.ext_hash)
@@ -31,7 +31,7 @@ describe Account do
   end
   context "should renew parent" do
    before do
-    #User.any_instance.stub!(:valid?).and_return(true)
+    #User.any_instance.stub(:valid?).and_return(true)
     #Axapta.stub(:user_info).with('asdfg').and_return(:blocked => '0', :business => "КОМПЭЛ", :empl_name=>"КАШИНА НАТАЛЬЯ ЛЬВОВНА", :empl_email => 'datis@compel.ru', :contact_email => 'datis@compel.ru', :contact_first_name => 'Владимир', :contact_last_name => 'Ластовка', :contact_middle_name => 'Владимирович', :parent_user_id => '', :user_name => 'УРМ-2 Тест')
     @puser = FactoryGirl.create(:user)
     @prnt = Account.find_by_axapta_hash(@puser.ext_hash)
@@ -49,7 +49,7 @@ describe Account do
   end
   context "should renew children" do
    before do
-    #User.any_instance.stub!(:valid?).and_return(true)
+    #User.any_instance.stub(:valid?).and_return(true)
     #Axapta.stub(:user_info).with('asdfg').and_return(:blocked => '0', :business => "КОМПЭЛ", :empl_name=>"КАШИНА НАТАЛЬЯ ЛЬВОВНА", :empl_email => 'datis@compel.ru', :contact_email => 'datis@compel.ru', :contact_first_name => 'Владимир', :contact_last_name => 'Ластовка', :contact_middle_name => 'Владимирович', :parent_user_id => '', :user_name => 'УРМ-2 Тест')
     @uchld = FactoryGirl.create_list(:user, 2)
     @chld = @uchld.map{|u| Account.find_by_axapta_hash(u.ext_hash)}.uniq
