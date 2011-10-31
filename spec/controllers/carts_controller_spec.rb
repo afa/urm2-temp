@@ -1,12 +1,32 @@
 require 'spec_helper'
 
 describe CartsController do
+ before do
+  @user = FactoryGirl.build(:user)
+  #@user = FactoryGirl.build(:user, :ext_hash => '123')
+  @user.stub!(:valid?).and_return(true)
+  @user.stub!(:create_axapta_account).and_return(true)
+  Axapta.stub!(:user_info).and_return({})
+  @user.save!
+  @account = FactoryGirl.build(:account, :blocked => false, :user => @user)
+  @account.save!
+  @user.current_account = @user.accounts.first
+  @user.save!
+  controller.sign_in @user
+ end
+
 
   describe "GET 'index'" do
     it "should be successful" do
       get 'index'
       response.should be_success
     end
+
+   it "should setup @cart" do
+    get "index"
+    p assigns[:cart].class
+    assigns[:cart].should be_kind_of(Array)
+   end
   end
 
   describe "GET 'new'" do
@@ -16,23 +36,23 @@ describe CartsController do
     end
   end
 
-  describe "GET 'create'" do
+  describe "POST 'create'" do
     it "should be successful" do
-      get 'create'
+      post 'create'
       response.should be_success
     end
   end
 
   describe "GET 'edit'" do
     it "should be successful" do
-      get 'edit'
+      get 'edit', :id => 0
       response.should be_success
     end
   end
 
-  describe "GET 'update'" do
+  describe "PUT 'update'" do
     it "should be successful" do
-      get 'update'
+      put 'update', :id => 0
       response.should be_success
     end
   end

@@ -1,0 +1,14 @@
+%table
+ %tr
+  %th= t :type
+  %th= t :name
+  %th= t :brend
+  %th= t :rohs
+  %th= t :price
+  %th= t :amount
+  %th= t :location
+  %th= t :prognosis
+  %th= t :comment
+  %th= t :user_price
+  %th= t :action
+ = render :partial => "carts/cart_line", :collection => cart
