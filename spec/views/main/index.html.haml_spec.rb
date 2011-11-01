@@ -15,5 +15,4 @@ describe "main/index.html.haml" do
   render #_template "main/index.html.haml"
  end
  #no anonymous in view. anon - redirected in controller
-
 end

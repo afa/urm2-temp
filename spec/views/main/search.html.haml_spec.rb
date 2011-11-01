@@ -14,6 +14,7 @@ describe "main/search.html.haml" do
   assign(:accounts, @login.accounts)
   assign(:current_user, @login)
   assign(:search, OpenStruct.new(:query_string => 'tst'))
+  assign(:cart, [])
   #controller.send(:current_user=, @login)
   render
  end
@@ -36,5 +37,9 @@ describe "main/search.html.haml" do
    rendered.should have_xpath("//td", :text => i["item_brend"])
   end
  end
+ it "should render cart/cart_table" do
+  rendered.should render_template("carts/_cart_table")
+ end
+
  #it "should show link to "
 end
