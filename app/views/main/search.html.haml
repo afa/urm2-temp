@@ -65,7 +65,7 @@
       %th.bold= t :avail_min
       %th.bold= t :avail_max
 
-   - if @items.empty?
+    - if @items.empty?
       %tr
        %td{:colspan => 22}= t :items_not_found
      - else
