@@ -27,78 +27,80 @@
    - unless to_bool(@only_store)
     .dms_loader{:align=>"center"}
      %img{:src => image_path('ajax-loader.gif')}
-   %table.table-style{:class => "search-products"}
-    %tr
-     %th{:rowspan => 2} &nbsp;
-     %th.text-left{:rowspan => 2}= t :item_name
-     %th.text-left{:rowspan => 2}= t :item_brend
-     %th{:rowspan=>2}= t :body_name
-     %th{:rowspan => 2} ROHS
-
-     %th{:rowspan => 2}= t :to_cart
-
-     %th{:colspan => 2}= t :avail
-
-     %th{:rowspan => 2}= t :location
-
-     -# %th{:rowspan => 2}= t :prognosis
-     %th{:rowspan => 2}= t :price1
-     %th{:rowspan => 2}= t :count2
-     %th{:rowspan => 2}= t :price2
-     %th{:rowspan => 2}= t :count3
-     %th{:rowspan => 2}= t :price3
-     %th{:rowspan => 2}= t :count4
-     %th{:rowspan => 2}= t :price4
-
-
-     %th{:rowspan => 2}= t :quantity
-     -# %th{:rowspan=>"2"} Рег. позиция
-     -# %th{:rowspan=>"2"} Снято с произв.
-     -# %th{:rowspan=>"2"} Сегмент
-     -# %th{:rowspan=>"2"}
-      Цена конеч.
-      %br
-      потребителя
-
-    %tr
-     %th.bold= t :avail_min
-     %th.bold= t :avail_max
-
-    - if @items.empty?
+   = form_for :cart_fields, :url => "#" do |frm|
+    %table.table-style{:class => "search-products"}
      %tr
-      %td{:colspan => 22}= t :items_not_found
-    - else
-     = render :partial => "items_line", :collection => @items, :locals => {:need_links => true}
+      %th{:rowspan => 2} &nbsp;
+      %th.text-left{:rowspan => 2}= t :item_name
+      %th.text-left{:rowspan => 2}= t :item_brend
+      %th{:rowspan=>2}= t :body_name
+      %th{:rowspan => 2} ROHS
 
-    %tr.title-header-bottom
-     %th{:rowspan => 2} &nbsp;
-     %th.text-left{:rowspan => 2}= t :item_name
-     %th.text-left{:rowspan => 2}= t :item_brend
-     %th{:rowspan=>2}= t :body_name
-     %th{:rowspan => 2} ROHS
-     %th{:rowspan => 2}= t :to_cart
-     %th.bold{:class=>"double-first-cell"}= t :avail_min
-     %th.bold{:class => "double-last-cell"}= t :avail_max
-     %th{:rowspan => 2}= t :location
-     -# %th{:rowspan => 2}= t :prognosis
-     %th{:rowspan => 2}= t :price1
-     %th{:rowspan => 2}= t :count2
-     %th{:rowspan => 2}= t :price2
-     %th{:rowspan => 2}= t :count3
-     %th{:rowspan => 2}= t :price3
-     %th{:rowspan => 2}= t :count4
-     %th{:rowspan => 2}= t :price4
-     %th{:rowspan => 2}= t :quantity
-     -# %th{:rowspan=>"2"} Рег. позиция
-     -# %th{:rowspan=>"2"} Снято с произв.
-     -# %th{:rowspan=>"2"} Сегмент
-     -# %th{:rowspan=>"2"}
-      Цена конеч.
-      %br
-      потребителя
+      %th{:rowspan => 2}= t :to_cart
 
-    %tr.title-header-bottom
-     %th.double-cell{:colspan => 2}= t :avail
+      %th{:colspan => 2}= t :avail
+
+      %th{:rowspan => 2}= t :location
+
+      -# %th{:rowspan => 2}= t :prognosis
+      %th{:rowspan => 2}= t :price1
+      %th{:rowspan => 2}= t :count2
+      %th{:rowspan => 2}= t :price2
+      %th{:rowspan => 2}= t :count3
+      %th{:rowspan => 2}= t :price3
+      %th{:rowspan => 2}= t :count4
+      %th{:rowspan => 2}= t :price4
+
+
+      %th{:rowspan => 2}= t :quantity
+      -# %th{:rowspan=>"2"} Рег. позиция
+      -# %th{:rowspan=>"2"} Снято с произв.
+      -# %th{:rowspan=>"2"} Сегмент
+      -# %th{:rowspan=>"2"}
+       Цена конеч.
+       %br
+       потребителя
+
+     %tr
+      %th.bold= t :avail_min
+      %th.bold= t :avail_max
+
+     - if @items.empty?
+      %tr
+       %td{:colspan => 22}= t :items_not_found
+     - else
+      = render :partial => "items_line", :collection => @items, :locals => {:need_links => true, :frm => form}
+
+     %tr.title-header-bottom
+      %th{:rowspan => 2} &nbsp;
+      %th.text-left{:rowspan => 2}= t :item_name
+      %th.text-left{:rowspan => 2}= t :item_brend
+      %th{:rowspan=>2}= t :body_name
+      %th{:rowspan => 2} ROHS
+      %th{:rowspan => 2}= t :to_cart
+      %th.bold{:class=>"double-first-cell"}= t :avail_min
+      %th.bold{:class => "double-last-cell"}= t :avail_max
+      %th{:rowspan => 2}= t :location
+      -# %th{:rowspan => 2}= t :prognosis
+      %th{:rowspan => 2}= t :price1
+      %th{:rowspan => 2}= t :count2
+      %th{:rowspan => 2}= t :price2
+      %th{:rowspan => 2}= t :count3
+      %th{:rowspan => 2}= t :price3
+      %th{:rowspan => 2}= t :count4
+      %th{:rowspan => 2}= t :price4
+      %th{:rowspan => 2}= t :quantity
+      -# %th{:rowspan=>"2"} Рег. позиция
+      -# %th{:rowspan=>"2"} Снято с произв.
+      -# %th{:rowspan=>"2"} Сегмент
+      -# %th{:rowspan=>"2"}
+       Цена конеч.
+       %br
+       потребителя
+
+     %tr.title-header-bottom
+      %th.double-cell{:colspan => 2}= t :avail
+   = form.submit
 
  .clear
  .cart-table
