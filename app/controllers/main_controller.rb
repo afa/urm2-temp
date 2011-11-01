@@ -7,6 +7,7 @@ class MainController < ApplicationController
  #before_filter :get_users, :only => [:index]
  #before_filter :get_accounts, :only => [:index, :search, :extended]
  before_filter :check_account, :only => [:search, :extended, :dms]
+ before_filter :get_cart
   def index
   end
 
@@ -157,5 +158,12 @@ class MainController < ApplicationController
    else
     redirect_to root_path
    end
+  end
+
+  def get_cart
+   if current_user
+    @cart = current_user.cart_items.unprocessed.all
+   end
+   @cart ||= []
   end
 end
