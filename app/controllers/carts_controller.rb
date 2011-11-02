@@ -9,7 +9,7 @@ class CartsController < ApplicationController
 
   def create
    if params[:items][:commit]
-    params[:items].reject{|k, v| k == :commit }.reject{|k, v| v[:amount].empty? }.each do 
+    params[:items].reject{|k, v| k == :commit }.reject{|k, v| v[:amount].blank? }.each do 
     end
     redirect_to carts_path
    end
