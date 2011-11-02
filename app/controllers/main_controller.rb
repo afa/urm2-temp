@@ -35,7 +35,7 @@ class MainController < ApplicationController
      a.merge!("price2" => locs[1]["price"], "count2" => locs[1]["min_qty"]) if locs[1]
      a.merge!("price3" => locs[2]["price"], "count3" => locs[2]["min_qty"]) if locs[2]
      a.merge!("price4" => locs[3]["price"], "count4" => locs[3]["min_qty"]) if locs[3]
-     r << a
+     r << CartStore.prepare_code(a)
     end
     r
    end
@@ -48,6 +48,7 @@ class MainController < ApplicationController
    @brend = params[:brend]
    @hash = current_user.current_account.try(:axapta_hash)
    @items = conv_dms_items(Axapta.search_dms_names(:user_hash => @hash, :item_id_search => @code, :query_string => @seek, :search_brend => @brend))
+   CartWorld.prepare_codes(@items)
    respond_with do |format|
     format.json do
      render :json => {:dms => render_to_string( :partial => "main/dms_block.html", :locals => {:items => @items, :after => @after} ), :gap => render_to_string( :partial => "main/gap_line.html", :locals => {:after => @after}), :empty => render_to_string(:partial => "main/dms_empty.html", :locals => {:after => @after})}
