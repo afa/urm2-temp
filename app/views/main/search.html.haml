@@ -27,7 +27,7 @@
    - unless to_bool(@only_store)
     .dms_loader{:align=>"center"}
      %img{:src => image_path('ajax-loader.gif')}
-   = form_for :cart_fields, :url => "#" do |frm|
+   = form_for :cart_fields, :url => carts_path, :method => :post do |frm|
     %table.table-style{:class => "search-products"}
      %tr
       %th{:rowspan => 2} &nbsp;
