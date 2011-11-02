@@ -163,7 +163,7 @@ class MainController < ApplicationController
 
   def get_cart
    if current_user
-    @cart = current_user.cart_items.unprocessed.all
+    @cart = current_user.cart_items.in_cart.unprocessed.all
    end
    @cart ||= []
   end
