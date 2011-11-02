@@ -1,5 +1,10 @@
 require 'spec_helper'
 
 describe CartStore do
-  pending "add some examples to (or delete) #{__FILE__}"
+ before do
+  @cart = FactoryGirl.create(:cart_store)
+ end
+ it "should return name of type" do
+
+ end
 end
