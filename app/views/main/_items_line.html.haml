@@ -1,9 +1,10 @@
 - require "web_utils"
 - line_code = WebUtils.escape_name("#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}")
+- offer_code = WebUtils.escape_name("#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}_#{items_line["location_id"]}")
 %tr{:class => "item_#{line_code}"}
  %td.icons
-  %input.item-code{:type => "hidden", :value => items_line["item_id"], :name => "code_#{line_code}"}
-  %input.item-cart{:type => "hidden", :value => items_line[:cart_id], :name => "cart_#{WebUtils.escape_name("#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}_#{items_line["location_id"]}")}"}
+  %input.item-code{:type => "hidden", :value => items_line["item_id"], :name => "items[#{offer_code}][code]", :id => "code_#{line_code}"}
+  %input.item-cart{:type => "hidden", :value => items_line[:cart_id], :name => "items[#{offer_code}][cart]"}
   .icon
    -# = link_to "", main_dms_path(:code => items_line["item_id"], :after => line_code), :class => "dms js", :remote => true
    .dms-req &nbsp;
