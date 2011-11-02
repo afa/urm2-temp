@@ -1,6 +1,6 @@
 class CartStore < CartItem
   def type_name
-   ::I18N::t :cart_store
+   ::I18n::t :cart_store
   end
 
   def self.prepare_code(current_user, search_hash)
