@@ -12,8 +12,9 @@ class CartsController < ApplicationController
     params[:items].reject{|k, v| k == :commit }.reject{|k, v| v[:amount].blank? }.each do 
     end
     redirect_to carts_path
+   else
+    redirect_to :back
    end
-   redirect_to :back
   end
 
   def edit
