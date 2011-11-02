@@ -3,7 +3,7 @@ class CartStore < CartItem
    t :cart_store
   end
 
-  def self.prepare_code(search_hash)
+  def self.prepare_code(current_user, search_hash)
    hsh = {:user_id => current_user.id, :product_link => search_hash["item_id"], :product_name => search_hash["item_name"], :product_rohs => search_hash["rohs"], :product_brend => search_hash["item_brend"], :location_link => search_hash["location_id"]}
    fnd = self.unprocessed.where( hsh ).order("updated_at desc").all
    if fnd.empty?

@@ -35,7 +35,7 @@ class MainController < ApplicationController
      a.merge!("price2" => locs[1]["price"], "count2" => locs[1]["min_qty"]) if locs[1]
      a.merge!("price3" => locs[2]["price"], "count3" => locs[2]["min_qty"]) if locs[2]
      a.merge!("price4" => locs[3]["price"], "count4" => locs[3]["min_qty"]) if locs[3]
-     r << CartStore.prepare_code(a)
+     r << CartStore.prepare_code(current_user, a)
     end
     r
    end
