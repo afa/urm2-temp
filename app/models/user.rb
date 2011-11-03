@@ -27,11 +27,11 @@ class User < ActiveRecord::Base
   # encrypt(password) == encrypted_password
   #end
   def self.current=(user)
-   @@current = user
+   @current = user
   end
 
   def self.current
-   @@current
+   @current
   end
 
   def authenticated?(pwd)
