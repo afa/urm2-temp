@@ -19,8 +19,12 @@ class CartItem < ActiveRecord::Base
   def self.copy_on_write(hsh) # excpshn on bad params, not found
    raise CartParamRequired unless hsh.try(:[], :cart)
    old = find(hsh[:cart])
+   puts "old offer"
+   p old
    if hsh[:amount].to_i != old.amount
+    puts "ammount #{hsh[:amount]}"
     offers = old.offers(hsh[:amount].to_i)
+    p offers
     puts "offers fetch #{offers.count}"
     new_hsh = old.class.prepare_for(hsh[:amount].to_i, offers)
     instance_eval(new_hsh[:type]).create(new_hsh.reject{|k, v| k == :type })
