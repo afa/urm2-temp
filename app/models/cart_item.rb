@@ -25,7 +25,7 @@ class CartItem < ActiveRecord::Base
     puts "ammount #{hsh[:amount]}"
     offers = old.offers(hsh[:amount].to_i)
     p offers
-    new_hsh = old.class.prepare_for(hsh[:amount].to_i, offers.first).first
+    new_hsh = old.class.prepare_for(hsh[:amount].to_i, offers.first)
     instance_eval(new_hsh[:type]).create(new_hsh.reject{|k, v| k == :type }.update(:draft => !(new_hsh.amount.to_i > 0)))
     old.destroy!
    end
