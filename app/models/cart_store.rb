@@ -20,11 +20,11 @@ class CartStore < CartItem
   end
 
   def offers(count) #ret hash product
-   Axapta.search_names(:item_id_search => product_link, :invent_location_id => location_link, :user_hash => User.current.current_account.axapta_hash).first.try(:[], "items")
+   Axapta.search_names(:item_id_search => product_link, :invent_location_id => location_link, :user_hash => User.current.current_account.axapta_hash)
   end
 
   def self.prepare_for(count, hsh)
-   raise "NYI"
+   
   end
 
 
