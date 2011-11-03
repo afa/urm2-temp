@@ -25,7 +25,6 @@ class CartItem < ActiveRecord::Base
     puts "ammount #{hsh[:amount]}"
     offers = old.offers(hsh[:amount].to_i)
     p offers
-    puts "offers fetch #{offers.count}"
     new_hsh = old.class.prepare_for(hsh[:amount].to_i, offers)
     instance_eval(new_hsh[:type]).create(new_hsh.reject{|k, v| k == :type })
     old.destroy!
