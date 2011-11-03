@@ -29,7 +29,7 @@ class CartStore < CartItem
    p hsh, count
    selected = hsh["locations"].first["price_qty"].detect{|v| count >= v["min_qty"] && count <= v["max_qty"] }
    return CartRequest.prepare_for(count, hsh) unless selected
-   {:type => self.class.name, :amount => count, :product_link => hsh["item_id"], :location_link => hsh["locations"].first["location_id"], :product_name => hsh["item_name"], :product_rohs => hsh["rohs"], :product_brend => hsh["item_brend"], :processed => false, :current_price => selected["price"], :quantity => hsh["qty_in_pack"], :min_amount => hsh["min_qty"], :max_amount => hsh["locations"].first["vend_qty"], :avail_amount => hsh["locations"].first["vend_qty"], :draft => !(count > 0)}
+   {:type => self.name, :amount => count, :product_link => hsh["item_id"], :location_link => hsh["locations"].first["location_id"], :product_name => hsh["item_name"], :product_rohs => hsh["rohs"], :product_brend => hsh["item_brend"], :processed => false, :current_price => selected["price"], :quantity => hsh["qty_in_pack"], :min_amount => hsh["min_qty"], :max_amount => hsh["locations"].first["vend_qty"], :avail_amount => hsh["locations"].first["vend_qty"], :draft => !(count > 0)}
   end
 =begin
 "rohs"=>"", "analog_exists"=>false, "item_brend_name"=>"CONTINENTAL DEVICE INDIA LTD.", "min_qty"=>98, "item_name"=>"2N2222A", "segment_rus"=>"п═п╣п╪п╬п╫я┌", "locations"=>[{"delivery_prognosis"=>[], "price_qty"=>[{"price"=>0.3469, "min_qty"=>98, "price_ref"=>0, "max_qty"=>952}], "forecast_available"=>false, "vend_qty"=>952, "location_id"=>"CENTRE"}], "item_brend_url"=>"", "item_id"=>"270670", "item_brend"=>"CDIL", "package_name"=>"TO-18", "qty_in_pack"=>1000
