@@ -24,7 +24,7 @@ class CartStore < CartItem
   end
 
   def self.prepare_for(count, hsh)
-   
+   p hsh.class.name
   end
 
 
