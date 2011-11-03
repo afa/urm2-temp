@@ -27,7 +27,7 @@ class CartItem < ActiveRecord::Base
     p offers
     new_hsh = old.class.prepare_for(hsh[:amount].to_i, offers.first)
     instance_eval(new_hsh[:type]).create(new_hsh.reject{|k, v| k == :type }.update(:draft => !(new_hsh[:amount].to_i > 0)))
-    old.destroy!
+    old.destroy
    end
    
   end
