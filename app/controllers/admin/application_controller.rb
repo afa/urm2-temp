@@ -34,11 +34,11 @@ class Admin::ApplicationController < ActionController::Base
   end
 
  def current_user
-  @current_user ||= user_from_cookie
+  User.current ||= user_from_cookie
  end
 
  def current_user=(user)
-  @current_user = user
+  User.current = user
  end
 
  def logged_in?
