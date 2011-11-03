@@ -10,7 +10,7 @@ class CartsController < ApplicationController
   def create
    if params[:items].try(:[], :commit)
     params[:items].reject{|k, v| k == :commit }.reject{|k, v| v[:amount].blank? }.each do |k, v|
-     p k
+     CartItem.copy_on_write(v)
     end
     redirect_to carts_path
    else
