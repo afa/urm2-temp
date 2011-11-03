@@ -24,6 +24,8 @@ class CartStore < CartItem
   end
 
   def self.prepare_for(count, hsh)
+   count = hsh["min_qty"] if count < hsh["min_qty"]
+   return CartRequest.prepare_for(count, hsh) if count > hsh["locations"].first["vend_qty"]
    p hsh, count
   end
 
