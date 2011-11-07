@@ -1,6 +1,6 @@
 class CartRequest < CartItem
   def type_name
-   t :cart_request
+   ::I18n::t :cart_request
   end
 
   def offers(count) #ret hash product
