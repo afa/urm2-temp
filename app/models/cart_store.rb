@@ -24,7 +24,7 @@ class CartStore < CartItem
   end
 
   def self.prepare_for(count, hsh)
-   return CartRequest.prepare_for(count, hsh) if hsh.blank? or count > (hsh["locations"].first["vend_qty"] || 0)
+   return CartRequest.prepare_for(count, hsh) if hsh.blank? or count > (hsh["locations"].first["vend_qty"].to_i || 0)
    count = hsh["min_qty"] if count < hsh["min_qty"]
    p hsh, count
    selected = hsh["locations"].first["price_qty"].detect{|v| count >= v["min_qty"] && count <= v["max_qty"] }
