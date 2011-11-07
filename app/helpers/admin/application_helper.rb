@@ -5,9 +5,9 @@ module Admin::ApplicationHelper
 #  end
 # end
  def current_user
-  @current_user
+  User.current
  end
  def logged_in?
-  not @current_user.blank?
+  not User.current.blank?
  end
 end

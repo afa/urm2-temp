@@ -24,7 +24,6 @@ describe CartsController do
 
    it "should setup @cart" do
     get "index"
-    p assigns[:cart].class
     assigns[:cart].should be_kind_of(Array)
    end
   end

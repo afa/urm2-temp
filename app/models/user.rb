@@ -26,6 +26,14 @@ class User < ActiveRecord::Base
   # #Digest::MD5.hexdigest([salt, password].join) == encrypted_password
   # encrypt(password) == encrypted_password
   #end
+  def self.current=(user)
+   @current = user
+  end
+
+  def self.current
+   @current
+  end
+
   def authenticated?(pwd)
    self.encrypted_password == self.encrypt(pwd)
   end
