@@ -1,3 +1,4 @@
+- offer_code = WebUtils.escape_name("#{dms_line["item_name"]}_#{dms_line["item_brend"]}_#{dms_line["rohs"]}_#{dms_line["location_id"]}")
 %tr.sub-row-table{:class => "dms_item_#{after}"}
  %td.icons{:class => "border-l"}
 
@@ -10,7 +11,7 @@
    %a.speed-cart-button{:href=>"#"}
     %span
      %span &nbsp;
-   %input{:type=>"text", :class=>"validate[custom[onlyNumber],max[10000]]"}
+   %input{:type=>"text", :class=>"validate[custom[onlyNumber],max[10000]]", :name => "dms[#{offer_code}][amount]"}
    %a.count{:href=>"#"}
  %td.double-first-cell= dms_line["min_qty"]
  %td.double-last-cell= dms_line["max_qty"]

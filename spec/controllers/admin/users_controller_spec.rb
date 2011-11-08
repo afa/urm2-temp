@@ -3,6 +3,9 @@ require 'spec_helper'
 describe Admin::UsersController do
 
   describe "unloged get index" do
+   before do
+    controller.sign_out
+   end
    it "should be redirect to new session" do
     get :index
     response.should redirect_to(new_admin_session_path)

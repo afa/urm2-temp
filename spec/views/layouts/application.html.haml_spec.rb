@@ -11,7 +11,8 @@ describe "layouts/application.html.haml" do
   @items = [{:item_id => 123, :item_name => 'ttt'}]
   assign(:items, @items)
   assign(:accounts, @login.accounts)
-  assign(:current_user, @login)
+  User.current = @login
+  #assign(:current_user, @login)
   #controller.send(:current_user=, @login)
   render
  end

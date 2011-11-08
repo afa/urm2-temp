@@ -13,7 +13,8 @@ describe "users/index.html.haml" do
   #@users.each{|u| u.save! }
   assign(:children, @users)
   assign(:parent, @parent)
-  session[:user] = @user.id
+  User.current = @user
+  #session[:user] = @user.id
   render
  end
 

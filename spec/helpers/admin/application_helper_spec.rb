@@ -18,7 +18,8 @@ describe Admin::ApplicationHelper do
   context "when user valid" do
    before do
     @manager = FactoryGirl.create(:manager)
-    assign(:current_user, @manager)
+    User.current = @manager
+    #assign(:current_user, @manager)
    end
    it "should locate logged user" do
     helper.current_user.should == @manager
@@ -28,7 +29,8 @@ describe Admin::ApplicationHelper do
  describe "on #logged_in?" do
   before do
    @manager = FactoryGirl.create(:manager)
-   assign(:current_user, @manager)
+   User.current = @manager
+   #assign(:current_user, @manager)
   end
   context "when valid user" do
    it "say ok" do
@@ -45,7 +47,8 @@ describe Admin::ApplicationHelper do
 #  end
   context "when no user" do
    before do
-    assign(:current_user, nil)
+    User.current = nil
+    #assign(:current_user, nil)
    end
    it "say no" do
     helper.logged_in?.should_not be_true

@@ -24,17 +24,22 @@ describe SessionsController do
   end
 
   describe "POST 'create'" do
+   before do
+    controller.sign_out
+   end
     it "should be successful" do
      #User.any_instance.stub(:reload_accounts).and_return(nil)
      @user.accounts.each{|a| Axapta.stub!(:renew_structure).with(a.axapta_hash).and_return(true) }
      post 'create', "session" =>{"username" => @user.username, "password" => @pass}
      response.should redirect_to(root_path)
-     assigns[:current_user].should_not be_nil
+     User.current.should_not be_nil
+     #assigns[:current_user].should_not be_nil
     end
 
    it "should deny blocked user" do
     post 'create', :session => {:username => @blocked.username, :password => @pass}
-    controller.send(:current_user).should be_nil
+    #controller.send(:current_user).should be_nil
+    User.current.should be_nil
     response.should redirect_to(new_sessions_path)
    end
   end
@@ -44,7 +49,8 @@ describe SessionsController do
       controller.sign_in @user
       delete 'destroy'
       response.should be_redirect
-      controller.send(:current_user).should be_nil
+      #controller.send(:current_user).should be_nil
+      User.current.should be_nil
     end
   end
 
