@@ -2,8 +2,16 @@ require 'spec_helper'
 
 describe CartRequest do
  before do
-  @user = FactoryGirl.create(:user)
-  @account = FactoryGirl.create(:account)
+  @user = FactoryGirl.build(:user)
+  #@user = FactoryGirl.build(:user, :ext_hash => '123')
+  @user.stub!(:valid?).and_return(true)
+  @user.stub!(:create_axapta_account).and_return(true)
+  Axapta.stub!(:user_info).and_return({})
+  @user.save!
+  @account = FactoryGirl.build(:account, :blocked => false, :user => @user)
+  @account.save!
+  @user.current_account = @user.accounts.first
+  @user.save!
  end
  describe "#type_name" do
   it "should be request" do
@@ -18,7 +26,7 @@ describe CartRequest do
    @hsh = {"locations" => [{"vend_qty" => 3}]}
   end
   it "should call CartStore::prepare_for in case" do
-   CartStore.stub!(:prepare_for).with(count, @hsh).and_return(:type_name=>"CartStore")
+   CartStore.stub!(:prepare_for).with(1, @hsh).and_return(:type_name=>"CartStore")
    CartRequest.prepare_for(1, @hsh).should be_is_a(Hash)
    CartRequest.prepare_for(1, @hsh)[:type_name].should == "CartStore"
   end
