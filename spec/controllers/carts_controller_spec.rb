@@ -37,8 +37,8 @@ describe CartsController do
 
   describe "POST 'create'" do
     it "should be successful" do
-      post 'create', :items => {:commit => true}
-      response.should be_success
+      post 'create', :items => {:commit => 'ok'}
+      response.should be_redirect
     end
   end
 
