@@ -1,6 +1,6 @@
 - offer_code = WebUtils.escape_name("#{dms_line["item_name"]}_#{dms_line["item_brend"]}_#{dms_line["rohs"]}")
 %tr.sub-row-table{:class => "dms_item_#{after}"}
- %input.dms-code{:type => "hidden", :value => dms_line["item_id"], :name => "dms[#{offer_code}][code]", :id => "code_#{line_code}"}
+ %input.dms-code{:type => "hidden", :value => dms_line["item_id"], :name => "dms[#{offer_code}][code]", :id => "code_#{offer_code}"}
  %input.dms-cart{:type => "hidden", :value => dms_line[:cart_id], :name => "dms[#{offer_code}][cart]"}
 
  %td.icons{:class => "border-l"}
