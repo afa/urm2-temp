@@ -12,6 +12,9 @@ class CartsController < ApplicationController
     params[:items].reject{|k, v| k == :commit }.reject{|k, v| v[:amount].blank? }.each do |k, v|
      CartItem.copy_on_write(v)
     end
+    params[:dms].reject{|k, v| k == :commit }.reject{|k, v| v[:amount].blank? }.each do |k, v|
+     CartWorld.copy_on_write(v)
+    end
     redirect_to carts_path
    else
     redirect_to :back

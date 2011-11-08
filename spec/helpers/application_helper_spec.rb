@@ -8,7 +8,8 @@ describe ApplicationHelper do
     @user.stub!(:valid?).and_return(true)
     @user.stub!(:create_axapta_account).and_return(true)
     @user.save!
-    session[:user] = @user.id
+    User.current = @user
+    #session[:user] = @user.id
    end
    it "should locate logged user" do
     current_user.should_not be_nil

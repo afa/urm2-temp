@@ -82,6 +82,7 @@ class MainController < ApplicationController
    @hash = current_user.current_account.try(:axapta_hash)
    begin
     @items = conv_dms_items(Axapta.search_dms_names(:user_hash => @hash, :query_string => params[:query_string]))
+    CartWorld.prepare_codes(@items)
    rescue Exception
     @items = []
    end
