@@ -22,7 +22,6 @@ class Offer::World < Offer::Base
     r
    end
 
-   end
   end
 
 
