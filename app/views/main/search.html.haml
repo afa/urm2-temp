@@ -38,7 +38,7 @@
 
       %th{:rowspan => 2}= t :to_cart
 
-      %th{:colspan => 2}= t :avail
+      %th{:colspan => 3}= t :avail
 
       %th{:rowspan => 2}= t :location
 
@@ -64,6 +64,7 @@
      %tr
       %th.bold= t :avail_min
       %th.bold= t :avail_max
+      %th.bold &nbsp;
 
      - if @items.empty?
       %tr
@@ -80,6 +81,7 @@
       %th{:rowspan => 2}= t :to_cart
       %th.bold{:class=>"double-first-cell"}= t :avail_min
       %th.bold{:class => "double-last-cell"}= t :avail_max
+      %th.bold &nbsp;
       %th{:rowspan => 2}= t :location
       -# %th{:rowspan => 2}= t :prognosis
       %th{:rowspan => 2}= t :price1
@@ -99,7 +101,7 @@
        потребителя
 
      %tr.title-header-bottom
-      %th.double-cell{:colspan => 2}= t :avail
+      %th.double-cell{:colspan => 3}= t :avail
     = frm.submit t(:add_to_cart), :name => "items[commit]"
 
  .clear
