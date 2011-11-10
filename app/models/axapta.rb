@@ -112,3 +112,96 @@ class Axapta
    end
   end
 end
+
+=begin
+--- 
+class: cmpECommerce_CreateSalesTable
+input: 
+  comment: 
+    setter: setCmpComment
+    type: string
+  customer_delivery_type_id: 
+    description: "код способа поставки клиента"
+    setter: setCustDlvModeRecId
+  date_dead_line: 
+    setter: setDateDeadLine
+    type: date
+  disc_percent: 
+    setter: setDiscPercent
+  is_pick_all: 
+    description: "резервируются/бронируются все вновь созданные строки заказа. Ранее существующие строки не обрабатываются."
+    setter: setIsPickAll
+    type: boolean
+  main_invent_location: 
+    setter: setMainInventLocationId
+  po_url: 
+    setter: setPoURL
+  reserve_sale: 
+    description: "зарезервировать весь заказ"
+    setter: setReserveSale
+    type: boolean
+  sales_auto_process: 
+    description: "флаг. установить автоматическую обработку заказа"
+    setter: setSalesAutoProcess
+    type: boolean
+  sales_lines: 
+    content: 
+      invc_brend_alias: 
+        setter: setDMSinvcBrendAlias
+      invent_location: 
+        setter: setInventLocationId
+        title: склад
+        type: string
+      is_pick: 
+        setter: setIsPick
+        title: "бронировать строку"
+        type: boolean
+      item_id: 
+        setter: setItemId
+        title: "код ном-ры"
+        type: string
+      item_name: 
+        setter: setInvcInventItemName
+      line_customer_delivery_type_id: 
+        setter: setLineCustDlvMode
+      line_type: 
+        setter: setEPXLineType
+        title: "тип строки (order / dms)"
+        type: string
+      max_qty: 
+        setter: setDMSPurchAutoMaxQty
+      min_qty: 
+        setter: setDMSPurchAutoMinQty
+      prognosis_id: 
+        setter: setDMSPrognosisId
+      qty: 
+        setter: setQty
+        title: количество
+        type: real
+      qty_multiples: 
+        setter: setDMSqtyMultiples
+      reserve_sale: 
+        setter: setReserveSale
+        type: boolean
+      sales_price: 
+        description: "необязательное. заполняется для ДМС или для стока, если это разрешено правами."
+        setter: setSalesPrice
+        title: цена
+    iterator: addTmpLine
+    title: "строки заказа"
+    type: array
+  user_hash: 
+    description: "Уникальный ключ пользователя, выдается при подключении"
+    mandatory: true
+    maxlen: 32
+    minlen: 32
+    setter: setcmpHashCode
+    title: "Ключ пользователя"
+    type: string
+output: 
+  sales_id: 
+    getter: getResultSalesId
+    title: "код созданного заказа"
+    type: string
+title: "создание заказа"
+=end
