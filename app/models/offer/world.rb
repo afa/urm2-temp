@@ -1,8 +1,9 @@
+require "ostruct"
 class Offer::World < Offer::Base
 
   SIGNATURE_FIELDS << :prognoz << :vend_qty << :qty_multiples
 
-  attr_accessor :prognoz, :vend_qty, :qty_multiples
+  attr_accessor :prognoz, :vend_qty, :qty_multiples, :vend_proposal_date, :qtys, :prices, :counts, :need_more
 
   def self.ask_axapta_by_id(product_id)
    hshs = Axapta.search_name(:user_hash => User.current.current_account.try(:axapta_hash), :item_id_search => product_id)
@@ -27,6 +28,28 @@ class Offer::World < Offer::Base
    hash = User.current.current_account.try(:axapta_hash)
    items = conv_dms_items(Axapta.search_dms_names(:user_hash => hash, :item_id_search => product_code))
    CartWorld.prepare_codes(items)
+   fabricate(items)
+  end
+
+  def self.fabricate(arr)
+   arr.inject([]) do |r, hsh|
+    hsh["prognosis"].each do |prgnz|
+     r << self.new do |n|
+      n.name = hsh["item_name"]
+      n.brend = hsh["item_brend"]
+      n.code = hsh["item_id"]
+      n.rohs = hsh["rohs"]
+      n.prognoz = hsh["prognosis_id"]
+      n.vend_qty = hsh["vend_qty"]
+      n.qty_multiples = prgnz["qty_multiples"]
+      n.name = hsh["item_name"]
+      n.qtys = prgnz["price_qty"].sort_by{|p| p["min_qty"] }.inject([]){|rr, h| rr << OpenStruct.new(h) }
+      n.prices = prgnz.map{|p| p.price }
+      n.counts = prgnz.map{|p| p.min_qty }
+     end
+     r
+    end
+   end
   end
 
   def self.by_query(query, brend = nil)

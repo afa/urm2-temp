@@ -22,4 +22,10 @@ class Offer::Base
    WebUtils.escape_name(SIGNATURE_FIELDS.map{|a| send(a) }.join('_'))
   end
 
+  def initialize
+   super
+   if block_given?
+    yield self
+   end
+  end
 end

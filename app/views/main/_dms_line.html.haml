@@ -1,14 +1,26 @@
-- offer_code = WebUtils.escape_name("#{dms_line["item_name"]}_#{dms_line["item_brend"]}_#{dms_line["rohs"]}")
+      n.name = hsh["item_name"]
+      n.brend = hsh["item_brend"]
+      n.code = hsh["item_id"]
+      n.rohs = hsh["rohs"]
+      n.prognoz = hsh["prognosis_id"]
+      n.vend_qty = hsh["vend_qty"]
+      n.qty_multiples = prgnz["qty_multiples"]
+      n.name = hsh["item_name"]
+      n.qtys = prgnz["price_qty"].sort_by{|p| p["min_qty"] }.inject([]){|rr, h| rr << OpenStruct.new(h) }
+      n.prices = prgnz.map{|p| p.price }
+      n.counts = prgnz.map{|p| p.min_qty }
+
+- offer_code = dms_line.signature
 %tr.sub-row-table{:class => "dms_item_#{after}"}
- %input.dms-code{:type => "hidden", :value => dms_line["item_id"], :name => "dms[#{offer_code}][code]", :id => "code_#{offer_code}"}
- %input.dms-cart{:type => "hidden", :value => dms_line[:cart_id], :name => "dms[#{offer_code}][cart]"}
+ %input.dms-code{:type => "hidden", :value => dms_line.code, :name => "dms[#{offer_code}][code]", :id => "code_#{offer_code}"}
+ %input.dms-cart{:type => "hidden", :value => dms_line.cart_id, :name => "dms[#{offer_code}][cart]"}
 
  %td.icons{:class => "border-l"}
 
  %td.text-left{:class => "font-small", :colspan => 2}
-  %a{:href => "#"}= t(:need_all_prices_for_offer) if false && dms_line["need_more"]
- %td= dms_line["rohs"]
- %td= dms_line["location_id"]
+  %a{:href => "#"}= t(:need_all_prices_for_offer) if false && dms_line.need_more
+ %td= dms_line.rohs
+ %td= #dms_line.location_id
  %td.input-in-cart
   %div
    %a.speed-cart-button{:href=>"#"}
@@ -16,17 +28,17 @@
      %span &nbsp;
    %input{:type=>"text", :class=>"validate[custom[onlyNumber],max[10000]]", :name => "dms[#{offer_code}][amount]"}
    %a.count{:href=>"#"}
- %td.double-first-cell= dms_line["min_qty"]
- %td.double-cell= dms_line["max_qty"]
- %td.double-last-cell= dms_line["qty_multiples"]
- %td= dms_line["prognoz"]= dms_line["prognosis_id"]
- %td= dms_line["price1"]
- %td.green= dms_line["count2"]
- %td= dms_line["price2"]
- %td.green= dms_line["count3"]
- %td= dms_line["price3"]
- %td.green= dms_line["count4"]
- %td= dms_line["price4"]
+ %td.double-first-cell= dms_line.min_qty
+ %td.double-cell= dms_line.max_qty
+ %td.double-last-cell= dms_line.qty_multiples
+ %td= dms_line.prognosis_id
+ %td= dms_line.prices[0]
+ %td.green= dms_line.counts[1]
+ %td= dms_line.prices[1]
+ %td.green= dms_line.counts[2]
+ %td= dms_line.prices[2]
+ %td.green= dms_line.counts[3]
+ %td= dms_line.prices[3]
  -# %td.grey= dms_line["qty_in_pack"]
  -# %td.font-small
   %span.color-red= dms_line["vend_proposal_date"]
