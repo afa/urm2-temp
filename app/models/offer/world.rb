@@ -21,9 +21,26 @@ class Offer::World < Offer::Base
     end
     r
    end
-
   end
 
+  def self.mass_load(query_string)
+   hash = User.current.current_account.try(:axapta_hash)
+   begin
+    items = conv_dms_items(Axapta.search_dms_names(:user_hash => hash, :query_string => query_string))
+    CartWorld.prepare_codes(@items)
+   rescue Exception
+    items = []
+   end
+   hsh = items.inject({}) do |r, item|
+    i = WebUtils.escape_name("#{item["item_name"]}_#{item["item_brend"]}_#{item["rohs"]}")
+    unless r.has_key?(i)
+     r[i] = []
+    end
+    r[i] << item
+    r
+   end
+   
+  end
 
 =begin
    @after = params[:after]
@@ -61,7 +78,23 @@ class Offer::World < Offer::Base
 
   end
 =end
-
+=begin
+   @hash = current_user.current_account.try(:axapta_hash)
+   begin
+    @items = conv_dms_items(Axapta.search_dms_names(:user_hash => @hash, :query_string => params[:query_string]))
+    CartWorld.prepare_codes(@items)
+   rescue Exception
+    @items = []
+   end
+   hsh = @items.inject({}) do |r, item|
+    i = WebUtils.escape_name("#{item["item_name"]}_#{item["item_brend"]}_#{item["rohs"]}")
+    unless r.has_key?(i)
+     r[i] = []
+    end
+    r[i] << item
+    r
+   end
+=end
 
 
 end
