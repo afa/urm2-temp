@@ -3,14 +3,12 @@ require 'spec_helper'
 describe CartsController do
  before do
   @user = FactoryGirl.build(:user)
-  #@user = FactoryGirl.build(:user, :ext_hash => '123')
   @user.stub!(:valid?).and_return(true)
-  @user.stub!(:create_axapta_account).and_return(true)
-  Axapta.stub!(:user_info).and_return({})
+  Axapta.stub!(:user_info).with(@user.ext_hash).and_return({})
   @user.save!
-  @account = FactoryGirl.build(:account, :blocked => false, :user => @user)
-  @account.save!
-  @user.current_account = @user.accounts.first
+  @accounts = FactoryGirl.create_list(:account, 2, :user => @user)
+  @account = @accounts.first
+  @user.current_account = @accounts.first
   @user.save!
   controller.sign_in @user
  end

@@ -3,12 +3,14 @@ require 'spec_helper'
 describe "accounts/new.html.haml" do
  before do
   @user = FactoryGirl.build(:user)
-  5.times do
-   @user.accounts << FactoryGirl.create(:account, :user => @user)
-  end
-
-  @user.stub! :check_axapta_validity
+  @user.stub!(:valid?).and_return(true)
+  Axapta.stub!(:user_info).with(@user.ext_hash).and_return({})
   @user.save!
+  @accounts = FactoryGirl.create_list(:account, 5, :user => @user)
+  @account = @accounts.first
+  @user.current_account = @accounts.first
+  @user.save!
+
   assign(:user, @user)
   #assign(:accounts, @user.accounts)
   assign(:account, account)

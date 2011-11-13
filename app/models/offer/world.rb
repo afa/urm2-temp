@@ -56,6 +56,7 @@ class Offer::World < Offer::Base
    hash = User.current.current_account.try(:axapta_hash)
    items = conv_dms_items(Axapta.search_dms_names(:user_hash => hash, :query_string => query, :search_brend => brend))
    CartWorld.prepare_codes(items)
+   fabricate(items)
   end
 
   def conv_dms_items(items)
