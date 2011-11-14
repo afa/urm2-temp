@@ -13,7 +13,8 @@ class CartsController < ApplicationController
      CartItem.copy_on_write(v)
     end
     if params[:dms]
-     params[:dms].reject{|k, v| k == :commit }.reject{|k, v| v[:amount].blank? }.each do |k, v|
+     params[:dms].reject{|k, v| v[:amount].blank? }.each do |k, v|
+      p "dms order", k, v
       CartWorld.copy_on_write(v)
      end
     end
