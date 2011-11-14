@@ -32,6 +32,7 @@ class CartWorld < CartItem
     end
     item.update_attributes(:avail_amount => search.max_qty, :min_amount => search.min_qty, :quantity => search.qty_multiples)
     search.cart_id = item.id
+    search
    end
   end
 
