@@ -41,7 +41,7 @@ class CartWorld < CartItem
   end
 
   def self.prepare_for(count, hsh)
-   count = hsh["min_qty"] if count < hsh.min_qty
+   count = hsh["min_qty"] if count < hsh["min_qty"]
    selected = hsh["locations"].first["price_qty"].detect{|v| count >= v["min_qty"] && count <= v["max_qty"] }
    {:type => self.name, :amount => count, :product_link => hsh["item_id"], :location_link => hsh["locations"].first["location_id"], :product_name => hsh["item_name"], :product_rohs => hsh["rohs"], :product_brend => hsh["item_brend"], :processed => false, :current_price => selected["price"], :quantity => hsh["qty_in_pack"], :min_amount => hsh["min_qty"], :max_amount => hsh["locations"].first["vend_qty"], :avail_amount => hsh["locations"].first["vend_qty"], :draft => !(count > 0)}
   end
