@@ -36,6 +36,10 @@ class CartWorld < CartItem
    searches
   end
 
+  def offers(count) #ret hash product
+   Axapta.search_dms_names( :item_id_search => product_link, :user_hash => User.current.current_account.axapta_hash)
+  end
+
 
 
 end
