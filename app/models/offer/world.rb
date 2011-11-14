@@ -24,6 +24,9 @@ class Offer::World < Offer::Base
    end
   end
 
+  def location_id
+  end
+
   def self.by_code(product_code)
    hash = User.current.current_account.try(:axapta_hash)
    items = Axapta.search_dms_names(:user_hash => hash, :item_id_search => product_code)
