@@ -21,7 +21,7 @@ class CartWorld < CartItem
 
   def self.prepare_offers(search)
    search.map do |search|
-    hsh = {:user_id => User.current.id, :product_link => search.item_id, :product_name => search.item_name, :product_rohs => search.rohs, :product_brend => search.item_brend, :location_link => search.location_id}
+    hsh = {:user_id => User.current.id, :product_link => search.code, :product_name => search.name, :product_rohs => search.rohs, :product_brend => search.brend, :location_link => search.location_id}
     fnd = self.unprocessed.where( hsh ).order("updated_at desc").all
     if fnd.empty?
      fnd << self.create(hsh.merge(:draft => true, :processed => false, :avail_amount => search.max_qty, :min_amount => search.min_qty))
