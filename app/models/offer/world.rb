@@ -58,6 +58,10 @@ class Offer::World < Offer::Base
    rez
   end
 
+  def max_qty
+   vend_qty
+  end
+
   def self.by_query(query, brend = nil)
    hash = User.current.current_account.try(:axapta_hash)
    items = Axapta.search_dms_names(:user_hash => hash, :query_string => query, :search_brend => brend)
