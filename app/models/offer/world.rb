@@ -32,6 +32,7 @@ class Offer::World < Offer::Base
   end
 
   def self.fabricate(arr)
+   p "fabricate", arr
    arr.inject([]) do |r, hsh|
     hsh["prognosis"].each do |prgnz|
      r << self.new do |n|

@@ -58,7 +58,7 @@ class Axapta
   end
 
   def self.search_dms_names(*args)
-   p "search_dms_names", args
+   #p "search_dms_names", args
    ar = *args.dup
    ar["query_string"] += '*' if ar.has_key?("query_string") && !ar["query_string"].blank? && ar["query_string"].last != '*'
    ar[:query_string] += '*' if ar.has_key?(:query_string) && !ar[:query_string].blank? && ar[:query_string].last != '*'
