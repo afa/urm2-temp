@@ -89,7 +89,7 @@ class MainController < ApplicationController
    # @items = []
    #end
    hsh = @items.inject({}) do |r, item|
-    i = item.signature
+    i = item.base_signature
     unless r.has_key?(i)
      r[i] = []
     end
