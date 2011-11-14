@@ -56,7 +56,7 @@ class Offer::World < Offer::Base
 
   def self.by_query(query, brend = nil)
    hash = User.current.current_account.try(:axapta_hash)
-   items = xapta.search_dms_names(:user_hash => hash, :query_string => query, :search_brend => brend)
+   items = Axapta.search_dms_names(:user_hash => hash, :query_string => query, :search_brend => brend)
    #items = conv_dms_items(Axapta.search_dms_names(:user_hash => hash, :query_string => query, :search_brend => brend))
    CartWorld.prepare_codes(items)
    fabricate(items)
