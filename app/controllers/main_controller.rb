@@ -80,6 +80,8 @@ class MainController < ApplicationController
 
   def mass_dms
    puts "---mass dms start #{Time.now}"
+   @seek = params[:name]
+   @brend = params[:brend]
    @hash = current_user.current_account.try(:axapta_hash)
    @items = Offer::World.by_query(@seek, @brend)
    #begin

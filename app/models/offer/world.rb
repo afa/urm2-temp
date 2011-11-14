@@ -59,7 +59,7 @@ class Offer::World < Offer::Base
    fabricate(items)
   end
 
-  def conv_dms_items(items)
+  def self.conv_dms_items(items)
    items.inject([]) do |r, i|
     i["prognosis"].each do |loc|
      a = {"item_name" => i["item_name"], "item_brend" => i["item_brend"], "qty_multiples" => loc["qty_multiples"], "max_qty" => loc["vend_qty"], "rohs" => i["rohs"], "prognosis_id" => loc["prognosis_id"]}#, "min_qty" => i["min_qty"], "location_id" => loc["location_id"]
