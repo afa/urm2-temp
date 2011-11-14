@@ -44,10 +44,10 @@ class Offer::World < Offer::Base
       n.prognoz = hsh["prognosis_id"]
       n.vend_qty = hsh["vend_qty"]
       n.qty_multiples = prgnz["qty_multiples"]
-      n.name = hsh["item_name"]
+      #n.name = hsh["item_name"]
       n.qtys = prgnz["price_qty"].sort_by{|p| p["min_qty"] }.inject([]){|rr, h| rr << OpenStruct.new(h) }
-      n.prices = prgnz.map{|p| p.price }
-      n.counts = prgnz.map{|p| p.min_qty }
+      n.prices = n.qtys.map{|p| p.price }
+      n.counts = n.qtys.map{|p| p.min_qty }
      end
      r
     end
