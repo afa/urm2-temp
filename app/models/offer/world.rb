@@ -28,7 +28,7 @@ class Offer::World < Offer::Base
    hash = User.current.current_account.try(:axapta_hash)
    items = Axapta.search_dms_names(:user_hash => hash, :item_id_search => product_code)
    #items = conv_dms_items(Axapta.search_dms_names(:user_hash => hash, :item_id_search => product_code))
-   CartWorld.prepare_codes(items)
+   CartWorld.prepare_offers(items)
    fabricate(items)
   end
 
@@ -60,7 +60,7 @@ class Offer::World < Offer::Base
    hash = User.current.current_account.try(:axapta_hash)
    items = Axapta.search_dms_names(:user_hash => hash, :query_string => query, :search_brend => brend)
    #items = conv_dms_items(Axapta.search_dms_names(:user_hash => hash, :query_string => query, :search_brend => brend))
-   CartWorld.prepare_codes(items)
+   CartWorld.prepare_offers(items)
    fabricate(items)
   end
 
