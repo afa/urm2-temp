@@ -34,7 +34,7 @@ class Offer::World < Offer::Base
 
   def self.fabricate(arr)
    p "fabricate", arr
-   arr.inject([]) do |r, hsh|
+   items = arr.inject([]) do |r, hsh|
     hsh["prognosis"].each do |prgnz|
      r << self.new do |n|
       n.name = hsh["item_name"]
@@ -52,6 +52,8 @@ class Offer::World < Offer::Base
      r
     end
    end
+   p "fabricate, items", items
+   items
   end
 
   def self.by_query(query, brend = nil)
