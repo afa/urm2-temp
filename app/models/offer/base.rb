@@ -8,7 +8,7 @@ class Offer::Base
   @attributes ||= {}
  end
 
-  attr_accessor :code, :name, :brend, :rohs
+  attr_accessor :code, :name, :brend, :rohs, :cart_id
 
   SIGNATURE_FIELDS = [:code, :name, :brend, :rohs]
 
