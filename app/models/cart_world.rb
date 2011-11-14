@@ -30,7 +30,7 @@ class CartWorld < CartItem
     unless fnd.empty?
      fnd.each{|i| i.destroy }
     end
-    item.update_attributes(:avail_amount => search.max_qty, :min_amount => search.min_qty, :quantity => search.qty_in_pack)
+    item.update_attributes(:avail_amount => search.max_qty, :min_amount => search.min_qty, :quantity => search.qty_multiples)
     search.cart_id = item.id
    end
   end
