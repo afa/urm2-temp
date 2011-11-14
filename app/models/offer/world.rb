@@ -27,6 +27,14 @@ class Offer::World < Offer::Base
   def location_id
   end
 
+  def max_qty
+   vend_qty
+  end
+
+  def min_qty
+   counts[0] || 0
+  end
+
   def self.by_code(product_code)
    hash = User.current.current_account.try(:axapta_hash)
    items = Axapta.search_dms_names(:user_hash => hash, :item_id_search => product_code)
@@ -56,10 +64,6 @@ class Offer::World < Offer::Base
    end
    p "fabricate, items", rez
    rez
-  end
-
-  def max_qty
-   vend_qty
   end
 
   def self.by_query(query, brend = nil)
