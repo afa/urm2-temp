@@ -6,7 +6,7 @@
     %th запрос
     %th= t :comment
     %th= t :action
-   - @nregs.each do |item|
+   - @nreqs.each do |item|
     %tr
      %td= item.inspect
      %td= f.textarea_field :comment
