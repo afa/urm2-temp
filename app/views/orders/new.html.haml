@@ -9,7 +9,7 @@
    - @nreqs.each do |item|
     %tr
      %td= item.inspect
-     %td= f.textarea_field :comment
+     %td= f.textarea :comment
      %td= f.checkbox :allow
  - unless @reqs.empty?
   %h3 запросы
