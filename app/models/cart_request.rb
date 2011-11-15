@@ -1,4 +1,9 @@
 class CartRequest < CartItem
+
+  def allow
+   true
+  end
+
   def type_name
    ::I18n::t :cart_request
   end
