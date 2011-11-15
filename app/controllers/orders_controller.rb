@@ -32,6 +32,10 @@ class OrdersController < ApplicationController
 
   end
 
+  def create
+
+  end
+
   def lines
    @lines = Axapta.sales_lines(:user_hash => current_user.current_account.axapta_hash, :only_open => true)
   end
