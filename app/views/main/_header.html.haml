@@ -178,9 +178,6 @@
         = f.hidden_field :only_store
         -# = f.submit :find
        -# %input{:type=>"text", :value=>"TDA2003;OR;300"}
-       - unless to_bool(@only_store)
-        %span.dms_loader{:float=>"right"}
-         %img{:src => image_path('ajax-loader.gif')}
        .button
         %a.button-style{:href=>"#"}
          %i.t &nbsp;
@@ -190,6 +187,9 @@
          %span Найти!
          %i.bl &nbsp;
          %i.br &nbsp;
+       - unless to_bool(@only_store)
+        %span.dms_loader{:float=>"right"}
+         %img{:src => image_path('ajax-loader.gif')}
      .clear
      .fields
       %span.switch{:class=>"check"}
