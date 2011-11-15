@@ -4,6 +4,8 @@ class CartItem < ActiveRecord::Base
  scope :unprocessed, where(:processed => false)
  scope :in_cart, where(:draft => false)
 
+ attr_accessor :allow
+
   def type_name
    "Base"
   end
