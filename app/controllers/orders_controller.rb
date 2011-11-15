@@ -32,6 +32,11 @@ class OrdersController < ApplicationController
 
   end
 
+  def new
+   @carts = current_user.cart_items.in_cart.unprocessed.all
+   @reqs = @carts.select{|i| i.is_a? CartRequest }
+  end
+
   def create
 
   end
