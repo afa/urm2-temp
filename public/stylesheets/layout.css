@@ -22,7 +22,8 @@
 #content .content-wrap{ padding:0 2em 0px 2em;}
 .table-scroll-additional #content .content-wrap{ padding:0px 20px 0px 20px;}
 
-span.dms_loader img {float:right;}
+#span.dms_loader img 
+#{float:right;}
 
 input#search_query_string {width: 564px;}
 
