@@ -1,4 +1,17 @@
-- unless @reqs.empty?
- запросы
-- unless @nreqs.empty?
- нон
+- form_for :order, :url => orders_path do |f|
+ - unless @nreqs.empty?
+  %h3 нон
+  %table
+   %tr
+    %th запрос
+    %th= t :comment
+    %th= t :action
+   - @nregs.each do |item|
+    %tr
+     %td= item.inspect
+     %td= f.textarea_field :comment
+     %td= f.checkbox :allow
+ - unless @reqs.empty?
+  %h3 запросы
+
+ = f.submit t(:make)
