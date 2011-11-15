@@ -22,6 +22,16 @@
 #content .content-wrap{ padding:0 2em 0px 2em;}
 .table-scroll-additional #content .content-wrap{ padding:0px 20px 0px 20px;}
 
+div.dms_loader {
+ display: inline-block;
+ float: left;
+ position:relative; 
+ left:600px; 
+ top: 4px;
+}
+
+input#search_query_string {width: 600px;}
+
 /* Прокрутка таблиц */
 .scroller-table{ display:none; width:100%; overflow:scroll; overflow-y:hidden; font-size:0px; line-height:0px; position:fixed; left:0px; bottom:0px; z-index:100;
 				 _position:absolute; _bottom:auto; _top:expression(document.documentElement.clientHeight-18+document.getElementsByTagName('html')[0].scrollTop + "px");}

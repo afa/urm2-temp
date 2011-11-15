@@ -32,6 +32,16 @@ class OrdersController < ApplicationController
 
   end
 
+  def new
+   @carts = current_user.cart_items.in_cart.unprocessed.all
+   @reqs = @carts.partition{|i| i.is_a? CartRequest }[0]
+   @nreqs = @carts.partition{|i| i.is_a? CartRequest }[1]
+  end
+
+  def create
+
+  end
+
   def lines
    @lines = Axapta.sales_lines(:user_hash => current_user.current_account.axapta_hash, :only_open => true)
   end

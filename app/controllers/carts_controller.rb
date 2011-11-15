@@ -31,4 +31,7 @@ class CartsController < ApplicationController
   def update
   end
 
+  def destroy
+  end
+
 end

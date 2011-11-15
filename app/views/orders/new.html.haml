@@ -1,0 +1,28 @@
+- form_for :order, :url => orders_path do |f|
+ - unless @nreqs.empty?
+  %h3 нон
+  %table
+   %tr
+    %th запрос
+    %th= t :comment
+    %th= t :action
+   - @nreqs.each do |item|
+    %tr
+     - f.fields_for :item, item do |ff|
+      %td= item.inspect
+      %td= ff.text_area :comment
+      %td= ff.check_box :allow
+ - unless @reqs.empty?
+  %h3 запросы
+  %table
+   %tr
+    %th запрос
+    %th= t :comment
+   - @reqs.each do |item|
+    - f.fields_for :item, item do |ff|
+     %tr
+      %td= item.inspect
+      %td= ff.text_area :comment
+     = ff.hidden_field :allow
+
+ = f.submit t(:make)

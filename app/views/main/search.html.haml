@@ -24,9 +24,6 @@
 .table-navigation-block{:class => "scroll"}
  .table-block
   .table-scrolling
-   - unless to_bool(@only_store)
-    .dms_loader{:align=>"center"}
-     %img{:src => image_path('ajax-loader.gif')}
    = form_for :cart_fields, :url => carts_path, :method => :post do |frm|
     %table.table-style{:class => "search-products"}
      %tr
