@@ -175,7 +175,7 @@
         -# = f.label :query_string
         = f.text_field :query_string
         - unless to_bool(@only_store)
-         .dms_loader{:float=>"right"}
+         %span.dms_loader{:float=>"right"}
           %img{:src => image_path('ajax-loader.gif')}
         = f.hidden_field :only_available
         = f.hidden_field :only_store
