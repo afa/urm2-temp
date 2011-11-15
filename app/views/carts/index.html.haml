@@ -1,4 +1,4 @@
-= form_for :order, :url => new_order_path, :method => :get do |f|
+= form_for :order, :url => new_order_path, :html => {:method => :get} do |f|
  = render :partial => "carts/cart_table", :locals => {:cart => @cart, :form => f}
  = f.submit :make_order
 
