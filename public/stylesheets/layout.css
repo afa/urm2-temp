@@ -24,7 +24,7 @@
 
 span.dms_loader img {float:right;}
 
-input#search_query_string {width: 580px;}
+input#search_query_string {width: 572px;}
 
 /* Прокрутка таблиц */
 .scroller-table{ display:none; width:100%; overflow:scroll; overflow-y:hidden; font-size:0px; line-height:0px; position:fixed; left:0px; bottom:0px; z-index:100;
