@@ -44,7 +44,7 @@ class CartWorld < CartItem
    prgnz = hsh["prognosis"]
    min = prgnz.map{|i| i["min_qty"] }.reject{|i| i.to_i <= 0 }.min
    count = hsh["min_qty"] if count < hsh["min_qty"].to_i
-   p "---prep, mincnt", min, count
+   p "---prep, off", hsh, prgnz
    selected = prgnz.first["price_qty"].detect{|v| count >= v["min_qty"] && count <= v["max_qty"] }
    {:type => self.name, :amount => count, :product_link => hsh["item_id"], :product_name => hsh["item_name"], :product_rohs => hsh["rohs"], :product_brend => hsh["item_brend"], :processed => false, :current_price => selected["price"], :quantity => hsh["qty_multiples"], :min_amount => hsh["min_qty"], :max_amount => hsh["locations"].first["vend_qty"], :avail_amount => hsh["locations"].first["vend_qty"], :draft => !(count > 0)}
   end
