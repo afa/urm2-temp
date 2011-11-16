@@ -9,6 +9,7 @@ class Offer::Base
  end
 
   attr_accessor :code, :name, :brend, :rohs, :cart_id
+  #serialize :addons, Array
 
   SIGNATURE_FIELDS = [:code, :name, :brend, :rohs]
 
