@@ -1,6 +1,16 @@
 require 'spec_helper'
 
 describe CartWorld do
+ before do
+  @user = FactoryGirl.build(:user)
+  @user.stub!(:valid?).and_return(true)
+  Axapta.stub!(:user_info).with(@user.ext_hash).and_return({})
+  @user.save!
+  @account = FactoryGirl.create(:account, :user_id => @user.id)
+  @user.current_account = @account
+  @user.save!
+  User.current = @user
+ end
  describe "#type_name" do
   it "should be dms" do
    CartWorld.new.type_name.should == 'ДМС'
@@ -9,8 +19,9 @@ describe CartWorld do
 
  describe "::prepare_code" do
   it "should return hash" do
-   CartWorld.prepare_codes([{}, {}]).should be_is_a(Array)
-   CartWorld.prepare_codes([{}, {}]).each{|i| i.should be_is_a(Offer::World)}
+   CartWorld.prepare_offers([{}, {}]).should be_is_a(Array)
+   p CartWorld.prepare_offers([{}, {}])
+   CartWorld.prepare_offers([{}, {}]).each{|i| i.should be_is_a(Offer::World)}
   end
   it "should return valid hash"
   context "when new cart" do
