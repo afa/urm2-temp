@@ -28,7 +28,7 @@ class Offer::World < Offer::Base
   end
 
   def max_qty
-   vend_qty
+   self.vend_qty
   end
 
   def min_qty
