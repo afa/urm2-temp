@@ -17,7 +17,7 @@
    %input{:type=>"text", :class=>"validate[custom[onlyNumber],max[10000]]", :name => "dms[#{offer_code}][amount]"}
    %a.count{:href=>"#"}
  %td.double-first-cell= dms_line.min_qty
- %td.double-cell= dms_line.max_qty
+ %td.double-cell= dms_line.vend_qty
  %td.double-last-cell= dms_line.qty_multiples
  %td= dms_line.prognoz
  %td= dms_line.prices[0]
