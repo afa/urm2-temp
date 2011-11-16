@@ -41,10 +41,13 @@ class CartWorld < CartItem
   end
 
   def self.prepare_for(count, hsh)
-   prgnz = hsh["prognosis"]
-   min = prgnz.map{|i| i["min_qty"] }.reject{|i| i.to_i <= 0 }.min
+   #prgnz = hsh["prognosis"]
+   
+   prgnz = hsh["prognosis"].select{|p| p["prognosis_id"] == prognosis }.select{|p| p["vend_qty"] == avail_amount }.select{|p| p["qty_multiples"] == quantity }.first
+   p "---prgnz", hsh["prognosis"].select{|p| p["prognosis_id"] == prognosis }.select{|p| p["vend_qty"] == avail_amount }.select{|p| p["qty_multiples"] == quantity }
+   min = prgnz["price_qty"].map{|i| i.map{|l| l["price_qty"] }.flatten.compact["min_qty"] }.reject{|i| i.to_i <= 0 }.min
    count = hsh["min_qty"] if count < hsh["min_qty"].to_i
-   p "---prep, off", hsh, prgnz
+   p "---prep, off", prgnz
    selected = prgnz.first["price_qty"].detect{|v| count >= v["min_qty"] && count <= v["max_qty"] }
    {:type => self.name, :amount => count, :product_link => hsh["item_id"], :product_name => hsh["item_name"], :product_rohs => hsh["rohs"], :product_brend => hsh["item_brend"], :processed => false, :current_price => selected["price"], :quantity => hsh["qty_multiples"], :min_amount => hsh["min_qty"], :max_amount => hsh["locations"].first["vend_qty"], :avail_amount => hsh["locations"].first["vend_qty"], :draft => !(count > 0)}
   end
