@@ -47,7 +47,7 @@ class CartWorld < CartItem
    #prgnz = hsh["prognosis"]
    
    prgnz = hsh["prognosis"].select{|p| p["prognosis_id"] == cart.prognosis }.select{|p| p["vend_qty"] == cart.avail_amount }.select{|p| p["qty_multiples"] == cart.quantity }.first
-   p "---prgnz", hsh["prognosis"].select{|p| p["prognosis_id"] == cart.prognosis }.select{|p| p["vend_qty"] == cart.avail_amount }.select{|p| p["qty_multiples"] == cart.quantity }
+   p "---prgnz", cart, hsh["prognosis"].select{|p| p["prognosis_id"] == cart.prognosis }.select{|p| p["vend_qty"] == cart.avail_amount }.select{|p| p["qty_multiples"] == cart.quantity }
    min = prgnz["price_qty"].map{|i| i.map{|l| l["price_qty"] }.flatten.compact["min_qty"] }.reject{|i| i.to_i <= 0 }.min
    count = hsh["min_qty"] if count < hsh["min_qty"].to_i
    p "---prep, off", prgnz
