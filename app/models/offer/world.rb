@@ -28,7 +28,7 @@ class Offer::World < Offer::Base
   end
 
   def max_qty
-   vend_qty
+   self.vend_qty
   end
 
   def min_qty
@@ -43,7 +43,6 @@ class Offer::World < Offer::Base
   end
 
   def self.fabricate(arr)
-   p "fabricate", arr
    rez = []
    arr.each do |hsh|
     hsh["prognosis"].each do |prgnz|
@@ -53,7 +52,7 @@ class Offer::World < Offer::Base
       n.code = hsh["item_id"]
       n.rohs = hsh["rohs"]
       n.prognoz = prgnz["prognosis_id"]
-      n.vend_qty = hsh["vend_qty"]
+      n.vend_qty = prgnz["vend_qty"]
       n.qty_multiples = prgnz["qty_multiples"]
       #n.name = hsh["item_name"]
       n.qtys = prgnz["price_qty"].sort_by{|p| p["min_qty"] }.inject([]){|rr, h| rr << OpenStruct.new(h) }
@@ -62,7 +61,6 @@ class Offer::World < Offer::Base
      end
     end
    end
-   p "fabricate, items", rez
    rez
   end
 

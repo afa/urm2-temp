@@ -27,6 +27,7 @@ class MainController < ApplicationController
     p "---exc in search #{Time.now}", e
     logger.info e.to_s
    end
+   #TODO: to offers
    @items = (data || []).inject([]) do |r, i|
     i["locations"].each do |loc|
      a = {"item_name" => i["item_name"], "item_brend" => i["item_brend"], "item_brend_name" => i["item_brend_name"], "item_brend_url" => i["item_brend_url"], "qty_in_pack" => i["qty_in_pack"], "location_id" => loc["location_id"], "min_qty" => i["min_qty"], "max_qty" => loc["vend_qty"], "rohs" => i["rohs"], "item_id" => i["item_id"], "segment_rus" => i["segment_rus"], "body_name" => i["package_name"], "analog_exists" => WebUtils.parse_bool(i["analog_exists"]), "forecast_available" => WebUtils.parse_bool(loc["forecast_available"])}

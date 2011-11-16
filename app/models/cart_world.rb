@@ -40,11 +40,18 @@ class CartWorld < CartItem
    Axapta.search_dms_names( :item_id_search => product_link, :user_hash => User.current.current_account.axapta_hash)
   end
 
-  def self.prepare_for(count, hsh)
-   prgnz = hsh["prognosis"]
-   min = prgnz.map{|i| i["min_qty"] }.reject{|i| i.to_i <= 0 }.min
+  def locate(offs, count) #rets loc or prgnz
+  end
+
+  def self.prepare_for(count, hsh, cart = nil)
+   #prgnz = hsh["prognosis"]
+   p "---prephsh", hsh["prognosis"]
+   prgnz = hsh["prognosis"].select{|p| p["prognosis_id"] == cart.prognosis }.select{|p| p["vend_qty"] == cart.avail_amount }.select{|p| p["qty_multiples"] == cart.quantity }.first
+   p "---prgnz", cart, hsh["prognosis"].select{|p| p["prognosis_id"] == cart.prognosis }.select{|p| p["vend_qty"] == cart.avail_amount }.select{|p| p["qty_multiples"] == cart.quantity }
+   min = prgnz["price_qty"].map{|i| i.map{|l| l["price_qty"] }.flatten.compact["min_qty"] }.reject{|i| i.to_i <= 0 }.min
    count = hsh["min_qty"] if count < hsh["min_qty"].to_i
-   selected = hsh["locations"].first["price_qty"].detect{|v| count >= v["min_qty"] && count <= v["max_qty"] }
+   p "---prep, off", prgnz
+   selected = prgnz.first["price_qty"].detect{|v| count >= v["min_qty"] && count <= v["max_qty"] }
    {:type => self.name, :amount => count, :product_link => hsh["item_id"], :product_name => hsh["item_name"], :product_rohs => hsh["rohs"], :product_brend => hsh["item_brend"], :processed => false, :current_price => selected["price"], :quantity => hsh["qty_multiples"], :min_amount => hsh["min_qty"], :max_amount => hsh["locations"].first["vend_qty"], :avail_amount => hsh["locations"].first["vend_qty"], :draft => !(count > 0)}
   end
 
