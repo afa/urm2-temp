@@ -40,11 +40,14 @@ class CartWorld < CartItem
    Axapta.search_dms_names( :item_id_search => product_link, :user_hash => User.current.current_account.axapta_hash)
   end
 
-  def self.prepare_for(count, hsh)
+  def locate(offs, count) #rets loc or prgnz
+  end
+
+  def self.prepare_for(count, hsh, cart = nil)
    #prgnz = hsh["prognosis"]
    
-   prgnz = hsh["prognosis"].select{|p| p["prognosis_id"] == prognosis }.select{|p| p["vend_qty"] == avail_amount }.select{|p| p["qty_multiples"] == quantity }.first
-   p "---prgnz", hsh["prognosis"].select{|p| p["prognosis_id"] == prognosis }.select{|p| p["vend_qty"] == avail_amount }.select{|p| p["qty_multiples"] == quantity }
+   prgnz = hsh["prognosis"].select{|p| p["prognosis_id"] == cart.prognosis }.select{|p| p["vend_qty"] == cart.avail_amount }.select{|p| p["qty_multiples"] == cart.quantity }.first
+   p "---prgnz", hsh["prognosis"].select{|p| p["prognosis_id"] == cart.prognosis }.select{|p| p["vend_qty"] == cart.avail_amount }.select{|p| p["qty_multiples"] == cart.quantity }
    min = prgnz["price_qty"].map{|i| i.map{|l| l["price_qty"] }.flatten.compact["min_qty"] }.reject{|i| i.to_i <= 0 }.min
    count = hsh["min_qty"] if count < hsh["min_qty"].to_i
    p "---prep, off", prgnz
