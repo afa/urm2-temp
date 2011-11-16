@@ -43,7 +43,6 @@ class Offer::World < Offer::Base
   end
 
   def self.fabricate(arr)
-   p "fabricate", arr
    rez = []
    arr.each do |hsh|
     hsh["prognosis"].each do |prgnz|
@@ -62,7 +61,6 @@ class Offer::World < Offer::Base
      end
     end
    end
-   p "fabricate, items", rez
    rez
   end
 
