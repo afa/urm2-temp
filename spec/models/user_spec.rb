@@ -33,7 +33,7 @@ describe User do
    Axapta.stub!(:make_order).and_return(2)
   end
   it "should make order for carts" do
-   User.make_order.should == 2
+   @user.make_order.should == 2
   end
  end
 end

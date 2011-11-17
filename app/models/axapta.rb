@@ -95,6 +95,10 @@ class Axapta
    a
   end
 
+  def make_order(hsh)
+   AxaptaRequest.make_order(hsh.merge(:user_hash => User.current.current_account.axapta_hash))
+  end
+
   def self.sales_info(*args)
    begin
     res = AxaptaRequest.sales_info(*args)

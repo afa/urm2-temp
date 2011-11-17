@@ -7,8 +7,6 @@ class CartStore < CartItem
    super.merge(:invent_location => location_link)
   end
 
-  def self.prepare_code(search_hash) #on find, chg search hash to offers array
-   hsh = {:user_id => User.current.id, :product_link => search_hash["item_id"], :product_name => search_hash["item_name"], :product_rohs => search_hash["rohs"], :product_brend => search_hash["item_brend"], :location_link => search_hash["location_id"]}
   def self.prepare_code(search) #on find, chg search hash to offers array
    hsh = {:user_id => User.current.id, :product_link => search.code, :product_name => search.name, :product_rohs => search.rohs, :product_brend => search.brend, :location_link => search.location_id}
    fnd = self.unprocessed.where( hsh ).order("updated_at desc").all
