@@ -3,22 +3,26 @@ class CartStore < CartItem
    ::I18n::t :cart_store
   end
 
+<<<<<<< HEAD:app/models/cart_store.rb
   def to_sales_lines
    super.merge(:invent_location => location_link)
   end
 
   def self.prepare_code(search_hash) #on find, chg search hash to offers array
    hsh = {:user_id => User.current.id, :product_link => search_hash["item_id"], :product_name => search_hash["item_name"], :product_rohs => search_hash["rohs"], :product_brend => search_hash["item_brend"], :location_link => search_hash["location_id"]}
+=======
+  def self.prepare_code(search) #on find, chg search hash to offers array
+   hsh = {:user_id => User.current.id, :product_link => search.code, :product_name => search.name, :product_rohs => search.rohs, :product_brend => search.brend, :location_link => search.location_id}
+>>>>>>> 0d8aae7cba081ed447d77a75496faecee0a0d400:app/models/cart_store.rb
    fnd = self.unprocessed.where( hsh ).order("updated_at desc").all
    if fnd.empty?
-    item = self.create(hsh.merge(:draft => true, :processed => false, :avail_amount => search_hash["max_qty"], :min_amount => search_hash["min_qty"]))
+    item = self.create(hsh.merge(:draft => true, :processed => false, :avail_amount => search.max_qty, :min_amount => search.min_qty))
    else
-    item = self.create(hsh.merge(:draft => true, :processed => false, :avail_amount => search_hash["max_qty"], :min_amount => search_hash["min_qty"], :quantity => search_hash["qty_in_pack"]))
+    item = self.create(hsh.merge(:draft => true, :processed => false, :avail_amount => search.max_qty, :min_amount => search.min_qty, :quantity => search.qty_in_pack))
    end #found/created
    fnd.each{|i| i.destroy }
    #item.update_attributes(:avail_amount => search_hash["max_qty"], :min_amount => search_hash["min_qty"], :quantity => search_hash["qty_in_pack"])
-   search_hash.merge(:cart_id => item.id)
-   #search_hash.merge()
+   search.cart_id = item.id
    
   end
 

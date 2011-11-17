@@ -1,33 +1,33 @@
 - require "web_utils"
-- line_code = WebUtils.escape_name("#{items_line["item_id"]}_#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}")
-- offer_code = WebUtils.escape_name("#{items_line["item_id"]}_#{items_line["item_name"]}_#{items_line["item_brend"]}_#{items_line["rohs"]}_#{items_line["location_id"]}")
+- line_code = items_line.base_signature
+- offer_code = items_line.signature
 %tr{:class => "item_#{line_code}"}
  %td.icons
-  %input.item-code{:type => "hidden", :value => items_line["item_id"], :name => "items[#{offer_code}][code]", :id => "code_#{line_code}"}
-  %input.item-cart{:type => "hidden", :value => items_line[:cart_id], :name => "items[#{offer_code}][cart]"}
+  %input.item-code{:type => "hidden", :value => items_line.code, :name => "items[#{offer_code}][code]", :id => "code_#{line_code}"}
+  %input.item-cart{:type => "hidden", :value => items_line.cart_id, :name => "items[#{offer_code}][cart]"}
   .icon
    -# = link_to "", main_dms_path(:code => items_line["item_id"], :after => line_code), :class => "dms js", :remote => true
    .dms-req &nbsp;
    .slider &nbsp;
   .icon
-   - if items_line["analog_exists"]
-    = link_to "", main_analog_path(:code => items_line["item_id"], :after => line_code), :class => "replacement js active", :remote => true
+   - if items_line.analog_exists
+    = link_to "", main_analog_path(:code => items_line.code, :after => line_code), :class => "replacement js active", :remote => true
    - else
     .replacement &nbsp;
    .slider &nbsp;
 
- %td.text-left= link_to items_line["item_name"], main_info_path(:code => items_line["item_id"], :after => line_code), :class => "dms js", :remote => true
+ %td.text-left= link_to items_line.name, main_info_path(:code => items_line.code, :after => line_code), :class => "dms js", :remote => true
 
  %td.text-left
-  - if items_line["item_brend_url"].blank?
-   - if items_line["item_brend_name"].blank?
-    #{items_line["item_brend"]}
+  - if items_line.brend_url.blank?
+   - if items_line.brend_name.blank?
+    #{items_line.brend}
    - else
-    %abbr{:title => items_line["item_brend_name"]}= items_line["item_brend"]
+    %abbr{:title => items_line.brend_name}= items_line.brend
   - else
-   %a{:href => items_line["item_brend_url"], :title => items_line["item_brend_name"]}= items_line["item_brend"]
- %td= items_line["body_name"]
- %td= items_line["rohs"]
+   %a{:href => items_line.brend_url, :title => items_line.brend_name}= items_line.brend
+ %td= items_line.body_name
+ %td= items_line.rohs
  %td.input-in-cart
   %div
    %a.speed-cart-button{:href=>"#"}
@@ -37,26 +37,26 @@
    -# %input{:type=>"text", :class=>"validate[custom[onlyNumber],max[#{items_line["max_qty"] || 0}]]"}
    %a.count{:href=>"#"}
  
- %td= items_line["min_qty"]
- %td= items_line["max_qty"]
+ %td= items_line.min_qty
+ %td= items_line.max_qty
  %td &nbsp;
  %td.with-icons{:class => "text-left"}
-  = items_line["location_id"]
+  = items_line.location_id
   .icons 
    .icon
-    - if items_line["forecast_available"]
-     = link_to "", main_info_path(:code => items_line["item_id"], :after => line_code), :class => "info js delivery active", :remote => true
+    - if items_line.forecast_available
+     = link_to "", main_info_path(:code => items_line.code, :after => line_code), :class => "info js delivery active", :remote => true
     - else
      .delivery &nbsp;
  -# %td= items_line["prognoz"]
- %td= items_line["price1"]
- %td.green= items_line["count2"]
- %td= items_line["price2"]
- %td.green= items_line["count3"]
- %td= items_line["price3"]
- %td.green= items_line["count4"]
- %td= items_line["price4"]
- %td.grey= items_line["qty_in_pack"]
+ %td= items_line.prices[0]
+ %td.green= items_line.counts[1]
+ %td= items_line.prices[1]
+ %td.green= items_line.counts[2]
+ %td= items_line.prices[2]
+ %td.green= items_line.counts[3]
+ %td= items_line.prices[3]
+ %td.grey= items_line.qty_in_pack
  -# %td
  -# %td
  -# %td= items_line["segment_rus"]

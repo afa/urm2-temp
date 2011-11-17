@@ -21,6 +21,8 @@ class MainController < ApplicationController
    avail = current_user.settings.where(:name => "search.only_available").first || current_user.settings.where(:name => "search.only_available").new
    avail.value = @only_available
    avail.save!
+   @items = Offer::Store.search(params[:search])
+=begin
    begin
     data = Axapta.search_names({:show_forecast_availability => true, :show_analog_existence => true, :calc_price=>true, :calc_qty => true}.merge(params[:search] || {}).merge(:user_hash => current_user.current_account.try(:axapta_hash)))
    rescue Exception => e
@@ -40,6 +42,7 @@ class MainController < ApplicationController
     end
     r
    end
+=end
   end
 
   def dms
