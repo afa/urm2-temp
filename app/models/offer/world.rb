@@ -39,7 +39,7 @@ class Offer::World < Offer::Base
    hash = User.current.current_account.try(:axapta_hash)
    items = Axapta.search_dms_names(:user_hash => hash, :item_id_search => product_code)
    #items = conv_dms_items(Axapta.search_dms_names(:user_hash => hash, :item_id_search => product_code))
-   CartWorld.prepare_offers(fabricate(items))
+   fabricate(items)
   end
 
   def self.fabricate(arr)
@@ -58,6 +58,7 @@ class Offer::World < Offer::Base
       n.qtys = prgnz["price_qty"].sort_by{|p| p["min_qty"] }.inject([]){|rr, h| rr << OpenStruct.new(h) }
       n.prices = n.qtys.map{|p| p.price }
       n.counts = n.qtys.map{|p| p.min_qty }
+      CartWorld.prepare_code(n)
      end
     end
    end
@@ -68,7 +69,7 @@ class Offer::World < Offer::Base
    hash = User.current.current_account.try(:axapta_hash)
    items = Axapta.search_dms_names(:user_hash => hash, :query_string => query, :search_brend => brend)
    #items = conv_dms_items(Axapta.search_dms_names(:user_hash => hash, :query_string => query, :search_brend => brend))
-   CartWorld.prepare_offers(fabricate(items))
+   fabricate(items)
   end
 
   def self.conv_dms_items(items)

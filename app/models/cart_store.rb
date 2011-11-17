@@ -14,7 +14,6 @@ class CartStore < CartItem
    fnd.each{|i| i.destroy }
    #item.update_attributes(:avail_amount => search_hash["max_qty"], :min_amount => search_hash["min_qty"], :quantity => search_hash["qty_in_pack"])
    search.cart_id = item.id
-   #search_hash.merge()
    
   end
 
