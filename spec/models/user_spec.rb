@@ -26,4 +26,14 @@ describe User do
 # end
 
   it "should validate current_account"
+
+ describe "#make_order" do
+  before do
+   @carts = [FactoryGirl.create(:cart_world, :user_id => @user.id), FactoryGirl.create(:cart_store, :user_id => @user.id)]
+   Axapta.stub!(:make_order).and_return(2)
+  end
+  it "should make order for carts" do
+   User.make_order.should == 2
+  end
+ end
 end

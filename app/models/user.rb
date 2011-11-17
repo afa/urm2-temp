@@ -93,6 +93,11 @@ class User < ActiveRecord::Base
    end
   end
 
+   def make_order
+    reqs = cart_items.unprocessed.in_cart.all.select{|c| c.is_a?(CartRequest) }
+    result = Axapta.make_order(:sales_lines => reqs.map{|i| i.to_sales_lines })
+    # add for nonrequests
+   end
  protected
   def generate_hash(string)
    if RUBY_VERSION >= '1.9'

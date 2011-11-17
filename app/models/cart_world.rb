@@ -3,6 +3,10 @@ class CartWorld < CartItem
    I18n::t :cart_world
   end
 
+  def to_sales_lines
+   super.merge(:max_qty => max_amount, :min_qty => min_amount, :prognosis_id => prognosis, :qty_multiples => quantity, :sales_price => (user_price || current_price))
+  end
+
   def self.prepare_codes(search)
    search.map do |search_hash|
     hsh = {:user_id => User.current.id, :product_link => search_hash["item_id"], :product_name => search_hash["item_name"], :product_rohs => search_hash["rohs"], :product_brend => search_hash["item_brend"], :location_link => search_hash["location_id"]}

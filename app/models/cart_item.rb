@@ -18,6 +18,10 @@ class CartItem < ActiveRecord::Base
    raise "NYI"
   end
 
+  def to_sales_line
+   {:brend_alias => product_brend, :item_id => product_link, :item_name => product_name, :note => comment, :qty => amount, :invc_brend_alias => product_brend}
+  end
+
   def self.copy_on_write(hsh) # excpshn on bad params, not found
    raise CartParamRequired unless hsh.try(:[], :cart)
    old = find_by_id(hsh[:cart])

@@ -10,6 +10,10 @@ FactoryGirl.define do
    type 'CartStore'
    product_name "store"
   end
+  factory :cart_world do
+   type "CartWorld"
+   product_name "store"
+  end
  end 
 
 end
