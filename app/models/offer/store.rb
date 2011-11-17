@@ -1,6 +1,6 @@
 class Offer::Store < Offer::Base
 
- SIGNATURE_FIELDS << :location_id
+ @signature_fields = @base_signature_fields + [:location_id]
  attr_accessor :location_id, :brend_name, :brend_url, :qtys, :prices, :counts, :need_more, :qty_in_pack, :segment_rus, :body_name, :analog_exists, :forecast_available, :min_qty, :max_qty
 
   def self.search(hsh)

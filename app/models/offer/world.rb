@@ -1,7 +1,7 @@
 require "ostruct"
 class Offer::World < Offer::Base
 
-  SIGNATURE_FIELDS << :prognoz << :vend_qty << :qty_multiples
+  @signature_fields = @base_signature_fields + [:prognoz, :vend_qty, :qty_multiples]
 
   attr_accessor :prognoz, :vend_qty, :qty_multiples, :vend_proposal_date, :qtys, :prices, :counts, :need_more
 
