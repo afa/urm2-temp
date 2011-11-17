@@ -17,8 +17,6 @@ class Offer::Store < Offer::Base
   end
 
   def self.fabricate(arr)
-     r << CartStore.prepare_code(a)
-
    rez = []
    arr.each do |hsh|
     hsh["locations"].each do |loc|
@@ -42,6 +40,7 @@ class Offer::Store < Offer::Base
       n.forecast_available = WebUtils.parse_bool(loc["forecast_available"])
       n.min_qty = hsh["min_qty"]
       n.max_qty = loc["vend_qty"]
+      CartStore.prepare_code(n)
      end
     end
    end
