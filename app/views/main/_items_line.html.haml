@@ -4,7 +4,7 @@
 %tr{:class => "item_#{line_code}"}
  %td.icons
   %input.item-code{:type => "hidden", :value => items_line.code, :name => "items[#{offer_code}][code]", :id => "code_#{line_code}"}
-  %input.item-cart{:type => "hidden", :value => items_line.cart_id], :name => "items[#{offer_code}][cart]"}
+  %input.item-cart{:type => "hidden", :value => items_line.cart_id, :name => "items[#{offer_code}][cart]"}
   .icon
    -# = link_to "", main_dms_path(:code => items_line["item_id"], :after => line_code), :class => "dms js", :remote => true
    .dms-req &nbsp;
