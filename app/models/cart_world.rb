@@ -7,6 +7,18 @@ class CartWorld < CartItem
    super.merge(:max_qty => max_amount, :min_qty => min_amount, :prognosis_id => prognosis, :qty_multiples => quantity, :sales_price => (user_price || current_price))
   end
 
+ before_validation :setup_price
+
+  def setup_price
+   if amount > 0
+    amount = max_amount if amount > max_amount
+    amount = min_amount if amount < min_amount
+    current_price = offer_params["price_qty"].sort_by{|i| i["min_qty"].to_i }.reject{|i| i["min_qty"].to_i > amount }.last["price"].to_f
+   else
+    current_price = 0
+   end
+  end
+
 =begin
   def self.prepare_codes(search)
    search.map do |search_hash|
@@ -44,6 +56,9 @@ class CartWorld < CartItem
   def locate(offs, count) #rets loc or prgnz
   end
 
+  def setup_for(hash)
+   return self.class
+  end
   def self.prepare_for(count, hsh, cart = nil)
    #prgnz = hsh["prognosis"]
    p "---prephsh", hsh["prognosis"]
