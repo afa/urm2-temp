@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-
+   User.current.make_order
   end
 
   def lines

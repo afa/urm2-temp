@@ -4,7 +4,17 @@ class CartWorld < CartItem
   end
 
   def to_sales_lines
-   super.merge(:max_qty => max_amount, :min_qty => min_amount, :prognosis_id => prognosis, :qty_multiples => quantity, :sales_price => (user_price || current_price))
+   super.merge(:max_qty => max_amount, :min_qty => min_amount, :prognosis_id => prognosis, :qty_multiples => quantity, :sales_price => current_price)
+  end
+
+  def setup_price
+   if amount > 0
+    amount = max_amount if amount > max_amount
+    amount = min_amount if amount < min_amount
+    current_price = offer_params["price_qty"].sort_by{|i| i["min_qty"].to_i }.reject{|i| i["min_qty"].to_i > amount }.last["price"].to_f
+   else
+    current_price = 0
+   end
   end
 
 =begin
@@ -37,13 +47,17 @@ class CartWorld < CartItem
    search.cart_id = item.id
   end
 
-  def offers(count) #ret hash product
-   Axapta.search_dms_names( :item_id_search => product_link, :user_hash => User.current.current_account.axapta_hash)
-  end
+  #def offers(count) #ret hash product
+  # Axapta.search_dms_names( :item_id_search => product_link, :user_hash => User.current.current_account.axapta_hash)
+  #end
 
   def locate(offs, count) #rets loc or prgnz
   end
 
+  def setup_for(hash)
+   return self.class
+  end
+=begin
   def self.prepare_for(count, hsh, cart = nil)
    #prgnz = hsh["prognosis"]
    p "---prephsh", hsh["prognosis"]
@@ -55,5 +69,6 @@ class CartWorld < CartItem
    selected = prgnz.first["price_qty"].detect{|v| count >= v["min_qty"] && count <= v["max_qty"] }
    {:type => self.name, :amount => count, :product_link => hsh["item_id"], :product_name => hsh["item_name"], :product_rohs => hsh["rohs"], :product_brend => hsh["item_brend"], :processed => false, :current_price => selected["price"], :quantity => hsh["qty_multiples"], :min_amount => hsh["min_qty"], :max_amount => hsh["locations"].first["vend_qty"], :avail_amount => hsh["locations"].first["vend_qty"], :draft => !(count > 0)}
   end
+=end
 
 end
