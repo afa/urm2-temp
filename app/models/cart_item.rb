@@ -5,6 +5,10 @@ class CartItem < ActiveRecord::Base
  scope :in_cart, where(:draft => false)
 
  attr_accessor :allow
+ attr_accessor :offer_params
+
+ after_initialize :deserialize_offer
+ before_validation :serialize_offer
 
   def type_name
    "Base"
@@ -26,6 +30,7 @@ class CartItem < ActiveRecord::Base
    raise CartParamRequired unless hsh.try(:[], :cart)
    old = find_by_id(hsh[:cart])
    raise CartParamRequired unless old
+   need_copy = {:user_price => old.user_price, :comment => old.comment, :actions => old.actions}
    if hsh[:amount].to_i != old.amount
     puts "ammount #{hsh[:amount]}"
     offers = old ? old.offers(hsh[:amount].to_i) : []
