@@ -8,6 +8,10 @@ class CartRequest < CartItem
    ::I18n::t :cart_request
   end
 
+  def to_sales_lines
+   super.merge(:invent_location => location_link)
+  end
+
   def offers(count) #ret hash product
    Axapta.search_names(:calc_price => true, :calc_qty => true, :show_delivery_prognosis => true, :item_id_search => product_link, :invent_location_id => location_link, :user_hash => User.current.current_account.axapta_hash)
   end
