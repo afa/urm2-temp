@@ -26,6 +26,8 @@ class ApplicationController < ActionController::Base
     puts "::: user_from_cookie"
     p token
     User.find_by_remember_token(token)
+   else
+    nil
    end
   end
 
