@@ -21,9 +21,9 @@ class CartStore < CartItem
    
   end
 
-  def offers(count) #ret hash product
-   Axapta.search_names(:calc_price => true, :calc_qty => true, :show_delivery_prognosis => true, :item_id_search => product_link, :invent_location_id => location_link, :user_hash => User.current.current_account.axapta_hash)
-  end
+  #def offers(count) #ret hash product
+  # Axapta.search_names(:calc_price => true, :calc_qty => true, :show_delivery_prognosis => true, :item_id_search => product_link, :invent_location_id => location_link, :user_hash => User.current.current_account.axapta_hash)
+  #end
 
   def self.prepare_for(count, hsh)
    return CartRequest.prepare_for(count, hsh) if hsh.blank? or count > (hsh["locations"].first["vend_qty"].to_i || 0)
@@ -33,6 +33,12 @@ class CartStore < CartItem
    return CartRequest.prepare_for(count, hsh) unless selected
    {:type => self.name, :amount => count, :product_link => hsh["item_id"], :location_link => hsh["locations"].first["location_id"], :product_name => hsh["item_name"], :product_rohs => hsh["rohs"], :product_brend => hsh["item_brend"], :processed => false, :current_price => selected["price"], :quantity => hsh["qty_in_pack"], :min_amount => hsh["min_qty"], :max_amount => hsh["locations"].first["vend_qty"], :avail_amount => hsh["locations"].first["vend_qty"], :draft => !(count > 0)}
   end
+
+  def setup_for(hash)
+   return self.class if hash[:amount] <= hash[:vend_qty]
+   CartRequest
+  end
+
 =begin
 "rohs"=>"", "analog_exists"=>false, "item_brend_name"=>"CONTINENTAL DEVICE INDIA LTD.", "min_qty"=>98, "item_name"=>"2N2222A", "segment_rus"=>"п═п╣п╪п╬п╫я┌", "locations"=>[{"delivery_prognosis"=>[], "price_qty"=>[{"price"=>0.3469, "min_qty"=>98, "price_ref"=>0, "max_qty"=>952}], "forecast_available"=>false, "vend_qty"=>952, "location_id"=>"CENTRE"}], "item_brend_url"=>"", "item_id"=>"270670", "item_brend"=>"CDIL", "package_name"=>"TO-18", "qty_in_pack"=>1000
 -end
