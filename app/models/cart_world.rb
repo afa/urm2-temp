@@ -8,7 +8,7 @@ class CartWorld < CartItem
   end
 
   def setup_price
-   if amount > 0
+   if amount and amount > 0
     amount = max_amount if amount > max_amount
     amount = min_amount if amount < min_amount
     current_price = offer_params["price_qty"].sort_by{|i| i["min_qty"].to_i }.reject{|i| i["min_qty"].to_i > amount }.last["price"].to_f
