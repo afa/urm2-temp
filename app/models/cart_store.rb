@@ -35,7 +35,7 @@ class CartStore < CartItem
   end
 
   def setup_for(hash)
-   return self.class if hash[:amount] <= hash[:vend_qty]
+   return self.class if hash[:amount] <= hash[:avail_amount]
    CartRequest
   end
 
