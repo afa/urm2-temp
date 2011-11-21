@@ -11,9 +11,9 @@ class CartStore < CartItem
    hsh = {:user_id => User.current.id, :product_link => search.code, :product_name => search.name, :product_rohs => search.rohs, :product_brend => search.brend, :location_link => search.location_id}
    fnd = self.unprocessed.where( hsh ).order("updated_at desc").all
    if fnd.empty?
-    item = self.create(hsh.merge(:draft => true, :processed => false, :avail_amount => search.max_qty, :min_amount => search.min_qty))
+    item = self.create(hsh.merge(:draft => true, :processed => false, :avail_amount => search.max_qty, :min_amount => search.min_qty, :offer_params => search.raw_location))
    else
-    item = self.create(hsh.merge(:draft => true, :processed => false, :avail_amount => search.max_qty, :min_amount => search.min_qty, :quantity => search.qty_in_pack))
+    item = self.create(hsh.merge(:draft => true, :processed => false, :avail_amount => search.max_qty, :min_amount => search.min_qty, :quantity => search.qty_in_pack, :offer_params => search.raw_location))
    end #found/created
    fnd.each{|i| i.destroy }
    #item.update_attributes(:avail_amount => search_hash["max_qty"], :min_amount => search_hash["min_qty"], :quantity => search_hash["qty_in_pack"])
