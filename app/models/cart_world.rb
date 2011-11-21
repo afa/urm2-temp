@@ -41,7 +41,7 @@ class CartWorld < CartItem
    hsh = {:user_id => User.current.id, :product_link => search.code, :product_name => search.name, :product_rohs => search.rohs, :product_brend => search.brend, :prognosis => search.prognoz, :quantity => search.qty_multiples, :avail_amount => search.max_qty}
    fnd = self.unprocessed.where( hsh ).order("updated_at desc").all
    #if fnd.empty?
-    item = self.create(hsh.merge(:draft => true, :processed => false, :min_amount => search.min_qty))
+    item = self.create(hsh.merge(:draft => true, :processed => false, :min_amount => search.min_qty).merge(:offer_params => search.raw_prognosis))
    #else
     
    #end #found/created

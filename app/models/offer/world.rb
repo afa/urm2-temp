@@ -3,7 +3,7 @@ class Offer::World < Offer::Base
 
   @signature_fields = @base_signature_fields + [:prognoz, :vend_qty, :qty_multiples]
 
-  attr_accessor :prognoz, :vend_qty, :qty_multiples, :vend_proposal_date, :qtys, :prices, :counts, :need_more
+  attr_accessor :prognoz, :vend_qty, :qty_multiples, :vend_proposal_date, :qtys, :prices, :counts, :need_more, :raw_prognosis
 
   def self.ask_axapta_by_id(product_id)
    hshs = Axapta.search_name(:user_hash => User.current.current_account.try(:axapta_hash), :item_id_search => product_id)
@@ -58,6 +58,7 @@ class Offer::World < Offer::Base
       n.qtys = prgnz["price_qty"].sort_by{|p| p["min_qty"] }.inject([]){|rr, h| rr << OpenStruct.new(h) }
       n.prices = n.qtys.map{|p| p.price }
       n.counts = n.qtys.map{|p| p.min_qty }
+      n.raw_prognosis = prgnz
       CartWorld.prepare_code(n)
      end
     end
