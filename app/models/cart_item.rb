@@ -26,7 +26,7 @@ class CartItem < ActiveRecord::Base
  before_validation :setup_price
 
   def setup_price
-   if self.amount > 0
+   if self.amount and self.amount > 0
     self.amount = self.max_amount if self.amount > self.max_amount
     self.amount = self.min_amount if self.amount < self.min_amount
     self.current_price = self.offer_params["price_qty"].sort_by{|i| i["min_qty"].to_i }.reject{|i| i["min_qty"].to_i > self.amount }.last["price"].to_f
