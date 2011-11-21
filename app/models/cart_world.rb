@@ -8,6 +8,8 @@ class CartWorld < CartItem
   end
 
   def setup_price
+   max_amount ||= 0
+   min_amount ||= 0
    if amount and amount > 0
     amount = max_amount if amount > max_amount
     amount = min_amount if amount < min_amount
