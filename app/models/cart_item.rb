@@ -3,7 +3,7 @@ class CartItem < ActiveRecord::Base
  belongs_to :user
  scope :unprocessed, where(:processed => false)
  scope :in_cart, where(:draft => false)
- ATTR_KEYS = %w(amount product_link location_link product_name product_rohs product_brend processed order current_price prognosis quantity min_amount max_amount avail_amount comment user_price actions draft).map(&:to_sym)
+ ATTR_KEYS = %w(amount product_link location_link product_name product_rohs product_brend processed order current_price prognosis quantity min_amount max_amount comment user_price actions draft offer_params).map(&:to_sym)
 
  attr_accessor :allow
  attr_accessor :offer_params
