@@ -16,7 +16,7 @@ class CartItem < ActiveRecord::Base
   end
 
   def deserialize_offer
-   offer_params = YAML::load(offer_serialized)
+   offer_params = offer_serialized.blank? ? [] : YAML::load(offer_serialized)
   end
 
   def serialize_offer
