@@ -4,18 +4,18 @@ class CartWorld < CartItem
   end
 
   def to_sales_lines
-   super.merge(:max_qty => max_amount, :min_qty => min_amount, :prognosis_id => prognosis, :qty_multiples => quantity, :sales_price => current_price)
+   super.merge(:max_qty => self.max_amount, :min_qty => self.min_amount, :prognosis_id => self.prognosis, :qty_multiples => self.quantity, :sales_price => self.current_price)
   end
 
   def setup_price
    self.max_amount ||= 0
    self.min_amount ||= 0
    if self.amount and self.amount > 0
-    self.amount = max_amount if self.amount > self.max_amount
+    self.amount = self.max_amount if self.amount > self.max_amount
     self.amount = self.min_amount if self.amount < self.min_amount
     self.current_price = self.offer_params["price_qty"].sort_by{|i| i["min_qty"].to_i }.reject{|i| i["min_qty"].to_i > amount }.last["price"].to_f
    else
-    current_price = 0
+    self.current_price = 0
    end
   end
 
