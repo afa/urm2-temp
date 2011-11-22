@@ -4,8 +4,57 @@ class CartStore < CartItem
   end
 
   def to_sales_lines
-   super.merge(:invent_location => location_link)
+   init = super.merge(:invent_location => location_link, :line_type => 'order')
+   # TODO: добавить reswerv & pick
+   init.merge!(:is_pick => true) if self.pick?
+   init.merge!(:reserve_sale => true) if self.reserve?
+   self.user_price.blank? ? init : init.merge(:sales_price => self.user_price)
   end
+=begin
+    #  invc_brend_alias:
+    #    setter: setDMSinvcBrendAlias
+    #  invent_location:
+    #    setter: setInventLocationId
+    #    title: склад
+    #    type: string
+      is_pick:
+        setter: setIsPick
+        title: "бронировать строку"
+        type: boolean
+   #   item_id:
+   #     setter: setItemId
+   #     title: "код ном-ры"
+   #     type: string
+   #   item_name:
+   #     setter: setInvcInventItemName
+   #   line_customer_delivery_type_id:
+   #     setter: setLineCustDlvMode
+   #   line_type:
+   #     setter: setEPXLineType
+   #     title: "тип строки (order / dms)"
+   #     type: string
+      max_qty:
+        setter: setDMSPurchAutoMaxQty
+      min_qty:
+        setter: setDMSPurchAutoMinQty
+      prognosis_id:
+        setter: setDMSPrognosisId
+   #   qty:
+   #     setter: setQty
+   #     title: количество
+   #     type: real
+      qty_multiples:
+        setter: setDMSqtyMultiples
+      reserve_sale:
+        setter: setReserveSale
+        title: резервировать
+        type: boolean
+   #   sales_price:
+   #     description: "необязательное. заполняется для ДМС или для стока, если это разрешено правами."
+   #     setter: setSalesPrice
+   #     title: цена
+=end
+
 
   def self.prepare_code(search) #on find, chg search hash to offers array
    hsh = {:user_id => User.current.id, :product_link => search.code, :product_name => search.name, :product_rohs => search.rohs, :product_brend => search.brend, :location_link => search.location_id}
