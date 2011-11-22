@@ -52,7 +52,7 @@ class CartItem < ActiveRecord::Base
    raise "NYI"
   end
 
-  def to_sales_line
+  def to_sales_lines
    {:brend_alias => product_brend, :item_id => product_link, :item_name => product_name, :note => comment, :qty => amount, :invc_brend_alias => product_brend}
   end
 
