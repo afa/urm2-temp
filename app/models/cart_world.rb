@@ -14,7 +14,11 @@ class CartWorld < CartItem
     self.amount = self.max_amount if self.amount > self.max_amount
     self.amount = self.min_amount if self.amount < self.min_amount
     p "---needoffer", self.offer_params
-    self.current_price = self.offer_params["price_qty"].sort_by{|i| i["min_qty"].to_i }.reject{|i| i["min_qty"].to_i > amount }.last["price"].to_f
+    if self.offer_params["price_qty"]
+     self.current_price = self.offer_params["price_qty"].sort_by{|i| i["min_qty"].to_i }.reject{|i| i["min_qty"].to_i > amount }.last["price"].to_f
+    else
+     self.current_price = 0
+    end
    else
     self.current_price = 0
    end
