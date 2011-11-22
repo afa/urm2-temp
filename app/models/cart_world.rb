@@ -4,7 +4,7 @@ class CartWorld < CartItem
   end
 
   def to_sales_lines
-   super.merge(:max_qty => self.max_amount, :min_qty => self.min_amount, :prognosis_id => self.prognosis, :qty_multiples => self.quantity, :sales_price => self.current_price, :line_type => 'dms')
+   init = super.merge(:max_qty => self.max_amount, :min_qty => self.min_amount, :prognosis_id => self.prognosis, :qty_multiples => self.quantity, :sales_price => self.current_price, :line_type => 'dms')
    # TODO: добавить reswerv & pick
    init.merge!(:is_pick => true) if self.pick?
    init.merge!(:reserve_sale => true) if self.reserve?
