@@ -8,6 +8,7 @@ class CartItem < ActiveRecord::Base
  attr_accessor :allow
  attr_accessor :offer_params
 
+ before_validation :setup_price
  after_initialize :deserialize_offer
  before_validation :serialize_offer
 
@@ -16,22 +17,23 @@ class CartItem < ActiveRecord::Base
   end
 
   def deserialize_offer
-   puts "---load offer"
    self.offer_params = self.offer_serialized.blank? ? {} : YAML::load(self.offer_serialized)
   end
 
   def serialize_offer
-   puts "---store offer"
    self.offer_serialized = self.offer_params.to_yaml
   end
 
- before_validation :setup_price
 
   def setup_price
    if self.amount and self.amount > 0
     self.amount = self.max_amount if self.amount > self.max_amount
     self.amount = self.min_amount if self.amount < self.min_amount
-    self.current_price = self.offer_params["price_qty"].sort_by{|i| i["min_qty"].to_i }.reject{|i| i["min_qty"].to_i > self.amount }.last["price"].to_f
+    if self.offer_params
+     self.current_price = self.offer_params["price_qty"].sort_by{|i| i["min_qty"].to_i }.reject{|i| i["min_qty"].to_i > self.amount }.last["price"].to_f
+    else
+     self.current_price = 0
+    end
    else
     self.current_price = 0
    end
