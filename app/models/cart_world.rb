@@ -10,8 +10,6 @@ class CartWorld < CartItem
    init.merge!(:reserve_sale => true) if self.reserve?
    self.user_price.blank? ? init : init.merge(:sales_price => self.user_price)
   end
-
-  end
 =begin
     #  invc_brend_alias:
     #    setter: setDMSinvcBrendAlias
