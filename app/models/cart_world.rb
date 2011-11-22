@@ -42,6 +42,8 @@ class CartWorld < CartItem
    fnd = self.unprocessed.where( hsh ).order("updated_at desc").all
    #if fnd.empty?
    item = self.create(hsh.merge(:draft => true, :processed => false, :min_amount => search.min_qty, :offer_params => search.raw_prognosis))
+   item.offer_params.merge!search.raw_prognosis
+   item.save!
    p "---prepcode", search, search.raw_prognosis, item.offer_params 
    #else
     
