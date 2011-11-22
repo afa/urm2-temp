@@ -73,6 +73,7 @@ class Offer::World < Offer::Base
    fabricate(items)
   end
 
+=begin
   def self.conv_dms_items(items)
    items.inject([]) do |r, i|
     i["prognosis"].each do |loc|
@@ -88,7 +89,9 @@ class Offer::World < Offer::Base
     r
    end
   end
+=end
 
+=begin
   def self.mass_load(query_string)
    hash = User.current.current_account.try(:axapta_hash)
    begin
@@ -107,6 +110,7 @@ class Offer::World < Offer::Base
    end
    
   end
+=end
 
 =begin
    @after = params[:after]

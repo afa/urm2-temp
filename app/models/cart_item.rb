@@ -3,7 +3,7 @@ class CartItem < ActiveRecord::Base
  belongs_to :user
  scope :unprocessed, where(:processed => false)
  scope :in_cart, where(:draft => false)
- ATTR_KEYS = %w(amount product_link location_link product_name product_rohs product_brend processed order current_price prognosis quantity min_amount max_amount comment user_price actions draft offer_params).map(&:to_sym)
+ ATTR_KEYS = %w(amount product_link location_link product_name product_rohs product_brend processed order current_price prognosis quantity min_amount max_amount comment user_price actions draft offer_params offer_serialized reserve pick).map(&:to_sym)
 
  attr_accessor :allow
  attr_accessor :offer_params
@@ -17,10 +17,12 @@ class CartItem < ActiveRecord::Base
   end
 
   def deserialize_offer
+   p "==deserialize #{self.type}##{self.id}", self.offer_serialized
    self.offer_params = self.offer_serialized.blank? ? {} : YAML::load(self.offer_serialized)
   end
 
   def serialize_offer
+   p "==serialize #{self.type}##{self.id}", self.offer_params
    self.offer_serialized = self.offer_params.to_yaml
   end
 
