@@ -94,8 +94,10 @@ class User < ActiveRecord::Base
   end
 
    def make_order
-    reqs = cart_items.unprocessed.in_cart.all.select{|c| c.is_a?(CartRequest) }
-    result = Axapta.make_order(:sales_lines => reqs.map{|i| i.to_sales_lines })
+    reqs = cart_items.unprocessed.in_cart.all.partition{|c| c.is_a?(CartRequest) }
+    result = Axapta.make_order(:sales_lines => reqs[0].map{|i| i.to_sales_lines })
+    result2 = Axapta.make_order(:sales_lines => reqs[1].map{|i| i.to_sales_lines })
+ 
     # add for nonrequests
    end
  protected
