@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-   User.current.make_order(params[:dead_line])
+   User.current.make_order(params[:date_picker])
   end
 
   def lines
