@@ -1,4 +1,5 @@
 - form_for :order, :url => orders_path do |f|
+ %input.date-picker{:type => "text", :name => 'date_picker'}
  - unless @nreqs.empty?
   %h3 нон
   %table
@@ -26,3 +27,5 @@
      = ff.hidden_field :allow
 
  = f.submit t(:make)
+:javascript
+ $(".date-picker").datePicker();
