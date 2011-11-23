@@ -97,13 +97,18 @@ class User < ActiveRecord::Base
    end
   end
 
-   def make_order(dead_line)
-    reqs = cart_items.unprocessed.in_cart.all.partition{|c| c.is_a?(CartRequest) }
-    result2 = Axapta.make_order(:sales_lines => reqs[1].map{|i| i.to_sales_lines }, :date_dead_line => dead_line)
-    result = Axapta.make_order(:sales_lines => reqs[0].map{|i| i.to_sales_lines }, :date_dead_line => dead_line)
+  def make_order(dead_line)
+   reqs = cart_items.unprocessed.in_cart.all.partition{|c| c.is_a?(CartRequest) }
+   result2 = Axapta.make_order(:sales_lines => reqs[1].map{|i| i.to_sales_lines }, :date_dead_line => dead_line)
+   result = Axapta.make_order(:sales_lines => reqs[0].map{|i| i.to_sales_lines }, :date_dead_line => dead_line)
  
     # add for nonrequests
-   end
+  end
+
+  def deliveries
+   types = Axapta.get_delivery_mode.try(:customer_delivery_types) || []
+   types.map{|t| [t["customer_delivery_type_id"], [t["delivery_type"], t["address"]["city"]].join(' ')] }
+  end
  protected
   def generate_hash(string)
    if RUBY_VERSION >= '1.9'

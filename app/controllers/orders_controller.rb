@@ -36,10 +36,11 @@ class OrdersController < ApplicationController
    @carts = current_user.cart_items.in_cart.unprocessed.all
    @reqs = @carts.partition{|i| i.is_a? CartRequest }[0]
    @nreqs = @carts.partition{|i| i.is_a? CartRequest }[1]
+   @deliveries = User.deliveries
   end
 
   def create
-   User.current.make_order(params[:date_picker])
+   User.current.make_order(params[:date_picker], params[:delivery_type])
   end
 
   def lines

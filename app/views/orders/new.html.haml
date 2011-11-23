@@ -1,4 +1,8 @@
 - form_for :order, :url => orders_path do |f|
+ - unless @deliveries.empty?
+  %select{:name => "delivery_type"}
+   - @deliveries.each do |del|
+    %option{:value=>del[0]}= del[1]
  %input.date-picker{:type => "text", :name => 'date_picker'}
  - unless @nreqs.empty?
   %h3 нон
