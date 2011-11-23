@@ -4,7 +4,7 @@ class CartWorld < CartItem
   end
 
   def to_sales_lines
-   init = super.merge(:max_qty => self.max_amount, :min_qty => self.min_amount, :prognosis_id => self.prognosis, :qty_multiples => self.quantity, :sales_price => self.current_price, :is_pick => self.pick?, :reserve_sale => self.reserve?)
+   init = super.merge(:max_qty => self.max_amount, :min_qty => self.min_amount, :prognosis_id => self.prognosis, :qty_multiples => self.quantity, :sales_price => self.current_price, :is_pick => true, :reserve_sale => self.reserve?)
    self.user_price.blank? ? init : init.merge(:sales_price => self.user_price)
   end
 =begin
