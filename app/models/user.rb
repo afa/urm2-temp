@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   def reset_remember_token!
    self.generate_remember_token
    if current_account
-    axapta_params = Axapta.user_info(ext_hash)
+    axapta_params = Axapta.user_info(current_account.axapta_hash)
     current_account.update_attributes :invent_location_id => axapta_params["invent_location_id"] unless current_account.invent_location_id == axapta_params["invent_location_id"]
    end
    save(:validate => false)
