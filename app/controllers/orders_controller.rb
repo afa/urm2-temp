@@ -36,7 +36,7 @@ class OrdersController < ApplicationController
    @carts = current_user.cart_items.in_cart.unprocessed.all
    @reqs = @carts.partition{|i| i.is_a? CartRequest }[0]
    @nreqs = @carts.partition{|i| i.is_a? CartRequest }[1]
-   @deliveries = User.deliveries
+   @deliveries = User.current.deliveries
   end
 
   def create
