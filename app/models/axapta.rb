@@ -120,7 +120,7 @@ class Axapta
   end
 
   def self.get_delivery_mode
-   AxaptaRequest.get_dlv_mode(:user_hash => User.current.try(:current_account)).try(:axapta_hash)
+   AxaptaRequest.get_dlv_mode(:user_hash => User.current.try(:current_account).try(:axapta_hash))
   end
 end
 
