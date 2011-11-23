@@ -4,10 +4,7 @@ class CartStore < CartItem
   end
 
   def to_sales_lines
-   init = super.merge(:invent_location => location_link, :line_type => 'order')
-   # TODO: добавить reswerv & pick
-   init.merge!(:is_pick => true) if self.pick?
-   init.merge!(:reserve_sale => true) if self.reserve?
+   init = super.merge(:invent_location => location_link, :is_pick => self.pick?, :reserve_sale => self.reserve?)
    self.user_price.blank? ? init : init.merge(:sales_price => self.user_price)
   end
 =begin
