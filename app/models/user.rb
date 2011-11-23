@@ -97,9 +97,9 @@ class User < ActiveRecord::Base
    end
   end
 
-  def make_order(dead_line)
+  def make_order(dead_line, delivery)
    reqs = cart_items.unprocessed.in_cart.all.partition{|c| c.is_a?(CartRequest) }
-   result2 = Axapta.make_order(:sales_lines => reqs[1].map{|i| i.to_sales_lines }, :date_dead_line => dead_line)
+   result2 = Axapta.make_order(:sales_lines => reqs[1].map{|i| i.to_sales_lines }, :date_dead_line => dead_line, :customer_delivery_type_id => delivery)
    result = Axapta.make_order(:sales_lines => reqs[0].map{|i| i.to_sales_lines }, :date_dead_line => dead_line)
  
     # add for nonrequests
