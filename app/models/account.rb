@@ -10,4 +10,5 @@ class Account < ActiveRecord::Base
   def self.axapta_renames
    {"user_id" => "axapta_user_id", "parent_user_id" => "axapta_parent_id", "user_name" => "name"}
   end
+
 end
