@@ -102,7 +102,7 @@ class User < ActiveRecord::Base
    res = []
    unless reqs[1].empty?
     begin
-     res << Axapta.make_order(:sales_lines => reqs[1].map{|i| i.to_sales_lines }, :date_dead_line => dead_line, :customer_delivery_type_id => delivery)
+     res << Axapta.make_order(:sales_lines => reqs[1].map{|i| i.to_sales_lines }, :date_dead_line => dead_line, :customer_delivery_type_id => delivery)["sales_id"]
      reqs[1].each{|i| i.update_attributes :processed => true, :order => res.last }
     rescue Exception => e
      p "---makeorder_exc!request", e
@@ -110,7 +110,7 @@ class User < ActiveRecord::Base
    end
    unless reqs[0].empty?
     begin
-     res << Axapta.make_order(:sales_lines => reqs[0].map{|i| i.to_sales_lines }, :date_dead_line => dead_line)
+     res << Axapta.make_order(:sales_lines => reqs[0].map{|i| i.to_sales_lines }, :date_dead_line => dead_line)["sales_id"]
      reqs[0].each{|i| i.update_attributes :processed => true, :order => res.last }
     rescue Exception => e
      p "---makeorder_exc_request", e
