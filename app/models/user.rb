@@ -99,10 +99,10 @@ class User < ActiveRecord::Base
 
   def make_order(dead_line, delivery)
    reqs = cart_items.unprocessed.in_cart.all.partition{|c| c.is_a?(CartRequest) }
-   result2 = Axapta.make_order(:sales_lines => reqs[1].map{|i| i.to_sales_lines }, :date_dead_line => dead_line, :customer_delivery_type_id => delivery) unless reqs[1].empty?
-   result = Axapta.make_order(:sales_lines => reqs[0].map{|i| i.to_sales_lines }, :date_dead_line => dead_line) unless reqs[0].empty?
- 
-    # add for nonrequests
+   res = []
+   res << Axapta.make_order(:sales_lines => reqs[1].map{|i| i.to_sales_lines }, :date_dead_line => dead_line, :customer_delivery_type_id => delivery) unless reqs[1].empty?
+   res << Axapta.make_order(:sales_lines => reqs[0].map{|i| i.to_sales_lines }, :date_dead_line => dead_line) unless reqs[0].empty?
+   res
   end
 
   def deliveries
