@@ -1,1 +1,3 @@
-= link_to @order, lines_orders_path("filter[sales_id]" => @order)
+%h3= t :orders_created
+- @results.compact.each do |ord|
+ %div= link_to ord, lines_orders_path("filter[sales_id]" => ord)

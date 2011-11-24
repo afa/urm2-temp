@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-   User.current.make_order(params[:date_picker], params[:delivery_type])
+   @results = User.current.make_order(params[:date_picker], params[:delivery_type])
   end
 
   def lines

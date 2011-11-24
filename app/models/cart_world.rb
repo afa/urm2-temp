@@ -59,9 +59,8 @@ class CartWorld < CartItem
    if self.amount and self.amount > 0
     self.amount = self.max_amount if self.amount > self.max_amount
     self.amount = self.min_amount if self.amount < self.min_amount
-    p "---needoffer", self.offer_params
     if self.offer_params["price_qty"]
-     self.current_price = self.offer_params["price_qty"].sort_by{|i| i["min_qty"].to_i }.reject{|i| i["min_qty"].to_i > amount }.last["price"].to_f
+     self.current_price = self.offer_params["price_qty"].sort_by{|i| i["min_qty"].to_i }.reject{|i| i["min_qty"].to_i > self.amount }.last["price"].to_f
     else
      self.current_price = 0
     end
@@ -93,7 +92,7 @@ class CartWorld < CartItem
    fnd = self.unprocessed.where( hsh ).order("updated_at desc").all
    #if fnd.empty?
    item = self.create(hsh.merge(:draft => true, :processed => false, :min_amount => search.min_qty, :offer_params => search.raw_prognosis))
-   item.offer_params.merge!search.raw_prognosis
+   item.offer_params.merge!(search.raw_prognosis)
    item.save!
    p "---prepcode", search, search.raw_prognosis, item.offer_params 
    #else
