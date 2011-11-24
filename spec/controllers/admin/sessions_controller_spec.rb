@@ -12,6 +12,7 @@ describe Admin::SessionsController do
   end
 
   it "should be redirect to new session on delete" do
+   ##Axapta.stub!(:user_info).with()
    delete :destroy
    response.should redirect_to(new_admin_session_path)
   end

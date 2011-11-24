@@ -45,6 +45,7 @@ class User < ActiveRecord::Base
   def encrypt_password
    self.encrypted_password = self.encrypt(self.password)
   end
+
   def reset_remember_token!
    self.generate_remember_token
    if current_account

@@ -3,18 +3,32 @@ require 'spec_helper'
 describe SessionsController do
 
   before do
-   @user = Factory.build(:user)
-   @user.stub!(:valid?).and_return(true)
+  @user = FactoryGirl.build(:user)
+  #@user = FactoryGirl.build(:user, :ext_hash => '123')
+  @user.stub!(:valid?).and_return(true)
+  @user.stub!(:create_axapta_account).and_return(true)
    @pass = "password" #@user.send(:calc_pass)
    @user.stub(:calc_pass).and_return(@pass)
-   Axapta.stub!(:user_info).with(@user.ext_hash).and_return({})
+  Axapta.stub!(:user_info).and_return({})
+  @user.save!
+  @account = FactoryGirl.build(:account, :blocked => false, :user => @user)
+  @account.save!
+  @user.current_account = @user.accounts.first
+  @user.save!
+  #controller.sign_in @user
+
+   Axapta.stub!(:user_info).with(@user.current_account.axapta_hash).and_return({})
    @user.save!
    @blocked = Factory.build(:user)
    @blocked.stub!(:valid?).and_return(true)
    @blocked.stub(:calc_pass).and_return(@pass)
-   Axapta.stub!(:user_info).with(@blocked.ext_hash).and_return({})
+   @blocked.stub!(:create_axapta_account).and_return(true)
+   #Axapta.stub!(:user_info).with(@blocked.ext_hash).and_return({})
    @blocked.save!
-   @blocked.accounts.each{|a| a.blocked = true; a.save! }
+   acc = FactoryGirl.build(:account, :blocked => true, :user => @blocked)
+   acc.save!
+   @blocked.current_account = @blocked.accounts.first
+   @blocked.save!
   end
   describe "GET 'new'" do
     it "should be successful" do
