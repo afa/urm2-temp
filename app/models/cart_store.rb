@@ -54,13 +54,15 @@ class CartStore < CartItem
 
 
   def self.prepare_code(search) #on find, chg search hash to offers array
+   #FIXME: fix for generation
    hsh = {:user_id => User.current.id, :product_link => search.code, :product_name => search.name, :product_rohs => search.rohs, :product_brend => search.brend, :location_link => search.location_id}
    fnd = self.unprocessed.where( hsh ).order("updated_at desc").all
-   if fnd.empty?
+   #if fnd.empty?
     item = self.create(hsh.merge(:draft => true, :processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :offer_params => search.raw_location))
-   else
-    item = self.create(hsh.merge(:draft => true, :processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :quantity => search.qty_in_pack, :offer_params => search.raw_location))
-   end #found/created
+    item.offer_params.merge!(search.raw_location)
+   #else
+    #item = self.create(hsh.merge(:draft => true, :processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :quantity => search.qty_in_pack, :offer_params => search.raw_location))
+   #end #found/created
    fnd.each{|i| i.destroy }
    #item.update_attributes(:max_amount => search_hash["max_qty"], :min_amount => search_hash["min_qty"], :quantity => search_hash["qty_in_pack"])
    search.cart_id = item.id
@@ -71,6 +73,7 @@ class CartStore < CartItem
   # Axapta.search_names(:calc_price => true, :calc_qty => true, :show_delivery_prognosis => true, :item_id_search => product_link, :invent_location_id => location_link, :user_hash => User.current.current_account.axapta_hash)
   #end
 
+=begin
   def self.prepare_for(count, hsh)
    return CartRequest.prepare_for(count, hsh) if hsh.blank? or count > (hsh["locations"].first["vend_qty"].to_i || 0)
    count = hsh["min_qty"] if count < hsh["min_qty"]
@@ -79,9 +82,10 @@ class CartStore < CartItem
    return CartRequest.prepare_for(count, hsh) unless selected
    {:type => self.name, :amount => count, :product_link => hsh["item_id"], :location_link => hsh["locations"].first["location_id"], :product_name => hsh["item_name"], :product_rohs => hsh["rohs"], :product_brend => hsh["item_brend"], :processed => false, :current_price => selected["price"], :quantity => hsh["qty_in_pack"], :min_amount => hsh["min_qty"], :max_amount => hsh["locations"].first["vend_qty"], :draft => !(count > 0)}
   end
+=end
 
   def setup_for(hash)
-   return self.class if hash[:amount] <= hash[:max_amount]
+   return self.class if hash[:amount].to_i <= hash[:max_amount].to_i
    CartRequest
   end
 

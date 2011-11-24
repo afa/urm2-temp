@@ -28,6 +28,9 @@ class CartItem < ActiveRecord::Base
 
 
   def setup_price
+   self.max_amount ||= 0
+   self.min_amount ||= 0
+
    if self.amount and self.amount > 0
     self.amount = self.max_amount if self.amount > self.max_amount
     self.amount = self.min_amount if self.amount < self.min_amount
