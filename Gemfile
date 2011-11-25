@@ -50,3 +50,7 @@ group :development, :test do
  #gem "selenium-webdriver"
 # gem 'webrat'
 end
+
+group :test do
+ gem "database_cleaner"
+end
