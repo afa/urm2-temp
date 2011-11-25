@@ -4,7 +4,7 @@ class Offer::Store < Offer::Base
  attr_accessor :location_id, :brend_name, :brend_url, :qtys, :prices, :counts, :need_more, :qty_in_pack, :segment_rus, :body_name, :analog_exists, :forecast_available, :min_qty, :max_qty, :raw_location
 
   def self.search(hsh)
-   return [] if hsh.empty? || hsh[:query_string].blank? || hsh[:query_string].size < 3
+   return [] if hsh.blank? || hsh[:query_string].blank? || hsh[:query_string].size < 3
    begin
     data = Axapta.search_names({:show_forecast_availability => true, :show_analog_existence => true, :calc_price=>true, :calc_qty => true}.merge(hsh || {}).merge(:user_hash => User.current.current_account.try(:axapta_hash)))
    rescue Exception => e
