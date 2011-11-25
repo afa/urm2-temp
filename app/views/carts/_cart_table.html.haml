@@ -1,14 +1,55 @@
-%table
- %tr
-  %th= t :type
-  %th= t :name
-  %th= t :brend
-  %th= t :rohs
-  %th= t :price
-  %th= t :amount
-  %th= t :location
-  %th= t :prognosis
-  %th= t :comment
-  %th= t :user_price
-  %th= t :action
- = render :partial => "carts/cart_line", :collection => cart
+#cart_store
+ %table
+  %tr
+   %th= t :type
+   %th= t :name
+   %th= t :brend
+   %th= t :rohs
+   %th= t :price
+   %th= t :amount
+   %th= t :location
+   %th= t :prognosis
+   %th= t :comment
+   %th= t :user_price
+   %th= t :action
+  = render :partial => "carts/cart_line", :collection => cart
+
+#order
+ - form_for :order, :url => orders_path do |f|
+  - unless @deliveries.blank?
+   %select{:name => "delivery_type"}
+    - @deliveries.each do |del|
+     %option{:value=>del[0]}= del[1]
+  %input.date-picker{:type => "text", :name => 'date_picker'}
+  - unless @nreqs.blank?
+   %h3 нон
+   %table
+    %tr
+     %th запрос
+     %th= t :comment
+     %th= t :action
+    - @nreqs.each do |item|
+     %tr
+      - f.fields_for :item do |ff|
+       %td= item.inspect
+       %td= ff.text_area :comment
+       %td= ff.check_box :allow
+  - unless @reqs.blank?
+   %h3 запросы
+   %table
+    %tr
+     %th запрос
+     %th= t :comment
+    - @reqs.each do |item|
+     - f.fields_for :item do |ff|
+      %tr
+       %td= item.inspect
+       %td= ff.text_area :comment
+      = ff.hidden_field :allow
+
+  = f.submit t(:make)
+#reserve
+
+:javascript
+ $(".date-picker").datepicker({ dateFormat: 'yy-mm-dd' });
+

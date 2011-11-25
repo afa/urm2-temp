@@ -5,3 +5,6 @@ require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
 Urm::Application.load_tasks
+Cucumber::Rake::Task.new do |t|
+ t.rcov = true
+end

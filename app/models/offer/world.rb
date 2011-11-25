@@ -6,6 +6,7 @@ class Offer::World < Offer::Base
   attr_accessor :prognoz, :vend_qty, :qty_multiples, :vend_proposal_date, :qtys, :prices, :counts, :need_more, :raw_prognosis
 
   def self.ask_axapta_by_id(product_id)
+   return [] if product_id.blank?
    hshs = Axapta.search_name(:user_hash => User.current.current_account.try(:axapta_hash), :item_id_search => product_id)
    #:query_string, :search_brend
    rez = []
@@ -36,6 +37,7 @@ class Offer::World < Offer::Base
   end
 
   def self.by_code(product_code)
+   return [] if product_code.blank?
    hash = User.current.current_account.try(:axapta_hash)
    items = Axapta.search_dms_names(:user_hash => hash, :item_id_search => product_code)
    #items = conv_dms_items(Axapta.search_dms_names(:user_hash => hash, :item_id_search => product_code))
@@ -67,6 +69,7 @@ class Offer::World < Offer::Base
   end
 
   def self.by_query(query, brend = nil)
+   return [] if query.blank?
    hash = User.current.current_account.try(:axapta_hash)
    items = Axapta.search_dms_names(:user_hash => hash, :query_string => query, :search_brend => brend)
    #items = conv_dms_items(Axapta.search_dms_names(:user_hash => hash, :query_string => query, :search_brend => brend))
