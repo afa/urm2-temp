@@ -14,8 +14,16 @@ describe Admin::UsersController do
   describe "logged manager" do
    before do
     controller.sign_in manager
+    @users = FactoryGirl.build_list(:user, 5)
     Axapta.stub!(:user_info).and_return({})
-    @users = FactoryGirl.create_list(:user, 5)
+    @users.each do |user|
+     user.stub!(:valid?).and_return(true)
+     user.stub!(:create_axapta_account).and_return(true)
+     user.save!
+     FactoryGirl.create(:account, :blocked => false, :user => user)
+     user.current_account = user.accounts.first
+     user.save!
+    end
     @user = @users.first
    end
    let(:manager) { Factory(:manager) }

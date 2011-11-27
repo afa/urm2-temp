@@ -3,14 +3,35 @@ require 'spec_helper'
 describe UsersController do
 
   before do
-   User.any_instance.stub(:valid?).and_return(true)
+   @parent = FactoryGirl.build(:user)
+   @parent.stub!(:valid?).and_return(true)
+   @parent.stub!(:create_axapta_account).and_return(true)
+   @parent.save!
+   FactoryGirl.create(:account, :blocked => false, :user => @parent)
+   @parent.current_account = @parent.accounts.first
+   @parent.save!
+   @user = FactoryGirl.build(:user, :parent => @parent)
+   @user.stub!(:valid?).and_return(true)
+   @user.stub!(:create_axapta_account).and_return(true)
    Axapta.stub!(:user_info).and_return({})
-   @parent = FactoryGirl.create(:user)
-   @user = FactoryGirl.create(:user, :parent => @parent)
-   @chlds = FactoryGirl.create_list(:user, 2, :parent => @user)
-   @chlds.each{|u| u.accounts.first.update_attributes :parent_id => @user.accounts.first.id }
+   @user.save!
+   FactoryGirl.create(:account, :blocked => false, :user => @user)
+   @user.current_account = @user.accounts.first
+   @user.save!
+   @chlds = FactoryGirl.build_list(:user, 2, :parent => @user)
+   @chlds.each do |c|
+    c.stub!(:valid?).and_return(true)
+    FactoryGirl.create(:account, :blocked => false, :user => c, :parent => @user.current_account)
+    c.save!
+    c.current_account = c.accounts.first
+    c.save!
+   end
    controller.sign_in @user
-   @invalid = FactoryGirl.create(:user)
+
+   @invalid = FactoryGirl.build(:user)
+   @invalid.stub!(:valid?).and_return(true)
+   @invalid.stub!(:create_axapta_account).and_return(true)
+   @invalid.save!
   end
 
   #let(:user){mock_model(User)}
