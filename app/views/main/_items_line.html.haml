@@ -1,6 +1,7 @@
 - require "web_utils"
 - line_code = items_line.base_signature
 - offer_code = items_line.signature
+- offer_amount = items_line.amount.to_i > 0 ? items_line.amount : ''
 %tr{:class => "item_#{line_code}"}
  %td.icons
   %input.item-code{:type => "hidden", :value => items_line.code, :name => "items[#{offer_code}][code]", :id => "code_#{line_code}"}
@@ -33,7 +34,7 @@
    %a.speed-cart-button{:href=>"#"}
     %span
      %span &nbsp;
-   %input{:type=>"text", :class=>"validate[custom[onlyNumber],max[10000]]", :name => "items[#{offer_code}][amount]"}
+   %input{:type=>"text", :class=>"validate[custom[onlyNumber],max[10000]]", :name => "items[#{offer_code}][amount]", :value => offer_amount}
    -# %input{:type=>"text", :class=>"validate[custom[onlyNumber],max[#{items_line["max_qty"] || 0}]]"}
    %a.count{:href=>"#"}
  
