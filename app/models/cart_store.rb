@@ -57,10 +57,15 @@ class CartStore < CartItem
    #FIXME: fix for generation
    hsh = {:user_id => User.current.id, :product_link => search.code, :product_name => search.name, :product_rohs => search.rohs, :product_brend => search.brend, :location_link => search.location_id}
    fnd = CartItem.unprocessed.where( hsh ).order("updated_at desc").all
+   carts = CartItem.unprocessed.in_cart.where(hsh).where("amount is not null and amount > 0").order("updated_at desc").all
    #if fnd.empty?
-    item = self.create(hsh.merge(:draft => true, :processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :offer_params => search.raw_location))
-    item.offer_params.merge!(search.raw_location)
-    item.save!
+   item = self.create(hsh.merge(:draft => true, :processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :offer_params => search.raw_location))
+   item.offer_params.merge!(search.raw_location)
+   carts.reject!{|i| i.amount.blank? or i.amount == 0 }
+   unless carts.empty?
+    item.amount = carts.first.amount
+   end
+   item.save!
    #else
     #item = self.create(hsh.merge(:draft => true, :processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :quantity => search.qty_in_pack, :offer_params => search.raw_location))
    #end #found/created
