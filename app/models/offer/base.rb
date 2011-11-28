@@ -11,7 +11,7 @@ class Offer::Base
   @attributes ||= {}
  end
 
-  attr_accessor :code, :name, :brend, :rohs, :cart_id
+  attr_accessor :code, :name, :brend, :rohs, :cart_id, :amount
   #serialize :addons, Array
 
   @base_signature_fields = [:code, :name, :brend, :rohs]
