@@ -2,7 +2,8 @@ class CartItem < ActiveRecord::Base
  class CartParamRequired < StandardError; end
  belongs_to :user
  scope :unprocessed, where(:processed => false)
- scope :in_cart, where(:draft => false)
+ scope :in_cart, where("amount > 0")
+ #scope :in_cart, where(:draft => false)
  ATTR_KEYS = %w(amount product_link location_link product_name product_rohs product_brend processed order current_price prognosis quantity min_amount max_amount comment user_price actions draft offer_params offer_serialized reserve pick).map(&:to_sym)
 
  attr_accessor :allow
