@@ -1,8 +1,11 @@
 require 'spec_helper'
+include HelperUser
 
 describe UsersController do
 
   before do
+   @parent = prepare_user_account({}, {:blocked => false})
+=begin
    @parent = FactoryGirl.build(:user)
    @parent.stub!(:valid?).and_return(true)
    @parent.stub!(:create_axapta_account).and_return(true)
@@ -18,6 +21,8 @@ describe UsersController do
    FactoryGirl.create(:account, :blocked => false, :user => @user)
    @user.current_account = @user.accounts.first
    @user.save!
+=end
+   @user = prepare_user_account({:parent => @parent}, {:blocked => false})
    @chlds = FactoryGirl.build_list(:user, 2, :parent => @user)
    @chlds.each do |c|
     c.stub!(:valid?).and_return(true)
@@ -28,13 +33,15 @@ describe UsersController do
    end
    controller.sign_in @user
 
+   @invalid = prepare_user({})
+=begin
    @invalid = FactoryGirl.build(:user)
    @invalid.stub!(:valid?).and_return(true)
    @invalid.stub!(:create_axapta_account).and_return(true)
    @invalid.save!
+=end
   end
 
-  #let(:user){mock_model(User)}
   describe "GET 'index'" do
    before do
     get :index

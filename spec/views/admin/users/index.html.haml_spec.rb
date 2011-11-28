@@ -1,4 +1,5 @@
 require 'spec_helper'
+include HelperUser
 
 describe "admin/users/index.html.haml" do
  before do
