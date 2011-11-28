@@ -56,7 +56,7 @@ class CartStore < CartItem
   def self.prepare_code(search) #on find, chg search hash to offers array
    #FIXME: fix for generation
    hsh = {:user_id => User.current.id, :product_link => search.code, :product_name => search.name, :product_rohs => search.rohs, :product_brend => search.brend, :location_link => search.location_id}
-   fnd = self.unprocessed.where( hsh ).order("updated_at desc").all
+   fnd = CartItem.unprocessed.where( hsh ).order("updated_at desc").all
    #if fnd.empty?
     item = self.create(hsh.merge(:draft => true, :processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :offer_params => search.raw_location))
     item.offer_params.merge!(search.raw_location)
@@ -90,21 +90,4 @@ class CartStore < CartItem
    CartRequest
   end
 
-=begin
-"rohs"=>"", "analog_exists"=>false, "item_brend_name"=>"CONTINENTAL DEVICE INDIA LTD.", "min_qty"=>98, "item_name"=>"2N2222A", "segment_rus"=>"п═п╣п╪п╬п╫я┌", "locations"=>[{"delivery_prognosis"=>[], "price_qty"=>[{"price"=>0.3469, "min_qty"=>98, "price_ref"=>0, "max_qty"=>952}], "forecast_available"=>false, "vend_qty"=>952, "location_id"=>"CENTRE"}], "item_brend_url"=>"", "item_id"=>"270670", "item_brend"=>"CDIL", "package_name"=>"TO-18", "qty_in_pack"=>1000
--end
-
-
-=begin
-    i["locations"].each do |loc|
-     a = {"item_name" => i["item_name"], "item_brend" => i["item_brend"], "item_brend_name" => i["item_brend_name"], "item_brend_url" => i["item_brend_url"], "qty_in_pack" => i["qty_in_pack"], "location_id" => loc["location_id"], "min_qty" => i["min_qty"], "max_qty" => loc["vend_qty"], "rohs" => i["rohs"], "item_id" => i["item_id"], "segment_rus" => i["segment_rus"], "body_name" => i["package_name"], "analog_exists" => WebUtils.parse_bool(i["analog_exists"]), "forecast_available" => WebUtils.parse_bool(loc["forecast_available"])}
-     locs = loc["price_qty"].sort_by{|l| l["min_qty"] }[0, 4]
-     a.merge!("price1" => locs[0]["price"]) if locs[0]
-     a.merge!("price2" => locs[1]["price"], "count2" => locs[1]["min_qty"]) if locs[1]
-     a.merge!("price3" => locs[2]["price"], "count3" => locs[2]["min_qty"]) if locs[2]
-     a.merge!("price4" => locs[3]["price"], "count4" => locs[3]["min_qty"]) if locs[3]
-     r << a
-    end
-    r
-=end
 end
