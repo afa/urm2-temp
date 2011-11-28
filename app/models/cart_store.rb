@@ -60,6 +60,7 @@ class CartStore < CartItem
    #if fnd.empty?
     item = self.create(hsh.merge(:draft => true, :processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :offer_params => search.raw_location))
     item.offer_params.merge!(search.raw_location)
+    item.save!
    #else
     #item = self.create(hsh.merge(:draft => true, :processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :quantity => search.qty_in_pack, :offer_params => search.raw_location))
    #end #found/created
