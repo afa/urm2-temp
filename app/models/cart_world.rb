@@ -90,17 +90,43 @@ class CartWorld < CartItem
   def self.prepare_code(search)
    hsh = {:user_id => User.current.id, :product_link => search.code, :product_name => search.name, :product_rohs => search.rohs, :product_brend => search.brend, :prognosis => search.prognoz, :quantity => search.qty_multiples, :max_amount => search.max_qty}
    fnd = self.unprocessed.where( hsh ).order("updated_at desc").all
+   carts = CartItem.unprocessed.in_cart.where(hsh).order("updated_at desc").all
    #if fnd.empty?
-   item = self.create(hsh.merge(:draft => true, :processed => false, :min_amount => search.min_qty, :offer_params => search.raw_prognosis))
+   item = self.create(hsh.merge(:processed => false, :min_amount => search.min_qty, :offer_params => search.raw_prognosis))
    item.offer_params.merge!(search.raw_prognosis)
+   carts.reject!{|i| i.amount.nil? or i.amount == 0 }
+   item.amount = carts.first.try(:amount)
    item.save!
-   p "---prepcode", search, search.raw_prognosis, item.offer_params 
    #else
     
    #end #found/created
    fnd.each{|i| i.destroy }
    search.cart_id = item.id
+   search.amount = item.amount
   end
+=begin from store
+  def self.prepare_code(search) #on find, chg search hash to offers array
+   #FIXME: fix for generation
+   hsh = {:user_id => User.current.id, :product_link => search.code, :product_name => search.name, :product_rohs => search.rohs, :product_brend => search.brend, :location_link => search.location_id}
+   fnd = CartItem.unprocessed.where( hsh ).order("updated_at desc").all
+   carts = CartItem.unprocessed.in_cart.where(hsh).where("amount > 0").order("updated_at desc").all
+   #if fnd.empty?
+   item = self.create(hsh.merge(:processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :offer_params => search.raw_location))
+   item.offer_params.merge!(search.raw_location)
+   carts.reject!{|i| i.amount.nil? or i.amount == 0 }
+   item.amount = carts.first.try(:amount)
+   item.save!
+   #else
+    #item = self.create(hsh.merge(:draft => true, :processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :quantity => search.qty_in_pack, :offer_params => search.raw_location))
+   #end #found/created
+   fnd.each{|i| i.destroy }
+   #item.update_attributes(:max_amount => search_hash["max_qty"], :min_amount => search_hash["min_qty"], :quantity => search_hash["qty_in_pack"])
+   search.cart_id = item.id
+   search.amount = item.amount
+
+  end
+=end
+
 
   #def offers(count) #ret hash product
   # Axapta.search_dms_names( :item_id_search => product_link, :user_hash => User.current.current_account.axapta_hash)

@@ -64,19 +64,46 @@ class CartRequest < CartItem
   def self.prepare_code(search) #on find, chg search hash to offers array
    #FIXME: fix for generation
    hsh = {:user_id => User.current.id, :product_link => search.code, :product_name => search.name, :product_rohs => search.rohs, :product_brend => search.brend, :location_link => search.location_id}
-   fnd = self.unprocessed.where( hsh ).order("updated_at desc").all
+   fnd = CartItem.unprocessed.where( hsh ).order("updated_at desc").all
+   carts = CartItem.unprocessed.in_cart.where(hsh).order("updated_at desc").all
    #if fnd.empty?
-    item = self.create(hsh.merge(:draft => true, :processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :offer_params => search.raw_location))
-    item.offer_params.merge!(search.raw_location)
-    item.save!
+   item = self.create(hsh.merge(:processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :offer_params => search.raw_location))
+   item.offer_params.merge!(search.raw_location)
+   carts.reject!{|i| i.amount.nil? or i.amount == 0 }
+   item.amount = carts.first.try(:amount)
+   item.save!
    #else
     #item = self.create(hsh.merge(:draft => true, :processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :quantity => search.qty_in_pack, :offer_params => search.raw_location))
    #end #found/created
    fnd.each{|i| i.destroy }
    #item.update_attributes(:max_amount => search_hash["max_qty"], :min_amount => search_hash["min_qty"], :quantity => search_hash["qty_in_pack"])
    search.cart_id = item.id
+   search.amount = item.amount
 
   end
+
+=begin from store
+  def self.prepare_code(search) #on find, chg search hash to offers array
+   #FIXME: fix for generation
+   hsh = {:user_id => User.current.id, :product_link => search.code, :product_name => search.name, :product_rohs => search.rohs, :product_brend => search.brend, :location_link => search.location_id}
+   fnd = CartItem.unprocessed.where( hsh ).order("updated_at desc").all
+   carts = CartItem.unprocessed.in_cart.where(hsh).where("amount > 0").order("updated_at desc").all
+   #if fnd.empty?
+   item = self.create(hsh.merge(:processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :offer_params => search.raw_location))
+   item.offer_params.merge!(search.raw_location)
+   carts.reject!{|i| i.amount.nil? or i.amount == 0 }
+   item.amount = carts.first.try(:amount)
+   item.save!
+   #else
+    #item = self.create(hsh.merge(:draft => true, :processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :quantity => search.qty_in_pack, :offer_params => search.raw_location))
+   #end #found/created
+   fnd.each{|i| i.destroy }
+   #item.update_attributes(:max_amount => search_hash["max_qty"], :min_amount => search_hash["min_qty"], :quantity => search_hash["qty_in_pack"])
+   search.cart_id = item.id
+   search.amount = item.amount
+
+  end
+=end
 
   def self.prepare_for(count, hsh)
    return CartStore.prepare_for(count, hsh) if !hsh.blank? and count <= hsh["locations"].first["vend_qty"]

@@ -77,7 +77,7 @@ class CartItem < ActiveRecord::Base
      # || {"item_id" =>old.product_link, "locations" => [{"location_id" => old.location_link, "price_qty" => {"price" => old.current_price}, "vend_qty" => old.max_amount}], "item_name" => old.product_name, "rohs" => old.product_rohs, "item_brend" => old.product_brend, "qty_in_pack" => old.quantity, "min_qty" => old.min_amount})
    #new_hsh = old.class.prepare_for(hsh[:amount].to_i, offers.first || {"item_id" =>old.product_link, "locations" => [{"location_id" => old.location_link, "price_qty" => {"price" => old.current_price}, "vend_qty" => old.max_amount}], "item_name" => old.product_name, "rohs" => old.product_rohs, "item_brend" => old.product_brend, "qty_in_pack" => old.quantity, "min_qty" => old.min_amount})
    #instance_eval(new_hsh[:type]).create(new_hsh.update(:draft => !(new_hsh[:amount].to_i > 0), :user_id => User.current.id))
-   n = ntype.create(new_hsh.update(:draft => !(new_hsh[:amount].to_i > 0), :user_id => User.current.id))
+   n = ntype.create(new_hsh.update(:user_id => User.current.id))
    old.destroy
    n
    #end
