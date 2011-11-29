@@ -7,5 +7,5 @@ $(".cart_store").show();
 } else {
 $(".cart_store").hide();
 }
-- @changed.each |i|
+- @changed.each do |i|
  $("table.search-products tr input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");
