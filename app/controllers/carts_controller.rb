@@ -8,7 +8,7 @@ class CartsController < ApplicationController
   end
 
   def create
-   @changed => []
+   @changed = []
    if params[:items].try(:[], :commit)
     params[:items].reject{|k, v| k == :commit }.reject{|k, v| v[:amount].blank? }.each do |k, v|
      @changed << [v[:cart], CartStore.copy_on_write(v)]
