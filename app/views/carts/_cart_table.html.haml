@@ -14,7 +14,8 @@
    %th= t :action
   = render :partial => "carts/cart_line", :collection => cart
 
-#order
+-#
+ #order
  - form_for :order, :url => orders_path do |f|
   - unless @deliveries.blank?
    %select{:name => "delivery_type"}
@@ -48,8 +49,9 @@
       = ff.hidden_field :allow
 
   = f.submit t(:make)
-#reserve
-
-:javascript
+-#
+ #reserve
+-#
+ :javascript
  $(".date-picker").datepicker({ dateFormat: 'yy-mm-dd' });
 
