@@ -80,6 +80,7 @@ class CartItem < ActiveRecord::Base
    n = ntype.create(new_hsh.update(:user_id => User.current.id))
    old.destroy
    n
+   n.id
    #end
    
   end
