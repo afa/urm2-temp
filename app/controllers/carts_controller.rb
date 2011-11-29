@@ -20,14 +20,16 @@ class CartsController < ApplicationController
       CartWorld.copy_on_write(v)
      end
     end
-    redirect_to carts_path
-   respond_with do |format|
-    format.json do
-     render :json => {:dms => render_to_string( :partial => "main/dms_block.html", :locals => {:items => @items, :after => @after} ), :gap => render_to_string( :partial => "main/gap_line.html", :locals => {:after => @after}), :empty => render_to_string(:partial => "main/dms_empty.html", :locals => {:after => @after})}
-    end
-    format.js { render :layout => false }
-    format.html do
-     redirect_to root_path
+    #redirect_to carts_path
+    respond_with do |format|
+     format.json do
+      render :json => {:dms => render_to_string( :partial => "main/dms_block.html", :locals => {:items => @items, :after => @after} ), :gap => render_to_string( :partial => "main/gap_line.html", :locals => {:after => @after}), :empty => render_to_string(:partial => "main/dms_empty.html", :locals => {:after => @after})}
+     end
+     format.js { render :layout => false }
+     format.html do
+      render
+      #redirect_to root_path
+     end
     end
    else
     redirect_to :back
