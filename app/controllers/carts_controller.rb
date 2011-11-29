@@ -27,8 +27,7 @@ class CartsController < ApplicationController
      end
      format.js { render :layout => false }
      format.html do
-      render
-      #redirect_to root_path
+      redirect_to carts_path
      end
     end
    else
