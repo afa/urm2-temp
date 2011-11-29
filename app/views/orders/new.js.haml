@@ -1,1 +1,1 @@
-$("#order").replaceHtml("#{render :partial => "orders/orders_form"}")
+$("#order").replaceHtml("#{escape_javascript(render :partial => "orders/orders_form")}")
