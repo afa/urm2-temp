@@ -1,6 +1,7 @@
+alert("js ok");
 $(".cart_store table").remove("tr:has(td)");
 - @cart.each do |crt|
- $(".cart_store table").append(#{ escape_javascript(render :partial => "carts/cart_line", :locals => {:cart_line => crt}) });
+ $(".cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :locals => {:cart_line => crt}) }");
 if($(".cart_store table tr").length > 1){
 $(".cart_store").show();
 } else {
