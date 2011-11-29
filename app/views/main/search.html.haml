@@ -24,7 +24,7 @@
 .table-navigation-block{:class => "scroll"}
  .table-block
   .table-scrolling
-   = form_for :cart_fields, :url => carts_path, :method => :post, :remote => true do |frm|
+   = form_for :cart_fields, :url => carts_path, :method => :post, :class => "js", :remote => true do |frm|
     %table.table-style{:class => "search-products"}
      %tr
       %th{:rowspan => 2} &nbsp;
