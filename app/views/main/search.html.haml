@@ -104,6 +104,7 @@
  .clear
  .cart-table
   .cart= render :partial => "carts/cart_table", :locals => {:cart => @cart}
+ .order= render :partial => "main/order_edit"
 
 
 :javascript
@@ -113,6 +114,7 @@
   apply_hover_in_table_on_mmove();
   //load_dms_each(#{not to_bool(@only_store)});
   load_dms_bundle("#{main_mass_dms_url(:query_string => @search.query_string)}", #{not to_bool(@only_store)});
+  $(".order").hide();
  /*$('a.button-style').click(function(){
   $(this).parents('form').submit();
   return false;
