@@ -41,7 +41,8 @@ class CartsController < ApplicationController
   end
 
   def destroy
-   CartItem.where(:user_id => current_user.id).unprocessed.in_cart.find(params[:id]).try(:update_attributes, :amount => 0)
+   @old = CartItem.where(:user_id => current_user.id).unprocessed.in_cart.find(params[:id])
+   @old.try(:update_attributes, :amount => 0)
    @cart = CartItem.where(:user_id => current_user.id).unprocessed.in_cart.all
    respond_with do |format|
     format.js { render :layout => false }
