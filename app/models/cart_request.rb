@@ -4,6 +4,10 @@ class CartRequest < CartItem
    true
   end
 
+  def allowed_actions
+   %w()
+  end
+
   def type_name
    ::I18n::t :cart_request
   end

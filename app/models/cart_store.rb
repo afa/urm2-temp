@@ -3,6 +3,10 @@ class CartStore < CartItem
    ::I18n::t :cart_store
   end
 
+  def allowed_actions
+   %w(reserve pick)
+  end
+
   def to_sales_lines
    init = super.merge(:invent_location => location_link, :is_pick => self.pick?, :reserve_sale => self.reserve?)
    self.user_price.blank? ? init : init.merge(:sales_price => self.user_price)
