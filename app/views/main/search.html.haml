@@ -104,6 +104,9 @@
  .clear
  .cart-table
   .cart= render :partial => "carts/cart_table", :locals => {:cart => @cart}
+ %div
+  = link_to t(:start_edit_order), new_order_path, :id => "allow_order"
+
  #order= render :partial => "main/order_edit"
 
 
@@ -115,6 +118,10 @@
   //load_dms_each(#{not to_bool(@only_store)});
   load_dms_bundle("#{main_mass_dms_url(:query_string => @search.query_string)}", #{not to_bool(@only_store)});
   $("#order").hide();
+  $("a#allow_order").click(function(){
+  $("#order").show();
+  return false;
+  });
  /*$('a.button-style').click(function(){
   $(this).parents('form').submit();
   return false;

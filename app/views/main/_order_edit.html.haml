@@ -13,7 +13,7 @@
     %th= t :action
    - @nreqs.each do |item|
     %tr
-     - f.fields_for :item do |ff|
+     = f.fields_for :item, item do |ff|
       %td= item.inspect
       %td= ff.text_area :comment
       %td= ff.check_box :allow
@@ -24,7 +24,7 @@
     %th запрос
     %th= t :comment
    - @reqs.each do |item|
-    - f.fields_for :item do |ff|
+    = f.fields_for :item do |ff|
      %tr
       %td= item.inspect
       %td= ff.text_area :comment

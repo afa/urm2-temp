@@ -1,0 +1,4 @@
+$("#cart_store").replaceWith("#{escape_javascript(render :partial => "carts/cart_table", :locals => {:cart => @cart})}");
+
+$("table.search-products tr:has(td input.item-cart[value=\"#{@old.id}\"])").find("td.input-in-cart").removeClass("exist speed");
+$("table.search-products tr:has(td input.item-cart[value=\"#{@old.id}\"])").find("td.input-in-cart input").val("0");

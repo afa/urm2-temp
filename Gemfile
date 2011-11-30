@@ -38,7 +38,7 @@ gem "bullet", :group => :development
 group :development, :test do
  gem "rspec-rails"
  gem "cucumber-rails"
- gem "factory_girl_rails", "~>1.1.rc1"
+ gem "factory_girl_rails", "~>1.3"
  gem "rspec-cells"
  gem "rcov"
  gem "jasmine"
