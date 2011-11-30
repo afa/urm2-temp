@@ -15,7 +15,7 @@
     %label{:for => "cart_#{cart_line.id}_#{act.to_s}"}= t act
     %input{:id => "cart_#{cart_line.id}_#{act.to_s}", :name => "cart[#{cart_line.id}][#{act.to_s}]", :type => "checkbox", :value => cart_line.send((act.to_s + '?').to_sym)}
   %span
-   - form_for :rm_cart, cart_line, :url => cart_path(cart_line), :remote => true, :html => {:method => :delete, :class = > "js"} do |frm|
+   - form_for :rm_cart, cart_line, :url => cart_path(cart_line), :remote => true, :html => {:method => :delete, :class => "js"} do |frm|
     = frm.submit t(:destroy)
 
 -#
