@@ -105,7 +105,7 @@
  .cart-table
   .cart= render :partial => "carts/cart_table", :locals => {:cart => @cart}
  %div
-  = link_to t(:start_edit_order), new_order_path, :class => "allow_order"
+  = link_to t(:start_edit_order), new_order_path, :id => "allow_order"
 
  #order= render :partial => "main/order_edit"
 
