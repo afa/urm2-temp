@@ -4,7 +4,7 @@ class CartWorld < CartItem
   end
 
   def allowed_actions
-   %w(pick)
+   %w()
   end
 
 
