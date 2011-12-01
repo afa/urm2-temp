@@ -10,6 +10,8 @@
  %td= cart_line.comment
  %td= cart_line.user_price
  %td
+  - if cart_line.is_a?(CartWorld)
+   %span= t :pick
   - cart_line.allowed_actions.each do |act|
    %span
     %label{:for => "cart_#{cart_line.id}_#{act.to_s}"}= t act
