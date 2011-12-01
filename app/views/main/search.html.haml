@@ -120,7 +120,7 @@
   $("#order").hide();
   $("a#allow_order").click(function(){
   $("#order").show();
-  $("div#cart_store input").disable();
+  $("div#cart_store input").each(function(i, item){ item.disabled = 'disabled'; });
   $("table.search-products").parents("form").hide();
   return false;
   });
