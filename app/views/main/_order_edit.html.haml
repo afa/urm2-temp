@@ -14,14 +14,14 @@
    - @nreqs.each do |item|
     %tr
      = f.fields_for :item, item do |ff|
-       %td= item.type_name
-       %td= item.product_name
-       %td= item.product_brend
-       %td= item.product_rohs
-       %td= item.current_price
-       %td= item.amount
-       %td= item.location_link
-       %td= item.prognosis
+      %td= item.type_name
+      %td= item.product_name
+      %td= item.product_brend
+      %td= item.product_rohs
+      %td= item.current_price
+      %td= item.amount
+      %td= item.location_link
+      %td= item.prognosis
       %td= ff.text_area :comment
  - unless @reqs.empty?
   %h3 запросы
@@ -32,14 +32,14 @@
    - @reqs.each do |item|
     = f.fields_for :item do |ff|
      %tr
-       %td= item.type_name
-       %td= item.product_name
-       %td= item.product_brend
-       %td= item.product_rohs
-       %td= item.current_price
-       %td= item.amount
-       %td= item.location_link
-       %td= item.prognosis
+      %td= item.type_name
+      %td= item.product_name
+      %td= item.product_brend
+      %td= item.product_rohs
+      %td= item.current_price
+      %td= item.amount
+      %td= item.location_link
+      %td= item.prognosis
       %td= ff.text_area :comment
 
  = f.submit t(:make)
