@@ -33,10 +33,9 @@ class CartItem < ActiveRecord::Base
    self.min_amount ||= 0
 
    if self.amount and self.amount > 0
-    #self.amount = self.max_amount if self.amount > self.max_amount
     self.amount = self.min_amount if self.amount < self.min_amount
     if self.offer_params.try(:[], "price_qty")
-     self.current_price = self.offer_params["price_qty"].sort_by{|i| i["min_qty"].to_i }.reject{|i| i["min_qty"].to_i > self.amount }.last["price"].to_f
+     self.current_price = self.offer_params["price_qty"].sort_by{|i| i["min_qty"].to_i }.reject{|i| i["min_qty"].to_i > self.amount }.last.try(:[], "price").try(:to_f) || 0.0
     else
      self.current_price = 0
     end
@@ -66,22 +65,14 @@ class CartItem < ActiveRecord::Base
    raise CartParamRequired unless hsh.try(:[], :cart)
    old = find_by_id(hsh[:cart])
    raise CartParamRequired unless old
-   #need_copy = {:user_price => old.user_price, :comment => old.comment, :actions => old.actions, :offer_params => old.offer_params}
-   #if hsh[:amount].to_i != old.amount
    puts "ammount #{hsh[:amount]} => #{old.amount}"
-   #offers = old.offers(hsh[:amount].to_i)
    new_hsh = old.to_hash
    new_hsh[:amount] = hsh[:amount].to_i
    ntype = old.setup_for(new_hsh)
-   #new_ = old.is_a?(CartWorld) ? old.class.prepare_for(hsh[:amount].to_i, offers.first, old) : old.class.prepare_for(hsh[:amount].to_i, offers.first)
-     # || {"item_id" =>old.product_link, "locations" => [{"location_id" => old.location_link, "price_qty" => {"price" => old.current_price}, "vend_qty" => old.max_amount}], "item_name" => old.product_name, "rohs" => old.product_rohs, "item_brend" => old.product_brend, "qty_in_pack" => old.quantity, "min_qty" => old.min_amount})
-   #new_hsh = old.class.prepare_for(hsh[:amount].to_i, offers.first || {"item_id" =>old.product_link, "locations" => [{"location_id" => old.location_link, "price_qty" => {"price" => old.current_price}, "vend_qty" => old.max_amount}], "item_name" => old.product_name, "rohs" => old.product_rohs, "item_brend" => old.product_brend, "qty_in_pack" => old.quantity, "min_qty" => old.min_amount})
-   #instance_eval(new_hsh[:type]).create(new_hsh.update(:draft => !(new_hsh[:amount].to_i > 0), :user_id => User.current.id))
    n = ntype.create(new_hsh.update(:user_id => User.current.id))
    old.destroy
    n
    n.id
-   #end
    
   end
 end
