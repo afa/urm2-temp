@@ -31,6 +31,8 @@
       %td= item.location_link
       %td= item.prognosis
       %td= text_area_tag "ord[#{item.id}][comment]", item.comment
+      %td= item.user_price
+      %td= item.is_a?(CartWorld) ? t(:reserve) : item.reserve? ? t(:reserve) : item.pick? ? t(:pick) : ''
  - unless @reqs.empty?
   %h3 запросы
   %table
@@ -61,6 +63,8 @@
       %td= item.location_link
       %td= item.prognosis
       %td= text_area_tag "ord[#{item.id}][comment]", item.comment
+      %td= item.user_price
+      %td= item.is_a?(CartWorld) ? t(:reserve) : item.reserve? ? t(:reserve) : item.pick? ? t(:pick) : ''
 
  = f.submit t(:make)
 :javascript
