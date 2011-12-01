@@ -18,10 +18,7 @@
     %th= t :prognosis
     %th= t :comment
     %th= t :user_price
-    %th= t :action
-
-    %th= t :comment
-    %th= t :action
+    %th= t :actions
    - @nreqs.each do |item|
     %tr
      = f.fields_for :item, item do |ff|
@@ -33,7 +30,7 @@
       %td= item.amount
       %td= item.location_link
       %td= item.prognosis
-      %td= ff.text_area :comment
+      %td= text_area_tag "ord[#{item.id}][comment]", item.comment
  - unless @reqs.empty?
   %h3 запросы
   %table
@@ -48,7 +45,7 @@
     %th= t :prognosis
     %th= t :comment
     %th= t :user_price
-    %th= t :action
+    %th= t :actions
 
     %th запрос
     %th= t :comment
@@ -63,7 +60,7 @@
       %td= item.amount
       %td= item.location_link
       %td= item.prognosis
-      %td= ff.text_area :comment
+      %td= text_area_tag "ord[#{item.id}][comment]", item.comment
 
  = f.submit t(:make)
 :javascript
