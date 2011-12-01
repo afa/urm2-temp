@@ -14,9 +14,15 @@
    - @nreqs.each do |item|
     %tr
      = f.fields_for :item, item do |ff|
-      %td= item.inspect
+       %td= item.type_name
+       %td= item.product_name
+       %td= item.product_brend
+       %td= item.product_rohs
+       %td= item.current_price
+       %td= item.amount
+       %td= item.location_link
+       %td= item.prognosis
       %td= ff.text_area :comment
-      %td= ff.check_box :allow
  - unless @reqs.empty?
   %h3 запросы
   %table
@@ -26,9 +32,15 @@
    - @reqs.each do |item|
     = f.fields_for :item do |ff|
      %tr
-      %td= item.inspect
+       %td= item.type_name
+       %td= item.product_name
+       %td= item.product_brend
+       %td= item.product_rohs
+       %td= item.current_price
+       %td= item.amount
+       %td= item.location_link
+       %td= item.prognosis
       %td= ff.text_area :comment
-     = ff.hidden_field :allow
 
  = f.submit t(:make)
 :javascript
