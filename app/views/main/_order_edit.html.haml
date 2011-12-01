@@ -8,7 +8,18 @@
   %h3 нон
   %table
    %tr
-    %th запрос
+    %th= t :type
+    %th= t :name
+    %th= t :brend
+    %th= t :rohs
+    %th= t :price
+    %th= t :amount
+    %th= t :location
+    %th= t :prognosis
+    %th= t :comment
+    %th= t :user_price
+    %th= t :action
+
     %th= t :comment
     %th= t :action
    - @nreqs.each do |item|
@@ -27,6 +38,18 @@
   %h3 запросы
   %table
    %tr
+    %th= t :type
+    %th= t :name
+    %th= t :brend
+    %th= t :rohs
+    %th= t :price
+    %th= t :amount
+    %th= t :location
+    %th= t :prognosis
+    %th= t :comment
+    %th= t :user_price
+    %th= t :action
+
     %th запрос
     %th= t :comment
    - @reqs.each do |item|
