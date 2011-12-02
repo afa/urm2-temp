@@ -62,11 +62,13 @@ class CartStore < CartItem
    hsh = {:user_id => User.current.id, :product_link => search.code, :product_name => search.name, :product_rohs => search.rohs, :product_brend => search.brend, :location_link => search.location_id}
    fnd = CartItem.unprocessed.where( hsh ).order("updated_at desc").all
    carts = CartItem.unprocessed.in_cart.where(hsh).order("updated_at desc").all
-   #if fnd.empty?
-   item = self.create(hsh.merge(:processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :offer_params => search.raw_location))
-   item.offer_params.merge!(search.raw_location)
    carts.reject!{|i| i.amount.nil? or i.amount == 0 }
-   item.amount = carts.first.try(:amount)
+   amnt = carts.first.try(:amount)
+   #if fnd.empty?
+   p_hsh = hsh.merge(:processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :offer_params => search.raw_location, :amount => amnt)
+   item = self.setup_for(p_hsh).create(p_hsh)
+   item.offer_params.merge!(search.raw_location)
+   item.amount = amnt
    item.save!
    #else
     #item = self.create(hsh.merge(:draft => true, :processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :quantity => search.qty_in_pack, :offer_params => search.raw_location))

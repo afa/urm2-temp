@@ -12,7 +12,6 @@ class MainController < ApplicationController
   end
 
   def search
-   logger.info "--- request_start: #{Time.now}"
    @only_store = params[:search].try(:[], :only_store) || false
    stor = current_user.settings.where(:name => "search.only_store").first || current_user.settings.where(:name => "search.only_store").new
    stor.value = @only_store
