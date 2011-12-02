@@ -111,11 +111,11 @@ class User < ActiveRecord::Base
    end
    unless reqs[0].empty?
     begin
-     res << Axapta.make_order(:sales_lines => reqs[0].map{|i| i.to_sales_lines }, :date_dead_line => dead_line).try(:[], "sales_id")
-     res.last = res.last.try(:[], "sales_id")
+     res << Axapta.create_quotation(:sales_lines => reqs[0].map{|i| i.to_sales_lines }).try(:[], "quotation_id")
+     #res << Axapta.make_order(:sales_lines => reqs[0].map{|i| i.to_sales_lines }, :date_dead_line => dead_line).try(:[], "sales_id")
      reqs[0].each{|i| i.update_attributes :processed => true, :order => res.last }
     rescue Exception => e
-     p "---makeorder_exc_request", e
+     p "---createquotation_exc_request", e
     end
    end
    p "---makeorder_res", res

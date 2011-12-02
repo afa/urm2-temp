@@ -101,6 +101,12 @@ class Axapta
    AxaptaRequest.make_order(hsh)
   end
 
+  def self.create_quotation(hsh)
+   hsh.merge!(:user_hash => User.current.current_account.axapta_hash)
+   p "---ax::makeorder", hsh
+   AxaptaRequest.create_quotation(hsh)
+  end
+
   def self.sales_info(*args)
    begin
     res = AxaptaRequest.sales_info(*args)
