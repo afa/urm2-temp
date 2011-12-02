@@ -58,23 +58,17 @@ class CartStore < CartItem
 
 
   def self.prepare_code(search) #on find, chg search hash to offers array
-   #FIXME: fix for generation
    hsh = {:user_id => User.current.id, :product_link => search.code, :product_name => search.name, :product_rohs => search.rohs, :product_brend => search.brend, :location_link => search.location_id}
    fnd = CartItem.unprocessed.where( hsh ).order("updated_at desc").all
    carts = CartItem.unprocessed.in_cart.where(hsh).order("updated_at desc").all
    carts.reject!{|i| i.amount.nil? or i.amount == 0 }
    amnt = carts.first.try(:amount)
-   #if fnd.empty?
    p_hsh = hsh.merge(:processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :offer_params => search.raw_location, :amount => amnt)
    item = self.setup_for(p_hsh).create(p_hsh)
    item.offer_params.merge!(search.raw_location)
    item.amount = amnt
    item.save!
-   #else
-    #item = self.create(hsh.merge(:draft => true, :processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :quantity => search.qty_in_pack, :offer_params => search.raw_location))
-   #end #found/created
    fnd.each{|i| i.destroy }
-   #item.update_attributes(:max_amount => search_hash["max_qty"], :min_amount => search_hash["min_qty"], :quantity => search_hash["qty_in_pack"])
    search.cart_id = item.id
    search.amount = item.amount
    
