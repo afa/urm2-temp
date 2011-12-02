@@ -18,9 +18,10 @@ class CartsController < ApplicationController
       @changed << [v[:cart], CartWorld.copy_on_write(v)]
      end
     end
-    User.uncached do
-     @cart = CartItem.where(:user_id => current_user.id).unprocessed.in_cart.all
-    end
+    #CartItem.uncached do
+     @cart = current_user.cart_items.unprocessed.in_cart.all
+     #@cart = CartItem.where(:user_id => current_user.id).unprocessed.in_cart.all
+    #end
     #redirect_to carts_path
     respond_with do |format|
      format.json do
