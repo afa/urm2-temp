@@ -94,8 +94,11 @@ class CartStore < CartItem
 =end
 
   def setup_for(hash)
-   return self.class if hash[:amount].to_i <= hash[:max_amount].to_i
-   CartRequest
+   self.class.setup_for(hash)
   end
 
+  def self.setup_for(hash)
+   return self if hash[:amount].to_i <= hash[:max_amount].to_i
+   CartRequest
+  end
 end
