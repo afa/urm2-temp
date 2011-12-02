@@ -131,6 +131,259 @@ class Axapta
 end
 
 =begin
+class: cmpECommerce_QuotationLines
+input: 
+  brend_alias: 
+    setter: setInvcBrendAlias
+    title: "фильтр по производителю"
+  cust_account: 
+    setter: setParCustAccount
+    title: "фильтр по коду клиента"
+  item_name: 
+    description: "возможен поиск по маске *"
+    setter: setInvcInventItemName
+    title: "фильтр по наименованию ном-ры"
+  order_item_id: 
+    description: "значения asc/desc"
+    setter: setorderItemId
+    title: "сортировка по коду ном-ры"
+  order_item_name: 
+    description: "значения asc/desc"
+    setter: setorderItemName
+    title: "сортировка по наименованию ном-ры"
+  order_quotation_id: 
+    description: "значения asc/desc"
+    setter: setorderQuotationId
+    title: "сортировка по коду запроса"
+  page_num: 
+    setter: setPageNum
+    title: "номер страницы"
+  quotation_id: 
+    setter: setQuotationIdIn
+    title: "фильтр по коду запроса"
+  records_per_page: 
+    setter: serRecordsPerPage
+    title: "количество строк на странице"
+  user_hash: 
+    description: "Уникальный ключ пользователя, выдается при подключении"
+    mandatory: true
+    maxlen: 32
+    minlen: 32
+    setter: setcmpHashCode
+    title: "Ключ пользователя"
+    type: string
+output: 
+  pages: 
+    getter: getPageCnt
+    title: "количество страниц в результатах поиска"
+  quotations_lines: 
+    content: 
+      brend_alias: 
+        ? "0"
+        : getinvcBrendAlias
+        title: производитель
+      client_price: 
+        ? "0"
+        : getsmmcLastQuotPrice
+        title: "цена клиента"
+      item_id: 
+        ? "0"
+        : getItemId
+        title: "код ном-ры"
+      item_name: 
+        ? "0"
+        : getinvcInventItemName
+        title: "наименование ном-ры"
+      line_amount: 
+        ? "0"
+        : getLineAmount
+        title: "сумма по строке"
+      line_comment: 
+        ? "0"
+        : getsmmcQuotationLineTxt
+        title: примечание
+      quotation_id: 
+        ? "0"
+        : getQuotationId
+        title: "код запроса"
+      quotation_line_status: 
+        ? "0"
+        : getQuotationLineStatus
+        title: "статус строки"
+      quotation_prognosis_id: 
+        ? "0"
+        : getQuotationPrognosisId
+        title: прогноз
+      sales_price: 
+        ? "0"
+        : getSalesPrice
+        title: цена
+      sales_qty: 
+        ? "0"
+        : getSalesQty
+        title: количество
+      sales_unit: 
+        ? "0"
+        : getSalesUnit
+        title: "единица измерения"
+    iterator: nextOutputLine
+    title: "строки запросов"
+    type: array
+  records: 
+    getter: getRecordCnt
+    title: "количество записей в результатах поиска"
+title: "Список строк запросов с учётом фильтров"
+
+
+=end
+
+=begin
+class: cmpECommerce_QuotationList
+input: 
+  cust_account: 
+    description: "фильтр по коду клиента"
+    setter: setParCustAccount
+  only_my: 
+    description: "фильтр. только заказы этого пользователя."
+    setter: setOnlyMy
+  order_quotation_id: 
+    description: "сортировка по коду запроса, значения asc/desc"
+    setter: setorderQuotationId
+  page_num: 
+    setter: setPageNum
+    title: "номер страницы"
+  quotation_id: 
+    description: "фильтр по коду запроса"
+    setter: setQuotationIdIn
+  quotation_status: 
+    description: "фильтр по статусу"
+    setter: setsmmQuotationStatus
+  records_per_page: 
+    setter: serRecordsPerPage
+    title: "количество строк на странице"
+  this_sales_origin: 
+    description: "флаг-фильтр. если установлен, фильтруется по источнику заказа этого пользователя"
+    setter: setthisSalesOrigin
+  user_hash: 
+    description: "Уникальный ключ пользователя, выдается при подключении"
+    mandatory: true
+    maxlen: 32
+    minlen: 32
+    setter: setcmpHashCode
+    title: "Ключ пользователя"
+    type: string
+output: 
+  pages: 
+    getter: getPageCnt
+    title: "количество страниц в результатах поиска"
+  quotations: 
+    content: 
+      comment: 
+        getter: getcmpComment
+        title: примечание
+      contact_person_name: 
+        getter: getcontactPersonName
+        title: "контактное лицо"
+      cust_account: 
+        getter: getBusRelAccount
+        title: "код клиента"
+      prognosis_date: 
+        getter: getPrognosisDate
+        title: прогноз
+        type: date
+      quotation_date: 
+        getter: getQuotationDate
+        title: "дата запроса"
+        type: date
+      quotation_id: 
+        getter: getQuotationId
+        title: "код запроса"
+      quotation_status: 
+        getter: getQuotationStatus
+        title: "статус запроса"
+      sales_responsible: 
+        getter: getSalesResponsible
+        title: "ответственный менеджер"
+    iterator: nextOutputLine
+    title: "список запросов клиента"
+    type: array
+  records: 
+    getter: getRecordCnt
+    title: "количество записей в результатах поиска"
+title: "список запросов клиента с учётом фильтров"
+
+
+
+=end
+
+=begin
+class: cmpECommerce_CreateQuotation
+input: 
+  comment: 
+    setter: setComment
+    title: примечание
+    type: string
+  sales_lines: 
+    content: 
+      brend_alias: 
+        setter: setInvcBrendAlias
+        title: производитель
+        type: string
+      client_price: 
+        setter: setsmmcLastQuotPriceStr
+        title: "цена клиента"
+        type: real
+      item_id: 
+        setter: setItemId
+        title: "код ном-ры"
+        type: string
+      item_name: 
+        setter: setInvcInventItemName
+        title: "наименование ном-ры"
+        type: string
+      max_qty: 
+        setter: setDMSPurchAutoMaxQty
+      min_qty: 
+        setter: setDMSPurchAutoMinQty
+      note: 
+        setter: setNote
+        title: примечание
+        type: string
+      prognosis_id: 
+        setter: setDMSPrognosisId
+      qty: 
+        setter: setSalesQty
+        title: количество
+        type: real
+      qty_multiples: 
+        setter: setDMSqtyMultiples
+      sales_price: 
+        setter: setDMScdnkSalesPriceHardCurrency
+    description: "строки запроса"
+    iterator: addLine
+    type: array
+  user_hash: 
+    description: "Уникальный ключ пользователя, выдается при подключении"
+    mandatory: true
+    maxlen: 32
+    minlen: 32
+    setter: setcmpHashCode
+    title: "Ключ пользователя"
+    type: string
+output: 
+  quotation_id: 
+    getter: getQuotationId
+    title: "код созданного запроса"
+    type: string
+title: "создание запроса клиента"
+
+
+
+
+
+=end
+
+=begin
 --- 
 class: cmpECommerce_CreateSalesTable
 input: 
