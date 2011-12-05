@@ -25,6 +25,7 @@ describe MainController do
  describe "POST 'search'" do
   before do
    Axapta.stub!(:search_names).and_return([])
+   Axapta.stub!(:get_delivery_mode).and_return({})
    post "search", :search => {:query => '21'}
   end
   it "should be success" do
@@ -37,14 +38,14 @@ describe MainController do
  end
 
  describe "GET search" do
-
+  pending
  end
 
  describe "ajax get dms" do
-
+  pending
  end
 
  describe "ajax get analog" do
-
+  pending
  end
 end

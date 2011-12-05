@@ -19,9 +19,8 @@ describe CartWorld do
 
  describe "::prepare_code" do
   it "should return hash" do
-   CartWorld.prepare_offers([{}, {}]).should be_is_a(Array)
-   p CartWorld.prepare_offers([{}, {}])
-   CartWorld.prepare_offers([{}, {}]).each{|i| i.should be_is_a(Offer::World)}
+   CartWorld.prepare_code(FactoryGirl.build(:offer_world)).should be_is_a(Array)
+   CartWorld.prepare_code([{}, {}]).each{|i| i.should be_is_a(Offer::World)}
   end
   it "should return valid hash"
   context "when new cart" do

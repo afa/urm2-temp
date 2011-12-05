@@ -51,5 +51,11 @@ describe Axapta do
   end
   it "should return openstruct" 
  end
+ context "on #get_delivery_mode" do
+  before do
+   AxaptaRequest.stub!(:get_delivery_mode).and_return({})
+  end
 
+  pending "get_delivery_mode NYI"
+ end
 end
