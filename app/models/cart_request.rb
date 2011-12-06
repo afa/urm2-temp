@@ -76,7 +76,7 @@ class CartRequest < CartItem
    item.offer_params.merge!(search.raw_location)
    item.amount = amnt
    item.save!
-   fnd.each{|i| i.destroy }
+   (fnd-carts).each{|i| i.destroy }
    search.cart_id = item.id
    search.amount = item.amount
 
