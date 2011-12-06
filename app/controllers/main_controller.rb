@@ -23,7 +23,7 @@ class MainController < ApplicationController
    @items = Offer::Store.search(params[:search])
 
    CartItem.uncached do
-    @carts = current_user.cart_items.in_cart.unprocessed.all
+    @carts = CartItem.where(:user_id => current_user.id).in_cart.unprocessed.all
    end
    @reqs = @carts.partition{|i| i.is_a? CartRequest }[0]
    @nreqs = @carts.partition{|i| i.is_a? CartRequest }[1]
