@@ -51,7 +51,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-   @cart = current_user.cart_items.unprocessed.in_cart.all
+   @carts = current_user.cart_items.unprocessed.in_cart.all
    @changed = []
    @results = User.current.make_order(params[:date_picker], params[:delivery_type])
   end
