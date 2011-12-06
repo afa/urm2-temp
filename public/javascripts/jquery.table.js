@@ -146,12 +146,12 @@
 			if(table.hasClass('search-products')){
 				
 				//Поле ввода "Добавить в корзину" для таблицы вывода списка продукции
-				$('.input-in-cart',table).inputInCart();
+				//$('.input-in-cart',table).inputInCart();
 				
 				// Нумерация строк
-				table.find('tr').each(function(index){
-					$(this).addClass('product'+index);
-					$(this).attr('product',index);
+				//table.find('tr').each(function(index){
+				//	$(this).addClass('product'+index);
+				//	$(this).attr('product',index);
 				});
 				
 				//Выпадающий блок с ценой конечного потребителя
