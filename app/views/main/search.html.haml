@@ -113,7 +113,7 @@
 :javascript
  $(document).ready(function(){
   $('.slider').hide();
-  if(User.current.cart_items.unprocessed.in_cart.count == 0){
+  if(#{User.current.cart_items.unprocessed.in_cart.count} == 0){
    $('.cart-table').add('.allow_order').hide();
   }
   search_icons_handle();
