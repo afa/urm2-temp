@@ -103,7 +103,7 @@
 
  .clear
  .cart-table
-  .cart= render :partial => "carts/cart_table", :locals => {:cart => @cart}
+  .cart= render :partial => "carts/cart_table", :locals => {:cart => @carts}
  .allow-order
   = link_to t(:start_edit_order), new_order_path, :id => "allow_order"
 
