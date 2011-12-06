@@ -1,7 +1,7 @@
 class CartsController < ApplicationController
  respond_to :js, :html, :json
   def index
-   @cart = CartItem.where(:user_id => current_user.id).unprocessed.in_cart.all
+   @carts = CartItem.where(:user_id => current_user.id).unprocessed.in_cart.all
   end
 
   def new
@@ -18,10 +18,10 @@ class CartsController < ApplicationController
       @changed << [v[:cart], CartWorld.copy_on_write(v)]
      end
     end
-    #CartItem.uncached do
-     @cart = current_user.cart_items.unprocessed.in_cart.all
-     #@cart = CartItem.where(:user_id => current_user.id).unprocessed.in_cart.all
-    #end
+    CartItem.uncached do
+     @carts = current_user.cart_items.unprocessed.in_cart.all
+     #@carts = CartItem.where(:user_id => current_user.id).unprocessed.in_cart.all
+    end
     #redirect_to carts_path
     respond_with do |format|
      format.json do
@@ -44,9 +44,11 @@ class CartsController < ApplicationController
   end
 
   def destroy
-   @old = CartItem.where(:user_id => current_user.id).unprocessed.in_cart.find(params[:id])
-   @old.try(:update_attributes, :amount => 0)
-   @cart = CartItem.where(:user_id => current_user.id).unprocessed.in_cart.all
+   old = CartItem.where(:user_id => current_user.id).unprocessed.in_cart.find(params[:id])
+   #@old.try(:update_attributes, :amount => 0)
+   @old = old.id
+   @new = old.setup_for(:amount => 0, :max_amount => old.max_amount).copy_on_write(:amount => 0, :cart => old.id)
+   @carts = CartItem.where(:user_id => current_user.id).unprocessed.in_cart.all
    respond_with do |format|
     format.js { render :layout => false }
    end

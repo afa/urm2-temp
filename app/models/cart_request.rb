@@ -94,6 +94,7 @@ class CartRequest < CartItem
   end
 
   def self.setup_for(hash)
+   return self if hash[:amount].nil? or hash[:max_amount].nil? or hash[:max_amount].to_i == 0
    return self if hash[:amount] > hash[:max_amount]
    CartStore
   end

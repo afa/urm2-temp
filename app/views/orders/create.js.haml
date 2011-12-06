@@ -1,2 +1,25 @@
-
+$("table.search-products").parents("form").hide();
+$("#cart_store table tr:has(td)").remove();
+- @carts.each do |crt|
+ $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :locals => {:cart_line => crt}) }");
+- unless @carts.empty?
+ $(".cart-table").add(".allow-order").show();
+if($("#cart_store table tr").length > 1){
+$("#cart_store").show();
+} else {
+$("#cart_store").hide();
+}
+$("div#order").hide();
+- @changed.each do |i|
+ $("table.search-products tr input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");
+ -# $("div#cart_store table tr##{i[0]} input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");
+- unless @results.empty?
+ $(".results").html(#{[t(:created_orders), @results.join(', ')].join(' ')})
+-#
+ $("#order").hide();
+ $("a#allow_order").click(function(){
+ $("#order").show();
+ $("div#cart_store input").each(function(i, item){ item.disabled = 'disabled'; });
+ return false;
+ });
 

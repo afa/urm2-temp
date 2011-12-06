@@ -18,12 +18,10 @@ class CartItem < ActiveRecord::Base
   end
 
   def deserialize_offer
-   p "==deserialize #{self.type}##{self.id}", self.offer_serialized
    self.offer_params = self.offer_serialized.blank? ? {} : YAML::load(self.offer_serialized)
   end
 
   def serialize_offer
-   p "==serialize #{self.type}##{self.id}", self.offer_params
    self.offer_serialized = self.offer_params.to_yaml
   end
 

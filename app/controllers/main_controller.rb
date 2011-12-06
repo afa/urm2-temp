@@ -7,7 +7,6 @@ class MainController < ApplicationController
  #before_filter :get_users, :only => [:index]
  #before_filter :get_accounts, :only => [:index, :search, :extended]
  before_filter :check_account, :only => [:search, :extended, :dms]
- before_filter :get_cart
   def index
   end
 
@@ -21,8 +20,11 @@ class MainController < ApplicationController
    avail.value = @only_available
    avail.save!
    @items = Offer::Store.search(params[:search])
-
-   @carts = current_user.cart_items.in_cart.unprocessed.all
+   p "items", @items.map(&:cart_id)
+   CartItem.uncached do
+    @carts = CartItem.where(:user_id => current_user.id).in_cart.unprocessed.all
+   end
+   p "carts", @carts.map(&:id)
    @reqs = @carts.partition{|i| i.is_a? CartRequest }[0]
    @nreqs = @carts.partition{|i| i.is_a? CartRequest }[1]
    @deliveries = current_user.deliveries
@@ -153,10 +155,4 @@ class MainController < ApplicationController
    end
   end
 
-  def get_cart
-   if current_user
-    @cart = current_user.cart_items.in_cart.unprocessed.all
-   end
-   @cart ||= []
-  end
 end

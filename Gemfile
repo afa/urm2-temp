@@ -33,8 +33,8 @@ gem "cells"
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
+gem "airbrake" #, :group => [:development, :production]
 #gem "airbrake", :group => [:development, :production]
-gem "airbrake"
 gem "bullet", :group => :development
 #gem "sqlite3", :group => :test
 group :development, :test do
