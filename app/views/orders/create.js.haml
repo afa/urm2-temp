@@ -16,10 +16,10 @@ $("div#order").hide();
 - unless @results.empty?
  $(".results").html(#{[t(:created_orders), @results.join(', ')].join(' ')})
 -#
-  $("#order").hide();
-  $("a#allow_order").click(function(){
-  $("#order").show();
-  $("div#cart_store input").each(function(i, item){ item.disabled = 'disabled'; });
-  return false;
-  });
+ $("#order").hide();
+ $("a#allow_order").click(function(){
+ $("#order").show();
+ $("div#cart_store input").each(function(i, item){ item.disabled = 'disabled'; });
+ return false;
+ });
 
