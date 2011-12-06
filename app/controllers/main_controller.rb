@@ -22,7 +22,9 @@ class MainController < ApplicationController
    avail.save!
    @items = Offer::Store.search(params[:search])
 
-   @carts = current_user.cart_items.in_cart.unprocessed.all
+   CartItem.uncached do
+    @carts = current_user.cart_items.in_cart.unprocessed.all
+   end
    @reqs = @carts.partition{|i| i.is_a? CartRequest }[0]
    @nreqs = @carts.partition{|i| i.is_a? CartRequest }[1]
    @deliveries = current_user.deliveries
