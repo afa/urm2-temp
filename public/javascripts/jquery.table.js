@@ -152,7 +152,7 @@
 				//table.find('tr').each(function(index){
 				//	$(this).addClass('product'+index);
 				//	$(this).attr('product',index);
-				});
+				//});
 				
 				//Выпадающий блок с ценой конечного потребителя
 				$('.full-price a').lightbox({
