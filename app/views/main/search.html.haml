@@ -104,7 +104,7 @@
  .clear
  .cart-table
   .cart= render :partial => "carts/cart_table", :locals => {:cart => @cart}
- %div
+ .allow-order
   = link_to t(:start_edit_order), new_order_path, :id => "allow_order"
 
  #order= render :partial => "main/order_edit"
@@ -113,6 +113,9 @@
 :javascript
  $(document).ready(function(){
   $('.slider').hide();
+  if(User.current.cart_items.unprocessed.in_cart.count == 0){
+   $('.cart-table').add('.allow_order').hide();
+  }
   search_icons_handle();
   apply_hover_in_table_on_mmove();
   //load_dms_each(#{not to_bool(@only_store)});
