@@ -43,6 +43,8 @@ class CartsController < ApplicationController
   end
 
   def update
+   cart = current_user.cart_items.find(params[:id])
+   cart.update_attributes params[:cart_item]
   end
 
   def destroy
