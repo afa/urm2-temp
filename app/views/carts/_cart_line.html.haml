@@ -8,8 +8,8 @@
   %td= cart_line.amount
   %td= cart_line.location_link
   %td= cart_line.prognosis
-  %td= ff.text_area :comment #cart_line.comment
-  %td= ff.text_field :user_price, :cols => 20, :rows => 3 #cart_line.user_price
+  %td= ff.text_area :comment, :cols => 20, :rows => 3  #cart_line.comment
+  %td= ff.text_field :user_price #cart_line.user_price
   %td
    - if cart_line.is_a?(CartWorld)
     %span= t :pick
