@@ -57,6 +57,7 @@ class CartsController < ApplicationController
     else
      cart.update_attributes hsh.reject{|k, v| k == :destroy }
     end
+    p "===hsh", CartItem.find(cart.id)
    end
   end
 
