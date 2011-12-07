@@ -1,5 +1,5 @@
 %tr{:id => "cart_str_#{cart_line.id.to_s}"}
- - form_for :cart_item, cart_line, :html => {:method => :put}, :url => edit_cart_path(cart_line), :remote => true do |ff|
+ - form_for :cart_item, cart_line, :html => {:method => :put}, :url => cart_path(cart_line), :remote => true do |ff|
   %td= cart_line.type_name
   %td= cart_line.product_name
   %td= cart_line.product_brend
