@@ -11,7 +11,9 @@ class CartsController < ApplicationController
    @changed = []
    if params[:items].try(:[], :commit)
     params[:items].reject{|k, v| k == :commit }.reject{|k, v| v[:amount].blank? }.each do |k, v|
+     p "===store", k, v
      @changed << [v[:cart], CartStore.copy_on_write(v)]
+     p "===chg", @changed.last
     end
     if params[:dms]
      params[:dms].reject{|k, v| v[:amount].blank? }.each do |k, v|
