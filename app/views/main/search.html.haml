@@ -123,7 +123,7 @@
   $("#order").hide();
   $("a#allow_order").click(function(){
   $("#order").show();
-  $("div#cart_store input").each(function(i, item){ item.disabled = 'disabled'; });
+  $("div#cart_store input").add("div#cart_store textarea").each(function(i, item){ item.disabled = 'disabled'; });
   $("table.search-products").parents("form").hide();
   return false;
   });
