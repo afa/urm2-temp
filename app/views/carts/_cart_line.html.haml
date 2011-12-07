@@ -1,28 +1,29 @@
-- form_for :cart_item, cart_line, :html => {:method => :put}, :url => cart_path(cart_line), :remote => true do |ff|
- %tr{:id => "cart_str_#{cart_line.id.to_s}"}
-  %td= cart_line.type_name
-  %td= cart_line.product_name
-  %td= cart_line.product_brend
-  %td= cart_line.product_rohs
-  %td= cart_line.current_price
-  %td= cart_line.amount
-  %td= cart_line.location_link
-  %td= cart_line.prognosis
-  %td= ff.text_area :comment, :cols => 20, :rows => 3  #cart_line.comment
-  %td= ff.text_field :user_price #cart_line.user_price
-  %td
-   - if cart_line.is_a?(CartWorld)
-    %span= t :pick
-   - cart_line.allowed_actions.each do |act|
-    %span
-     %label{:for => "cart_#{cart_line.id}_#{act.to_s}"}= t act
-     %input{:id => "cart_item_#{cart_line.id}_#{act.to_s}", :name => "cart_item[#{cart_line.id}][#{act.to_s}]", :type => "checkbox", :value => cart_line.send((act.to_s + '?').to_sym)}
-   %span
-    = ff.submit t(:save)
+%tr{:id => "cart_str_#{cart_line.id.to_s}"}
+ %td= cart_line.type_name
+ %td= cart_line.product_name
+ %td= cart_line.product_brend
+ %td= cart_line.product_rohs
+ %td= cart_line.current_price
+ %td= cart_line.amount
+ %td= cart_line.location_link
+ %td= cart_line.prognosis
  %td
+  %textarea{:cols => 20, :rows => 3, :id => "cart_item_#{cart_line.id}_comment", :name => "cart_item[#{cart_line.id}][comment]"}= cart_line.comment
+ %td
+  %input{:type => :text, :value => cart_line.user_price, :id => "cart_item_#{cart_line.id}_user_price", :name => "cart_item[#{cart_line.id}][user_price]"}
+ %td
+  - if cart_line.is_a?(CartWorld)
+   %span= t :pick
+  - cart_line.allowed_actions.each do |act|
+   %span
+    %label{:for => "cart_#{cart_line.id}_#{act.to_s}"}= t act
+    %input{:id => "cart_item_#{cart_line.id}_#{act.to_s}", :name => "cart_item[#{cart_line.id}][#{act.to_s}]", :type => "checkbox", :value => cart_line.send((act.to_s + '?').to_sym)}
   %span
-   - form_for :rm_cart, cart_line, :url => cart_path(cart_line), :remote => true, :html => {:method => :delete, :class => "js"} do |frm|
-    = frm.submit t(:destroy)
+   - form_for :cart_item, cart_line, :html => {:method => :put}, :url => cart_path(cart_line), :remote => true do |ff|
+    = ff.submit t(:save)
+ %span
+  - form_for :rm_cart, cart_line, :url => cart_path(cart_line), :remote => true, :html => {:method => :delete, :class => "js"} do |frm|
+   = frm.submit t(:destroy)
 
 -#
  %th= t :type
