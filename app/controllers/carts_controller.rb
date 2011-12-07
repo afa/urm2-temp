@@ -51,6 +51,7 @@ class CartsController < ApplicationController
    carts = params[:cart_item].keys.map{|i| CartItem.find i }
    carts.each do |cart|
     hsh = params[:cart_item][cart.id.to_s]
+    p "===savehsh", cart, hsh
     if hsh[:destroy]
      cart.update_attributes :amount => 0
     else
