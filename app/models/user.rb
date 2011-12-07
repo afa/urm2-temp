@@ -118,7 +118,6 @@ class User < ActiveRecord::Base
      p "---createquotation_exc_request", e
     end
    end
-   p "---makeorder_res", res
    res
   end
 

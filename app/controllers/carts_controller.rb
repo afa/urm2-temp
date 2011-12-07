@@ -11,9 +11,7 @@ class CartsController < ApplicationController
    @changed = []
    if params[:items].try(:[], :commit)
     params[:items].reject{|k, v| k == :commit }.reject{|k, v| v[:amount].blank? }.each do |k, v|
-     p "===store", k, v
      @changed << [v[:cart], CartStore.copy_on_write(v)]
-     p "===chg", @changed.last
     end
     if params[:dms]
      params[:dms].reject{|k, v| v[:amount].blank? }.each do |k, v|
@@ -52,14 +50,12 @@ class CartsController < ApplicationController
    carts = params[:cart_item].keys.map{|i| CartItem.find i }
    carts.each do |cart|
     hsh = params[:cart_item][cart.id.to_s]
-    p "===savehsh", cart, hsh
     if hsh[:destroy]
      cart.update_attributes :amount => 0
      @changed << [cart.id.to_s, '0']
     else
      cart.update_attributes hsh.reject{|k, v| k == :destroy }
     end
-    p "===hsh", CartItem.find(cart.id)
    end
    @carts = current_user.cart_items.unprocessed.in_cart.all
   end

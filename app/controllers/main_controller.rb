@@ -20,11 +20,9 @@ class MainController < ApplicationController
    avail.value = @only_available
    avail.save!
    @items = Offer::Store.search(params[:search])
-   p "items", @items.map(&:cart_id)
    CartItem.uncached do
     @carts = CartItem.where(:user_id => current_user.id).in_cart.unprocessed.all
    end
-   p "carts", @carts.map(&:id)
    @reqs = @carts.partition{|i| i.is_a? CartRequest }[0]
    @nreqs = @carts.partition{|i| i.is_a? CartRequest }[1]
    @deliveries = current_user.deliveries

@@ -97,13 +97,11 @@ class Axapta
 
   def self.make_order(hsh)
    hsh.merge!(:user_hash => User.current.current_account.axapta_hash, :main_invent_location => User.current.current_account.invent_location_id)
-   p "---ax::makeorder", hsh
    AxaptaRequest.make_order(hsh)
   end
 
   def self.create_quotation(hsh)
    hsh.merge!(:user_hash => User.current.current_account.axapta_hash)
-   p "---ax::makeorder", hsh
    AxaptaRequest.create_quotation(hsh)
   end
 

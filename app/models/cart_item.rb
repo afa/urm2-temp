@@ -66,7 +66,6 @@ class CartItem < ActiveRecord::Base
    puts "ammount #{hsh[:amount]} => #{old.amount}"
    new_hsh = old.to_hash
    new_hsh[:amount] = hsh[:amount].to_i
-   p "===hsh on cpy", new_hsh
    ntype = old.setup_for(new_hsh)
    n = ntype.create(new_hsh.update(:user_id => User.current.id))
    old.destroy

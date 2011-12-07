@@ -60,9 +60,7 @@ class CartStore < CartItem
   def self.prepare_code(search) #on find, chg search hash to offers array
    hsh = {:user_id => User.current.id, :product_link => search.code, :product_name => search.name, :product_rohs => search.rohs, :product_brend => search.brend, :location_link => search.location_id}
    fnd = CartItem.unprocessed.where( hsh ).order("updated_at desc").all
-   p "fnd", fnd.map(&:id)
    carts = CartItem.unprocessed.in_cart.where(hsh).order("updated_at desc").all
-   p "crts", carts.map(&:id)
    carts.reject!{|i| i.amount.nil? or i.amount == 0 }
    amnt = carts.first.try(:amount)
    cart = carts.first
@@ -74,7 +72,6 @@ class CartStore < CartItem
    fnd.each{|i| i.destroy }
    search.cart_id = item.id
    search.amount = item.amount
-   p "prep", item, search
    
   end
 
@@ -86,7 +83,6 @@ class CartStore < CartItem
   def self.prepare_for(count, hsh)
    return CartRequest.prepare_for(count, hsh) if hsh.blank? or count > (hsh["locations"].first["vend_qty"].to_i || 0)
    count = hsh["min_qty"] if count < hsh["min_qty"]
-   p hsh, count
    selected = hsh["locations"].first["price_qty"].detect{|v| count >= v["min_qty"] && count <= v["max_qty"] }
    return CartRequest.prepare_for(count, hsh) unless selected
    {:type => self.name, :amount => count, :product_link => hsh["item_id"], :location_link => hsh["locations"].first["location_id"], :product_name => hsh["item_name"], :product_rohs => hsh["rohs"], :product_brend => hsh["item_brend"], :processed => false, :current_price => selected["price"], :quantity => hsh["qty_in_pack"], :min_amount => hsh["min_qty"], :max_amount => hsh["locations"].first["vend_qty"], :draft => !(count > 0)}
