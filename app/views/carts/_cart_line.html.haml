@@ -16,10 +16,10 @@
    %span= t :pick
   - cart_line.allowed_actions.each do |act|
    %span
-    %label{:for => "cart_#{cart_line.id}_#{act.to_s}"}= t act
+    %label{:for => "cart_item_#{cart_line.id}_#{act.to_s}"}= t act
     %input{:id => "cart_item_#{cart_line.id}_#{act.to_s}", :name => "cart_item[#{cart_line.id}][#{act.to_s}]", :type => "checkbox", :value => cart_line.send((act.to_s + '?').to_sym)}
   %span
-   %label{:for => "cart_#{cart_line.id}_destroy"}= t :delete
+   %label{:for => "cart_item_#{cart_line.id}_destroy"}= t :delete
    %input{:id => "cart_item_#{cart_line.id}_destroy", :name => "cart_item[#{cart_line.id}][destroy]", :type => "checkbox"}
 
 -#
