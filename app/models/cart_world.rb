@@ -99,7 +99,7 @@ class CartWorld < CartItem
    #if fnd.empty?
    carts.reject!{|i| i.amount.nil? or i.amount == 0 }
    cart = carts.first
-   item = self.create(hsh.merge(:processed => false, :min_amount => search.min_qty, :offer_params => search.raw_prognosis, :comment => cart.try(:comment), :reserve => cart.try(reserve), :user_price => cart.try(:user_price), :pick => cart.try(:pick)))
+   item = self.create(hsh.merge(:processed => false, :min_amount => search.min_qty, :offer_params => search.raw_prognosis, :comment => cart.try(:comment), :reserve => cart.try(:reserve), :user_price => cart.try(:user_price), :pick => cart.try(:pick)))
    item.offer_params.merge!(search.raw_prognosis)
    item.amount = carts.first.try(:amount)
    item.save!
