@@ -20,7 +20,7 @@
     = check_box_tag "cart_item[#{cart_line.id}][#{act.to_s}]", '1', cart_line.send((act.to_s + '?').to_sym), :id => "cart_item_#{cart_line.id}_#{act.to_s}"
   %span
    %label{:for => "cart_item_#{cart_line.id}_destroy"}= t :delete
-   = check_box_tag "cart_item[#{cart_line.id}][destroy]", '1', :id => "cart_item_#{cart_line.id}_destroy"
+   = check_box_tag "cart_item[#{cart_line.id}][destroy]", '1', false, :id => "cart_item_#{cart_line.id}_destroy"
 
 -#
  %th= t :type
