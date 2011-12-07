@@ -49,6 +49,7 @@ class CartsController < ApplicationController
 
   def save
    carts = params[:cart_item]
+   CartItem.update_attributes carts
   end
 
   def destroy
