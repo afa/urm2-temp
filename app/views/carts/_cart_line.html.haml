@@ -9,14 +9,14 @@
   %td= cart_line.location_link
   %td= cart_line.prognosis
   %td= ff.text_area :comment #cart_line.comment
-  %td= ff.text_field :user_price #cart_line.user_price
+  %td= ff.text_field :user_price, :size => "20x3" #cart_line.user_price
   %td
    - if cart_line.is_a?(CartWorld)
     %span= t :pick
    - cart_line.allowed_actions.each do |act|
     %span
      %label{:for => "cart_#{cart_line.id}_#{act.to_s}"}= t act
-     %input{:id => "cart_#{cart_line.id}_#{act.to_s}", :name => "cart[#{cart_line.id}][#{act.to_s}]", :type => "checkbox", :value => cart_line.send((act.to_s + '?').to_sym)}
+     %input{:id => "cart_item_#{cart_line.id}_#{act.to_s}", :name => "cart_item[#{cart_line.id}][#{act.to_s}]", :type => "checkbox", :value => cart_line.send((act.to_s + '?').to_sym)}
    %span
     = ff.submit t(:save)
  %td
