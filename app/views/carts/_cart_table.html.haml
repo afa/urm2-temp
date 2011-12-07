@@ -1,16 +1,19 @@
 #cart_store
- %table
-  %tr
-   %th= t :type
-   %th= t :name
-   %th= t :brend
-   %th= t :rohs
-   %th= t :price
-   %th= t :amount
-   %th= t :location
-   %th= t :prognosis
-   %th= t :comment
-   %th= t :user_price
-   %th= t :action
-  = render :partial => "carts/cart_line", :collection => cart
+ - form_for :cart_item, cart_line, :html => {:method => :put}, :url => carts_path, :remote => true, :class => 'js' do |ff|
+
+  %table
+   %tr
+    %th= t :type
+    %th= t :name
+    %th= t :brend
+    %th= t :rohs
+    %th= t :price
+    %th= t :amount
+    %th= t :location
+    %th= t :prognosis
+    %th= t :comment
+    %th= t :user_price
+    %th= t :action
+   = render :partial => "carts/cart_line", :collection => cart
+  = ff.submit t(:save)
  
