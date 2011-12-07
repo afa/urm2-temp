@@ -48,8 +48,15 @@ class CartsController < ApplicationController
   end
 
   def save
-   carts = params[:cart_item]
-   CartItem.update_attributes carts
+   carts = params[:cart_item].keys.map{|i| CartItem.find i }
+   carts.each do |cart|
+    hsh = params[:cart_item][cart.id]
+    if hsh[:destroy]
+     cart.update_attributes :amount => 0
+    else
+     cart.update_attributes hsh.reject{|k, v| k == :destroy }
+    end
+   end
   end
 
   def destroy
