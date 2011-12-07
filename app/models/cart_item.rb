@@ -61,7 +61,7 @@ class CartItem < ActiveRecord::Base
 
   def self.copy_on_write(hsh) # excpshn on bad params, not found
    raise CartParamRequired unless hsh.try(:[], :cart)
-   old = find_by_id(hsh[:cart])
+   old = CartItem.find_by_id(hsh[:cart])
    raise CartParamRequired unless old
    puts "ammount #{hsh[:amount]} => #{old.amount}"
    new_hsh = old.to_hash
