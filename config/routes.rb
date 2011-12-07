@@ -1,6 +1,10 @@
 Urm::Application.routes.draw do
 
-  resources :carts, :except => [:show]
+  resources :carts, :except => [:show] do
+   collection do
+    put :save
+   end
+  end
   resources :orders, :only => [:index, :new, :show, :create] do
    collection do
     get :lines

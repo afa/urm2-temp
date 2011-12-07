@@ -47,6 +47,10 @@ class CartsController < ApplicationController
    cart.update_attributes params[:cart_item]
   end
 
+  def save
+   carts = params[:cart_item]
+  end
+
   def destroy
    old = CartItem.where(:user_id => current_user.id).unprocessed.in_cart.find(params[:id])
    #@old.try(:update_attributes, :amount => 0)
