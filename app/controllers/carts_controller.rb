@@ -48,17 +48,20 @@ class CartsController < ApplicationController
   end
 
   def save
+   @changed = []
    carts = params[:cart_item].keys.map{|i| CartItem.find i }
    carts.each do |cart|
     hsh = params[:cart_item][cart.id.to_s]
     p "===savehsh", cart, hsh
     if hsh[:destroy]
      cart.update_attributes :amount => 0
+     @changed << [cart.id.to_s, '0']
     else
      cart.update_attributes hsh.reject{|k, v| k == :destroy }
     end
     p "===hsh", CartItem.find(cart.id)
    end
+   @carts = current_user.cart_items.unprocessed.in_cart.all
   end
 
   def destroy
