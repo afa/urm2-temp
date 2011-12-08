@@ -30,7 +30,7 @@
       %td= item.amount
       %td.text-left= item.location_link
       %td.text-left= item.prognosis
-      %td= text_area_tag "ord[#{item.id}][comment]", item.comment
+      %td= text_area_tag "ord[#{item.id}][comment]", item.comment, :rows => 1
       %td= item.user_price
       %td= item.is_a?(CartRequest) ? t(:request) : (item.is_a?(CartWorld) ? t(:pick) : (item.pick? ? t(:pick) : (item.reserve? ? t(:reserve) : 'заказ')))
  - unless @reqs.empty?
@@ -62,7 +62,7 @@
       %td= item.amount
       %td.text-left= item.location_link
       %td.text-left= item.prognosis
-      %td= text_area_tag "ord[#{item.id}][comment]", item.comment
+      %td= text_area_tag "ord[#{item.id}][comment]", item.comment, :rows => 1
       %td= item.user_price
       %td= item.is_a?(CartRequest) ? t(:request) : (item.is_a?(CartWorld) ? t(:pick) : (item.pick? ? t(:pick) : (item.reserve? ? t(:reserve) : 'заказ')))
 
