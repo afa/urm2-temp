@@ -1,7 +1,7 @@
 #cart_store
  - form_for :cart_item, :html => {:method => :put}, :url => save_carts_path, :remote => true, :class => 'js' do |ff|
 
-  %table
+  %table.table-style
    %tr
     %th.text-left= t :type
     %th.text-left= t :name
