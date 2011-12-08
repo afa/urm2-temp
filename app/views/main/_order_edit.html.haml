@@ -6,30 +6,30 @@
  %input.date-picker{:type => "text", :name => 'date_picker'}
  - unless @nreqs.empty?
   %h3 заказы
-  %table
+  %table.table-style
    %tr
-    %th= t :type
-    %th= t :name
-    %th= t :brend
-    %th= t :rohs
+    %th.text-left= t :type
+    %th.text-left= t :name
+    %th.text-left= t :brend
+    %th.text-left= t :rohs
     %th= t :price
     %th= t :amount
-    %th= t :location
-    %th= t :prognosis
+    %th.text-left= t :location
+    %th.text-left= t :prognosis
     %th= t :comment
     %th= t :user_price
     %th= t :actions
    - @nreqs.each do |item|
     %tr
      = f.fields_for :item, item do |ff|
-      %td= item.type_name
-      %td= item.product_name
-      %td= item.product_brend
-      %td= item.product_rohs
+      %td.text-left= item.type_name
+      %td.text-left= item.product_name
+      %td.text-left= item.product_brend
+      %td.text-left= item.product_rohs
       %td= item.current_price
       %td= item.amount
-      %td= item.location_link
-      %td= item.prognosis
+      %td.text-left= item.location_link
+      %td.text-left= item.prognosis
       %td= text_area_tag "ord[#{item.id}][comment]", item.comment
       %td= item.user_price
       %td= item.is_a?(CartRequest) ? t(:request) : (item.is_a?(CartWorld) ? t(:pick) : (item.pick? ? t(:pick) : (item.reserve? ? t(:reserve) : 'заказ')))
@@ -37,14 +37,14 @@
   %h3 запросы
   %table
    %tr
-    %th= t :type
-    %th= t :name
-    %th= t :brend
-    %th= t :rohs
+    %th.text-left= t :type
+    %th.text-left= t :name
+    %th.text-left= t :brend
+    %th.text-left= t :rohs
     %th= t :price
     %th= t :amount
-    %th= t :location
-    %th= t :prognosis
+    %th.text-left= t :location
+    %th.text-left= t :prognosis
     %th= t :comment
     %th= t :user_price
     %th= t :actions
@@ -54,14 +54,14 @@
    - @reqs.each do |item|
     = f.fields_for :item do |ff|
      %tr
-      %td= item.type_name
-      %td= item.product_name
-      %td= item.product_brend
-      %td= item.product_rohs
+      %td.text-left= item.type_name
+      %td.text-left= item.product_name
+      %td.text-left= item.product_brend
+      %td.text-left= item.product_rohs
       %td= item.current_price
       %td= item.amount
-      %td= item.location_link
-      %td= item.prognosis
+      %td.text-left= item.location_link
+      %td.text-left= item.prognosis
       %td= text_area_tag "ord[#{item.id}][comment]", item.comment
       %td= item.user_price
       %td= item.is_a?(CartRequest) ? t(:request) : (item.is_a?(CartWorld) ? t(:pick) : (item.pick? ? t(:pick) : (item.reserve? ? t(:reserve) : 'заказ')))
