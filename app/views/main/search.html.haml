@@ -123,6 +123,8 @@
   $("#order").hide();
   $("a#allow_order").click(function(){
   $("#order").show();
+  $("div.allow-order").hide();
+  $("div.cart input#cart_item_submit").hide();
   $("div#cart_store input").add("div#cart_store textarea").each(function(i, item){ item.disabled = 'disabled'; });
   $("table.search-products").parents("form").hide();
   return false;
