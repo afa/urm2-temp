@@ -1,12 +1,12 @@
 - form_for :order, :url => orders_path, :remote => true, :html => {:class => "js"} do |f|
  - unless @deliveries.empty?
-  %span.switch{:class=>"radio"}
-   Цены:
-   %a{:href=>"#", :class=>"active"}
-    %span USD
-   %a{:href=>"#"}
-    %span RUB
-
+  -# form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
+  .select
+   .sub
+    -# = link_to "-----", "#", :name => "0" unless current_user.current_account
+    - @deliveries.each do |a|
+     = link_to a[1], "#", :name => a[0], :class => "showed"
+   = f.hidden_field :delivery_type, :value => @deliveries.first.try(:first) || 0
   -# %select{:name => "delivery_type"}
    - @deliveries.each do |del|
     %option{:value=>del[0]}= del[1]
