@@ -31,13 +31,7 @@
            = link_to a.cust_account, "#", :name => a.id, :class => "showed"
          = form.hidden_field :account, :value => current_user.try(:current_account).try(:id) || 0
        .account_selector
-        -# form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
-         = form.label :account
-         = form.select :account, options_from_collection_for_select(current_user.accounts.where(:blocked => false), :id, :contact_first_name, current_user.current_account.try(:id)), :include_blank => t(:select_account)
-         = form.submit :select
-       -#%a{:href=>user_path(current_user)} Настройки
        = link_to t(:logout), sessions_path, :method => :delete, :class => "quite"
-       -#%a.quite{:href=>sessions_path, :method => :delete} Выход из системы
 
       .clear
 .button-slide-panel
