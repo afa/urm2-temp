@@ -5,8 +5,8 @@
    .sub
     -# = link_to "-----", "#", :name => "0" unless current_user.current_account
     - @deliveries.each do |a|
-     = link_to a[1], "#", :name => a[0], :class => "showed"
-   = f.hidden_field :delivery_type, :value => @deliveries.first.try(:first) || 0
+     = link_to a[1], "#", :name => a[0], :class => "showed", :style => "white-space:nowrap;"
+   = hidden_field_tag :delivery_type, @deliveries.first.try(:first) || 0
   -# %select{:name => "delivery_type"}
    - @deliveries.each do |del|
     %option{:value=>del[0]}= del[1]
