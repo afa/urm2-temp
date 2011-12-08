@@ -11,7 +11,7 @@
    - @deliveries.each do |del|
     %option{:value=>del[0]}= del[1]
  %input.date-picker{:type => "text", :name => 'date_picker'}
- - unless @nreqs.empty?
+ -# - unless @nreqs.empty?
   %h3 заказы
   %table.table-style
    %tr
@@ -40,7 +40,7 @@
       %td= text_area_tag "ord[#{item.id}][comment]", item.comment, :rows => 1
       %td= item.user_price
       %td= item.is_a?(CartRequest) ? t(:request) : (item.is_a?(CartWorld) ? t(:pick) : (item.pick? ? t(:pick) : (item.reserve? ? t(:reserve) : 'заказ')))
- - unless @reqs.empty?
+ -# - unless @reqs.empty?
   %h3 запросы
   %table
    %tr
