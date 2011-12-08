@@ -101,3 +101,8 @@ ru:
  cart_store: Склад
  cart_request: Запрос
  cart_world: ДМС
+
+ save: Сохранить
+ start_edit_order: Перейти к редактированию заказа
+ make: Заказать
+ cancel: Отмена
