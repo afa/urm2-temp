@@ -39,6 +39,7 @@ gem "bullet", :group => :development
 #gem "sqlite3", :group => :test
 group :development, :test do
  gem "rspec-rails"
+ gem "cucumber", "1.0.6"
  gem "cucumber-rails"
  gem "factory_girl_rails", "~>1.3"
  gem "rspec-cells"
