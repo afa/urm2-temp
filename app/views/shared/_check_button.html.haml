@@ -1,0 +1,10 @@
+- if defined?(opts)
+ - if opts[:need_field]
+  - if opts.has_key?(:field_code)
+   = opts[:field_code]
+  - else
+   = hidden_field_tag name, opts.has_key?(:value) ? opts[:value] : false, opts[:field_opts] || {}
+%span.switch{:class=>"check"}
+ %a{:href=>"#", :name => name}
+  %span= title
+
