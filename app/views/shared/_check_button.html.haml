@@ -3,7 +3,7 @@
   - if opts[:field_code]
    = opts[:field_code]
   - else
-   = hidden_field_tag name, opts.has_key?(:value) ? opts[:value] : '0', opts[:field_opts]
+   = hidden_field_tag name, opts.has_key?(:value) ? opts[:value] : false, opts[:field_opts]
 %span.switch{:class=>"check"}
  %a{:href=>"#", :name => name}
   %span= title
