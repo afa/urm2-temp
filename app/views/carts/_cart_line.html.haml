@@ -18,7 +18,7 @@
    %span
     %label{:for => "cart_item_#{cart_line.id}_#{act.to_s}"}= t act
     = check_box_tag "cart_item[#{cart_line.id}][#{act.to_s}]", '1', cart_line.send((act.to_s + '?').to_sym), :id => "cart_item_#{cart_line.id}_#{act.to_s}"
-  = render :partial => "shared/check_button", :locals => {:name => "cart_item[#{cart_line.id}][destroy]", :title => t(:delete)}
+  = render :partial => "shared/check_button", :locals => {:name => "cart_item[#{cart_line.id}][destroy]", :title => t(:delete), :opts => {:need_field => true}}
   -# %span.switch{:class=>"check"}
    %a{:href=>"#", :name => "search[only_store]"}
     %span Только склад
