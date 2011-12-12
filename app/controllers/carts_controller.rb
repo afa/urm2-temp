@@ -50,8 +50,8 @@ class CartsController < ApplicationController
    carts = params[:cart_item].keys.map{|i| CartItem.find i }
    carts.each do |cart|
     hsh = params[:cart_item][cart.id.to_s]
-    if hsh[:destroy]
-     cart.update_attributes :amount => 0
+    if hsh[:destroy] and WebUtils.parse_bool(hsh[:destroy])
+     cart.update_attributes hsh.reject{|k, v| k == :destroy }.merge(:amount => 0)
      @changed << [cart.id.to_s, '0']
     else
      cart.update_attributes hsh.reject{|k, v| k == :destroy }
