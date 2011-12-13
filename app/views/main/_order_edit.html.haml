@@ -10,7 +10,7 @@
   -# %select{:name => "delivery_type"}
    - @deliveries.each do |del|
     %option{:value=>del[0]}= del[1]
- %input.date-picker{:type => "text", :name => 'date_picker', :value => Date.today.strftime("%Y-%m-%d")}
+ %input.calendar-input{:type => "text", :name => 'date_picker', :value => Date.today.strftime("%Y-%m-%d")}
 
  -# - unless @nreqs.empty?
   %h3 заказы
@@ -76,5 +76,5 @@
 
  = f.submit t(:make)
 :javascript
- $(".date-picker").datePicker({ dateFormat: 'yy-mm-dd' });
+ $(".calendar-input").datePicker({ dateFormat: 'yy-mm-dd' });
 
