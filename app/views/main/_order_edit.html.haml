@@ -11,6 +11,8 @@
    - @deliveries.each do |del|
     %option{:value=>del[0]}= del[1]
  %input.date-picker{:type => "text", :name => 'date_picker'}
+ .date-picker
+
  -# - unless @nreqs.empty?
   %h3 заказы
   %table.table-style
