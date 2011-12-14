@@ -215,11 +215,11 @@ table.ui-datepicker-calendar{ background:#FFFFFF; border-collapse:separate; bord
 table.ui-datepicker-calendar th{ color:#383838; font-weight:bold; padding:3px 3px;}
 table.ui-datepicker-calendar th.ui-datepicker-week-end{ color:#9F0022;}
 
-table.ui-datepicker-calendar td{ color:#383838; padding:2px 4px; text-align:center; border:1px solid #FFFFFF;}
+table.ui-datepicker-calendar td a.ui-state-default{ color:#383838; padding:2px 4px; text-align:center; border:1px solid #FFFFFF;}
 table.ui-datepicker-calendar td.ui-datepicker-week-end{ color:#9F0022;}
 table.ui-datepicker-calendar td.other-month{ color:#B3B3B3 !important;}
 table.ui-datepicker-calendar td.today{ background:#C4C4C4; color:#FFFFFF;}
-table.ui-datepicker-calendar td.dp-hover, table.ui-datepicker-calendar tr.activeWeekHover td{ border:1px solid #666666;}
+table.ui-datepicker-calendar td a.ui-state-default.ui-state-hover, table.ui-datepicker-calendar tr.activeWeekHover td{ border:1px solid #666666;}
 table.ui-datepicker-calendar tr.selectedWeek td{ color:#FFFFFF;}
 table.ui-datepicker-calendar td.disabled{ color:#666666; border:1px solid #FFFFFF !important;}
 
