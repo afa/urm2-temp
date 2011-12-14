@@ -174,7 +174,7 @@ input.validation-error, textarea.validation-error{ background:#FFEBEB !important
 /* Календарь */
 .calendar-input{ width:92px; height:14px; margin:0px; padding:2px 4px; border:1px solid #9E9E9E; font-size:1em;}
 
-table.jCalendar{ background:#FFFFFF; border-collapse:separate; border-spacing:2px;}
+/*table.jCalendar{ background:#FFFFFF; border-collapse:separate; border-spacing:2px;}
 table.jCalendar th{ color:#383838; font-weight:bold; padding:3px 3px;}
 table.jCalendar th.weekend{ color:#9F0022;}
 
@@ -188,19 +188,6 @@ table.jCalendar td.disabled{ color:#666666; border:1px solid #FFFFFF !important;
 
 table.jCalendar td.disabled.weekend, table.jCalendar td.disabled.dp-hover.weekend{ color:#C5667A; _color:#9F0022;}
 
-table.dp-calendar{ background:#FFFFFF; border-collapse:separate; border-spacing:2px;}
-table.dp-calendar th{ color:#383838; font-weight:bold; padding:3px 3px;}
-table.dp-calendar th.weekend{ color:#9F0022;}
-
-table.dp-calendar td{ color:#383838; padding:2px 4px; text-align:center; border:1px solid #FFFFFF;}
-table.dp-calendar td.weekend{ color:#9F0022;}
-table.dp-calendar td.other-month{ color:#B3B3B3 !important;}
-table.dp-calendar td.today{ background:#C4C4C4; color:#FFFFFF;}
-table.dp-calendar td.dp-hover, table.dp-calendar tr.activeWeekHover td{ border:1px solid #666666;}
-table.dp-calendar tr.selectedWeek td{ color:#FFFFFF;}
-table.dp-calendar td.disabled{ color:#666666; border:1px solid #FFFFFF !important;}
-
-table.dp-calendar td.disabled.weekend, table.dp-calendar td.disabled.dp-hover.weekend{ color:#C5667A; _color:#9F0022;}
 div.dp-popup{ position:relative; background:#3A96D9; font-size:11px; font-family:Tahoma, Arial, Helvetica, sans-serif; padding:3px; width:170px; line-height:13px;}
 div#dp-popup{ position:absolute; z-index:199;}
 div.dp-popup h2{ font-size:12px; line-height:15px; text-align:center; margin:0; padding:2px 0 7px 0; color:#FFFFFF;}
@@ -222,6 +209,45 @@ div.dp-popup a.dp-nav-prev-month{ width:13px; background:url(/images/date_picker
 div.dp-popup a.dp-nav-next-year{ background:url(/images/date_picker_buttons.gif) no-repeat -38px 5px; margin-left:0px; margin-right:0px;}
 div.dp-popup a.dp-nav-next-month{ width:13px; background:url(/images/date_picker_buttons.gif) no-repeat -26px 5px; margin-right:1px; margin-left:0px;}
 div.dp-popup a.dp-nav-prev-year.disabled, div.dp-popup a.dp-nav-prev-month.disabled, div.dp-popup a.dp-nav-next-year.disabled, div.dp-popup a.dp-nav-next-month.disabled{ opacity:0.5; filter:alpha(opacity=50);}
+*/
+/* cld 2 */
+table.ui-datepicker-calendar{ background:#FFFFFF; border-collapse:separate; border-spacing:2px;}
+table.ui-datepicker-calendar th{ color:#383838; font-weight:bold; padding:3px 3px;}
+table.ui-datepicker-calendar th.weekend{ color:#9F0022;}
+
+table.ui-datepicker-calendar td{ color:#383838; padding:2px 4px; text-align:center; border:1px solid #FFFFFF;}
+table.ui-datepicker-calendar td.weekend{ color:#9F0022;}
+table.ui-datepicker-calendar td.other-month{ color:#B3B3B3 !important;}
+table.ui-datepicker-calendar td.today{ background:#C4C4C4; color:#FFFFFF;}
+table.ui-datepicker-calendar td.dp-hover, table.ui-datepicker-calendar tr.activeWeekHover td{ border:1px solid #666666;}
+table.ui-datepicker-calendar tr.selectedWeek td{ color:#FFFFFF;}
+table.ui-datepicker-calendar td.disabled{ color:#666666; border:1px solid #FFFFFF !important;}
+
+table.ui-datepicker-calendar td.disabled.weekend, table.ui-datepicker-calendar td.disabled.dp-hover.weekend{ color:#C5667A; _color:#9F0022;}
+
+div.dp-popup{ position:relative; background:#3A96D9; font-size:11px; font-family:Tahoma, Arial, Helvetica, sans-serif; padding:3px; width:170px; line-height:13px;}
+div#dp-popup{ position:absolute; z-index:199;}
+div.dp-popup h2{ font-size:12px; line-height:15px; text-align:center; margin:0; padding:2px 0 7px 0; color:#FFFFFF;}
+a#dp-close{ font-size:11px; padding:4px 0; text-align:center; display:block;}
+a#dp-close:hover{ text-decoration:underline;}
+div.dp-popup a{ color:#FFFFFF; text-decoration:none; padding:3px 2px 0;}
+div.dp-popup a:hover{ color:#B0D5F0 !important;}
+div.dp-popup div.dp-nav-prev{ position:absolute; top:2px; left:4px; width:100px; font-family:Arial, Helvetica, sans-serif;}
+div.dp-popup div.dp-nav-prev a{ float:left;}
+div.dp-popup div.dp-nav-prev a, div.dp-popup div.dp-nav-next a{ cursor:pointer;}
+div.dp-popup div.dp-nav-prev a.disabled, div.dp-popup div.dp-nav-next a.disabled{ cursor:default;}
+div.dp-popup div.dp-nav-next{ position:absolute; top:2px; right:4px; width:100px; font-family:Arial, Helvetica, sans-serif;}
+div.dp-popup div.dp-nav-next a{ float:right;}
+div.dp-popup a.disabled{ cursor:default; color:#B0D5F0;}
+div.dp-popup td{ cursor:pointer;}
+div.dp-popup td.disabled{ cursor:default;}
+div.dp-popup a.dp-nav-prev-year, div.dp-popup a.dp-nav-prev-month, div.dp-popup a.dp-nav-next-year, div.dp-popup a.dp-nav-next-month{ display:block; float:left; font-size:0px; line-height:0px; text-indent:-9999px; width:15px; height:22px; padding:0px; background:url(/images/date_picker_buttons.gif) no-repeat 3px 5px; margin-left:0px;}
+div.dp-popup a.dp-nav-prev-month{ width:13px; background:url(/images/date_picker_buttons.gif) no-repeat -11px 5px; margin-left:1px;}
+div.dp-popup a.dp-nav-next-year{ background:url(/images/date_picker_buttons.gif) no-repeat -38px 5px; margin-left:0px; margin-right:0px;}
+div.dp-popup a.dp-nav-next-month{ width:13px; background:url(/images/date_picker_buttons.gif) no-repeat -26px 5px; margin-right:1px; margin-left:0px;}
+div.dp-popup a.dp-nav-prev-year.disabled, div.dp-popup a.dp-nav-prev-month.disabled, div.dp-popup a.dp-nav-next-year.disabled, div.dp-popup a.dp-nav-next-month.disabled{ opacity:0.5; filter:alpha(opacity=50);}
+
+
 
 /* Кнопка для сворачивания/разворачивания панелей */
 .button-slide{ display:block; font-size:10px; width:16px; height:16px; background-image:url(/images/icon_pointer_slide.gif); background-repeat:no-repeat; outline:0px;}
