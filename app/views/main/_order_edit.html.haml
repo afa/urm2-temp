@@ -1,10 +1,10 @@
 .clear
 - form_for :order, :url => orders_path, :remote => true, :html => {:class => "js"} do |f|
- - if @carts.detect?{|c| not c.is_a?(CartRequest) }
+ - if @carts.detect{|c| not c.is_a?(CartRequest) }
   %h2 Параметры заказа
   %textarea{:name => "order_comment"}
   = render :partial => "shared/check_button", :locals => {:name => "order_needed", :title => t(:order_needed), :opts => {:need_field => true}}
- - if @carts.detect?{|c| c.pick }
+ - if @carts.detect{|c| c.pick }
   %h2 Параметры бронирования
   - unless @deliveries.empty?
    Способ поставки:
@@ -12,7 +12,7 @@
   Дата готовности:
   %input.calendar-input{:type => "text", :name => 'date_picker', :value => Date.today.strftime("%Y-%m-%d")}
   .clear
- - if @carts.detect?{|c| c.is_a?(CartRequest) }
+ - if @carts.detect{|c| c.is_a?(CartRequest) }
   %h2 Параметры запроса
   %textarea{:name => "comment"}
  = render :partial => "shared/submit_button", :locals => {:title => t(:make)}
