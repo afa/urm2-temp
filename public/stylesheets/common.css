@@ -244,7 +244,7 @@ div.ui-datepicker td.disabled{ cursor:default;}
 div.ui-datepicker a.dp-nav-prev-year, div.ui-datepicker a.ui-datepicker-prev, div.ui-datepicker a.dp-nav-next-year, div.ui-datepicker a.ui-datepicker-next{ display:block; float:left; font-size:0px; line-height:0px; text-indent:-9999px; width:15px; height:22px; padding:0px; background:url(/images/date_picker_buttons.gif) no-repeat 3px 5px; margin-left:0px;}
 div.ui-datepicker a.ui-datepicker-prev{ width:13px; background:url(/images/date_picker_buttons.gif) no-repeat -11px 5px; margin-left:1px;}
 div.ui-datepicker a.dp-nav-next-year{ background:url(/images/date_picker_buttons.gif) no-repeat -38px 5px; margin-left:0px; margin-right:0px;}
-div.ui-datepicker a.dp-nav-next-month{ width:13px; background:url(/images/date_picker_buttons.gif) no-repeat -26px 5px; margin-right:1px; margin-left:0px;}
+div.ui-datepicker a.ui-datepicker-next{ width:13px; background:url(/images/date_picker_buttons.gif) no-repeat -26px 5px; margin-right:1px; margin-left:0px;}
 div.ui-datepicker a.dp-nav-prev-year.disabled, div.ui-datepicker a.ui-datepicker-prev.disabled, div.ui-datepicker a.dp-nav-next-year.disabled, div.ui-datepicker a.ui-datepicker-next.disabled{ opacity:0.5; filter:alpha(opacity=50);}
 
 
