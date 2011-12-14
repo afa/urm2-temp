@@ -3,7 +3,7 @@
  - unless @deliveries.empty?
   = render :partial => "shared/select_list", :locals => {:list_items => @deliveries, :name => :delivery_type}
  %input.calendar-input{:type => "text", :name => 'date_picker', :value => Date.today.strftime("%Y-%m-%d")}
-
+ .clear
  = f.submit t(:make)
 :javascript
  $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
