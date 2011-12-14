@@ -1,0 +1,8 @@
+.select
+ .sub
+  -# = link_to "-----", "#", :name => "0" unless current_user.current_account
+  - list_items.each do |a|
+   = link_to a[1], "#", :name => a[0], :class => "showed", :style => "white-space:nowrap;"
+ = hidden_field_tag name, list_items.first.try(:first) || 0
+
+
