@@ -2,7 +2,8 @@
 - form_for :order, :url => orders_path, :remote => true, :html => {:class => "js"} do |f|
  - if @carts.any?{|c| not c.is_a?(CartRequest) }
   %h2 Параметры заказа
-
+  %textarea{:name => "order_comment"}
+  = render :partial => "shared/check_button", :locals => {:name => "order_needed", :title => t(:order_needed), :opts => {:need_field => true}}
  - if @carts.any?{|c| c.pick? }
   %h2 Параметры бронирования
   - unless @deliveries.empty?
@@ -13,8 +14,9 @@
   .clear
  - if @carts.any?{|c| c.is_a?(CartRequest) }
   %h2 Параметры запроса
+  %textarea{:name => "comment"}
  = render :partial => "shared/submit_button", :locals => {:title => t(:make)}
- = f.submit t(:make)
+ -# = f.submit t(:make)
 :javascript
  $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
 
