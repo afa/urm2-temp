@@ -234,18 +234,18 @@ div.ui-datepicker a{ color:#FFFFFF; text-decoration:none; padding:3px 2px 0;}
 div.ui-datepicker a:hover{ color:#B0D5F0 !important;}
 div.ui-datepicker div.dp-nav-prev{ position:absolute; top:2px; left:4px; width:100px; font-family:Arial, Helvetica, sans-serif;}
 div.ui-datepicker div.dp-nav-prev a{ float:left;}
-div.ui-datepicker div.dp-nav-prev a, div.dp-popup div.dp-nav-next a{ cursor:pointer;}
-div.ui-datepicker div.dp-nav-prev a.disabled, div.dp-popup div.dp-nav-next a.disabled{ cursor:default;}
+div.ui-datepicker div.dp-nav-prev a, div.ui-datepicker div.dp-nav-next a{ cursor:pointer;}
+div.ui-datepicker div.dp-nav-prev a.disabled, div.ui-datepicker div.dp-nav-next a.disabled{ cursor:default;}
 div.ui-datepicker div.dp-nav-next{ position:absolute; top:2px; right:4px; width:100px; font-family:Arial, Helvetica, sans-serif;}
 div.ui-datepicker div.dp-nav-next a{ float:right;}
 div.ui-datepicker a.disabled{ cursor:default; color:#B0D5F0;}
 div.ui-datepicker td{ cursor:pointer;}
 div.ui-datepicker td.disabled{ cursor:default;}
-div.ui-datepicker a.dp-nav-prev-year, div.ui-datepicker a.dp-nav-prev-month, div.ui-datepicker a.dp-nav-next-year, div.ui-datepicker a.dp-nav-next-month{ display:block; float:left; font-size:0px; line-height:0px; text-indent:-9999px; width:15px; height:22px; padding:0px; background:url(/images/date_picker_buttons.gif) no-repeat 3px 5px; margin-left:0px;}
-div.ui-datepicker a.dp-nav-prev-month{ width:13px; background:url(/images/date_picker_buttons.gif) no-repeat -11px 5px; margin-left:1px;}
+div.ui-datepicker a.dp-nav-prev-year, div.ui-datepicker a.ui-datepicker-prev, div.ui-datepicker a.dp-nav-next-year, div.ui-datepicker a.ui-datepicker-next{ display:block; float:left; font-size:0px; line-height:0px; text-indent:-9999px; width:15px; height:22px; padding:0px; background:url(/images/date_picker_buttons.gif) no-repeat 3px 5px; margin-left:0px;}
+div.ui-datepicker a.ui-datepicker-prev{ width:13px; background:url(/images/date_picker_buttons.gif) no-repeat -11px 5px; margin-left:1px;}
 div.ui-datepicker a.dp-nav-next-year{ background:url(/images/date_picker_buttons.gif) no-repeat -38px 5px; margin-left:0px; margin-right:0px;}
 div.ui-datepicker a.dp-nav-next-month{ width:13px; background:url(/images/date_picker_buttons.gif) no-repeat -26px 5px; margin-right:1px; margin-left:0px;}
-div.ui-datepicker a.dp-nav-prev-year.disabled, div.ui-datepicker a.dp-nav-prev-month.disabled, div.ui-datepicker a.dp-nav-next-year.disabled, div.ui-datepicker a.dp-nav-next-month.disabled{ opacity:0.5; filter:alpha(opacity=50);}
+div.ui-datepicker a.dp-nav-prev-year.disabled, div.ui-datepicker a.ui-datepicker-prev.disabled, div.ui-datepicker a.dp-nav-next-year.disabled, div.ui-datepicker a.dp-nav-next-month.disabled{ opacity:0.5; filter:alpha(opacity=50);}
 
 
 
