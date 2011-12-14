@@ -213,7 +213,7 @@ div.dp-popup a.dp-nav-prev-year.disabled, div.dp-popup a.dp-nav-prev-month.disab
 /* cld 2 */
 table.ui-datepicker-calendar{ background:#FFFFFF; border-collapse:separate; border-spacing:2px;}
 table.ui-datepicker-calendar th{ color:#383838; font-weight:bold; padding:3px 3px;}
-table.ui-datepicker-calendar th.ui-datepicker-week-end{ color:#9F0022;}
+table.ui-datepicker-calendar th.ui-datepicker-week-end a.ui-state-default{ color:#9F0022;}
 
 table.ui-datepicker-calendar td a.ui-state-default{ color:#383838; padding:2px 4px; text-align:center; border:1px solid #FFFFFF;}
 table.ui-datepicker-calendar td.ui-datepicker-week-end{ color:#9F0022;}
