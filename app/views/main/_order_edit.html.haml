@@ -1,9 +1,19 @@
 .clear
 - form_for :order, :url => orders_path, :remote => true, :html => {:class => "js"} do |f|
- - unless @deliveries.empty?
-  = render :partial => "shared/select_list", :locals => {:list_items => @deliveries, :name => :delivery_type}
- %input.calendar-input{:type => "text", :name => 'date_picker', :value => Date.today.strftime("%Y-%m-%d")}
- .clear
+ - if @carts.any?{|c| not c.is_a?(CartRequest) }
+  %h2 Параметры заказа
+
+ - if @carts.any?{|c| c.pick? }
+  %h2 Параметры бронирования
+  - unless @deliveries.empty?
+   Способ поставки:
+   = render :partial => "shared/select_list", :locals => {:list_items => @deliveries, :name => :delivery_type}
+  Дата готовности:
+  %input.calendar-input{:type => "text", :name => 'date_picker', :value => Date.today.strftime("%Y-%m-%d")}
+  .clear
+ - if @carts.any?{|c| c.is_a?(CartRequest) }
+  %h2 Параметры запроса
+ = render :partial => "shared/submit_button", :locals => {:title => t(:make)}
  = f.submit t(:make)
 :javascript
  $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
