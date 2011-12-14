@@ -303,7 +303,7 @@ td.input-in-cart.speed .speed-cart-button span span{ background:url(/images/icon
 
 /* Выпадающий список */
 .select{ float:left; border:1px solid #3A96D9; _display:inline-block;}
-.select a{ width:177px; display:block; background-image:url(/images/spacer.gif);}
+.select a{ width:auto; display:block; background-image:url(/images/spacer.gif);}
 /*.select a{ width:77px; display:block; background-image:url(/images/spacer.gif);}*/
 .select .sub{ display:none; background:#FFFFFF; position:absolute; border:1px solid #3A96D9; margin-left:-1px; border-top:0px;}
 .select .active{ cursor:pointer; padding:1px 16px 3px 7px; background:url(/images/icon_pointer_blue.gif) no-repeat 100% -16px #3A96D9; text-decoration:none; color:#FFFFFF; outline:0;}
