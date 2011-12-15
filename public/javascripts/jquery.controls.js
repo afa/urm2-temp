@@ -112,10 +112,10 @@
    input.val(active.get(0).name);
 
    //Показать/скрыть список
-   active.click(function(){
+   active.click(function(e){
     subList.toggle();
     sel.toggleClass('hover');
-    return false;
+    e.preventDefault();
    });
 
    //Клик в пустом месте закрывает список
@@ -133,7 +133,7 @@
     subList.hide();
     sel.removeClass('hover');
     e.preventDefault();
-    active.parents("form").eq(0).submit();
+    //active.parents("form").eq(0).submit();
    });
 
   });
