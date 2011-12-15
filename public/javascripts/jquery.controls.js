@@ -116,6 +116,7 @@
     subList.toggle();
     sel.toggleClass('hover');
     e.preventDefault();
+    return false;
    });
 
    //Клик в пустом месте закрывает список
