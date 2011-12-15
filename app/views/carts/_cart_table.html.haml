@@ -16,5 +16,6 @@
     %th{:colspan => 2}= t :action
     %th
    = render :partial => "carts/cart_line", :collection => cart
-  = ff.submit t(:save)
+  -# = ff.submit t(:save)
+  = render :partial => "shared/submit_button", :locals => {:title => t(:save)}
  
