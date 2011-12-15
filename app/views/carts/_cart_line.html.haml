@@ -15,12 +15,13 @@
   %td &nbsp;
   %td
    %span= t :pick
- - [:reserve, :pick].each do |act|
-  %td
-   %span
-    - if cart_line.allowed_actions.include?(act)
-     -# %label{:for => "cart_item_#{cart_line.id}_#{act.to_s}"}= t act
-     = render :partial => "shared/check_button", :locals => {:name => "cart_item[#{cart_line.id}][#{act.to_s}]", :title => t(act), :opts => {:need_field => true, :value => cart_line.send(act)}}
+ - else
+  - [:reserve, :pick].each do |act|
+   %td
+    %span
+     - if cart_line.allowed_actions.include?(act)
+      -# %label{:for => "cart_item_#{cart_line.id}_#{act.to_s}"}= t act
+      = render :partial => "shared/check_button", :locals => {:name => "cart_item[#{cart_line.id}][#{act.to_s}]", :title => t(act), :opts => {:need_field => true, :value => cart_line.send(act)}}
  %td
   = render :partial => "shared/check_button", :locals => {:name => "cart_item[#{cart_line.id}][destroy]", :title => t(:delete), :opts => {:need_field => true, :value => false}}
   -# %span.switch{:class=>"check"}
