@@ -265,6 +265,7 @@
      e.preventDefault();
     });
     $('input[name="' + links.attr("name") + '"]').watch("disabled", function(e){
+     alert("toggled");
      if ($('input[name="'+ $(this).attr("name") +'"]').is(':disabled')) {
       links.addClass('disabled');
      } else {
