@@ -263,7 +263,7 @@
      $('input[name="'+ $(this).attr("name") +'"]').attr("value", $(this).hasClass("active") ? '1' : '0');
      e.preventDefault();
     });
-    links.observe("disabled", function(e, data){
+    links.watch("disabled", function(e, data){
      e.preventDefault();
     }, 400);
    }
