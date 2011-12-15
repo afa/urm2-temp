@@ -99,8 +99,8 @@
 
      %tr.title-header-bottom
       %th.double-cell{:colspan => 3}= t :avail
-    = frm.submit t(:add_to_cart), :name => "items[commit]"
-
+    -# = frm.submit t(:add_to_cart), :name => "items[commit]"
+    = render :partial => "shared/submit_button", :locals => {:title => t(:add_to_cart, :name => "items[commit]")}
  .clear
  .cart-table
   .cart= render :partial => "carts/cart_table", :locals => {:cart => @carts}
