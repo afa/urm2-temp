@@ -112,9 +112,10 @@
    input.val(active.get(0).name);
 
    //Показать/скрыть список
-   active.click(function(){
+   active.click(function(e){
     subList.toggle();
     sel.toggleClass('hover');
+    e.preventDefault();
     return false;
    });
 
@@ -133,7 +134,7 @@
     subList.hide();
     sel.removeClass('hover');
     e.preventDefault();
-    active.parents("form").eq(0).submit();
+    //active.parents("form").eq(0).submit();
    });
 
   });
@@ -259,10 +260,22 @@
      links.removeClass("active");
     }
     links.click(function(e){
-     $(this).toggleClass('active');
+     if($('input[name="' + links.attr("name") + '"]').is(":disabled")) {
+     } else {
+      $(this).toggleClass('active');
+     }
      $('input[name="'+ $(this).attr("name") +'"]').attr("value", $(this).hasClass("active") ? '1' : '0');
      e.preventDefault();
     });
+    /*$('input[name="' + links.attr("name") + '"]').watch("disabled", function(e){
+     alert("toggled");
+     if ($('input[name="'+ $(this).attr("name") +'"]').is('input[disabled]')) {
+      links.addClass('disabled');
+     } else {
+      links.removeClass('disabled');
+     }
+     e.preventDefault();
+    }, 400);*/
    }
 
 

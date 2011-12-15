@@ -106,3 +106,16 @@ ru:
  start_edit_order: Перейти к редактированию заказа
  make: Заказать
  cancel: Отмена
+
+ type: Тип
+ name: Наименование
+ brend: Производитель
+ price: Цена
+ amount: Количество
+ comment: Примечание
+ user_price: Цена клиента
+ action: Действие
+ delete: Удалить
+ pick: Бронь
+ reserve: Резерв
+ order_needed: Выставить счет

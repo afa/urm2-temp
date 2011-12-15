@@ -11,15 +11,19 @@
   %textarea{:cols => 20, :rows => 1, :id => "cart_item_#{cart_line.id}_comment", :name => "cart_item[#{cart_line.id}][comment]"}= cart_line.comment
  %td
   %input{:type => :text, :value => cart_line.user_price, :id => "cart_item_#{cart_line.id}_user_price", :name => "cart_item[#{cart_line.id}][user_price]"}
- %td
-  - if cart_line.is_a?(CartWorld)
+ - if cart_line.is_a?(CartWorld)
+  %td &nbsp;
+  %td
    %span= t :pick
-  - cart_line.allowed_actions.each do |act|
-   %span
-    -# %label{:for => "cart_item_#{cart_line.id}_#{act.to_s}"}= t act
-    = render :partial => "shared/check_button", :locals => {:name => "cart_item[#{cart_line.id}][#{act.to_s}]", :title => t(act), :opts => {:need_field => true}}
-    -# = check_box_tag "cart_item[#{cart_line.id}][#{act.to_s}]", '1', cart_line.send((act.to_s + '?').to_sym), :id => "cart_item_#{cart_line.id}_#{act.to_s}"
-  = render :partial => "shared/check_button", :locals => {:name => "cart_item[#{cart_line.id}][destroy]", :title => t(:delete), :opts => {:need_field => true}}
+ - else
+  - [:reserve, :pick].each do |act|
+   %td
+    %span
+     - if cart_line.allowed_actions.include?(act.to_s)
+      -# %label{:for => "cart_item_#{cart_line.id}_#{act.to_s}"}= t act
+      = render :partial => "shared/check_button", :locals => {:name => "cart_item[#{cart_line.id}][#{act.to_s}]", :title => t(act), :opts => {:need_field => true, :value => cart_line.send(act)}}
+ %td
+  = render :partial => "shared/check_button", :locals => {:name => "cart_item[#{cart_line.id}][destroy]", :title => t(:delete), :opts => {:need_field => true, :value => false}}
   -# %span.switch{:class=>"check"}
    %a{:href=>"#", :name => "search[only_store]"}
     %span Только склад
