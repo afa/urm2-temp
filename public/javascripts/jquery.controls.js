@@ -264,7 +264,12 @@
      $('input[name="'+ $(this).attr("name") +'"]').attr("value", $(this).hasClass("active") ? '1' : '0');
      e.preventDefault();
     });
-    links.watch("disabled", function(e){
+    $('input[name="' + links.attr("name") + '"]').watch("disabled", function(e){
+     if ($('input[name="'+ $(this).attr("name") +'"]').is(':disabled')) {
+      links.addClass('disabled');
+     } else {
+      links.removeClass('disabled');
+     }
      e.preventDefault();
     }, 400);
    }
