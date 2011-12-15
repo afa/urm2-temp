@@ -260,19 +260,22 @@
      links.removeClass("active");
     }
     links.click(function(e){
-     $(this).toggleClass('active');
+     if($('input[name="' + links.attr("name") + '"]').is(":disabled")) {
+     } else {
+      $(this).toggleClass('active');
+     }
      $('input[name="'+ $(this).attr("name") +'"]').attr("value", $(this).hasClass("active") ? '1' : '0');
      e.preventDefault();
     });
-    $('input[name="' + links.attr("name") + '"]').watch("disabled", function(e){
+    /*$('input[name="' + links.attr("name") + '"]').watch("disabled", function(e){
      alert("toggled");
-     if ($('input[name="'+ $(this).attr("name") +'"]').is(':disabled')) {
+     if ($('input[name="'+ $(this).attr("name") +'"]').is('input[disabled]')) {
       links.addClass('disabled');
      } else {
       links.removeClass('disabled');
      }
      e.preventDefault();
-    }, 400);
+    }, 400);*/
    }
 
 
