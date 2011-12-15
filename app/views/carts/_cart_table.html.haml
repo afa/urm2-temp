@@ -13,7 +13,7 @@
     %th.text-left= t :prognosis
     %th= t :comment
     %th= t :user_price
-    %th= t :action
+    %th{:colspan => 2}= t :action
     %th
    = render :partial => "carts/cart_line", :collection => cart
   = ff.submit t(:save)
