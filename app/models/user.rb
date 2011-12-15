@@ -98,7 +98,8 @@ class User < ActiveRecord::Base
    end
   end
 
-  def make_order(dead_line, delivery)
+  def make_order(dead_line, delivery, *args)
+   #, :order_needed => params[:order_needed], :order_comment => params[:order_comment], :request_comment => params[:request_comment]
    reqs = cart_items.unprocessed.in_cart.all.partition{|c| c.is_a?(CartRequest) }
    res = []
    unless reqs[1].empty?

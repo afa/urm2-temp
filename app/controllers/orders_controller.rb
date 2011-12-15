@@ -39,9 +39,6 @@ class OrdersController < ApplicationController
    @nreqs = @carts.partition{|i| i.is_a? CartRequest }[1]
    @deliveries = User.current.deliveries
    respond_with do |format|
-    #format.json do
-    # render :json => {:dms => render_to_string( :partial => "main/dms_block.html", :locals => {:items => @items, :after => @after} ), :gap => render_to_string( :partial => "main/gap_line.html", :locals => {:after => @after}), :empty => render_to_string(:partial => "main/dms_empty.html", :locals => {:after => @after})}
-    #end
     format.js { render :layout => false }
     format.html do
      render
@@ -52,7 +49,7 @@ class OrdersController < ApplicationController
 
   def create
    @changed = []
-   @results = User.current.make_order(params[:date_picker], params[:delivery_type])
+   @results = User.current.make_order(params[:date_picker], params[:delivery_type], :order_needed => params[:order_needed], :order_comment => params[:order_comment], :request_comment => params[:request_comment])
    @carts = current_user.cart_items.unprocessed.in_cart.all
   end
 
