@@ -312,6 +312,13 @@ div.switch{ padding-bottom:10px;}
 .switch.check .active:hover{ color:#CEE5F5 !important;}
 .switch.radio .active:hover{ color:#FFFFFF !important;}
 
+/* disabled checkbox */
+/*.switch{ padding-right:22px;}
+div.switch{ padding-bottom:10px;}*/
+.switch.disabled span{ padding:2px 4px 4px 5px; text-decoration:none !important;}
+.switch.disabled span span{ margin-right:1px;}
+
+
 /* Поле ввода "Добавить в корзину" для таблицы вывода списка продукции */
 td.input-in-cart{ text-align:center; font-size:1.17em; line-height:1em; font-weight:bold; padding:0px !important;}
 td.input-in-cart div{ position:relative; padding:5px 6px 1px 6px; height:1.6em; *padding-bottom:3px; *height:1.5em; background:url(/images/input_in_cart_back.gif) repeat-x 0px -30px; min-width:3.5em; *width:3.5em;}

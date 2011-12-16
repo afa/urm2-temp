@@ -100,12 +100,16 @@ class User < ActiveRecord::Base
 
   def make_order(dead_line, delivery, *args)
    #, :order_needed => params[:order_needed], :order_comment => params[:order_comment], :request_comment => params[:request_comment]
+   ar = {}.merge(*args)
    reqs = cart_items.unprocessed.in_cart.all.partition{|c| c.is_a?(CartRequest) }
    res = []
    unless reqs[1].empty?
     begin
      res << Axapta.make_order(:sales_lines => reqs[1].map{|i| i.to_sales_lines }, :date_dead_line => dead_line, :customer_delivery_type_id => delivery).try(:[], "sales_id")
      reqs[1].each{|i| i.update_attributes :processed => true, :order => res.last }
+     if ar.has_key?(:order_needed) and ar[:order_needed] == '1'
+      Axapta.create_invoice(res.last)
+     end
     rescue Exception => e
      p "---makeorder_exc!request", e
     end

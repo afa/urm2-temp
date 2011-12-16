@@ -1,5 +1,8 @@
 $("table.search-products").parents("form").show();
+$("table.search-products tr:has(td)").remove();
+$("input#search_query_string").val('');
 $("#cart_store table tr:has(td)").remove();
+$("#cancel_order").hide();
 - @carts.each do |crt|
  $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :locals => {:cart_line => crt}) }");
 - unless @carts.empty?
@@ -12,6 +15,15 @@ $("#cart_store").hide();
 $("div.allow-order").hide();
 }
 $("div#order").hide();
+
+-#
+ $("div.cart input#cart_item_submit").show();
+ $("div#cart_store input").add("div#cart_store textarea").each(function(i, item){ item.disabled = ''; });
+ $("table.search-products").parents("form").show();
+ return false;
+
+
+
 -# @changed.each do |i|
  $("table.search-products tr input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");
  -# $("div#cart_store table tr##{i[0]} input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");

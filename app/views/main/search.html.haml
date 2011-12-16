@@ -100,7 +100,7 @@
      %tr.title-header-bottom
       %th.double-cell{:colspan => 3}= t :avail
     -# = frm.submit t(:add_to_cart), :name => "items[commit]"
-    = render :partial => "shared/submit_button", :locals => {:title => t(:add_to_cart, :name => "items[commit]")}
+    = render :partial => "shared/submit_button", :locals => {:title => t(:add_to_cart), :name => "items[commit]"}
  .clear
  .cart-table
   .cart= render :partial => "carts/cart_table", :locals => {:cart => @carts}
@@ -121,12 +121,23 @@
   //load_dms_each(#{not to_bool(@only_store)});
   load_dms_bundle("#{main_mass_dms_url(:query_string => @search.query_string)}", #{not to_bool(@only_store)});
   $("#order").hide();
+  $("#cancel_order").hide();
   $("a#allow_order").click(function(){
   $("#order").show();
   $("div.allow-order").hide();
+  $("#cancel_order").show();
   $("div.cart input#cart_item_submit").hide();
   $("div#cart_store input").add("div#cart_store textarea").each(function(i, item){ item.disabled = 'disabled'; });
   $("table.search-products").parents("form").hide();
+  return false;
+  });
+  $("#cancel_order").click(function(){
+  $("#order").hide();
+  $("div.allow-order").show();
+  $("#cancel_order").hide();
+  $("div.cart input#cart_item_submit").show();
+  $("div#cart_store input").add("div#cart_store textarea").each(function(i, item){ item.disabled = ''; });
+  $("table.search-products").parents("form").show();
   return false;
   });
  /*$('a.button-style').click(function(){
