@@ -126,6 +126,10 @@ class Axapta
   def self.get_delivery_mode
    AxaptaRequest.get_dlv_mode(:user_hash => User.current.try(:current_account).try(:axapta_hash))
   end
+
+  def self.create_invoice(order)
+   AxaptaRequest.create_invoice(:user_hash => User.current.try(:current_account).try(:axapta_hash), :sales_id => order)
+  end
 end
 
 =begin
