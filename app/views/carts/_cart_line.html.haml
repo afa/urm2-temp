@@ -14,7 +14,9 @@
  - if cart_line.is_a?(CartWorld)
   %td &nbsp;
   %td
-   %span= t :pick
+   .switch.disabled
+    %span
+     %span= t :pick
  - else
   - [:reserve, :pick].each do |act|
    %td
