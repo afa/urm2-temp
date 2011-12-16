@@ -107,7 +107,7 @@ class User < ActiveRecord::Base
     begin
      res << Axapta.make_order(:sales_lines => reqs[1].map{|i| i.to_sales_lines }, :date_dead_line => dead_line, :customer_delivery_type_id => delivery).try(:[], "sales_id")
      reqs[1].each{|i| i.update_attributes :processed => true, :order => res.last }
-     if *args.has_key?(:order_needed) and *args[:order_needed] == '1'
+     if (*args).has_key?(:order_needed) and (*args)[:order_needed] == '1'
       Axapta.create_invoice(res.last)
      end
     rescue Exception => e
