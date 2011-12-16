@@ -16,7 +16,7 @@
   %h2 Параметры запроса
   %textarea{:name => "comment"}
  = render :partial => "shared/submit_button", :locals => {:title => t(:make), :opts => {}}
- = render :partial => "shared/submit_button", :locals => {:title => t(:cancel), :opts => {:id => "order_cancel"}}
+ = render :partial => "shared/button", :locals => {:title => t(:cancel), :opts => {:id => "order_cancel"}}
  -# = f.submit t(:make)
 :javascript
  $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });

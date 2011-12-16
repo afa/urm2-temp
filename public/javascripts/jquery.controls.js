@@ -260,8 +260,7 @@
      links.removeClass("active");
     }
     links.click(function(e){
-     if($('input[name="' + links.attr("name") + '"]').is(":disabled")) {
-     } else {
+     if($('input[name="' + links.attr("name") + '"]').is(":enabled")) {
       $(this).toggleClass('active');
      }
      $('input[name="'+ $(this).attr("name") +'"]').attr("value", $(this).hasClass("active") ? '1' : '0');
