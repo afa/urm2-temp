@@ -125,19 +125,21 @@
   $("a#allow_order").click(function(){
   $("#order").show();
   $("div.allow-order").hide();
-  $("#cancel_order").show();
+  $("#order_cancel").show();
   $("div.cart input#cart_item_submit").hide();
   $("div#cart_store input").add("div#cart_store textarea").each(function(i, item){ item.disabled = 'disabled'; });
   $("table.search-products").parents("form").hide();
+  $("#save_cart_button").hide();
   return false;
   });
   $("#order_cancel .button-style").click(function(){
   $("#order").hide();
   $("div.allow-order").show();
-  $("#cancel_order").hide();
+  $("#order_cancel").hide();
   $("div.cart input#cart_item_submit").show();
   $("div#cart_store input").add("div#cart_store textarea").each(function(i, item){ item.disabled = ''; });
   $("table.search-products").parents("form").show();
+  $("#save_cart_button").show();
   return false;
   });
  /*$('a.button-style').click(function(){
