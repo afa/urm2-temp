@@ -1,7 +1,7 @@
 class Offer::Store < Offer::Base
 
  @signature_fields = @base_signature_fields + [:location_id]
- attr_accessor :location_id, :brend_name, :brend_url, :qtys, :prices, :counts, :need_more, :qty_in_pack, :segment_rus, :body_name, :analog_exists, :forecast_available, :min_qty, :max_qty, :raw_location
+ attr_accessor :location_id, :brend_name, :brend_url, :qtys, :prices, :counts, :need_more, :qty_in_pack, :segment_rus, :body_name, :analog_exists, :forecast_available, :min_qty, :max_qty, :raw_location, :vend_proposal_date
 
   def self.search(hsh)
    return [] if hsh.blank? || hsh[:query_string].blank? || hsh[:query_string].size < 3
@@ -40,11 +40,24 @@ class Offer::Store < Offer::Base
       n.min_qty = hsh["min_qty"]
       n.max_qty = loc["vend_qty"]
       n.raw_location = loc
+      #n.vend_proposal_date = nil
       CartStore.prepare_code(n)
      end
     end
    end
    rez
   end
+
+  def self.analogs(code)
+   return [] if code.blank?
+   begin
+    data = Axapta.search_analogs(:calc_price=>true, :calc_qty => true, :user_hash => User.current.current_account.try(:axapta_hash), :item_id_search => code)
+   rescue Exception => e
+    p "---exc in search #{Time.now}", e
+    return []
+   end
+   fabricate(data)
+  end
+
 
 end
