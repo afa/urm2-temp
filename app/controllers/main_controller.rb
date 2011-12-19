@@ -97,16 +97,18 @@ class MainController < ApplicationController
   def analog
    @after = params[:after]
    @code = params[:code]
-   @hash = current_user.current_account.try(:axapta_hash)
+   #@hash = current_user.current_account.try(:axapta_hash)
    
    logger.info "--- request_start: #{Time.now}"
    begin
-    data = Axapta.search_analogs({:calc_price=>true, :calc_qty => true, :user_hash => @hash, :item_id_search => @code})
+    data = Offer::Store.analogs(@code)
    rescue Exception => e
     p "---exc in search #{Time.now}", e
     logger.info e.to_s
    end
-   @items = data.inject([]) do |r, i|
+   @items = data
+=begin
+.inject([]) do |r, i|
     i["locations"].each do |loc|
      a = {"item_name" => i["item_name"], "item_brend" => i["item_brend"], "qty_in_pack" => i["qty_in_pack"], "location_id" => loc["location_id"], "min_qty" => i["min_qty"], "max_qty" => loc["vend_qty"], "rohs" => i["rohs"], "item_id" => i["item_id"], "segment_rus" => i["segment_rus"], "package_name" => i["package_name"]}
      locs = loc["price_qty"].sort_by{|l| l["min_qty"] }[0, 4]
@@ -118,6 +120,7 @@ class MainController < ApplicationController
     end
     r
    end
+=end
   end
 
   def info
