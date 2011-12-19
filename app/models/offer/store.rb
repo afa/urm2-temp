@@ -48,7 +48,7 @@ class Offer::Store < Offer::Base
   end
 
   def self.analogs(code)
-   return [] if hsh.blank? || hsh[:query_string].blank? || hsh[:query_string].size < 3
+   return [] if code.blank?
    begin
     data = Axapta.search_analogs(:calc_price=>true, :calc_qty => true, :user_hash => User.current.current_account.try(:axapta_hash), :item_id_search => code)
    rescue Exception => e
