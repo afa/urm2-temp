@@ -40,6 +40,7 @@ class Offer::Store < Offer::Base
       n.min_qty = hsh["min_qty"]
       n.max_qty = loc["vend_qty"]
       n.raw_location = loc
+      n.vend_proposal_date = nil
       CartStore.prepare_code(n)
      end
     end
