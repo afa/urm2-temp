@@ -11,13 +11,14 @@
  = form_for :filter, :url => orders_path, :html => {:method => :get} do |f|
   .field
    = f.label :sales_id
-   = f.text_field :sales_id
-  .field
-   = f.label :official_number
-   = f.text_field :official_number
-   -# = f.hidden_field :only_dms
-   -# = f.hidden_field :only_my
+   = f.text_field :item_name
   = render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
+  .field
+   Дата отгрузки:
+   с&nbsp;
+   %input.calendar-input{:type => "text", :name => 'date_from', :value => 1.month.ago.strftime("%Y-%m-%d")}
+   по&nbsp;
+   %input.calendar-input{:type => "text", :name => 'date_to', :value => Date.current.strftime("%Y-%m-%d")}
   -# .button
    %a.button-style{:href=>"#"}
     %i.t &nbsp;
