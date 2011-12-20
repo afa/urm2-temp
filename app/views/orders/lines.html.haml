@@ -8,7 +8,7 @@
 
 .filter-tab-block
  -# %form{:action=>" "}
- = form_for :filter, :url => orders_path, :html => {:method => :get} do |f|
+ = form_for :filter, :url => lines_orders_path, :html => {:method => :get} do |f|
   .field
    = f.label :item_name
    = f.text_field :item_name
