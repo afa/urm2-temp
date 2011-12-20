@@ -10,15 +10,15 @@
  -# %form{:action=>" "}
  = form_for :filter, :url => lines_orders_path, :html => {:method => :get} do |f|
   .field
-   = f.label :item_name
+   = f.label :item_name, t(:item_name)
    = f.text_field :item_name
   = render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
   .field
    Дата отгрузки:
    с&nbsp;
-   %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => 1.month.ago.strftime("%Y-%m-%d")}
+   %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => params[:filter].try(:[], :date_from).try(:blank?) ? 1.month.ago.strftime("%Y-%m-%d") : params[:filter][:date_from]}
    по&nbsp;
-   %input.calendar-input{:type => "text", :name => 'filter[date_to]', :value => Date.current.strftime("%Y-%m-%d")}
+   %input.calendar-input{:type => "text", :name => 'filter[date_to]', :value => params[:filter].try(:[], :date_to).try(:blank?) ? Date.current.strftime("%Y-%m-%d") : params[:filter][:date_to]}
   -# .button
    %a.button-style{:href=>"#"}
     %i.t &nbsp;
