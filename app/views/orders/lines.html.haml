@@ -10,15 +10,15 @@
  -# %form{:action=>" "}
  = form_for :filter, :url => orders_path, :html => {:method => :get} do |f|
   .field
-   = f.label :sales_id
+   = f.label :item_name
    = f.text_field :item_name
   = render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
   .field
    Дата отгрузки:
    с&nbsp;
-   %input.calendar-input{:type => "text", :name => 'date_from', :value => 1.month.ago.strftime("%Y-%m-%d")}
+   %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => 1.month.ago.strftime("%Y-%m-%d")}
    по&nbsp;
-   %input.calendar-input{:type => "text", :name => 'date_to', :value => Date.current.strftime("%Y-%m-%d")}
+   %input.calendar-input{:type => "text", :name => 'filter[date_to]', :value => Date.current.strftime("%Y-%m-%d")}
   -# .button
    %a.button-style{:href=>"#"}
     %i.t &nbsp;
@@ -82,3 +82,6 @@
 -# "Заказ": sales_lines[].sales_id
 -# "Контактное лицо": todo
 -# "Проект": todo
+
+:javascript
+ $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
