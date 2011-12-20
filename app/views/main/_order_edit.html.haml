@@ -7,7 +7,7 @@
  - if @carts.detect{|c| c.pick or c.is_a?(CartWorld) }
   %h2 Параметры бронирования
   - unless @deliveries.empty?
-   Способ поставки:
+   %span{:style => "float:left;"} Способ поставки:
    = render :partial => "shared/select_list", :locals => {:list_items => @deliveries, :name => :delivery_type}
   Дата готовности:
   %input.calendar-input{:type => "text", :name => 'date_picker', :value => Date.today.strftime("%Y-%m-%d")}

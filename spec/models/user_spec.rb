@@ -30,10 +30,11 @@ describe User do
  describe "#make_order" do
   before do
    @carts = [FactoryGirl.create(:cart_world, :user_id => @user.id), FactoryGirl.create(:cart_store, :user_id => @user.id)]
-   Axapta.stub!(:make_order).and_return([2])
+   Axapta.stub!(:make_order).and_return(2)
+   Axapta.stub!(:create_quotation).and_return(3)
   end
   it "should make order for carts" do
-   @user.make_order(Date.today, '011').should == 2
+   @user.make_order(Date.today, '011').should == [2]
   end
  end
 end
