@@ -16,6 +16,11 @@ Urm::Application.routes.draw do
     get :lines
    end
   end
+  resources :quotations, :only => [:index, :show] do
+   collection do
+    get :lines
+   end
+  end
   resources :users do
    collection do
     get :current_account
