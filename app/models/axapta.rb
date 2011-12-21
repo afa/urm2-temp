@@ -132,6 +132,6 @@ class Axapta
   end
 
   def self.quotation_info(hsh)
-   AxaptaRequest.quotation_info(hsh.merge(:user_hash => User.current.try(:current_account).try(:axapta_hash))).try(:[], "quotations") || []
+   (AxaptaRequest.quotation_info(hsh.merge(:user_hash => User.current.try(:current_account).try(:axapta_hash))).try(:[], "quotations") || []).map{|i| OpenStruct.new(i)}
   end
 end
