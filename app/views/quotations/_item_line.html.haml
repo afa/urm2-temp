@@ -1,0 +1,26 @@
+-# Код запроса: quotation_id
+-# Статус: quotation_line_status
+-# ROHS: todo
+-# Наименование: item_name
+-# Производитель: brend_alias
+-# Цена клиента: client_price (если 0 - пусто)
+-# Цена предложения: sales_price (если 0 - пусто)
+-# Текущее количество: sales_qty (если 0 - пусто)
+-# Прогноз: quotation_prognosis_id
+-# Примечание: line_comment
+-# Сумма: line_amount (если 0 - пусто)
+-# Код номенклатуры: item_id
+
+%tr
+ %td= item_line.quotation_id
+ %td.text-left= item_line.quotation_line_status
+ %td.text-left= item_line.rohs
+ %td.text-right= item_line.item_name
+ %td.text-right= item_line.brend_alias
+ %td.text-right= item_line.client_price
+ %td= item_line.sales_price
+ %td= item_line.sales_qty
+ %td= item_line.quotation_prognosis_id
+ %td= item_line.line_comment
+ %td= item_line.line_amount
+ %td= item_line.item_id

@@ -46,24 +46,17 @@
    .table-scrolling
     %table.table-style{:class => "order-list"}
      %tr
+      %th Код запроса
+      %th Статус
       %th ROHS
       %th= t(:item_name)
       %th Производитель
-      %th Количество
-      %th Цена
+      %th Цена клиента
+      %th Цена предложения
+      %th Текущее количество
+      %th Прогноз
+      %th Примечание
       %th Сумма
-      %th Поставка
-      %th Резерв
-      %th В обработке складом
-      %th Получено
-      %th Продано
-      %th Дата готовности
-      %th Ожидаемая дата поставки
-      %th Заказ
-      %th Контактное лицо
-      %th Проект
+      %th Код номенклатуры
 
      = render :partial => "orders/item_line", :collection => @lines
-
-:javascript
- $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
