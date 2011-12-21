@@ -1,13 +1,10 @@
 %tr
  %td= list_line.this_sales_origin
- %td.text-left= link_to list_line.sales_id, order_path(list_line.sales_id)
- %td.text-left= list_line.official_number
- %td= list_line.amount
- %td= list_line.sales_date
- %td= list_line.sales_status
+ %td.text-left= link_to list_line.quotation_id, quotation_path(list_line.quotation_id)
+ %td.text-left= list_line.cust_account
+ %td= list_line.quotation_date
+ %td= list_line.prognosis_date
  %td= list_line.comment
- %td.text-right= list_line.contactperson_name
- %td.text-right= list_line.date_dead_line_delivery
- %td.text-right= list_line.delivery_mode
- %td.text-right= list_line.document_number
- %td.text-right= list_line.sales_amount
+ %td= list_line.quotation_status
+ %td= list_line.sales_responsible
+ %td.text-right= list_line.contact_person_name

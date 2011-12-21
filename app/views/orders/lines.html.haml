@@ -18,15 +18,6 @@
    %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from}
    по&nbsp;
    %input.calendar-input{:type => "text", :name => 'filter[date_to]', :value => @filter.try(:date_to).blank? ? Date.current.strftime("%Y-%m-%d") : @filter.date_to}
-  -# .button
-   %a.button-style{:href=>"#"}
-    %i.t &nbsp;
-    %i.b &nbsp;
-    %i.tl &nbsp;
-    %i.tr &nbsp;
-    %span Найти!
-    %i.bl &nbsp;
-    %i.br &nbsp;
   .clear
   .fields
    Искать:
