@@ -1,72 +1,34 @@
--#
- filters
- Номер заказа sales_id
- Оф. номер счета official_number
- Только УРМ bool this_sales_origin
- Только мои заказы bool only_my
-
 .content-wrap
  .filter-block
-  -# %form{:action=>" "}
   = form_for :filter, :url => orders_path, :html => {:method => :get} do |f|
    .fields
-    = f.label :sales_id
+    = f.label :quotation_id
     .field
-     = f.text_field :sales_id
+     = f.text_field :quotation_id
    .fields
-    = f.label :official_number
+    = f.label :quotation_status
     .field
-     = f.text_field :official_number
-     = f.hidden_field :this_sales_origin
-     = f.hidden_field :only_my
-     -# = f.submit :find
-    -# %input{:type=>"text", :value=>"TDA2003;OR;300"}
-    .button
-     %a.button-style{:href=>"#"}
-      %i.t &nbsp;
-      %i.b &nbsp;
-      %i.tl &nbsp;
-      %i.tr &nbsp;
-      %span Найти!
-      %i.bl &nbsp;
-      %i.br &nbsp;
-  .clear
-  .fields
-   Искать:
-   = render :partial => "shared/check_button", :locals => {:name => "filter[this_sales_origin]", :title => t(:this_sales_origin), :opts => {:need_field => true, :value => params[:filter].try(:[], :this_sales_origin).try(:==, '1')}}
-   = render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:need_field => true, :value => params[:filter].try(:[], :only_my).try(:==, '1')}}
-   -# %span.switch{:class=>"check"}
+     = f.text_field :quotation_status
+    = render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
+   .clear
+   .fields
     Искать:
-    %a{:href=>"#", :name => "filter[this_sales_origin]"}
-     %span= t :this_sales_origin
-   -# %span.switch{:class=>"check"}
-    %a{:href=>"#", :name => "filter[only_my]"}
-     %span= t :only_my
-   -# %span.switch{:class=>"radio"}
-    Цены:
-    %a{:href=>"#", :class=>"active"}
-     %span USD
-    %a{:href=>"#"}
-     %span RUB
+    = render :partial => "shared/check_button", :locals => {:name => "filter[this_sales_origin]", :title => t(:this_sales_origin), :opts => {:need_field => true, :value => @filter.try(:this_sales_origin).try(:==, '1')}}
+    = render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:need_field => true, :value => @:filter.try(:only_my).try(:==, '1')}}
 
-
- .table-title{:class=>"favorite"}Список заказов
+ .table-title{:class=>"favorite"}Список запросов
  .table-navigation-block{:class => "scroll"}
   .table-block
    .table-scrolling
-    %table.table-style{:class => "order-list"}
+    %table.table-style.quotation-list
      %tr
       %th УРМ
-      %th.text-left Номер заказа
-      %th.text-left Офиц. номер
-      %th Сумма
+      %th.text-left Номер запроса
+      %th.text-left Код клиента
       %th Дата создания
-      %th Статус
+      %th Прогноз
       %th Примечание
+      %th Статус
+      %th Менеджер
       %th.text-right Контактное лицо
-      %th.text-right Дата готовности
-      %th.text-right Код способа доставки
-      %th.text-right Счет
-      %th.text-right Сумма по счету
-     = render :partial => "orders/list_line", :collection => @orders
--# filters sales_id, official_number, this_sales_origin, only_my
+     = render :partial => "quotations/list_line", :collection => @quotations
