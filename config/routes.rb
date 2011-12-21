@@ -1,5 +1,11 @@
 Urm::Application.routes.draw do
 
+  get "quotations/index"
+
+  get "quotations/show"
+
+  get "quotations/lines"
+
   resources :carts, :except => [:show] do
    collection do
     put :save
