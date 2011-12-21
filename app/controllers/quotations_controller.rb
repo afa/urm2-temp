@@ -4,9 +4,11 @@ class QuotationsController < ApplicationController
  before_filter :get_filter
 
   def index
-   @orders = Axapta.sales_info(:user_hash => current_user.current_account.axapta_hash)
+   hsh = params[:filter] || {} 
+   @quotations = Axapta.quotation_info(hsh)
   end
 
+=begin
   def new
    @carts = current_user.cart_items.in_cart.unprocessed.all
    @reqs = @carts.partition{|i| i.is_a? CartRequest }[0]
@@ -25,6 +27,7 @@ class QuotationsController < ApplicationController
    @results = User.current.make_order(params[:date_picker], params[:delivery_type], :order_needed => params[:order_needed], :order_comment => params[:order_comment], :request_comment => params[:request_comment])
    @carts = current_user.cart_items.unprocessed.in_cart.all
   end
+=end
 
   def lines
    hsh = params[:filter] || {}
@@ -39,16 +42,6 @@ class QuotationsController < ApplicationController
  protected
   def get_filter
    @filter = OpenStruct.new(params[:filter] || {})
-  end
-
-
-  def index
-  end
-
-  def show
-  end
-
-  def lines
   end
 
 end
