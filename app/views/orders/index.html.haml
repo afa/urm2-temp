@@ -32,11 +32,14 @@
       %i.br &nbsp;
   .clear
   .fields
-   %span.switch{:class=>"check"}
+   Искать:
+   = render :partial => "shared/check_button", :locals => {:name => "filter[this_sales_origin]", :title => t(:this_sales_origin), :opts => {:need_field => true, :value => params[:filter].try(:[], :this_sales_origin).try(:==, '1')}}
+   = render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:need_field => true, :value => params[:filter].try(:[], :only_my).try(:==, '1')}}
+   -# %span.switch{:class=>"check"}
     Искать:
     %a{:href=>"#", :name => "filter[this_sales_origin]"}
      %span= t :this_sales_origin
-   %span.switch{:class=>"check"}
+   -# %span.switch{:class=>"check"}
     %a{:href=>"#", :name => "filter[only_my]"}
      %span= t :only_my
    -# %span.switch{:class=>"radio"}

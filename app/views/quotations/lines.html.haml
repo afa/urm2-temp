@@ -1,0 +1,63 @@
+-# Фильтры:
+
+-# Код запроса: params.quotation_id
+-# Наименование: строка, params.item_name
+-# Производитель: params.brend_alias
+
+-# Если указан quotation_id (вариант: если у всех строк один quotation_id, если не сложно),
+-# выводим над таблицей строк запроса блок информации о данном запросе:
+
+-# Примечание: comment
+-# Статус: quotation_status
+-# Поля:
+
+-# Код запроса: quotation_id
+-# Статус: quotation_line_status
+-# ROHS: todo
+-# Наименование: item_name
+-# Производитель: brend_alias
+-# Цена клиента: client_price (если 0 - пусто)
+-# Цена предложения: sales_price (если 0 - пусто)
+-# Текущее количество: sales_qty (если 0 - пусто)
+-# Прогноз: quotation_prognosis_id
+-# Примечание: line_comment
+-# Сумма: line_amount (если 0 - пусто)
+-# Код номенклатуры: item_id
+
+.filter-tab-block
+ = form_for :filter, :url => lines_quotations_path, :html => {:method => :get} do |f|
+  .field
+   = f.label :quotation_id, t(:quotation_id)
+   = f.text_field :quotation_id
+  .field
+   = f.label :item_name, t(:item_name)
+   = f.text_field :item_name
+  .field
+   = f.label :brend_alias, t(:brend_alias)
+   = f.text_field :brend_alias
+  .clear
+  .field
+   = render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
+
+.clear
+.content-wrap
+ .table-title{:class=>"favorite"}Список заказов
+ .table-navigation-block{:class => "scroll"}
+  .table-block
+   .table-scrolling
+    %table.table-style{:class => "order-list"}
+     %tr
+      %th Код запроса
+      %th Статус
+      %th ROHS
+      %th= t(:item_name)
+      %th Производитель
+      %th Цена клиента
+      %th Цена предложения
+      %th Текущее количество
+      %th Прогноз
+      %th Примечание
+      %th Сумма
+      %th Код номенклатуры
+
+     = render :partial => "quotations/item_line", :collection => @lines

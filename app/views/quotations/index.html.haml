@@ -1,0 +1,34 @@
+.content-wrap
+ .filter-block
+  = form_for :filter, :url => quotations_path, :html => {:method => :get} do |f|
+   .fields
+    = f.label :quotation_id
+    .field
+     = f.text_field :quotation_id
+   .fields
+    = f.label :quotation_status
+    .field
+     = f.text_field :quotation_status
+    = render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
+   .clear
+   .fields
+    Искать:
+    = render :partial => "shared/check_button", :locals => {:name => "filter[this_sales_origin]", :title => t(:this_sales_origin), :opts => {:need_field => true, :value => @filter.try(:this_sales_origin).try(:==, '1')}}
+    = render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:need_field => true, :value => @filter.try(:only_my).try(:==, '1')}}
+
+ .table-title{:class=>"favorite"}Список запросов
+ .table-navigation-block{:class => "scroll"}
+  .table-block
+   .table-scrolling
+    %table.table-style.quotation-list
+     %tr
+      %th УРМ
+      %th.text-left Номер запроса
+      %th.text-left Код клиента
+      %th Дата создания
+      %th Прогноз
+      %th Примечание
+      %th Статус
+      %th Менеджер
+      %th.text-right Контактное лицо
+     = render :partial => "quotations/list_line", :collection => @quotations
