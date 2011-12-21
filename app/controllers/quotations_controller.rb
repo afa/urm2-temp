@@ -31,11 +31,11 @@ class QuotationsController < ApplicationController
 
   def lines
    hsh = params[:filter] || {}
-   @lines = Axapta.sales_lines(hsh.merge(:user_hash => current_user.current_account.axapta_hash, :only_open => true))
+   @lines = Axapta.quotation_lines(hsh)
   end
 
   def show
-   @order = Axapta.sales_lines(:sales_id => params[:id], :user_hash => current_user.current_account.axapta_hash)#, :only_open => true)
+   @quotation = Axapta.quotation_lines(:sales_id => params[:id])#, :only_open => true)
   end
 
 
