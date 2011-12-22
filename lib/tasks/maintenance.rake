@@ -1,6 +1,8 @@
-=begin
-def config
-   @config ||= AxaptaRequest.describe_methods("id"=>rand(10**6))
+namespace :maintenance do
+ namespace :enums do
+  desc "renew enums from Axapta"
+  task :renew => :environment do
+   Enumeration.renew_enums
   end
-=end
-
+ end
+end

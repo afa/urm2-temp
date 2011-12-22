@@ -35,7 +35,7 @@ class QuotationsController < ApplicationController
   end
 
   def show
-   @quotation = Axapta.quotation_lines(:sales_id => params[:id])#, :only_open => true)
+   @quotation = Axapta.quotation_lines(:quotation_id => params[:id])#, :only_open => true)
   end
 
 

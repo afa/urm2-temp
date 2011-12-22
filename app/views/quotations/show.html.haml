@@ -1,25 +1,5 @@
--# 2. Строки заказа
--# 
--# Меню: Заказы - Открытые строки
--# 
--# Запрос: sales_lines, параметр params.only_open - всегда true
--# 
--# Фильтры:
--# 
--# Дата отгрузки: даты c/по (см. календарик в шаблоне 008, compel_html_008/orders.html), params.date_from, params.date_to
--# Наименование: строка, params.item_name
--# Только мои позиции: вкл/выкл, params.only_my
--# Только ДМС: вкл/выкл, params.only_dms
--# Фильтры
-
--# Дата отгрузки: даты c/по (см. календарик в шаблоне 008, compel_html_008/orders.html), params.date_from, params.date_to
--# Наименование: строка, params.item_name
--# Только мои позиции: вкл/выкл, params.only_my
--# Только ДМС: вкл/выкл, params.only_dms
--# Таблица:
 .content-wrap
- .filter-block
-  -# %form{:action=>" "}
+ -#.filter-block
   = form_for :filter, :url => orders_path, :html => {:method => :get} do |f|
    .fields
     .field
@@ -30,8 +10,6 @@
      = f.text_field :official_number
      = f.hidden_field :this_sales_origin
      = f.hidden_field :only_my
-     -# = f.submit :find
-    -# %input{:type=>"text", :value=>"TDA2003;OR;300"}
     .button
      %a.button-style{:href=>"#"}
       %i.t &nbsp;
@@ -50,23 +28,26 @@
    %span.switch{:class=>"check"}
     %a{:href=>"#", :name => "filter[only_my]"}
      %span= t :only_my
-   -# %span.switch{:class=>"radio"}
-    Цены:
-    %a{:href=>"#", :class=>"active"}
-     %span USD
-    %a{:href=>"#"}
-     %span RUB
 
-
-
-
-
- .table-title{:class=>"favorite"}
- .table-navigation-block{:class => "scroll"}
+ .table-title.favorite
+ .table-navigation-block.scroll
   .table-block
    .table-scrolling
-    %table.table-style{:class => "order-list"}
+    %table.table-style.quotation-list
      %tr
+      %th Код запроса
+      %th Статус
+      %th ROHS
+      %th= t(:item_name)
+      %th Производитель
+      %th Цена клиента
+      %th Цена предложения
+      %th Текущее количество
+      %th Прогноз
+      %th Примечание
+      %th Сумма
+      %th Код номенклатуры
+     -#
       %th ROHS
       %th.text-left Наименование
       %th.text-left Производитель
@@ -84,20 +65,4 @@
       %th Контактное лицо
       %th Проект
 
-     = render :partial => "orders/item_line", :collection => @order
--# "ROHS": sales_lines[].rohs
--# "Наименование": sales_lines[].item_name
--# "Производитель": sales_lines[].brend
--# "Количество": sales_lines[].sales_qty
--# "Цена": sales_lines[].price
--# "Сумма": sales_lines[].amount
--# "Поставка": sales_lines[].qty_in_debt
--# "Резерв": sales_lines[].reserve_qty
--# "В обработке складом": sales_lines[].qty_in_processing
--# "Получено": sales_lines[].qty_receive
--# "Продано": sales_lines[].invoiced_in_total
--# "Дата готовности": sales_lines[].date_dead_line
--# "Ожидаемая дата поставки": sales_lines[].confirmed_dlv_date
--# "Заказ": sales_lines[].sales_id
--# "Контактное лицо": todo
--# "Проект": todo
+     = render :partial => "quotations/item_line", :collection => @quotation
