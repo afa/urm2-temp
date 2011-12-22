@@ -1,5 +1,5 @@
 .content-wrap
- .filter-block
+ -#.filter-block
   = form_for :filter, :url => orders_path, :html => {:method => :get} do |f|
    .fields
     .field
@@ -29,7 +29,7 @@
     %a{:href=>"#", :name => "filter[only_my]"}
      %span= t :only_my
 
- .table-title{:class=>"favorite"}
+ .table-title.favorite
  .table-navigation-block.scroll
   .table-block
    .table-scrolling
