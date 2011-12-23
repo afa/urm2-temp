@@ -1,3 +1,10 @@
 $("#order").replaceHtml("#{escape_javascript(render :partial => "main/order_edit")}");
 $("#order").show();
 $("table.search-products").parents("form").hide();
+$('.commit a.button-style').click(function(){
+$(this).parents('form').submit();
+return false;
+});
+$('.select').selectList();
+$('.button-style').button();
+$('.switch').switchControl();

@@ -60,25 +60,7 @@ class CartsController < ApplicationController
     end
    end
    @carts = current_user.cart_items.unprocessed.in_cart.all
-
-
-=begin
-   @only_store = params[:search].try(:[], :only_store) || false
-   stor = current_user.settings.where(:name => "search.only_store").first || current_user.settings.where(:name => "search.only_store").new
-   stor.value = @only_store
-   stor.save!
-   @only_available = params[:search].try(:[], :only_available) || false
-   avail = current_user.settings.where(:name => "search.only_available").first || current_user.settings.where(:name => "search.only_available").new
-   avail.value = @only_available
-   avail.save!
-   @items = Offer::Store.search(params[:search])
-   CartItem.uncached do
-    @carts = CartItem.where(:user_id => current_user.id).in_cart.unprocessed.all
-   end
-   @reqs = @carts.partition{|i| i.is_a? CartRequest }[0]
-   @nreqs = @carts.partition{|i| i.is_a? CartRequest }[1]
    @deliveries = current_user.deliveries
-=end
   end
 
   def destroy

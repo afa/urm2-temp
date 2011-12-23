@@ -1,5 +1,5 @@
 #cart_store
- - form_for :cart_item, :html => {:method => :put}, :url => save_carts_path, :remote => true, :class => 'js' do |ff|
+ - form_for :cart_item, :html => {:class => 'js', :method => :put}, :url => save_carts_path, :remote => true do |ff|
 
   %table.table-style
    %tr
