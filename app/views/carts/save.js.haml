@@ -14,6 +14,10 @@ $("div#order").replaceHtml("#{escape_javascript(render :partial => "main/order_e
  $("table.search-products tr:has(td input.item-cart[value=\"#{i[0]}\"])").find("td.input-in-cart input").val(#{i[1]});
 -# @changed.each do |i|
  $("table.search-products tr input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");
+$('.commit a.button-style').click(function(){
+$(this).parents('form').submit();
+return false;
+});
 $('.select').selectList();
 $('.button-style').button();
 $('.switch').switchControl();
