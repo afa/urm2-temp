@@ -5,6 +5,6 @@
     = opts[:field_code]
    - else
     = hidden_field_tag name, opts.has_key?(:value) ? (opts[:value] ? '1' : '0') : '0', opts[:field_opts] || {}
- %a{:href=>"#", :name => name}
+ %a{:href=>"#", :name => name, :class => [defined?(opts) && opts[:value] ? "active" : nil]}
   %span= title
 
