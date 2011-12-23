@@ -21,4 +21,7 @@ return false;
 $('.select').selectList();
 $('.button-style').button();
 $('.switch').switchControl();
+$('.js').bind('ajax:success', function(evt, xhr, status){
+eval(xhr.responseText);
+});
 
