@@ -10,7 +10,7 @@ $("#cart_store").hide();
 }
 $("div#order").hide();
 $("div#order").replaceHtml("#{escape_javascript(render :partial => "main/order_edit")}");
-- @changed.each do |i|
+-# - @changed.each do |i|
  $("table.search-products tr:has(td input.item-cart[value=\"#{i[0]}\"])").find("td.input-in-cart input").val(#{i[1]});
 -# @changed.each do |i|
  $("table.search-products tr input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");
