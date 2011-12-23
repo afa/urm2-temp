@@ -16,6 +16,15 @@ $("div.allow-order").hide();
 }
 $("div#order").hide();
 
+$('.commit a.button-style').click(function(){
+$(this).parents('form').submit();
+return false;
+});
+$('.select').selectList();
+$('.button-style').button();
+$('.switch').switchControl();
+
+
 -#
  $("div.cart input#cart_item_submit").show();
  $("div#cart_store input").add("div#cart_store textarea").each(function(i, item){ item.disabled = ''; });
