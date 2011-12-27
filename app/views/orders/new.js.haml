@@ -1,6 +1,7 @@
 $("#order").replaceHtml("#{escape_javascript(render :partial => "main/order_edit")}");
 $("#order").show();
 $("table.search-products").parents("form").hide();
+$(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
 $('.commit a.button-style').click(function(){
 $(this).parents('form').submit();
 return false;

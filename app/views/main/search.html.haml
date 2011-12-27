@@ -116,6 +116,7 @@
   if(#{User.current.cart_items.unprocessed.in_cart.count} == 0){
    $('.cart-table').add('.allow-order').hide();
   }
+  $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
   search_icons_handle();
   apply_hover_in_table_on_mmove();
   //load_dms_each(#{not to_bool(@only_store)});
