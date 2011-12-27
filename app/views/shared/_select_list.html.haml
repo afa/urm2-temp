@@ -1,6 +1,6 @@
 - sz = list_items.map{|a| a[1] }.compact.map{|a| a.mb_chars.size }.max
 .select
- .sub
+ .sub{:style => "z-order=110;"}
   - list_items.each do |a|
    = link_to a[1], "#", :name => a[0], :class => "showed", :style => "white-space:nowrap;min-width:#{sz}ex;"
  = hidden_field_tag name, list_items.first.try(:first) || 0
