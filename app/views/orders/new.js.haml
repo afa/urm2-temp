@@ -1,4 +1,4 @@
-$("#order").replaceHtml("#{escape_javascript(render :partial => "main/order_edit")}");
+$("#order").html("#{escape_javascript(render :partial => "main/order_edit")}");
 $("#order").show();
 $("table.search-products").parents("form").hide();
 $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });

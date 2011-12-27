@@ -9,7 +9,7 @@ $(".cart-table").add(".allow-order").show();
 $("#cart_store").hide();
 }
 $("div#order").hide();
-$("div#order").replaceHtml("#{escape_javascript(render :partial => "main/order_edit")}");
+$("div#order").html("#{escape_javascript(render :partial => "main/order_edit")}");
 $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
 -# - @changed.each do |i|
  $("table.search-products tr:has(td input.item-cart[value=\"#{i[0]}\"])").find("td.input-in-cart input").val(#{i[1]});
