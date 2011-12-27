@@ -1,7 +1,7 @@
 $("#cart_store table tr:has(td)").remove();
 - @carts.each do |crt|
  $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :locals => {:cart_line => crt}) }");
-$('.button-style').button();
+$('.switch').switchControl();
 - unless @carts.empty?
  $(".cart-table").add(".allow-order").show();
 if($("#cart_store table tr").length > 1){
