@@ -124,7 +124,6 @@
   //load_dms_each(#{not to_bool(@only_store)});
   load_dms_bundle("#{main_mass_dms_url(:query_string => @search.query_string)}", #{not to_bool(@only_store)});
   $("#order").hide();
-  $("#cancel_order").hide();
   $("a#allow_order").click(function(){
   $("#order").show();
   $("div.allow-order").hide();
@@ -135,16 +134,8 @@
   $("#save_cart_button").hide();
   return false;
   });
-  $("#order_cancel .button-style").click(function(){
-  $("#order").hide();
-  $("div.allow-order").show();
-  $("#order_cancel").hide();
-  $("div.cart input#cart_item_submit").show();
-  $("div#cart_store input").add("div#cart_store textarea").each(function(i, item){ item.disabled = ''; });
-  $("table.search-products").parents("form").show();
-  $("#save_cart_button").show();
-  return false;
-  });
+  $("#cancel_order").hide();
+  activateSearchCancelButton();
  /*$('a.button-style').click(function(){
   $(this).parents('form').submit();
   return false;

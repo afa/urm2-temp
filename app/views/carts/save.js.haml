@@ -17,6 +17,7 @@ $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
  $("table.search-products tr:has(td input.item-cart[value=\"#{i[0]}\"])").find("td.input-in-cart input").val(#{i[1]});
 -# @changed.each do |i|
  $("table.search-products tr input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");
+activateSearchCancelButton();
 $('.commit a.button-style').click(function(){
 $(this).parents('form').submit();
 return false;

@@ -160,3 +160,17 @@ function insertBlock(blkType, val, after){
  }
  $("tr." + blkType + "_" + after).show();
 }
+
+function activateSearchCancelButton(){
+ $("#order_cancel .button-style").click(function(){
+  $("#order").hide();
+  $("div.allow-order").show();
+  $("#order_cancel").hide();
+  $("div.cart input#cart_item_submit").show();
+  $("div#cart_store input").add("div#cart_store textarea").each(function(i, item){ item.disabled = ''; });
+  $("table.search-products").parents("form").show();
+  $("#save_cart_button").show();
+  return false;
+ });
+
+}
