@@ -62,8 +62,8 @@ class CartsController < ApplicationController
      cart.update_attributes hsh
     end
    end
-   @carts = current_user.cart_items.unprocessed.in_cart.all
-   @deliveries = current_user.deliveries
+   @carts = User.current.cart_items.unprocessed.in_cart.all
+   @deliveries = User.current.deliveries
   end
 
   def destroy
