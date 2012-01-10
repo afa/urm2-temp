@@ -17,12 +17,12 @@
      %label{:for=>"user_login"}
       Имя пользователя
       %br
-      %input#user_login.input{:type=>"text", :name=>"username", :value=>"", :size=>"20", :tabindex=>"10"}
+      %input#user_login.input{:type=>"text", :name=>"session[username]", :value=>"", :size=>"20", :tabindex=>"10"}
     %p
      %label{:for=>"user_pass"}
       Пароль
       %br
-      %input#user_pass.input{:type=>"password", :name=>"password", :value=>"", :size=>"20", :tabindex=>"20"}
+      %input#user_pass.input{:type=>"password", :name=>"session[password]", :value=>"", :size=>"20", :tabindex=>"20"}
     %p.forgetmenot
      %label{:for=>"rememberme"}
       %input#rememberme{:name=>"rememberme", :type=>"checkbox", :value=>"1", :tabindex=>"90"}
