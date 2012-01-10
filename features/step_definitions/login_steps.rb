@@ -13,6 +13,7 @@ Given /^I login with registered user:$/ do |table|
  @user = FactoryGirl.build(:user, table.hashes.first)
  @user.stub!(:valid?).and_return(true)
  Axapta.stub!(:user_info).and_return({})
+ Axapta.stub!(:renew_structure)
  @user.save!
 end
 

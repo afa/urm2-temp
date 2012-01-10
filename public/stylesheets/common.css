@@ -448,3 +448,6 @@ td.input-in-cart.speed .speed-cart-button span span{ background:url(/images/icon
 .field_with_errors {
  background-color: red;
 }
+
+div.padded {padding-bottom: 0.5em;}
+div.block-padded {padding-bottom: 2.5em;}
