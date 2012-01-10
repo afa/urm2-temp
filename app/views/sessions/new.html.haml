@@ -1,6 +1,61 @@
-%h2 Sign in
+!!!
+%html{:xmlns=>"http://www.w3.org/1999/xhtml", :dir=>"ltr", :lang=>"ru-RU"}
+ %head
+  %meta{:"http-equiv"=>"Content-Type" :content=>"text/html; charset=UTF-8"}
+  %titleУРМ-2 &rsaquo; Войти
+  %link rel='stylesheet' id='wp-admin-css'  href='http://192.168.0.72:8080/news/wp-admin/css/wp-admin.css?ver=20111208' type='text/css' media='all' />
+<link rel='stylesheet' id='colors-fresh-css'  href='http://192.168.0.72:8080/news/wp-admin/css/colors-fresh.css?ver=20111206' type='text/css' media='all' />
+<script type='text/javascript' src='http://192.168.0.72:8080/news/wp-includes/js/jquery/jquery.js?ver=1.7.1'></script>
+<meta name='robots' content='noindex,nofollow' />
+ %body.login
+  #login
+   %h1
+    УРМ-2
 
-- form_for :session, :url => sessions_path do |form|
+   %form#loginform{:name=>"loginform", :action=>"/sessions", :method=>"post"}
+    %p
+     %label{:for=>"user_login"}
+      Имя пользователя
+      %br
+      %input#user_login.input{:type=>"text", :name=>"username", :value=>"", :size=>"20", :tabindex=>"10"}
+    %p
+     %label{:for=>"user_pass"}
+      Пароль
+      %br
+      %input#user_pass.input{:type=>"password", :name=>"password", :value=>"", :size=>"20", :tabindex=>"20"}
+    %p.forgetmenot
+     %label{:for=>"rememberme"}
+      %input#rememberme{:name=>"rememberme", :type=>"checkbox", :value=>"1", :tabindex=>"90"}
+      Запомнить меня
+    %p.submit
+     %input#wp-submit.button-primary{:type=>"submit", :name=>"wp-submit", :value=>"Войти", :tabindex=>"100"}
+
+   %p.nav
+    -# %a{:href=>"http://192.168.0.72:8080/news/wp-login.php?action=lostpassword", :title=>"Восстановление пароля"}Забыли пароль?
+    %a{:href=>"#", :title=>"Восстановление пароля"}Забыли пароль?
+   -#
+    <script type="text/javascript">
+    function wp_attempt_focus(){
+    setTimeout( function(){ try{
+    d = document.getElementById('user_login');
+    d.focus();
+    d.select();
+    } catch(e){}
+    }, 200);
+    }
+
+    wp_attempt_focus();
+    if(typeof wpOnload=='function')wpOnload();
+    </script>
+
+    %p id="backtoblog"><a href="http://192.168.0.72:8080/news/" title="Потерялись?">&larr; Назад к сайту &laquo;УРМ&raquo;</a></p>
+
+
+  .clear
+
+-#%h2 Sign in
+
+-#- form_for :session, :url => sessions_path do |form|
  .text_field
   - #= form.label :email %>
   - #= form.text_field :email, :type => "email" %>
@@ -12,6 +67,6 @@
 
  .submit_field
   = form.submit "Sign in"
-%ul
+-#%ul
  %li= link_to "Register", new_user_path
  -# %li= link_to "Forgot password?", new_password_path
