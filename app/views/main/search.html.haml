@@ -1,26 +1,3 @@
--# .search-result-block
- -# .main-title Результаты поиска
- .filters
-  %span.switch{:class=>"radio"}
-   Цены: 
-   %a{:href=>"#", :class=>"active"}
-    %span USD
-   %a{:href=>"#"}
-    %span RUB
-  -# %span.switch{:class=>"check"}
-   Показать: 
-   %a{:href=>"#", :class=>"active"}
-    %span Только в наличии
-  %span.switch{:class=>"radio"}
-   Упорядочить по: 
-   %a{:href=>"#", :class=>"active"}
-    %span Цене
-   %a{:href=>"#"}
-    %span Наличию
-  -# %span.switch{:class=>"check none"}
-   Показать: 
-   %a{:href=>"search_result_group.html"}
-    %span Прогноз поставки
 .table-navigation-block{:class => "scroll"}
  .table-block
   .table-scrolling
@@ -32,14 +9,9 @@
       %th.text-left{:rowspan => 2}= t :item_brend
       %th{:rowspan=>2}= t :body_name
       %th{:rowspan => 2} ROHS
-
       %th{:rowspan => 2}= t :to_cart
-
       %th{:colspan => 3}= t :avail
-
       %th{:rowspan => 2}= t :location
-
-      -# %th{:rowspan => 2}= t :prognosis
       %th{:rowspan => 2}= t :price1
       %th{:rowspan => 2}= t :count2
       %th{:rowspan => 2}= t :price2
@@ -47,16 +19,7 @@
       %th{:rowspan => 2}= t :price3
       %th{:rowspan => 2}= t :count4
       %th{:rowspan => 2}= t :price4
-
-
       %th{:rowspan => 2}= t :quantity
-      -# %th{:rowspan=>"2"} Рег. позиция
-      -# %th{:rowspan=>"2"} Снято с произв.
-      -# %th{:rowspan=>"2"} Сегмент
-      -# %th{:rowspan=>"2"}
-       Цена конеч.
-       %br
-       потребителя
 
      %tr
       %th.bold= t :avail_min
@@ -69,37 +32,31 @@
      - else
       = render :partial => "items_line", :collection => @items, :locals => {:need_links => true, :frm => form}
 
-     %tr.title-header-bottom
-      %th{:rowspan => 2} &nbsp;
-      %th.text-left{:rowspan => 2}= t :item_name
-      %th.text-left{:rowspan => 2}= t :item_brend
-      %th{:rowspan=>2}= t :body_name
-      %th{:rowspan => 2} ROHS
-      %th{:rowspan => 2}= t :to_cart
-      %th.bold= t :avail_min
-      %th.bold= t :avail_max
-      %th.bold MPQ
-      %th{:rowspan => 2}= t :location
-      -# %th{:rowspan => 2}= t :prognosis
-      %th{:rowspan => 2}= t :price1
-      %th{:rowspan => 2}= t :count2
-      %th{:rowspan => 2}= t :price2
-      %th{:rowspan => 2}= t :count3
-      %th{:rowspan => 2}= t :price3
-      %th{:rowspan => 2}= t :count4
-      %th{:rowspan => 2}= t :price4
-      %th{:rowspan => 2}= t :quantity
-      -# %th{:rowspan=>"2"} Рег. позиция
-      -# %th{:rowspan=>"2"} Снято с произв.
-      -# %th{:rowspan=>"2"} Сегмент
-      -# %th{:rowspan=>"2"}
-       Цена конеч.
-       %br
-       потребителя
+     - if @items.size > 5
+      %tr.title-header-bottom
+       %th{:rowspan => 2} &nbsp;
+       %th.text-left{:rowspan => 2}= t :item_name
+       %th.text-left{:rowspan => 2}= t :item_brend
+       %th{:rowspan=>2}= t :body_name
+       %th{:rowspan => 2} ROHS
+       %th{:rowspan => 2}= t :to_cart
+       %th.bold= t :avail_min
+       %th.bold= t :avail_max
+       %th.bold MPQ
+       %th{:rowspan => 2}= t :location
+       %th{:rowspan => 2}= t :price1
+       %th{:rowspan => 2}= t :count2
+       %th{:rowspan => 2}= t :price2
+       %th{:rowspan => 2}= t :count3
+       %th{:rowspan => 2}= t :price3
+       %th{:rowspan => 2}= t :count4
+       %th{:rowspan => 2}= t :price4
+       %th{:rowspan => 2}= t :quantity
 
-     %tr.title-header-bottom
-      %th.double-cell{:colspan => 3}= t :avail
-    -# = frm.submit t(:add_to_cart), :name => "items[commit]"
+      %tr.title-header-bottom
+       %th.double-cell{:colspan => 3}= t :avail
+    .padded
+
     = render :partial => "shared/submit_button", :locals => {:title => t(:add_to_cart), :name => "items[commit]"}
  .clear
  .cart-table
