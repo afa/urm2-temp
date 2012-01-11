@@ -25,7 +25,9 @@ class ApplicationController < ActionController::Base
    if token = cookies[:user_remember_token]
     puts "::: user_from_cookie"
     p token
-    User.find_by_remember_token(token)
+    u = User.find_by_remember_token(token)
+    cookies.delete(:user_remember_token) unless u
+    u
    else
     nil
    end
