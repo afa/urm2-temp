@@ -9,7 +9,7 @@
  %td.text-left= cart_line.prognosis
  %td
   %textarea{:cols => 20, :rows => 1, :id => "cart_item_#{cart_line.id}_comment", :name => "cart_item[#{cart_line.id}][comment]"}= cart_line.comment
- %td
+ %td.price-user
   %input{:type => :text, :value => cart_line.user_price, :id => "cart_item_#{cart_line.id}_user_price", :name => "cart_item[#{cart_line.id}][user_price]"}
  - if cart_line.is_a?(CartWorld)
   %td &nbsp;
