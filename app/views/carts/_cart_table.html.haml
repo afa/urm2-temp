@@ -3,6 +3,7 @@
 
   %table.table-style
    %tr
+    %th
     %th= t :type
     %th= t :name
     %th= t :brend
@@ -14,7 +15,7 @@
     %th= t :comment
     %th= t :user_price
     %th{:colspan => 2}= t :action
-    %th
+    -# %th
    = render :partial => "carts/cart_line", :collection => cart
 
   .padded
