@@ -56,9 +56,9 @@
       %tr.title-header-bottom
        %th.double-cell{:colspan => 3}= t :avail
     .padded
-
-    = render :partial => "shared/submit_button", :locals => {:title => t(:add_to_cart), :name => "items[commit]"}
-    .clear.block-padded
+    .block-padded
+     = render :partial => "shared/submit_button", :locals => {:title => t(:add_to_cart), :name => "items[commit]"}
+    .clear
  .cart-table.block-padded
   .cart= render :partial => "carts/cart_table", :locals => {:cart => @carts}
  .allow-order.block-padded
