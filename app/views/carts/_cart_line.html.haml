@@ -1,4 +1,7 @@
 %tr{:id => "cart_str_#{cart_line.id.to_s}"}
+ %td.icons
+  .icon
+   %a.delete.delete-from-cart
  %td.text-left= cart_line.type_name
  %td.text-left= cart_line.product_name
  %td.text-left= cart_line.product_brend
