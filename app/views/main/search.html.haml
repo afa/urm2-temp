@@ -58,7 +58,7 @@
     .padded
 
     = render :partial => "shared/submit_button", :locals => {:title => t(:add_to_cart), :name => "items[commit]"}
- .clear.block-padded
+    .clear.block-padded
  .cart-table.block-padded
   .cart= render :partial => "carts/cart_table", :locals => {:cart => @carts}
  .allow-order.block-padded
