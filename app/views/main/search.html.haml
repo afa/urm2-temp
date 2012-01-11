@@ -10,7 +10,7 @@
       %th{:rowspan=>2}= t :body_name
       %th{:rowspan => 2} ROHS
       %th{:rowspan => 2}= t :to_cart
-      %th{:colspan => 3}= t :avail
+      %th.double-cell{:colspan => 3}= t :avail
       %th{:rowspan => 2}= t :location
       %th{:rowspan => 2}= t :price1
       %th{:rowspan => 2}= t :count2
@@ -22,9 +22,9 @@
       %th{:rowspan => 2}= t :quantity
 
      %tr
-      %th.bold= t :avail_min
+      %th.bold.double-first-cell= t :avail_min
       %th.bold= t :avail_max
-      %th.bold MPQ
+      %th.bold.double-last-cell MPQ
 
      - if @items.empty?
       %tr
@@ -40,9 +40,9 @@
        %th{:rowspan=>2}= t :body_name
        %th{:rowspan => 2} ROHS
        %th{:rowspan => 2}= t :to_cart
-       %th.bold= t :avail_min
+       %th.bold.double-first-cell= t :avail_min
        %th.bold= t :avail_max
-       %th.bold MPQ
+       %th.bold.double-last-cell MPQ
        %th{:rowspan => 2}= t :location
        %th{:rowspan => 2}= t :price1
        %th{:rowspan => 2}= t :count2

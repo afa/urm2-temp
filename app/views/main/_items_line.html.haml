@@ -38,9 +38,9 @@
    -# %input{:type=>"text", :class=>"validate[custom[onlyNumber],max[#{items_line["max_qty"] || 0}]]"}
    %a.count{:href=>"#"}
  
- %td= items_line.min_qty
+ %td.double-first-cell= items_line.min_qty
  %td= items_line.max_qty
- %td &nbsp;
+ %td.double-last-cell &nbsp;
  %td.with-icons{:class => "text-left"}
   = items_line.location_id
   .icons 
