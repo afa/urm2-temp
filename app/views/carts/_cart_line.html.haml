@@ -11,7 +11,7 @@
  %td.text-left= cart_line.location_link
  %td.text-left= cart_line.prognosis
  %td
-  %textarea{:cols => 20, :rows => 1, :id => "cart_item_#{cart_line.id}_comment", :name => "cart_item[#{cart_line.id}][comment]"}= cart_line.comment
+  %textarea{:style => "height: 14px; padding: 2px 4px; border: 1px solid #9E9E9E", :cols => 20, :rows => 1, :id => "cart_item_#{cart_line.id}_comment", :name => "cart_item[#{cart_line.id}][comment]"}= cart_line.comment
  %td.price-user
   %input{:type => :text, :size => "9", :value => cart_line.user_price, :id => "cart_item_#{cart_line.id}_user_price", :name => "cart_item[#{cart_line.id}][user_price]"}
  - if cart_line.is_a?(CartWorld)
@@ -27,4 +27,4 @@
      - if cart_line.allowed_actions.include?(act.to_s)
       = render :partial => "shared/check_button", :locals => {:name => "cart_item[#{cart_line.id}][#{act.to_s}]", :title => t(act), :opts => {:need_field => true, :value => cart_line.send(act)}}
  %td
-  = render :partial => "shared/check_button", :locals => {:name => "cart_item[#{cart_line.id}][destroy]", :title => t(:delete), :opts => {:need_field => true, :value => false}}
+  -# = render :partial => "shared/check_button", :locals => {:name => "cart_item[#{cart_line.id}][destroy]", :title => t(:delete), :opts => {:need_field => true, :value => false}}

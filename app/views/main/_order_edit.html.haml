@@ -4,8 +4,8 @@
   .block-padded
    %h2 Параметры заказа
    %textarea{:name => "order_comment"}
-   .padded
    = render :partial => "shared/check_button", :locals => {:name => "order_needed", :title => t(:order_needed), :opts => {:need_field => true}}
+   .padded
    
  - if @carts.detect{|c| c.pick or c.is_a?(CartWorld) }
   .block-padded
