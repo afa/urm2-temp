@@ -4,7 +4,7 @@ class CartStore < CartItem
   end
 
   def allowed_actions
-   %w(reserve pick)
+   %w(order reserve pick)
   end
 
   def to_sales_lines
