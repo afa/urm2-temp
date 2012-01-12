@@ -12,7 +12,8 @@
    %h1
     %a{:href => "/"}УРМ-2
 
-   %form#loginform{:name=>"loginform", :action=>"/sessions"}
+   = form_for :session, :url => sessions_path, :id => "loginform" do |form|
+    -# %form#loginform{:name=>"loginform", :action=>"/sessions"}
     %p
      %label{:for=>"user_login"}
       Имя пользователя
@@ -33,23 +34,6 @@
    %p.nav
     -# %a{:href=>"http://192.168.0.72:8080/news/wp-login.php?action=lostpassword", :title=>"Восстановление пароля"}Забыли пароль?
     %a{:href=>"#", :title=>"Восстановление пароля"}Забыли пароль?
-   -#
-    <script type="text/javascript">
-    function wp_attempt_focus(){
-    setTimeout( function(){ try{
-    d = document.getElementById('user_login');
-    d.focus();
-    d.select();
-    } catch(e){}
-    }, 200);
-    }
-
-    wp_attempt_focus();
-    if(typeof wpOnload=='function')wpOnload();
-    </script>
-
-    %p id="backtoblog"><a href="http://192.168.0.72:8080/news/" title="Потерялись?">&larr; Назад к сайту &laquo;УРМ&raquo;</a></p>
-
 
   .clear
 
