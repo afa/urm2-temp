@@ -16,7 +16,7 @@
    
  - if @carts.detect{|c| c.pick or c.is_a?(CartWorld) }
   .block-padded
-   %h2 Параметры бронирования
+   %h3 Параметры бронирования
    - unless @deliveries.empty?
     %span{:style => "float:left;"} Способ поставки:
     = render :partial => "shared/select_list", :locals => {:list_items => @deliveries, :name => :delivery_type}
@@ -25,7 +25,7 @@
    .clear
  - if @carts.detect{|c| c.is_a?(CartRequest) }
   .block-padded
-   %h2 Параметры запроса
+   %h3 Параметры запроса
    %textarea{:name => "comment"}
    .padded
  = render :partial => "shared/submit_button", :locals => {:title => t(:make)}
