@@ -83,7 +83,8 @@ class CartsController < ApplicationController
    #@old.try(:update_attributes, :amount => 0)
    @old = old.id
    @new = old.setup_for(:amount => 0, :max_amount => old.max_amount).copy_on_write(:amount => 0, :cart => old.id)
-   @carts = CartItem.where(:user_id => current_user.id).unprocessed.in_cart.all
+   @carts = User.current.cart_items.unprocessed.in_cart.all
+   @deliveries = User.current.deliveries
    respond_with do |format|
     format.js { render :layout => false }
    end

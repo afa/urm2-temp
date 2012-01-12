@@ -3,9 +3,16 @@
  - if @carts.detect{|c| not c.is_a?(CartRequest) }
   .block-padded
    %h2 Параметры заказа
-   %textarea{:name => "order_comment"}
+   .cell-in-3
+    .form-hide
+     .item
+      .name
+       %a.j-link{:href=>"#"}Добавить примечание к заказу
+      .hide{:style=>"display: none;"}
+       %textarea{:name => "order_comment"}
+   .clear.padded
    = render :partial => "shared/check_button", :locals => {:name => "order_needed", :title => t(:order_needed), :opts => {:need_field => true}}
-   .padded
+   .block-padded
    
  - if @carts.detect{|c| c.pick or c.is_a?(CartWorld) }
   .block-padded
