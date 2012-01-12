@@ -1,4 +1,25 @@
 class CartStore < CartItem
+
+  def action
+   return "pick" if self.pick?
+   return "reserve" if self.reserve?
+   return "order"
+  end
+
+  def action=(str)
+   case str
+    when "pick"
+     self.pick = true
+     self.reserve = false
+    when "reserve"
+     self.pick = false
+     self.reserve = true
+    else
+     self.pick = false
+     self.reserve = false
+   end
+  end
+
   def type_name
    ::I18n::t :cart_store
   end

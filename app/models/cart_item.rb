@@ -13,6 +13,14 @@ class CartItem < ActiveRecord::Base
  after_initialize :deserialize_offer
  before_validation :serialize_offer
 
+  def action
+
+  end
+
+  def action=(str)
+
+  end
+
   def to_hash
    ATTR_KEYS.map{|k| [k, send(k)] }.inject({}){|r, v| r.merge(v[0] => v[1]) }
   end
