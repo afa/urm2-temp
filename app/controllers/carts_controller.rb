@@ -51,6 +51,17 @@ class CartsController < ApplicationController
    carts.each do |cart|
     hsh = params[:cart_item][cart.id.to_s]
     p hsh
+    act = hsh[:action]
+    if act
+     case act
+      when "pick"
+       hsh.merge(:pick => true, :reserve => false)
+      when "reserve"
+       hsh.merge(:pick => false, :reserve => true)
+      else
+       hsh.merge(:pick => false, :reserve => false)
+     end
+    end
     [:destroy, :pick, :reserve].each{|s| hsh[s] = WebUtils.parse_bool(hsh[s]) if hsh.has_key?(s) }
     p hsh
     v_destroy = hsh[:destroy]
