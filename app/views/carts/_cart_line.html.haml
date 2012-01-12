@@ -16,6 +16,7 @@
   %input{:type => :text, :size => "9", :value => cart_line.user_price, :id => "cart_item_#{cart_line.id}_user_price", :name => "cart_item[#{cart_line.id}][user_price]"}
  - if cart_line.is_a?(CartWorld)
   %td &nbsp;
+  %td &nbsp;
   %td
    %span.switch.disabled
     %span
