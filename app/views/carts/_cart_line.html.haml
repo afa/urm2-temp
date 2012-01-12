@@ -25,7 +25,7 @@
    %td
     %span
      - if cart_line.allowed_actions.include?(act.to_s)
-      %input{:name => "cart_item[#{cart_line.id}][action]", :value => act.to_s, :type => "radio", :id => "radio_cart_item_#{cart_line.id}_#{act.to_s}"}
+      %input{:name => "cart_item[#{cart_line.id}][action]", :value => act.to_s, :type => "radio", :id => "radio_cart_item_#{cart_line.id}_#{act.to_s}", :checked => (act.to_s == cart_line.action)}
       %label{:for => "radio_cart_item_#{cart_line.id}_#{act.to_s}"}= t(act)
       -# = render :partial => "shared/check_button", :locals => {:name => "cart_item[#{cart_line.id}][#{act.to_s}]", :title => t(act), :opts => {:need_field => true, :value => cart_line.send(act)}}
  -# %td
