@@ -60,6 +60,7 @@ class CartsController < ApplicationController
      @changed << [cart.id.to_s, '0']
     else
      cart.update_attributes hsh
+     @changed << [cart.id.to_s, cart.amount.to_s]
     end
    end
    @carts = User.current.cart_items.unprocessed.in_cart.all
