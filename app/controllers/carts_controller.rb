@@ -87,6 +87,7 @@ class CartsController < ApplicationController
    @deliveries = User.current.deliveries
    respond_with do |format|
     format.js { render :layout => false }
+    format.json { render :json => {:carts_table => "", :old => @old, :new => @new, :carts_empty => @carts.empty?} }
    end
   end
 

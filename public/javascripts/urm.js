@@ -163,7 +163,31 @@ function showDms(evt){
 
 function handleCartDelete(){
  $(".icons .icon .delete-from-cart").click(function(){
-  makeAjaxDestroy("/carts/" + $(this).parents("tr").prop("id").match(/\bcart_str_(\w+)\b/)[1], function(data){}, function(data){});
+  makeAjaxDestroy("/carts/" + $(this).parents("tr").prop("id").match(/\bcart_str_(\w+)\b/)[1], 
+   function(data){
+    $("#cart_store").replaceWith(data["carts_table"]);
+    $("table.search-products tr:has(td input.item-cart[value=\"" + data["old"] + "\"])").find("td.input-in-cart").removeClass("exist speed");
+    $("table.search-products tr:has(td input.item-cart[value=\"" + data["old"] + "\"])").find("td.input-in-cart input").val("0");
+    $("table.search-products tr td input.item-cart[value=\"" + data["old"] + "\"]").val(data["new"]);
+
+    if(data["carts_empty"]){
+
+    /*- if @carts.empty?*/
+     $(".cart-table").add(".allow-order").hide();
+    } else {
+     $(".cart-table").add(".allow-order").show();
+    }
+    if($("#cart_store table tr").length > 1){
+     $("#cart_store").show();
+    } else {
+     $("#cart_store").hide();
+    }
+    $("div#order").hide();
+
+   }, 
+   function(data){
+   }
+  );
  });
 }
 
