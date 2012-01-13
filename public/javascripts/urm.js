@@ -23,7 +23,7 @@ function makeAjaxCall(ajaxUrl, functionSuccess, functionFailure){
 
 function makeAjaxDestroy(ajaxUrl, functionSuccess, functionFailure){
  $.ajax({
-  type: "GET",
+  type: "DELETE",
   url: ajaxUrl,
   contentType: "application/json; charset=utf-8",
   data: {},
