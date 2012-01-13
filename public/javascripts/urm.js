@@ -163,7 +163,7 @@ function showDms(evt){
 
 function handleCartDelete(){
  $(".icons .icon .delete-from-cart").click(function(){
-  MakeAjaxDestroy("/carts/" + $(this).parents("tr").prop("id").match(/\bcart_str_(\w+)\b/)[1], function(data){}, function(data){});
+  makeAjaxDestroy("/carts/" + $(this).parents("tr").prop("id").match(/\bcart_str_(\w+)\b/)[1], function(data){}, function(data){});
  });
 }
 
