@@ -21,6 +21,18 @@ function makeAjaxCall(ajaxUrl, functionSuccess, functionFailure){
  });
 }
 
+function makeAjaxDestroy(ajaxUrl, functionSuccess, functionFailure){
+ $.ajax({
+  type: "GET",
+  url: ajaxUrl,
+  contentType: "application/json; charset=utf-8",
+  data: {},
+  dataType: "json",
+  success: functionSuccess,
+  error: functionFailure
+ });
+}
+
 function search_icons_handle(){
  var uniq = new Array();
  var ins = $(".icons input.item-code");
@@ -147,6 +159,12 @@ function showDms(evt){
    $("tr.item_" + row_id + " .icon .dms").show();
  }
  evt.preventDefault();
+}
+
+function handleCartDelete(){
+ $(".icons .icon .delete-from-cart").click(function(){
+  MakeAjaxDestroy("/carts/" + $(this).parents("tr").prop("id").match(/\bcart_str_(\w+)\b/)[1], function(data){}, function(data){});
+ });
 }
 
 function insertBlock(blkType, val, after){
