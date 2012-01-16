@@ -29,7 +29,12 @@
   - if @carts.detect{|c| c.is_a?(CartRequest) }
    .block-padded
     %h3 Параметры запроса
-    %textarea{:name => "comment"}
+    .form-hide
+     .item
+      .name
+       %a.j-link{:href=>"#"}Добавить примечание к запросу
+      .hide{:style=>"display: none;"}
+       %textarea{:name => "comment"}
     .padded
  = render :partial => "shared/submit_button", :locals => {:title => t(:make)}
  = render :partial => "shared/button", :locals => {:title => t(:cancel), :opts => {:id => "order_cancel"}}
