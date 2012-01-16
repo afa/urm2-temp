@@ -49,7 +49,29 @@ When /^I click logout$/ do
  click_link(I18n::t(:logout))
 end
 
+Then /^I redirected to new session$/ do
+  page.should redirected_to(new_sessions_path)
+end
+
 Then /^I unlogged$/ do
  User.current.should be_nil
 end
 
+
+
+
+
+
+Then /^I should be on the (.+?) page$/ do |page_name|
+  request.request_uri.should == send("#{page_name.downcase.gsub(' ','_')}_path")
+  response.should be_success
+end
+
+Then /^I should be redirected to the (.+?) page$/ do |page_name|
+  page.should redirected_to(send("#{page_name.downcase.gsub(' ','_')}_path"))
+  page.header['HTTP_REFERER'].should_not be_nil
+  #request.headers['HTTP_REFERER'].should_not be_nil
+  request.headers['HTTP_REFERER'].should_not == request.request_uri
+
+  Then "I should be on the #{page_name} page"
+end

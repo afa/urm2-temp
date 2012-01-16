@@ -19,3 +19,7 @@ Feature: Manage logins
    And I am at index page
    When I click logout
    Then I unlogged
+   And I should be redirected to the new session page
+   And I login with registered user:
+      |username|password|
+      |tst     |password|
