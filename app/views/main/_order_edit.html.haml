@@ -1,8 +1,8 @@
 .clear.block-padded
 - form_for :order, :url => orders_path, :remote => true, :html => {:class => "js"} do |f|
- - if @carts.detect{|c| not c.is_a?(CartRequest) }
-  .block-padded
-   %h2 Параметры заказа
+ .block-padded
+  %h2 Параметры заказа
+  - if @carts.detect{|c| not c.is_a?(CartRequest) }
    .cell-in-3
     .form-hide
      .item
