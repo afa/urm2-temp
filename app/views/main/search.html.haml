@@ -61,7 +61,7 @@
  .cart-table.block-padded
   .cart= render :partial => "carts/cart_table", :locals => {:cart => @carts}
  .allow-order.block-padded
-  = link_to t(:start_edit_order), new_order_path, :id => "allow_order"
+  = link_to t(:start_edit_order), new_order_path, :id => "allow_order", :class => "ajax"
 
  #order= render :partial => "main/order_edit"
  .results
