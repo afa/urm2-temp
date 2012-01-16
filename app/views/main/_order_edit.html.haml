@@ -39,6 +39,6 @@
     .padded
  .clear
  = render :partial => "shared/submit_button", :locals => {:title => t(:make)}
- %a#order_cancel{}= t(:cancel)
+ %a#order_cancel{:href => "#", :style => "padding: 3px 19px;"}= t(:cancel)
  -# = render :partial => "shared/button", :locals => {:title => t(:cancel), :opts => {:id => "order_cancel"}}
 
