@@ -10,21 +10,18 @@
        %a.j-link{:href=>"#"}Добавить примечание к заказу
       .hide{:style=>"display: none;"}
        %textarea{:name => "order_comment"}
-    .clear.padded
+    .padded
     = render :partial => "shared/check_button", :locals => {:name => "order_needed", :title => t(:order_needed), :opts => {:need_field => true}}
-   .block-padded
    
  - if @carts.detect{|c| c.pick or c.is_a?(CartWorld) }
-  .block-padded
-   .cell-in-3
+  .cell-in-3
 
-    %h3 Параметры бронирования
-    - unless @deliveries.empty?
-     %span{:style => "float:left;"} Способ поставки:
-     = render :partial => "shared/select_list", :locals => {:list_items => @deliveries, :name => :delivery_type}
-    Дата готовности:
-    %input.calendar-input{:type => "text", :name => 'date_picker', :value => Date.today.strftime("%Y-%m-%d")}
-    .clear
+   %h3 Параметры бронирования
+   - unless @deliveries.empty?
+    %span{:style => "float:left;"} Способ поставки:
+    = render :partial => "shared/select_list", :locals => {:list_items => @deliveries, :name => :delivery_type}
+   Дата готовности:
+   %input.calendar-input{:type => "text", :name => 'date_picker', :value => Date.today.strftime("%Y-%m-%d")}
  - if @carts.detect{|c| c.is_a?(CartRequest) }
   .block-padded
    %h3 Параметры запроса
