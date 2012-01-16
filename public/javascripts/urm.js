@@ -204,7 +204,8 @@ function insertBlock(blkType, val, after){
 }
 
 function activateSearchCancelButton(){
- $("#order_cancel .button-style").click(function(){
+ /*$("#order_cancel .button-style").click(function(){*/
+ $("#order_cancel").click(function(){
   $("#order").hide();
   $("div.allow-order").show();
   $("#order_cancel").hide();
