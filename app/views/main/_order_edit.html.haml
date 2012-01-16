@@ -39,6 +39,6 @@
     .padded
  .clear
  = render :partial => "shared/submit_button", :locals => {:title => t(:make)}
- %a#order_cancel{:href => "#", :style => "padding: 5px 21px;"}= t(:cancel)
+ %a.ajax#order_cancel{:href => "#", :style => "padding: 5px 21px; float: left;"}= t(:cancel)
  -# = render :partial => "shared/button", :locals => {:title => t(:cancel), :opts => {:id => "order_cancel"}}
 
