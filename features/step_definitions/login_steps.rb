@@ -4,9 +4,10 @@ end
 
 Given /^I am at search page$/ do
  visit search_path
- page.should have_xpath("//input[@id='session_username']")
- page.should have_xpath("//input[@id='session_password']")
- page.should have_xpath("//input[@id='session_submit' and @type='submit']")
+ #save_and_open_page
+ page.should have_xpath("//input[@id='user_login']")
+ page.should have_xpath("//input[@id='user_pass']")
+ page.should have_xpath("//input[@id='wp-submit' and @type='submit']")
 end
 
 Given /^I login with registered user:$/ do |table|
@@ -19,10 +20,10 @@ end
 
 When /^I click login$/ do
  User.any_instance.stub(:reload_accounts).and_return(true)
- fill_in('session_username', :with => @user.username)
- fill_in('session_password', :with => 'password')
- click_button("session_submit")
- save_and_open_page
+ fill_in('user_login', :with => @user.username)
+ fill_in('user_pass', :with => 'password')
+ click_button("wp-submit")
+ #save_and_open_page
 end
 
 Then /^I logged in$/ do
@@ -68,7 +69,7 @@ Then /^I should be on the (.+?) page$/ do |page_name|
 end
 
 Then /^I should be redirected to the (.+?) page$/ do |page_name|
-  page.should redirected_to(send("#{page_name.downcase.gsub(' ','_')}_path"))
+  should redirected_to(send("#{page_name.downcase.gsub(' ','_')}_path"))
   page.header['HTTP_REFERER'].should_not be_nil
   #request.headers['HTTP_REFERER'].should_not be_nil
   request.headers['HTTP_REFERER'].should_not == request.request_uri
