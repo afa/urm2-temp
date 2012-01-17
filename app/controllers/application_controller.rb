@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     val = {
       :value   => user.remember_token
     }
-    val.merge!(:expires => 1.day.from_now.utc) if opts.try(:[], :rememberme)
+    val.merge!(:expires => 1.day.from_now.utc) if opts.is_a?(Hash) && opts[:rememberme]
     cookies[:user_remember_token] = val
     self.current_user = user
    end
