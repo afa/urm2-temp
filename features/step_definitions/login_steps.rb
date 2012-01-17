@@ -16,6 +16,10 @@ Given /^I login with registered user:$/ do |table|
  Axapta.stub!(:user_info).and_return({})
  Axapta.stub!(:renew_structure)
  @user.save!
+ acnt = FactoryGirl.create(:account, :user => @user)
+ @user.current_account = acnt
+ @user.save!
+
 end
 
 When /^I click login$/ do
@@ -69,10 +73,6 @@ Then /^I should be on the (.+?) page$/ do |page_name|
 end
 
 Then /^I should be redirected to the (.+?) page$/ do |page_name|
-  should redirected_to(send("#{page_name.downcase.gsub(' ','_')}_path"))
-  page.header['HTTP_REFERER'].should_not be_nil
-  #request.headers['HTTP_REFERER'].should_not be_nil
-  request.headers['HTTP_REFERER'].should_not == request.request_uri
-
-  Then "I should be on the #{page_name} page"
+  page.current_path.should == send("#{page_name.downcase.gsub(' ','_')}_path")
+  [302,304].should be_include(page.status_code)
 end
