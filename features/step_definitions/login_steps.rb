@@ -67,12 +67,13 @@ end
 
 
 
-Then /^I should be on the (.+?) page$/ do |page_name|
-  request.request_uri.should == send("#{page_name.downcase.gsub(' ','_')}_path")
-  response.should be_success
-end
+#Then /^I should be on the (.+?) page$/ do |page_name|
+#  request.request_uri.should == send("#{page_name.downcase.gsub(' ','_')}_path")
+#  response.should be_success
+#end
 
-Then /^I should be redirected to the (.+?) page$/ do |page_name|
-  page.current_path.should == send("#{page_name.downcase.gsub(' ','_')}_path")
-  [302,304].should be_include(page.status_code)
-end
+#Then /^I should be on (.+?) page$/ do |page_name|
+#  page.current_path.should == send("#{page_name.downcase.gsub(' ','_')}_path")
+#  [200, 304].should be_include(page.status_code)
+#  #[302,304].should be_include(page.status_code)
+#end

@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
  skip_filter :authenticate!, :except => :destroy
+ skip_filter :check_account
  #skip_before_filter :authenticate!, :only => [:new, :create]
  layout false
 

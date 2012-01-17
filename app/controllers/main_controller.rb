@@ -6,7 +6,7 @@ class MainController < ApplicationController
 
  #before_filter :get_users, :only => [:index]
  #before_filter :get_accounts, :only => [:index, :search, :extended]
- before_filter :check_account#, :only => [:search, :extended, :dms]
+ #before_filter :check_account#, :only => [:search, :extended, :dms]
   def index
   end
 

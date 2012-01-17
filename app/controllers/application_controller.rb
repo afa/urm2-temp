@@ -1,15 +1,17 @@
 class ApplicationController < ActionController::Base
   before_filter :authenticate!
+  before_filter :check_account
   before_filter :get_accounts
   before_filter :take_search
   protect_from_forgery
 
-  def sign_in(user)
+  def sign_in(user, *opts)
    if user
-    cookies[:user_remember_token] = {
-      :value   => user.remember_token,
-      :expires => 1.day.from_now.utc
+    val = {
+      :value   => user.remember_token
     }
+    val.merge!(:expires => 1.day.from_now.utc) if opts.try(:[], :rememberme)
+    cookies[:user_remember_token] = val
     self.current_user = user
    end
   end
@@ -56,6 +58,16 @@ class ApplicationController < ActionController::Base
     @accounts = current_user.accounts.where(:blocked => false)
    else
     @accounts = []
+   end
+  end
+
+  def check_account
+   if current_user.current_account
+    if current_user.current_account.blocked? or current_user.accounts.where(:id => current_user.current_account_id).count == 0
+     redirect_to root_path
+    end
+   else
+    redirect_to root_path
    end
   end
 
