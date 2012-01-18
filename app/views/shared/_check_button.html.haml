@@ -1,10 +1,19 @@
 %span.switch.check
  - if defined?(opts)
-  - if opts[:need_field]
-   - if opts.has_key?(:field_code)
-    = opts[:field_code]
-   - else
-    = hidden_field_tag name, opts.has_key?(:value) ? (opts[:value] ? '1' : '0') : '0', opts[:field_opts] || {}
- %a{:href=>"#", :name => name, :class => [defined?(opts) && (opts[:value] == true || opts[:value] == '1') ? "active" : nil]}
-  %span= title
-
+  - id = opts[:id].blank? ? name.to_s.split(/[\[\]\-]/).map{|s| s.blank? ? nil : s }.compact.join('_') : opts[:id]
+  - val = opts.has_key?(:value) ? (opts[:value] ? '1' : '0') : '0'
+  - if opts[:use_system]
+   %input{:type => "check", :id => id, :value => val, :name => name}
+   %label{:for => id}= title
+  - else
+   - if opts[:need_field]
+    - if opts.has_key?(:field_code)
+     = opts[:field_code]
+    - else
+     = hidden_field_tag name, val, (opts[:field_opts] || {}).merge(id.blank? ? {} : :id => id)
+     -# %input{:name => name, :id => id, :value => val}
+   %a{:href=>"#", :name => name, :class => [opts[:value] == true || opts[:value] == '1' ? "active" : nil]}
+    %span= title
+ - else
+  %a{:href=>"#", :name => name}
+   %span= title
