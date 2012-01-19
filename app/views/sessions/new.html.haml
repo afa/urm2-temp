@@ -17,8 +17,8 @@
      %strong ОШИБКА
      = ": #{flash[:error]}"
      -# = ": Неверное имя пользователя. "
-     %a{:href=>"http://192.168.0.72:8080/news/wp-login.php?action=lostpassword", :title=>"Восстановление пароля"}Потеряли пароль
-     ?
+     -# %a{:href=>"http://192.168.0.72:8080/news/wp-login.php?action=lostpassword", :title=>"Восстановление пароля"}Потеряли пароль
+     -# ?
      %br
 
    = form_for :session, :url => sessions_path, :id => "loginform" do |form|
