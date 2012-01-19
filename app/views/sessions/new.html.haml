@@ -12,6 +12,13 @@
    %h1
     %a{:href => "/"}УРМ-2
 
+   #login_error
+    %strong ОШИБКА
+    = ": Неверное имя пользователя. "
+    %a{:href=>"http://192.168.0.72:8080/news/wp-login.php?action=lostpassword", :title=>"Восстановление пароля"}Потеряли пароль
+    ?
+    %br
+
    = form_for :session, :url => sessions_path, :id => "loginform" do |form|
     -# %form#loginform{:name=>"loginform", :action=>"/sessions"}
     %p
@@ -33,7 +40,8 @@
 
    %p.nav
     -# %a{:href=>"http://192.168.0.72:8080/news/wp-login.php?action=lostpassword", :title=>"Восстановление пароля"}Забыли пароль?
-    %a{:href=>"#", :title=>"Восстановление пароля"}Забыли пароль?
+    -# %a{:href=>"#", :title=>"Восстановление пароля"}Забыли пароль?
+    = link_to "Регистрация", new_user_path
 
   .clear
 

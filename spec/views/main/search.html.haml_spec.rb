@@ -9,7 +9,8 @@ describe "main/search.html.haml" do
   #@login.stub!(:unique_hash).and_return(true)
   Axapta.stub!(:user_info).with(@login.ext_hash).and_return({})
   @login.save!
-  @items = [{:item_id => 123, :item_name => 'ttt'}]
+  @items = FactoryGirl.build_list(:store, 2)
+  #@items = Offer::Store.fabricate([{:item_id => 123, :item_name => 'ttt'}])
   assign(:items, @items)
   assign(:accounts, @login.accounts)
   assign(:current_user, @login)
