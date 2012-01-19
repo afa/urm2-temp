@@ -13,6 +13,7 @@ class UsersController < ApplicationController
 
   def new
    @user = User.new
+   render :layout => "simple"
   end
 
   def edit
