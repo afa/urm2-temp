@@ -189,7 +189,8 @@
     .search-tab-block
      -# %form{:action=>" "}
      = form_for :search, :url => search_path do |f|
-      .fields
+      -# .fields
+      %div
        .field
         -# = f.label :query_string
         = f.text_field :query_string
