@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
- skip_filter :authenticate!, :only => [:new, :create]
+ skip_before_filter :authenticate!, :only => [:new, :create]
+ skip_before_filter :check_account, :only => [:new, :create]
  before_filter :get_user, :only => [:edit, :update, :show, :destroy]
  before_filter :check_user, :only => [:edit, :update, :show, :destroy]
  before_filter :get_accounts, :only => [:edit, :update]
