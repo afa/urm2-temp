@@ -3,7 +3,7 @@
   - id = opts[:id].blank? ? name.to_s.split(/[\[\]\-]/).map{|s| s.blank? ? nil : s }.compact.join('_') : opts[:id]
   - val = opts.has_key?(:value) ? (opts[:value] ? '1' : '0') : '0'
   - if opts[:use_system]
-   %input{:type => "check", :id => id, :value => val, :name => name}
+   %input{:type => "checkbox", :id => id, :value => val, :name => name}
    %label{:for => id}= title
   - else
    - if opts[:need_field]
