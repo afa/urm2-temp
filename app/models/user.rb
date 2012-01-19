@@ -162,7 +162,8 @@ class User < ActiveRecord::Base
   def check_axapta_validity
    begin
     axapta_params = Axapta.user_info(ext_hash)
-    current_account.update_attributes :invent_location_id => axapta_params["invent_location_id"] unless current_account.invent_location_id == axapta_params["invent_location_id"]
+    #TODO: no need check more
+    #current_account.update_attributes :invent_location_id => axapta_params["invent_location_id"] unless current_account.invent_location_id == axapta_params["invent_location_id"]
    rescue Exception => e
     errors.add(:ext_hash, "#{e.class.name}:#{e.message}")
    end
@@ -178,7 +179,12 @@ class User < ActiveRecord::Base
 
   def create_axapta_account
    #self.update_attributes :encrypted_password => Digest::MD5.hexdigest([self.salt, self.password].join)
-   accounts << Account.create(Axapta.user_info(self.ext_hash).inject({}){|r, a| r.merge(Account.axapta_renames[a[0]].nil? ? {a[0] => a[1]}: {Account.axapta_renames[a[0]] => a[1]}) }.delete_if{|k, v| not Account.axapta_attributes.include?(k.to_s) }.merge({:axapta_hash => self.ext_hash})) if self.accounts.empty?
+   if self.accounts.empty?
+    axapta_params = Axapta.user_info(self.ext_hash)
+    acc = Account.create(Axapta.user_info(self.ext_hash).inject({}){|r, a| r.merge(Account.axapta_renames[a[0]].nil? ? {a[0] => a[1]}: {Account.axapta_renames[a[0]] => a[1]}) }.delete_if{|k, v| not Account.axapta_attributes.include?(k.to_s) }.merge({:axapta_hash => self.ext_hash}))
+    acc.update_attributes :invent_location_id => axapta_params["invent_location_id"] unless acc.invent_location_id == axapta_params["invent_location_id"]
+    accounts << acc
+   end
    #ext_hash = nil
   end
 
