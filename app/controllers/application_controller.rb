@@ -63,6 +63,7 @@ class ApplicationController < ActionController::Base
 
   def check_account
    if current_user.try(:current_account)
+    p "::current_user", current_user
     if current_user.current_account.blocked? or current_user.accounts.where(:id => current_user.current_account_id).count == 0
      redirect_to root_path
     end
