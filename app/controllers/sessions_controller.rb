@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
    sign_in(User.authenticate(params[:session].try(:[], :username), params[:session].try(:[], :password))) #unless logged_in?
    current_user.reload_accounts if logged_in?
    redirect_to root_path if logged_in?
-   redirect_to new_sessions_path unless logged_in?
+   redirect_to new_sessions_path, :error => "Неверное имя пользователя." unless logged_in?
   end
 
   def destroy
