@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_filter :unmodify
   before_filter :authenticate!
   before_filter :check_account
   before_filter :get_accounts
@@ -79,5 +80,9 @@ class ApplicationController < ActionController::Base
     srch[:only_store] = current_user.settings.where(:name => 'search.only_store').first.try(:value) if srch[:only_store].nil?
    end
    @search = OpenStruct.new(srch)
+  end
+
+  def unmodify
+   response.headers['Last-Modified'] = Time.zone.now.httpdate
   end
 end
