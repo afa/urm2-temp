@@ -3,28 +3,29 @@
   .table-scrolling
    = form_for :cart_fields, :url => carts_path, :method => :post, :html=>{:class => "js"}, :remote => true do |frm|
     %table.table-style{:class => "search-products"}
-     %tr
-      %th{:rowspan => 2} &nbsp;
-      %th.text-left{:rowspan => 2}= t :item_name
-      %th.text-left{:rowspan => 2}= t :item_brend
-      %th{:rowspan=>2}= t :body_name
-      %th{:rowspan => 2} ROHS
-      %th{:rowspan => 2}= t :to_cart
-      %th.double-cell{:colspan => 3}= t :avail
-      %th{:rowspan => 2}= t :location
-      %th{:rowspan => 2}= t :price1
-      %th{:rowspan => 2}= t :count2
-      %th{:rowspan => 2}= t :price2
-      %th{:rowspan => 2}= t :count3
-      %th{:rowspan => 2}= t :price3
-      %th{:rowspan => 2}= t :count4
-      %th{:rowspan => 2}= t :price4
-      %th{:rowspan => 2}= t :quantity
+     - unless @items.empty?
+      %tr
+       %th{:rowspan => 2} &nbsp;
+       %th.text-left{:rowspan => 2}= t :item_name
+       %th.text-left{:rowspan => 2}= t :item_brend
+       %th{:rowspan=>2}= t :body_name
+       %th{:rowspan => 2} ROHS
+       %th{:rowspan => 2}= t :to_cart
+       %th.double-cell{:colspan => 3}= t :avail
+       %th{:rowspan => 2}= t :location
+       %th{:rowspan => 2}= t :price1
+       %th{:rowspan => 2}= t :count2
+       %th{:rowspan => 2}= t :price2
+       %th{:rowspan => 2}= t :count3
+       %th{:rowspan => 2}= t :price3
+       %th{:rowspan => 2}= t :count4
+       %th{:rowspan => 2}= t :price4
+       %th{:rowspan => 2}= t :quantity
 
-     %tr
-      %th.bold.double-first-cell= t :avail_min
-      %th.bold= t :avail_max
-      %th.bold.double-last-cell MPQ
+      %tr
+       %th.bold.double-first-cell= t :avail_min
+       %th.bold= t :avail_max
+       %th.bold.double-last-cell MPQ
 
      - if @items.empty?
       %tr

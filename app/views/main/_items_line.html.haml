@@ -17,7 +17,7 @@
     .replacement &nbsp;
    .slider &nbsp;
 
- %td.text-left= link_to items_line.name, main_info_path(:code => items_line.code, :after => line_code), :class => "dms js", :remote => true
+ %td.text-left= link_to items_line.name, main_info_path(:code => items_line.code, :after => line_code), :class => "dms js", :title => "Описание позиции", :remote => true
 
  %td.text-left
   - if items_line.brend_url.blank?

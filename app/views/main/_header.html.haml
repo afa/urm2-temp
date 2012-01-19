@@ -214,7 +214,7 @@
       .clear
       .fields
        Искать:
-       = render :partial => "shared/check_button", :locals => {:name => "search[only_available]", :title => "Только в наличии", :opts => {:need_field => true}}
+       = render :partial => "shared/check_button", :locals => {:name => "search[only_available]", :title => "Только в наличии", :opts => {:need_field => true, :use_system => true}}
        -# %span.switch{:class=>"check"}
         %a{:href=>"#", :name => "search[only_available]"}
          %span Только в наличии
