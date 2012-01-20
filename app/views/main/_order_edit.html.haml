@@ -28,15 +28,16 @@
       %span Дата готовности:
       %input.calendar-input{:type => "text", :name => 'date_picker', :value => Date.today.strftime("%Y-%m-%d")}
   - if @carts.detect{|c| c.is_a?(CartRequest) }
-   .block-padded
-    %h3 Параметры запроса
-    .form-hide
-     .item
-      .name
-       %a.j-link{:href=>"#"}Добавить примечание к запросу
-      .hide{:style=>"display: none;"}
-       %textarea{:name => "comment"}
-    .padded
+   .cell-in-3
+    .block-padded
+     %h3 Параметры запроса
+     .form-hide
+      .item
+       .name
+        %a.j-link{:href=>"#"}Добавить примечание к запросу
+       .hide{:style=>"display: none;"}
+        %textarea{:name => "comment"}
+     .padded
  .clear
  = render :partial => "shared/submit_button", :locals => {:title => t(:make)}
  %a.ajax#order_cancel{:href => "#", :style => "margin: 5px 21px; float: left;"}= t(:cancel)
