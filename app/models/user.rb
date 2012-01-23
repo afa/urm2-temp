@@ -87,7 +87,7 @@ class User < ActiveRecord::Base
   end
 
   def reload_accounts
-   self.accounts.each do |account|
+   self.accounts.where(:blocked => false).each do |account|
     Axapta.renew_structure(account.axapta_hash)
    end
    if self.current_account
