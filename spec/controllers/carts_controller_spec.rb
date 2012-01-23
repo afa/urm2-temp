@@ -10,19 +10,22 @@ describe CartsController do
   @account = @accounts.first
   @user.current_account = @accounts.first
   @user.save!
+  @carts = FactoryGirl.create_list(:cart_store, 2, :user => @user, :processed => false, :amount => 1)
   controller.sign_in @user
  end
 
 
   describe "GET 'index'" do
     it "should be successful" do
+     # assigns[:carts] = @carts
       get 'index'
       response.should be_success
     end
 
    it "should setup @cart" do
+    #assigns[:carts] = @carts
     get "index"
-    assigns[:cart].should be_kind_of(Array)
+    assigns[:carts].should be_kind_of(Array)
    end
   end
 

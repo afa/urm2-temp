@@ -40,8 +40,8 @@ class CartItem < ActiveRecord::Base
 
    if self.amount and self.amount > 0
     self.amount = self.min_amount if self.amount < self.min_amount
-    if self.offer_params.try(:[], "price_qty")
-     self.current_price = self.offer_params["price_qty"].sort_by{|i| i["min_qty"].to_i }.reject{|i| i["min_qty"].to_i > self.amount }.last.try(:[], "price").try(:to_f) || 0.0
+    if self.offer_params && self.offer_params["price_qty"]
+     self.current_price = (self.offer_params["price_qty"] || []).sort_by{|i| i["min_qty"].to_i }.reject{|i| i["min_qty"].to_i > self.amount }.last.try(:[], "price").try(:to_f) || 0.0
     else
      self.current_price = 0
     end

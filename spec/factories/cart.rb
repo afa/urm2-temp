@@ -12,7 +12,7 @@ FactoryGirl.define do
   factory :cart_store do
    type 'CartStore'
    product_name "store"
-   offer_params { {"price_qty" => offers_count.times{|i| {"min_qty" => i*100+50, "price" => 5.0-(i*0.5)} } } }
+   offer_params { {"price_qty" => (1..offers_count).inject([]){|r, i| r << {"min_qty" => i*100+50, "price" => 5.0-(i*0.5)} } } }
   end
   factory :cart_world do
    type "CartWorld"
