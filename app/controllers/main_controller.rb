@@ -132,7 +132,7 @@ class MainController < ApplicationController
     @data = Axapta.item_info({:user_hash => @hash, :item_id => @code})
     @data["prices"] = Axapta.retail_price(:user_hash => @hash, :item_id => @code)
    rescue Exception => e
-    p "---exc in info #{Time.now}", e
+    p "---exc in info #{Time.now}", e, e.backtrace
     logger.info e.to_s
     @data = {}
    end
