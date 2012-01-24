@@ -80,6 +80,7 @@ class ApplicationController < ActionController::Base
     srch[:only_store] = current_user.settings.where(:name => 'search.only_store').first.try(:value) if srch[:only_store].nil?
    end
    @search = OpenStruct.new(srch)
+   p ":::search", @search
   end
 
   def unmodify

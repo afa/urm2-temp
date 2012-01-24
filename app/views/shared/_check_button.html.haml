@@ -5,7 +5,7 @@
   - if opts[:use_system]
    - unless opts[:send_only_checked]
     %input{:type => "hidden", :id => "#{id}_fallback", :value => '0', :name => name}
-   %input{:type => "checkbox", :id => id, :value => '1', :name => name, :checked => false}
+   %input{:type => "checkbox", :id => id, :value => '1', :name => name, :checked => (val == '1')}
    %label{:for => id}= title
   - else
    - if opts[:need_field]
@@ -14,7 +14,7 @@
     - else
      = hidden_field_tag name, val, (opts[:field_opts] || {}).merge(id.blank? ? {} : :id => id)
      -# %input{:name => name, :id => id, :value => val}
-   %a{:href=>"#", :name => name, :class => [opts[:value] == true || opts[:value] == '1' ? "active" : nil]}
+   %a{:href=>"#", :name => name, :class => [val == '1' ? "active" : nil]}
     %span= title
  - else
   %a{:href=>"#", :name => name}
