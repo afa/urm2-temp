@@ -3,6 +3,8 @@
   - id = opts[:id].blank? ? name.to_s.split(/[\[\]\-]/).map{|s| s.blank? ? nil : s }.compact.join('_') : opts[:id]
   - val = opts.has_key?(:value) ? (opts[:value] ? '1' : '0') : '0'
   - if opts[:use_system]
+   - unless opts[:send_only_checked]
+    %input{:type => "hidden", :id => "#{id}_fallback", :value => '0', :name => name}
    %input{:type => "checkbox", :id => id, :value => val, :name => name}
    %label{:for => id}= title
   - else
