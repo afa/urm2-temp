@@ -12,7 +12,7 @@
       .hide{:style=>"display: none;"}
        %textarea{:name => "order_comment"}
     .padded
-    = render :partial => "shared/check_button", :locals => {:name => "order_needed", :title => t(:order_needed), :opts => {:need_field => true}}
+    = render :partial => "shared/check_button", :locals => {:name => "order_needed", :title => t(:order_needed), :opts => {:need_field => true, :use_system => true}}
    
   - if @carts.detect{|c| c.pick or c.is_a?(CartWorld) }
    .cell-in-3
