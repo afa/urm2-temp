@@ -214,11 +214,11 @@
       .clear
       .fields
        Искать:
-       = render :partial => "shared/check_button", :locals => {:name => "search[only_available]", :title => "Только в наличии", :opts => {:need_field => true, :use_system => true, :value => @search.only_available}}
+       = render :partial => "shared/check_button", :locals => {:name => "search[only_available]", :title => "Только в наличии", :opts => {:need_field => true, :use_system => true, :value => @only_available}}
        -# %span.switch{:class=>"check"}
         %a{:href=>"#", :name => "search[only_available]"}
          %span Только в наличии
-       = render :partial => "shared/check_button", :locals => {:name => "search[only_store]", :title => "Только склад", :opts => {:need_field => true, :use_system => true, :value => @search.only_store}}
+       = render :partial => "shared/check_button", :locals => {:name => "search[only_store]", :title => "Только склад", :opts => {:need_field => true, :use_system => true, :value => @only_store}}
        -# %span.switch{:class=>"check"}
         %a{:href=>"#", :name => "search[only_store]"}
          %span Только склад
