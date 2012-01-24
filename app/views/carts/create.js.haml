@@ -6,6 +6,7 @@ $("#cart_store table tr:has(td)").remove();
  $(".cart-table").add(".allow-order").show();
 if($("#cart_store table tr").length > 1){
 $("#cart_store").show();
+activateSearchCancelButton();
 } else {
 $("#cart_store").hide();
 }
