@@ -81,17 +81,7 @@
   //load_dms_each(#{not to_bool(@only_store)});
   load_dms_bundle("#{main_mass_dms_url(:query_string => @search.query_string)}", #{not to_bool(@only_store)});
   $("#order").hide();
-  $("a#allow_order").click(function(){
-  $("#order").show();
-  $("div.allow-order").hide();
-  $("#order_cancel").show();
-  $("div.cart input#cart_item_submit").hide();
-  $("div#cart_store input").add("div#cart_store textarea").each(function(i, item){ item.disabled = 'disabled'; });
-  $("table.search-products").parents("form").hide();
-  $("#save_cart_button").hide();
-  $(".delete-from-cart").unbind("click");
-  return false;
-  });
+  activateSearchAllowOrderButton();
   $("#cancel_order").hide();
   activateSearchCancelButton();
  /*$('a.button-style').click(function(){

@@ -218,4 +218,19 @@ function activateSearchCancelButton(){
   return false;
  });
 
+
+}
+
+function activateSearchAllowOrderButton(){
+ $("a#allow_order").click(function(){
+  $("#order").show();
+  $("div.allow-order").hide();
+  $("#order_cancel").show();
+  $("div.cart input#cart_item_submit").hide();
+  $("div#cart_store input").add("div#cart_store textarea").each(function(i, item){ item.disabled = 'disabled'; });
+  $("table.search-products").parents("form").hide();
+  $("#save_cart_button").hide();
+  $(".delete-from-cart").unbind("click");
+  return false;
+ });
 }
