@@ -2,6 +2,7 @@ class CartsController < ApplicationController
  respond_to :js, :html, :json
   def index
    @carts = CartItem.where(:user_id => current_user.id).unprocessed.in_cart.all
+   @deliveries = User.current.deliveries
   end
 
   def new
@@ -20,6 +21,7 @@ class CartsController < ApplicationController
     end
     CartItem.uncached do
      @carts = current_user.cart_items.unprocessed.in_cart.all
+     @deliveries = User.current.deliveries
      #@carts = CartItem.where(:user_id => current_user.id).unprocessed.in_cart.all
     end
     #redirect_to carts_path
