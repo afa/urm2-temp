@@ -5,7 +5,7 @@
   - if opts[:use_system]
    - unless opts[:send_only_checked]
     %input{:type => "hidden", :id => "#{id}_fallback", :value => '0', :name => name}
-   %input{:type => "checkbox", :id => id, :value => '1', :name => name, :checked => (val == '1')}
+   %input{:type => "checkbox", :id => id, :value => '1', :name => name, :checked => false}
    %label{:for => id}= title
   - else
    - if opts[:need_field]
