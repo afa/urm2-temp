@@ -195,7 +195,7 @@
         -# = f.label :query_string
         = f.text_field :query_string
         -# = f.hidden_field :only_available
-        = f.hidden_field :only_store
+        -# = f.hidden_field :only_store
         -# = f.submit :find
        -# %input{:type=>"text", :value=>"TDA2003;OR;300"}
        - unless @only_store.nil?
@@ -218,7 +218,8 @@
        -# %span.switch{:class=>"check"}
         %a{:href=>"#", :name => "search[only_available]"}
          %span Только в наличии
-       %span.switch{:class=>"check"}
+       = render :partial => "shared/check_button", :locals => {:name => "search[only_store]", :title => "Только склад", :opts => {:need_field => true, :use_system => true}}
+       -# %span.switch{:class=>"check"}
         %a{:href=>"#", :name => "search[only_store]"}
          %span Только склад
        %span.switch{:class=>"radio"}
