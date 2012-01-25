@@ -10,7 +10,7 @@ class Admin::NewsController < Admin::ApplicationController
 
   def create
    NewsArticle.create params[:news_article]
-   redirect_to :admin_root_path
+   redirect_to admin_root_path
   end
 
   def edit
