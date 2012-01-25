@@ -134,7 +134,7 @@
     subList.hide();
     sel.removeClass('hover');
     if(typeof(settings.controls.select[input.get(0).id]) == "function"){
-     settings.controls.select[input.get(0).id]();
+     settings.controls.select[input.get(0).id](sel);
     }
     e.preventDefault();
     //active.parents("form").eq(0).submit();
