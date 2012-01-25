@@ -133,10 +133,10 @@
     active.attr('name',this.name).text(this.innerHTML);
     subList.hide();
     sel.removeClass('hover');
-    e.preventDefault();
     if(typeof(settings.controls.select[input.get(0).id]) == "function"){
      settings.controls.select[input.get(0).id]();
     }
+    e.preventDefault();
     //active.parents("form").eq(0).submit();
    });
 
