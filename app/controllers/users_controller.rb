@@ -51,7 +51,7 @@ class UsersController < ApplicationController
     account = current_user.accounts.where(:blocked => false).find_by_id(account_id)
     if account
      if current_user.update_attributes :current_account_id => account.id
-      redirect_to :back
+      redirect_to root_path
      else
       redirect_to root_path, :flash => {:error => t(:error_selecting_account)}
      end
