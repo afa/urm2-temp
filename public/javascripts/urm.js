@@ -234,3 +234,7 @@ function activateSearchAllowOrderButton(){
   return false;
  });
 }
+
+function onSelectSendForm(obj){
+ $(obj).parents("form").submit();
+}
