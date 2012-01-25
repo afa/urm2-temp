@@ -7,5 +7,5 @@
 - @news.each do |art|
  %div
   = link_to "#{art.created_at} &mdash; #{art.name}", edit_admin_news_path(art)
- %div
-  =link_to "Добавить новость", new_admin_news_index_path
+%div
+ =link_to "Добавить новость", new_admin_news_index_path
