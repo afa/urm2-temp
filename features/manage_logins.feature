@@ -1,6 +1,6 @@
 Feature: Manage logins
-  In order to [goal]
-  [stakeholder]
+  In order to restrict unauthorized access to urm
+  and manage users by someself
   wants [behaviour]
   
   Scenario: Login when unlogged
@@ -9,6 +9,7 @@ Feature: Manage logins
     And I login with registered user:
       |username|password|
       |tst     |password|
+      |test    |password|
     When I click login
     Then I logged in
 
@@ -16,6 +17,7 @@ Feature: Manage logins
    Given I am logged with registered user:
     |username|password|
     |tst     |password|
+    |test    |password|
    And I am at index page
    When I click logout
    Then I unlogged
@@ -23,3 +25,4 @@ Feature: Manage logins
    And I login with registered user:
       |username|password|
       |tst     |password|
+      |test    |password|

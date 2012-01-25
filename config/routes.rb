@@ -1,11 +1,5 @@
 Urm::Application.routes.draw do
 
-  get "quotations/index"
-
-  get "quotations/show"
-
-  get "quotations/lines"
-
   resources :carts, :except => [:show] do
    collection do
     put :save
@@ -47,6 +41,7 @@ Urm::Application.routes.draw do
 
   namespace :admin do
    #resources :main, :only => [:index]
+   resources :news
    get "main/index"
    root :to => "main#index"
    resources :users do
