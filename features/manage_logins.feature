@@ -17,12 +17,10 @@ Feature: Manage logins
    Given I am logged with registered user:
     |username|password|
     |tst     |password|
-    |test    |password|
    And I am at index page
    When I click logout
    Then I unlogged
    And I should be on the new sessions page
    And I login with registered user:
       |username|password|
-      |tst     |password|
       |test    |password|
