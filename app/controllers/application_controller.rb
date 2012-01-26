@@ -26,9 +26,10 @@ class ApplicationController < ActionController::Base
  protected
   def user_from_cookie
    if token = cookies[:user_remember_token]
+    return nil if token.blank?
     puts "::: user_from_cookie"
     p token
-    u = User.find_by_remember_token(token)
+    u = User.where(:remember_token => token).first
     cookies.delete(:user_remember_token) unless u
     u
    else
