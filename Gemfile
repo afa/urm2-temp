@@ -6,6 +6,12 @@ gem 'rails', '3.1.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+group :assets do
+ gem 'sass-rails'
+ gem 'coffee-rails'
+ gem 'uglifier'
+end
+
 gem 'pg'
 gem "carpentry"
 gem "newrelic_rpm"
@@ -13,7 +19,7 @@ gem "newrelic_rpm"
 # Use unicorn as the web server
 gem 'unicorn'
 gem "haml-rails"
-gem "sass"
+#gem "sass"
 gem "jquery-rails"
 #gem "clearance"
 gem "cells"
