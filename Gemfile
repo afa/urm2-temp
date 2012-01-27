@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.11'
+gem 'rails', '3.1.3'
+#gem 'rails', '3.0.11'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -41,7 +42,7 @@ group :development, :test do
  gem "rspec-rails"
  gem "cucumber", "1.0.6"
  gem "cucumber-rails"
- gem "factory_girl_rails", "~>1.3"
+ gem "factory_girl_rails", "~>1.4.0"
  gem "rspec-cells"
  gem "rcov"
  gem "jasmine"
