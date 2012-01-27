@@ -34,7 +34,7 @@ describe "shared/_check_button.html.haml" do
   context "opts => id" do
    it "should render input with id" do
     render :partial => "shared/check_button", :locals => {:name => "tes-t[123][4]", :title => "titletest", :opts => {:id => "try_test", :use_system => true}}
-    rendered.should have_xpath('//span[@class="switch check"]//input[@type="check" and @name="tes-t[123][4]" and @id="try_test"]')
+    rendered.should have_xpath('//span[@class="switch check"]//input[@type="checkbox" and @name="tes-t[123][4]" and @id="try_test"]')
     rendered.should have_xpath('//span[@class="switch check"]//label[@for="try_test"]', :text => "titletest")
    end
 
@@ -43,7 +43,7 @@ describe "shared/_check_button.html.haml" do
   context "without opts => id" do
    it "should render input with mangled name as id" do
     render :partial => "shared/check_button", :locals => {:name => "tes-t[123][4]", :title => "titletest", :opts => {:use_system => true}}
-    rendered.should have_xpath('//span[@class="switch check"]//input[@type="check" and @name="tes-t[123][4]" and @id="tes_t_123_4"]')
+    rendered.should have_xpath('//span[@class="switch check"]//input[@type="checkbox" and @name="tes-t[123][4]" and @id="tes_t_123_4"]')
     rendered.should have_xpath('//span[@class="switch check"]//label[@for="tes_t_123_4"]', :text => "titletest")
    end
   end
@@ -51,7 +51,7 @@ describe "shared/_check_button.html.haml" do
   it "should render checkbox with label" do
    render :partial => "shared/check_button", :locals => {:name => "test", :title => "titletest", :opts => {:use_system => true}}
    rendered.should have_xpath('//span[@class="switch check"]')
-   rendered.should have_xpath('//span[@class="switch check"]//input[@type="check" and @name="test" and @id="test"]')
+   rendered.should have_xpath('//span[@class="switch check"]//input[@type="checkbox" and @name="test" and @id="test"]')
    rendered.should have_xpath('//span[@class="switch check"]//label[@for="test"]', :text => "titletest")
   end
  end
