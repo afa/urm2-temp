@@ -31,6 +31,7 @@ When /^I click login$/ do
 end
 
 Then /^I logged in$/ do
+ save_and_open_page
  page.should have_xpath("//input[@id='current_account_account' and @type='hidden']")
  page.should have_xpath("//a[@class='quite']") #[@href='/sessions' and @data-method='delete']
 end
