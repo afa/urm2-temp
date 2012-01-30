@@ -10,7 +10,7 @@ body, html
   margin: 0px
   padding: 0px
   height: 100%
-  background: url(/images/spacer.gif) fixed no-repeat 0px 0px white
+  background: asset-url("spacer.gif", image) fixed no-repeat 0px 0px white
 
 table
   padding: 0px
@@ -103,11 +103,11 @@ img
   color: #7D7D7D
   padding-bottom: 12px
   &.cart
-    background: url(/images/icon_cart_big.gif) no-repeat 0px 0px
+    background: asset-url("icon_cart_big.gif", image) no-repeat 0px 0px
     padding-left: 32px
     margin-left: -2px
   &.orders
-    background: url(/images/icon_order_big.gif) no-repeat 0px 0px
+    background: asset-url("/images/icon_order_big.gif", image) no-repeat 0px 0px
     padding-left: 32px
     margin-left: -2px
   .active
@@ -127,7 +127,7 @@ img
     img
       width: 16px
       height: 16px
-      background: url(/images/icon_star.gif) no-repeat 0px 0px
+      background: asset-url("icon_star.gif", image) no-repeat 0px 0px
       cursor: pointer
     &:hover img
       width: 16px
@@ -137,7 +137,7 @@ img
     img
       width: 16px
       height: 16px
-      background: url(/images/icon_pointer_slide.gif) no-repeat 0px 0px
+      background: asset-url("icon_pointer_slide.gif", image) no-repeat 0px 0px
       cursor: pointer
     &:hover img
       width: 16px
@@ -151,7 +151,7 @@ img
   min-height: 1.2em
   _height: 1.2em
   &.cart
-    background: url(/images/icon_cart_big.gif) no-repeat 0px 0px
+    background: asset-url("icon_cart_big.gif", image) no-repeat 0px 0px
     padding-left: 32px
 
 table.cart
@@ -163,16 +163,16 @@ table.cart
   padding-bottom: 7px
   position: relative
   &.speed-max
-    background: url(/images/icon_speed_max.gif) no-repeat 0px 1px
+    background: asset-url("icon_speed_max.gif", image) no-repeat 0px 1px
     padding-left: 20px
   &.speed-mid
-    background: url(/images/icon_speed_mid.gif) no-repeat 0px 1px
+    background: asset-url("icon_speed_mid.gif", image) no-repeat 0px 1px
     padding-left: 20px
   &.speed-min
-    background: url(/images/icon_speed_min.gif) no-repeat 0px 1px
+    background: asset-url("icon_speed_min.gif", image) no-repeat 0px 1px
     padding-left: 20px
   &.favorite
-    background: url(/images/icon_star.gif) no-repeat -16px 0px
+    background: asset-url("icon_star.gif", image) no-repeat -16px 0px
     padding-left: 20px
 
 h1
@@ -306,7 +306,7 @@ h4
     left: 0
     width: 40px
     height: 480px
-    background-image: url(/images/lightbox_loading.png)
+    background-image: asset-url("lightbox_loading.png", image)
 
 #lightbox-loading-min
   position: absolute
@@ -324,7 +324,7 @@ h4
     left: 0
     width: 15px
     height: 180px
-    background-image: url(/images/lightbox_loading_min.png)
+    background-image: asset-url("lightbox_loading_min.png", image)
 
 #lightbox-overlay
   position: absolute
@@ -398,52 +398,52 @@ h4
     line-height: 0px
     width: 13px
     height: 53px
-    background: url(/images/popup_back_tl.png) no-repeat 0px 0px
+    background: asset-url("popup_back_tl.png", image) no-repeat 0px 0px
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/popup_back_tl.png')
   .back-tr
     font-size: 0px
     line-height: 0px
     width: 13px
     height: 53px
-    background: url(/images/popup_back_tr.png) no-repeat 0px 0px
+    background: asset-url("popup_back_tr.png", image) no-repeat 0px 0px
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/popup_back_tr.png')
   .back-bl
     font-size: 0px
     line-height: 0px
     width: 13px
     height: 13px
-    background: url(/images/popup_back_bl.png) no-repeat 0px 0px
+    background: asset-url("popup_back_bl.png", image) no-repeat 0px 0px
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/popup_back_bl.png')
   .back-br
     font-size: 0px
     line-height: 0px
     width: 13px
     height: 13px
-    background: url(/images/popup_back_br.png) no-repeat 0px 0px
+    background: asset-url("popup_back_br.png", image) no-repeat 0px 0px
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/popup_back_br.png')
   .back-tx
     font-size: 0px
     line-height: 0px
     height: 53px
-    background: url(/images/popup_back_tx.png) repeat-x 0px 0px
+    background: asset-url("popup_back_tx.png", image) repeat-x 0px 0px
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/popup_back_tx.png', sizingMethod='scale')
   .back-bx
     font-size: 0px
     line-height: 0px
     height: 13px
-    background: url(/images/popup_back_bx.png) repeat-x 0px 100%
+    background: asset-url("popup_back_bx.png", image) repeat-x 0px 100%
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/popup_back_bx.png', sizingMethod='scale')
   .back-ly
     font-size: 0px
     line-height: 0px
     width: 13px
-    background: url(/images/popup_back_ly.png) repeat-y 0px 0px
+    background: asset-url("popup_back_ly.png", image) repeat-y 0px 0px
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/popup_back_ly.png', sizingMethod='scale')
   .back-ry
     font-size: 0px
     line-height: 0px
     width: 13px
-    background: url(/images/popup_back_ry.png) repeat-y 100% 0px
+    background: asset-url("popup_back_ry.png", image) repeat-y 100% 0px
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/popup_back_ry.png', sizingMethod='scale')
 
 .lightbox-ie
@@ -475,7 +475,7 @@ h4
   margin-top: 3px
   z-index: 1103
   text-decoration: none
-  background: url(/images/icon_delete_blue.gif) no-repeat 100% 1px
+  background: asset-url("icon_delete_blue.gif", image) no-repeat 100% 1px
   padding-right: 21px
   margin-right: 7px
 
@@ -485,7 +485,7 @@ h4
   img
     width: 13px
     height: 13px
-    background: url(/images/icon_hint.gif) no-repeat 0px 0px
+    background: asset-url("icon_hint.gif", image) no-repeat 0px 0px
   &.hint-hover img
     background-position: 0px -13px
 
@@ -504,7 +504,7 @@ h4
     margin-top: -1px
     width: 6px
     height: 8px
-    background: url(/images/hint_back.gif) no-repeat -7px -8px
+    background: asset-url("hint_back.gif", image) no-repeat -7px -8px
 
 /* Ошибки
 
@@ -523,7 +523,7 @@ h4
     top: 5px
     width: 6px
     height: 11px
-    background: url(/images/error_back.gif) no-repeat 0px 0px
+    background: asset-url("error_back.gif", image) no-repeat 0px 0px
 
 input.validation-error, textarea.validation-error
   background: #FFEBEB !important
@@ -694,19 +694,19 @@ div.ui-datepicker
       width: 15px
       height: 22px
       padding: 0px
-      background: url(/images/date_picker_buttons.gif) no-repeat 3px 5px
+      background: asset-url("date_picker_buttons.gif", image) no-repeat 3px 5px
       margin-left: 0px
     &.ui-datepicker-prev
       width: 13px
-      background: url(/images/date_picker_buttons.gif) no-repeat -11px 5px
+      background: asset-url("date_picker_buttons.gif", image) no-repeat -11px 5px
       margin-left: 1px
     &.dp-nav-next-year
-      background: url(/images/date_picker_buttons.gif) no-repeat -38px 5px
+      background: asset-url("date_picker_buttons.gif", image) no-repeat -38px 5px
       margin-left: 0px
       margin-right: 0px
     &.ui-datepicker-next
       width: 13px
-      background: url(/images/date_picker_buttons.gif) no-repeat -26px 5px
+      background: asset-url("date_picker_buttons.gif", image) no-repeat -26px 5px
       margin-right: 1px
       margin-left: 0px
     &.dp-nav-prev-year.disabled, &.ui-datepicker-prev.disabled, &.dp-nav-next-year.disabled, &.ui-datepicker-next.disabled
@@ -720,7 +720,7 @@ div.ui-datepicker
   font-size: 10px
   width: 16px
   height: 16px
-  background-image: url(/images/icon_pointer_slide.gif)
+  background-image: asset-url("icon_pointer_slide.gif", image)
   background-repeat: no-repeat
   outline: 0px
   &.up
@@ -742,7 +742,7 @@ div.ui-datepicker
   float: left
   outline: 0px
   text-decoration: none
-  background: url(/images/spacer.gif) no-repeat 0px 0px #fdfeff
+  background: asset-url("spacer.gif", image) no-repeat 0px 0px #fdfeff
   font-size: 1.08em
   color: #383838
   cursor: pointer
@@ -761,7 +761,7 @@ div.ui-datepicker
     height: 7px
     font-size: 0px
     line-height: 0px
-    background-image: url(/images/button_style_back.gif)
+    background-image: asset-url("button_style_back.gif", image)
     background-repeat: no-repeat
   span
     display: block
@@ -792,7 +792,7 @@ div.ui-datepicker
     z-index: 1
     width: 100%
     height: 24px
-    background-image: url(/images/button_style_back.gif)
+    background-image: asset-url("button_style_back.gif", image)
     background-repeat: repeat-x
     background-position: 0px -42px
   .t
@@ -801,7 +801,7 @@ div.ui-datepicker
     z-index: 1
     width: 100%
     height: 24px
-    background-image: url(/images/button_style_back.gif)
+    background-image: asset-url("button_style_back.gif", image)
     background-repeat: repeat-x
     background-position: 0px -42px
     top: 0px
@@ -887,20 +887,20 @@ div.ui-datepicker
     .br
       background-position: 0px -28px
   .pointer
-    background-image: url(/images/icon_pointer_button.gif)
+    background-image: asset-url("icon_pointer_button.gif", image)
   .order
-    background-image: url(/images/icon_order_button.gif)
+    background-image: asset-url("icon_order_button.gif", image)
   .cart
-    background-image: url(/images/icon_cart_button.gif)
+    background-image: asset-url("icon_cart_button.gif", image)
   .options
-    background-image: url(/images/icon_options.gif)
+    background-image: asset-url("icon_options.gif", image)
     padding-left: 38px !important
   &:hover .options
-    background-image: url(/images/icon_options.gif)
+    background-image: asset-url("icon_options.gif", image)
     padding-left: 37px !important
 
 .hover .button-style .options
-  background-image: url(/images/icon_options.gif)
+  background-image: asset-url("icon_options.gif", image)
   padding-left: 37px !important
 
 /* Выпадающий список к стандартной кнопке
@@ -986,7 +986,7 @@ td.input-in-cart
     height: 1.6em
     *padding-bottom: 3px
     *height: 1.5em
-    background: url(/images/input_in_cart_back.gif) repeat-x 0px -30px
+    background: asset-url("input_in_cart_back.gif", image) repeat-x 0px -30px
     min-width: 3.5em
     *width: 3.5em
   input
@@ -1008,7 +1008,7 @@ td.input-in-cart
     &:hover
       color: #FFFFFF !important
   &.exist, &.edit, &.speed
-    background: url(/images/input_in_cart_back.gif) repeat-x 0px 0px #737373
+    background: asset-url("input_in_cart_back.gif", image) repeat-x 0px 0px #737373
   &.exist input, &.speed input
     display: none
   &.exist div, &.speed div
@@ -1033,11 +1033,11 @@ td.input-in-cart
       display: block
       width: 31px
       height: 25px
-      background: url(/images/table_style_row_icon_back.png) no-repeat 0px 0px
+      background: asset-url("table_style_row_icon_back.png", image) no-repeat 0px 0px
       filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/table_style_row_icon_back.png')
       _background: none
       span
-        background: url(/images/icon_cart.gif) no-repeat 11px 4px
+        background: asset-url("icon_cart.gif", image) no-repeat 11px 4px
         filter: alpha(opacity = 100)
 
 /* Выпадающий список
@@ -1049,7 +1049,7 @@ td.input-in-cart
   a
     width: auto
     display: block
-    background-image: url(/images/spacer.gif)
+    background-image: asset-url("spacer.gif")
   .sub
     display: none
     background: #FFFFFF
@@ -1060,7 +1060,7 @@ td.input-in-cart
   .active
     cursor: pointer
     padding: 1px 16px 3px 7px
-    background: url(/images/icon_pointer_blue.gif) no-repeat 100% -16px #3a96d9
+    background: asset-url("icon_pointer_blue.gif", image) no-repeat 100% -16px #3a96d9
     text-decoration: none
     color: #FFFFFF
     outline: 0
@@ -1167,7 +1167,7 @@ td.input-in-cart
     &.hover, &.title-back-s
       background: #F2FAFF
     &.title-back
-      background: url(/images/table_style_row_title.gif) repeat-x 0px 100% #fafafb
+      background: asset-url("table_style_row_title.gif", image) repeat-x 0px 100% #fafafb
       _background: #EDEEEF
   td
     &.price-user input
@@ -1232,9 +1232,9 @@ td.input-in-cart
           color: #7D7D7D
   .sub-row-table
     &.blue-back th
-      background: url(/images/table_style_row_b.gif) repeat-x 0px 0px
+      background: asset-url("table_style_row_b.gif", image) repeat-x 0px 0px
     &.yel-back th
-      background: url(/images/table_style_row_y.gif) repeat-x 0px 0px
+      background: asset-url("table_style_row_y.gif", image) repeat-x 0px 0px
     th
       &.name
         font-size: 1.08em
@@ -1301,42 +1301,42 @@ td.input-in-cart
     white-space: nowrap
   .icons
     .plus
-      background: url(/images/icon_plus.gif) no-repeat 0px -16px
+      background: asset-url("icon_plus.gif", image) no-repeat 0px -16px
       &.hide
         background-position: 0px 0px
     .replacement
-      background: url(/images/icon_replacement.gif) no-repeat 0px 0px
+      background: asset-url("icon_replacement.gif", image) no-repeat 0px 0px
       &.active
         background-position: 0px -112px
     .delivery
-      background: url(/images/zil130m.gif) no-repeat 0px 0px
+      background: asset-url("zil130m.gif", image) no-repeat 0px 0px
       &.active
         background-position: 0px -112px
     .pp
-      background: url(/images/icon_pp.gif) no-repeat 0px 0px
+      background: asset-url("icon_pp.gif", image) no-repeat 0px 0px
     .delete
-      background: url(/images/icon_delete.gif) no-repeat 0px 0px
+      background: asset-url("icon_delete.gif", image) no-repeat 0px 0px
   .hover .icons .delete
     background-position: 0px -16px
   .icons
     .delete.active
       background-position: 0px -16px
     .order
-      background: url(/images/icon_order.gif) no-repeat 0px 0px
+      background: asset-url("icon_order.gif", image) no-repeat 0px 0px
   .hover .icons .order
     background-position: 0px -112px
   .icons
     .order.active
       background-position: 0px -112px
     .slider
-      background: url(/images/ajax-loader.gif) no-repeat 0px 0px
+      background: asset-url("ajax-loader.gif", image) no-repeat 0px 0px
       /*margin-left: 4px;
     .dms
-      background: url(/images/icon_dms.gif) no-repeat 0px 0px
+      background: asset-url("icon_dms.gif", image) no-repeat 0px 0px
       &.active
         background-position: 0px -112px
     .favorite
-      background: url(/images/icon_star.gif) no-repeat -16px 0px
+      background: asset-url("icon_star.gif", image) no-repeat -16px 0px
   abbr
     border-bottom: 1px dotted #222
 
