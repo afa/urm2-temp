@@ -5,6 +5,7 @@ require 'rails/all'
 #require "action_mailer/railtie"
 #require "active_resource/railtie"
 ##require "rails/test_unit/railtie"
+require "sprockets/railtie"
 
 
 if defined?(Bundler)
