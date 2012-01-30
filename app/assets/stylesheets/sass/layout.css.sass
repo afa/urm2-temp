@@ -178,7 +178,7 @@ div#cart_store
     a
       color: #9F0022
       text-decoration: none
-      background: url(/images/icon_delete.gif) no-repeat 0px -16px
+      background: asset-url("icon_delete.gif", image) no-repeat 0px -16px
       padding-left: 20px
       &:hover
         color: #9F0022 !important
@@ -230,13 +230,13 @@ div#cart_store
   _display: inline-block
   .back-hp1
     border: 1px solid #D5DADF
-    background: url(/images/header_panel_back.jpg) no-repeat 0px 0px
+    background: asset-url("header_panel_back.jpg", image) no-repeat 0px 0px
     position: relative
   .back-hp2
     margin: -1px
-    background: url(/images/header_corner_tl.gif) no-repeat 0px 0px
+    background: asset-url("header_corner_tl.gif", image) no-repeat 0px 0px
   .back-hp3
-    background: url(/images/header_corner_tr.gif) no-repeat top right
+    background: asset-url("header_corner_tr.gif", image) no-repeat top right
     height: 82px
     padding: 1px
   .logo-name
@@ -283,14 +283,14 @@ div#cart_store
       .name
         font-weight: bold
         padding: 1px 0 2px 23px
-        background: url(/images/icon_user.gif) no-repeat 0px 0px
+        background: asset-url("icon_user.gif", image) no-repeat 0px 0px
       .comp
         padding: 2px 0 14px 0
       .quite
         color: #9F0022
         padding: 0 10px 0 0
         margin-left: 30px
-        background: url(/images/icon_pointer_down_red.gif) no-repeat 100% 6px
+        background: asset-url("icon_pointer_down_red.gif", image) no-repeat 100% 6px
 
 /* Информационные блоки в шапке
 
@@ -313,14 +313,14 @@ div#cart_store
   position: relative
   z-index: 5
   margin-top: -1px
-  background: url(/images/panel_dark_back.gif) repeat-x 0px -58px
+  background: asset-url("panel_dark_back.gif", image) repeat-x 0px -58px
   .corner-l
     position: absolute
     top: 0px
     left: 0px
     width: 7px
     height: 29px
-    background: url(/images/main_menu_corner_l.png) no-repeat 0px 0px
+    background: asset-url("main_menu_corner_l.png", image) no-repeat 0px 0px
     _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/main_menu_corner_l.png')
     _background: none
   .corner-r
@@ -332,7 +332,7 @@ div#cart_store
     _margin-left: 100%
     width: 7px
     height: 29px
-    background: url(/images/main_menu_corner_r.png) no-repeat 0px 0px
+    background: asset-url("main_menu_corner_r.png", image) no-repeat 0px 0px
     _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/main_menu_corner_r.png')
     _background: none
   .button
@@ -350,15 +350,15 @@ div#cart_store
       display: block
       _display: none
       position: absolute
-      background-image: url(/images/main_menu_submenu.png)
+      background-image: asset-url("main_menu_submenu.png", image)
       background-repeat: no-repeat
       font-size: 0px
       line-height: 0px
   .button-shadow
     i
-      background: url(/images/main_menu_submenu.png) no-repeat 0px -100px
+      background: asset-url("main_menu_submenu.png", image) no-repeat 0px -100px
     .b2
-      background: url(/images/main_menu_submenu_v.png) no-repeat 0px -100px
+      background: asset-url("main_menu_submenu_v.png", image) no-repeat 0px -100px
   .sub-active .button-shadow
     .b1
       top: -4px
@@ -394,7 +394,7 @@ div#cart_store
     height: 24px
     &:hover
       color: #FFFFFF !important
-      background: url(/images/main_menu_hover.gif) repeat-x 0px -31px #a8a8a8
+      background: asset-url("main_menu_hover.gif", image) repeat-x 0px -31px #a8a8a8
   .active .link
     color: #FFFFFF !important
     background: #3A96D9 !important
@@ -425,7 +425,7 @@ div#cart_store
       display: block
       _display: none
       position: absolute
-      background-image: url(/images/main_menu_submenu.png)
+      background-image: asset-url("main_menu_submenu.png", image)
       background-repeat: no-repeat
       font-size: 0px
       line-height: 0px
@@ -480,13 +480,13 @@ div#cart_store
       right: -6px
       width: 6px
       height: 100%
-      background: url(/images/main_menu_submenu_v.png) repeat-y 0 0
+      background: asset-url("main_menu_submenu_v.png", image) repeat-y 0 0
     .b8
       top: 2px
       left: -6px
       width: 6px
       height: 100%
-      background: url(/images/main_menu_submenu_v.png) repeat-y -6px 0
+      background: asset-url("main_menu_submenu_v.png", image) repeat-y -6px 0
   .submenu
     padding: 7px 0 3px 0
     _padding-bottom: 10px
@@ -520,7 +520,7 @@ div#cart_store
           background-color: #3A96D9
           color: #FFFFFF !important
         &.active
-          background: url(/images/main_menu_hover.gif) repeat-x 0px -31px #a8a8a8
+          background: asset-url("main_menu_hover.gif", image) repeat-x 0px -31px #a8a8a8
           color: #FFFFFF !important
   .counter
     display: inline-block
@@ -529,7 +529,7 @@ div#cart_store
     position: relative
     *bottom: -1px
     font: bold 11px / 13px Tahoma, Arial, Helvetica, sans-serif
-    background: url(/images/main_menu_count_back_c.gif) repeat-x 0px 0px #fefefe
+    background: asset-url("main_menu_count_back_c.gif", image) repeat-x 0px 0px #fefefe
     color: #3A99DB
     .c1
       display: block
@@ -538,7 +538,7 @@ div#cart_store
       left: -5px
       width: 5px
       height: 17px
-      background: url(/images/main_menu_count_back_l.png) no-repeat 0px 0px
+      background: asset-url("main_menu_count_back_l.png", image) no-repeat 0px 0px
       _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/main_menu_count_back_l.png')
       _background: none
     .c2
@@ -548,7 +548,7 @@ div#cart_store
       right: -5px
       width: 5px
       height: 17px
-      background: url(/images/main_menu_count_back_r.png) no-repeat 0px 0px
+      background: asset-url("main_menu_count_back_r.png", image) no-repeat 0px 0px
       _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/main_menu_count_back_r.png')
       _background: none
   .submenu
@@ -568,11 +568,11 @@ div#cart_store
         background-position: 21px -107px
     a
       &.order span
-        background-image: url(/images/icon_order.gif)
+        background-image: asset-url("icon_order.gif", image)
       &.dms span
-        background-image: url(/images/icon_dms.gif)
+        background-image: asset-url("icon_dms.gif", image)
       &.replacement span
-        background-image: url(/images/icon_replacement.gif)
+        background-image: asset-url("icon_replacement.gif", image)
 
 /* Табы
 
@@ -625,14 +625,14 @@ div#cart_store
     .item
       padding-bottom: 5px
   .title
-    background: url(/images/panel_dark_back.gif) repeat-x 0px -58px
+    background: asset-url("panel_dark_back.gif", image) repeat-x 0px -58px
     font-size: 1.17em
     color: #FFFFFF
     .back-l
-      background: url(/images/panel_dark_back.gif) no-repeat 0px 0px
+      background: asset-url("panel_dark_back.gif", image) no-repeat 0px 0px
       height: 100%
     .back-r
-      background: url(/images/panel_dark_back.gif) no-repeat 100% -29px
+      background: asset-url("panel_dark_back.gif", image) no-repeat 100% -29px
       height: 22px
       padding: 4px 7px 3px 15px
     a
@@ -648,15 +648,15 @@ div#cart_store
     border: 0px !important
     width: 45px
     height: 20px
-    background: url(/images/cart_panel_button_back.gif) no-repeat 0px 0px
+    background: asset-url("cart_panel_button_back.gif", image) no-repeat 0px 0px
     .icon-pointer
       display: block
       height: 19px
-      background: url(/images/icon_pointer_button.gif) no-repeat 7px 2px
+      background: asset-url("icon_pointer_button.gif", image) no-repeat 7px 2px
     .icon
       display: block
       height: 19px
-      background: url(/images/icon_cart_button.gif) no-repeat 24px 2px
+      background: asset-url("icon_cart_button.gif", image) no-repeat 24px 2px
 
 /* filters
 
@@ -667,13 +667,13 @@ div#cart_store
   position: relative
   z-index: 4
   .back-x
-    background: url(/images/search_block_back_x.gif) repeat-x 0px 0px
+    background: asset-url("search_block_back_x.gif", image) repeat-x 0px 0px
     height: 100%
   .back-l
-    background: url(/images/search_block_back_l.gif) no-repeat 0px 0px
+    background: asset-url("search_block_back_l.gif", image) no-repeat 0px 0px
     height: 100%
   .back-r
-    background: url(/images/search_block_back_r.gif) no-repeat 100% 0px
+    background: asset-url("search_block_back_r.gif, image) no-repeat 100% 0px
     padding: 12px 13px 0 2em
   .search-tabs
     width: 100%
@@ -686,11 +686,11 @@ div#cart_store
       span
         display: block
         _float: left
-        background: url(/images/search_block_tab_back_l.gif) no-repeat 0px -100px
+        background: asset-url("search_block_tab_back_l.gif", image) no-repeat 0px -100px
         height: 100%
         span
           padding: 6px 12px 7px 12px
-          background: url(/images/search_block_tab_back_r.gif) no-repeat 100% -100px
+          background: asset-url("search_block_tab_back_r.gif", image) no-repeat 100% -100px
       &.active
         color: #FFFFFF
         background: #7D7D7D
@@ -702,7 +702,7 @@ div#cart_store
           span
             background-position: 100% 0px
       &.more
-        background: url(/images/icon_pointer_blue.gif) no-repeat 100% 5px
+        background: asset-url("icon_pointer_blue.gif", image) no-repeat 100% 5px
         padding: 6px 18px 7px 12px
         font-weight: bold
   .close-link
@@ -711,7 +711,7 @@ div#cart_store
     top: -7px
     margin-bottom: -13px
     font-size: 0.83em
-    background: url(/images/search_block_icon_close.gif) no-repeat 100% 2px
+    background: asset-url("search_block_icon_close.gif", image) no-repeat 100% 2px
     color: #7D7D7D
     padding: 0 18px 3px 0
     text-decoration: none
@@ -765,7 +765,7 @@ div#cart_store
   position: relative
   z-index: 2
   _position: static
-  background: url(/images/scroll_content_back.png) no-repeat 0px -30px
+  background: asset-url("scroll_content_back.png", image) no-repeat 0px -30px
   .scroll-show
     display: none
     _margin-bottom: -20px
@@ -777,7 +777,7 @@ div#cart_store
     z-index: 2
   .shadow
     height: 20px
-    background: url(/images/scroll_content_back.png) repeat-x 0px 0px
+    background: asset-url("scroll_content_back.png", image) repeat-x 0px 0px
     display: inline-block
     _position: relative
     margin: 0 -2%
@@ -801,7 +801,7 @@ div#cart_store
       font-size: 0px
       line-height: 0px
       height: 30px
-      background: url(/images/scroll_content_button.png) no-repeat 0px 0px
+      background: asset-url("scroll_content_button.png", image) no-repeat 0px 0px
       _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/scroll_content_button.png')
       _background: none
       &:hover
