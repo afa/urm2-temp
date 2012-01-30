@@ -1,0 +1,872 @@
+/*-----------------------------------------
+ *  Last change:	00/00/00 [-]
+ *-----------------------------------------
+
+/*-----------------------------------------
+ *  Ограничения ширины интерфейса
+ *-----------------------------------------
+
+.all
+  min-width: 1000px
+  margin: 0px auto
+  position: relative
+  min-height: 100%
+  _height: 100%
+  _width: expression((document.documentElement.clientWidth < 1000)? "1000px" : "100%")
+
+.table-scroll-additional
+  display: inline-block
+
+/* Обертка для ие6
+
+.all-ie
+  width: 100%
+  height: 100%
+
+/*-----------------------------------------
+ *  Контент
+ *-----------------------------------------
+
+#content
+  position: relative
+  z-index: 99
+  display: inline-block
+  width: 100%
+  .content-wrap
+    padding: 0 2em 0px 2em
+
+.table-scroll-additional #content .content-wrap
+  padding: 0px 20px 0px 20px
+
+div.dms_loader
+  display: inline-block
+  float: left
+  position: relative
+  left: 600px
+  top: 4px
+
+input#search_query_string
+  width: 600px
+
+/* Прокрутка таблиц
+
+.scroller-table
+  display: none
+  width: 100%
+  overflow: scroll
+  overflow-y: hidden
+  font-size: 0px
+  line-height: 0px
+  position: fixed
+  left: 0px
+  bottom: 0px
+  z-index: 100
+  _position: absolute
+  _bottom: auto
+  _top: expression(document.documentElement.clientHeight-18+document.getElementsByTagName('html')[0].scrollTop + "px")
+  .scroll-content-width
+    height: 1px
+
+.table-scroll-additional.scroller-table
+  display: none !important
+
+/* Результаты поиска
+
+.search-result-block .filters
+
+.filter-block .fields, .search-block .fields
+  padding-top: 1em
+
+/* Корзина
+
+div#cart_store
+  margin-top: 2.5em
+
+.cart-page
+  .add-in h4
+    padding-bottom: 17px
+  .check-block
+    padding-bottom: 12px
+  .comment-area
+    width: 254px
+    height: 90px
+    padding: 2px 4px
+    border: 1px solid #9E9E9E
+  .total
+    padding-right: 20px
+    .total-table, .button-style
+      float: right
+
+/* Заказы
+
+.orders-block .controls-cell
+  padding-right: 30px
+  float: left
+  position: relative
+
+/* Заказ
+
+.order-block
+  .controls-cell
+    padding-right: 30px
+    float: left
+    position: relative
+  .info-cell
+    font-size: 0.92em
+    padding-top: 7px
+    strong
+      font-size: 1.09em
+      font-family: Arial, Helvetica, sans-serif
+    .menu
+      margin: 0px
+      padding: 0px
+      list-style-type: none
+      float: left
+      li
+        margin: 0px
+        padding: 0 18px 0 0
+        float: left
+    .inv-info
+      line-height: 1.55em
+      padding-top: 16px
+      .txt-line
+        padding-bottom: 4px
+      .hint
+        position: relative
+        bottom: -2px
+
+/*-----------------------------------------
+ *  Всплывающие блоки
+ *-----------------------------------------
+/* Корзина (popup)
+
+.cart-popup
+  width: 535px
+  z-index: 160
+  .switch
+    font-size: 0.92em
+  .table-style
+    width: 100%
+    *width: 96%
+  .button-style
+    float: right
+    margin-top: 10px
+  .total
+    padding: 3px 0 0 0px
+    font-size: 1.08em
+    line-height: 1.5em
+  .red
+    color: #9F0022
+  .grey
+    color: #7D7D7D
+
+/* Редактировать комментарий
+
+.edit-comment
+  textarea
+    width: 273px
+    height: 123px
+    border: 1px solid #9E9E9E
+    overflow: auto
+    padding: 2px
+    margin-bottom: 15px
+  .button-save
+    float: right
+    position: relative
+  .button-clear
+    padding-top: 7px
+    a
+      color: #9F0022
+      text-decoration: none
+      background: url(/images/icon_delete.gif) no-repeat 0px -16px
+      padding-left: 20px
+      &:hover
+        color: #9F0022 !important
+        text-decoration: underline
+
+/*-----------------------------------------
+ *  Шапка
+ *-----------------------------------------
+
+.header-fixed
+  z-index: 150
+  background: #FFFFFF
+  position: fixed
+  width: 100%
+  min-width: 1000px
+  left: 0px
+  top: 0px
+  _position: absolute
+  _top: expression(document.getElementsByTagName('html')[0].scrollTop + 'px')
+
+.header-static
+  z-index: 150
+  background: #FFFFFF
+  position: relative
+  width: 100%
+  min-width: 1000px
+  _top: 0px !important
+
+#header-height
+  height: 237px
+
+#header
+  .header-hid
+    position: relative
+  .header-wrap
+    padding: 0px 2em
+
+.header .header-wrap
+  padding: 0px 2em
+
+.table-scroll-additional #header .header-wrap
+  padding: 0px 20px
+
+/* Скрывающаяся панель в шапке
+
+.header-panel
+  position: relative
+  padding-top: 20px
+  _display: inline-block
+  .back-hp1
+    border: 1px solid #D5DADF
+    background: url(/images/header_panel_back.jpg) no-repeat 0px 0px
+    position: relative
+  .back-hp2
+    margin: -1px
+    background: url(/images/header_corner_tl.gif) no-repeat 0px 0px
+  .back-hp3
+    background: url(/images/header_corner_tr.gif) no-repeat top right
+    height: 82px
+    padding: 1px
+  .logo-name
+    position: absolute
+    top: 24px
+    left: 19px
+  .logo-company
+    position: absolute
+    top: 24px
+    left: 241px
+  .info-block
+    position: absolute
+    top: 12px
+    right: 18px
+    a
+      color: #264987
+      &:hover
+        color: #7D7D7D !important
+    .informer
+      width: 11.6em
+      padding-right: 22px
+      float: left
+      font-size: 1.08em
+      .today
+        width: 4.7em
+        float: left
+      .date
+        float: left
+        padding-bottom: 10px
+      .rate
+        padding-left: 7px
+        clear: both
+    .line
+      height: 50px
+      width: 30px
+      float: left
+      margin-top: 4px
+      border-left: 1px solid #DFDFDF
+    .user-block
+      width: 17.4em
+      float: left
+      font-size: 0.92em
+      text-align: right
+      .name
+        font-weight: bold
+        padding: 1px 0 2px 23px
+        background: url(/images/icon_user.gif) no-repeat 0px 0px
+      .comp
+        padding: 2px 0 14px 0
+      .quite
+        color: #9F0022
+        padding: 0 10px 0 0
+        margin-left: 30px
+        background: url(/images/icon_pointer_down_red.gif) no-repeat 100% 6px
+
+/* Информационные блоки в шапке
+
+/* Кнопка, скрывающая шапку
+
+.button-slide-panel
+  width: 17px
+  position: relative
+  float: left
+  margin-right: -17px
+  left: -17px
+  padding-top: 7px
+
+/* Гланвое меню
+
+.main-menu
+  height: 29px
+  padding-bottom: 18px
+  float: left
+  position: relative
+  z-index: 5
+  margin-top: -1px
+  background: url(/images/panel_dark_back.gif) repeat-x 0px -58px
+  .corner-l
+    position: absolute
+    top: 0px
+    left: 0px
+    width: 7px
+    height: 29px
+    background: url(/images/main_menu_corner_l.png) no-repeat 0px 0px
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/main_menu_corner_l.png')
+    _background: none
+  .corner-r
+    position: absolute
+    top: 0px
+    right: 0px
+    _right: auto
+    _left: -7px
+    _margin-left: 100%
+    width: 7px
+    height: 29px
+    background: url(/images/main_menu_corner_r.png) no-repeat 0px 0px
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/main_menu_corner_r.png')
+    _background: none
+  .button
+    float: left
+  .sub-active .button-shadow
+    border-bottom: 0px
+    padding: 0 2px
+    margin: 0 -2px
+    position: relative
+    z-index: 3
+    _margin: 0px
+    _padding: 0px
+    _float: left
+    i
+      display: block
+      _display: none
+      position: absolute
+      background-image: url(/images/main_menu_submenu.png)
+      background-repeat: no-repeat
+      font-size: 0px
+      line-height: 0px
+  .button-shadow
+    i
+      background: url(/images/main_menu_submenu.png) no-repeat 0px -100px
+    .b2
+      background: url(/images/main_menu_submenu_v.png) no-repeat 0px -100px
+  .sub-active .button-shadow
+    .b1
+      top: -4px
+      left: -4px
+      width: 6px
+      height: 35px
+      background-position: 0px -10px
+    .b2
+      top: -4px
+      right: -4px
+      width: 6px
+      height: 33px
+      background-position: -6px -10px
+    .b3
+      top: -4px
+      left: 0px
+      width: 100%
+      height: 4px
+      background: none
+      i
+        position: static
+        height: 4px
+        margin: 0 2px
+        background-position: 0px -6px
+        background-repeat: repeat-x
+  .button .link
+    display: block
+    _float: left
+    padding: 5px 20px 0 20px
+    font-size: 1.17em
+    color: #FFFFFF
+    text-decoration: none
+    height: 24px
+    &:hover
+      color: #FFFFFF !important
+      background: url(/images/main_menu_hover.gif) repeat-x 0px -31px #a8a8a8
+  .active .link
+    color: #FFFFFF !important
+    background: #3A96D9 !important
+    &:hover
+      color: #FFFFFF !important
+      background: #3A96D9 !important
+  .sub-active .link
+    color: #383838 !important
+    background: #FFFFFF !important
+    _padding: 4px 19px 0 19px
+    _border: 1px solid #C0C0C0
+    _border-bottom: 0px
+    &:hover
+      color: #383838 !important
+      background: #FFFFFF !important
+      _padding: 4px 19px 0 19px
+      _border: 1px solid #C0C0C0
+      _border-bottom: 0px
+  .submenu-shadow
+    position: absolute
+    display: none
+    z-index: 2
+    _clear: both
+    margin: 0px
+    background: #FFFFFF
+    _margin-top: -1px
+    i
+      display: block
+      _display: none
+      position: absolute
+      background-image: url(/images/main_menu_submenu.png)
+      background-repeat: no-repeat
+      font-size: 0px
+      line-height: 0px
+    .b1
+      top: -4px
+      right: -6px
+      width: 6px
+      height: 6px
+      background-position: -17px -10px
+    .b2
+      bottom: -13px
+      left: -6px
+      width: 11px
+      height: 11px
+      background-position: -12px -21px
+    .b3
+      bottom: -13px
+      right: -6px
+      width: 11px
+      height: 11px
+      background-position: -12px -32px
+    .b4
+      top: -4px
+      left: 0px
+      width: 100%
+      background: none
+      i
+        position: static
+        height: 4px
+        margin: 0 0px 0 0
+        background-position: 0px -6px
+        background-repeat: repeat-x
+    .b5
+      bottom: -13px
+      left: 0px
+      width: 100%
+      background: none
+      i
+        position: static
+        height: 6px
+        margin: 0 5px
+        background-position: 0px 0px
+        background-repeat: repeat-x
+    .b6
+      bottom: -7px
+      left: 0px
+      width: 100%
+      height: 7px
+      background: #FFFFFF
+    .b7
+      top: 2px
+      right: -6px
+      width: 6px
+      height: 100%
+      background: url(/images/main_menu_submenu_v.png) repeat-y 0 0
+    .b8
+      top: 2px
+      left: -6px
+      width: 6px
+      height: 100%
+      background: url(/images/main_menu_submenu_v.png) repeat-y -6px 0
+  .submenu
+    padding: 7px 0 3px 0
+    _padding-bottom: 10px
+    list-style-type: none
+    position: relative
+    margin: 0 -2px
+    *display: inline-block
+    _display: block
+    _border: 1px solid #C0C0C0
+    _margin: 0px
+    ul
+      margin: 0px
+      padding: 0px
+      list-style-type: none
+      _margin-bottom: -1px
+      _padding-top: 1px
+    li
+      margin: 0px
+      padding: 0px
+      _padding-bottom: 1px
+      a
+        display: block
+        cursor: pointer
+        _margin-bottom: -1px
+        white-space: nowrap
+        position: relative
+        font-family: Arial, Helvetica, sans-serif
+        font-size: 1.05em
+        text-decoration: none
+        &:hover
+          background-color: #3A96D9
+          color: #FFFFFF !important
+        &.active
+          background: url(/images/main_menu_hover.gif) repeat-x 0px -31px #a8a8a8
+          color: #FFFFFF !important
+  .counter
+    display: inline-block
+    left: 2px
+    padding: 2px 0
+    position: relative
+    *bottom: -1px
+    font: bold 11px / 13px Tahoma, Arial, Helvetica, sans-serif
+    background: url(/images/main_menu_count_back_c.gif) repeat-x 0px 0px #fefefe
+    color: #3A99DB
+    .c1
+      display: block
+      position: absolute
+      top: 0px
+      left: -5px
+      width: 5px
+      height: 17px
+      background: url(/images/main_menu_count_back_l.png) no-repeat 0px 0px
+      _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/main_menu_count_back_l.png')
+      _background: none
+    .c2
+      display: block
+      position: absolute
+      top: 0px
+      right: -5px
+      width: 5px
+      height: 17px
+      background: url(/images/main_menu_count_back_r.png) no-repeat 0px 0px
+      _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/main_menu_count_back_r.png')
+      _background: none
+  .submenu
+    a span
+      display: block
+      min-width: 150px
+      background-repeat: no-repeat
+      background-position: 9px 5px
+      padding: 5px 20px 6px 34px
+    li a:hover span
+      background-position: 9px -107px
+    ul li a
+      span
+        padding-left: 46px
+        background-position: 21px 5px
+      &:hover span
+        background-position: 21px -107px
+    a
+      &.order span
+        background-image: url(/images/icon_order.gif)
+      &.dms span
+        background-image: url(/images/icon_dms.gif)
+      &.replacement span
+        background-image: url(/images/icon_replacement.gif)
+
+/* Табы
+
+.tabs-block
+  float: left
+  margin-left: 2em
+  .tab
+    display: block
+    float: left
+    _display: inline-block
+    text-decoration: none
+    border: 1px solid #6BB0E3
+    border-top: 0px
+    padding: 4px 17px 6px 17px
+    font-size: 0.92em
+    &:hover
+      color: #FFFFFF !important
+      background: #3A99DB
+      border-color: #3A99DB
+
+/* вернуть 2% если шо
+
+/* Корзина
+
+.cart-block
+  float: right
+  width: 168px
+  position: relative
+  margin-top: -1px
+  z-index: 99
+
+.cart-block-wrap
+  position: absolute
+  width: 168px
+  overflow: hidden
+
+.cart-block-slider
+  position: relative
+  margin-top: -85px
+
+.cart-block
+  .info
+    border: 1px solid #B5B5B5
+    border-bottom: 0px
+    border-top: 0px
+    padding: 7px 10px 6px 10px
+    color: #7D7D7D
+    font-size: 0.92em
+    _display: inline-block
+    .item
+      padding-bottom: 5px
+  .title
+    background: url(/images/panel_dark_back.gif) repeat-x 0px -58px
+    font-size: 1.17em
+    color: #FFFFFF
+    .back-l
+      background: url(/images/panel_dark_back.gif) no-repeat 0px 0px
+      height: 100%
+    .back-r
+      background: url(/images/panel_dark_back.gif) no-repeat 100% -29px
+      height: 22px
+      padding: 4px 7px 3px 15px
+    a
+      color: #FFFFFF
+      text-decoration: none
+      border-bottom: 1px dotted
+      outline: 0
+      &:hover
+        color: #FFFFFF !important
+  .order
+    display: block
+    float: right
+    border: 0px !important
+    width: 45px
+    height: 20px
+    background: url(/images/cart_panel_button_back.gif) no-repeat 0px 0px
+    .icon-pointer
+      display: block
+      height: 19px
+      background: url(/images/icon_pointer_button.gif) no-repeat 7px 2px
+    .icon
+      display: block
+      height: 19px
+      background: url(/images/icon_cart_button.gif) no-repeat 24px 2px
+
+/* filters
+
+.filter-block, .search-block
+  padding-bottom: 20px
+  width: 740px
+  _display: inline-block
+  position: relative
+  z-index: 4
+  .back-x
+    background: url(/images/search_block_back_x.gif) repeat-x 0px 0px
+    height: 100%
+  .back-l
+    background: url(/images/search_block_back_l.gif) no-repeat 0px 0px
+    height: 100%
+  .back-r
+    background: url(/images/search_block_back_r.gif) no-repeat 100% 0px
+    padding: 12px 13px 0 2em
+  .search-tabs
+    width: 100%
+    overflow: hidden
+    a
+      display: block
+      float: left
+      text-decoration: none
+      cursor: pointer
+      span
+        display: block
+        _float: left
+        background: url(/images/search_block_tab_back_l.gif) no-repeat 0px -100px
+        height: 100%
+        span
+          padding: 6px 12px 7px 12px
+          background: url(/images/search_block_tab_back_r.gif) no-repeat 100% -100px
+      &.active
+        color: #FFFFFF
+        background: #7D7D7D
+        cursor: default
+        &:hover
+          color: #FFFFFF !important
+        span
+          background-position: 0px 0px
+          span
+            background-position: 100% 0px
+      &.more
+        background: url(/images/icon_pointer_blue.gif) no-repeat 100% 5px
+        padding: 6px 18px 7px 12px
+        font-weight: bold
+  .close-link
+    float: right
+    position: relative
+    top: -7px
+    margin-bottom: -13px
+    font-size: 0.83em
+    background: url(/images/search_block_icon_close.gif) no-repeat 100% 2px
+    color: #7D7D7D
+    padding: 0 18px 3px 0
+    text-decoration: none
+    span
+      border-bottom: 1px dotted
+      padding-bottom: 1px
+    &:hover
+      background-position: 100% -22px
+      color: #3A96D9 !important
+  .field
+    float: left
+    border: 1px solid #9E9E9E
+    padding: 0px 4px
+    position: absolute
+    background: #FFFFFF
+    input
+      font-family: "Courier New", Courier
+      margin: 0px
+      border: 4px solid #FFFFFF
+      background: #FFFFFF
+      width: 600px
+      font-size: 1.08em
+      line-height: 1.2em
+      height: 1.1em
+      outline: 0px
+      *border-bottom-width: 3px
+      *border-top-width: 3px
+    textarea
+      font-family: "Courier New", Courier
+      margin: 0px
+      border: 4px solid #FFFFFF
+      background: #FFFFFF
+      width: 600px
+      font-size: 1.08em
+      line-height: 1.2em
+      height: 1.1em
+      outline: 0px
+      *border-bottom-width: 3px
+      *border-top-width: 3px
+      padding: 0px
+      padding-bottom: 2px
+  .button
+    float: right
+
+/* Поиск
+
+/* Линия, отделяющая контент от шапки, которая появляется при фиксированной шапке и прокрученном вертикальном скролле
+
+.scroll-content-block
+  height: 20px
+  position: relative
+  z-index: 2
+  _position: static
+  background: url(/images/scroll_content_back.png) no-repeat 0px -30px
+  .scroll-show
+    display: none
+    _margin-bottom: -20px
+    _position: relative
+  .line
+    height: 19px
+    border-bottom: 1px solid #808080
+    position: relative
+    z-index: 2
+  .shadow
+    height: 20px
+    background: url(/images/scroll_content_back.png) repeat-x 0px 0px
+    display: inline-block
+    _position: relative
+    margin: 0 -2%
+    width: 104%
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/scroll_content_back.png', sizingMethod='scale')
+    _background: none
+    z-index: 1
+  .button
+    width: 32px
+    height: 15px
+    overflow: hidden
+    margin: 0px auto
+    position: relative
+    z-index: 2
+    bottom: -12px
+    a
+      cursor: pointer
+      display: block
+      width: 32px
+      text-decoration: none
+      font-size: 0px
+      line-height: 0px
+      height: 30px
+      background: url(/images/scroll_content_button.png) no-repeat 0px 0px
+      _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/scroll_content_button.png')
+      _background: none
+      &:hover
+        margin-top: -15px
+
+/* Контент в шапке
+
+.content-in-header
+  position: relative
+  z-index: 3
+
+/* Глобальная ошибка
+
+.global-error
+  border: 1px solid #9B9696
+  background: #FFEBEB
+  padding: 9px 20px 11px 20px
+  text-align: center
+  margin-top: -1px
+  font-size: 0.92em
+  color: #595959
+
+/*-----------------------------------------
+ *  Подвал
+ *-----------------------------------------
+
+#footer-height
+  height: 120px
+
+#footer
+  width: 100%
+  position: absolute
+  bottom: 0px
+  font-size: 0.92em
+  z-index: 98
+  .footer-wrap
+    margin: 0 2em 0 2em
+    border-top: 2px solid #3EA2EB
+    padding: 10px 5px 0 5px
+    height: 85px
+
+.table-scroll-additional #footer .footer-wrap
+  margin: 0 20px
+
+#footer
+  .left-cell
+    float: left
+  .right-cell
+    float: right
+    padding-top: 4px
+  .logoes
+    padding-bottom: 8px
+    img
+      margin-right: 25px
+  .copyright
+    padding-bottom: 10px
+    color: #3A96D9
+
+.footer-menu
+  margin: 0px
+  padding: 0px
+  list-style-type: none
+  li
+    margin: 0px
+    padding: 0 15px 0 25px
+    float: left
+    a
+      text-decoration: none
