@@ -51,5 +51,8 @@ module Urm
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Sass
+    config.sass.template_location = {"assets/stylesheets/sass" => "assets/stylesheets"}
   end
 end
