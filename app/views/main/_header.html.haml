@@ -23,7 +23,7 @@
         .comp= current_user.current_account.try(:business)
        - else
         %span= t :select_account
-       - form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
+       = form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
         .select
          .sub
           = link_to "-----", "#", :name => "0" unless current_user.current_account

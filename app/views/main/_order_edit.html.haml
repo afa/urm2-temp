@@ -1,6 +1,6 @@
 .clear
 .block-padded
-- form_for :order, :url => orders_path, :remote => true, :html => {:class => "js"} do |f|
+= form_for :order, :url => orders_path, :remote => true, :html => {:class => "js"} do |f|
  .block-padded
   %h2 Параметры заказа
   - if @carts.detect{|c| not c.is_a?(CartRequest) }
