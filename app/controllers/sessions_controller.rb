@@ -1,6 +1,10 @@
 class SessionsController < ApplicationController
- skip_filter :authenticate!, :except => :destroy
- skip_filter :check_account
+
+ skip_before_filter :authenticate!, :except => :destroy
+ skip_before_filter :check_account
+ skip_before_filter :get_accounts
+ skip_before_filter :take_search
+ 
  #skip_before_filter :authenticate!, :only => [:new, :create]
  layout false
 
