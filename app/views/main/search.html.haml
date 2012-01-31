@@ -31,7 +31,7 @@
       %tr
        %td{:colspan => 22}= t :items_not_found
      - else
-      = render :partial => "items_line", :collection => @items, :locals => {:need_links => true, :frm => form}
+      = render :partial => "items_line", :collection => @items, :locals => {:need_links => true, :form => frm}
 
      - if @items.size > 5
       %tr.title-header-bottom
