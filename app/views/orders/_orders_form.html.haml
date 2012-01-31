@@ -1,5 +1,5 @@
 #order{:display => "none"}
- - form_for :order, :url => orders_path do |f|
+ = form_for :order, :url => orders_path do |f|
   - unless @deliveries.blank?
    %select{:name => "delivery_type"}
     - @deliveries.each do |del|

@@ -1,5 +1,5 @@
 %h1 Редактирование менеджера
-- form_for :manager, :url => admin_manager_path(@manager.id), :html=>{:method => :put} do |form|
+= form_for :manager, :url => admin_manager_path(@manager.id), :html=>{:method => :put} do |form|
  .form_field
   = form.label :name
   = form.text_field :name, :disabled => true
