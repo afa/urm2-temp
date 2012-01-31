@@ -14,10 +14,9 @@
 //= require date
 //= require jquery.ui.datepicker
 //= require urm
-//= require jquery.validationEngine-ru
+//= require "jquery.validationEngine-ru"
 //= require jquery.validationEngine
-//= require jquery-ui-i18n
-//= require jquery.ui.datepicker-ru
+//= require "jquery-ui-i18n"
+//= require "jquery.ui.datepicker-ru"
 //= require jquery.watch
 
-//-# = require_tree .
