@@ -1,2 +1,9 @@
-%h1 Admin::News#edit
-%p Find me in app/views/admin/news/edit.html.haml
+= form_for :news_article, :url => admin_news_index_pathi, :html => {:method => :put} do |f|
+ %div
+  =f.label :name
+  = f.text_field :name
+ %div
+  = f.label :body
+  = f.text_area :body
+ %div
+  = f.submit "save"
