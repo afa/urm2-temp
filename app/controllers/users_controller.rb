@@ -43,6 +43,7 @@ class UsersController < ApplicationController
   end
 
   def current_account
+   #TODO: не менять аккаунт при ошибках?
    account_id = params[:current_account][:account]
    if account_id.blank?
     current_user.update_attributes :current_account_id => nil
@@ -51,7 +52,8 @@ class UsersController < ApplicationController
     account = current_user.accounts.where(:blocked => false).find_by_id(account_id)
     if account
      if current_user.update_attributes :current_account_id => account.id
-      redirect_to root_path
+      current_user.cart_items.in_cart.unprocessed.destroy_all
+      redirect_to root_path, :flash => {:info => t(:info_account_changed)}
      else
       redirect_to root_path, :flash => {:error => t(:error_selecting_account)}
      end
