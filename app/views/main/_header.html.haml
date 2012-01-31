@@ -1,6 +1,4 @@
 #header1
- - flash.each do |key, value|
-  .flash{ :class => key}= value
 .header-panel
  .back-hp1
   .back-hp2
@@ -143,6 +141,8 @@
 .tabs-block
  %a.tab{:href=>"#", :class=>"tab-search", :style=>"display:none"} Поиск
 .clear
+- flash.each do |key, value|
+ .flash{ :class => key}= value
 .search-block
  .back-x
   .back-l
@@ -281,5 +281,5 @@
      %span &nbsp;
   .shadow
 
-.global-error{:style=>"display:none"}
+-# .global-error{:style=>"display:none"}
 
