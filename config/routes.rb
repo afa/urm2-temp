@@ -1,7 +1,6 @@
 Urm::Application.routes.draw do
 
-  get "news/index"
-
+  resources :news, :only => [:index]
   resources :carts, :except => [:show] do
    collection do
     put :save
