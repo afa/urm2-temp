@@ -1,5 +1,5 @@
 .article
  .name= item_on_main.name
- .time= item_on_main.created_at
+ .time= item_on_main.created_at.strftime("%d.%m.%Y")
  .body!= item_on_main.body
 
