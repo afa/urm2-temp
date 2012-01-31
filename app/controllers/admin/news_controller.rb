@@ -1,4 +1,5 @@
 class Admin::NewsController < Admin::ApplicationController
+ before_filter :get_article, :only => [:show, :edit, :update, :destroy]
   def index
   end
 
@@ -17,9 +18,15 @@ class Admin::NewsController < Admin::ApplicationController
   end
 
   def update
+   @news_article.update_attributes(params[:news_article])
+   redirect_to admin_root_path
   end
 
   def destroy
   end
 
+ protected
+  def get_article
+   @news_article = NewsArticle.find(params[:id])
+  end
 end
