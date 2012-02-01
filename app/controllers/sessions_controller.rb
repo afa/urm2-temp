@@ -19,6 +19,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+   User.current.settings.update_all("value = '0'", "name = 'hideheader'")
    sign_out
    redirect_to new_sessions_path
   end
