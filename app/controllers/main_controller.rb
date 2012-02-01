@@ -145,7 +145,13 @@ class MainController < ApplicationController
 
   def set
    p ":::main#set", params[:id], params[:value]
+   respond_with do |format|
+    format.json do
+     render :nothing => true
+    end
+   end
   end
+
  protected
   #def get_accounts
   # @accounts = current_user.accounts.where(:blocked => false)
