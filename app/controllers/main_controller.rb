@@ -144,8 +144,10 @@ class MainController < ApplicationController
   end
 
   def set
-   session[params[:id]] = params[:value]
-   p ":::main#set", params[:id], params[:value]
+   val = params[:value] || false
+   stor = current_user.settings.where(:name => params[:id]).first || current_user.settings.where(:name => params[:id]).new
+   stor.value = val
+   stor.save!
    respond_with do |format|
     format.json do
      render :nothing => true

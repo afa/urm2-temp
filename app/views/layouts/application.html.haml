@@ -13,7 +13,7 @@
    var settings = {
     animation: true, //Включить/выключить анимацию элементов интерфейса
     header: { //Шапка
-     hide: #{WebUtils.parse_bool(session[:hideheader]).to_s }, //Показать/скрыть
+     hide: #{WebUtils.parse_bool(current_user.settings.where(:name => "hideheader").first.try(:value)).to_s }, //Показать/скрыть
      //static: false, //Статическая/фиксированная (прижата к верхней границе браузера)
      speedAnimation: 500 //Скорость анимации
     },
