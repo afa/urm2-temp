@@ -40,7 +40,7 @@
  -#TODO: поправить меню, актуализировать
  .corner-l
  .corner-r
- .button{:class => [current_page?(:controller => "main") ? "active" : nil]}
+ .button{:class => [current_page?(:controller => "main") || current_page?(root_path) ? "active" : nil]}
   .button-shadow
    %i.b1
    %i.b2
