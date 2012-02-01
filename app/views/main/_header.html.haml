@@ -40,14 +40,14 @@
  -#TODO: поправить меню, актуализировать
  .corner-l
  .corner-r
- .button{:class => [current_page?(:controller => "main") || current_page?(root_path) ? "active" : nil]}
+ .button{:class => [(params[:controller] == "main") || current_page?(root_path) ? "active" : nil]}
   .button-shadow
    %i.b1
    %i.b2
    %i.b3
     %i
    %a.link{:href=>root_path} Главная
- .button{:class => [current_page?(:controller => "orders") ? "active" : nil]}
+ .button{:class => [(params[:controller] == "orders") ? "active" : nil]}
   .button-shadow
    %i.b1
    %i.b2
@@ -72,7 +72,7 @@
     %li
      %a{:class => [current_page?(lines_orders_path) ? "active" : nil], :href=>lines_orders_path()}
       %span Открытые строки
- .button{:class => [current_page?(:controller => "quotations") ? "active" : nil]}
+ .button{:class => [(params[:controller] == "quotations") ? "active" : nil]}
   .button-shadow
    %i.b1
    %i.b2
