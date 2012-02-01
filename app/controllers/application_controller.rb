@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def sign_out
+   self.current_user.settings.update_all("value = '0'", "name = 'hideheader'")
    self.current_user.reset_remember_token! if self.current_user
    cookies.delete(:user_remember_token)
    self.current_user = nil
