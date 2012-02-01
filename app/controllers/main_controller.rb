@@ -142,6 +142,10 @@ class MainController < ApplicationController
    end
 
   end
+
+  def set
+   p ":::main#set", params[:id], params[:value]
+  end
  protected
   #def get_accounts
   # @accounts = current_user.accounts.where(:blocked => false)

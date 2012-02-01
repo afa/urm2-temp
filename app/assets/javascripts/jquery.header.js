@@ -158,6 +158,7 @@ var header = false, //Шапка
 								header.heightMonitor.set(-104);
 								header.fixed();
 							}
+							makeAjaxCall("/main/hideheader/set?value=0", function(){}, function(){});
 							$(this).removeClass('up').addClass('down');
 							settings.header.hide = true;
 						}
@@ -170,6 +171,7 @@ var header = false, //Шапка
 								header.heightMonitor.set(104);
 								header.static();
 							}
+							makeAjaxCall("/main/hideheader/set?value=1", function(){}, function(){});
 							$(this).removeClass('down').addClass('up');
 							settings.header.hide = false;
 						}
