@@ -144,6 +144,7 @@ class MainController < ApplicationController
   end
 
   def set
+   session[params[:id]] = params[:value]
    p ":::main#set", params[:id], params[:value]
    respond_with do |format|
     format.json do
