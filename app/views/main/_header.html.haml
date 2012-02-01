@@ -68,10 +68,10 @@
    %ul.submenu
     %li
      %a{:href=>orders_path}
-      %span Список заказов
+      %span{:class => [current_page?(orders_path) ? "active" : nil]} Список заказов
     %li
      %a.order{:href=>lines_orders_path()}
-      %span Открытые строки
+      %span{:class => [current_page?(lines_orders_path) ? "active" : nil]} Открытые строки
  .button{:class => [current_page?(:controller => "quotations") ? "active" : nil]}
   .button-shadow
    %i.b1
@@ -93,10 +93,10 @@
    %ul.submenu
     %li
      %a{:href=>quotations_path}
-      %span Список запросов
+      %span{:class => [current_page?(quotations_path) ? "active" : nil]} Список запросов
     %li
      %a.order{:href=>lines_quotations_path()}
-      %span Открытые строки
+      %span{:class => [current_page?(lines_quotations_path) ? "active" : nil]} Открытые строки
     -# %li
      %a{:href=>"#"}
       %span Грузы
