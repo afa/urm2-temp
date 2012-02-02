@@ -85,7 +85,7 @@ class Axapta
    return [] unless args.first.has_key?("item_id") || args.first.has_key?(:item_id)
    srch = args.first["item_id"]
    srch = args.first[:item_id] unless srch
-   res = AxaptaRequest.retail_price(*args).try(:[], "items") || []
+   res = AxaptaRequest.retail_price(*args).try(:[], "prices") || []
    a = {}
    p ":::ax retprice ", res
    locs = res["prices"].sort_by{|l| l["min_qty"] }[0, 4]
