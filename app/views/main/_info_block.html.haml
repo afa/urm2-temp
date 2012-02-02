@@ -1,3 +1,7 @@
+- prices = info_block.delete("prices")
+- keys = info_block.map{|k, v| not (v.blank? || v.to_s == '0') ? k : nil }.compact
+- cnt = (keys.size/2.0).ceil
+- p ":::info ", info_block
 %tr.sub-row-block{:class => "info_item_#{after}"}
  %th.icons{:class=>"border-l"}
   .icon
@@ -9,6 +13,15 @@
      .item-f
       -# %a{:href=>"#"}Описание
       Описание
+     - unless keys.empty?
+      - keys.each_slice(cnt) do |blk|
+       %div
+        - blk.each do |key|
+         .item
+          
+
+
+
      - unless info_block["regulations"].blank? || info_block["regulations"].to_s == '0'
       .item
        Регистрационная позиция:
