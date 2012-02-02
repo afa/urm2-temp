@@ -88,7 +88,7 @@ class Axapta
    res = AxaptaRequest.retail_price(*args).try(:[], "prices") || []
    a = {}
    p ":::ax retprice ", res
-   locs = res["prices"].sort_by{|l| l["min_qty"] }[0, 4]
+   locs = res.sort_by{|l| l["min_qty"] }[0, 4]
    a.merge!("price1" => locs[0]["price"]) if locs[0]
    a.merge!("price2" => locs[1]["price"], "count2" => locs[1]["min_qty"]) if locs[1]
    a.merge!("price3" => locs[2]["price"], "count3" => locs[2]["min_qty"]) if locs[2]
