@@ -1,5 +1,5 @@
 - prices = info_block.delete("prices")
-- keys = info_block.map{|k, v| not (v.blank? || v.to_s == '0') ? k : nil }.compact
+- keys = info_block.select{|k, v| not (v.blank? || v.to_s == '0') }.keys
 - cnt = (keys.size/2.0).ceil
 - p ":::info ", info_block
 %tr.sub-row-block{:class => "info_item_#{after}"}
