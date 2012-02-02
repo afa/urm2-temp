@@ -131,11 +131,17 @@ class MainController < ApplicationController
    logger.info "--- request_start: #{Time.now}"
    begin
     @data = Axapta.item_info({:user_hash => @hash, :item_id => @code})
-    @data["prices"] = Axapta.retail_price(:user_hash => @hash, :item_id => @code)
    rescue Exception => e
     p "---exc in info #{Time.now}", e, e.backtrace
     logger.info e.to_s
     @data = {}
+   end
+   begin
+    @data["prices"] = Axapta.retail_price(:user_hash => @hash, :item_id => @code)
+   rescue Exception => e
+    p "---exc in retail #{Time.now}", e, e.backtrace
+    logger.info e.to_s
+    @data["prices"] = []
    end
    respond_with do |format|
     format.js { render :layout => false }

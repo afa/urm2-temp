@@ -9,28 +9,38 @@
      .item-f
       -# %a{:href=>"#"}Описание
       Описание
-     .item
-      Регистрационная позиция:
-      %span.color-black= info_block["regulations"]
-     .item
-      Снято с производства:
-      %span.color-black= info_block["discontinued"]
+     - unless info_block["regulations"].blank?
+      .item
+       Регистрационная позиция:
+       %span.color-black= info_block["regulations"]
+     - unless info_block["discontinued"].blank?
+      .item
+       Снято с производства:
+       %span.color-black= info_block["discontinued"]
+     - unless info_block["retail"].blank?
+      .item
+       Цена конечного потребителя:
+       %span.color-black= info_block["retail"]
      -# .item
       Сегмент:
       %span.color-black Ремонт
     %td
-     .item
-      Брутто-объём в кубических мм:
-      %span.color-black= info_block["volume"]
-     .item
-      Упаковочное количество:
-      %span.color-black= info_block["qty_in_pack"]
-     .item
-      Вес брутто, г:
-      %span.color-black= info_block["weight"]
-     .item
-      Вид упаковки:
-      %span.color-black= info_block["packing_type"]
+     - unless info_block["volume"].blank?
+      .item
+       Брутто-объём в кубических мм:
+       %span.color-black= info_block["volume"]
+     - unless info_block["qty_in_pack"].blank?
+      .item
+       Упаковочное количество:
+       %span.color-black= info_block["qty_in_pack"]
+     - unless info_block["weight"].blank?
+      .item
+       Вес брутто, г:
+       %span.color-black= info_block["weight"]
+     - unless info_block["packing_type"].blank?
+      .item
+       Вид упаковки:
+       %span.color-black= info_block["packing_type"]
     -# %td
      .item
       %a{:href=>"#"} Комплементарные товары
