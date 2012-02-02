@@ -9,7 +9,7 @@
      .item-f
       -# %a{:href=>"#"}Описание
       Описание
-     - unless info_block["regulations"].blank?
+     - unless info_block["regulations"].blank? || info_block["regulations"].zero?
       .item
        Регистрационная позиция:
        %span.color-black= info_block["regulations"]
