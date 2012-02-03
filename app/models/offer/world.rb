@@ -59,6 +59,7 @@ class Offer::World < Offer::Base
       #n.name = hsh["item_name"]
       n.qtys = prgnz["price_qty"].sort_by{|p| p["min_qty"] }.inject([]){|rr, h| rr << OpenStruct.new(h) }
       n.prices = n.qtys.map{|p| p.price }
+      n.alt_prices = n.qtys.map{|p| p.price_ref }
       n.counts = n.qtys.map{|p| p.min_qty }
       n.raw_prognosis = prgnz
       CartWorld.prepare_code(n)

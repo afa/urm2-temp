@@ -50,7 +50,12 @@
     - else
      .delivery &nbsp;
  -# %td= items_line["prognoz"]
- %td= items_line.prices[0]
+ %td
+  %span{:class => ["price", @use_alt_price ? "hidden" : "active"]}
+   = items_line.prices[0]
+  %span{:class => ["price", @use_alt_price ? "active" : "hidden"]}
+   = items_line.alt_prices[0]
+  
  %td.green= items_line.counts[1]
  %td= items_line.prices[1]
  %td.green= items_line.counts[2]
