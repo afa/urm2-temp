@@ -7,16 +7,19 @@
   .icon
    %a.plus{:href=>"#", :class=>"hide"}
  %th.info{:colspan=>"17", :class=>"border-r"}
-  %table
-   %tr
-    %td
-     .item-f
-      -# %a{:href=>"#"}Описание
-      Описание
-     - unless keys.empty?
-      - keys.each_slice(cnt) do |blk|
-       %div
-        - blk.each do |key|
-         .item
-          = t(key.to_sym)
-          %span.color-black= info_block[key]
+  - unless keys.empty?
+   .item-f
+    -# %a{:href=>"#"}Описание
+    Описание
+- unless keys.empty?
+ %tr
+  %td.border-l &nbsp;
+  %td.border-r{:colspan=>"17"}
+   %table
+    %tr
+     - keys.each_slice(cnt) do |blk|
+      %td
+       - blk.each do |key|
+        .item
+         = t(key.to_sym)
+         %span.color-black= info_block[key]
