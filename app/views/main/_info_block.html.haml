@@ -1,7 +1,6 @@
 - prices = info_block.delete("prices")
 - keys = info_block.inject({}){|r, (k, v)| (not (v.blank? || v.to_s == '0')) ? r.merge(k => v) : r }.keys
 - cnt = (keys.size/2.0).ceil
-- p ":::info ", prices
 %tr.sub-row-block{:class => "info_item_#{after}"}
  %th.icons{:class=>"border-l"}
   .icon
@@ -12,7 +11,7 @@
     -# %a{:href=>"#"}Описание
     Описание
 - unless keys.empty?
- %tr
+ %tr.sub-row-block{:class => "info_item_#{after}"}
   %td.border-l &nbsp;
   %td.border-r{:colspan=>"17", :valign => "top"}
    %table
@@ -26,6 +25,7 @@
      %td{:style => "border-bottom: 0;"}
       %table
        - 4.times do |idx|
-        %tr
-         %td{:style => "border-bottom: 0;"}= prices["count#{idx + 1}"]
-         %td{:style => "border-bottom: 0;"}= prices["price#{idx + 1}"]
+        -if prices.has_key?("price#{idx + 1}")
+         %tr
+          %td{:style => "border-bottom: 0;"}= prices["count#{idx + 1}"]
+          %td{:style => "border-bottom: 0;"}= prices["price#{idx + 1}"]
