@@ -1,7 +1,7 @@
 class Offer::Store < Offer::Base
 
  @signature_fields = @base_signature_fields + [:location_id]
- attr_accessor :location_id, :brend_name, :brend_url, :qtys, :prices, :counts, :need_more, :qty_in_pack, :segment_rus, :body_name, :analog_exists, :forecast_available, :min_qty, :max_qty, :raw_location, :vend_proposal_date
+ attr_accessor :location_id, :brend_name, :brend_url, :qtys, :prices, :counts, :need_more, :qty_in_pack, :segment_rus, :body_name, :analog_exists, :forecast_available, :min_qty, :max_qty, :raw_location, :vend_proposal_date, :alt_prices
 
   def self.search(hsh)
    return [] if hsh.blank? || hsh[:query_string].blank? || hsh[:query_string].size < 3

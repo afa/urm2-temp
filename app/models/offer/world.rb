@@ -3,7 +3,7 @@ class Offer::World < Offer::Base
 
   @signature_fields = @base_signature_fields + [:prognoz, :vend_qty, :qty_multiples]
 
-  attr_accessor :prognoz, :vend_qty, :qty_multiples, :vend_proposal_date, :qtys, :prices, :counts, :need_more, :raw_prognosis
+  attr_accessor :prognoz, :vend_qty, :qty_multiples, :vend_proposal_date, :qtys, :prices, :counts, :need_more, :raw_prognosis, :alt_prices
 
   def self.ask_axapta_by_id(product_id)
    return [] if product_id.blank?
