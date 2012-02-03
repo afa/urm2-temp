@@ -1,7 +1,7 @@
 - prices = info_block.delete("prices")
 - keys = info_block.inject({}){|r, (k, v)| (not (v.blank? || v.to_s == '0')) ? r.merge(k => v) : r }.keys
 - cnt = (keys.size/2.0).ceil
-- p ":::info ", info_block
+- p ":::info ", prices
 %tr.sub-row-block{:class => "info_item_#{after}"}
  %th.icons{:class=>"border-l"}
   .icon
@@ -14,7 +14,7 @@
 - unless keys.empty?
  %tr
   %td.border-l &nbsp;
-  %td.border-r{:colspan=>"17"}
+  %td.border-r{:colspan=>"17", :"v-align" => "top"}
    %table
     %tr
      - keys.each_slice(cnt) do |blk|
@@ -23,3 +23,8 @@
         .item
          = t(key.to_sym)
          %span.color-black= info_block[key]
+     %td
+      %table
+       - prices.each do |prc|
+        %tr
+         %td= # prc
