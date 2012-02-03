@@ -1,5 +1,5 @@
 - prices = info_block.delete("prices")
-- keys = info_block.select{|k, v| not (v.blank? || v.to_s == '0') }.keys
+- keys = info_block.inject{|r, (k, v)| (not (v.blank? || v.to_s == '0')) ? r.merge(k => v) : r }.keys
 - cnt = (keys.size/2.0).ceil
 - p ":::info ", info_block
 %tr.sub-row-block{:class => "info_item_#{after}"}
@@ -18,7 +18,7 @@
        %div
         - blk.each do |key|
          .item
-          = key
+          = t(key.to_sym)
           %span.color-black= info_block[key]
 
 
