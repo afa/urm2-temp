@@ -18,14 +18,14 @@
    %table
     %tr
      - keys.each_slice(cnt) do |blk|
-      %td
+      %td{:style => "border-botton: 0;"}
        - blk.each do |key|
         .item
          = t(key.to_sym)
          %span.color-black= info_block[key]
-     %td
+     %td{:style => "border-botton: 0;"}
       %table
        - 4.times do |idx|
         %tr
-         %td= prices["count#{idx + 1}"]
-         %td= prices["price#{idx + 1}"]
+         %td{:style => "border-botton: 0;"}= prices["count#{idx + 1}"]
+         %td{:style => "border-botton: 0;"}= prices["price#{idx + 1}"]
