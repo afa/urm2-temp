@@ -23,9 +23,13 @@
          = t(key.to_sym)
          %span.color-black= info_block[key]
      %td{:style => "border-bottom: 0;"}
-      %table
-       - 4.times do |idx|
-        -if prices.has_key?("price#{idx + 1}")
-         %tr
-          %td{:style => "border-bottom: 0;"}= prices["count#{idx + 1}"]
-          %td{:style => "border-bottom: 0;"}= prices["price#{idx + 1}"]
+      - unless prices.blank?
+       %table
+        %tr
+         %th K
+         %th Ц
+        - 4.times do |idx|
+         -if prices.has_key?("price#{idx + 1}")
+          %tr
+           %td{:style => "border-bottom: 0;"}= prices["count#{idx + 1}"]
+           %td{:style => "border-bottom: 0;"}= prices["price#{idx + 1}"]
