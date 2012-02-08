@@ -215,23 +215,14 @@
       .fields
        Искать:
        = render :partial => "shared/check_button", :locals => {:name => "search[only_available]", :title => "Только в наличии", :opts => {:need_field => true, :use_system => true, :value => WebUtils::parse_bool(@search.only_available)}}
-       -# %span.switch{:class=>"check"}
-        %a{:href=>"#", :name => "search[only_available]"}
-         %span Только в наличии
        = render :partial => "shared/check_button", :locals => {:name => "search[only_store]", :title => "Только склад", :opts => {:need_field => true, :use_system => true, :value => WebUtils::parse_bool(@search.only_store)}}
-       -# %span.switch{:class=>"check"}
-        %a{:href=>"#", :name => "search[only_store]"}
-         %span Только склад
-       %span.switch{:class=>"radio"}
-        Цены:
-        %a{:href=>"#", :class=>"active"}
-         %span USD
-        %a{:href=>"#"}
-         %span RUB
-       -# %span.switch{:class=>"check"}
-        Показать:
-        %a{:href=>"#", :class=>"active"}
-         %span Только в наличии
+       - if defined?(@use_alt_price)
+        %span.switch{:class=>"radio"}
+         Цены:
+         %a{:href=>"#", :class=>[@use_alt_price ? nil : "active", "usd"]}
+          %span USD
+         %a{:href=>"#", :class => [@use_alt_price ? "active" : nil, "rub"]}
+          %span RUB
        -# %span.switch{:class=>"radio"}
         Упорядочить по:
         %a{:href=>"#", :class=>"active"}

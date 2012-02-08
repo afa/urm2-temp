@@ -56,6 +56,14 @@
     //Скроллинг таблиц
     tableScroller.refresh();
     //Выпадающие списки (файл: jquery.controls.js)
+    $('.switch.radio a.rub').click(function(){
+    $('.alt.price').add_class('active').remove_class('hidden');
+    $('.real.price').add_class('hidden').remove_class('active');
+    });
+    $('.switch.radio a.usd').click(function(){
+    $('.alt.price').add_class('hidden').remove_class('active');
+    $('.real.price').add_class('active').remove_class('hidden');
+    });
     $('.select').selectList();
     //Кнопки
     $('.button-style').button();
