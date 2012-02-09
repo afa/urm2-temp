@@ -27,7 +27,7 @@ class MainController < ApplicationController
    @reqs = @carts.partition{|i| i.is_a? CartRequest }[0]
    @nreqs = @carts.partition{|i| i.is_a? CartRequest }[1]
    @deliveries = current_user.deliveries
-
+   @use_alt_prices = false if @items.detect{|i| i.alt_prices.size > 0 }
 
   end
 
