@@ -54,10 +54,10 @@ group :development, :test do
  gem "rcov"
  #gem "jasmine"
  gem "jasmine-headless-webkit"
- gem "mustang"
+ #gem "mustang"
  gem "headless"
  gem "execjs"
- #gem "therubyracer"
+ gem "therubyracer"
  #gem "capybara"
  #gem "selenium-webdriver"
 # gem 'webrat'

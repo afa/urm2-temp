@@ -21,13 +21,41 @@
  %td.double-cell= dms_line.vend_qty
  %td.double-last-cell= dms_line.qty_multiples
  %td= dms_line.prognoz
- %td= dms_line.prices[0]
+ %td
+  %span{:class => ["price", "real", @use_alt_price ? "hidden" : "active"]}
+   = dms_line.prices[0]
+  %span{:class => ["price", "alt", @use_alt_price ? "active" : "hidden"]}
+   = dms_line.alt_prices[0]
+
  %td.green= dms_line.counts[1]
- %td= dms_line.prices[1]
+ -# %td= items_line.prices[1]
+ %td
+  %span{:class => ["price", "real", @use_alt_price ? "hidden" : "active"]}
+   = dms_line.prices[1]
+  %span{:class => ["price", "alt", @use_alt_price ? "active" : "hidden"]}
+   = dms_line.alt_prices[1]
  %td.green= dms_line.counts[2]
- %td= dms_line.prices[2]
+ -# %td= items_line.prices[2]
+ %td
+  %span{:class => ["price", "real", @use_alt_price ? "hidden" : "active"]}
+   = dms_line.prices[2]
+  %span{:class => ["price", "alt", @use_alt_price ? "active" : "hidden"]}
+   = dms_line.alt_prices[2]
  %td.green= dms_line.counts[3]
- %td= dms_line.prices[3]
+ -# %td= items_line.prices[3]
+ %td
+  %span{:class => ["price", "real", @use_alt_price ? "hidden" : "active"]}
+   = dms_line.prices[3]
+  %span{:class => ["price", "alt", @use_alt_price ? "active" : "hidden"]}
+   = dms_line.alt_prices[3]
+
+ -# %td= dms_line.prices[0]
+ -# %td.green= dms_line.counts[1]
+ -# %td= dms_line.prices[1]
+ -# %td.green= dms_line.counts[2]
+ -# %td= dms_line.prices[2]
+ -# %td.green= dms_line.counts[3]
+ -# %td= dms_line.prices[3]
  -# %td.grey= dms_line["qty_in_pack"]
  -# %td.font-small
   %span.color-red= dms_line["vend_proposal_date"]
