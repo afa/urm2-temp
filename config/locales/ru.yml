@@ -120,3 +120,8 @@ ru:
  reserve: Резерв
  order_needed: Выставить счет
  order: Заказ
+ class_name: Класс
+ packing_type: Вид упаковки
+ volume: "Брутто-объём, мм куб."
+ qty_in_pack: Упаковочное количество
+ weight: Вес брутто, г
