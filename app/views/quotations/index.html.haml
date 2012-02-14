@@ -5,7 +5,7 @@
     .field
      = f.label :quotation_id
      = f.text_field :quotation_id
-     = render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
+    = render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
    .fields
     .field
      = render :partial => "shared/select_list", :locals => {:list_items => (@filter.quotation_statuses || []), :name => "filter[quotation_status]"}
