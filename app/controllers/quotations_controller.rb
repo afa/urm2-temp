@@ -41,7 +41,8 @@ class QuotationsController < ApplicationController
 
  protected
   def get_filter
-   @filter = OpenStruct.new(params[:filter] || {})
+   @filter = OpenStruct.new((params[:filter] || {}).merge(:quotation_statuses => Axapta.enums["quotation_status"]))
+   
   end
 
 end
