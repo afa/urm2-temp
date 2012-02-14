@@ -4,5 +4,3 @@
   - list_items.each do |a|
    = link_to a[1], "#", :name => a[0], :class => "showed", :style => "white-space:nowrap;min-width:#{sz}ex;"
  = hidden_field_tag name, list_items.first.try(:first) || 0
-
-
