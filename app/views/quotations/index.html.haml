@@ -9,7 +9,7 @@
    .clear.padding
    .fields
     .field
-     = render :partial => "shared/select_list", :locals => {:list_items => (@filter.quotation_statuses || []), :name => "filter[quotation_status]", :opts => {:use_system => true}}
+     = render :partial => "shared/select_list", :locals => {:list_items => (@filter.quotation_statuses || []), :name => "filter[quotation_status]", :title => t(:quotation_status), :opts => {:use_system => true}}
      -# = f.label :quotation_status
      -# = f.text_field :quotation_status
    .clear.padding
