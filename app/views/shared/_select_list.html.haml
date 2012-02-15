@@ -1,6 +1,36 @@
-- sz = list_items.map{|a| a[1] }.compact.map{|a| a.mb_chars.size }.max
-.select
+-# - sz = list_items.map{|a| a[1] }.compact.map{|a| a.mb_chars.size }.max
+-# .select
  .sub{:style => "z-index:4;"}
   - list_items.each do |a|
    = link_to a[1], "#", :name => a[0], :class => "showed", :style => "white-space:nowrap;min-width:#{sz}ex;"
  = hidden_field_tag name, list_items.first.try(:first) || 0
+
+
+
+- sz = list_items.map{|a| a[1] }.compact.map{|a| a.mb_chars.size }.max
+%span.select
+ - if defined?(opts)
+  - id = opts[:id].blank? ? name.to_s.split(/[\[\]\-]/).map{|s| s.blank? ? nil : s }.compact.join('_') : opts[:id]
+  - val = opts.has_key?(:selected) ? opts[:selected] : ''
+  - if opts[:use_system]
+   %input{:type => "checkbox", :id => id, :value => '1', :name => name, :checked => (val == '1')}
+   %label{:for => id}= title
+  - else
+   - if opts[:need_field]
+    - if opts.has_key?(:field_code)
+     = opts[:field_code]
+    - else
+     = hidden_field_tag name, val, (opts[:field_opts] || {}).merge(id.blank? ? {} : :id => id)
+     -# %input{:name => name, :id => id, :value => val}
+   .sub{:style => "z-index:4;"}
+    - list_items.each do |a|
+     = link_to a[1], "#", :name => a[0], :class => "showed", :style => "white-space:nowrap;min-width:#{sz}ex;"
+   -# %a{:href=>"#", :name => name, :class => [val == '1' ? "active" : nil]}
+    %span= title
+ - else
+  .sub{:style => "z-index:4;"}
+   - list_items.each do |a|
+    = link_to a[1], "#", :name => a[0], :class => "showed", :style => "white-space:nowrap;min-width:#{sz}ex;"
+  -# %a{:href=>"#", :name => name}
+   %span= title
+
