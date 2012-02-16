@@ -41,7 +41,7 @@ class QuotationsController < ApplicationController
 
  protected
   def get_filter
-   @filter = OpenStruct.new((params[:filter] || {}).merge(:quotation_statuses => YAML.load(Setting.find_by_name("hash.quotation_status").try(:value)).zip(YAML.load(Setting.find_by_name("hash.quotation_statusi_rus").try(:value)))))
+   @filter = OpenStruct.new((params[:filter] || {}).merge(:quotation_statuses => YAML.load(Setting.find_by_name("hash.quotation_status").try(:value)).zip(YAML.load(Setting.find_by_name("hash.quotation_status_rus").try(:value)))))
    
   end
 
