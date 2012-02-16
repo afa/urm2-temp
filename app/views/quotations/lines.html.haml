@@ -25,19 +25,20 @@
 -# Код номенклатуры: item_id
 
 .filter-tab-block
- = form_for @filter, :url => lines_quotations_path, :html => {:method => :get} do |f|
-  .field
-   = f.label :quotation_id, t(:quotation_id)
-   = f.text_field :quotation_id
-  .field
-   = f.label :item_name, t(:item_name)
-   = f.text_field :item_name
-  .field
-   = f.label :brend_alias, t(:brend_alias)
-   = f.text_field :brend_alias
-  .clear
-  .field
-   = render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
+ .fields
+  = form_for :filter, :url => lines_quotations_path, :html => {:method => :get} do |f|
+   .field
+    = f.label :quotation_id, t(:quotation_id)
+    = f.text_field :quotation_id
+   .field
+    = f.label :item_name, t(:item_name)
+    = f.text_field :item_name
+   .field
+    = f.label :brend_alias, t(:brend_alias)
+    = f.text_field :brend_alias
+   .clear
+   .field
+    = render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
 
 .clear
 .content-wrap
