@@ -25,14 +25,16 @@
 -# Код номенклатуры: item_id
 
 .filter-block
- .fields
-  = form_for :filter, :url => lines_quotations_path, :html => {:method => :get} do |f|
+ = form_for :filter, :url => lines_quotations_path, :html => {:method => :get} do |f|
+  .fields
    .field
     = f.label :quotation_id, t(:quotation_id)
     = f.text_field :quotation_id
+  .fields
    .field
     = f.label :item_name, t(:item_name)
     = f.text_field :item_name
+  .fields
    .field
     = f.label :brend_alias, t(:brend_alias)
     = f.text_field :brend_alias
