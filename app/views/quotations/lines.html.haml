@@ -25,7 +25,7 @@
 -# Код номенклатуры: item_id
 
 .filter-tab-block
- = form_for :filter, :url => lines_quotations_path, :html => {:method => :get} do |f|
+ = form_for :filter, @filter, :url => lines_quotations_path, :html => {:method => :get} do |f|
   .field
    = f.label :quotation_id, t(:quotation_id)
    = f.text_field :quotation_id

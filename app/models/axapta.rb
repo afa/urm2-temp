@@ -33,14 +33,9 @@ class Axapta
    accnt = Account.find_by_axapta_hash(hash)
    accnt.update_attributes self.filter_account_attributes(self.user_info(hash))
    accnt.parent.update_attributes self.filter_account_attributes(self.user_info(accnt.parent.axapta_hash)) if accnt.parent
-   #non_registered = []
    self.load_child_hashes(hash).each do |hsh|
     acc = Account.find_by_axapta_user_id(hsh["user_id"])
-    #if acc
      acc.update_attributes self.filter_account_attributes(hsh) if acc
-    #else
-     #non_registered << hsh
-    #end
    end
   end
 
@@ -53,23 +48,18 @@ class Axapta
    ar["query_string"] += '*' if ar.has_key?("query_string") && ar["query_string"].last != '*'
    ar[:query_string] += '*' if ar.has_key?(:query_string) && ar[:query_string].last != '*'
    res = AxaptaRequest.search_item_name_h(ar).try(:[], "items") || []
-   #res = AxaptaRequest.search_item_name_h((*args).map{|k, v| (k.to_s == "search_string" && v.last != "*") ? ( k => v + "*" ) : (k => v) }).try(:[], "items") || []
-   #res
   end
 
   def self.search_dms_names(*args)
-   #p "search_dms_names", args
    ar = *args.dup
    ar["query_string"] += '*' if ar.has_key?("query_string") && !ar["query_string"].blank? && ar["query_string"].last != '*'
    ar[:query_string] += '*' if ar.has_key?(:query_string) && !ar[:query_string].blank? && ar[:query_string].last != '*'
    res = AxaptaRequest.search_item_name_dms_h(ar).try(:[], "items") || []
-   #res
   end
 
   def self.item_info(*args)
    ar = *args.dup
    res = AxaptaRequest.item_info(ar) || []
-   #res
   end
 
   def self.search_analogs(*args)
@@ -78,7 +68,6 @@ class Axapta
    srch = args.first[:item_id_search] unless srch
    res = AxaptaRequest.search_item_an_h(*args).try(:[], "items") || []
    res.select{|i| i.has_key?("item_id") && i["item_id"] != srch }
-   #res
   end
 
   def self.retail_price(*args)
@@ -137,6 +126,11 @@ class Axapta
   end
 
   def self.quotation_lines(hsh)
-   (AxaptaRequest.quotation_lines(hsh.merge(:user_hash => User.current.try(:current_account).try(:axapta_hash))).try(:[], "quotations_lines") || []).map{|i| OpenStruct.new(i)}
+   fix = {:item_name => hsh[:item_name]}
+   unless fix[:item_name].blank?
+    fix[:item_name] += '*' if fix[:item_name].last != '*'
+    fix[:item_name] = "" if fix[:item_name].mb_chars.length < 4
+   end
+   (AxaptaRequest.quotation_lines(hsh.merge(:user_hash => User.current.try(:current_account).try(:axapta_hash)).merge(fix)).try(:[], "quotations_lines") || []).map{|i| OpenStruct.new(i)}
   end
 end
