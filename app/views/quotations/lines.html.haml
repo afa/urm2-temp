@@ -34,11 +34,12 @@
    .field
     = f.label :item_name, t(:item_name)
     = f.text_field :item_name
-  .fields
+  .fields{:style => "position:relative;"}
    .field
     = f.label :brend_alias, t(:brend_alias)
     = f.text_field :brend_alias
-   .clear
+  .fields
+   .clear.padding
    .field
     = render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
 
