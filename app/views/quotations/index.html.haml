@@ -9,8 +9,8 @@
    .clear.padding
    .fields
     = render :partial => "shared/select_list", :locals => {:list_items => (@filter.quotation_statuses || []), :name => "filter[quotation_status]", :title => t(:quotation_status), :opts => {:use_system => true}}
-     -# = f.label :quotation_status
-     -# = f.text_field :quotation_status
+    -# = f.label :quotation_status
+    -# = f.text_field :quotation_status
     Искать:
     = render :partial => "shared/check_button", :locals => {:name => "filter[this_sales_origin]", :title => t(:this_sales_origin), :opts => {:use_system => true, :need_field => false, :value => @filter.try(:this_sales_origin).try(:==, '1')}}
     = render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:use_system => true, :need_field => false, :value => @filter.try(:only_my).try(:==, '1')}}
