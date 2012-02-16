@@ -8,7 +8,7 @@
 
 
 - sz = list_items.map{|a| a[1] }.compact.map{|a| a.mb_chars.size }.max
-%span.select
+%span.select{:class => [defined?(opts) && opts[:use_system] ? "system" : nil]}
  - if defined?(opts)
   - id = opts[:id].blank? ? name.to_s.split(/[\[\]\-]/).map{|s| s.blank? ? nil : s }.compact.join('_') : opts[:id]
   - val = opts.has_key?(:selected) ? opts[:selected] : ''
