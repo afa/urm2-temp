@@ -126,6 +126,7 @@ ru:
  qty_in_pack: Упаковочное количество
  weight: Вес брутто, г
  quotation_id: Код запроса
+ quotation_status: Статус запроса
  brend_alias: Производитель
  sales_id: Номер заказа
  official_number: Оф. номер счета

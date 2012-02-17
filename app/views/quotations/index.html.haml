@@ -3,7 +3,7 @@
   = form_for :filter, :url => quotations_path, :html => {:method => :get} do |f|
    .fields
     .field
-     = f.label :quotation_id
+     = f.label :quotation_id, t(:quotation_id)
      = f.text_field :quotation_id
     = render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
    .clear.padding
