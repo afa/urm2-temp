@@ -9,11 +9,12 @@
  .filter-block
   -# %form{:action=>" "}
   = form_for :filter, :url => orders_path, :html => {:method => :get} do |f|
-   .fields.padded
+   .fields
     .field
      = f.label :sales_id
      = f.text_field :sales_id
-   .fields.clear.padded
+   .clear.padded
+   .fields
     .field
      = f.label :official_number
      = f.text_field :official_number
@@ -30,25 +31,11 @@
       %span Найти!
       %i.bl &nbsp;
       %i.br &nbsp;
-  .clear
+  .clear.padded
   .fields
    Искать:
-   = render :partial => "shared/check_button", :locals => {:name => "filter[this_sales_origin]", :title => t(:this_sales_origin), :opts => {:need_field => true, :value => params[:filter].try(:[], :this_sales_origin).try(:==, '1')}}
-   = render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:need_field => true, :value => params[:filter].try(:[], :only_my).try(:==, '1')}}
-   -# %span.switch{:class=>"check"}
-    Искать:
-    %a{:href=>"#", :name => "filter[this_sales_origin]"}
-     %span= t :this_sales_origin
-   -# %span.switch{:class=>"check"}
-    %a{:href=>"#", :name => "filter[only_my]"}
-     %span= t :only_my
-   -# %span.switch{:class=>"radio"}
-    Цены:
-    %a{:href=>"#", :class=>"active"}
-     %span USD
-    %a{:href=>"#"}
-     %span RUB
-
+   = render :partial => "shared/check_button", :locals => {:name => "filter[this_sales_origin]", :title => t(:this_sales_origin), :opts => {:use_system => true, :value => params[:filter].try(:[], :this_sales_origin).try(:==, '1')}}
+   = render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:use_system => true, :value => params[:filter].try(:[], :only_my).try(:==, '1')}}
 
  .table-title{:class=>"favorite"}Список заказов
  .table-navigation-block{:class => "scroll"}
