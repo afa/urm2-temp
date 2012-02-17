@@ -1,44 +1,23 @@
--#
- filters
- Номер заказа sales_id
- Оф. номер счета official_number
- Только УРМ bool this_sales_origin
- Только мои заказы bool only_my
-
 .content-wrap
  .filter-block
-  -# %form{:action=>" "}
   = form_for :filter, :url => orders_path, :html => {:method => :get} do |f|
    .fields
     .field
      = f.label :sales_id
      = f.text_field :sales_id
     = render :partial => "shared/submit_button", :locals => {:title => "Найти"}
-    -# .button
-     %a.button-style{:href=>"#"}
-      %i.t &nbsp;
-      %i.b &nbsp;
-      %i.tl &nbsp;
-      %i.tr &nbsp;
-      %span Найти!
-      %i.bl &nbsp;
-      %i.br &nbsp;
    .clear.padded
    .fields
     .field
      = f.label :official_number
      = f.text_field :official_number
-     = f.hidden_field :this_sales_origin
-     = f.hidden_field :only_my
-     -# = f.submit :find
-    -# %input{:type=>"text", :value=>"TDA2003;OR;300"}
+     -# = f.hidden_field :this_sales_origin
+     -# = f.hidden_field :only_my
    .clear.padded
    .fields
-    .field
-     Искать:
-     = render :partial => "shared/check_button", :locals => {:name => "filter[this_sales_origin]", :title => t(:this_sales_origin), :opts => {:use_system => true, :value => params[:filter].try(:[], :this_sales_origin).try(:==, '1')}}
-    .field
-     = render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:use_system => true, :value => params[:filter].try(:[], :only_my).try(:==, '1')}}
+    Искать:
+    = render :partial => "shared/check_button", :locals => {:name => "filter[this_sales_origin]", :title => t(:this_sales_origin), :opts => {:use_system => true, :value => params[:filter].try(:[], :this_sales_origin).try(:==, '1')}}
+    = render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:use_system => true, :value => params[:filter].try(:[], :only_my).try(:==, '1')}}
 
  .table-title{:class=>"favorite"}Список заказов
  .table-navigation-block{:class => "scroll"}
@@ -59,4 +38,3 @@
       %th.text-right Счет
       %th.text-right Сумма по счету
      = render :partial => "orders/list_line", :collection => @orders
--# filters sales_id, official_number, this_sales_origin, only_my

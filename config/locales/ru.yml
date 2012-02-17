@@ -127,3 +127,8 @@ ru:
  weight: Вес брутто, г
  quotation_id: Код запроса
  brend_alias: Производитель
+ sales_id: Номер заказа
+ official_number: Оф. номер счета
+ this_sales_origin: Только УРМ
+ only_my: Только мои заказы
+
