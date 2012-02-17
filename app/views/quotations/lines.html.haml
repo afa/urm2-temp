@@ -31,6 +31,8 @@
     .field
      = f.label :quotation_id, t(:quotation_id)
      = f.text_field :quotation_id
+    .field
+     = render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
    .fields
     .field
      = f.label :item_name, t(:item_name)
@@ -39,10 +41,7 @@
     .field
      = f.label :brend_alias, t(:brend_alias)
      = f.text_field :brend_alias
-   .fields
-    .clear.padded
-    .field
-     = render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
+   .clear.padded
 
 .clear
 .content-wrap
