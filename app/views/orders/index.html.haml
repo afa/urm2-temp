@@ -9,11 +9,11 @@
  .filter-block
   -# %form{:action=>" "}
   = form_for :filter, :url => orders_path, :html => {:method => :get} do |f|
-   .fields
+   .fields.padded
     .field
      = f.label :sales_id
      = f.text_field :sales_id
-   .fields
+   .fields.clear.padded
     .field
      = f.label :official_number
      = f.text_field :official_number
