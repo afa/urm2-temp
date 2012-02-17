@@ -15,9 +15,10 @@
      -# = f.hidden_field :only_my
    .clear.padded
    .fields
-    Искать:
+    -# Искать:
     = render :partial => "shared/check_button", :locals => {:name => "filter[this_sales_origin]", :title => t(:this_sales_origin), :opts => {:use_system => true, :value => params[:filter].try(:[], :this_sales_origin).try(:==, '1')}}
     = render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:use_system => true, :value => params[:filter].try(:[], :only_my).try(:==, '1')}}
+   .clear.padded
 
  .table-title{:class=>"favorite"}Список заказов
  .table-navigation-block{:class => "scroll"}
