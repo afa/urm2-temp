@@ -9,10 +9,10 @@
 .filter-tab-block
  -# %form{:action=>" "}
  = form_for :filter, :url => lines_orders_path, :html => {:method => :get} do |f|
-  .field
+  .field.urm
    = f.label :item_name, t(:item_name)
    = f.text_field :item_name
-  .field
+  .field.urm
    Дата отгрузки:
    с&nbsp;
    %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from}
