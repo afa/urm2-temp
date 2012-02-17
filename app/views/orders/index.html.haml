@@ -31,11 +31,13 @@
      = f.hidden_field :only_my
      -# = f.submit :find
     -# %input{:type=>"text", :value=>"TDA2003;OR;300"}
-  .clear.padded
-  .fields
-   Искать:
-   = render :partial => "shared/check_button", :locals => {:name => "filter[this_sales_origin]", :title => t(:this_sales_origin), :opts => {:use_system => true, :value => params[:filter].try(:[], :this_sales_origin).try(:==, '1')}}
-   = render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:use_system => true, :value => params[:filter].try(:[], :only_my).try(:==, '1')}}
+   .clear.padded
+   .fields
+    .field
+     Искать:
+     = render :partial => "shared/check_button", :locals => {:name => "filter[this_sales_origin]", :title => t(:this_sales_origin), :opts => {:use_system => true, :value => params[:filter].try(:[], :this_sales_origin).try(:==, '1')}}
+    .field
+     = render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:use_system => true, :value => params[:filter].try(:[], :only_my).try(:==, '1')}}
 
  .table-title{:class=>"favorite"}Список заказов
  .table-navigation-block{:class => "scroll"}
