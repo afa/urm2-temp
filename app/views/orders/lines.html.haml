@@ -27,8 +27,7 @@
     = render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:use_system => true, :need_field => true, :value => @filter.try(:only_my).try(:==, '1')}}
     = render :partial => "shared/check_button", :locals => {:name => "filter[only_dms]", :title => t(:only_dms), :opts => {:use_system => true, :need_field => true, :value => @filter.try(:only_dms).try(:==, '1')}}
    .clear.padded
-   .field
-    = render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
+   = render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
    .clear.block-padded
 
  .table-title{:class=>"favorite"}Список заказов
