@@ -13,6 +13,7 @@
     .field.urm
      = f.label :item_name, t(:item_name)
      = f.text_field :item_name
+   .clear.padded
    .fields
     .field.urm
      Дата отгрузки:
@@ -20,7 +21,7 @@
      %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from}
      по&nbsp;
      %input.calendar-input{:type => "text", :name => 'filter[date_to]', :value => @filter.try(:date_to).blank? ? Date.current.strftime("%Y-%m-%d") : @filter.date_to}
-   .clear
+   .clear.padded
    .fields
     Искать:
     = render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:use_system => true, :need_field => true, :value => @filter.try(:only_my).try(:==, '1')}}
