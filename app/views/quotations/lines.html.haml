@@ -9,36 +9,33 @@
 
 -# Примечание: comment
 -# Статус: quotation_status
--# Поля:
-
--# Код запроса: quotation_id
--# Статус: quotation_line_status
--# ROHS: todo
--# Наименование: item_name
--# Производитель: brend_alias
--# Цена клиента: client_price (если 0 - пусто)
--# Цена предложения: sales_price (если 0 - пусто)
--# Текущее количество: sales_qty (если 0 - пусто)
--# Прогноз: quotation_prognosis_id
--# Примечание: line_comment
--# Сумма: line_amount (если 0 - пусто)
--# Код номенклатуры: item_id
 
 .content-wrap
  .filter-block
   = form_for :filter, :url => lines_quotations_path, :html => {:method => :get} do |f|
-   .fields
+   %table
+    %tr
+     %th= f.label :item_name, t(:item_name)
+     %td{:colspan => 3}= f.text_field :item_name
+     %td= render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
+    %tr
+     %th= f.label :quotation_id, t(:quotation_id)
+     %td= f.text_field :quotation_id
+     %th= f.label :brend_alias, t(:brend_alias)
+     %td= f.text_field :brend_alias
+     %td
+   -# .fields
     .field.urm
      = f.label :quotation_id, t(:quotation_id)
      = f.text_field :quotation_id
     = render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
-   .clear.block-padded
-   .fields
+   -# .clear.block-padded
+   -# .fields
     .field.urm
      = f.label :item_name, t(:item_name)
      = f.text_field :item_name
-   .clear.block-padded
-   .fields
+   -# .clear.block-padded
+   -# .fields
     .field.urm
      = f.label :brend_alias, t(:brend_alias)
      = f.text_field :brend_alias
