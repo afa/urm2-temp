@@ -12,7 +12,7 @@
    %table
     %tr
      %th= f.label :item_name, t(:item_name)
-     %td= f.text_field :item_name
+     %td{:colspan => 3}= f.text_field :item_name
      %td= render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
     %tr
      %th Дата отгрузки:
