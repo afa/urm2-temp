@@ -1,7 +1,7 @@
 .content-wrap
  .filter-block
   = form_for :filter, :url => orders_path, :html => {:method => :get} do |f|
-   %table
+   %table{:style=>"width: 700px;"}
     %tr
      %th= f.label :sales_id, t(:sales_id)
      %td= f.text_field :sales_id

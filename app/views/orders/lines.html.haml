@@ -9,25 +9,39 @@
 .content-wrap
  .filter-block
   = form_for :filter, :url => lines_orders_path, :html => {:method => :get} do |f|
-   .fields
+   %table
+    %tr
+     %th= f.label :item_name, t(:item_name)
+     %td= f.text_field :item_name
+     %td= render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
+    %tr
+     %th Дата отгрузки:
+     %th с&nbsp;
+     %td
+      %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from}
+     %th по&nbsp;
+     %td 
+      %input.calendar-input{:type => "text", :name => 'filter[date_to]', :value => @filter.try(:date_to).blank? ? Date.current.strftime("%Y-%m-%d") : @filter.date_to}
+      
+   -# .fields
     .field.urm
      = f.label :item_name, t(:item_name)
      = f.text_field :item_name
-   .clear.padded
-   .fields
+   -# .clear.padded
+   -# .fields
     -# .field.urm
     Дата отгрузки:
     с&nbsp;
     %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from}
     по&nbsp;
     %input.calendar-input{:type => "text", :name => 'filter[date_to]', :value => @filter.try(:date_to).blank? ? Date.current.strftime("%Y-%m-%d") : @filter.date_to}
-   .clear.padded
-   .fields
+   -# .clear.padded
+   -# .fields
     Искать:
     = render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:use_system => true, :need_field => true, :value => @filter.try(:only_my).try(:==, '1')}}
     = render :partial => "shared/check_button", :locals => {:name => "filter[only_dms]", :title => t(:only_dms), :opts => {:use_system => true, :need_field => true, :value => @filter.try(:only_dms).try(:==, '1')}}
-   .clear.padded
-   = render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
+   -# .clear.padded
+   -# = render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
    .clear.block-padded
 
  .table-title{:class=>"favorite"}Список заказов
