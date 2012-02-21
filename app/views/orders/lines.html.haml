@@ -12,7 +12,7 @@
    %table
     %tr
      %th= f.label :item_name, t(:item_name)
-     %td{:colspan => 3}= f.text_field :item_name
+     %td{:colspan => 4}= f.text_field :item_name
      %td= render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
     %tr
      %th Дата отгрузки:
@@ -22,6 +22,7 @@
      %th по&nbsp;
      %td 
       %input.calendar-input{:type => "text", :name => 'filter[date_to]', :value => @filter.try(:date_to).blank? ? Date.current.strftime("%Y-%m-%d") : @filter.date_to}
+     %td
       
    -# .fields
     .field.urm
