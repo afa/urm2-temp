@@ -10,7 +10,7 @@ class QuotationsController < ApplicationController
 
   def lines
    hsh = params[:filter] || {}
-   @lines = Axapta.quotation_lines({:order_quotation_id => "desc", :order_item_name => "asc"}.merge(hsh))
+   @lines = Axapta.quotation_lines({:order_quotation_id => "desc"}.merge(hsh))
   end
 
   def show
