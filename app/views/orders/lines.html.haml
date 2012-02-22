@@ -9,18 +9,19 @@
 .content-wrap
  .filter-block
   = form_for :filter, :url => lines_orders_path, :html => {:method => :get} do |f|
-   %table
-    %tr
-     %th= f.label :item_name, t(:item_name)
-     %td{:colspan => 4}= f.text_field :item_name, :style => "width:100%;"
-     %td= render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
+   .filter
+    %table
+     %tr
+      %th= f.label :item_name, t(:item_name)
+      %td.long{:colspan => 4}= f.text_field :item_name, :style => "width:100%;"
+      %td= render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
     %tr
      %th Дата отгрузки:
      %th с&nbsp;
-     %td
+     %td.tiny
       %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from}
      %th по&nbsp;
-     %td 
+     %td.tiny
       %input.calendar-input{:type => "text", :name => 'filter[date_to]', :value => @filter.try(:date_to).blank? ? Date.current.strftime("%Y-%m-%d") : @filter.date_to}
      %td
       
