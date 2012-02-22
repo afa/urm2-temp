@@ -5,12 +5,12 @@ class QuotationsController < ApplicationController
 
   def index
    hsh = params[:filter] || {} 
-   @quotations = Axapta.quotation_info(hsh)
+   @quotations = Axapta.quotation_info({:order_quotation_id => "desc"}.merge(hsh))
   end
 
   def lines
    hsh = params[:filter] || {}
-   @lines = Axapta.quotation_lines(hsh)
+   @lines = Axapta.quotation_lines({:order_quotation_id => "desc", :order_item_name => "asc"}.merge(hsh))
   end
 
   def show
