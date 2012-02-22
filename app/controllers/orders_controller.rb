@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
  before_filter :get_filter
 
   def index
-   @orders = Axapta.sales_info(:user_hash => current_user.current_account.axapta_hash)
+   @orders = Axapta.sales_info({:user_hash => current_user.current_account.axapta_hash}.merge(params[:filter] || {}))
 # Фильтры:
 
 # Номер заказа: текстовая строка, params.sales_id
