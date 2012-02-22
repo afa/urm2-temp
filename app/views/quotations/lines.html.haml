@@ -13,17 +13,18 @@
 .content-wrap
  .filter-block
   = form_for :filter, :url => lines_quotations_path, :html => {:method => :get} do |f|
-   %table
-    %tr
-     %th= f.label :item_name, t(:item_name)
-     %td{:colspan => 3}= f.text_field :item_name
-     %td= render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
-    %tr
-     %th= f.label :quotation_id, t(:quotation_id)
-     %td= f.text_field :quotation_id
-     %th= f.label :brend_alias, t(:brend_alias)
-     %td= f.text_field :brend_alias
-     %td
+   .filter
+    %table
+     %tr
+      %th= f.label :item_name, t(:item_name)
+      %td.long{:colspan => 3}= f.text_field :item_name
+      %td= render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
+     %tr
+      %th= f.label :quotation_id, t(:quotation_id)
+      %td.medium= f.text_field :quotation_id
+      %th= f.label :brend_alias, t(:brend_alias)
+      %td.medium= f.text_field :brend_alias
+      %td
    -# .fields
     .field.urm
      = f.label :quotation_id, t(:quotation_id)
