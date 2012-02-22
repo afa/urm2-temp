@@ -97,7 +97,7 @@ class Axapta
 
   def self.sales_info(*args)
    begin
-    res = AxaptaRequest.sales_info(*args)
+    res = AxaptaRequest.sales_info({:order_sales_date => "desc"}.merge(*args))
    rescue Exception => e
     return []
    end
