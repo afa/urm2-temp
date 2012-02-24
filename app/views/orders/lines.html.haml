@@ -24,10 +24,11 @@
       %td.tiny
        %input.calendar-input{:type => "text", :name => 'filter[date_to]', :value => @filter.try(:date_to).blank? ? Date.current.strftime("%Y-%m-%d") : @filter.date_to}
       %td
-     -# %tr
+     %tr
       %td{:colspan => 2}
-      %td{:style => "position: relative;"}
-       .
+      %td
+       #ui-datepicker-div
+      %td{:colspan => 3}
       
    -# .fields
     .field.urm
