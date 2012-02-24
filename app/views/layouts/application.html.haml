@@ -65,12 +65,12 @@
     tableScroller.refresh();
     //Выпадающие списки (файл: jquery.controls.js)
     $('.switch.radio a.rub').click(function(){
-    $('.alt.price').add_class('active').remove_class('hidden');
-    $('.real.price').add_class('hidden').remove_class('active');
+    $('.alt.price').addClass('active').removeClass('hidden');
+    $('.real.price').addClass('hidden').removeClass('active');
     });
     $('.switch.radio a.usd').click(function(){
-    $('.alt.price').add_class('hidden').remove_class('active');
-    $('.real.price').add_class('active').remove_class('hidden');
+    $('.alt.price').addClass('hidden').removeClass('active');
+    $('.real.price').addClass('active').removeClass('hidden');
     });
     $('.select').selectList();
     //Кнопки
