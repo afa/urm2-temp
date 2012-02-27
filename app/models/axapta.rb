@@ -107,7 +107,7 @@ class Axapta
   end
 
   def self.sales_lines(*args)
-   prm = *args.dup
+   prm = args.dup
    res = AxaptaRequest.sales_lines({:page_num => prm[:page]}.merge(*args))
    OpenStruct.new(:items => (res.try(:[], "sales_lines") || []).map do |sale|
     OpenStruct.new sale
