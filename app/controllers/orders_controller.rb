@@ -60,36 +60,6 @@ class OrdersController < ApplicationController
 
   def show
    @order = Axapta.sales_lines(:sales_id => params[:id], :user_hash => current_user.current_account.axapta_hash)#, :only_open => true)
-# 2. Строки заказа
- 
-# Меню: Заказы - Открытые строки
-
-# Запрос: sales_lines, параметр params.only_open - всегда true
-
-# Фильтры:
-
-# Дата отгрузки: даты c/по (см. календарик в шаблоне 008, compel_html_008/orders.html), params.date_from, params.date_to
-# Наименование: строка, params.item_name
-# Только мои позиции: вкл/выкл, params.only_my
-# Только ДМС: вкл/выкл, params.only_dms
-# Таблица:
-# 
-# "ROHS": sales_lines[].rohs
-# "Наименование": sales_lines[].item_name
-# "Производитель": sales_lines[].brend
-# "Количество": sales_lines[].sales_qty
-# "Цена": sales_lines[].price
-# "Сумма": sales_lines[].amount
-# "Поставка": sales_lines[].qty_in_debt
-# "Резерв": sales_lines[].reserve_qty
-# "В обработке складом": sales_lines[].qty_in_processing
-# "Получено": sales_lines[].qty_receive
-# "Продано": sales_lines[].invoiced_in_total
-# "Дата готовности": sales_lines[].date_dead_line
-# "Ожидаемая дата поставки": sales_lines[].confirmed_dlv_date
-# "Заказ": sales_lines[].sales_id
-# "Контактное лицо": todo
-# "Проект": todo
   end
 
 
