@@ -5,8 +5,8 @@
  - unless pages <= 1
   %ul
    - f_col.each do |i|
-    %li= link_to i, url_for(params.merge(:page => i.to_s)
+    %li= link_to i, url_for(params.merge(:page => i.to_s))
    - m_col.each do |i|
-    %li= link_to i, url_for(params.merge(:page => i.to_s)
+    %li= link_to i, url_for(params.merge(:page => i.to_s))
    - e_col.each do |i|
-    %li= link_to i, url_for(params.merge(:page => i.to_s)
+    %li= link_to i, url_for(params.merge(:page => i.to_s))
