@@ -55,7 +55,7 @@ class OrdersController < ApplicationController
 
   def lines
    hsh = params[:filter] || {}
-   @lines = Axapta.sales_lines(hsh.merge(:user_hash => current_user.current_account.axapta_hash, :only_open => true))
+   @lines = Axapta.sales_lines(hsh.merge(:user_hash => current_user.current_account.axapta_hash, :only_open => true, :page => params[:page] || 1))
   end
 
   def show
