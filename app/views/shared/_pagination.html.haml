@@ -1,0 +1,12 @@
+- m_col = ((page - 2 > 1 ? page - 2 : 1)..(page + 2 < pages ? page + 2 : pages)).to_a
+- f_col = [pages > 1 ? 1 : nil].compact - m_col
+- e_col = [pages > 1 ? pages : nil].compact - m_col
+.pagination
+ - unless pages <= 1
+  %ul
+   - f_col.each do |i|
+    %li= link_to i, url_for(params.merge(:page => i.to_s)
+   - m_col.each do |i|
+    %li= link_to i, url_for(params.merge(:page => i.to_s)
+   - e_col.each do |i|
+    %li= link_to i, url_for(params.merge(:page => i.to_s)

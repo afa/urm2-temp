@@ -31,27 +31,9 @@
        #ui-datepicker-div-container{:style=>"position: relative;"}
       %td{:colspan => 3}
       
-   -# .fields
-    .field.urm
-     = f.label :item_name, t(:item_name)
-     = f.text_field :item_name
-   -# .clear.padded
-   -# .fields
-    -# .field.urm
-    Дата отгрузки:
-    с&nbsp;
-    %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from}
-    по&nbsp;
-    %input.calendar-input{:type => "text", :name => 'filter[date_to]', :value => @filter.try(:date_to).blank? ? Date.current.strftime("%Y-%m-%d") : @filter.date_to}
-   -# .clear.padded
-   -# .fields
-    Искать:
-    = render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:use_system => true, :need_field => true, :value => @filter.try(:only_my).try(:==, '1')}}
-    = render :partial => "shared/check_button", :locals => {:name => "filter[only_dms]", :title => t(:only_dms), :opts => {:use_system => true, :need_field => true, :value => @filter.try(:only_dms).try(:==, '1')}}
-   -# .clear.padded
-   -# = render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
    .clear.block-padded
 
+ = render :partial => "shared/pagination", :locals => {:page => @lines.page, :pages => @lines.total}
  .table-title{:class=>"favorite"}Строки заказов
  .table-navigation-block{:class => "scroll"}
   .table-block
@@ -75,23 +57,7 @@
       %th Контактное лицо
       %th Проект
 
-     = render :partial => "orders/item_line", :collection => @lines
--# "ROHS": sales_lines[].rohs
--# "Наименование": sales_lines[].item_name
--# "Производитель": sales_lines[].brend
--# "Количество": sales_lines[].sales_qty
--# "Цена": sales_lines[].price
--# "Сумма": sales_lines[].amount
--# "Поставка": sales_lines[].qty_in_debt
--# "Резерв": sales_lines[].reserve_qty
--# "В обработке складом": sales_lines[].qty_in_processing
--# "Получено": sales_lines[].qty_receive
--# "Продано": sales_lines[].invoiced_in_total
--# "Дата готовности": sales_lines[].date_dead_line
--# "Ожидаемая дата поставки": sales_lines[].confirmed_dlv_date
--# "Заказ": sales_lines[].sales_id
--# "Контактное лицо": todo
--# "Проект": todo
+     = render :partial => "orders/item_line", :collection => @lines.items
 
 :javascript
  if($(".calendar-input").length > 0){
