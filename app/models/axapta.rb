@@ -111,7 +111,7 @@ class Axapta
    res = AxaptaRequest.sales_lines({:page_num => prm[:page]}.merge(*args))
    OpenStruct.new(:items => (res.try(:[], "sales_lines") || []).map do |sale|
     OpenStruct.new sale
-   end, :total => res.try(:[], "pages") || 1, :page => args[:page] || 1)
+   end, :total => res.try(:[], "pages") || 1, :page => prm[:page] || 1)
   end
 
   def self.get_delivery_mode
