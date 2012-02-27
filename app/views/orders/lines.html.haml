@@ -19,8 +19,8 @@
       %th Дата отгрузки:
       %th с&nbsp;
       %td.tiny
-       -# %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from}
-       .calendar-input= @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from
+       %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from}
+       -# .calendar-input= @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from
       %th по&nbsp;
       %td.tiny
        %input.calendar-input{:type => "text", :name => 'filter[date_to]', :value => @filter.try(:date_to).blank? ? Date.current.strftime("%Y-%m-%d") : @filter.date_to}
@@ -28,7 +28,7 @@
      %tr
       %td{:colspan => 2}
       %td
-       #ui-datepicker-div
+       #ui-datepicker-div-container
       %td{:colspan => 3}
       
    -# .fields
@@ -95,5 +95,5 @@
 
 :javascript
  if($(".calendar-input").length > 0){
- $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
+ $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd', popupContainer: '#ui-datepicker-div-container'});
  }
