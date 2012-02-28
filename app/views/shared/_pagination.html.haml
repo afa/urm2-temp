@@ -1,6 +1,7 @@
 - m_col = ((page - 2 > 1 ? page - 2 : 1)..(page + 2 < pages ? page + 2 : pages)).to_a
 - f_col = [pages > 1 ? 1 : nil].compact - m_col
 - e_col = [pages > 1 ? pages : nil].compact - m_col
+- p "---pagination", page, pages, m_col, f_col, e_col
 .pagination
  - unless pages <= 1
   - f_col.each do |i|
