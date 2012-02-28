@@ -33,6 +33,8 @@
     = render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:use_system => true, :value => params[:filter].try(:[], :only_my).try(:==, '1')}}
    .clear.padded
 
+ = render :partial => "shared/pagination", :locals => {:page => @orders.page.to_i, :pages => @orders.total.to_i}
+
  .table-title{:class=>"favorite"}Список заказов
  .table-navigation-block{:class => "scroll"}
   .table-block
@@ -51,4 +53,4 @@
       %th.text-right Код способа доставки
       %th.text-right Счет
       %th.text-right Сумма по счету
-     = render :partial => "orders/list_line", :collection => @orders
+     = render :partial => "orders/list_line", :collection => @orders.items
