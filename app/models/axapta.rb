@@ -133,15 +133,25 @@ class Axapta
   end
 
   def self.quotation_info(hsh)
-   (AxaptaRequest.quotation_info(hsh.merge(:user_hash => User.current.try(:current_account).try(:axapta_hash))).try(:[], "quotations") || []).map{|i| OpenStruct.new(i)}
+   quotation_info_paged(nil, hsh).try(:items) || []
+  end
+
+  def self.quotation_info_paged(page, hsh)
+   res = AxaptaRequest.quotation_info({:page_num => (page || hsh[:page] || 1)}.merge(hsh).merge(:user_hash => User.current.try(:current_account).try(:axapta_hash)))
+   OpenStruct.new(:items => (res.try(:[], "quotations") || []).map{|i| OpenStruct.new(i)}, :page => (page || hsh[:page] || 1), :total =>  res.try(:[], "pages") || 1)
   end
 
   def self.quotation_lines(hsh)
+   quotation_lines_paged(nil, hsh).try(:items) || []
+  end
+
+  def self.quotation_lines_paged(page, hsh)
    fix = {:item_name => hsh[:item_name]}
    unless fix[:item_name].blank?
     fix[:item_name] += '*' if fix[:item_name].last != '*'
     fix[:item_name] = "" if fix[:item_name].mb_chars.length < 4
    end
-   (AxaptaRequest.quotation_lines(hsh.merge(:user_hash => User.current.try(:current_account).try(:axapta_hash)).merge(fix)).try(:[], "quotations_lines") || []).map{|i| OpenStruct.new(i)}
+   res = AxaptaRequest.quotation_lines(hsh.merge(:page_num => (page || hsh[:page] || 1), :user_hash => User.current.try(:current_account).try(:axapta_hash)).merge(fix))
+   OpenStruct.new(:items => (res.try(:[], "quotations_lines") || []).map{|i| OpenStruct.new(i)}, :page => (page || hsh[:page] || 1), :total =>  res.try(:[], "pages") || 1)
   end
 end
