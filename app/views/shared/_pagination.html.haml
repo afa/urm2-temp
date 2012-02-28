@@ -3,10 +3,18 @@
 - e_col = [pages > 1 ? pages : nil].compact - m_col
 .pagination
  - unless pages <= 1
-  %ul
-   - f_col.each do |i|
-    %li= link_to i, url_for(params.merge(:page => i.to_s))
-   - m_col.each do |i|
-    %li= link_to i, url_for(params.merge(:page => i.to_s))
-   - e_col.each do |i|
-    %li= link_to i, url_for(params.merge(:page => i.to_s))
+  - f_col.each do |i|
+   - if i == page
+    %span.current= i.to_s
+   - else
+    = link_to i.to_s, url_for(params.merge(:page => i.to_s))
+  - m_col.each do |i|
+   - if i == page
+    %span.current= i.to_s
+   - else
+    = link_to i.to_s, url_for(params.merge(:page => i.to_s))
+  - e_col.each do |i|
+   - if i == page
+    %span.current= i.to_s
+   - else
+    = link_to i.to_s, url_for(params.merge(:page => i.to_s))
