@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
  before_filter :get_filter
 
   def index
-   @orders = Axapta.sales_info({:user_hash => current_user.current_account.axapta_hash}.merge(params[:filter] || {}))
+   @orders = Axapta.sales_info({:user_hash => current_user.current_account.axapta_hash}.merge(@filter_hash))
 # Фильтры:
 
 # Номер заказа: текстовая строка, params.sales_id
@@ -54,8 +54,7 @@ class OrdersController < ApplicationController
   end
 
   def lines
-   hsh = params[:filter] || {}
-   @lines = Axapta.sales_lines(hsh.merge(:user_hash => current_user.current_account.axapta_hash, :only_open => true, :page => params[:page] || 1))
+   @lines = Axapta.sales_lines(@filter_hash.merge(:user_hash => current_user.current_account.axapta_hash, :only_open => true, :page => params[:page] || 1))
   end
 
   def show
@@ -65,6 +64,7 @@ class OrdersController < ApplicationController
 
  protected
   def get_filter
-   @filter = OpenStruct.new(params[:filter] || {})
+   @filter_hash = params[:filter] || {}
+   @filter = OpenStruct.new(@filter_hash)
   end
 end
