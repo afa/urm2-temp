@@ -34,6 +34,7 @@
    .clear.block-padded
 
  = render :partial => "shared/pagination", :locals => {:page => @lines.page.to_i, :pages => @lines.total.to_i}
+
  .table-title{:class=>"favorite"}Строки заказов
  .table-navigation-block{:class => "scroll"}
   .table-block

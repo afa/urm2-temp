@@ -54,7 +54,7 @@ class OrdersController < ApplicationController
   end
 
   def lines
-   @lines = Axapta.sales_lines_paged(@page, @filter_hash.merge(:user_hash => current_user.current_account.axapta_hash, :only_open => true))
+   @lines = Axapta.sales_lines_paged(@page, @filter_hash.merge(:only_open => true))
   end
 
   def show

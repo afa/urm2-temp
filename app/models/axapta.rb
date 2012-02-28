@@ -97,31 +97,31 @@ class Axapta
 
   def self.sales_info(*args)
    p "---sales_info_args", *args
-   sales_info_paged(nil, *args).try(:items)
+   sales_info_paged(nil, *args).try(:items) || []
   end
 
   def self.sales_info_paged(page, *args)
    prm = *args.dup
    begin
-    res = AxaptaRequest.sales_info({:user_hash => User.current.current_account.axapta_hash, :page_num => page || prm[:page] || 1, :order_sales_date => "desc"}.merge(*args))
+    res = AxaptaRequest.sales_info({:user_hash => User.current.try(:current_account).try(:axapta_hash), :page_num => (page || prm[:page] || 1), :order_sales_date => "desc"}.merge(*args))
    rescue Exception => e
     return []
    end
    OpenStruct.new(:items => (res.try(:[], "sales") || []).map do |sale|
     OpenStruct.new sale
-   end, :total => res.try(:[], "pages") || 1, :page => prm[:page] || 1)
+   end, :total => res.try(:[], "pages") || 1, :page => (page || prm[:page] || 1))
   end
 
   def self.sales_lines(*args)
-   sales_lines_paged(nil, *args).try(:items)
+   sales_lines_paged(nil, *args).try(:items) || []
   end
 
   def self.sales_lines_paged(page, *args)
    prm = *args.dup
-   res = AxaptaRequest.sales_lines({:user_hash => User.current.current_account.axapta_hash, :page_num => page || prm[:page] || 1}.merge(*args))
+   res = AxaptaRequest.sales_lines({:user_hash => User.current.try(:current_account).try(:axapta_hash), :page_num => (page || prm[:page] || 1)}.merge(*args))
    OpenStruct.new(:items => (res.try(:[], "sales_lines") || []).map do |sale|
     OpenStruct.new sale
-   end, :total => res.try(:[], "pages") || 1, :page => prm[:page] || 1)
+   end, :total => res.try(:[], "pages") || 1, :page => (page || prm[:page] || 1))
   end
 
   def self.get_delivery_mode
