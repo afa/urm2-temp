@@ -109,7 +109,7 @@ class Axapta
    end
    OpenStruct.new(:items => (res.try(:[], "sales") || []).map do |sale|
     OpenStruct.new sale
-   end, :total => res.try(:[], "pages") || 1, :page => (page || prm[:page] || 1))
+   end, :total => res.try(:[], "pages") || 1, :page => (page || prm[:page] || 1), :records => res.try(:[], "records") || 0)
   end
 
   def self.sales_lines(*args)
@@ -121,7 +121,7 @@ class Axapta
    res = AxaptaRequest.sales_lines({:user_hash => User.current.try(:current_account).try(:axapta_hash), :page_num => (page || prm[:page] || 1)}.merge(*args))
    OpenStruct.new(:items => (res.try(:[], "sales_lines") || []).map do |sale|
     OpenStruct.new sale
-   end, :total => res.try(:[], "pages") || 1, :page => (page || prm[:page] || 1))
+   end, :total => res.try(:[], "pages") || 1, :page => (page || prm[:page] || 1), :records => res.try(:[], "records") || 0)
   end
 
   def self.get_delivery_mode
@@ -138,7 +138,7 @@ class Axapta
 
   def self.quotation_info_paged(page, hsh)
    res = AxaptaRequest.quotation_info({:page_num => (page || hsh[:page] || 1)}.merge(hsh).merge(:user_hash => User.current.try(:current_account).try(:axapta_hash)))
-   OpenStruct.new(:items => (res.try(:[], "quotations") || []).map{|i| OpenStruct.new(i)}, :page => (page || hsh[:page] || 1), :total =>  res.try(:[], "pages") || 1)
+   OpenStruct.new(:items => (res.try(:[], "quotations") || []).map{|i| OpenStruct.new(i)}, :page => (page || hsh[:page] || 1), :total =>  res.try(:[], "pages") || 1, :records => res.try(:[], "records") || 0)
   end
 
   def self.quotation_lines(hsh)
@@ -152,6 +152,6 @@ class Axapta
     fix[:item_name] = "" if fix[:item_name].mb_chars.length < 4
    end
    res = AxaptaRequest.quotation_lines(hsh.merge(:page_num => (page || hsh[:page] || 1), :user_hash => User.current.try(:current_account).try(:axapta_hash)).merge(fix))
-   OpenStruct.new(:items => (res.try(:[], "quotations_lines") || []).map{|i| OpenStruct.new(i)}, :page => (page || hsh[:page] || 1), :total =>  res.try(:[], "pages") || 1)
+   OpenStruct.new(:items => (res.try(:[], "quotations_lines") || []).map{|i| OpenStruct.new(i)}, :page => (page || hsh[:page] || 1), :total =>  res.try(:[], "pages") || 1, :records => res.try(:[], "records") || 0)
   end
 end
