@@ -9,22 +9,26 @@
  - if options[:show_prevnext]
   - unless page <= 2
    = link_to "<", url_for(params.merge(:page => (page - 1).to_s))
- - unless pages <= 1
-  - f_col.each do |i|
-   - if i == page
-    %span.current= i.to_s
-   - else
-    = link_to i.to_s, url_for(params.merge(:page => i.to_s))
-  - m_col.each do |i|
-   - if i == page
-    %span.current= i.to_s
-   - else
-    = link_to i.to_s, url_for(params.merge(:page => i.to_s))
-  - e_col.each do |i|
-   - if i == page
-    %span.current= i.to_s
-   - else
-    = link_to i.to_s, url_for(params.merge(:page => i.to_s))
+ - if options[:show_numbers]
+  - unless pages <= 1
+   - f_col.each do |i|
+    - if i == page
+     %span.current= i.to_s
+    - else
+     = link_to i.to_s, url_for(params.merge(:page => i.to_s))
+   - m_col.each do |i|
+    - if i == page
+     %span.current= i.to_s
+    - else
+     = link_to i.to_s, url_for(params.merge(:page => i.to_s))
+   - e_col.each do |i|
+    - if i == page
+     %span.current= i.to_s
+    - else
+     = link_to i.to_s, url_for(params.merge(:page => i.to_s))
+ - else
+  - if options[:show_current]
+   %span.current= page.to_s
  - if options[:show_prevnext]
   - unless page >= pages - 1
    = link_to ">", url_for(params.merge(:page => (page + 1).to_s))
