@@ -1,4 +1,4 @@
-.table-title{:class=>"favorite"}Список запросов
+.table-title Список запросов
 .content-wrap
  .filter-block
   = form_for :filter, :url => quotations_path, :html => {:method => :get} do |f|
@@ -19,7 +19,7 @@
  .table-navigation-block{:class => "scroll"}
   .table-block
    .table-scrolling
-    = render :partial => "shared/pagination", :locals => {:page => @quotations.page.to_i, :pages => @quotations.total.to_i}
+    = render :partial => "shared/pagination", :locals => {:page => @quotations.page.to_i, :pages => @quotations.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true}}
     %table.table-style.quotation-list
      %tr
       %th УРМ

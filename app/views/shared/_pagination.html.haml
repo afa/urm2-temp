@@ -1,8 +1,14 @@
+- options = {:show_numbers => true, :show_prevnext => false, :show_firstlast => false}.merge(defined?(opts) ? opts : {})
 - m_col = ((page - 2 > 1 ? page - 2 : 1)..(page + 2 < pages ? page + 2 : pages)).to_a
 - f_col = [pages > 1 ? 1 : nil].compact - m_col
 - e_col = [pages > 1 ? pages : nil].compact - m_col
-- p "---pagination", page, pages, m_col, f_col, e_col
 .pagination
+ - if options[:show_firstlast]
+  - unless page <= 1
+   = link_to "<<", url_for(params.merge(:page => '1'))
+ - if options[:show_prevnext]
+  - unless page <= 2
+   = link_to "<", url_for(params.merge(:page => (page - 1).to_s))
  - unless pages <= 1
   - f_col.each do |i|
    - if i == page
@@ -19,3 +25,9 @@
     %span.current= i.to_s
    - else
     = link_to i.to_s, url_for(params.merge(:page => i.to_s))
+ - if options[:show_prevnext]
+  - unless page >= pages - 1
+   = link_to ">", url_for(params.merge(:page => (page + 1).to_s))
+ - if options[:show_firstlast]
+  - unless page >= pages
+   = link_to ">>", url_for(params.merge(:page => pages.to_s))
