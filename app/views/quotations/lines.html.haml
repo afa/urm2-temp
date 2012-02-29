@@ -10,6 +10,7 @@
 -# Примечание: comment
 -# Статус: quotation_status
 
+.table-title{:class=>"favorite"}Строки запросов
 .content-wrap
  .filter-block
   = form_for :filter, :url => lines_quotations_path, :html => {:method => :get} do |f|
@@ -44,7 +45,6 @@
 
 .clear
 .content-wrap
- .table-title{:class=>"favorite"}Строки запросов
  .table-navigation-block{:class => "scroll"}
   .table-block
    .table-scrolling

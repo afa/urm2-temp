@@ -34,11 +34,11 @@
     = render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:use_system => true, :value => params[:filter].try(:[], :only_my).try(:==, '1')}}
    .clear.padded
 
- = render :partial => "shared/pagination", :locals => {:page => @orders.page.to_i, :pages => @orders.total.to_i}
 
  .table-navigation-block{:class => "scroll"}
   .table-block
    .table-scrolling
+    = render :partial => "shared/pagination", :locals => {:page => @orders.page.to_i, :pages => @orders.total.to_i}
     %table.table-style{:class => "order-list"}
      %tr
       %th УРМ

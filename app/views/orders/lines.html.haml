@@ -6,6 +6,7 @@
 -# Только ДМС: вкл/выкл, params.only_dms
 -# Таблица:
 
+.table-title{:class=>"favorite"}Строки заказов
 .content-wrap
  .filter-block
   = form_for :filter, :url => lines_orders_path, :html => {:method => :get} do |f|
@@ -33,12 +34,11 @@
       
    .clear.block-padded
 
- = render :partial => "shared/pagination", :locals => {:page => @lines.page.to_i, :pages => @lines.total.to_i}
 
- .table-title{:class=>"favorite"}Строки заказов
  .table-navigation-block{:class => "scroll"}
   .table-block
    .table-scrolling
+    = render :partial => "shared/pagination", :locals => {:page => @lines.page.to_i, :pages => @lines.total.to_i}
     %table.table-style{:class => "order-list"}
      %tr
       %th ROHS
