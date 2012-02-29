@@ -42,6 +42,7 @@
      = f.text_field :brend_alias
    .clear.block-padded
 
+ = render :partial => "shared/pagination", :locals => {:page => @orders.page.to_i, :pages => @orders.total.to_i}
 .clear
 .content-wrap
  .table-title{:class=>"favorite"}Строки запросов

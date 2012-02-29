@@ -15,6 +15,7 @@
     = render :partial => "shared/check_button", :locals => {:name => "filter[this_sales_origin]", :title => t(:this_sales_origin), :opts => {:use_system => true, :need_field => false, :value => @filter.try(:this_sales_origin).try(:==, '1')}}
     = render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:use_system => true, :need_field => false, :value => @filter.try(:only_my).try(:==, '1')}}
 
+ = render :partial => "shared/pagination", :locals => {:page => @quotations.page.to_i, :pages => @quotations.total.to_i}
  .table-title{:class=>"favorite"}Список запросов
  .table-navigation-block{:class => "scroll"}
   .table-block
