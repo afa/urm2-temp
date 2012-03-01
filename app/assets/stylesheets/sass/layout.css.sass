@@ -942,22 +942,23 @@ div#cart_store
       text-align: left
       font-weight: bold
       min-width: 10em
+    td
       div.commit.button
         float: none
-    td.long
-      input
-        +filtered-input
-        width: 20em
-    td.medium
-      input
-        +filtered-input
-        width: 20em
-    td.tiny
-      input
-        +filtered-input
-        width: 10em
-        &.calendar-input
-          z-index: 999
+      &.long
+        input
+          +filtered-input
+          width: 20em
+      &.medium
+        input
+          +filtered-input
+          width: 20em
+      &.tiny
+        input
+          +filtered-input
+          width: 10em
+          &.calendar-input
+            z-index: 999
 
 .pagination
   a
