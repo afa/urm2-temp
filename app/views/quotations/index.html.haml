@@ -1,4 +1,7 @@
-.title Список запросов
+.nav-title
+ %span= link_to "Запросы", quotations_path
+ %span >
+ %span.current Список запросов
 .content-wrap
  .filter-block
   = form_for :filter, :url => quotations_path, :html => {:method => :get} do |f|
