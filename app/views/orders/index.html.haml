@@ -7,22 +7,23 @@
 .content-wrap
  .filter-block
   = form_for :filter, :url => orders_path, :html => {:method => :get} do |f|
-   %table
-    %tr
-     %th= f.label :sales_id, t(:sales_id)
-     %td= f.text_field :sales_id
-    %tr
-     %th= f.label :official_number, t(:official_number)
-     %td= f.text_field :official_number
-    %tr
-     %th
-     %td= render :partial => "shared/check_button", :locals => {:name => "filter[this_sales_origin]", :title => t(:this_sales_origin), :opts => {:use_system => true, :value => params[:filter].try(:[], :this_sales_origin).try(:==, '1')}}
-    %tr
-     %th
-     %td= render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:use_system => true, :value => params[:filter].try(:[], :only_my).try(:==, '1')}}
-    %tr
-     %th
-     %td= render :partial => "shared/submit_button", :locals => {:title => "Найти"}
+   .filter
+    %table
+     %tr
+      %th= f.label :sales_id, t(:sales_id)
+      %td= f.text_field :sales_id
+     %tr
+      %th= f.label :official_number, t(:official_number)
+      %td= f.text_field :official_number
+     %tr
+      %th
+      %td= render :partial => "shared/check_button", :locals => {:name => "filter[this_sales_origin]", :title => t(:this_sales_origin), :opts => {:use_system => true, :value => params[:filter].try(:[], :this_sales_origin).try(:==, '1')}}
+     %tr
+      %th
+      %td= render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:use_system => true, :value => params[:filter].try(:[], :only_my).try(:==, '1')}}
+     %tr
+      %th
+      %td= render :partial => "shared/submit_button", :locals => {:title => "Найти"}
    -# .fields
     .field.urm
      = f.label :sales_id, t(:sales_id)
