@@ -930,6 +930,11 @@ div#cart_store
   height: 14px
   margin: 0px
   padding: 2px 4px
+  border: 1px solid #9E9E9E
+  font: 1em Tahoma, Arial, Helvetica, sans-serif
+  color: #383838
+  text-decoration: none
+  background: #F9FCFF
 
 .filter
   table
@@ -939,27 +944,15 @@ div#cart_store
     td.long
       input
         +filtered-input
-        border: 1px solid #9E9E9E
-        font: 1em Tahoma, Arial, Helvetica, sans-serif
-        color: #383838
-        text-decoration: none
-
-        width: 520px
-        //padding: 4px
-        //border: 4px white solid
-        background: #F9FCFF
+        width: 20em
     td.medium
       input
-        width: 200px
-        padding: 4px
-        border: 4px white solid
-        background: #F9FCFF
+        +filtered-input
+        width: 20em
     td.tiny
       input
-        width: 70px
-        padding: 4px
-        border: 4px white solid
-        background: #F9FCFF
+        +filtered-input
+        width: 10em
         &.calendar-input
           z-index: 999
 
