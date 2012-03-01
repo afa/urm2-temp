@@ -4,7 +4,7 @@
 - e_col = [pages > 1 ? pages : nil].compact - m_col
 .pagination
  - if options[:text_before]
-  = options[:text_before]
+  != options[:text_before]
  - if options[:show_firstlast]
   - unless page <= 1
    = link_to "<<", url_for(params.merge(:page => '1'))
