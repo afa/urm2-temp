@@ -10,7 +10,11 @@
 -# Примечание: comment
 -# Статус: quotation_status
 
-.title Строки запросов
+.nav-title
+ %span= link_to "Запросы", quotations_path
+ %span >
+ %span.current Строки запросов
+
 .content-wrap
  .filter-block
   = form_for :filter, :url => lines_quotations_path, :html => {:method => :get} do |f|

@@ -1,4 +1,8 @@
-.title Список заказов
+.nav-title
+ %span= link_to "Заказы", orders_path
+ %span >
+ %span.current Список заказов
+
 .content-wrap
  .filter-block
   = form_for :filter, :url => orders_path, :html => {:method => :get} do |f|

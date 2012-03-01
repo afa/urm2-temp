@@ -6,7 +6,11 @@
 -# Только ДМС: вкл/выкл, params.only_dms
 -# Таблица:
 
-.title Строки заказов
+.nav-title
+ %span= link_to "Заказы", orders_path
+ %span >
+ %span.current Строки заказов
+
 .content-wrap
  .filter-block
   = form_for :filter, :url => lines_orders_path, :html => {:method => :get} do |f|
