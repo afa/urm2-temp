@@ -11,10 +11,10 @@
     %table
      %tr
       %th= f.label :sales_id, t(:sales_id)
-      %td= f.text_field :sales_id
+      %td.medium= f.text_field :sales_id
      %tr
       %th= f.label :official_number, t(:official_number)
-      %td= f.text_field :official_number
+      %td.medium= f.text_field :official_number
      %tr
       %th
       %td= render :partial => "shared/check_button", :locals => {:name => "filter[this_sales_origin]", :title => t(:this_sales_origin), :opts => {:use_system => true, :value => params[:filter].try(:[], :this_sales_origin).try(:==, '1')}}
