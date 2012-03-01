@@ -1,6 +1,6 @@
 .nav-title
  %span= link_to "Запросы", quotations_path
- %span >
+-# %span >
  %span.current Список запросов
 .content-wrap
  .filter-block
@@ -21,12 +21,13 @@
       %th
       %td= render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:use_system => true, :need_field => false, :value => @filter.try(:only_my).try(:==, '1')}}
      %tr
+      %th
       %td= render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
 
  .table-navigation-block{:class => "scroll"}
   .table-block
    .table-scrolling
-    = render :partial => "shared/pagination", :locals => {:page => @quotations.page.to_i, :pages => @quotations.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей #{@quotations.records} Страниц #{@quotations.total} Страница "}}
+    = render :partial => "shared/pagination", :locals => {:page => @quotations.page.to_i, :pages => @quotations.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей: #{@quotations.records}&nbsp;&nbsp;Страниц: #{@quotations.total} Страница "}}
     %table.table-style.quotation-list
      %tr
       %th УРМ
