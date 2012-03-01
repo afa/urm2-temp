@@ -18,23 +18,19 @@
     %table
      %tr
       %th= f.label :item_name, t(:item_name)
-      %td.long{:colspan => 4}= f.text_field :item_name
-      %td= render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
+      %td.long= f.text_field :item_name
      %tr
       %th Дата отгрузки:
-      %th с&nbsp;
       %td.tiny
+       с&nbsp;
        %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from}
        -# .calendar-input= @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from
-      %th по&nbsp;
-      %td.tiny
+       &nbsp;по&nbsp;
        %input.calendar-input{:type => "text", :name => 'filter[date_to]', :value => @filter.try(:date_to).blank? ? Date.current.strftime("%Y-%m-%d") : @filter.date_to}
-      %td
+       -# #ui-datepicker-div-container{:style=>"position: relative;"}
      %tr
-      %td{:colspan => 2}
-      %td
-       #ui-datepicker-div-container{:style=>"position: relative;"}
-      %td{:colspan => 3}
+      %th
+      %td= render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
       
    .clear.block-padded
 
