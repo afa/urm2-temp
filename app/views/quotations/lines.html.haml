@@ -19,13 +19,14 @@
      %tr
       %th= f.label :item_name, t(:item_name)
       %td.long{:colspan => 3}= f.text_field :item_name
-      %td= render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
      %tr
       %th= f.label :quotation_id, t(:quotation_id)
       %td.medium= f.text_field :quotation_id
+     %tr
       %th= f.label :brend_alias, t(:brend_alias)
       %td.medium= f.text_field :brend_alias
-      %td
+     %tr
+      %td= render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
    -# .fields
     .field.urm
      = f.label :quotation_id, t(:quotation_id)
