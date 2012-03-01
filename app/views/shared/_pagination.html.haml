@@ -1,4 +1,10 @@
 - options = {:show_numbers => true, :show_prevnext => false, :show_firstlast => false}.merge(defined?(opts) ? opts : {})
+- content_for :text_before_current do
+ - if options[:text_before_current]
+  != options[:text_before_current]
+- content_for :text_after_current do
+ - if options[:text_after_current]
+  != options[:text_after_current]
 - m_col = ((page - 2 > 1 ? page - 2 : 1)..(page + 2 < pages ? page + 2 : pages)).to_a
 - f_col = [pages > 1 ? 1 : nil].compact - m_col
 - e_col = [pages > 1 ? pages : nil].compact - m_col
@@ -47,9 +53,3 @@
    = link_to ">>", url_for(params.merge(:page => pages.to_s))
  - if options[:text_after]
   = options[:text_after]
-- content_for :text_before_current do
- - if options[:text_before_current]
-  != options[:text_before_current]
-- content_for :text_after_current do
- - if options[:text_after_current]
-  != options[:text_after_current]
