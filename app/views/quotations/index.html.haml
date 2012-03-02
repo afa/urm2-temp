@@ -9,10 +9,10 @@
    .filter
     %table
      %tr
-      %th= f.label :quotation_id, t(:quotation_id)
+      %th= f.label :quotation_id, t(:quotation_id) + ':'
       %td.medium= f.text_field :quotation_id
      %tr
-      %th= t(:quotation_status)
+      %th= t(:quotation_status) + ':'
       %td= render :partial => "shared/select_list", :locals => {:list_items => (@filter.quotation_statuses || []), :name => "filter[quotation_status]", :title => '', :opts => {:use_system => true, :selected => @filter.quotation_status, :with_blank => true}}
      %tr
       %th
