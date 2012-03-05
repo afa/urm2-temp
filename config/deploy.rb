@@ -1,5 +1,5 @@
-set :application, "set your application name here"
-set :repository,  "set your repository location here"
+set :application, "Urm2"
+set :repository,  ""
 
 set :scm, :subversion
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`

@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_filter :check_account
   before_filter :get_accounts
   before_filter :take_search
+  before_filter :put_sess
   protect_from_forgery
 
   def sign_in(user, *opts)
@@ -87,5 +88,9 @@ class ApplicationController < ActionController::Base
 
   def unmodify
    response.headers['Last-Modified'] = Time.zone.now.httpdate
+  end
+
+  def put_sess
+   p session
   end
 end
