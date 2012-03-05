@@ -2,9 +2,9 @@
  .field
   = f.label :username
   = f.text_field :username
-  %span.error #{@user.errors.on(:username)}
+  %span.error #{@user.errors[:username]}
  .field
   = f.label :ext_hash
   = f.text_field :ext_hash
-  %span.error #{@user.errors.on(:ext_hash)}
+  %span.error #{@user.errors[:ext_hash]}
  = f.submit "save"
