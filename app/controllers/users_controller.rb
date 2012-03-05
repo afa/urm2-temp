@@ -25,9 +25,10 @@ class UsersController < ApplicationController
    @user.save
    if @user.valid?
     flash[:info] = "ok"
+    render :layout => "simple"
    else
     flash[:error] = "fail"
-    render :new
+    render :new, :layout => "simple"
    end
   end
 
