@@ -38,7 +38,7 @@
  .table-navigation-block{:class => "scroll"}
   .table-block
    .table-scrolling
-    = render :partial => "shared/pagination", :locals => {:page => @order.page.to_i, :pages => @order.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей: #{@order.records}&nbsp;&nbsp;Страниц: #{@order.total}&nbsp;&nbsp;".html_safe, :text_before_current => "Страница: "}}
+    = render :partial => "shared/pagination", :locals => {:page => @lines.page.to_i, :pages => @lines.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей: #{@lines.records}&nbsp;&nbsp;Страниц: #{@lines.total}&nbsp;&nbsp;".html_safe, :text_before_current => "Страница: "}}
     -# = render :partial => "shared/pagination", :locals => {:page => @lines.page.to_i, :pages => @lines.total.to_i}
     %table.table-style{:class => "order-list"}
      %tr
@@ -59,9 +59,81 @@
       %th Контактное лицо
       %th Проект
 
-     = render :partial => "orders/item_line", :collection => @order.items
+     = render :partial => "orders/item_line", :collection => @lines.items
 
+    .order_info
+     %span.title= "Расчётный счёт"
+     = @order_info.bank_account
+     %span.title= "Комментарий"
+     = @order_info.comment
+     %span.title= "Фирма"
+     = @order_info.company_code
+     %span.title= "Валюта"
+     = @order_info.currency_code
+     %span.title= "Дата готовности"
+     = @order_info.date_dead_line_delivery
+     %span.title= "Способ поставки"
+     = @order_info.delivery_mode
+     %span.title= "Счёт"
+     = @order_info.document_number
+     %span.title= "Накладная ТК"
+     = @order_info.external_invoice_num
+     %span.title= "Срок поставки"
+     = @order_info.max_quotation_prognosis
+     %span.title= "Способ оплаты"
+     = @order_info.paym_mode
+     %span.title= "Статус оплаты"
+     = @order_info.payment_status
+     %span.title= "Сумма"
+     = @order_info.sales_amount
+     %span.title= "Дата заказа"
+     = @order_info.sales_date
+     %span.title= "Статус в СОД"
+     = @order_info.sales_ecommerce_status
+     %span.title= "Номер заказа"
+     = @order_info.sales_id
+     %span.title= "Статус"
+     = @order_info.sales_status
 -# :javascript
  if($(".calendar-input").length > 0){
  $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd', popupContainer: $('#ui-datepicker-div-container')});
  }
+
+-# 
+ =begin
+  bank_account:
+   title: "Расчётный счёт"
+  comment:
+   title: Комментарий
+  company_code:
+   title: Фирма
+  currency_code:
+   title: Валюта
+  date_dead_line_delivery:
+   title: "Дата готовности"
+   type: date
+  delivery_mode:
+   title: "Способ поставки"
+  document_number:
+   title: Счёт
+  external_invoice_num:
+   title: "Накладная ТК"
+  max_quotation_prognosis:
+   title: "Срок поставки"
+  paym_mode:
+   title: "Способ оплаты"
+  payment_status:
+   title: "Статус оплаты"
+  sales_amount:
+   title: Сумма
+  sales_date:
+   title: "Дата заказа"
+   type: date
+  sales_ecommerce_status:
+   title: "Статус в СОД"
+  sales_id:
+   title: "Номер заказа"
+  sales_status:
+   title: Статус
+ =end
+

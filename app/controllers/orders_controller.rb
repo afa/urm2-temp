@@ -33,6 +33,44 @@ class OrdersController < ApplicationController
 
   end
 
+=begin
+Заказ
+
+Инф. блок о заказе
+
+Редактирование:
+    Строки: Примечание, Требования sales_handle_edit
+    Комментарий: sales_handle_header
+
+Обработка
+    Заказ
+        Выставление счета
+            Создать и/или Отправить (3 варианта)
+            [Go]
+        Закрыть заказ
+            Выбор причины закрытия
+            [Закрыть]            
+    Строки
+        Резервирование
+            Количество по строкам для обработки
+            [Резервировать]
+            [Разрезервировать все]
+        Бронь
+            Количество по строкам для обработки
+            Параметры бронирования
+            [Бронировать]
+        Перенос резерва
+            Выбор строк (чекбокс), Заказ для переноса - выбор (20-30)
+        Удаление строк
+            Выбор строк (чекбокс)        
+            Причина удаления
+            [Удалить]
+        Запрос цены
+            Выбор строк (чекбокс)        
+            Цена клиента
+            [Запросить]
+=end
+
   def new
    @carts = current_user.cart_items.in_cart.unprocessed.all
    @reqs = @carts.partition{|i| i.is_a? CartRequest }[0]
@@ -58,9 +96,9 @@ class OrdersController < ApplicationController
   end
 
   def show
-   @order = Axapta.sales_lines_paged(@page, :sales_id => params[:id])#, :only_open => true)
+   @order_info = Axapta.sales_info(:sales_id => params[:id], :show_external_invoice_num => true, :show_max_quotation_prognosis => true).first
+   @lines = Axapta.sales_lines_paged(@page, :sales_id => params[:id])#, :only_open => true)
   end
-
 
  protected
   def get_filter
