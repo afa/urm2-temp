@@ -15,14 +15,17 @@ class SessionsController < ApplicationController
    sign_out if logged_in?
    l_user = User.authenticate(params[:session].try(:[], :username), params[:session].try(:[], :password))
    unless l_user
-    redirect_to new_sessions_path, :flash => {:error => "Неверный пароль или имя пользователя."} 
     User.current = nil
+    redirect_to new_sessions_path, :flash => {:error => "Неверный пароль или имя пользователя."} 
     return
    end
    sign_in(l_user) #unless logged_in?
-   current_user.reload_accounts if logged_in?
-   redirect_to root_path if logged_in?
-   redirect_to new_sessions_path, :flash => {:error => "Неверный пароль или имя пользователя."} unless logged_in?
+   if logged_in?
+    current_user.reload_accounts
+    redirect_to root_path
+   else
+    redirect_to new_sessions_path, :flash => {:error => "Неверный пароль или имя пользователя."}
+   end
   end
 
   def destroy

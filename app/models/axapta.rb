@@ -105,7 +105,7 @@ class Axapta
    begin
     res = AxaptaRequest.sales_info({:user_hash => User.current.try(:current_account).try(:axapta_hash), :page_num => (page || prm[:page] || 1), :order_sales_date => "desc"}.merge(*args))
    rescue Exception => e
-    return []
+    return OpenStruct.new(:total => 0, :page => 0, :records => 0, :items => [], :error => e.to_s)
    end
    OpenStruct.new(:items => (res.try(:[], "sales") || []).map do |sale|
     OpenStruct.new sale
