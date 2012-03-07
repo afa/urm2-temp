@@ -62,55 +62,18 @@
 
      = render :partial => "orders/showed_line", :collection => @lines.items
 
-    .order_info
-     .line
-      %span.title= "Расчётный счёт"
-      = @order_info.bank_account
-     .line
-      %span.title= "Комментарий"
-      = @order_info.comment
-     .line
-      %span.title= "Фирма"
-      = @order_info.company_code
-     .line
-      %span.title= "Валюта"
-      = @order_info.currency_code
-     .line
-      %span.title= "Дата готовности"
-      = @order_info.date_dead_line_delivery
-     .line
-      %span.title= "Способ поставки"
-      = @order_info.delivery_mode
-     .line
-      %span.title= "Счёт"
-      = @order_info.document_number
-     .line
-      %span.title= "Накладная ТК"
-      = @order_info.external_invoice_num
-     .line
-      %span.title= "Срок поставки"
-      = @order_info.max_quotation_prognosis
-     .line
-      %span.title= "Способ оплаты"
-      = @order_info.paym_mode
-     .line
-      %span.title= "Статус оплаты"
-      = @order_info.payment_status
-     .line
-      %span.title= "Сумма"
-      = @order_info.sales_amount
-     .line
-      %span.title= "Дата заказа"
-      = @order_info.sales_date
-     .line
-      %span.title= "Статус в СОД"
-      = @order_info.sales_ecommerce_status
-     .line
-      %span.title= "Номер заказа"
-      = @order_info.sales_id
-     .line
-      %span.title= "Статус"
-      = @order_info.sales_status
+    .handle_sale
+     .make_order
+      выставление счета
+     .close_sale
+      закрыть заказ
+    .handle_lines
+     .reserve_lines
+     .pick_lines
+     .reserve_transfer
+     .remove_lines
+     .price_request
+    = render :partial => "order/info", :locals => {:order => @order_info}
 -# :javascript
  if($(".calendar-input").length > 0){
  $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd', popupContainer: $('#ui-datepicker-div-container')});
