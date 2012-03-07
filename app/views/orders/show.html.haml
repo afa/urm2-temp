@@ -55,11 +55,12 @@
       %th Продано
       %th Дата готовности
       %th Ожидаемая дата поставки
-      %th Заказ
+      %th Комментарий
+      %th Требования
       %th Контактное лицо
       %th Проект
 
-     = render :partial => "orders/item_line", :collection => @lines.items
+     = render :partial => "orders/showed_line", :collection => @lines.items
 
     .order_info
      .line
