@@ -98,6 +98,7 @@ class OrdersController < ApplicationController
   def show
    @order_info = Axapta.sales_info(:sales_id => params[:id], :show_external_invoice_num => true, :show_max_quotation_prognosis => true).first
    @lines = Axapta.sales_lines_paged(@page, :sales_id => params[:id])#, :only_open => true)
+   @deliveries = current_user.deliveries
   end
 
  protected

@@ -15,19 +15,7 @@
     = render :partial => "shared/check_button", :locals => {:name => "order_needed", :title => t(:order_needed), :opts => {:need_field => true, :use_system => true}}
    
   - if @carts.detect{|c| c.pick or c.is_a?(CartWorld) }
-   .cell-in-3
-
-    %h3 Параметры бронирования
-    - p ":::deliv", @deliveries
-    - unless @deliveries.empty?
-     .padded
-      %span
-       %span{:style => "float: left;"}Способ поставки:
-       = render :partial => "shared/select_list", :locals => {:list_items => @deliveries, :name => :delivery_type}
-       .clear
-     .padded
-      %span Дата готовности:
-      %input.calendar-input{:type => "text", :name => 'date_picker', :value => Date.today.strftime("%Y-%m-%d")}
+   = render :partial => "main/pick_options"
   - if @carts.detect{|c| c.is_a?(CartRequest) }
    .cell-in-3
     .block-padded

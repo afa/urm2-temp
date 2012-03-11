@@ -80,7 +80,7 @@
        [#{t(:unreserve_all)}]
      .pick_lines
       - form_for :order, :url => order_path, :html => {:method => "GET"}, :remote => true do |f4|
-       = render :partial => ""
+       = render :partial => "main/pick_options"
        [#{t(:pick)}]
      .reserve_transfer
       - form_for :order, :url => order_path, :html => {:method => "GET"}, :remote => true do |f5|
