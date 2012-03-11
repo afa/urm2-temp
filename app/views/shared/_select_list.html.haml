@@ -35,7 +35,7 @@
     %span= title
  - else
   .sub{:style => "z-index:4;"}
-   - (blank + list_items).each do |a|
+   - (list_items).each do |a|
     = link_to a[1], "#", :name => a[0], :class => "showed", :style => "white-space:nowrap;min-width:#{sz}ex;"
   -# %a{:href=>"#", :name => name}
    %span= title
