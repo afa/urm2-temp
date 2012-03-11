@@ -65,29 +65,29 @@
     .handle_sale
      .make_order
       выставление счета
-      - form_for :order, :url => order_path, :html => {:method => "GET"}, :remote => true do |f1|
+      - form_for :order, :url => order_path, :html => {:method => "GET"} do |f1|
        = select_tag("order[#{params[:id]}][order_action]", "<option value=\"make\">Создать</option><option value=\"send\">Отправить</option><option value=\"make_send\">Создать и отправить</option>".html_safe)
        [#{t(:go)}]
      .close_sale
       закрыть заказ
-      - form_for :order, :url => order_path, :html => {:method => "GET"}, :remote => true do |f2|
+      - form_for :order, :url => order_path, :html => {:method => "GET"} do |f2|
        = text_area_tag "order[#{params[:id]}][order_cancelation_reason]"
        [#{t(:close)}]
     .handle_lines
      .reserve_lines
-      - form_for :order, :url => order_path, :html => {:method => "GET"}, :remote => true do |f3|
+      - form_for :order, :url => order_path, :html => {:method => "GET"} do |f3|
        [#{t(:reserve)}]
        [#{t(:unreserve_all)}]
      .pick_lines
-      - form_for :order, :url => order_path, :html => {:method => "GET"}, :remote => true do |f4|
+      - form_for :order, :url => order_path, :html => {:method => "GET"} do |f4|
        = render :partial => "main/pick_options"
        [#{t(:pick)}]
      .reserve_transfer
-      - form_for :order, :url => order_path, :html => {:method => "GET"}, :remote => true do |f5|
+      - form_for :order, :url => order_path, :html => {:method => "GET"} do |f5|
        = select_tag "order[#{params[:id]}][transferable_order]", "<option></option>".html_safe
        
      .remove_lines
-      - form_for :order, :url => order_path, :html => {:method => "GET"}, :remote => true do |f6|
+      - form_for :order, :url => order_path, :html => {:method => "GET"} do |f6|
        = text_area_tag "order[#{params[:id]}][erase_reason]"
        [#{t(:remove)}]
      .price_request
