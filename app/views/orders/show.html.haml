@@ -64,34 +64,34 @@
 
     .handle_sale
      .make_order
-      выставление счета
+      .header выставление счета
       = form_for :order, :url => order_path, :html => {:method => "GET"} do |f1|
-       = select_tag("order[#{params[:id]}][order_action]", "<option value=\"make\">Создать</option><option value=\"send\">Отправить</option><option value=\"make_send\">Создать и отправить</option>".html_safe)
-       [#{t(:go)}]
+       .param= select_tag("order[#{params[:id]}][order_action]", "<option value=\"make\">Создать</option><option value=\"send\">Отправить</option><option value=\"make_send\">Создать и отправить</option>".html_safe)
+       .link [#{t(:go)}]
      .close_sale
-      закрыть заказ
+      .header закрыть заказ
       = form_for :order, :url => order_path, :html => {:method => "GET"} do |f2|
-       = text_area_tag "order[#{params[:id]}][order_cancelation_reason]"
-       [#{t(:close)}]
+       .param= text_area_tag "order[#{params[:id]}][order_cancelation_reason]"
+       .link [#{t(:close)}]
     .handle_lines
      .reserve_lines
       = form_for :order, :url => order_path, :html => {:method => "GET"} do |f3|
-       [#{t(:reserve)}]
-       [#{t(:unreserve_all)}]
+       .link [#{t(:reserve)}]
+       .link [#{t(:unreserve_all)}]
      .pick_lines
       = form_for :order, :url => order_path, :html => {:method => "GET"} do |f4|
-       = render :partial => "main/pick_options"
-       [#{t(:pick)}]
+       .param= render :partial => "main/pick_options"
+       .link [#{t(:pick)}]
      .reserve_transfer
       = form_for :order, :url => order_path, :html => {:method => "GET"} do |f5|
-       = select_tag "order[#{params[:id]}][transferable_order]", "<option></option>".html_safe
+       .param= select_tag "order[#{params[:id]}][transferable_order]", "<option></option>".html_safe
        
      .remove_lines
       = form_for :order, :url => order_path, :html => {:method => "GET"} do |f6|
-       = text_area_tag "order[#{params[:id]}][erase_reason]"
-       [#{t(:remove)}]
+       .param= text_area_tag "order[#{params[:id]}][erase_reason]"
+       .link [#{t(:remove)}]
      .price_request
-      ???
+      .param ???
     = render :partial => "orders/info", :locals => {:order => @order_info}
 -# :javascript
  if($(".calendar-input").length > 0){
