@@ -20,12 +20,14 @@
       .header выставление счета
       = form_for :order, :url => order_path, :html => {:method => "GET"} do |f1|
        .param= select_tag("order[#{params[:id]}][order_action]", "<option value=\"make\">Создать</option><option value=\"send\">Отправить</option><option value=\"make_send\">Создать и отправить</option>".html_safe)
-       .link [#{t(:go)}]
+       -# .link [#{t(:go)}]
+       = render :partial => "shared/submit_button", :locals => {:title => t(:go)}
      .close_sale
       .header= t(:close_sale) #закрыть заказ
       = form_for :order, :url => order_path, :html => {:method => "GET"} do |f2|
        .param= text_area_tag "order[#{params[:id]}][order_cancelation_reason]"
-       .link [#{t(:close)}]
+       -# .link [#{t(:close)}]
+       = render :partial => "shared/submit_button", :locals => {:title => t(:close)}
 
     = render :partial => "orders/info", :locals => {:order => @order_info}
 
