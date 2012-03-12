@@ -238,3 +238,25 @@ function activateSearchAllowOrderButton(){
 function onSelectSendForm(obj){
  $(obj).parents("form").submit();
 }
+
+function ordersTabOnClick(){
+ var lst = $(this).parents(".tabbed_box").find(".dialogs");
+ var idx = $(this).parents(".tabbed_box .tabs").index($(this));
+ if(index == -1){
+  return false;
+ }
+ var page = lst.eq(idx);
+ if(page.hasClass("active")){
+  page.removeClass("active");
+  //page.hide();
+ } else {
+  lst.removeClass("active");
+  page.addClass("active");
+ }
+ return false;
+}
+function ordersTabsProcess(){
+ $(".tabbed_box .tabs .tab a#enable_reserve_lines").click(ordersTabOnClick);
+ $(".tabbed_box .tabs .tab a#enable_pick_lines").click(ordersTabOnClick);
+ $(".tabbed_box .tabs .tab a#enable_reserve_transfer").click(ordersTabOnClick);
+}
