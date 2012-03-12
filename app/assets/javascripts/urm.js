@@ -241,11 +241,11 @@ function onSelectSendForm(obj){
 
 function ordersTabOnClick(){
  var lst = $(this).parents(".tabbed_box").find(".dialogs");
- var idx = $(this).parents(".tabbed_box").find(".tabs .tab").index($(this).parents(".tab"));
- if(index == -1){
+ var idx = $(this).parents(".tabbed_box").find(".tabs .tab a").index($(this));
+ if(idx == -1){
   return false;
  }
- var page = lst.eq(idx);
+ var page = lst.get(idx);
  if(page.hasClass("active")){
   page.removeClass("active");
   //page.hide();
