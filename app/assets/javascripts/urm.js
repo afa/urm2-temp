@@ -241,7 +241,7 @@ function onSelectSendForm(obj){
 
 function ordersTabOnClick(){
  var lst = $(this).parents(".tabbed_box").find(".dialogs");
- var idx = $(this).parents(".tabbed_box .tabs").index($(this));
+ var idx = $(this).parents(".tabbed_box").find(".tabs .tab").index($(this).parents(".tab"));
  if(index == -1){
   return false;
  }
