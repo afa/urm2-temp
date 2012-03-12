@@ -240,7 +240,7 @@ function onSelectSendForm(obj){
 }
 
 function ordersTabOnClick(){
- var lst = $(this).parents(".tabbed_box").find(".dialogs");
+ var lst = $(this).parents(".tabbed_box").find(".dialogs .page");
  var idx = $(this).parents(".tabbed_box").find(".tabs .tab a").index($(this));
  if(idx == -1){
   return false;
