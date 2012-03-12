@@ -1,12 +1,11 @@
 .cell-in-3
-
  %h3 Параметры бронирования
- - p ":::deliv", @deliveries
+ -# p ":::deliv", @deliveries
  - unless @deliveries.empty?
   .padded
    %span
-    %span{:style => "float: left;"}Способ поставки:
-    = render :partial => "shared/select_list", :locals => {:list_items => @deliveries, :name => :delivery_type, :title => "", :opts => {:use_system => true} }
+    -# %span{:style => "float: left;"}Способ поставки:
+    = render :partial => "shared/select_list", :locals => {:list_items => @deliveries, :name => :delivery_type, :title => t(:delivery_type), :opts => {:use_system => true} }
     .clear
   .padded
    %span Дата готовности:
