@@ -62,7 +62,7 @@
      .pick_lines
       = form_for :order, :url => order_path, :html => {:method => "GET"} do |f4|
        .param= render :partial => "main/pick_options"
-       .link.clear [#{t(:pick)}]
+       .link [#{t(:pick)}]
      .reserve_transfer
       = form_for :order, :url => order_path, :html => {:method => "GET"} do |f5|
        .param= select_tag "order[#{params[:id]}][transferable_order]", "<option></option>".html_safe #TODO: place valid options
