@@ -15,6 +15,8 @@
  .table-navigation-block{:class => "scroll"}
   .table-block
    .table-scrolling
+    = render :partial => "orders/info", :locals => {:order => @order_info}
+
     .handle_sale
      .make_order
       .header выставление счета
@@ -30,8 +32,6 @@
        -# .link [#{t(:close)}]
        = render :partial => "shared/submit_button", :locals => {:title => t(:close)}
        .clear
-
-    = render :partial => "orders/info", :locals => {:order => @order_info}
 
     = render :partial => "shared/pagination", :locals => {:page => @lines.page.to_i, :pages => @lines.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей: #{@lines.records}&nbsp;&nbsp;Страниц: #{@lines.total}&nbsp;&nbsp;".html_safe, :text_before_current => "Страница: "}}
     -# = render :partial => "shared/pagination", :locals => {:page => @lines.page.to_i, :pages => @lines.total.to_i}
@@ -58,6 +58,7 @@
       %th Проект
 
      = render :partial => "orders/showed_line", :collection => @lines.items
+     .clear
      = render :partial => "shared/submit_button", :locals => {:title => t(:save)}
      .clear
     .handle_lines
