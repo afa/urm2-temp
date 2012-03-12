@@ -15,7 +15,8 @@
     = render :partial => "shared/check_button", :locals => {:name => "order_needed", :title => t(:order_needed), :opts => {:need_field => true, :use_system => true}}
    
   - if @carts.detect{|c| c.pick or c.is_a?(CartWorld) }
-   = render :partial => "main/pick_options"
+   .cell-in-3
+    = render :partial => "main/pick_options"
   - if @carts.detect{|c| c.is_a?(CartRequest) }
    .cell-in-3
     .block-padded
