@@ -57,26 +57,39 @@
       %th Проект
 
      = render :partial => "orders/showed_line", :collection => @lines.items
-
+     = render :partial => "shared/submit_button", :locals => {:title => t(:save)}
+     .clear
     .handle_lines
      .reserve_lines
       = form_for :order, :url => order_path, :html => {:method => "GET"} do |f3|
-       .link [#{t(:reserve)}]
-       .link [#{t(:unreserve_all)}]
+       -# .link [#{t(:reserve)}]
+       = render :partial => "shared/submit_button", :locals => {:title => t(:reserve)}
+       .clear
+       -# .link [#{t(:unreserve_all)}]
+       = render :partial => "shared/submit_button", :locals => {:title => t(:unreserve_all)}
+       .clear
      .pick_lines
       = form_for :order, :url => order_path, :html => {:method => "GET"} do |f4|
        .param= render :partial => "main/pick_options"
-       .link [#{t(:pick)}]
+       -# .link [#{t(:pick)}]
+       = render :partial => "shared/submit_button", :locals => {:title => t(:pick)}
+       .clear
      .reserve_transfer
       = form_for :order, :url => order_path, :html => {:method => "GET"} do |f5|
        .param= select_tag "order[#{params[:id]}][transferable_order]", "<option></option>".html_safe #TODO: place valid options
-       .link [#{t(:transfer_sales_lines)}]
+       -# .link [#{t(:transfer_sales_lines)}]
+       = render :partial => "shared/submit_button", :locals => {:title => t(:transfer_sales_lines)}
+       .clear
      .remove_lines
       = form_for :order, :url => order_path, :html => {:method => "GET"} do |f6|
        .param= text_area_tag "order[#{params[:id]}][erase_reason]"
-       .link [#{t(:remove)}]
+       -# .link [#{t(:remove)}]
+       = render :partial => "shared/submit_button", :locals => {:title => t(:remove)}
+       .clear
      .price_request
       .param ???
+       = render :partial => "shared/submit_button", :locals => {:title => t(:request_new_price)}
+       .clear
 -# :javascript
  if($(".calendar-input").length > 0){
  $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd', popupContainer: $('#ui-datepicker-div-container')});
