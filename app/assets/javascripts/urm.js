@@ -245,7 +245,7 @@ function ordersTabOnClick(){
  if(idx == -1){
   return false;
  }
- var page = lst.get(idx);
+ var page = lst.eq(idx);
  if(page.hasClass("active")){
   page.removeClass("active");
   //page.hide();
