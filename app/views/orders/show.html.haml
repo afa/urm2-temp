@@ -58,9 +58,9 @@
       %th Проект
 
      = render :partial => "orders/showed_line", :collection => @lines.items
-     .clear
-     = render :partial => "shared/submit_button", :locals => {:title => t(:save)}
-     .clear
+    .clear
+    = render :partial => "shared/submit_button", :locals => {:title => t(:save)}
+    .clear
     .handle_lines
      .reserve_lines
       = form_for :order, :url => order_path, :html => {:method => "GET"} do |f3|
