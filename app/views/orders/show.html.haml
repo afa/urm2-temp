@@ -64,9 +64,9 @@
     .handle_lines
      .tabbed_box
       .tabs
-       .tab= t(:reserve_lines)
-       .tab= t(:pick_lines)
-       .tab= t(:reserve_transfer)
+       .tab= link_to t(:reserve_lines), "#", :id => "enable_rteserve_lines", :class => "ajax"
+       .tab= link_to t(:pick_lines), "#"
+       .tab= link_to t(:reserve_transfer), "#"
       .dialogs
        .page
         .reserve_lines
