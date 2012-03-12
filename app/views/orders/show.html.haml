@@ -62,26 +62,35 @@
     = render :partial => "shared/submit_button", :locals => {:title => t(:save)}
     .clear
     .handle_lines
-     .reserve_lines
-      = form_for :order, :url => order_path, :html => {:method => "GET"} do |f3|
-       -# .link [#{t(:reserve)}]
-       = render :partial => "shared/submit_button", :locals => {:title => t(:reserve)}
-       .clear
-       -# .link [#{t(:unreserve_all)}]
-       = render :partial => "shared/submit_button", :locals => {:title => t(:unreserve_all)}
-       .clear
-     .pick_lines
-      = form_for :order, :url => order_path, :html => {:method => "GET"} do |f4|
-       .param= render :partial => "main/pick_options"
-       -# .link [#{t(:pick)}]
-       = render :partial => "shared/submit_button", :locals => {:title => t(:pick)}
-       .clear
-     .reserve_transfer
-      = form_for :order, :url => order_path, :html => {:method => "GET"} do |f5|
-       .param= select_tag "order[#{params[:id]}][transferable_order]", "<option></option>".html_safe #TODO: place valid options
-       -# .link [#{t(:transfer_sales_lines)}]
-       = render :partial => "shared/submit_button", :locals => {:title => t(:transfer_sales_lines)}
-       .clear
+     .tabbed_box
+      .tabs
+       .tab= t(:reserve_lines)
+       .tab= t(:pick_lines)
+       .tab= t(:reserve_transfer)
+      .dialogs
+       .page
+        .reserve_lines
+         = form_for :order, :url => order_path, :html => {:method => "GET"} do |f3|
+          -# .link [#{t(:reserve)}]
+          = render :partial => "shared/submit_button", :locals => {:title => t(:reserve)}
+          .clear
+          -# .link [#{t(:unreserve_all)}]
+          = render :partial => "shared/submit_button", :locals => {:title => t(:unreserve_all)}
+          .clear
+       .page
+        .pick_lines
+         = form_for :order, :url => order_path, :html => {:method => "GET"} do |f4|
+          .param= render :partial => "main/pick_options"
+          -# .link [#{t(:pick)}]
+          = render :partial => "shared/submit_button", :locals => {:title => t(:pick)}
+          .clear
+       .page
+        .reserve_transfer
+         = form_for :order, :url => order_path, :html => {:method => "GET"} do |f5|
+          .param= select_tag "order[#{params[:id]}][transferable_order]", "<option></option>".html_safe #TODO: place valid options
+          -# .link [#{t(:transfer_sales_lines)}]
+          = render :partial => "shared/submit_button", :locals => {:title => t(:transfer_sales_lines)}
+          .clear
      .remove_lines
       = form_for :order, :url => order_path, :html => {:method => "GET"} do |f6|
        .param= text_area_tag "order[#{params[:id]}][erase_reason]"
