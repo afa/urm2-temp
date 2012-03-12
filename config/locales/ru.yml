@@ -133,3 +133,14 @@ ru:
  this_sales_origin: Только УРМ
  only_my: Только мои заказы
  news: Новости
+
+# Orders#show
+ close: Закрыть
+ go: Выставить
+ close_sale: Закрытие заказа
+ request_new_price: Запросить новую цену
+ remove: Удалить
+ transfer_sales_lines: Переместить строки
+ delivery_type: Способ доставки
+ unreserve_all: Разрезервировать всё
+
