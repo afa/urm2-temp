@@ -6,7 +6,7 @@
   .padded
    %span
     %span{:style => "float: left;"}Способ поставки:
-    = render :partial => "shared/select_list", :locals => {:list_items => @deliveries, :name => :delivery_type, :opts => {:use_system => true} }
+    = render :partial => "shared/select_list", :locals => {:list_items => @deliveries, :name => :delivery_type, :title => "", :opts => {:use_system => true} }
     .clear
   .padded
    %span Дата готовности:

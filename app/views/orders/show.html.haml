@@ -12,29 +12,6 @@
  %span.current Заказ #{params[:id]}
 
 .content-wrap
- -# .filter-block
-  = form_for :filter, :url => lines_orders_path, :html => {:method => :get} do |f|
-   .filter
-    %table
-     %tr
-      %th= f.label :item_name, t(:item_name)
-      %td.long= f.text_field :item_name
-     %tr
-      %th Дата отгрузки:
-      %td.tiny
-       с&nbsp;
-       %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from}
-       -# .calendar-input= @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from
-       &nbsp;по&nbsp;
-       %input.calendar-input{:type => "text", :name => 'filter[date_to]', :value => @filter.try(:date_to).blank? ? Date.current.strftime("%Y-%m-%d") : @filter.date_to}
-       -# #ui-datepicker-div-container{:style=>"position: relative;"}
-     %tr
-      %th
-      %td= render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
-      
-   .clear.block-padded
-
-
  .table-navigation-block{:class => "scroll"}
   .table-block
    .table-scrolling
@@ -99,41 +76,4 @@
  $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd', popupContainer: $('#ui-datepicker-div-container')});
  }
 
--# 
- =begin
-  bank_account:
-   title: "Расчётный счёт"
-  comment:
-   title: Комментарий
-  company_code:
-   title: Фирма
-  currency_code:
-   title: Валюта
-  date_dead_line_delivery:
-   title: "Дата готовности"
-   type: date
-  delivery_mode:
-   title: "Способ поставки"
-  document_number:
-   title: Счёт
-  external_invoice_num:
-   title: "Накладная ТК"
-  max_quotation_prognosis:
-   title: "Срок поставки"
-  paym_mode:
-   title: "Способ оплаты"
-  payment_status:
-   title: "Статус оплаты"
-  sales_amount:
-   title: Сумма
-  sales_date:
-   title: "Дата заказа"
-   type: date
-  sales_ecommerce_status:
-   title: "Статус в СОД"
-  sales_id:
-   title: "Номер заказа"
-  sales_status:
-   title: Статус
- =end
 
