@@ -43,6 +43,7 @@
       %th Производитель
       %th Количество
       %th Цена
+      %th= t(:user_price)
       %th Сумма
       %th Поставка
       %th Резерв
@@ -88,8 +89,8 @@
        .clear
      .price_request
       .param ???
-       = render :partial => "shared/submit_button", :locals => {:title => t(:request_new_price)}
-       .clear
+      = render :partial => "shared/submit_button", :locals => {:title => t(:request_new_price)}
+      .clear
 -# :javascript
  if($(".calendar-input").length > 0){
  $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd', popupContainer: $('#ui-datepicker-div-container')});
