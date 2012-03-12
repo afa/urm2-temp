@@ -15,6 +15,20 @@
  .table-navigation-block{:class => "scroll"}
   .table-block
    .table-scrolling
+    .handle_sale
+     .make_order
+      .header выставление счета
+      = form_for :order, :url => order_path, :html => {:method => "GET"} do |f1|
+       .param= select_tag("order[#{params[:id]}][order_action]", "<option value=\"make\">Создать</option><option value=\"send\">Отправить</option><option value=\"make_send\">Создать и отправить</option>".html_safe)
+       .link [#{t(:go)}]
+     .close_sale
+      .header= t(:close_sale) #закрыть заказ
+      = form_for :order, :url => order_path, :html => {:method => "GET"} do |f2|
+       .param= text_area_tag "order[#{params[:id]}][order_cancelation_reason]"
+       .link [#{t(:close)}]
+
+    = render :partial => "orders/info", :locals => {:order => @order_info}
+
     = render :partial => "shared/pagination", :locals => {:page => @lines.page.to_i, :pages => @lines.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей: #{@lines.records}&nbsp;&nbsp;Страниц: #{@lines.total}&nbsp;&nbsp;".html_safe, :text_before_current => "Страница: "}}
     -# = render :partial => "shared/pagination", :locals => {:page => @lines.page.to_i, :pages => @lines.total.to_i}
     %table.table-style{:class => "order-list"}
@@ -40,17 +54,6 @@
 
      = render :partial => "orders/showed_line", :collection => @lines.items
 
-    .handle_sale
-     .make_order
-      .header выставление счета
-      = form_for :order, :url => order_path, :html => {:method => "GET"} do |f1|
-       .param= select_tag("order[#{params[:id]}][order_action]", "<option value=\"make\">Создать</option><option value=\"send\">Отправить</option><option value=\"make_send\">Создать и отправить</option>".html_safe)
-       .link [#{t(:go)}]
-     .close_sale
-      .header закрыть заказ
-      = form_for :order, :url => order_path, :html => {:method => "GET"} do |f2|
-       .param= text_area_tag "order[#{params[:id]}][order_cancelation_reason]"
-       .link [#{t(:close)}]
     .handle_lines
      .reserve_lines
       = form_for :order, :url => order_path, :html => {:method => "GET"} do |f3|
@@ -63,14 +66,13 @@
      .reserve_transfer
       = form_for :order, :url => order_path, :html => {:method => "GET"} do |f5|
        .param= select_tag "order[#{params[:id]}][transferable_order]", "<option></option>".html_safe #TODO: place valid options
-       
+       .link [#{t(:transfer_sales_lines)}]
      .remove_lines
       = form_for :order, :url => order_path, :html => {:method => "GET"} do |f6|
        .param= text_area_tag "order[#{params[:id]}][erase_reason]"
        .link [#{t(:remove)}]
      .price_request
       .param ???
-    = render :partial => "orders/info", :locals => {:order => @order_info}
 -# :javascript
  if($(".calendar-input").length > 0){
  $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd', popupContainer: $('#ui-datepicker-div-container')});
