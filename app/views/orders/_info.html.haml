@@ -4,7 +4,7 @@
   = order.bank_account
  .line
   %span.title= "Комментарий"
-  = order.comment
+  = text_area_tag "order[#{params[:id]}][comment]", order.comment
  .line
   %span.title= "Фирма"
   = order.company_code
