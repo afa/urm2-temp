@@ -10,6 +10,10 @@ Urm::Application.routes.draw do
    collection do
     get :lines
    end
+   member do
+    post :save
+    post :close
+   end
   end
   resources :quotations, :only => [:index, :show] do
    collection do

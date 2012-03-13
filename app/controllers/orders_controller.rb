@@ -101,6 +101,21 @@ class OrdersController < ApplicationController
    @deliveries = current_user.deliveries
   end
 
+  def save
+   id = params[:id]
+   lines = params[:order][id][:line]
+   comment = params[:order][id][:comment]
+   #@order = Axapta.sales_info(:sales_id => id.to_i)
+   #@lines = Axapta.sales_lines(:sales_id => id.to_i)
+   Axapta.sales_handle_header(:comment => comment)
+   Axapta.sales_handle_edit(:sales_lines => lines, :sales_id => id.to_i)
+   redirect_to order_path(id.to_i)
+  end
+
+  def close
+
+  end
+
  protected
   def get_filter
    @filter_hash = params[:filter] || {}

@@ -59,7 +59,7 @@
 
      = render :partial => "orders/showed_line", :collection => @lines.items
     .clear
-    = render :partial => "shared/submit_button", :locals => {:title => t(:save)}
+    = render :partial => "shared/submit_button", :locals => {:title => t(:save), :id => "save_order"}
     .clear
     .handle_lines
      .tabbed_box
@@ -107,3 +107,4 @@
  }
 :javascript
  ordersTabsProcess();
+ ordersSaveProcess();

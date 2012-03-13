@@ -154,4 +154,12 @@ class Axapta
    res = AxaptaRequest.quotation_lines(hsh.merge(:page_num => (page || hsh[:page] || 1), :user_hash => User.current.try(:current_account).try(:axapta_hash)).merge(fix))
    OpenStruct.new(:items => (res.try(:[], "quotations_lines") || []).map{|i| OpenStruct.new(i)}, :page => (page || hsh[:page] || 1), :total =>  res.try(:[], "pages") || 1, :records => res.try(:[], "records") || 0)
   end
+
+  def self.sales_handle_header(hsh)
+   AxaptaRequest.sales_handle_header(hsh.merge(:user_hash => User.current.try(:current_account).try(:axapta_hash)))
+  end
+
+  def self.sales_handle_edit(hsh)
+   AxaptaRequest.sales_handle_edit(hsh.merge(:user_hash => User.current.try(:current_account).try(:axapta_hash)))
+  end
 end
