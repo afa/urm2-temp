@@ -43,7 +43,7 @@
       %th Производитель
       %th Количество
       %th Цена
-      %th= t(:user_price)
+      -# TODO %th= t(:user_price)
       %th Сумма
       %th Поставка
       %th Резерв
@@ -97,7 +97,7 @@
        -# .link [#{t(:remove)}]
        = render :partial => "shared/submit_button", :locals => {:title => t(:remove)}
        .clear
-     .price_request
+     -# TODO .price_request
       .param ???
       = render :partial => "shared/submit_button", :locals => {:title => t(:request_new_price)}
       .clear
