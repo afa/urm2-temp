@@ -265,15 +265,16 @@ function ordersCollectLines(){
 
 }
 
-function ordersCopyToHidden(item){
- $('<input type="hidden" name="' + item.name + '" value="' + $(item).val() + '">').insertAfter($(this));
+function ordersCopyToHidden(item, after){
+ $('<input type="hidden" name="' + item.name + '" value="' + $(item).val() + '">').insertAfter($(after));
  alert(item.name);
 }
 
 function ordersSaveOnClick(){
- $('input[id^="order_"][id$="_note"]').each(function(i, item){ ordersCopyToHidden(item); });
- $('input[id^="order_"][id$="_requirements"]').each(function(i, item){ ordersCopyToHidden(item); });
- $('input[id^="order_"][id$="_comment"]').each(function(i, item){ ordersCopyToHidden(item); });
+ var curr = this;
+ $('input[id^="order_"][id$="_note"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
+ $('input[id^="order_"][id$="_requirements"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
+ $('input[id^="order_"][id$="_comment"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
  //$(this).parents("form").submit();
  return false;
 }
