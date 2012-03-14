@@ -105,7 +105,7 @@ class OrdersController < ApplicationController
    id = params[:id]
    lines = params.try(:[], :order).try(:[], id).try(:[], :line) || []
    if lines.empty?
-    redirect_to order_path(id.to_i), :flash => {:error => "empty lines"}
+    redirect_to order_path(id), :flash => {:error => "empty lines"}
     return
    end
    comment = params[:order][id][:comment]
@@ -113,7 +113,7 @@ class OrdersController < ApplicationController
    #@lines = Axapta.sales_lines(:sales_id => id.to_i)
    Axapta.sales_handle_header(:comment => comment, :sale_id => id.to_i)
    Axapta.sales_handle_edit(:sales_lines => lines, :sales_id => id.to_i)
-   redirect_to order_path(id.to_i)
+   redirect_to order_path(id)
   end
 
   def close
