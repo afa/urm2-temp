@@ -59,7 +59,7 @@
 
      = render :partial => "orders/showed_line", :collection => @lines.items
     .clear
-    = form_for :order, :url => save_order(params[:id]) do |f6|
+    = form_for :order, :url => save_order_path(params[:id]) do |f6|
      = render :partial => "shared/submit_button", :locals => {:title => t(:save), :opts => {:id => "save_order"}}
     .clear
     .handle_lines
