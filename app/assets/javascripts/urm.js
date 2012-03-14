@@ -266,7 +266,7 @@ function ordersCollectLines(){
 }
 
 function ordersSaveOnClick(){
- 
+ alert("tst");
 }
 
 function ordersSaveProcess(){
