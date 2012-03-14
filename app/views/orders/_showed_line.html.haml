@@ -1,5 +1,8 @@
+- iid = showed_line.item_id
 %tr
- %td= check_box_tag "order[#{showed_line.id}][line][#{showed_line.item_id}][selected]", "1", false # TODO: chg item_id to line_id
+ %td
+  = check_box_tag "order[#{showed_line.id}][line][#{iid}][selected]", "1", false # TODO: chg item_id to line_id
+  = hidden_field_tag "order[#{showed_line.id}][line][#{iid}][item_id]", showed_line.item_id
  %td= showed_line.rohs
  %td.text-left= showed_line.item_name
  %td.text-left= showed_line.brend
@@ -14,7 +17,7 @@
  %td= showed_line.invoiced_in_total
  %td= showed_line.date_dead_line
  %td= showed_line.confirmed_dlv_date
- %td= text_field_tag "order[#{showed_line.sales_id}][line][#{showed_line.item_id}][note]", showed_line.note
- %td= text_field_tag "order[#{showed_line.sales_id}][line][#{showed_line.item_id}][requirements]", showed_line.requirements
+ %td= text_field_tag "order[#{showed_line.sales_id}][line][#{iid}][note]", showed_line.note
+ %td= text_field_tag "order[#{showed_line.sales_id}][line][#{iid}][requirements]", showed_line.requirements
  %td
  %td
