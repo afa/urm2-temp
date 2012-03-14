@@ -266,7 +266,7 @@ function ordersCollectLines(){
 }
 
 function ordersCopyToHidden(item){
- $('<input type="hidden" name="' + item.name + '" value="' + item.val() + '">').insertAfter($(this));
+ $('<input type="hidden" name="' + item.name + '" value="' + $(item).val() + '">').insertAfter($(this));
 }
 
 function ordersSaveOnClick(){
