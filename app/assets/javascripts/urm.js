@@ -267,6 +267,7 @@ function ordersCollectLines(){
 
 function ordersSaveOnClick(){
  alert("tst");
+ $(this).parents("form").submit();
 }
 
 function ordersSaveProcess(){

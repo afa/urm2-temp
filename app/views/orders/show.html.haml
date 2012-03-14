@@ -59,7 +59,8 @@
 
      = render :partial => "orders/showed_line", :collection => @lines.items
     .clear
-    = render :partial => "shared/submit_button", :locals => {:title => t(:save), :opts => {:id => "save_order"}}
+    = form_for :order, :url => save_order(params[:id]) do |f6|
+     = render :partial => "shared/submit_button", :locals => {:title => t(:save), :opts => {:id => "save_order"}}
     .clear
     .handle_lines
      .tabbed_box
