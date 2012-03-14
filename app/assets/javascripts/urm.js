@@ -274,6 +274,7 @@ function ordersSaveOnClick(){
  $('input[id^="order_"][id$="_requirements"]').each(function(i, item){ ordersCopyToHidden(item); });
  $('input[id^="order_"][id$="_comment"]').each(function(i, item){ ordersCopyToHidden(item); });
  //$(this).parents("form").submit();
+ alert("ttt");
  return false;
 }
 
