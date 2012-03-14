@@ -267,7 +267,6 @@ function ordersCollectLines(){
 
 function ordersCopyToHidden(item, after){
  $('<input type="hidden" name="' + item.name + '" value="' + $(item).val() + '">').insertAfter($(after));
- alert(item.name);
 }
 
 function ordersSaveOnClick(){
@@ -275,8 +274,7 @@ function ordersSaveOnClick(){
  $('input[id^="order_"][id$="_note"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
  $('input[id^="order_"][id$="_requirements"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
  $('textarea[id^="order_"][id$="_comment"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
- //$(this).parents("form").submit();
- return false;
+ $(this).parents("form").submit();
 }
 
 function ordersSaveProcess(){
