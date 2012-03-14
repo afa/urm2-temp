@@ -111,8 +111,8 @@ class OrdersController < ApplicationController
    comment = params[:order][id][:comment]
    #@order = Axapta.sales_info(:sales_id => id.to_i)
    #@lines = Axapta.sales_lines(:sales_id => id.to_i)
-   Axapta.sales_handle_header(:comment => comment, :sale_id => id.to_i)
-   Axapta.sales_handle_edit(:sales_lines => lines, :sales_id => id.to_i)
+   Axapta.sales_handle_header(:comment => comment, :sale_id => id)
+   Axapta.sales_handle_edit(:sales_lines => lines, :sales_id => id)
    redirect_to order_path(id)
   end
 
