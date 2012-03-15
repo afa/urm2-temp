@@ -260,6 +260,7 @@ function ordersTabsProcess(){
  $(".tabbed_box .tabs .tab a#enable_reserve_lines").click(ordersTabOnClick);
  $(".tabbed_box .tabs .tab a#enable_pick_lines").click(ordersTabOnClick);
  $(".tabbed_box .tabs .tab a#enable_reserve_transfer").click(ordersTabOnClick);
+ $(".tabbed_box .tabs .tab a#enable_remove_lines").click(ordersTabOnClick);
 }
 
 function ordersCollectLines(){
