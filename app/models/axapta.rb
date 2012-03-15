@@ -103,7 +103,7 @@ class Axapta
   def self.sales_info_paged(page, *args)
    prm = *args.dup
    begin
-    res = AxaptaRequest.sales_info({:user_hash => User.current.try(:current_account).try(:axapta_hash), :page_num => (page || prm[:page] || 1), :order_sales_date => "desc"}.merge(*args))
+    res = AxaptaRequest.sales_info({:user_hash => User.current.try(:current_account).try(:axapta_hash), :page_num => (page || prm[:page] || 1), :order_sales_id => "desc"}.merge(*args))
    rescue Exception => e
     return OpenStruct.new(:total => 0, :page => 0, :records => 0, :items => [], :error => e.to_s)
    end
