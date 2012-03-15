@@ -70,6 +70,8 @@
       .dialogs
        .page
         = form_for :order, :url => save_order_path(params[:id]) do |f6|
+         = label_tag "order_#{params[:id]}_comment", t(:order_comment)
+         = text_area_tag "order[#{params[:id]}][comment]", order.comment
          = render :partial => "shared/submit_button", :locals => {:title => t(:save), :opts => {:id => "save_order"}}
        .page
         .reserve_lines
