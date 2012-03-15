@@ -69,7 +69,7 @@
         = render :partial => "orders/showed_line", :collection => @lines.items
 
       .dialogs
-       .page
+       .page.active
         = form_for :order, :url => save_order_path(params[:id]) do |f6|
          = label_tag "order_#{params[:id]}_comment", t(:order_comment)
          = text_area_tag "order[#{params[:id]}][comment]", @order_info.comment
