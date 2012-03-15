@@ -34,9 +34,6 @@
        .clear
 
     .clear
-    = form_for :order, :url => save_order_path(params[:id]) do |f6|
-     = render :partial => "shared/submit_button", :locals => {:title => t(:save), :opts => {:id => "save_order"}}
-    .clear
     .handle_lines
      .tabbed_box
       .tabs
@@ -82,21 +79,19 @@
           .clear
           -# .link [#{t(:unreserve_all)}]
           = render :partial => "shared/submit_button", :locals => {:title => t(:unreserve_all)}
-          .clear
        .page
         .pick_lines
          = form_for :order, :url => order_path, :html => {:method => "GET"} do |f4|
           .param= render :partial => "main/pick_options"
           -# .link [#{t(:pick)}]
           = render :partial => "shared/submit_button", :locals => {:title => t(:pick)}
-          .clear
        .page
         .reserve_transfer
          = form_for :order, :url => order_path, :html => {:method => "GET"} do |f5|
           .param= select_tag "order[#{params[:id]}][transferable_order]", "<option></option>".html_safe #TODO: place valid options
           -# .link [#{t(:transfer_sales_lines)}]
           = render :partial => "shared/submit_button", :locals => {:title => t(:transfer_sales_lines)}
-          .clear
+     .clear
      .remove_lines
       = form_for :order, :url => order_path, :html => {:method => "GET"} do |f6|
        .param= text_area_tag "order[#{params[:id]}][erase_reason]"
