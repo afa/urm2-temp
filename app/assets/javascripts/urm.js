@@ -255,8 +255,18 @@ function ordersTabOnClick(){
  }
  return false;
 }
+
+function ordersHideInactiveControls(){
+ $('input[id^="order_"][id$="_item_id"]').parent().remove();
+}
+
+function ordersOnClickEnableMainOptions(){
+ ordersHideInactiveControls();
+ ordersTabOnClick();
+}
+
 function ordersTabsProcess(){
- $(".tabbed_box .tabs .tab a#enable_main_options").click(ordersTabOnClick);
+ $(".tabbed_box .tabs .tab a#enable_main_options").click(ordersOnClickEnableMainOptions);
  $(".tabbed_box .tabs .tab a#enable_reserve_lines").click(ordersTabOnClick);
  $(".tabbed_box .tabs .tab a#enable_pick_lines").click(ordersTabOnClick);
  $(".tabbed_box .tabs .tab a#enable_reserve_transfer").click(ordersTabOnClick);
