@@ -240,7 +240,6 @@ function onSelectSendForm(obj){
 }
 
 function ordersTabOnClick(){
- alert(this.id);
  var lst = $(this).parents(".tabbed_box").find(".dialogs .page");
  var idx = $(this).parents(".tabbed_box").find(".tabs .tab a").index($(this));
  if(idx == -1){
@@ -258,8 +257,7 @@ function ordersTabOnClick(){
 }
 
 function ordersHideInactiveControls(){
- alert(this.id);
- #('tr th.main_options_header').hide();
+ $('tr th.main_options_header').hide();
  $('input[id^="order_"][id*="_line"][id$="_item_id"]').parent().remove();
  $('input[id^="order_"][id*="_line"][id$="_note"]').parent().remove();
  $('input[id^="order_"][id*="_line"][id$="_requirement"]').parent().remove();
