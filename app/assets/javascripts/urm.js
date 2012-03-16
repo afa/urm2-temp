@@ -259,16 +259,14 @@ function ordersTabOnClick(){
 
 function ordersHideInactiveControls(){
  alert(this.id);
+ #('tr th.main_options_header').hide();
  $('input[id^="order_"][id*="_line"][id$="_item_id"]').parent().remove();
- $("tr th#selector_header").remove();
  $('input[id^="order_"][id*="_line"][id$="_note"]').parent().remove();
- $("tr th#line_comment_header").remove();
  $('input[id^="order_"][id*="_line"][id$="_requirement"]').parent().remove();
- $("tr th#requirement_header").remove();
 }
 
 function ordersOnClickEnableMainOptions(){
- #{t(:main_options)}
+ $("th.main_options_header").show();
  //.main_options_requirement_placeholder #main_options_requirement_header_placeholder
  //         %th#main_options_requirement_header_placeholder Ожидаемая дата поставки
  //        %th#main_options_note_header Комментарий
