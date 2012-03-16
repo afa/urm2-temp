@@ -285,7 +285,7 @@ function ordersSaveOnClick(){
  var curr = this;
  $('input[id^="order_"][id$="_item_id"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
  $('input[id^="order_"][id$="_note"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
- $('input[id^="order_"][id$="_requirements"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
+ $('input[id^="order_"][id$="_requirement"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
  $('textarea[id^="order_"][id$="_comment"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
  $(this).parents("form").submit();
 }
