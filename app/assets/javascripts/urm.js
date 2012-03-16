@@ -263,12 +263,12 @@ function ordersHideInactiveControls(){
 }
 
 function ordersOnClickEnableMainOptions(){
- ordersHideInactiveControls();
- ordersTabOnClick();
+ //ordersHideInactiveControls();
+ //ordersTabOnClick();
 }
 
 function ordersTabsProcess(){
- $(".tabbed_box .tabs .tab a#enable_main_options").click(ordersOnClickEnableMainOptions);
+ $(".tabbed_box .tabs .tab a#enable_main_options").click(ordersHideInactiveControls).click(ordersOnClickEnableMainOptions).click(ordersTabOnClick);
  $(".tabbed_box .tabs .tab a#enable_reserve_lines").click(ordersTabOnClick);
  $(".tabbed_box .tabs .tab a#enable_pick_lines").click(ordersTabOnClick);
  $(".tabbed_box .tabs .tab a#enable_reserve_transfer").click(ordersTabOnClick);
