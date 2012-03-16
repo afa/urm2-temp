@@ -258,13 +258,22 @@ function ordersTabOnClick(){
 
 function ordersHideInactiveControls(){
  $('tr th.main_options_header').hide();
- $('input[id^="order_"][id*="_line"][id$="_item_id"]').parent().remove();
- $('input[id^="order_"][id*="_line"][id$="_note"]').parent().remove();
- $('input[id^="order_"][id*="_line"][id$="_requirement"]').parent().remove();
+ $("itr td.main_options_data").hide();
+ $('tr th.reserve_header').hide();
+ $('tr th.delete_header').hide();
+ $('input[type="checkbox"][name^="order["][name*="][line]["][name$="][item_id]"]').remove();
+ $('input[type="text"][id^="order_"][id*="_line"][id$="_note"]').remove();
+ $('input[type="text"][id^="order_"][id*="_line"][id$="_requirement"]').remove();
+ $('input[type="text"][id^="order_"][id*="_line"][id$="_process_qty"]').remove();
 }
 
 function ordersOnClickEnableMainOptions(){
- $("th.main_options_header").show();
+ $("tr th.main_options_header").show();
+ $("tr td.main_options_data").show();
+ $("tr td.main_options_data").each(function(i, item){
+  var cp = $(item).parents("tr").find('td input[type="hidden"][name^="order["][name*="][line]["][name$="][note]"]').eq(0);
+  alert(cp.val("name"));
+ });
  //.main_options_requirement_placeholder #main_options_requirement_header_placeholder
  //         %th#main_options_requirement_header_placeholder Ожидаемая дата поставки
  //        %th#main_options_note_header Комментарий

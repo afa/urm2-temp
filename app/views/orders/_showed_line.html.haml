@@ -2,8 +2,11 @@
 %tr
  %td
   = check_box_tag "order[#{showed_line.sales_id}][line][#{iid}][selected]", "1", false # TODO: chg item_id to line_id
+ %td
+  = showed_line.rohs
   = hidden_field_tag "order[#{showed_line.sales_id}][line][#{iid}][item_id]", showed_line.item_id
- %td= showed_line.rohs
+  = hidden_field_tag "order[#{showed_line.sales_id}][line][#{iid}][note]", showed_line.note
+  = hidden_field_tag "order[#{showed_line.sales_id}][line][#{iid}][requirement]", showed_line.requirement
  %td.text-left= showed_line.item_name
  %td.text-left= showed_line.brend
  %td.text-right= showed_line.sales_qty
@@ -11,13 +14,14 @@
  -# TODO %td.text-right= text_field_tag "order[#{showed_line.sales_id}][user_price]", showed_line.user_price
  %td.text-right= showed_line.amount
  %td= showed_line.qty_in_debt
+ %td.reserve_data= text_field_tag "order[#{showed_line.sales_id}][line][#{iid}][process_qty]", showed_line.process_qty
  %td= showed_line.reserve_qty
  %td= showed_line.qty_in_processing
  %td= showed_line.qty_receive
  %td= showed_line.invoiced_in_total
  %td= showed_line.date_dead_line
- %td.main_options_requirement_placeholder= showed_line.confirmed_dlv_date
- %td= text_field_tag "order[#{showed_line.sales_id}][line][#{iid}][note]", showed_line.note
- %td= text_field_tag "order[#{showed_line.sales_id}][line][#{iid}][requirement]", showed_line.requirement
+ %td= showed_line.confirmed_dlv_date
+ %td.main_options_data= text_field_tag "order[#{showed_line.sales_id}][line][#{iid}][note]", showed_line.note
+ %td.main_options_data= text_field_tag "order[#{showed_line.sales_id}][line][#{iid}][requirement]", showed_line.requirement
  %td
  %td
