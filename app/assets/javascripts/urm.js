@@ -275,12 +275,10 @@ function ordersOnClickEnableMainOptions(){
  $("tr td.main_options_data").each(function(i, item){
   if($(item).hasClass("note-option")){
    var cp = $(item).parents("tr").find('td input[type="hidden"][name^="order["][name*="][line]["][name$="][note]"]').eq(0);
-   alert(cp.attr("name"));
    $(item).append('<input type="text" name="' + cp.attr("name") + '" value="' + cp.val()+ '">');
   }
   if($(item).hasClass("requirement-option")){
    var cp = $(item).parents("tr").find('td input[type="hidden"][name^="order["][name*="][line]["][name$="][requirement]"]').eq(0);
-   alert(cp.attr("name"));
    $(item).append('<input type="text" name="' + cp.attr("name") + '" value="' + cp.val()+ '">');
   }
  });
