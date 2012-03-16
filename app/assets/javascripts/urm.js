@@ -261,9 +261,8 @@ function ordersHideInactiveControls(){
  $("tr td.main_options_data").hide();
  $('tr th.reserve_header').hide();
  $("tr td.reserve_data").hide();
- $('tr th.reserve_header').hide();
  $('tr th.select_header').hide();
- $('tr th.select_data').hide();
+ $('tr td.select_data').hide();
  $('input[type="checkbox"][name^="order["][name*="][line]["][name$="][selected]"]').remove();
  $('input[type="text"][name^="order["][name*="][line]["][name$="][note]"]').remove();
  $('input[type="text"][name^="order["][name*="][line]["][name$="][requirement]"]').remove();
