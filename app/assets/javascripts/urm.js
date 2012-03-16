@@ -259,20 +259,41 @@ function ordersTabOnClick(){
 
 function ordersHideInactiveControls(){
  alert(this.id);
- $('input[id^="order_"][id$="_item_id"]').parent().remove();
+ $('input[id^="order_"][id*="_line"][id$="_item_id"]').parent().remove();
+ $("tr th#selector_header").remove();
+ $('input[id^="order_"][id*="_line"][id$="_note"]').parent().remove();
+ $("tr th#line_comment_header").remove();
+ $('input[id^="order_"][id*="_line"][id$="_requirement"]').parent().remove();
+ $("tr th#requirement_header").remove();
 }
 
 function ordersOnClickEnableMainOptions(){
- //ordersHideInactiveControls();
- //ordersTabOnClick();
+ #{t(:main_options)}
+ //.main_options_requirement_placeholder #main_options_requirement_header_placeholder
+ //         %th#main_options_requirement_header_placeholder Ожидаемая дата поставки
+ //        %th#main_options_note_header Комментарий
+ //        %th#main_options_requirement_header Требования
+
+}
+
+function ordersOnClickEnableReserveLines(){
+}
+
+function ordersOnClickEnablePickLines(){
+}
+
+function ordersOnClickEnableReserveTransfer(){
+}
+
+function ordersOnClickEnableRemoveLines(){
 }
 
 function ordersTabsProcess(){
  $(".tabbed_box .tabs .tab a#enable_main_options").click(ordersHideInactiveControls).click(ordersOnClickEnableMainOptions).click(ordersTabOnClick);
- $(".tabbed_box .tabs .tab a#enable_reserve_lines").click(ordersTabOnClick);
- $(".tabbed_box .tabs .tab a#enable_pick_lines").click(ordersTabOnClick);
- $(".tabbed_box .tabs .tab a#enable_reserve_transfer").click(ordersTabOnClick);
- $(".tabbed_box .tabs .tab a#enable_remove_lines").click(ordersTabOnClick);
+ $(".tabbed_box .tabs .tab a#enable_reserve_lines").click(ordersHideInactiveControls).click(ordersOnClickEnableMainOptions).click(ordersTabOnClick);
+ $(".tabbed_box .tabs .tab a#enable_pick_lines").click(ordersHideInactiveControls).click(ordersOnClickEnableMainOptions).click(ordersTabOnClick);
+ $(".tabbed_box .tabs .tab a#enable_reserve_transfer").click(ordersHideInactiveControls).click(ordersOnClickEnableMainOptions).click(ordersTabOnClick);
+ $(".tabbed_box .tabs .tab a#enable_remove_lines").click(ordersHideInactiveControls).click(ordersOnClickEnableMainOptions).click(ordersTabOnClick);
 }
 
 function ordersCollectLines(){
