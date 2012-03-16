@@ -260,11 +260,14 @@ function ordersHideInactiveControls(){
  $('tr th.main_options_header').hide();
  $("tr td.main_options_data").hide();
  $('tr th.reserve_header').hide();
- $('tr th.delete_header').hide();
- $('input[type="checkbox"][name^="order["][name*="][line]["][name$="][item_id]"]').remove();
+ $("tr td.reserve_data").hide();
+ $('tr th.reserve_header').hide();
+ $('tr th.select_header').hide();
+ $('tr th.select_data').hide();
+ $('input[type="checkbox"][name^="order["][name*="][line]["][name$="][selected]"]').remove();
  $('input[type="text"][name^="order["][name*="][line]["][name$="][note]"]').remove();
  $('input[type="text"][name^="order["][name*="][line]["][name$="][requirement]"]').remove();
- $('input[type="text"][name^="order_"][name*="_line"][name$="_process_qty"]').remove();
+ $('input[type="text"][name^="order["][name*="][line]["][name$="][process_qty]"]').remove();
 }
 
 function ordersOnClickEnableMainOptions(){

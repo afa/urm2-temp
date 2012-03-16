@@ -1,6 +1,6 @@
 - iid = showed_line.item_id
 %tr
- %td
+ %td.select_data
   = check_box_tag "order[#{showed_line.sales_id}][line][#{iid}][selected]", "1", false # TODO: chg item_id to line_id
  %td
   = showed_line.rohs
