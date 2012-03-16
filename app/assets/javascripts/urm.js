@@ -240,6 +240,7 @@ function onSelectSendForm(obj){
 }
 
 function ordersTabOnClick(){
+ alert(this.id);
  var lst = $(this).parents(".tabbed_box").find(".dialogs .page");
  var idx = $(this).parents(".tabbed_box").find(".tabs .tab a").index($(this));
  if(idx == -1){
@@ -257,6 +258,7 @@ function ordersTabOnClick(){
 }
 
 function ordersHideInactiveControls(){
+ alert(this.id);
  $('input[id^="order_"][id$="_item_id"]').parent().remove();
 }
 
