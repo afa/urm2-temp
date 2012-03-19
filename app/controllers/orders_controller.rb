@@ -127,7 +127,7 @@ class OrdersController < ApplicationController
     redirect_to order_path(id), :flash => {:error => "empty lines"}
     return
    end
-   Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:item_id => k) }, :sales_id => id) #TODO fix item_id for line_id
+   Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:item_id => k, :is_reserve => 1) }, :sales_id => id) #TODO fix item_id for line_id
    redirect_to order_path(id)
   end
 
