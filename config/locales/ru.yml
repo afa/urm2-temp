@@ -143,4 +143,10 @@ ru:
  transfer_sales_lines: Переместить строки
  delivery_type: Способ доставки
  unreserve_all: Разрезервировать всё
+ main_options: Обзор
+ reserve_lines: Резерв
+ pick_lines: Бронь
+ reserve_transfer: Перенос резерва
+ remove_lines: Удаление строк
+
 
