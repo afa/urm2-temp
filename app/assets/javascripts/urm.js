@@ -299,13 +299,13 @@ function ordersOnClickEnableReserveLines(){
  }
  $('tr th.reserve_header').show();
  $("tr td.reserve_data").show();
- $('input[type="text"][name^="order["][name*="][line]["][name$="][process_qty]"]').remove();
+ //$('input[type="text"][name^="order["][name*="][line]["][name$="][process_qty]"]').remove();
  $("tr td.reserve_data").each(function(i, item){
   //if($(item).hasClass("note-option")){
- var cp = $(item).parents("tr").find('td input[type="hidden"][name^="order["][name*="][line]["][name$="][process_qty]"]').eq(0);
- $(item).append('<input type="text" name="' + cp.attr("name") + '" value="' + cp.val()+ '">');
+  var cp = $(item).parents("tr").find('td input[type="hidden"][name^="order["][name*="][line]["][name$="][process_qty]"]').eq(0);
+  $(item).append('<input type="text" name="' + cp.attr("name") + '" value="' + cp.val()+ '">');
   //}
- 
+ }
 }
 
 function ordersOnClickEnablePickLines(){
