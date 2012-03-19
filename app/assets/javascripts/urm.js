@@ -305,7 +305,7 @@ function ordersOnClickEnableReserveLines(){
   var cp = $(item).parents("tr").find('td input[type="hidden"][name^="order["][name*="][line]["][name$="][process_qty]"]').eq(0);
   $(item).append('<input type="text" name="' + cp.attr("name") + '" value="' + cp.val()+ '">');
   //}
- }
+ });
 }
 
 function ordersOnClickEnablePickLines(){
