@@ -270,7 +270,7 @@ function ordersHideInactiveControls(){
 }
 
 function ordersOnClickEnableMainOptions(){
- if(!$(this).parents(".tabbed_box").find(".dialogs .page").eq(0).hasClass("active")){
+ if($(this).parents(".tabbed_box").find(".dialogs .page").eq(0).hasClass("active")){
   return;
  }
 
