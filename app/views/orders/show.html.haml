@@ -71,10 +71,11 @@
 
       .dialogs
        .page.active
-        = form_for :order, :url => save_order_path(params[:id]) do |f6|
-         = label_tag "order_#{params[:id]}_comment", t(:order_comment)
-         = text_area_tag "order[#{params[:id]}][comment]", @order_info.comment
-         = render :partial => "shared/submit_button", :locals => {:title => t(:save), :opts => {:id => "save_order"}}
+        .main_options
+         = form_for :order, :url => save_order_path(params[:id]) do |f6|
+          = label_tag "order_#{params[:id]}_comment", t(:order_comment)
+          = text_area_tag "order[#{params[:id]}][comment]", @order_info.comment
+          = render :partial => "shared/submit_button", :locals => {:title => t(:save), :opts => {:id => "save_order"}}
        .page
         .reserve_lines
          = form_for :order, :url => reserve_order_path(params[:id]) do |f3|
