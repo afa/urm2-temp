@@ -79,7 +79,7 @@
         .reserve_lines
          = form_for :order, :url => order_path, :html => {:method => "GET"} do |f3|
           -# .link [#{t(:reserve)}]
-          = render :partial => "shared/submit_button", :locals => {:title => t(:reserve)}
+          = render :partial => "shared/submit_button", :locals => {:title => t(:reserve), :opts => {:id => "reserve_order"}}
           .clear
           -# .link [#{t(:unreserve_all)}]
           = render :partial => "shared/submit_button", :locals => {:title => t(:unreserve_all)}
