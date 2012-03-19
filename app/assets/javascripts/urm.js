@@ -349,7 +349,8 @@ function ordersSaveProcess(){
 function ordersReserveOnClick(){
  var curr = this;
  $('input[name^="order["][name$="][item_id]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
- $('td.reserve_data input[type="text"][name^="order["][name$="][process_qty]"]').each(function(i, item){ if($(item).val().match(/^\d+$/)){ ordersCopyToHidden(item, curr);} });
+ $('td.reserve_data input[type="text"][name^="order["][name$="][process_qty]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
+ //$('td.reserve_data input[type="text"][name^="order["][name$="][process_qty]"]').each(function(i, item){ if($(item).val().match(/^\d+$/)){ ordersCopyToHidden(item, curr);} });
  $(this).parents("form").submit();
 }
 
