@@ -84,13 +84,13 @@
           .clear
          = form_for :order, :url => unreserve_order_path(params[:id]) do |f3|
           -# .link [#{t(:unreserve_all)}]
-          = render :partial => "shared/submit_button", :locals => {:title => t(:unreserve_all)}
+          = render :partial => "shared/submit_button", :locals => {:title => t(:unreserve_all), :opts => {:id => "unreserve_all_orders"}}
        .page
         .pick_lines
          = form_for :order, :url => pick_order_path(params[:id]) do |f4|
           .param= render :partial => "main/pick_options"
           -# .link [#{t(:pick)}]
-          = render :partial => "shared/submit_button", :locals => {:title => t(:pick)}
+          = render :partial => "shared/submit_button", :locals => {:title => t(:pick), :opts => {:id => "pick_lines"}}
        .page
         .reserve_transfer
          = form_for :order, :url => order_path, :html => {:method => "GET"} do |f5|
