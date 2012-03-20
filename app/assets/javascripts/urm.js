@@ -309,7 +309,7 @@ function ordersOnClickEnableReserveLines(){
 }
 
 function ordersOnClickEnablePickLines(){
- if($(this).parents(".tabbed_box").find(".dialogs .page").eq(1).hasClass("active")){
+ if($(this).parents(".tabbed_box").find(".dialogs .page").eq(2).hasClass("active")){
   return;
  }
  $('tr th.reserve_header').show();
