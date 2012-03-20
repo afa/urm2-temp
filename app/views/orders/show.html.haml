@@ -87,7 +87,7 @@
           = render :partial => "shared/submit_button", :locals => {:title => t(:unreserve_all)}
        .page
         .pick_lines
-         = form_for :order, :url => order_path, :html => {:method => "GET"} do |f4|
+         = form_for :order, :url => pick_order_path(params[:id]) do |f4|
           .param= render :partial => "main/pick_options"
           -# .link [#{t(:pick)}]
           = render :partial => "shared/submit_button", :locals => {:title => t(:pick)}
@@ -116,3 +116,4 @@
  ordersTabsProcess();
  ordersSaveProcess();
  ordersReserveProcess();
+ ordersPickProcess();

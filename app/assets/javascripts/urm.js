@@ -309,6 +309,18 @@ function ordersOnClickEnableReserveLines(){
 }
 
 function ordersOnClickEnablePickLines(){
+ if($(this).parents(".tabbed_box").find(".dialogs .page").eq(1).hasClass("active")){
+  return;
+ }
+ $('tr th.reserve_header').show();
+ $("tr td.reserve_data").show();
+ //$('input[type="text"][name^="order["][name*="][line]["][name$="][process_qty]"]').remove();
+ $("tr td.reserve_data").each(function(i, item){
+  //if($(item).hasClass("note-option")){
+  var cp = $(item).parents("tr").find('td input[type="hidden"][name^="order["][name*="][line]["][name$="][process_qty]"]').eq(0);
+  $(item).append('<input type="text" name="' + cp.attr("name") + '" value="' + cp.val()+ '">');
+  //}
+ });
 }
 
 function ordersOnClickEnableReserveTransfer(){
@@ -356,4 +368,16 @@ function ordersReserveOnClick(){
 
 function ordersReserveProcess(){
  $("#reserve_order a.button-style").click(ordersReserveOnClick);
+}
+
+function ordersPickOnClick(){
+ var curr = this;
+ $('input[name^="order["][name$="][item_id]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
+ //$('td.reserve_data input[type="text"][name^="order["][name$="][process_qty]"]').each(function(i, item){ alert(i); ordersCopyToHidden(item, curr); });
+ $('td.reserve_data input[type="text"][name^="order["][name$="][process_qty]"]').each(function(i, item){ if($(item).val().match(/^\d+$/)){ ordersCopyToHidden(item, curr);} });
+ $(this).parents("form").submit();
+}
+
+function ordersPickProcess(){
+ $("#pick_order a.button-style").click(ordersPickOnClick);
 }
