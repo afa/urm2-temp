@@ -133,12 +133,13 @@ class OrdersController < ApplicationController
 
   def unreserve
    id = params[:id]
-   lines = params.try(:[], :order).try(:[], id).try(:[], :line) || []
+   lines = Axapta.sales_lines(:sales_id => id, :show_reserve_qty => true)#, :only_open => true)
+   #lines = params.try(:[], :order).try(:[], id).try(:[], :line) || []
    if lines.empty?
     redirect_to order_path(id), :flash => {:error => "empty lines"}
     return
    end
-   #Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:item_id => k) }, :sales_id => id) #TODO fix item_id for line_id
+   Axapta.sales_handle_edit(:sales_lines => lines.select{|v| v.process_qty > 0 }.map{|v| {:item_id => v.item_id, :process_qty => -v.process_qty} }, :sales_id => id) #TODO fix item_id for line_id
    redirect_to order_path(id)
   end
 
