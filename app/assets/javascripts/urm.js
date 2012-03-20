@@ -379,5 +379,5 @@ function ordersPickOnClick(){
 }
 
 function ordersPickProcess(){
- $("#pick_order a.button-style").click(ordersPickOnClick);
+ $("#pick_lines a.button-style").click(ordersPickOnClick);
 }
