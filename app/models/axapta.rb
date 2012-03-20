@@ -162,4 +162,12 @@ class Axapta
   def self.sales_handle_edit(hsh)
    AxaptaRequest.sales_handle_edit(hsh.merge(:user_hash => User.current.try(:current_account).try(:axapta_hash)))
   end
+
+  def self.sales_close_reason_list
+   begin
+    AxaptaRequest.sales_close_reason_list(hsh.merge(:user_hash => User.current.try(:current_account).try(:axapta_hash)))
+   rescue
+    []
+   end
+  end
 end

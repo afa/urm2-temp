@@ -96,6 +96,7 @@ class OrdersController < ApplicationController
   end
 
   def show
+   @reasons = Axapta.sales_close_reason_list
    @order_info = Axapta.sales_info(:sales_id => params[:id], :show_external_invoice_num => true, :show_max_quotation_prognosis => true).first
    @lines = Axapta.sales_lines_paged(@page, :sales_id => params[:id], :show_reserve_qty => true)#, :only_open => true)
    @deliveries = current_user.deliveries
@@ -117,7 +118,14 @@ class OrdersController < ApplicationController
   end
 
   def close
-
+   id = params[:id]
+   reason = params.try(:[], :order).try(:[], id).try(:[], :close_reason_id)
+   unless reason
+    redirect_to order_path(id), :flash => {:error => "empty reason"}
+    return
+   end
+   Axapta.sales_handle_header(:close_reason_id => reason, :sales_id => id)
+   redirect_to order_path(id)
   end
 
   def reserve

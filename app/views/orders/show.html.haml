@@ -28,7 +28,8 @@
      .close_sale
       .header= t(:close_sale) #закрыть заказ
       = form_for :order, :url => order_path, :html => {:method => "GET"} do |f2|
-       .param= text_area_tag "order[#{params[:id]}][order_cancelation_reason]"
+       .param
+        = select_tag "order[#{params[:id]}][close_reason_id]", options_for_select(@reasons)
        -# .link [#{t(:close)}]
        = render :partial => "shared/submit_button", :locals => {:title => t(:close)}
        .clear
