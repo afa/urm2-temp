@@ -98,7 +98,7 @@ class OrdersController < ApplicationController
   def show
    @reasons = Axapta.sales_close_reason_list
    @order_info = Axapta.sales_info(:sales_id => params[:id], :show_external_invoice_num => true, :show_max_quotation_prognosis => true).first
-   @lines = Axapta.sales_lines_paged(@page, :sales_id => params[:id], :show_reserve_qty => true)#, :only_open => true)
+   @lines = Axapta.sales_lines_paged(@page, :sales_id => params[:id], :show_reserve_qty => true, :show_status_qty => true)#, :only_open => true)
    @deliveries = current_user.deliveries
   end
 
@@ -135,7 +135,7 @@ class OrdersController < ApplicationController
     redirect_to order_path(id), :flash => {:error => "empty lines"}
     return
    end
-   Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:item_id => k, :is_reserve => 1) }, :sales_id => id) #TODO fix item_id for line_id
+   Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:item_id => k, :is_reserv => 1) }, :sales_id => id) #TODO fix item_id for line_id
    redirect_to order_path(id)
   end
 
@@ -147,7 +147,7 @@ class OrdersController < ApplicationController
     redirect_to order_path(id), :flash => {:error => "empty lines"}
     return
    end
-   Axapta.sales_handle_edit(:sales_lines => lines.select{|v| v.reserve_qty > 0 }.map{|v| {:item_id => v.item_id, :process_qty => -v.reserve_qty} }, :sales_id => id) #TODO fix item_id for line_id
+   Axapta.sales_handle_edit(:sales_lines => lines.select{|v| v.reserve_qty > 0 }.map{|v| {:item_id => v.item_id, :process_qty => -v.reserve_qty, :is_reserv => 1} }, :sales_id => id) #TODO fix item_id for line_id
    redirect_to order_path(id)
   end
 
@@ -158,7 +158,7 @@ class OrdersController < ApplicationController
     redirect_to order_path(id), :flash => {:error => "empty lines"}
     return
    end
-   Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:item_id => k, :is_pick => 1) }, :sales_id => id) #TODO fix item_id for line_id
+   Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:item_id => k, :is_pick => 1) }, :sales_id => id, :date_dead_line => params.try(:[], :date_picker), :customer_delivery_type_id => params.try(:[], :delivery_type)) #TODO fix item_id for line_id
    redirect_to order_path(id)
   end
 
