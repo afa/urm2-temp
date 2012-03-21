@@ -1,4 +1,5 @@
 - iid = showed_line.item_id
+- p "---line", showed_line
 %tr
  %td.select_data{:style => "display: none;"}
   = check_box_tag "order[#{showed_line.sales_id}][line][#{iid}][selected]", "1", false # TODO: chg item_id to line_id
