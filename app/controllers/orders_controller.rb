@@ -158,7 +158,7 @@ class OrdersController < ApplicationController
     redirect_to order_path(id), :flash => {:error => "empty lines"}
     return
    end
-   Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:item_id => k, :is_pick => 1) }, :sales_id => id, :date_dead_line => params.try(:[], :order).try(:[], id).try(:[], :date_picker), :customer_delivery_type_id => params.try(:[], :order).try(:[], id).try(:[], :delivery_type)) #TODO fix item_id for line_id
+   Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:item_id => k, :is_pick => 1) }, :sales_id => id, :date_dead_line => params.try(:[], :date_picker), :customer_delivery_type_id => params.try(:[], :delivery_type)) #TODO fix item_id for line_id
    redirect_to order_path(id)
   end
 

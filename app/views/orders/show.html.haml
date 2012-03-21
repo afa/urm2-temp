@@ -89,7 +89,7 @@
        .page
         .pick_lines
          = form_for :order, :url => pick_order_path(params[:id]) do |f4|
-          .param= render :partial => "main/pick_options", :locals => {:opts => {:prefix => "order_#{params[:id]}_"}}
+          .param= render :partial => "main/pick_options"
           -# .link [#{t(:pick)}]
           = render :partial => "shared/submit_button", :locals => {:title => t(:pick), :opts => {:id => "pick_lines"}}
        .page
