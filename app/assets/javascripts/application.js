@@ -5,7 +5,7 @@
 // the compiled file.
 //
 //= require gon
-//= include gon
+//= include_gon
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.core
