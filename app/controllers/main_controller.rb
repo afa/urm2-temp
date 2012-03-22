@@ -16,6 +16,7 @@ class MainController < ApplicationController
    stor = current_user.settings.where(:name => "search.only_store").first || current_user.settings.where(:name => "search.only_store").new
    stor.value = @only_store
    stor.save!
+   gon.only_store = WebUtils.to_bool(@only_store)
    @only_available = params[:search].try(:[], :only_available) || false
    avail = current_user.settings.where(:name => "search.only_available").first || current_user.settings.where(:name => "search.only_available").new
    avail.value = @only_available

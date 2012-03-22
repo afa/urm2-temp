@@ -214,8 +214,8 @@
       .clear
       .fields
        Искать:
-       = render :partial => "shared/check_button", :locals => {:name => "search[only_available]", :title => "Только в наличии", :opts => {:need_field => true, :use_system => true, :value => WebUtils::parse_bool(@search.only_available)}}
-       = render :partial => "shared/check_button", :locals => {:name => "search[only_store]", :title => "Только склад", :opts => {:need_field => true, :use_system => true, :value => WebUtils::parse_bool(@search.only_store)}}
+       = render :partial => "shared/check_button", :locals => {:name => "search[only_available]", :title => "Только в наличии", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@search.only_available)}}
+       = render :partial => "shared/check_button", :locals => {:name => "search[only_store]", :title => "Только склад", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@search.only_store)}}
        - if defined?(@use_alt_price)
         %span.switch{:class=>"radio"}
          Цены:
