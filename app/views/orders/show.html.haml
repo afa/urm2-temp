@@ -20,7 +20,7 @@
     .handle_sale
      .make_order
       .header выставление счета
-      = form_for :order, :url => order_path, :html => {:method => "GET"} do |f1|
+      = form_for :order, :url => invoice_order_path(params[:id]) do |f1|
        .param= select_tag("order[#{params[:id]}][order_action]", "<option value=\"make\">Создать</option><option value=\"send\">Отправить</option><option value=\"make_send\">Создать и отправить</option>".html_safe)
        -# .link [#{t(:go)}]
        = render :partial => "shared/submit_button", :locals => {:title => t(:go)}

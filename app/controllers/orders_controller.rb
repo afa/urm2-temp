@@ -117,6 +117,21 @@ class OrdersController < ApplicationController
    redirect_to order_path(id)
   end
 
+  def invoice
+   id = params[:id]
+   idx = %w(make send make_send).index(params[:order].try(:[], id).try(:[], :order_action) || "")
+   unless idx
+    redirect_to root_path, :flash => {:error => "invalid req"}
+    return
+   end
+   if [0, 2].include?(idx)
+    Axapta.create_invoice(id, idx == 2)
+   else
+    Axapta.invoice_paym(id, true)
+   end
+   redirect_to order_path(id)
+  end
+
   def close
    id = params[:id]
    reason = params.try(:[], :order).try(:[], id).try(:[], :close_reason_id)

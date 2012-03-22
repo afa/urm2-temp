@@ -86,12 +86,12 @@ class Axapta
   end
 
   def self.make_order(hsh)
-   hsh.merge!(:user_hash => User.current.current_account.axapta_hash, :main_invent_location => User.current.current_account.invent_location_id)
+   hsh.merge!(:user_hash => axapta_hash, :main_invent_location => User.current.current_account.invent_location_id)
    AxaptaRequest.make_order(hsh)
   end
 
   def self.create_quotation(hsh)
-   hsh.merge!(:user_hash => User.current.current_account.axapta_hash)
+   hsh.merge!(:user_hash => axapta_hash)
    AxaptaRequest.create_quotation(hsh)
   end
 
@@ -103,7 +103,7 @@ class Axapta
   def self.sales_info_paged(page, *args)
    prm = *args.dup
    begin
-    res = AxaptaRequest.sales_info({:user_hash => User.current.try(:current_account).try(:axapta_hash), :page_num => (page || prm[:page] || 1), :order_sales_id => "desc"}.merge(*args))
+    res = AxaptaRequest.sales_info({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1), :order_sales_id => "desc"}.merge(*args))
    rescue Exception => e
     return OpenStruct.new(:total => 0, :page => 0, :records => 0, :items => [], :error => e.to_s)
    end
@@ -118,18 +118,22 @@ class Axapta
 
   def self.sales_lines_paged(page, *args)
    prm = *args.dup
-   res = AxaptaRequest.sales_lines({:user_hash => User.current.try(:current_account).try(:axapta_hash), :page_num => (page || prm[:page] || 1)}.merge(*args))
+   res = AxaptaRequest.sales_lines({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1)}.merge(*args))
    OpenStruct.new(:items => (res.try(:[], "sales_lines") || []).map do |sale|
     OpenStruct.new sale
    end, :total => res.try(:[], "pages") || 1, :page => (page || prm[:page] || 1), :records => res.try(:[], "records") || 0)
   end
 
   def self.get_delivery_mode
-   AxaptaRequest.get_dlv_mode(:user_hash => User.current.try(:current_account).try(:axapta_hash))
+   AxaptaRequest.get_dlv_mode(:user_hash => axapta_hash)
   end
 
-  def self.create_invoice(order)
-   AxaptaRequest.create_invoice(:user_hash => User.current.try(:current_account).try(:axapta_hash), :sales_id => order)
+  def self.create_invoice(order, send = false)
+   AxaptaRequest.create_invoice(:user_hash => axapta_hash, :sales_id => order, :send_by_email => send)
+  end
+
+  def self.invoice_paym(order, send = false)
+   AxaptaRequest.invoice_paym(:user_hash => axapta_hash, :sales_id => order, :send_by_email => send)
   end
 
   def self.quotation_info(hsh)
@@ -137,7 +141,7 @@ class Axapta
   end
 
   def self.quotation_info_paged(page, hsh)
-   res = AxaptaRequest.quotation_info({:page_num => (page || hsh[:page] || 1)}.merge(hsh).merge(:user_hash => User.current.try(:current_account).try(:axapta_hash)))
+   res = AxaptaRequest.quotation_info({:page_num => (page || hsh[:page] || 1)}.merge(hsh).merge(:user_hash => axapta_hash))
    OpenStruct.new(:items => (res.try(:[], "quotations") || []).map{|i| OpenStruct.new(i)}, :page => (page || hsh[:page] || 1), :total =>  res.try(:[], "pages") || 1, :records => res.try(:[], "records") || 0)
   end
 
@@ -151,23 +155,27 @@ class Axapta
     fix[:item_name] += '*' if fix[:item_name].last != '*'
     fix[:item_name] = "" if fix[:item_name].mb_chars.length < 4
    end
-   res = AxaptaRequest.quotation_lines(hsh.merge(:page_num => (page || hsh[:page] || 1), :user_hash => User.current.try(:current_account).try(:axapta_hash)).merge(fix))
+   res = AxaptaRequest.quotation_lines(hsh.merge(:page_num => (page || hsh[:page] || 1), :user_hash => axapta_hash).merge(fix))
    OpenStruct.new(:items => (res.try(:[], "quotations_lines") || []).map{|i| OpenStruct.new(i)}, :page => (page || hsh[:page] || 1), :total =>  res.try(:[], "pages") || 1, :records => res.try(:[], "records") || 0)
   end
 
   def self.sales_handle_header(hsh)
-   AxaptaRequest.sales_handle_header(hsh.merge(:user_hash => User.current.try(:current_account).try(:axapta_hash)))
+   AxaptaRequest.sales_handle_header(hsh.merge(:user_hash => axapta_hash))
   end
 
   def self.sales_handle_edit(hsh)
-   AxaptaRequest.sales_handle_edit(hsh.merge(:user_hash => User.current.try(:current_account).try(:axapta_hash)))
+   AxaptaRequest.sales_handle_edit(hsh.merge(:user_hash => axapta_hash))
   end
 
   def self.sales_close_reason_list
    begin
-    AxaptaRequest.sales_close_reason_list(:user_hash => User.current.try(:current_account).try(:axapta_hash))["reason_list"].map{|x| [x["close_reason_description"], x["close_reason_id"]] }
+    AxaptaRequest.sales_close_reason_list(:user_hash => axapta_hash)["reason_list"].map{|x| [x["close_reason_description"], x["close_reason_id"]] } #return [[desc, id]]
    rescue
     []
    end
+  end
+ private
+  def self.axapta_hash
+   User.current.try(:current_account).try(:axapta_hash)
   end
 end
