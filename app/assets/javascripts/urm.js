@@ -327,6 +327,18 @@ function ordersOnClickEnableReserveTransfer(){
 }
 
 function ordersOnClickEnableRemoveLines(){
+ if($(this).parents(".tabbed_box").find(".dialogs .page").eq(2).hasClass("active")){
+  return;
+ }
+ $('tr th.select_header').show();
+ $("tr td.select_data").show();
+ //$('input[type="text"][name^="order["][name*="][line]["][name$="][process_qty]"]').remove();
+ $("tr td.select_data").each(function(i, item){
+  //if($(item).hasClass("note-option")){
+  var cp = $(item).parents("tr").find('td input[type="hidden"][name^="order["][name*="][line]["][name$="][item_id]"]').eq(0);
+  $(item).append('<input type="checkbox" name="' + cp.attr("name") + '" value="1">');
+  //}
+ });
 }
 
 function ordersTabsProcess(){
@@ -356,6 +368,17 @@ function ordersSaveOnClick(){
 
 function ordersSaveProcess(){
  $("#save_order a.button-style").click(ordersSaveOnClick);
+}
+
+function ordersRemoveOnClick(){
+ var curr = this;
+ $('input:checked[name^="order["][name$="][item_id]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
+ //$('td.reserve_data input[type="text"][name^="order["][name$="][process_qty]"]').each(function(i, item){ if($(item).val().match(/^\d+$/)){ ordersCopyToHidden(item, curr);} });
+ $(this).parents("form").submit();
+}
+
+function ordersRemoveProcess(){
+ $("#remove_order a.button-style").click(ordersRemoveOnClick);
 }
 
 function ordersReserveOnClick(){
