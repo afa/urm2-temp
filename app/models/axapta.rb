@@ -165,7 +165,7 @@ class Axapta
 
   def self.sales_close_reason_list
    begin
-    AxaptaRequest.sales_close_reason_list(hsh.merge(:user_hash => User.current.try(:current_account).try(:axapta_hash))).map{|x| [x["close_reason_id"], x["close_reason_description"]] }
+    AxaptaRequest.sales_close_reason_list(:user_hash => User.current.try(:current_account).try(:axapta_hash)).map{|x| [x["close_reason_id"], x["close_reason_description"]] }
    rescue
     []
    end
