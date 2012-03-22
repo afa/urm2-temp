@@ -100,7 +100,7 @@
           = render :partial => "shared/submit_button", :locals => {:title => t(:transfer_sales_lines)}
        .page
         .remove_lines
-         = form_for :order, :url => order_path(params[:id]), :html => {:method => "GET"} do |f6|
+         = form_for :order, :url => erase_order_path(params[:id]) do |f6|
           .param= text_area_tag "order[#{params[:id]}][erase_reason]"
           -# .link [#{t(:remove)}]
           = render :partial => "shared/submit_button", :locals => {:title => t(:remove), :opts => {:id => "remove_order"}}

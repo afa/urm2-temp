@@ -162,6 +162,17 @@ class OrdersController < ApplicationController
    redirect_to order_path(id)
   end
 
+  def erase
+   id = params[:id]
+   lines = params.try(:[], :order).try(:[], id).try(:[], :line) || []
+   if lines.empty?
+    redirect_to order_path(id), :flash => {:error => "empty lines"}
+    return
+   end
+   #Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:item_id => k, :reason => params.try(:[], :order).try(:[], id).try(:[], :erase_reason)) }, :sales_id => id) #TODO fix item_id for line_id
+   redirect_to order_path(id)
+  end
+
  protected
   def get_filter
    @filter_hash = params[:filter] || {}
