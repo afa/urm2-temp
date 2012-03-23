@@ -407,6 +407,7 @@ function ordersPickProcess(){
 
 //carts
 function cartsAddElementToCart(){
+ alert("b add");
  if(gon.carts.length == 0){
   $('.cart-table').add('.allow-order').hide();
  }
