@@ -10,7 +10,7 @@ module WebUtils
   false
  end
 
- def to_bool(val)
+ def self.to_bool(val)
   ActiveRecord::ConnectionAdapters::Column.value_to_boolean(val)
  end
 end
