@@ -422,13 +422,16 @@ function cartsAddElementToCart(){
  //-# @carts.each do |crt|
   //$("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :locals => {:cart_line => crt}) }");
  if (gon.carts.length == 0){ //empty?
+  alert("show carts");
 //  $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :collection => @carts) }");
   $(".cart-table").add(".allow-order").show();
  }
  if($("#cart_store table tr").length > 1){
+  alert("show carts");
   $("#cart_store").show();
   activateSearchCancelButton();
  } else {
+  alert("hide carts");
   $("#cart_store").hide();
  }
  $("div#order").hide();
@@ -438,6 +441,7 @@ function cartsAddElementToCart(){
   $("table.search-products tr input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");
   //-# $("div#cart_store table tr##{i[0]} input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");
 */ 
+ alert("process");
  $('.select').selectList();
  $('.button-style').button();
  $('.switch').switchControl();
