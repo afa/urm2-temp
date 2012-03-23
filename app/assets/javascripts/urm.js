@@ -404,3 +404,41 @@ function ordersPickOnClick(){
 function ordersPickProcess(){
  $("#pick_lines a.button-style").click(ordersPickOnClick);
 }
+
+//carts
+function cartsAddElementToCart(){
+ if(gon.carts.length == 0){
+  $('.cart-table').add('.allow-order').hide();
+ }
+ if($(".calendar-input").length > 0){
+  $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
+ }
+ $("#order").hide();
+ activateSearchAllowOrderButton();
+ $("#cancel_order").hide();
+ activateSearchCancelButton();
+
+ $("#cart_store table tr:has(td)").remove();
+ //-# @carts.each do |crt|
+  //$("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :locals => {:cart_line => crt}) }");
+ if (gon.carts.length == 0){ //empty?
+//  $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :collection => @carts) }");
+  $(".cart-table").add(".allow-order").show();
+ }
+ if($("#cart_store table tr").length > 1){
+  $("#cart_store").show();
+  activateSearchCancelButton();
+ } else {
+  $("#cart_store").hide();
+ }
+ $("div#order").hide();
+ $("div#order").children().remove();
+// $("div#order").append("#{ escape_javascript(render :partial => "main/order_edit") }");
+/* gon.changed//- @changed.each do |i|
+  $("table.search-products tr input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");
+  //-# $("div#cart_store table tr##{i[0]} input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");
+*/ 
+ $('.select').selectList();
+ $('.button-style').button();
+ $('.switch').switchControl();
+}
