@@ -96,7 +96,7 @@ class OrdersController < ApplicationController
   end
 
   def show
-   @reasons = Axapta.sales_close_reason_list
+   @close_reasons = Axapta.sales_close_reason_list
    @order_info = Axapta.sales_info(:sales_id => params[:id], :show_external_invoice_num => true, :show_max_quotation_prognosis => true).first
    @lines = Axapta.sales_lines_paged(@page, :sales_id => params[:id], :show_reserve_qty => true, :show_status_qty => true)#, :only_open => true)
    @deliveries = current_user.deliveries
@@ -114,6 +114,21 @@ class OrdersController < ApplicationController
    #@lines = Axapta.sales_lines(:sales_id => id.to_i)
    Axapta.sales_handle_header(:comment => comment, :sales_id => id)
    Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:item_id => k) }, :sales_id => id) #TODO fix item_id for line_id
+   redirect_to order_path(id)
+  end
+
+  def invoice
+   id = params[:id]
+   idx = %w(make send make_send).index(params[:order].try(:[], id).try(:[], :order_action) || "")
+   unless idx
+    redirect_to root_path, :flash => {:error => "invalid req"}
+    return
+   end
+   if [0, 2].include?(idx)
+    Axapta.create_invoice(id, idx == 2)
+   else
+    Axapta.invoice_paym(id, true)
+   end
    redirect_to order_path(id)
   end
 
@@ -159,6 +174,17 @@ class OrdersController < ApplicationController
     return
    end
    Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:item_id => k, :is_pick => 1) }, :sales_id => id, :date_dead_line => params.try(:[], :date_picker), :customer_delivery_type_id => params.try(:[], :delivery_type)) #TODO fix item_id for line_id
+   redirect_to order_path(id)
+  end
+
+  def erase
+   id = params[:id]
+   lines = params.try(:[], :order).try(:[], id).try(:[], :line) || []
+   if lines.empty?
+    redirect_to order_path(id), :flash => {:error => "empty lines"}
+    return
+   end
+   #Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:item_id => k, :reason => params.try(:[], :order).try(:[], id).try(:[], :erase_reason)) }, :sales_id => id) #TODO fix item_id for line_id
    redirect_to order_path(id)
   end
 

@@ -1,7 +1,7 @@
 class Offer::Store < Offer::Base
 
  @signature_fields = @base_signature_fields + [:location_id]
- attr_accessor :location_id, :brend_name, :brend_url, :qtys, :prices, :counts, :need_more, :qty_in_pack, :segment_rus, :body_name, :analog_exists, :forecast_available, :min_qty, :max_qty, :raw_location, :vend_proposal_date, :alt_prices
+ attr_accessor :location_id, :brend_name, :brend_url, :qtys, :prices, :counts, :need_more, :qty_in_pack, :segment_rus, :body_name, :analog_exists, :forecast_available, :min_qty, :max_qty, :raw_location, :vend_proposal_date, :alt_prices, :application_area_mandatory
 
   def self.search(hsh)
    return [] if hsh.blank? || hsh[:query_string].blank? || hsh[:query_string].size < 3
@@ -41,6 +41,7 @@ class Offer::Store < Offer::Base
       n.min_qty = hsh["min_qty"]
       n.max_qty = loc["vend_qty"]
       n.raw_location = loc
+      n.application_area_mandatory = WebUtils.parse_bool(hsh["application_area_mandatory"])
       #n.vend_proposal_date = nil
       CartStore.prepare_code(n)
      end

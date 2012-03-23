@@ -16,6 +16,8 @@ Urm::Application.routes.draw do
     post :reserve
     post :unreserve
     post :pick
+    post :erase
+    post :invoice
    end
   end
   resources :quotations, :only => [:index, :show] do

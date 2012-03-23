@@ -20,16 +20,16 @@
     .handle_sale
      .make_order
       .header выставление счета
-      = form_for :order, :url => order_path, :html => {:method => "GET"} do |f1|
+      = form_for :order, :url => invoice_order_path(params[:id]) do |f1|
        .param= select_tag("order[#{params[:id]}][order_action]", "<option value=\"make\">Создать</option><option value=\"send\">Отправить</option><option value=\"make_send\">Создать и отправить</option>".html_safe)
        -# .link [#{t(:go)}]
        = render :partial => "shared/submit_button", :locals => {:title => t(:go)}
        .clear
      .close_sale
       .header= t(:close_sale) #закрыть заказ
-      = form_for :order, :url => order_path, :html => {:method => "GET"} do |f2|
+      = form_for :order, :url => close_order_path(params[:id]) do |f2|
        .param
-        = select_tag "order[#{params[:id]}][close_reason_id]", options_for_select(@reasons)
+        = select_tag "order[#{params[:id]}][close_reason_id]", options_for_select(@close_reasons)
        -# .link [#{t(:close)}]
        = render :partial => "shared/submit_button", :locals => {:title => t(:close)}
        .clear
@@ -100,10 +100,10 @@
           = render :partial => "shared/submit_button", :locals => {:title => t(:transfer_sales_lines)}
        .page
         .remove_lines
-         = form_for :order, :url => order_path, :html => {:method => "GET"} do |f6|
+         = form_for :order, :url => erase_order_path(params[:id]) do |f6|
           .param= text_area_tag "order[#{params[:id]}][erase_reason]"
           -# .link [#{t(:remove)}]
-          = render :partial => "shared/submit_button", :locals => {:title => t(:remove)}
+          = render :partial => "shared/submit_button", :locals => {:title => t(:remove), :opts => {:id => "remove_order"}}
      .clear
      -# TODO .price_request
       .param ???
@@ -118,3 +118,4 @@
  ordersSaveProcess();
  ordersReserveProcess();
  ordersPickProcess();
+ ordersRemoveProcess();

@@ -9,4 +9,8 @@ module WebUtils
   return true if %w(1 T t y Y true).include?(str.to_s)
   false
  end
+
+ def self.to_bool(val)
+  ActiveRecord::ConnectionAdapters::Column.value_to_boolean(val)
+ end
 end

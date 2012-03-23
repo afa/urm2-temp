@@ -327,6 +327,18 @@ function ordersOnClickEnableReserveTransfer(){
 }
 
 function ordersOnClickEnableRemoveLines(){
+ if($(this).parents(".tabbed_box").find(".dialogs .page").eq(2).hasClass("active")){
+  return;
+ }
+ $('tr th.select_header').show();
+ $("tr td.select_data").show();
+ //$('input[type="text"][name^="order["][name*="][line]["][name$="][process_qty]"]').remove();
+ $("tr td.select_data").each(function(i, item){
+  //if($(item).hasClass("note-option")){
+  var cp = $(item).parents("tr").find('td input[type="hidden"][name^="order["][name*="][line]["][name$="][item_id]"]').eq(0);
+  $(item).append('<input type="checkbox" name="' + cp.attr("name") + '" value="1">');
+  //}
+ });
 }
 
 function ordersTabsProcess(){
@@ -358,6 +370,17 @@ function ordersSaveProcess(){
  $("#save_order a.button-style").click(ordersSaveOnClick);
 }
 
+function ordersRemoveOnClick(){
+ var curr = this;
+ $('input:checked[name^="order["][name$="][item_id]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
+ //$('td.reserve_data input[type="text"][name^="order["][name$="][process_qty]"]').each(function(i, item){ if($(item).val().match(/^\d+$/)){ ordersCopyToHidden(item, curr);} });
+ $(this).parents("form").submit();
+}
+
+function ordersRemoveProcess(){
+ $("#remove_order a.button-style").click(ordersRemoveOnClick);
+}
+
 function ordersReserveOnClick(){
  var curr = this;
  $('input[name^="order["][name$="][item_id]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
@@ -380,4 +403,47 @@ function ordersPickOnClick(){
 
 function ordersPickProcess(){
  $("#pick_lines a.button-style").click(ordersPickOnClick);
+}
+
+//carts
+function cartsAddElementToCart(){
+ alert(gon);
+ if(gon.carts.length == 0){
+  $('.cart-table').add('.allow-order').hide();
+ }
+ if($(".calendar-input").length > 0){
+  $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
+ }
+ $("#order").hide();
+ activateSearchAllowOrderButton();
+ $("#cancel_order").hide();
+ activateSearchCancelButton();
+
+ $("#cart_store table tr:has(td)").remove();
+ //-# @carts.each do |crt|
+  //$("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :locals => {:cart_line => crt}) }");
+ if (gon.carts.length == 0){ //empty?
+  alert("show carts");
+//  $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :collection => @carts) }");
+  $(".cart-table").add(".allow-order").show();
+ }
+ if($("#cart_store table tr").length > 1){
+  alert("show carts");
+  $("#cart_store").show();
+  activateSearchCancelButton();
+ } else {
+  alert("hide carts");
+  $("#cart_store").hide();
+ }
+ $("div#order").hide();
+ $("div#order").children().remove();
+// $("div#order").append("#{ escape_javascript(render :partial => "main/order_edit") }");
+/* gon.changed//- @changed.each do |i|
+  $("table.search-products tr input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");
+  //-# $("div#cart_store table tr##{i[0]} input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");
+*/ 
+ alert("process");
+ $('.select').selectList();
+ $('.button-style').button();
+ $('.switch').switchControl();
 }
