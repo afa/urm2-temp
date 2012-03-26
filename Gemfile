@@ -13,6 +13,7 @@ group :assets do
  gem 'uglifier'
 end
 
+gem "uniform_notifier", "1.0.1"
 gem 'pg'
 gem "carpentry"
 gem "newrelic_rpm"
