@@ -13,6 +13,7 @@ group :assets do
  gem 'uglifier'
 end
 
+gem "uniform_notifier", "1.0.1"
 gem 'pg'
 gem "carpentry"
 gem "newrelic_rpm"
@@ -44,7 +45,7 @@ gem 'capistrano'
 gem "airbrake" #, :group => [:development, :production]
 #gem "airbrake", :group => [:development, :production]
 gem "bullet", :group => :development
-gem "gon"
+gem "gon", :git => 'git://github.com/afa/gon.git'
 #gem "sqlite3", :group => :test
 group :development, :test do
  gem "rspec-rails"
