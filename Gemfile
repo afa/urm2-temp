@@ -44,7 +44,7 @@ gem 'capistrano'
 gem "airbrake" #, :group => [:development, :production]
 #gem "airbrake", :group => [:development, :production]
 gem "bullet", :group => :development
-gem "gon"
+gem "gon", :git => 'https://afa@github.com/afa/gon.git'
 #gem "sqlite3", :group => :test
 group :development, :test do
  gem "rspec-rails"
