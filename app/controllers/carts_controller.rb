@@ -21,7 +21,7 @@ class CartsController < ApplicationController
     end
     CartItem.uncached do
      @carts = current_user.cart_items.unprocessed.in_cart.all
-     gon.carts = @carts
+     gon.carts = j @carts
      @deliveries = User.current.deliveries
      #@carts = CartItem.where(:user_id => current_user.id).unprocessed.in_cart.all
     end
