@@ -407,8 +407,8 @@ function ordersPickProcess(){
 
 //carts
 function cartsAddElementToCart(){
- alert(window.gon.carts.length);
- if(window.gon.carts.length == 0){
+ alert(gon.carts.length);
+ if(gon.carts.length == 0){
   $('.cart-table').add('.allow-order').hide();
  }
  if($(".calendar-input").length > 0){
