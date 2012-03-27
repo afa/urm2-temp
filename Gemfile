@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.3'
+gem 'rails', '3.1.4'
 #gem 'rails', '3.0.11'
 
 # Bundle edge Rails instead:
@@ -45,7 +45,7 @@ gem 'capistrano'
 gem "airbrake" #, :group => [:development, :production]
 #gem "airbrake", :group => [:development, :production]
 gem "bullet", :group => :development
-gem "gon", :git => 'git://github.com/afa/gon.git'
+gem "gon", :git => 'git://github.com/afa/gon.git', :branch => "script_tag"
 #gem "sqlite3", :group => :test
 group :development, :test do
  gem "rspec-rails"
@@ -53,7 +53,8 @@ group :development, :test do
  gem "cucumber-rails"
  gem "factory_girl_rails", "~>1.4.0"
  gem "rspec-cells"
- gem "rcov"
+ #gem "rcov"
+ gem "simplecov"
  #gem "jasmine"
  gem "jasmine-headless-webkit"
  #gem "mustang"

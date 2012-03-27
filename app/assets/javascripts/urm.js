@@ -248,7 +248,6 @@ function ordersTabOnClick(){
  var page = lst.eq(idx);
  if(page.hasClass("active")){
   page.removeClass("active");
-  //page.hide();
  } else {
   lst.removeClass("active");
   page.addClass("active");
@@ -286,10 +285,6 @@ function ordersOnClickEnableMainOptions(){
    $(item).append('<input type="text" name="' + cp.attr("name") + '" value="' + cp.val()+ '">');
   }
  });
- //.main_options_requirement_placeholder #main_options_requirement_header_placeholder
- //         %th#main_options_requirement_header_placeholder Ожидаемая дата поставки
- //        %th#main_options_note_header Комментарий
- //        %th#main_options_requirement_header Требования
 
 }
 
@@ -299,12 +294,9 @@ function ordersOnClickEnableReserveLines(){
  }
  $('tr th.reserve_header').show();
  $("tr td.reserve_data").show();
- //$('input[type="text"][name^="order["][name*="][line]["][name$="][process_qty]"]').remove();
  $("tr td.reserve_data").each(function(i, item){
-  //if($(item).hasClass("note-option")){
   var cp = $(item).parents("tr").find('td input[type="hidden"][name^="order["][name*="][line]["][name$="][process_qty]"]').eq(0);
   $(item).append('<input type="text" name="' + cp.attr("name") + '" value="' + cp.val()+ '">');
-  //}
  });
 }
 
@@ -314,12 +306,9 @@ function ordersOnClickEnablePickLines(){
  }
  $('tr th.reserve_header').show();
  $("tr td.reserve_data").show();
- //$('input[type="text"][name^="order["][name*="][line]["][name$="][process_qty]"]').remove();
  $("tr td.reserve_data").each(function(i, item){
-  //if($(item).hasClass("note-option")){
   var cp = $(item).parents("tr").find('td input[type="hidden"][name^="order["][name*="][line]["][name$="][process_qty]"]').eq(0);
   $(item).append('<input type="text" name="' + cp.attr("name") + '" value="' + cp.val()+ '">');
-  //}
  });
 }
 
@@ -332,12 +321,9 @@ function ordersOnClickEnableRemoveLines(){
  }
  $('tr th.select_header').show();
  $("tr td.select_data").show();
- //$('input[type="text"][name^="order["][name*="][line]["][name$="][process_qty]"]').remove();
  $("tr td.select_data").each(function(i, item){
-  //if($(item).hasClass("note-option")){
   var cp = $(item).parents("tr").find('td input[type="hidden"][name^="order["][name*="][line]["][name$="][item_id]"]').eq(0);
   $(item).append('<input type="checkbox" name="' + cp.attr("name") + '" value="1">');
-  //}
  });
 }
 
@@ -373,7 +359,6 @@ function ordersSaveProcess(){
 function ordersRemoveOnClick(){
  var curr = this;
  $('input:checked[name^="order["][name$="][item_id]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
- //$('td.reserve_data input[type="text"][name^="order["][name$="][process_qty]"]').each(function(i, item){ if($(item).val().match(/^\d+$/)){ ordersCopyToHidden(item, curr);} });
  $(this).parents("form").submit();
 }
 
@@ -384,7 +369,6 @@ function ordersRemoveProcess(){
 function ordersReserveOnClick(){
  var curr = this;
  $('input[name^="order["][name$="][item_id]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
- //$('td.reserve_data input[type="text"][name^="order["][name$="][process_qty]"]').each(function(i, item){ alert(i); ordersCopyToHidden(item, curr); });
  $('td.reserve_data input[type="text"][name^="order["][name$="][process_qty]"]').each(function(i, item){ if($(item).val().match(/^\d+$/)){ ordersCopyToHidden(item, curr);} });
  $(this).parents("form").submit();
 }
@@ -396,7 +380,6 @@ function ordersReserveProcess(){
 function ordersPickOnClick(){
  var curr = this;
  $('input[name^="order["][name$="][item_id]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
- //$('td.reserve_data input[type="text"][name^="order["][name$="][process_qty]"]').each(function(i, item){ alert(i); ordersCopyToHidden(item, curr); });
  $('td.reserve_data input[type="text"][name^="order["][name$="][process_qty]"]').each(function(i, item){ if($(item).val().match(/^\d+$/)){ ordersCopyToHidden(item, curr);} });
  $(curr).parents("form").submit();
 }
@@ -407,7 +390,7 @@ function ordersPickProcess(){
 
 //carts
 function cartsAddElementToCart(){
- alert(window.gon);
+ alert(gon.carts.length);
  if(gon.carts.length == 0){
   $('.cart-table').add('.allow-order').hide();
  }
@@ -420,8 +403,8 @@ function cartsAddElementToCart(){
  activateSearchCancelButton();
 
  $("#cart_store table tr:has(td)").remove();
- //-# @carts.each do |crt|
-  //$("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :locals => {:cart_line => crt}) }");
+ // - # @carts.each do |crt|
+  // $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :locals => {:cart_line => crt}) }");
  if (gon.carts.length == 0){ //empty?
   alert("show carts");
 //  $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :collection => @carts) }");
@@ -438,10 +421,9 @@ function cartsAddElementToCart(){
  $("div#order").hide();
  $("div#order").children().remove();
 // $("div#order").append("#{ escape_javascript(render :partial => "main/order_edit") }");
-/* gon.changed//- @changed.each do |i|
-  $("table.search-products tr input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");
-  //-# $("div#cart_store table tr##{i[0]} input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");
-*/ 
+// gon.changed//- @changed.each do |i|
+//  $("table.search-products tr input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");
+//  //-# $("div#cart_store table tr##{i[0]} input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");
  alert("process");
  $('.select').selectList();
  $('.button-style').button();
