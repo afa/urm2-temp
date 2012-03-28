@@ -45,21 +45,21 @@ class Axapta
   end
 
   def self.search_names(*args)
-   ar = *args.dup.to_hash
+   ar = *args.dup.as_hash
    ar["query_string"] += '*' if ar.has_key?("query_string") && ar["query_string"].last != '*'
    ar[:query_string] += '*' if ar.has_key?(:query_string) && ar[:query_string].last != '*'
    res = AxaptaRequest.search_item_name_h(ar).try(:[], "items") || []
   end
 
   def self.search_dms_names(*args)
-   ar = *args.dup.to_hash
+   ar = *args.dup.as_hash
    ar["query_string"] += '*' if ar.has_key?("query_string") && !ar["query_string"].blank? && ar["query_string"].last != '*'
    ar[:query_string] += '*' if ar.has_key?(:query_string) && !ar[:query_string].blank? && ar[:query_string].last != '*'
    res = AxaptaRequest.search_item_name_dms_h(ar).try(:[], "items") || []
   end
 
   def self.item_info(*args)
-   ar = *args.dup.to_hash
+   ar = *args.dup.as_hash
    res = AxaptaRequest.item_info(ar) || []
   end
 
@@ -102,9 +102,10 @@ class Axapta
   end
 
   def self.sales_info_paged(page, *args)
-   prm = *args.dup.to_hash
+   prm = *args.dup.as_hash
    begin
-    res = AxaptaRequest.sales_info({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1), :order_sales_id => "desc"}.merge(*args))
+    res = AxaptaRequest.sales_info({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1), :order_sales_id => "desc"}.merge(prm))
+    #res = AxaptaRequest.sales_info({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1), :order_sales_id => "desc"}.merge(*args))
    rescue Exception => e
     return OpenStruct.new(:total => 0, :page => 0, :records => 0, :items => [], :error => e.to_s)
    end
@@ -118,8 +119,9 @@ class Axapta
   end
 
   def self.sales_lines_paged(page, *args)
-   prm = *args.dup.to_hash
-   res = AxaptaRequest.sales_lines({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1)}.merge(*args))
+   prm = *args.dup.as_hash
+   res = AxaptaRequest.sales_lines({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1)}.merge(prm))
+   #res = AxaptaRequest.sales_lines({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1)}.merge(*args))
    OpenStruct.new(:items => (res.try(:[], "sales_lines") || []).map do |sale|
     OpenStruct.new sale
    end, :total => res.try(:[], "pages") || 1, :page => (page || prm[:page] || 1), :records => res.try(:[], "records") || 0)

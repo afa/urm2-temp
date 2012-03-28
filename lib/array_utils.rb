@@ -1,7 +1,7 @@
 class Array
- def to_hash
+ def as_hash
   hsh = {}
-  self.each_slice(2){|i| hsh.merge!(i[0] => i[1]) }
+  self.each_slice(2){|i| hsh.merge!(i.first => i.last) }
   hsh
  end
 end
