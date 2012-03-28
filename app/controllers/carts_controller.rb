@@ -1,4 +1,5 @@
 class CartsController < ApplicationController
+ helper :JavaScript
  respond_to :js, :html, :json
   def index
    @carts = CartItem.where(:user_id => current_user.id).unprocessed.in_cart.all
