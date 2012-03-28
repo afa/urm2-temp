@@ -7,7 +7,7 @@ gem 'rails', '3.1.4'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem "sass"
-gem 'sass-rails'
+gem 'sass-rails', "3.1.4"
 group :assets do
  gem 'coffee-rails'
  gem 'uglifier'
