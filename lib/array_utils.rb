@@ -3,7 +3,9 @@ class Array
   #rets single hash
   if self.first.is_a? Hash
    p "array hashes to hash", self
-   return self.inject({}){|r, i| r.merge(i) }
+   hsh = self.inject({}){|r, i| r.merge(i) }
+   p "array hashes to hash rez", hsh
+   return hsh
   end
   hsh = {}
   p "array to hash", self
