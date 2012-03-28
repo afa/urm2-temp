@@ -8,7 +8,7 @@ class Offer::Store < Offer::Base
    begin
     data = Axapta.search_names({:show_forecast_availability => true, :show_analog_existence => true, :calc_price=>true, :calc_qty => true}.merge(hsh || {}).merge(:user_hash => User.current.current_account.try(:axapta_hash)))
    rescue Exception => e
-    p "---exc in Store#search #{Time.now}", e
+    p "---exc in Store#search #{Time.now}", e, e.backtrace
     return []
    end
    #TODO: to offers
