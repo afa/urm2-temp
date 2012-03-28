@@ -2,6 +2,7 @@ class Array
  def as_hash
   #rets single hash
   if self.first.is_a? Hash
+   p "array hashes to hash", self
    return self.inject({}){|r, i| r.merge(i) }
   end
   hsh = {}
