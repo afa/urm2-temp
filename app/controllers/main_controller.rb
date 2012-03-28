@@ -105,7 +105,7 @@ class MainController < ApplicationController
    begin
     data = Offer::Store.analogs(@code)
    rescue Exception => e
-    p "---exc in search #{Time.now}", e
+    p "---exc in Main#analog:search #{Time.now}", e
     logger.info e.to_s
    end
    @items = data
