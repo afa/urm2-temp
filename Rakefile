@@ -6,5 +6,5 @@ require 'rake'
 
 Urm::Application.load_tasks
 Cucumber::Rake::Task.new do |t|
- t.rcov = true
+ #t.rcov = true
 end
