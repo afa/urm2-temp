@@ -410,7 +410,6 @@ function cartsAddElementToCart(){
   $.each(gon.carts, function(idx, item){
    $("#cart_store table").append(item.line);
   });
-  $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :collection => @carts) }");
 //  $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :collection => @carts) }");
   $(".cart-table").add(".allow-order").show();
  }
