@@ -15,7 +15,7 @@ end
 
 gem "uniform_notifier", "1.0.1"
 gem 'pg'
-gem "carpentry"
+#gem "carpentry"
 gem "newrelic_rpm"
 
 # Use unicorn as the web server
