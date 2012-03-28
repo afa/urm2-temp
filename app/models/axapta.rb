@@ -53,14 +53,14 @@ class Axapta
   end
 
   def self.search_dms_names(*args)
-   ar = *args.dup.as_hash
+   ar = args.dup.as_hash
    ar["query_string"] += '*' if ar.has_key?("query_string") && !ar["query_string"].blank? && ar["query_string"].last != '*'
    ar[:query_string] += '*' if ar.has_key?(:query_string) && !ar[:query_string].blank? && ar[:query_string].last != '*'
    res = AxaptaRequest.search_item_name_dms_h(ar).try(:[], "items") || []
   end
 
   def self.item_info(*args)
-   ar = *args.dup.as_hash
+   ar = args.dup.as_hash
    res = AxaptaRequest.item_info(ar) || []
   end
 
@@ -103,7 +103,7 @@ class Axapta
   end
 
   def self.sales_info_paged(page, *args)
-   prm = *args.dup.as_hash
+   prm = args.dup.as_hash
    begin
     res = AxaptaRequest.sales_info({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1), :order_sales_id => "desc"}.merge(prm))
     #res = AxaptaRequest.sales_info({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1), :order_sales_id => "desc"}.merge(*args))
@@ -120,7 +120,7 @@ class Axapta
   end
 
   def self.sales_lines_paged(page, *args)
-   prm = *args.dup.as_hash
+   prm = args.dup.as_hash
    res = AxaptaRequest.sales_lines({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1)}.merge(prm))
    #res = AxaptaRequest.sales_lines({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1)}.merge(*args))
    OpenStruct.new(:items => (res.try(:[], "sales_lines") || []).map do |sale|
