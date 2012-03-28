@@ -22,6 +22,9 @@ class CartsController < ApplicationController
     CartItem.uncached do
      @carts = current_user.cart_items.unprocessed.in_cart.all
      gon.carts = @carts
+     gon.carts.each do |cart|
+      cart.line = escape_javascript(render :partial => "carts/cart_line", :locals => {:cart_line => cart})
+     end
      @deliveries = User.current.deliveries
      #@carts = CartItem.where(:user_id => current_user.id).unprocessed.in_cart.all
     end
