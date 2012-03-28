@@ -1,3 +1,4 @@
+require "array_utils"
 class Axapta
  include ActiveModel
  include ActiveModel::Serialization
