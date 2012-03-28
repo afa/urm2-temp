@@ -410,7 +410,7 @@ function cartsAddElementToCart(){
 //  $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :collection => @carts) }");
   $(".cart-table").add(".allow-order").show();
  }
- if($("#cart_store table tr").length > 1){
+ if($("#cart_store table tr").length >= 1){
   alert("show carts");
   $("#cart_store").show();
   activateSearchCancelButton();
