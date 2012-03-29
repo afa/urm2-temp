@@ -1,3 +1,4 @@
+#coding: UTF-8
 module HelperUser
  def prepare_user(args)
   prepare_user_account(args, {})

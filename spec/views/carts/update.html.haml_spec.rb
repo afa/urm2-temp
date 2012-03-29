@@ -1,3 +1,4 @@
+#coding: UTF-8
 require 'spec_helper'
 
 describe "carts/update.html.haml" do
