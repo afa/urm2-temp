@@ -411,7 +411,8 @@ function cartsAddElementToCart(){
  if (gon.carts.length > 0){ //empty?
   $.each(gon.carts, function(idx, item){
    $("#cart_store table").append(item.line);
-   $('table.search-products tr.item_' + item.offer_code + ' td.input-in-cart input[type="text"][name="items[' + item.line_code + '][amount]"]').val(item.amount);
+   //$('table.search-products tr.item_' + item.offer_code + ' td.input-in-cart input[type="text"][name="items[' + item.line_code + '][amount]"]').val(item.amount);
+   $('table.search-products input.item-cart[value="' + item.obj_id +'"]').parents("tr").find('td.input-in-cart input[type="text"]').val(item.amount);
   });
 //  $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :collection => @carts) }");
   $(".cart-table").add(".allow-order").show();
