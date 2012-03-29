@@ -405,7 +405,7 @@ function cartsAddElementToCart(){
  $("#cart_store table tr:has(td)").remove();
  // - # @carts.each do |crt|
   // $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :locals => {:cart_line => crt}) }");
- if (gon.carts.length == 0){ //empty?
+ if (gon.carts.length > 0){ //empty?
   alert("show carts");
   $.each(gon.carts, function(idx, item){
    $("#cart_store table").append(item.line);
