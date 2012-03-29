@@ -23,9 +23,8 @@ class CartsController < ApplicationController
      @carts = current_user.cart_items.unprocessed.in_cart.all
      @carts.each do |cart|
       cart.line = view_context.escape_javascript(render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart})
-      p "rendered line ", cart.line
      end
-     gon.carts = @carts
+     gon.carts = @carts.map(&:to_hash)
      @deliveries = User.current.deliveries
      #@carts = CartItem.where(:user_id => current_user.id).unprocessed.in_cart.all
     end
