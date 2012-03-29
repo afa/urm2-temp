@@ -431,4 +431,5 @@ function cartsAddElementToCart(){
  $('.select').selectList();
  $('.button-style').button();
  $('.switch').switchControl();
+ handleCartDelete();
 }
