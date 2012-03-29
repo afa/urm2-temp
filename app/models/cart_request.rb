@@ -1,4 +1,6 @@
 class CartRequest < CartItem
+ @signature_fields = @base_signature_fields + [:location_link]
+
  after_initialize :init_bools
 
   def allow

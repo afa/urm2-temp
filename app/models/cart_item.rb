@@ -1,5 +1,15 @@
+require "web_utils"
+require "class_attributes_inheritance"
 class CartItem < ActiveRecord::Base
  class CartParamRequired < StandardError; end
+
+ include ClassLevelInheritableAttributes
+ include WebSignature
+ cattr_inheritable :base_signature_fields, :signature_fields
+  @base_signature_fields = [:product_link, :product_name, :product_brend, :product_rohs]
+  #@base_signature_fields = [:code, :name, :brend, :rohs]
+  @signature_fields = @base_signature_fields
+
  belongs_to :user
  scope :unprocessed, where(:processed => false)
  scope :in_cart, where("amount > 0")
@@ -8,6 +18,7 @@ class CartItem < ActiveRecord::Base
 
  attr_accessor :allow, :line, :offer_code, :line_code
  attr_accessor :offer_params
+
 
  before_validation :setup_price
  after_initialize :deserialize_offer

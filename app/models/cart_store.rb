@@ -1,5 +1,7 @@
 class CartStore < CartItem
 
+ @signature_fields = @base_signature_fields + [:location_link]
+
   def action
    return "pick" if self.pick?
    return "reserve" if self.reserve?

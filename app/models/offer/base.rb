@@ -6,6 +6,7 @@ class Offer::Base
  include ActiveModel::Serialization
  include ActiveModel::Validations
  include ClassLevelInheritableAttributes
+ include WebSignature
  cattr_inheritable :base_signature_fields, :signature_fields
  def attributes
   @attributes ||= {}
@@ -16,16 +17,6 @@ class Offer::Base
 
   @base_signature_fields = [:code, :name, :brend, :rohs]
   @signature_fields = @base_signature_fields
-
-  
-
-  def base_signature
-   WebUtils.escape_name(self.class.base_signature_fields.map{|a| send(a) }.join('_'))
-  end
-
-  def signature
-   WebUtils.escape_name(self.class.signature_fields.map{|a| send(a) }.join('_'))
-  end
 
   def initialize
    super

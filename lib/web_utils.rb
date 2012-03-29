@@ -14,3 +14,13 @@ module WebUtils
   ActiveRecord::ConnectionAdapters::Column.value_to_boolean(val)
  end
 end
+
+module WebSignature
+  def base_signature
+   WebUtils.escape_name(self.class.base_signature_fields.map{|a| send(a) }.join('_'))
+  end
+
+  def signature
+   WebUtils.escape_name(self.class.signature_fields.map{|a| send(a) }.join('_'))
+  end
+end
