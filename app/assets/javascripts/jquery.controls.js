@@ -109,7 +109,7 @@
     active = $('.active', sel);
    }
 
-   input.val(active.get(0).name);
+   input.val(active.eq(0).attr("name"));
 
    //Показать/скрыть список
    active.click(function(e){
