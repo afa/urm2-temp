@@ -406,9 +406,9 @@ function cartsAddElementToCart(){
  // - # @carts.each do |crt|
   // $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :locals => {:cart_line => crt}) }");
  if (gon.carts.length > 0){ //empty?
-  alert("show carts");
   $.each(gon.carts, function(idx, item){
    $("#cart_store table").append(item.line);
+   $('table.search-products tr.item_' + item.offer_code + ' td.input-in-cart input[type="text"][name="items[' + item.line_code + '][amount]"]').val(item.amount);
   });
 //  $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :collection => @carts) }");
   $(".cart-table").add(".allow-order").show();
