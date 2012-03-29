@@ -88,7 +88,7 @@ class CartsController < ApplicationController
   end
 
   def destroy
-   old = CartItem.where(:user_id => current_user.id).unprocessed.in_cart.find(params[:id])
+   old = User.current.cart_items.unprocessed.in_cart.find(params[:id])
    #@old.try(:update_attributes, :amount => 0)
    @old = old.id
    #@new = old.setup_for(:amount => 0, :max_amount => old.max_amount).copy_on_write(:amount => 0, :cart => old.id)
@@ -99,7 +99,7 @@ class CartsController < ApplicationController
    @deliveries = User.current.deliveries
    respond_with do |format|
     format.js { render :layout => false }
-    format.json { render :json => {:carts_table => escape_javascript(render_to_string(:partial => "carts/cart_table", :locals => {:cart => @carts})), :old => @old, :new => @new, :carts_empty => @carts.empty?} }
+    #format.json { render :json => {:carts_table => escape_javascript(render_to_string(:partial => "carts/cart_table", :locals => {:cart => @carts})), :old => @old, :new => @new, :carts_empty => @carts.empty?} }
    end
   end
 
