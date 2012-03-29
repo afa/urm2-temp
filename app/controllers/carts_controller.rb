@@ -27,7 +27,7 @@ class CartsController < ApplicationController
       cart.line_code = cart.base_signature
       #cart.line = view_context.escape_javascript(render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart})
      end
-     gon.carts = @carts.map(&:to_hash)
+     gon.carts = @carts.map{|c| c.to_hash.merge(:obj_id => id)}
      gon.changes = @changed
      @deliveries = User.current.deliveries
     end

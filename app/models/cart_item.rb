@@ -33,7 +33,7 @@ class CartItem < ActiveRecord::Base
   end
 
   def to_hash
-   ATTR_KEYS.map{|k| [k, send(k)] }.inject({}){|r, v| r.merge(v[0] => v[1]) }.merge(:obj_id => id)
+   ATTR_KEYS.map{|k| [k, send(k)] }.inject({}){|r, v| r.merge(v[0] => v[1]) }
   end
 
   def deserialize_offer
