@@ -432,4 +432,5 @@ function cartsAddElementToCart(){
  $('.button-style').button();
  $('.switch').switchControl();
  handleCartDelete();
+ apply_hover_in_table_on_mmove();
 }
