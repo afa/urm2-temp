@@ -414,19 +414,18 @@ function cartsAddElementToCart(){
   $(".cart-table").add(".allow-order").show();
  }
  if($("#cart_store table tr").length >= 1){
-  alert("show carts");
   $("#cart_store").show();
   activateSearchCancelButton();
  } else {
-  alert("hide carts");
   $("#cart_store").hide();
  }
  $("div#order").hide();
  $("div#order").children().remove();
 // $("div#order").append("#{ escape_javascript(render :partial => "main/order_edit") }");
-// gon.changed//- @changed.each do |i|
-//  $("table.search-products tr input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");
-//  //-# $("div#cart_store table tr##{i[0]} input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");
+ $.each(gon.changes, function(idx, item){
+  $('table.search-products tr input.item-cart[value="' + item[0] + '"]').val(item[1]);
+ });
+  //-# $("div#cart_store table tr##{i[0]} input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");
  alert("process");
  $('.select').selectList();
  $('.button-style').button();

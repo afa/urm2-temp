@@ -28,6 +28,7 @@ class CartsController < ApplicationController
       #cart.line = view_context.escape_javascript(render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart})
      end
      gon.carts = @carts.map(&:to_hash)
+     gon.changes = @changed
      @deliveries = User.current.deliveries
     end
     #redirect_to carts_path
