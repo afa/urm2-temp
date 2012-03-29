@@ -405,6 +405,9 @@ function cartsAddElementToCart(){
  $("#cart_store table tr:has(td)").remove();
  // - # @carts.each do |crt|
   // $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :locals => {:cart_line => crt}) }");
+ $.each(gon.changes, function(idx, item){
+  $('table.search-products tr input.item-cart[value="' + item[0] + '"]').val(item[1]);
+ });
  if (gon.carts.length > 0){ //empty?
   $.each(gon.carts, function(idx, item){
    $("#cart_store table").append(item.line);
@@ -422,9 +425,6 @@ function cartsAddElementToCart(){
  $("div#order").hide();
  $("div#order").children().remove();
 // $("div#order").append("#{ escape_javascript(render :partial => "main/order_edit") }");
- $.each(gon.changes, function(idx, item){
-  $('table.search-products tr input.item-cart[value="' + item[0] + '"]').val(item[1]);
- });
   //-# $("div#cart_store table tr##{i[0]} input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");
  alert("process");
  $('.select').selectList();
