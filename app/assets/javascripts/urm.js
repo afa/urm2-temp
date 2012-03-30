@@ -390,17 +390,9 @@ function ordersPickProcess(){
 
 //carts
 function cartsAddElementToCart(){
- alert(gon.carts.length);
  if(gon.carts.length == 0){
   $('.cart-table').add('.allow-order').hide();
  }
- if($(".calendar-input").length > 0){
-  $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
- }
- $("#order").hide();
- activateSearchAllowOrderButton();
- $("#cancel_order").hide();
- activateSearchCancelButton();
 
  $("#cart_store table tr:has(td)").remove();
  // - # @carts.each do |crt|
@@ -419,7 +411,6 @@ function cartsAddElementToCart(){
  }
  if($("#cart_store table tr").length >= 1){
   $("#cart_store").show();
-  activateSearchCancelButton();
  } else {
   $("#cart_store").hide();
  }
@@ -430,6 +421,13 @@ function cartsAddElementToCart(){
  $('.select').selectList();
  $('.button-style').button();
  $('.switch').switchControl();
+ if($(".calendar-input").length > 0){
+  $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
+ }
+ $("#order").hide();
+ activateSearchAllowOrderButton();
+ $("#cancel_order").hide();
+ activateSearchCancelButton();
  handleCartDelete();
  apply_hover_in_table_on_mmove();
 }
