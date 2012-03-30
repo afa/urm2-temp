@@ -162,6 +162,8 @@ function showDms(evt){
 }
 
 function handleCartDelete(){
+ alert("deprecated use cartsRemoveElementFromCart");
+ return false;
  $(".icons .icon .delete-from-cart").click(function(){
   makeAjaxDestroy("/carts/" + $(this).parents("tr").prop("id").match(/\bcart_str_(\w+)\b/)[1], 
    function(data){
@@ -231,6 +233,7 @@ function activateSearchAllowOrderButton(){
   $("table.search-products").parents("form").hide();
   $("#save_cart_button").hide();
   $(".delete-from-cart").unbind("click");
+  activateSearchCancelButton();
   return false;
  });
 }
