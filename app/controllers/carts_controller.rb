@@ -30,6 +30,7 @@ class CartsController < ApplicationController
      gon.carts = @carts.map{|c| c.to_hash.merge(:obj_id => c.id)}
      gon.changes = @changed
      @deliveries = User.current.deliveries
+     gon.order = render_to_string :partial => "main/order_edit"
     end
     #redirect_to carts_path
     respond_with do |format|

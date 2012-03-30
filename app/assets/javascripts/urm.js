@@ -425,8 +425,7 @@ function cartsAddElementToCart(){
  }
  $("div#order").hide();
  $("div#order").children().remove();
-// $("div#order").append("#{ escape_javascript(render :partial => "main/order_edit") }");
-  //-# $("div#cart_store table tr##{i[0]} input.item-cart[value=\"#{i[0]}\"]").val("#{i[1]}");
+ $("div#order").append(gon.order);
  alert("process");
  $('.select').selectList();
  $('.button-style').button();
