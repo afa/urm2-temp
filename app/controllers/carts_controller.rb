@@ -84,8 +84,18 @@ class CartsController < ApplicationController
      @changed << [cart.id.to_s, cart.amount.to_s]
     end
    end
-   @carts = User.current.cart_items.unprocessed.in_cart.all
-   @deliveries = User.current.deliveries
+   CartItem.uncached do
+    @carts = User.current.cart_items.unprocessed.in_cart.all
+    @deliveries = User.current.deliveries
+    @carts.each do |cart|
+     cart.line = render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart}
+     cart.offer_code = cart.signature
+     cart.line_code = cart.base_signature
+    end
+    gon.carts = @carts.map{|c| c.to_hash.merge(:obj_id => c.id)}
+    gon.order = render_to_string :partial => "main/order_edit"
+   end
+
   end
 
   def destroy
