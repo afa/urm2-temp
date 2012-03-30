@@ -438,34 +438,27 @@ function cartsAddElementToCart(){
 //destroy
 function cartsRemoveElementFromCarts(){
  //-# $("#cart_store").replaceWith("#{escape_javascript(render :partial => "carts/cart_table", :locals => {:cart => @carts})}");
- $("table.search-products tr:has(td input.item-cart[value=\"#{@old}\"])").find("td.input-in-cart").removeClass("exist speed");
- $("table.search-products tr:has(td input.item-cart[value=\"#{@old}\"])").find("td.input-in-cart input").val("0");
- $("table.search-products tr td input.item-cart[value=\"#{@old}\"]").val("#{@new}");
+ $('table.search-products tr:has(td input.item-cart[value="' + gon.deleted + '"])').find("td.input-in-cart").removeClass("exist speed");
+ $('table.search-products tr:has(td input.item-cart[value="' + gon.deleted + '"])').find("td.input-in-cart input").val("");
+ // need? $("table.search-products tr td input.item-cart[value=\"#{@old}\"]").val("#{@new}");
 
  $("#cart_store table tr:has(td)").remove();
- //- unless @carts.empty?
-//  $("#cart_store table").append('#{ escape_javascript(render :partial => "carts/cart_line", :collection => @carts) }');
-  $(".cart-table").add(".allow-order").show();
- if($("#cart_store table tr").length > 1){
-  $("#cart_store").show();
-  activateSearchCancelButton();
- } else {
-  $("#cart_store").hide();
+ if (gon.carts.length > 0){ //empty?
+  $.each(gon.carts, function(idx, item){
+   $("#cart_store table").append(item.line);
+   $('table.search-products input.item-cart[value="' + item.obj_id +'"]').parents("tr").find('td.input-in-cart input[type="text"]').val(item.amount);
+  });
+  //$(".cart-table").add(".allow-order").show();
  }
+ if($("#cart_store table tr").length > 1){
+  $("#cart_store").add(".allow-order").show();
+ } else {
+  $("#cart_store").add(".allow-order").hide();
+ }
+ activateSearchCancelButton();
  $("div#order").hide();
  $("div#order").children().remove();
-// $("div#order").append('#{ escape_javascript(render :partial => "main/order_edit") }');
-
-
- //- if @carts.empty?
-  $(".cart-table").add(".allow-order").hide();
- //- else
-  $(".cart-table").add(".allow-order").show();
- if($("#cart_store table tr").length > 1){
-  $("#cart_store").show();
- } else {
-  $("#cart_store").hide();
- }
+ $("div#order").append(gon.order);
  $("div#order").hide();
 
 }
