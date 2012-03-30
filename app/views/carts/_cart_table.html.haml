@@ -19,6 +19,5 @@
    = render :partial => "carts/cart_line", :collection => cart
 
   .padded
-  -# = ff.submit t(:save)
   = render :partial => "shared/submit_button", :locals => {:title => t(:save), :opts => {:id => "save_cart_button"}}
  .clear.block-padded
