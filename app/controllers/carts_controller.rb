@@ -98,6 +98,21 @@ class CartsController < ApplicationController
    #@new = old.setup_for(:amount => 0, :max_amount => old.max_amount).copy_on_write(:amount => 0, :cart => old.id)
    @carts = User.current.cart_items.unprocessed.in_cart.all
    @deliveries = User.current.deliveries
+   CartItem.uncached do
+    @carts = current_user.cart_items.unprocessed.in_cart.all
+    @carts.each do |cart|
+     cart.line = render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart}
+     cart.offer_code = cart.signature
+     cart.line_code = cart.base_signature
+     #cart.line = view_context.escape_javascript(render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart})
+    end
+    gon.carts = @carts.map{|c| c.to_hash.merge(:obj_id => c.id)}
+    gon.deleted = @old
+    #gon.changes = @changed
+    @deliveries = User.current.deliveries
+    gon.order = render_to_string :partial => "main/order_edit"
+   end
+
    respond_with do |format|
     format.js { render :layout => false }
     #format.json { render :json => {:carts_table => escape_javascript(render_to_string(:partial => "carts/cart_table", :locals => {:cart => @carts})), :old => @old, :new => @new, :carts_empty => @carts.empty?} }
