@@ -443,7 +443,7 @@ function cartsRemoveElementFromCarts(){
 
  $("#cart_store table tr:has(td)").remove();
  //- unless @carts.empty?
-  $("#cart_store table").append('#{ escape_javascript(render :partial => "carts/cart_line", :collection => @carts) }');
+//  $("#cart_store table").append('#{ escape_javascript(render :partial => "carts/cart_line", :collection => @carts) }');
   $(".cart-table").add(".allow-order").show();
  if($("#cart_store table tr").length > 1){
   $("#cart_store").show();
@@ -453,7 +453,7 @@ function cartsRemoveElementFromCarts(){
  }
  $("div#order").hide();
  $("div#order").children().remove();
- $("div#order").append('#{ escape_javascript(render :partial => "main/order_edit") }');
+// $("div#order").append('#{ escape_javascript(render :partial => "main/order_edit") }');
 
 
  //- if @carts.empty?
