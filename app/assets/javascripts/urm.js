@@ -215,7 +215,7 @@ function activateSearchCancelButton(){
   $("div#cart_store input").add("div#cart_store textarea").each(function(i, item){ item.disabled = ''; });
   $("table.search-products").parents("form").show();
   $("#save_cart_button").show();
-  handleCartDelete();
+  //handleCartDelete();
   /*$(".delete-from-cart").unbind("click");*/
   return false;
  });
@@ -431,7 +431,7 @@ function cartsAddElementToCart(){
  activateSearchAllowOrderButton();
  $("#cancel_order").hide();
  activateSearchCancelButton();
- handleCartDelete();
+ //handleCartDelete();
  apply_hover_in_table_on_mmove();
 }
 
