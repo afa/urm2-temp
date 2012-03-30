@@ -215,6 +215,7 @@ function activateSearchCancelButton(){
   $("div#cart_store input").add("div#cart_store textarea").each(function(i, item){ item.disabled = ''; });
   $("table.search-products").parents("form").show();
   $("#save_cart_button").show();
+  apply_hover_in_table_on_mmove();
   //handleCartDelete();
   /*$(".delete-from-cart").unbind("click");*/
   return false;
@@ -430,6 +431,7 @@ function cartsAddElementToCart(){
  activateSearchCancelButton();
  //handleCartDelete();
  apply_hover_in_table_on_mmove();
+ $('.form-hide .item').dropDown();
 }
 
 //destroy
@@ -456,7 +458,7 @@ function cartsRemoveElementFromCarts(){
  $("div#order").children().remove();
  $("div#order").append(gon.order);
  $("div#order").hide();
-
+ $('.form-hide .item').dropDown();
 }
 
 function cartsSaveCart(){
@@ -489,6 +491,7 @@ function cartsSaveCart(){
   return false;
  });
  $('.select').selectList();
+ $('.form-hide .item').dropDown();
  $('.button-style').button();
  $('.switch').switchControl();
  $('.js').bind('ajax:success', function(evt, xhr, status){
