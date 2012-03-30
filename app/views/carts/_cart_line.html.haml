@@ -1,7 +1,7 @@
 %tr{:id => "cart_str_#{cart_line.id.to_s}"}
  %td.icons
   .icon
-   %a.delete.delete-from-cart
+   = link_to"", cart_path(cart_line), :class => ["delete", "delete-from-cart"], :remote => true, :method => :delete
  %td.text-left= cart_line.type_name
  %td.text-left= cart_line.product_name
  %td.text-left= cart_line.product_brend
