@@ -1,3 +1,7 @@
+if RUBY_VERSION.to_f >= 1.9
+ require 'simplecov'
+ SimpleCov.start 'rails'
+end
 #coding: UTF-8
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] = 'test'
