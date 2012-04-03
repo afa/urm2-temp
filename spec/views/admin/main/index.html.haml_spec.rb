@@ -14,7 +14,9 @@ describe "admin/main/index.html.haml" do
   u.save!
   end
   session[:manager] = FactoryGirl.create(:manager).id
+  @news = FactoryGirl.create_list(:news_article, 2)
   assign(:users, @users)
+  assign(:news, @news)
   render
  end
  it { rendered.should have_xpath("//a[@href='/admin/managers']") }
