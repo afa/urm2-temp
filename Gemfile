@@ -1,3 +1,4 @@
+#coding: UTF-8
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.4'
@@ -48,6 +49,9 @@ gem "bullet", :group => :development
 gem "gon", :git => 'git://github.com/afa/gon.git', :branch => "script_tag"
 #gem "sqlite3", :group => :test
 group :development, :test do
+ gem "konacha"
+ gem "sprockets"
+ gem "ejs"
  gem "rspec-rails"
  gem "cucumber", "1.0.6"
  gem "cucumber-rails"

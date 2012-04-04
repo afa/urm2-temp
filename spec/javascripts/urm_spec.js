@@ -1,10 +1,25 @@
-describe("insertGap", function(){
+//=require urm
+//=require spec_helper
+
+describe("tst", function(){
+ it("should ok", function(){ true.should.equal(true); });
+});
+
+describe("test template", function(){
+ //before(function(){
+ //});
+ it("should show test", function(){
+  $("#konacha").html(JST['templates/test']());
+  $("#konacha").text().should.contain("test");
+ });
+});
+/*describe("insertGap", function(){
  var foursquare, request;
  var onSuccess, onFailure;
- beforeEach(function(){
-  setFixtures("<table><tr class='item_tst'><td></td></tr><tr class='dms_item_tst'><td></td></tr></table>");
-  insertGap('tst', "<tr class='gap_tst'><td></td></tr>");
- });
+ //beforeEach(function(){
+ // setFixtures("<table><tr class='item_tst'><td></td></tr><tr class='dms_item_tst'><td></td></tr></table>");
+ // insertGap('tst', "<tr class='gap_tst'><td></td></tr>");
+ //});
  it("should insert gap into table", function(){
   expect($('tr').length).toBeGreaterThan(2);
  });
@@ -67,3 +82,5 @@ describe("search_icons_handle", function(){
   expect($(".dms")).not.toBeEmpty();
  });
 });
+*/
+
