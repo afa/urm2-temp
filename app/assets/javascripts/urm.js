@@ -486,6 +486,7 @@ function cartsSaveCart(){
   $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
  }
  activateSearchCancelButton();
+ activateSearchAllowButton();
  $('.commit a.button-style').click(function(){
   $(this).parents('form').submit();
   return false;
