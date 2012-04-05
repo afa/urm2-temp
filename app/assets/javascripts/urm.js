@@ -404,10 +404,8 @@ function cartsAddElementToCart(){
  if (gon.carts.length > 0){ //empty?
   $.each(gon.carts, function(idx, item){
    $("#cart_store table").append(item.line);
-   //$('table.search-products tr.item_' + item.offer_code + ' td.input-in-cart input[type="text"][name="items[' + item.line_code + '][amount]"]').val(item.amount);
    $('table.search-products input.item-cart[value="' + item.obj_id +'"]').parents("tr").find('td.input-in-cart input[type="text"]').val(item.amount);
   });
-//  $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :collection => @carts) }");
   $(".cart-table").add(".allow-order").show();
  }
  if($("#cart_store table tr").length >= 1){
@@ -422,6 +420,10 @@ function cartsAddElementToCart(){
  $('.select').selectList();
  $('.button-style').button();
  $('.switch').switchControl();
+ $('.commit a.button-style').click(function(){
+  $(this).parents('form').submit();
+  return false;
+ });
  if($(".calendar-input").length > 0){
   $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
  }
@@ -459,6 +461,10 @@ function cartsRemoveElementFromCarts(){
  $("div#order").append(gon.order);
  $("div#order").hide();
  $('.form-hide .item').dropDown();
+ $('.commit a.button-style').click(function(){
+  $(this).parents('form').submit();
+  return false;
+ });
 }
 
 function cartsSaveCart(){
