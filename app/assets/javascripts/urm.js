@@ -89,7 +89,6 @@ function load_dms_bundle(from_where, need_load){
     $(data[kk]).insertAfter($("tr.item_" + kk).last());
     $("tr.dms_item_" + kk + " th .plus").click(function(){
      var obj = $(this).parents("tr").find("th .icon input.after").first().val();
-     //alert("click "+obj+" " + $(this).parents("tr").first().prop("class"));
      $("tr.dms_item_" + obj).hide();
      $("tr.dms_item_" + obj).addClass("hidden");
      if($("tr.analog_item_" + obj).add("tr.info_item_" + obj).not(".hidden").length == 0){
@@ -416,11 +415,11 @@ function cartsAddElementToCart(){
  $("div#order").hide();
  $("div#order").children().remove();
  $("div#order").append(gon.order);
- alert("process");
  $('.select').selectList();
  $('.button-style').button();
  $('.switch').switchControl();
- $('.commit a.button-style').click(function(){
+ $('.commit a.button-style').off("click");
+ $('.commit a.button-style').on("click", function(){
   $(this).parents('form').submit();
   return false;
  });
@@ -461,7 +460,8 @@ function cartsRemoveElementFromCarts(){
  $("div#order").append(gon.order);
  $("div#order").hide();
  $('.form-hide .item').dropDown();
- $('.commit a.button-style').click(function(){
+ $('.commit a.button-style').off("click");
+ $('.commit a.button-style').on("click", function(){
   $(this).parents('form').submit();
   return false;
  });
@@ -493,7 +493,8 @@ function cartsSaveCart(){
  }
  activateSearchCancelButton();
  activateSearchAllowButton();
- $('.commit a.button-style').click(function(){
+ $('.commit a.button-style').off("click");
+ $('.commit a.button-style').on("click", function(){
   $(this).parents('form').submit();
   return false;
  });
