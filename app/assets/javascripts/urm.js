@@ -89,7 +89,6 @@ function load_dms_bundle(from_where, need_load){
     $(data[kk]).insertAfter($("tr.item_" + kk).last());
     $("tr.dms_item_" + kk + " th .plus").click(function(){
      var obj = $(this).parents("tr").find("th .icon input.after").first().val();
-     //alert("click "+obj+" " + $(this).parents("tr").first().prop("class"));
      $("tr.dms_item_" + obj).hide();
      $("tr.dms_item_" + obj).addClass("hidden");
      if($("tr.analog_item_" + obj).add("tr.info_item_" + obj).not(".hidden").length == 0){
@@ -404,10 +403,8 @@ function cartsAddElementToCart(){
  if (gon.carts.length > 0){ //empty?
   $.each(gon.carts, function(idx, item){
    $("#cart_store table").append(item.line);
-   //$('table.search-products tr.item_' + item.offer_code + ' td.input-in-cart input[type="text"][name="items[' + item.line_code + '][amount]"]').val(item.amount);
    $('table.search-products input.item-cart[value="' + item.obj_id +'"]').parents("tr").find('td.input-in-cart input[type="text"]').val(item.amount);
   });
-//  $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :collection => @carts) }");
   $(".cart-table").add(".allow-order").show();
  }
  if($("#cart_store table tr").length >= 1){
@@ -418,10 +415,14 @@ function cartsAddElementToCart(){
  $("div#order").hide();
  $("div#order").children().remove();
  $("div#order").append(gon.order);
- alert("process");
  $('.select').selectList();
  $('.button-style').button();
  $('.switch').switchControl();
+ $('.commit a.button-style').off("click");
+ $('.commit a.button-style').on("click", function(){
+  $(this).parents('form').submit();
+  return false;
+ });
  if($(".calendar-input").length > 0){
   $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
  }
@@ -459,6 +460,11 @@ function cartsRemoveElementFromCarts(){
  $("div#order").append(gon.order);
  $("div#order").hide();
  $('.form-hide .item').dropDown();
+ $('.commit a.button-style').off("click");
+ $('.commit a.button-style').on("click", function(){
+  $(this).parents('form').submit();
+  return false;
+ });
 }
 
 function cartsSaveCart(){
@@ -486,7 +492,9 @@ function cartsSaveCart(){
   $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
  }
  activateSearchCancelButton();
- $('.commit a.button-style').click(function(){
+ activateSearchAllowButton();
+ $('.commit a.button-style').off("click");
+ $('.commit a.button-style').on("click", function(){
   $(this).parents('form').submit();
   return false;
  });
