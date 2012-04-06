@@ -234,7 +234,7 @@ function activateSearchAllowOrderButton(){
   $("#save_cart_button").hide();
   $(".delete-from-cart").unbind("click");
   activateSearchCancelButton();
-  $("#order .commit.button a.commit-button").on("click", function(){onSelectSendForm(this); return false;});
+  $("#order .commit.button a.commit-button").bind("click", function(){onSelectSendForm(this); return false;});
   return false;
  });
 }
@@ -419,8 +419,8 @@ function cartsAddElementToCart(){
  $('.select').selectList();
  $('.button-style').button();
  $('.switch').switchControl();
- $('.commit a.button-style').off("click");
- $('.commit a.button-style').on("click", function(){
+ $('.commit a.button-style').unbind("click");
+ $('.commit a.button-style').bind("click", function(){
   $(this).parents('form').submit();
   return false;
  });
@@ -461,8 +461,8 @@ function cartsRemoveElementFromCarts(){
  $("div#order").append(gon.order);
  $("div#order").hide();
  $('.form-hide .item').dropDown();
- $('.commit a.button-style').off("click");
- $('.commit a.button-style').on("click", function(){
+ $('.commit a.button-style').unbind("click");
+ $('.commit a.button-style').bind("click", function(){
   $(this).parents('form').submit();
   return false;
  });
@@ -494,8 +494,8 @@ function cartsSaveCart(){
  }
  activateSearchCancelButton();
  activateSearchAllowButton();
- $('.commit a.button-style').off("click");
- $('.commit a.button-style').on("click", function(){
+ $('.commit a.button-style').unbind("click");
+ $('.commit a.button-style').bind("click", function(){
   $(this).parents('form').submit();
   return false;
  });
