@@ -29,8 +29,8 @@ class ApplicationController < ActionController::Base
   def user_from_cookie
    if token = cookies[:user_remember_token]
     return nil if token.blank?
-    puts "::: user_from_cookie"
-    p token
+    #puts "::: user_from_cookie"
+    #p token
     u = User.where(:remember_token => token).first
     cookies.delete(:user_remember_token) unless u
     u
@@ -67,7 +67,7 @@ class ApplicationController < ActionController::Base
 
   def check_account
    if current_user.try(:current_account)
-    p "::current_user", current_user
+    #p "::current_user", current_user
     if current_user.current_account.blocked? or current_user.accounts.where(:id => current_user.current_account_id).count == 0
      redirect_to root_path
     end
@@ -83,7 +83,7 @@ class ApplicationController < ActionController::Base
     srch[:only_store] = current_user.settings.where(:name => 'search.only_store').first.try(:value) if srch[:only_store].nil?
    end
    @search = OpenStruct.new(srch)
-   p ":::search", @search
+   #p ":::search", @search
   end
 
   def unmodify
@@ -91,6 +91,6 @@ class ApplicationController < ActionController::Base
   end
 
   def put_sess
-   p session
+   #p session
   end
 end

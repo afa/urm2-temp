@@ -20,6 +20,7 @@ describe OrdersController do
   before do
    @orders = [{}]
    Axapta.stub!(:sales_info).and_return(@orders)
+   Axapta.stub!(:sales_info_paged).and_return(OpenStruct.new(:items => @orders, :pages => 1, :total => 1, :page => 1))
   end
   it "should be successful" do
    get 'index'
@@ -28,14 +29,17 @@ describe OrdersController do
 
   it "should assign orders" do
    get 'index'
-   assigns[:orders].should == @orders
+   assigns(:orders).should be_is_a(OpenStruct)
+   assigns(:orders).items.should == @orders
   end
  end
 
  describe "GET 'show'" do
   before do
    @orders = [{:sales_id => '01'}, {:sales_id => '02'}].map{|s| OpenStruct.new s }
-   Axapta.stub!(:sales_lines).and_return([OpenStruct.new({:sales_id => '01'})])
+   User.current.stub!(:deliveries).and_return(["del_id", "del_type"])
+   Axapta.stub!(:sales_info).and_return([@orders.first])
+   Axapta.stub!(:sales_lines_paged).and_return(:items => [OpenStruct.new({:sales_id => '01'})], :total => 1, :pages => 1, :page => 1)
    get 'show', :id => @orders.first.sales_id
   end
 
@@ -44,7 +48,7 @@ describe OrdersController do
   end
 
   it "should assign order" do
-   assigns[:order].should == [@orders.first]
+   assigns[:order_info].should == @orders.first
   end
  end
 

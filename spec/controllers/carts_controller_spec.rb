@@ -12,6 +12,7 @@ describe CartsController do
   @user.save!
   @carts = FactoryGirl.create_list(:cart_store, 2, :user => @user, :processed => false, :amount => 1)
   controller.sign_in @user
+  User.current.stub!(:deliveries).and_return(["del_id", "del_type"])
  end
 
 
