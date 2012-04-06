@@ -20,6 +20,7 @@ describe CartWorld do
 
  describe "::prepare_code" do
   it "should return hash" do
+   p (FactoryGirl.build(:offer_world))
    CartWorld.prepare_code(FactoryGirl.build(:offer_world)).should be_is_a(Offer::World)
    #CartWorld.prepare_code([{}, {}]).each{|i| i.should be_is_a(Offer::World)}
   end

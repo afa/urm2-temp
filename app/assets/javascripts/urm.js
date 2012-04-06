@@ -234,6 +234,7 @@ function activateSearchAllowOrderButton(){
   $("#save_cart_button").hide();
   $(".delete-from-cart").unbind("click");
   activateSearchCancelButton();
+  $("#order .commit.button a.commit-button").on("click", function(){onSelectSendForm(this)});
   return false;
  });
 }
