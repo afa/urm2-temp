@@ -39,21 +39,21 @@ describe CartsController do
 
   describe "POST 'create'" do
     it "should be successful" do
-      post 'create', :items => {:commit => 'ok'}
+      post 'create', :items => {:commit => 'ok', '123' => {:amount => ''}}
       response.should be_redirect
     end
   end
 
   describe "GET 'edit'" do
     it "should be successful" do
-      get 'edit', :id => 0
+      get 'edit', :id => @carts.first.id
       response.should be_success
     end
   end
 
   describe "PUT 'update'" do
     it "should be successful" do
-      put 'update', :id => 0
+      put 'update', :id => @carts.first.id
       response.should be_success
     end
   end
