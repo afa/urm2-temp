@@ -31,7 +31,7 @@ class CartStore < CartItem
   end
 
   def to_sales_lines
-   init = super.merge(:invent_location => location_link, :is_pick => self.pick?, :reserve_sale => self.reserve?, :application_area_id => self.application_area_mandatory)
+   init = super.merge(:invent_location => location_link, :is_pick => self.pick?, :reserve_sale => self.reserve?, :application_area_id => self.application_area_id)
    self.user_price.blank? ? init : init.merge(:sales_price => self.user_price)
   end
 
@@ -42,7 +42,7 @@ class CartStore < CartItem
    carts.reject!{|i| i.amount.nil? or i.amount == 0 }
    amnt = carts.first.try(:amount)
    cart = carts.first
-   p_hsh = hsh.merge(:processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :offer_params => search.raw_location, :amount => amnt, :comment => cart.try(:comment), :application_area_mandatory => search.application_area_mandatory, :reserve => cart.try(:reserve), :user_price => cart.try(:user_price), :pick => cart.try(:pick))
+   p_hsh = hsh.merge(:processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :offer_params => search.raw_location, :amount => amnt, :comment => cart.try(:comment), :application_area_id => cart.try(:application_area_id), :application_area_mandatory => search.application_area_mandatory, :reserve => cart.try(:reserve), :user_price => cart.try(:user_price), :pick => cart.try(:pick))
    item = self.setup_for(p_hsh).create(p_hsh)
    item.offer_params.merge!(search.raw_location)
    item.amount = amnt
