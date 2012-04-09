@@ -19,7 +19,7 @@
    %select{:id => "cart_item_#{cart_line.id}_application_area_mandatory", :name => "cart_item[#{cart_line.id}][application_area_mandatory]"}
     %option
     - @app_list.each do |app|
-     %option{:value => app.application_area_id}= app.application_area_name
+     %option{:value => app.application_area_id, :selected => (app.application_area_id == cart_line.application_area_mandatory)}= app.application_area_name
  - if cart_line.is_a?(CartWorld)
   %td &nbsp;
   %td &nbsp;
