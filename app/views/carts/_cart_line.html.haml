@@ -16,7 +16,7 @@
   %input{:type => :text, :size => "9", :value => cart_line.user_price, :id => "cart_item_#{cart_line.id}_user_price", :name => "cart_item[#{cart_line.id}][user_price]"}
  %td
   - if cart_line.application_area_mandatory?
-   %select{:id => "cart_item_#{cart_line.id}_application_area_id", :name => "cart_item[#{cart_line.id}][application_area_id]"}
+   %select{:id => "cart_item_#{cart_line.id}_application_area_mandatory", :name => "cart_item[#{cart_line.id}][application_area_mandatory]"}
     %option
     - @app_list.each do |app|
      %option{:value => app.application_area_id}= app.application_area_name

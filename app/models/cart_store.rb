@@ -31,7 +31,7 @@ class CartStore < CartItem
   end
 
   def to_sales_lines
-   init = super.merge(:invent_location => location_link, :is_pick => self.pick?, :reserve_sale => self.reserve?)
+   init = super.merge(:invent_location => location_link, :is_pick => self.pick?, :reserve_sale => self.reserve?, :application_area_id => self.application_area_mandatory)
    self.user_price.blank? ? init : init.merge(:sales_price => self.user_price)
   end
 
