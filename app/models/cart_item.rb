@@ -14,7 +14,7 @@ class CartItem < ActiveRecord::Base
  scope :unprocessed, where(:processed => false)
  scope :in_cart, where("amount > 0")
  #scope :in_cart, where(:draft => false)
- ATTR_KEYS = %w(amount product_link location_link product_name product_rohs product_brend processed order current_price prognosis quantity min_amount max_amount comment user_price actions draft offer_params offer_serialized reserve pick requirement line offer_code line_code).map(&:to_sym)
+ ATTR_KEYS = %w(amount product_link location_link product_name product_rohs product_brend processed order current_price prognosis quantity min_amount max_amount comment user_price actions draft offer_params offer_serialized reserve pick requirement line offer_code line_code application_area_mandatory application_area_id).map(&:to_sym)
 
  attr_accessor :allow, :line, :offer_code, :line_code
  attr_accessor :offer_params

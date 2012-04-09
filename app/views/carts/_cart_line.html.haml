@@ -14,6 +14,12 @@
   %textarea{:style => "height: 14px; padding: 2px 4px; border: 1px solid #9E9E9E", :cols => 20, :rows => 1, :id => "cart_item_#{cart_line.id}_comment", :name => "cart_item[#{cart_line.id}][comment]"}= cart_line.comment
  %td.price-user
   %input{:type => :text, :size => "9", :value => cart_line.user_price, :id => "cart_item_#{cart_line.id}_user_price", :name => "cart_item[#{cart_line.id}][user_price]"}
+ %td
+  - if cart_line.application_area_mandatory?
+   %select{:id => "cart_item_#{cart_line.id}_application_area_id", :name => "cart_item[#{cart_line.id}][application_area_id]"}
+    %option
+    - @app_list.each do |app|
+     %option{:value => app.application_area_id, :selected => (app.application_area_id == cart_line.application_area_id)}= app.application_area_name
  - if cart_line.is_a?(CartWorld)
   %td &nbsp;
   %td &nbsp;

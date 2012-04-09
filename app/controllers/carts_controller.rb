@@ -22,6 +22,9 @@ class CartsController < ApplicationController
     end
     CartItem.uncached do
      @carts = current_user.cart_items.unprocessed.in_cart.all
+     gon.need_application = @carts.detect{|i| i.application_area_mandatory }
+     @app_list = gon.need_application ? Axapta.application_area_list : []
+     gon.app_list = @app_list
      @carts.each do |cart|
       cart.line = render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart}
       cart.offer_code = cart.signature
@@ -88,6 +91,9 @@ class CartsController < ApplicationController
    CartItem.uncached do
     @carts = User.current.cart_items.unprocessed.in_cart.all
     @deliveries = User.current.deliveries
+    gon.need_application = @carts.detect{|i| i.application_area_mandatory }
+    @app_list = gon.need_application ? Axapta.application_area_list : []
+    gon.app_list = @app_list
     @carts.each do |cart|
      cart.line = render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart}
      cart.offer_code = cart.signature
@@ -109,6 +115,9 @@ class CartsController < ApplicationController
    #@new = old.setup_for(:amount => 0, :max_amount => old.max_amount).copy_on_write(:amount => 0, :cart => old.id)
    @carts = User.current.cart_items.unprocessed.in_cart.all
    @deliveries = User.current.deliveries
+   gon.need_application = @carts.detect{|i| i.application_area_mandatory }
+   @app_list = gon.need_application ? Axapta.application_area_list : []
+   gon.app_list = @app_list
    CartItem.uncached do
     @carts = current_user.cart_items.unprocessed.in_cart.all
     @carts.each do |cart|
