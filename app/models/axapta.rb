@@ -178,6 +178,14 @@ class Axapta
     []
    end
   end
+
+  def self.application_area_list
+   begin
+    AxaptaRequest.application_area_list(:user_hash => axapta_hash)["area_list"].map{|x| OpenStruct.new(x)}
+   rescue
+    []
+   end
+  end
  private
   def self.axapta_hash
    User.current.try(:current_account).try(:axapta_hash)
