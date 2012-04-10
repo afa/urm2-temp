@@ -4,7 +4,7 @@ $("input#search_query_string").val('');
 $("#cart_store table tr:has(td)").remove();
 $("#cancel_order").hide();
 - @carts.each do |crt|
- $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :locals => {:cart_line => crt}) }");
+ $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :locals => {:cart_line => crt, :app_list => @app_list}) }");
 - unless @carts.empty?
  $(".cart-table").add(".allow-order").show();
 if($("#cart_store table tr").length > 1){

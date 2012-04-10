@@ -26,7 +26,7 @@ class CartsController < ApplicationController
      @app_list = Axapta.application_area_list || []
      gon.app_list = @app_list
      @carts.each do |cart|
-      cart.line = render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart}
+      cart.line = render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart, :app_list => @app_list}
       cart.offer_code = cart.signature
       cart.line_code = cart.base_signature
       #cart.line = view_context.escape_javascript(render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart})
@@ -95,7 +95,7 @@ class CartsController < ApplicationController
     @app_list = Axapta.application_area_list || []
     gon.app_list = @app_list
     @carts.each do |cart|
-     cart.line = render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart}
+     cart.line = render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart, :app_list => @app_list}
      cart.offer_code = cart.signature
      cart.line_code = cart.base_signature
     end
@@ -121,7 +121,7 @@ class CartsController < ApplicationController
    CartItem.uncached do
     @carts = current_user.cart_items.unprocessed.in_cart.all
     @carts.each do |cart|
-     cart.line = render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart}
+     cart.line = render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart, :app_list => @app_list}
      cart.offer_code = cart.signature
      cart.line_code = cart.base_signature
      #cart.line = view_context.escape_javascript(render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart})
