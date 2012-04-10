@@ -2,6 +2,9 @@
 - offer_code = analog_line.signature
 - offer_amount = analog_line.amount.to_i > 0 ? analog_line.amount : ''
 %tr.sub-row-table{:class => "analog_item_#{after}"}
+ %input.analog-code{:type => "hidden", :value => analog_line.code, :name => "analog[#{offer_code}][code]", :id => "code_#{offer_code}"}
+ %input.analog-cart{:type => "hidden", :value => analog_line.cart_id, :name => "analog[#{offer_code}][cart]"}
+
  %td.icons{:class => "border-l"}
   .icon
    %a.pp{:href => "#"}
