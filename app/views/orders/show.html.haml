@@ -41,7 +41,7 @@
     .handle_lines
      .tabbed_box
       .tabs
-       .tab= link_to t(:main_options), "#", :id => "enable_main_options", :class => "ajax"
+       .tab.active= link_to t(:main_options), "#", :id => "enable_main_options", :class => "ajax"
        .tab= link_to t(:reserve_lines), "#", :id => "enable_reserve_lines", :class => "ajax"
        .tab= link_to t(:pick_lines), "#", :id => "enable_pick_lines", :class => "ajax"
        .tab= link_to t(:reserve_transfer), "#", :id => "enable_reserve_transfer", :class => "ajax"

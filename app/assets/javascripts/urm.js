@@ -245,16 +245,19 @@ function onSelectSendForm(obj){
 
 function ordersTabOnClick(){
  var lst = $(this).parents(".tabbed_box").find(".dialogs .page");
+ var tabs = $(this).parents(".tabbed_box").find(".dialogs .tab");
  var idx = $(this).parents(".tabbed_box").find(".tabs .tab a").index($(this));
  if(idx == -1){
   return false;
  }
  var page = lst.eq(idx);
+ var tab = tabs.eq(idx)
  if(page.hasClass("active")){
   page.removeClass("active");
  } else {
   lst.removeClass("active");
   page.addClass("active");
+  tab.addClass("active");
  }
  return false;
 }
