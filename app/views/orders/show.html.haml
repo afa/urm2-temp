@@ -77,12 +77,12 @@
        .page.active
         .main_options
          %div
+          = yield :order_base_info
+         %div
           = form_for :order, :url => save_order_path(params[:id]) do |f6|
            = label_tag "order_#{params[:id]}_comment", t(:order_comment)
            = text_area_tag "order[#{params[:id]}][comment]", @order_info.comment
            = render :partial => "shared/submit_button", :locals => {:title => t(:save), :opts => {:id => "save_order"}}
-         %div
-          = yield :order_base_info
          %div
           = yield :order_base_make
          %div
