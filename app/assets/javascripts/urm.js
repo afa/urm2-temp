@@ -321,10 +321,13 @@ function ordersOnClickEnablePickLines(){
 }
 
 function ordersOnClickEnableReserveTransfer(){
+ if($(this).parents(".tabbed_box").find(".dialogs .page").eq(3).hasClass("active")){
+  return;
+ }
 }
 
 function ordersOnClickEnableRemoveLines(){
- if($(this).parents(".tabbed_box").find(".dialogs .page").eq(2).hasClass("active")){
+ if($(this).parents(".tabbed_box").find(".dialogs .page").eq(4).hasClass("active")){
   return;
  }
  $('tr th.select_header').show();
