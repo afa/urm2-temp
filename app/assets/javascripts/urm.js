@@ -258,6 +258,7 @@ function ordersTabOnClick(){
  } else {
   lst.removeClass("active");
   page.addClass("active");
+  tabs.removeClass("active");
   tab.addClass("active");
  }
  return false;
