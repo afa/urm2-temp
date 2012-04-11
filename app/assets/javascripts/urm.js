@@ -251,9 +251,10 @@ function ordersTabOnClick(){
   return false;
  }
  var page = lst.eq(idx);
- var tab = tabs.eq(idx)
+ var tab = tabs.eq(idx);
  if(page.hasClass("active")){
   page.removeClass("active");
+  tab.removeClass("active");
  } else {
   lst.removeClass("active");
   page.addClass("active");
