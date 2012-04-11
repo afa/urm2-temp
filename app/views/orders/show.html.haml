@@ -21,7 +21,7 @@
     - content_for :order_base_make do
      .handle_sale
       .make_order
-       .header выставление счета
+       .header= t(:invoice_generation)
        = form_for :order, :url => invoice_order_path(params[:id]) do |f1|
         .param= select_tag("order[#{params[:id]}][order_action]", "<option value=\"make\">Создать</option><option value=\"send\">Отправить</option><option value=\"make_send\">Создать и отправить</option>".html_safe)
         -# .link [#{t(:go)}]
