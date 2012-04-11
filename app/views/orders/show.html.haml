@@ -15,24 +15,27 @@
  .table-navigation-block{:class => "scroll"}
   .table-block
    .table-scrolling
-    = render :partial => "orders/info", :locals => {:order => @order_info}
+    - content_for :order_base_info do
+     = render :partial => "orders/info", :locals => {:order => @order_info}
 
-    .handle_sale
-     .make_order
-      .header выставление счета
-      = form_for :order, :url => invoice_order_path(params[:id]) do |f1|
-       .param= select_tag("order[#{params[:id]}][order_action]", "<option value=\"make\">Создать</option><option value=\"send\">Отправить</option><option value=\"make_send\">Создать и отправить</option>".html_safe)
-       -# .link [#{t(:go)}]
-       = render :partial => "shared/submit_button", :locals => {:title => t(:go)}
-       .clear
-     .close_sale
-      .header= t(:close_sale) #закрыть заказ
-      = form_for :order, :url => close_order_path(params[:id]) do |f2|
-       .param
-        = select_tag "order[#{params[:id]}][close_reason_id]", options_for_select(@close_reasons)
-       -# .link [#{t(:close)}]
-       = render :partial => "shared/submit_button", :locals => {:title => t(:close)}
-       .clear
+    - content_for :order_base_make do
+     .handle_sale
+      .make_order
+       .header выставление счета
+       = form_for :order, :url => invoice_order_path(params[:id]) do |f1|
+        .param= select_tag("order[#{params[:id]}][order_action]", "<option value=\"make\">Создать</option><option value=\"send\">Отправить</option><option value=\"make_send\">Создать и отправить</option>".html_safe)
+        -# .link [#{t(:go)}]
+        = render :partial => "shared/submit_button", :locals => {:title => t(:go)}
+        .clear
+     - content_for :order_base_close do
+      .close_sale
+       .header= t(:close_sale) #закрыть заказ
+       = form_for :order, :url => close_order_path(params[:id]) do |f2|
+        .param
+         = select_tag "order[#{params[:id]}][close_reason_id]", options_for_select(@close_reasons)
+        -# .link [#{t(:close)}]
+        = render :partial => "shared/submit_button", :locals => {:title => t(:close)}
+        .clear
 
     .clear
     .handle_lines
@@ -73,10 +76,13 @@
       .dialogs
        .page.active
         .main_options
-         = form_for :order, :url => save_order_path(params[:id]) do |f6|
-          = label_tag "order_#{params[:id]}_comment", t(:order_comment)
-          = text_area_tag "order[#{params[:id]}][comment]", @order_info.comment
-          = render :partial => "shared/submit_button", :locals => {:title => t(:save), :opts => {:id => "save_order"}}
+         %div
+          = form_for :order, :url => save_order_path(params[:id]) do |f6|
+           = label_tag "order_#{params[:id]}_comment", t(:order_comment)
+           = text_area_tag "order[#{params[:id]}][comment]", @order_info.comment
+           = render :partial => "shared/submit_button", :locals => {:title => t(:save), :opts => {:id => "save_order"}}
+         %div
+          = yield :order_base_info
        .page
         .reserve_lines
          = form_for :order, :url => reserve_order_path(params[:id]) do |f3|
