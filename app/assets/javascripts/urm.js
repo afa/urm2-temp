@@ -333,6 +333,7 @@ function ordersOnClickEnableRemoveLines(){
  }
  $('tr th.select_header').show();
  $("tr td.select_data").show();
+ $('tr td.select_data input[type="checkbox"]').remove();
  $("tr td.select_data").each(function(i, item){
   var cp = $(item).parents("tr").find('td input[type="hidden"][name^="order["][name*="][line]["][name$="][item_id]"]').eq(0);
   $(item).append('<input type="checkbox" name="' + cp.attr("name") + '" value="1">');
