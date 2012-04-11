@@ -83,6 +83,10 @@
            = render :partial => "shared/submit_button", :locals => {:title => t(:save), :opts => {:id => "save_order"}}
          %div
           = yield :order_base_info
+         %div
+          = yield :order_base_make
+         %div
+          = yield :order_base_close
        .page
         .reserve_lines
          = form_for :order, :url => reserve_order_path(params[:id]) do |f3|
