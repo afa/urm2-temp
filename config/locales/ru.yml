@@ -150,3 +150,4 @@ ru:
  remove_lines: Удаление строк
  application_mandatory: Требовать указать применение
  invoice_generation: Выставление счета
+ order_comment: Комментарий заказа
