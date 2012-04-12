@@ -23,7 +23,7 @@
  %td= showed_line.invoiced_in_total
  %td= showed_line.date_dead_line
  %td= showed_line.confirmed_dlv_date
- %td.note-option.main_options_data= text_field_tag "order[#{showed_line.sales_id}][line][#{iid}][note]", showed_line.note
- %td.requirement-option.main_options_data= text_field_tag "order[#{showed_line.sales_id}][line][#{iid}][requirement]", showed_line.requirement
+ %td.note-option.main_options_data.medium= text_field_tag "order[#{showed_line.sales_id}][line][#{iid}][note]", showed_line.note
+ %td.requirement-option.main_options_data.medium= text_field_tag "order[#{showed_line.sales_id}][line][#{iid}][requirement]", showed_line.requirement
  %td
  %td
