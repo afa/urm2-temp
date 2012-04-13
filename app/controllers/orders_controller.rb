@@ -156,7 +156,7 @@ class OrdersController < ApplicationController
    end
    begin
     Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:item_id => k, :reason => params.try(:[], :order).try(:[], id).try(:[], :erase_reason)) }, :sales_id => id) #TODO fix item_id for line_id
-   resque AxaptaError
+   rescue AxaptaError
     redirect_to order_path(id), :flash =>{:error => Axapta.get_last_exc["_error"]["message"]}
     return
    end
