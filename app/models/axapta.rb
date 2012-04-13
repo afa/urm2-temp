@@ -2,6 +2,7 @@ require "array_utils"
 class Axapta
  include ActiveModel
  include ActiveModel::Serialization
+ class AxaptaError < Exception; end
 
   def self.parse_exc(e)
    @last_parsed_error = ActiveSupport::JSON.decode(e.message.scan(/JSON-RPC error ::\((.+)\)::.+\{.+\}/)[0][0])
@@ -12,6 +13,10 @@ class Axapta
    {"_error" => @last_parsed_error}
   end
 
+  def self.clean_exc
+   @last_parsed_error = nil
+  end
+
  def attributes
   @attributes ||= {}
  end
@@ -19,7 +24,12 @@ class Axapta
  attr_accessor :method
 
   def config
-   @config ||= AxaptaRequest.describe_methods
+   begin
+    @config ||= AxaptaRequest.describe_methods
+   rescue Exception => e
+    parse_exc(e)
+    {}
+   end
   end
 
   def method(key)
@@ -36,13 +46,9 @@ class Axapta
    AxaptaRequest.user_info(args)
   end
 
-  def self.filter_account_attributes(args)
-   args.inject({}){|r, a| r.merge(Account.axapta_renames[a[0]].nil? ? {a[0] => a[1]}: {Account.axapta_renames[a[0]] => a[1]}) }.delete_if{|k, v| not Account.axapta_attributes.include?(k.to_s) }
-  end
-
   def self.renew_structure(hash) #REFACTOR: move to account
    accnt = Account.find_by_axapta_hash(hash)
-   accnt.update_attributes self.filter_account_attributes(self.user_info(hash))
+   accnt.update_attributes Account.filter_account_attributes(self.user_info(hash))
    accnt.parent.update_attributes self.filter_account_attributes(self.user_info(accnt.parent.axapta_hash)) if accnt.parent
    self.load_child_hashes(hash).each do |hsh|
     acc = Account.find_by_axapta_user_id(hsh["user_id"])
@@ -55,23 +61,36 @@ class Axapta
   end
 
   def self.search_names(*args)
-   ar = args.dup.as_hash
-   p "Ax#search_names arg", ar
+   ar = args.as_hash
    ar["query_string"] += '*' if ar.has_key?("query_string") && ar["query_string"].last != '*'
    ar[:query_string] += '*' if ar.has_key?(:query_string) && ar[:query_string].last != '*'
-   res = AxaptaRequest.search_item_name_h(ar).try(:[], "items") || []
+   begin
+    res = AxaptaRequest.search_item_name_h(ar).try(:[], "items") || []
+   rescue Exception => e
+    parse_exc(e)
+    []
+   end
   end
 
   def self.search_dms_names(*args)
-   ar = args.dup.as_hash
+   ar = args.as_hash
    ar["query_string"] += '*' if ar.has_key?("query_string") && !ar["query_string"].blank? && ar["query_string"].last != '*'
    ar[:query_string] += '*' if ar.has_key?(:query_string) && !ar[:query_string].blank? && ar[:query_string].last != '*'
-   res = AxaptaRequest.search_item_name_dms_h(ar).try(:[], "items") || []
+   begin
+    res = AxaptaRequest.search_item_name_dms_h(ar).try(:[], "items") || []
+   rescue Exception => e
+    parse_exc(e)
+    []
+   end
   end
 
   def self.item_info(*args)
-   ar = args.dup.as_hash
+   ar = args.as_hash
    res = AxaptaRequest.item_info(ar) || []
+   rescue Exception => e
+    parse_exc(e)
+    []
+   end
   end
 
   def self.search_analogs(*args)
@@ -147,7 +166,7 @@ class Axapta
     AxaptaRequest.create_invoice(:user_hash => axapta_hash, :sales_id => order, :send_by_email => send)
    rescue Exception => e
     parse_exc(e)
-    raise
+    raise AxaptaError
    end
   end
 
@@ -156,7 +175,7 @@ class Axapta
     AxaptaRequest.invoice_paym(:user_hash => axapta_hash, :sales_id => order, :send_by_email => send)
    rescue Exception => e
     parse_exc(e)
-    raise
+    raise AxaptaError
    end
   end
 
@@ -188,7 +207,7 @@ class Axapta
     AxaptaRequest.sales_handle_header(hsh.merge(:user_hash => axapta_hash))
    rescue Exception => e
     parse_exc(e)
-    raise
+    raise AxaptaError
    end
   end
 
@@ -197,7 +216,7 @@ class Axapta
     AxaptaRequest.sales_handle_edit(hsh.merge(:user_hash => axapta_hash))
    rescue Exception => e
     parse_exc(e)
-    raise
+    raise AxaptaError
    end
   end
 
@@ -220,6 +239,15 @@ class Axapta
   end
  private
   def self.axapta_hash
-   User.current.try(:current_account).try(:axapta_hash)
+   unless User.current
+    @last_parsed_error = {"message" => "Non-selected user"}
+    raise AxaptaError
+   end
+   unless User.current.current_account
+    @last_parsed_error = {"message" => "Invalid current account for current user"}
+    raise AxaptaError
+   end
+   
+   User.current.current_account.axapta_hash
   end
 end

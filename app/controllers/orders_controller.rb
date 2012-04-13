@@ -67,14 +67,14 @@ class OrdersController < ApplicationController
    if [0, 2].include?(idx)
     begin
      Axapta.create_invoice(id, idx == 2)
-    rescue
+    rescue AxaptaError
      redirect_to order_path(id), :flash =>{:error => Axapta.get_last_exc["_error"]["message"]}
      return
     end
    else
     begin
      Axapta.invoice_paym(id, true)
-    rescue
+    rescue AxaptaError
      redirect_to order_path(id), :flash =>{:error => Axapta.get_last_exc["_error"]["message"]}
      return
     end
@@ -91,7 +91,7 @@ class OrdersController < ApplicationController
    end
    begin
     Axapta.sales_handle_header(:close_reason_id => reason, :sales_id => id)
-   rescue
+   rescue AxaptaError
     redirect_to order_path(id), :flash =>{:error => Axapta.get_last_exc["_error"]["message"]}
     return
    end

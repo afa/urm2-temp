@@ -11,4 +11,9 @@ class Account < ActiveRecord::Base
    {"user_id" => "axapta_user_id", "parent_user_id" => "axapta_parent_id", "user_name" => "name"}
   end
 
+  def self.filter_account_attributes(args)
+   args.inject({}){|r, a| r.merge(axapta_renames[a[0]].nil? ? {a[0] => a[1]}: {axapta_renames[a[0]] => a[1]}) }.delete_if{|k, v| not axapta_attributes.include?(k.to_s) }
+  end
+
+
 end
