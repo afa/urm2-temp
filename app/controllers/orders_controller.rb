@@ -143,7 +143,11 @@ class OrdersController < ApplicationController
     redirect_to order_path(id), :flash => {:error => "empty reason"}
     return
    end
-   Axapta.sales_handle_header(:close_reason_id => reason, :sales_id => id)
+   begin
+    Axapta.sales_handle_header(:close_reason_id => reason, :sales_id => id)
+   rescue
+    flash.now(:error => Axapta.last_parsed_exc)
+   end
    redirect_to order_path(id)
   end
 

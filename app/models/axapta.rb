@@ -4,8 +4,12 @@ class Axapta
  include ActiveModel::Serialization
 
   def self.parse_exc(e)
-   p "::JSONRPCERROR", ActiveSupport::JSON.decode(e.message.scan(/JSON-RPC error ::\((.+)\)::.+\{.+\}/)[0][0])
-   #p "::JSONRPCERROR", (e.message.scan(/JSON-RPC error ::\((.+)\)::.+\{.+\}/))
+   @last_parsed_error = ActiveSupport::JSON.decode(e.message.scan(/JSON-RPC error ::\((.+)\)::.+\{.+\}/)[0][0])
+   {"_error" => @last_parsed_error}
+  end
+
+  def self.get_last_exc
+   {"_error" => @last_parsed_error}
   end
 
  def attributes
@@ -179,13 +183,19 @@ class Axapta
   end
 
   def self.sales_handle_edit(hsh)
-   AxaptaRequest.sales_handle_edit(hsh.merge(:user_hash => axapta_hash))
+   begin
+    AxaptaRequest.sales_handle_edit(hsh.merge(:user_hash => axapta_hash))
+   rescue Exception => e
+    parse_exc(e)
+    raise
+   end
   end
 
   def self.sales_close_reason_list
    begin
     AxaptaRequest.sales_close_reason_list(:user_hash => axapta_hash)["reason_list"].map{|x| [x["close_reason_description"], x["close_reason_id"]] } #return [[desc, id]]
-   rescue
+   rescue Exception => e
+    parse_exc(e)
     []
    end
   end
@@ -193,7 +203,8 @@ class Axapta
   def self.application_area_list
    begin
     AxaptaRequest.application_area_list(:user_hash => axapta_hash)["area_list"].map{|x| OpenStruct.new(x)}
-   rescue
+   rescue Exception => e
+    parse_exc(e)
     []
    end
   end
