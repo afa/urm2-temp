@@ -138,7 +138,12 @@ class OrdersController < ApplicationController
     redirect_to order_path(id), :flash => {:error => "empty lines"}
     return
    end
-   Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:item_id => k, :is_pick => 1) }, :sales_id => id, :date_dead_line => params.try(:[], :date_picker), :customer_delivery_type_id => params.try(:[], :delivery_type)) #TODO fix item_id for line_id
+   begin
+    Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:item_id => k, :is_pick => 1) }, :sales_id => id, :date_dead_line => params.try(:[], :date_picker), :customer_delivery_type_id => params.try(:[], :delivery_type)) #TODO fix item_id for line_id
+   rescue AxaptaError
+    redirect_to order_path(id), :flash =>{:error => Axapta.get_last_exc["_error"]["message"]}
+    return
+   end
    redirect_to order_path(id)
   end
 
@@ -149,7 +154,12 @@ class OrdersController < ApplicationController
     redirect_to order_path(id), :flash => {:error => "empty lines"}
     return
    end
-   #Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:item_id => k, :reason => params.try(:[], :order).try(:[], id).try(:[], :erase_reason)) }, :sales_id => id) #TODO fix item_id for line_id
+   begin
+    Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:item_id => k, :reason => params.try(:[], :order).try(:[], id).try(:[], :erase_reason)) }, :sales_id => id) #TODO fix item_id for line_id
+   resque AxaptaError
+    redirect_to order_path(id), :flash =>{:error => Axapta.get_last_exc["_error"]["message"]}
+    return
+   end
    redirect_to order_path(id)
   end
 
