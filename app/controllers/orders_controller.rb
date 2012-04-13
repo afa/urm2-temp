@@ -65,9 +65,19 @@ class OrdersController < ApplicationController
     return
    end
    if [0, 2].include?(idx)
-    Axapta.create_invoice(id, idx == 2)
+    begin
+     Axapta.create_invoice(id, idx == 2)
+    rescue
+     redirect_to order_path(id), :flash =>{:error => Axapta.get_last_exc["_error"]["message"]}
+     return
+    end
    else
-    Axapta.invoice_paym(id, true)
+    begin
+     Axapta.invoice_paym(id, true)
+    rescue
+     redirect_to order_path(id), :flash =>{:error => Axapta.get_last_exc["_error"]["message"]}
+     return
+    end
    end
    redirect_to order_path(id)
   end
