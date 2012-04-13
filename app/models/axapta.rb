@@ -143,11 +143,21 @@ class Axapta
   end
 
   def self.create_invoice(order, send = false)
-   AxaptaRequest.create_invoice(:user_hash => axapta_hash, :sales_id => order, :send_by_email => send)
+   begin
+    AxaptaRequest.create_invoice(:user_hash => axapta_hash, :sales_id => order, :send_by_email => send)
+   rescue Exception => e
+    parse_exc(e)
+    raise
+   end
   end
 
   def self.invoice_paym(order, send = false)
-   AxaptaRequest.invoice_paym(:user_hash => axapta_hash, :sales_id => order, :send_by_email => send)
+   begin
+    AxaptaRequest.invoice_paym(:user_hash => axapta_hash, :sales_id => order, :send_by_email => send)
+   rescue Exception => e
+    parse_exc(e)
+    raise
+   end
   end
 
   def self.quotation_info(hsh)
