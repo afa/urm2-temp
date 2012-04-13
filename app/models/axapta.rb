@@ -1,8 +1,8 @@
 require "array_utils"
+class AxaptaError < Exception; end
 class Axapta
  include ActiveModel
  include ActiveModel::Serialization
- class AxaptaError < Exception; end
 
   def self.parse_exc(e)
    @last_parsed_error = ActiveSupport::JSON.decode(e.message.scan(/JSON-RPC error ::\((.+)\)::.+\{.+\}/)[0][0])
