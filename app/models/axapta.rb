@@ -169,7 +169,12 @@ class Axapta
   end
 
   def self.sales_handle_header(hsh)
-   AxaptaRequest.sales_handle_header(hsh.merge(:user_hash => axapta_hash))
+   begin
+    AxaptaRequest.sales_handle_header(hsh.merge(:user_hash => axapta_hash))
+   rescue Exception => e
+    parse_exc(e)
+    raise
+   end
   end
 
   def self.sales_handle_edit(hsh)
