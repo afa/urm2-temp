@@ -82,7 +82,7 @@ class OrdersController < ApplicationController
    begin
     Axapta.sales_handle_header(:close_reason_id => reason, :sales_id => id)
    rescue
-    redirect_to order_path(id), :flash =>{:error => Axapta.get_last_exc}
+    redirect_to order_path(id), :flash =>{:error => Axapta.get_last_exc["_error"]["message"]}
     return
    end
    redirect_to order_path(id)
