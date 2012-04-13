@@ -1,14 +1,6 @@
--# Фильтры
-
--# Дата отгрузки: даты c/по (см. календарик в шаблоне 008, compel_html_008/orders.html), params.date_from, params.date_to
--# Наименование: строка, params.item_name
--# Только мои позиции: вкл/выкл, params.only_my
--# Только ДМС: вкл/выкл, params.only_dms
--# Таблица:
-
 .nav-title
  %span= link_to "Заказы", orders_path
- %span >
+ %span &raquo;
  %span.current Заказ #{params[:id]}
 
 .content-wrap

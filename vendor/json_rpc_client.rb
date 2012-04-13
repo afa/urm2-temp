@@ -127,7 +127,7 @@ class JsonRpcClient
           if json['error']
             @logger.error "JSON-RPC call to #{host_and_port}: #{self}.#{name}(#{args.inspect})" if @logger
             @logger.error "JSON-RPC error from #{host_and_port}: #{json['error'].inspect}" if @logger
-            raise ServiceError, "JSON-RPC error from #{host_and_port}: #{json['error'].inspect}"
+            raise ServiceError, "JSON-RPC error ::(#{json['error'].to_json}):: from #{host_and_port}: #{json['error'].inspect}"
           end
           return json['result']
         end

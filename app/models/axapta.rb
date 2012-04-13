@@ -2,6 +2,11 @@ require "array_utils"
 class Axapta
  include ActiveModel
  include ActiveModel::Serialization
+
+  def parse_exc(e)
+   p "::JSONRPCERROR", ActiveSupport::JSON.decode(e.message.scan(/JSON-RPC error ::\((.+)\)::.+\{.+\}/))
+  end
+
  def attributes
   @attributes ||= {}
  end
