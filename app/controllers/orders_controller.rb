@@ -5,71 +5,7 @@ class OrdersController < ApplicationController
 
   def index
    @orders = Axapta.sales_info_paged(@page, {:user_hash => current_user.current_account.axapta_hash}.merge(@filter_hash))
-# Фильтры:
-
-# Номер заказа: текстовая строка, params.sales_id
-# Оф. номер счета: текстовая строка, params.official_number
-# Только УРМ: вкл/выкл, params.this_sales_origin
-# Только мои заказы: вкл/выкл, params.only_my
-
-# "УРМ": todo (this_sales_origin)
-# "Номер заказа": result.sales[].sales_id
-# "Офиц. номер": todo (official_number)
-# "Сумма": todo (amount?)
-# "Статусы строк заказа" --
-# "Трекинг" --
-# "Дата создания": result.sales[].sales_date
-# "Статус": result.sales[].sales_status todo - в enum
-# "Примечание": todo (comment)
-# "Контактное лицо": todo (имя contactperson_name)
-# "Заявка на склад": todo (да/нет)
-# "Дата готовности": result.sales[].date_dead_line_delivery
-# "Код способа поставки": result.sales[].delivery_mode
-# "Cчет": result.sales[].document_number
-# "Сумма по счету": result.sales[].sales_amount
-# "Менеджер" --
-# "Вид оплаты" --
-# "Накладная" --
-
   end
-
-=begin
-Заказ
-
-Инф. блок о заказе
-
-Редактирование:
-    Строки: Примечание, Требования sales_handle_edit
-    Комментарий: sales_handle_header
-
-Обработка
-    Заказ
-        Выставление счета
-            Создать и/или Отправить (3 варианта)
-            [Go]
-        Закрыть заказ
-            Выбор причины закрытия
-            [Закрыть]            
-    Строки
-        Резервирование
-            Количество по строкам для обработки
-            [Резервировать]
-            [Разрезервировать все]
-        Бронь
-            Количество по строкам для обработки
-            Параметры бронирования
-            [Бронировать]
-        Перенос резерва
-            Выбор строк (чекбокс), Заказ для переноса - выбор (20-30)
-        Удаление строк
-            Выбор строк (чекбокс)        
-            Причина удаления
-            [Удалить]
-        Запрос цены
-            Выбор строк (чекбокс)        
-            Цена клиента
-            [Запросить]
-=end
 
   def new
    @carts = current_user.cart_items.in_cart.unprocessed.all
@@ -146,7 +82,8 @@ class OrdersController < ApplicationController
    begin
     Axapta.sales_handle_header(:close_reason_id => reason, :sales_id => id)
    rescue
-    flash.now[:error] = Axapta.get_last_exc
+    redirect_to order_path(id), :flash =>{:error => Axapta.get_last_exc}
+    return
    end
    redirect_to order_path(id)
   end
