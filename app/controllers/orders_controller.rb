@@ -148,6 +148,25 @@ class OrdersController < ApplicationController
   end
 
   def erase
+=begin
+1. Добавить запрос - "Список причин закрытия заказа".
+
+Наименование: sales_close_reason_list
+
+Входные данные: нет
+
+Выходные данные:
+
+Массив причин отказов, для каждого два поля: код (close_reason_id) и описание (close_reason_description), данные брать из справочника "Причины предложения", smmQuotationReasonGroup по условиям не "Блокировано" и не "Причина для регламента" с сортировкой по полю "Приоритет" - см. EPSalesTableInfoRBA -> WebUserDefined:CloseSaleReasonId -> layout - общий для УРМ и СОД код вынести из веб-формы.
+
+2. В запрос sales_handle_header добавить параметр "Причина закрытия" close_reason_id.
+
+При установке - производить закрытие заказа как в УРМ, см. EPSalesTableInfoRBA -> WebButton:webCloseSale -> clicked - общий для УРМ и СОД код вынести из веб-формы.
+
+3. В запрос sales_handle_edit добавить параметр "Причина закрытия" close_reason_id.
+
+При установке - производить удаление строки как в УРМ, см. EPSalesTableInfoRBA -> WebButton:WebButtonDelete -> clicked - общий для УРМ и СОД код вынести из веб-формы. Обработку параметра производить после обработки изменения количества и разрезервирования.
+=end
    id = params[:id]
    lines = params.try(:[], :order).try(:[], id).try(:[], :line) || []
    if lines.empty?
