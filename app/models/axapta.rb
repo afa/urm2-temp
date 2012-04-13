@@ -86,7 +86,8 @@ class Axapta
 
   def self.item_info(*args)
    ar = args.as_hash
-   res = AxaptaRequest.item_info(ar) || []
+   begin
+    AxaptaRequest.item_info(ar) || []
    rescue Exception => e
     parse_exc(e)
     []
@@ -127,7 +128,6 @@ class Axapta
   end
 
   def self.sales_info(*args)
-   p "---sales_info_args", *args
    sales_info_paged(nil, *args).try(:items) || []
   end
 
