@@ -104,7 +104,7 @@
        .page
         .remove_lines
          = form_for :order, :url => erase_order_path(params[:id]) do |f6|
-          .param= text_area_tag "order[#{params[:id]}][erase_reason]"
+          .param= select_tag "order[#{params[:id]}][close_reason_id]", options_for_select(@close_reasons)
           -# .link [#{t(:remove)}]
           = render :partial => "shared/submit_button", :locals => {:title => t(:remove), :opts => {:id => "remove_order"}}
      .clear
