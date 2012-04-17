@@ -335,7 +335,7 @@ function ordersOnClickEnableRemoveLines(){
  $("tr td.select_data").show();
  $('tr td.select_data input[type="checkbox"]').remove();
  $("tr td.select_data").each(function(i, item){
-  var cp = $(item).parents("tr").find('td input[type="hidden"][name^="order["][name*="][line]["][name$="][item_id]"]').eq(0);
+  var cp = $(item).parents("tr").find('td input[type="hidden"][name^="order["][name*="][line]["][name$="][line_id]"]').eq(0);
   $(item).append('<input type="checkbox" name="' + cp.attr("name") + '" value="1">');
  });
 }
@@ -358,7 +358,7 @@ function ordersCopyToHidden(item, after){
 
 function ordersSaveOnClick(){
  var curr = this;
- $('input[name^="order["][name$="][item_id]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
+ $('input[name^="order["][name$="][line_id]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
  $('td.main_options_data input[type="text"][name^="order["][name$="][note]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
  $('td.main_options_data input[type="text"][name^="order["][name$="][requirement]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
  $('textarea[id^="order_"][id$="_comment"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
@@ -371,7 +371,7 @@ function ordersSaveProcess(){
 
 function ordersRemoveOnClick(){
  var curr = this;
- $('input:checked[name^="order["][name$="][item_id]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
+ $('input:checked[name^="order["][name$="][line_id]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
  $(this).parents("form").submit();
 }
 
@@ -381,7 +381,7 @@ function ordersRemoveProcess(){
 
 function ordersReserveOnClick(){
  var curr = this;
- $('input[name^="order["][name$="][item_id]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
+ $('input[name^="order["][name$="][line_id]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
  $('td.reserve_data input[type="text"][name^="order["][name$="][process_qty]"]').each(function(i, item){ if($(item).val().match(/^\d+$/)){ ordersCopyToHidden(item, curr);} });
  $(this).parents("form").submit();
 }
@@ -392,7 +392,7 @@ function ordersReserveProcess(){
 
 function ordersPickOnClick(){
  var curr = this;
- $('input[name^="order["][name$="][item_id]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
+ $('input[name^="order["][name$="][line_id]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
  $('td.reserve_data input[type="text"][name^="order["][name$="][process_qty]"]').each(function(i, item){ if($(item).val().match(/^\d+$/)){ ordersCopyToHidden(item, curr);} });
  $(curr).parents("form").submit();
 }
