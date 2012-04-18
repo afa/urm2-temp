@@ -75,7 +75,7 @@ class CartItem < ActiveRecord::Base
   end
 
   def to_sales_lines
-   {:item_id => self.product_link, :item_name => self.product_name, :note => self.comment, :qty => self.amount, :invc_brend_alias => self.product_brend, :requirement => self.requirement}
+   {:item_id => self.product_link, :item_name => self.product_name, :note => self.comment, :qty => self.amount, :invc_brend_alias => self.product_brend, :requirements => self.requirement}
   end
 
   def self.copy_on_write(hsh) # excpshn on bad params, not found
