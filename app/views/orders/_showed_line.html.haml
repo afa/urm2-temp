@@ -6,7 +6,7 @@
   = showed_line.rohs
   = hidden_field_tag "order[#{showed_line.sales_id}][line][#{iid}][line_id]", showed_line.line_id # сртпв item_id to line_id ??
   = hidden_field_tag "order[#{showed_line.sales_id}][line][#{iid}][note]", showed_line.note
-  = hidden_field_tag "order[#{showed_line.sales_id}][line][#{iid}][requirement]", showed_line.requirement
+  = hidden_field_tag "order[#{showed_line.sales_id}][line][#{iid}][requirement]", showed_line.requirements
   = hidden_field_tag "order[#{showed_line.sales_id}][line][#{iid}][process_qty]", showed_line.process_qty
   = hidden_field_tag "order[#{showed_line.sales_id}][line][#{iid}][selected]", ""
  %td.text-left= showed_line.item_name
