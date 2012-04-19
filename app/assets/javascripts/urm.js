@@ -501,10 +501,10 @@ function cartsSaveCart(){
  if($(".calendar-input").length > 0){
   $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
  }
- activateSearchCancelButton();
+ //activateSearchCancelButton();
  activateSearchAllowButton();
- $('.commit a.button-style').unbind("click");
- $('.commit a.button-style').bind("click", function(){
+ $('.commit a.button-style').off("click");
+ $('.commit a.button-style').on("click", function(){
   $(this).parents('form').submit();
   return false;
  });
