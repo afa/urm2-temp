@@ -41,7 +41,7 @@
     }
    }
 
-   $(function(){
+   $(document).on("ready", function(){
     $('.commit a.button-style').click(function(){
      $(this).parents('form').submit();
      return false;
