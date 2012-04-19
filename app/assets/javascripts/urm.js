@@ -436,10 +436,10 @@ function cartsAddElementToCart(){
  if($(".calendar-input").length > 0){
   $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
  }
- $("#order").hide();
  activateSearchAllowOrderButton();
+ $("#order").hide();
  $("#cancel_order").hide();
- activateSearchCancelButton();
+ //activateSearchCancelButton();
  //handleCartDelete();
  apply_hover_in_table_on_mmove();
  $('.form-hide .item').dropDown();
