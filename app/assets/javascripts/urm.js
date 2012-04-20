@@ -497,6 +497,7 @@ function cartsSaveCart(){
  }
  $("div#order").children().remove();
  $("div#order").append(gon.order);
+ $('.form-hide .item').dropDown();
  $("div#order").hide();
  if($(".calendar-input").length > 0){
   $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
@@ -509,7 +510,6 @@ function cartsSaveCart(){
   return false;
  });
  $('.select').selectList();
- $('.form-hide .item').dropDown();
  $('.button-style').button();
  $('.switch').switchControl();
  $('.js').bind('ajax:success', function(evt, xhr, status){
