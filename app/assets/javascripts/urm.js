@@ -214,6 +214,7 @@ function activateSearchCancelButton(){
   $("div#cart_store input").add("div#cart_store textarea").each(function(i, item){ item.disabled = ''; });
   $("table.search-products").parents("form").show();
   $("#save_cart_button").show();
+  $(".delete-from-cart").show();
   apply_hover_in_table_on_mmove();
   //handleCartDelete();
   /*$(".delete-from-cart").unbind("click");*/
