@@ -77,9 +77,13 @@ class ApplicationController < ActionController::Base
    if User.current.try(:current_account)
     #p "::current_user", current_user
     if User.current.current_account.blocked? or User.current.accounts.where(:id => User.current.current_account_id).count == 0
+     Rails.logger.warn "---blocked acc #{User.current.current_account_id}"
+     
      redirect_to root_path
     end
    else
+
+    Rails.logger.warn "---no acc #{User.current.id}"
     redirect_to root_path
    end
   end
