@@ -1,11 +1,11 @@
 class ApplicationController < ActionController::Base
-  before_filter :unmodify
+  #before_filter :unmodify
   before_filter :login_from_cookie
   before_filter :authenticate!
   before_filter :check_account
   before_filter :get_accounts
   before_filter :take_search
-  before_filter :put_sess
+  #before_filter :put_sess
   protect_from_forgery
 
   def sign_in(user, *opts)
@@ -15,13 +15,13 @@ class ApplicationController < ActionController::Base
     }
     val.merge!(:expires => 1.day.from_now.utc) if opts.is_a?(Hash) && opts[:rememberme]
     cookies[:user_remember_token] = val
-    self.current_user = user
+    User.current = user
    end
   end
 
   def sign_out
-   self.current_user.settings.update_all("value = '0'", "name = 'hideheader'")
-   self.current_user.reset_remember_token! if logged_in?
+   User.current.settings.update_all("value = '0'", "name = 'hideheader'")
+   User.current.reset_remember_token! if logged_in?
    cookies.delete(:user_remember_token)
    current_user = nil
   end
@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in?
-   not current_user.blank?
+   not User.current.blank?
   end
 
   def get_accounts
@@ -74,9 +74,9 @@ class ApplicationController < ActionController::Base
   end
 
   def check_account
-   if current_user.try(:current_account)
+   if User.current.try(:current_account)
     #p "::current_user", current_user
-    if current_user.current_account.blocked? or current_user.accounts.where(:id => current_user.current_account_id).count == 0
+    if User.current.current_account.blocked? or User.current.accounts.where(:id => User.current.current_account_id).count == 0
      redirect_to root_path
     end
    else
