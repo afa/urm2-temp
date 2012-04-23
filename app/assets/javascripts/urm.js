@@ -211,7 +211,7 @@ function activateSearchCancelButton(){
   $("div.allow-order").show();
   $("#order_cancel").hide();
   $("div.cart input#cart_item_submit").show();
-  $("div#cart_store input").add("div#cart_store textarea").each(function(i, item){ item.disabled = ''; });
+  $("div#cart_store input").add("div#cart_store textarea").add("div#cart_store select").each(function(i, item){ item.disabled = ''; });
   $("table.search-products").parents("form").show();
   $("#save_cart_button").show();
   $(".delete-from-cart").show();
@@ -230,7 +230,7 @@ function activateSearchAllowOrderButton(){
   $("div.allow-order").hide();
   $("#order_cancel").show();
   $("div.cart input#cart_item_submit").hide();
-  $("div#cart_store input").add("div#cart_store textarea").each(function(i, item){ item.disabled = 'disabled'; });
+  $("div#cart_store input").add("div#cart_store textarea").add("div#cart_store select").each(function(i, item){ item.disabled = 'disabled'; });
   $("table.search-products").parents("form").hide();
   $("#save_cart_button").hide();
   //$(".delete-from-cart").unbind("click");
