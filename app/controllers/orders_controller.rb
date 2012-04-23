@@ -28,6 +28,8 @@ class OrdersController < ApplicationController
    gon.need_application = @carts.detect{|i| i.application_area_mandatory }
    @app_list = Axapta.application_area_list || []
    gon.app_list = @app_list
+   gon.carts = render_to_string :partial => "carts/cart_line", :locals => {:app_list => @app_list}, :collection => @carts
+   gon.results = ["#{t :created_orders} #{@results[0]}" if results[0], "#{t :created_quotations} #{@results[1]}" if results[1]]
 
   end
 

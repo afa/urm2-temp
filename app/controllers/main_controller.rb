@@ -171,14 +171,14 @@ class MainController < ApplicationController
   # @accounts = current_user.accounts.where(:blocked => false)
   #end
 
-  def check_account
-   if current_user.current_account
-    if current_user.current_account.blocked? or current_user.accounts.where(:id => current_user.current_account_id).count == 0
-     redirect_to root_path
-    end
-   else
-    redirect_to root_path
-   end
-  end
+  #def check_account
+  # if current_user.current_account
+  #  if current_user.current_account.blocked? or current_user.accounts.where(:id => current_user.current_account_id).count == 0
+  #   redirect_to root_path
+  #  end
+  # else
+  #  redirect_to root_path
+  # end
+  #end
 
 end

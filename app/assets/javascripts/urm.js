@@ -518,3 +518,43 @@ function cartsSaveCart(){
   eval(xhr.responseText);
  });
 }
+
+function ordersRenderCreate(){
+ $("table.search-products").parents("form").show();
+ $("table.search-products tr:has(td)").add("table.search-products tr.heading").remove();
+ $("input#search_query_string").val('');
+ $("#cart_store table tr:has(td)").remove();
+ $("#cancel_order").hide();
+ $.each(gon.carts, function(i, crt){
+  $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :locals => {:cart_line => crt, :app_list => @app_list}) }");
+ });
+ if(gon.carts.length > 0){
+  $(".cart-table").add(".allow-order").show();
+ }
+ if($("#cart_store table tr").length > 1){
+  $("#cart_store").show();
+  $("div.allow-order").show();
+ } else {
+  $("#cart_store").hide();
+  $("div.allow-order").hide();
+ }
+ $("div#order").hide();
+ 
+ $('.commit a.button-style').click(function(){
+  $(this).parents('form').submit();
+  return false;
+ });
+ $('.select').selectList();
+ $('.button-style').button();
+ $('.switch').switchControl();
+ 
+ if(gon.results.length > 0){
+  placeResults(gon.results); //!!!!!
+  //$("div.results").html("#{escape_javascript([t(:created_orders), @results.join(', ')].join(' ').html_safe)}");
+ }
+}
+
+function placeResults(){
+ //place strings into .info .flash, setting timer for 10 secs
+}
+
