@@ -62,9 +62,9 @@ class User < ActiveRecord::Base
 
  def self.authenticate(username, password)
   return nil  unless user = find_by_username(username)
-  if current_account
-   axapta_params = Axapta.user_info(current_account.axapta_hash)
-   current_account.update_attributes :invent_location_id => axapta_params["invent_location_id"] unless current_account.invent_location_id == axapta_params["invent_location_id"]
+  if user.current_account
+   axapta_params = Axapta.user_info(user.current_account.axapta_hash)
+   user.current_account.update_attributes :invent_location_id => axapta_params["invent_location_id"] unless user.current_account.invent_location_id == axapta_params["invent_location_id"]
   end
   return nil  if     user.accounts.all.all? {|a| a.blocked? }
   return user if     user.authenticated?(password)
