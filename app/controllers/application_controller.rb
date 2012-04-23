@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
     User.current = u
     Rails.logger.info "---luser #{u.id} #{u.inspect}"
    end
-   Rails.logger.info "---luser #{u.id} #{u.inspect}"
+   Rails.logger.info "---luser #{User.current.id} #{User.current}"
   end
 
   def current_user
