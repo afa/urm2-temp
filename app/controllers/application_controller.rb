@@ -44,7 +44,9 @@ class ApplicationController < ActionController::Base
    u = user_from_cookie
    if u 
     User.current = u
+    Rails.logger.info "---luser #{u.id} #{u.inspect}"
    end
+   Rails.logger.info "---luser #{u.id} #{u.inspect}"
   end
 
   def current_user
@@ -63,7 +65,7 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in?
-   not User.current.blank?
+   not User.current.nil?
   end
 
   def get_accounts
