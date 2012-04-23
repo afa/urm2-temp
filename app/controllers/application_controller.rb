@@ -74,16 +74,16 @@ class ApplicationController < ActionController::Base
 
   def check_account
     Rails.logger.info "---acc #{User.current.id}"
-   if User.current.try(:current_account)
+   if User.current and User.current.current_account
     #p "::current_user", current_user
     if User.current.current_account.blocked? or User.current.accounts.where(:id => User.current.current_account_id).count == 0
      Rails.logger.warn "---blocked acc #{User.current.current_account_id}"
-     
-     redirect_to root_path
+     User.current.update_attributes(:current_account => nil)
+     redirect_to root_path unless current_page?(root_path)
     end
    else
 
-    redirect_to root_path
+    redirect_to root_path unless current_page?(root_path)
    end
   end
 
