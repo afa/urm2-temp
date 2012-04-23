@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   #before_filter :unmodify
-  before_filter :login_from_cookie
+  #before_filter :login_from_cookie
   before_filter :authenticate!
   before_filter :check_account
   before_filter :get_accounts
