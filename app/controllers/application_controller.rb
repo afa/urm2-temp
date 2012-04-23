@@ -40,6 +40,7 @@ class ApplicationController < ActionController::Base
   end
 
   def login_from_cookie
+   Rails.logger.info "---from coo!"
    u = user_from_cookie
    if u 
     User.current = u
@@ -55,6 +56,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate!
+   Rails.logger.info "auth!"
    unless logged_in?
     redirect_to new_sessions_path
    end
@@ -65,6 +67,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_accounts
+   Rails.logger.info "---get acc"
    if logged_in?
     @accounts = current_user.accounts.where(:blocked => false)
    else
@@ -73,7 +76,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_account
-    Rails.logger.info "---acc #{User.current.id}"
+   Rails.logger.info "---acc #{User.current.id}"
    if User.current and User.current.current_account
     #p "::current_user", current_user
     if User.current.current_account.blocked? or User.current.accounts.where(:id => User.current.current_account_id).count == 0
