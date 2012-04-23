@@ -41,7 +41,10 @@ class ApplicationController < ActionController::Base
   end
 
   def login_from_cookie
-   current_user = user_from_cookie
+   u = user_from_cookie
+   if u and (! User.current)
+    User.current = user_from_cookie
+   end
   end
 
   def current_user
