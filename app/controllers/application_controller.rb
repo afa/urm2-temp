@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   #before_filter :unmodify
-  #before_filter :login_from_cookie
+  before_filter :login_from_cookie
   before_filter :authenticate!
   before_filter :check_account
   before_filter :get_accounts
@@ -28,22 +28,21 @@ class ApplicationController < ActionController::Base
 
  protected
   def user_from_cookie
-   if token = cookies[:user_remember_token]
+   token = cookies[:user_remember_token]
+   if token
     return nil if token.blank?
     #puts "::: user_from_cookie"
     #p token
     u = User.where(:remember_token => token).first
     cookies.delete(:user_remember_token) unless u
-    u
-   else
-    nil
    end
+   u
   end
 
   def login_from_cookie
    u = user_from_cookie
    if u 
-    User.current = user_from_cookie
+    User.current = u
    end
   end
 
