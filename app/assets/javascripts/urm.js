@@ -525,9 +525,10 @@ function ordersRenderCreate(){
  $("input#search_query_string").val('');
  $("#cart_store table tr:has(td)").remove();
  $("#cancel_order").hide();
- $.each(gon.carts, function(i, crt){
-  $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :locals => {:cart_line => crt, :app_list => @app_list}) }");
- });
+ $("#cart_store table").append(gon.carts);
+ //$.each(gon.carts, function(i, crt){
+ // $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :locals => {:cart_line => crt, :app_list => @app_list}) }");
+ //});
  if(gon.carts.length > 0){
   $(".cart-table").add(".allow-order").show();
  }
@@ -554,7 +555,8 @@ function ordersRenderCreate(){
  }
 }
 
-function placeResults(){
+function placeResults(res){
  //place strings into .info .flash, setting timer for 10 secs
+ $.each(res, function(i, item){$("div#flash_place").append(item)});
 }
 
