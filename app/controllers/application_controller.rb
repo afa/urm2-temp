@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
    User.current.settings.update_all("value = '0'", "name = 'hideheader'")
    User.current.reset_remember_token! if logged_in?
    cookies.delete(:user_remember_token)
-   current_user = nil
+   User.current = nil
   end
 
  protected
@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
     #puts "::: user_from_cookie"
     #p token
     u = User.where(:remember_token => token).first
-    cookies.delete(:user_remember_token) unless u
+    #cookies.delete(:user_remember_token) unless u
    end
    u
   end
