@@ -2,8 +2,8 @@ class ApplicationController < ActionController::Base
   #before_filter :unmodify
   before_filter :login_from_cookie
   before_filter :authenticate!
-  before_filter :check_account
-  before_filter :get_accounts
+  before_filter :check_account_cur
+  before_filter :get_accounts_in
   before_filter :take_search
   #before_filter :put_sess
   protect_from_forgery
@@ -66,11 +66,11 @@ class ApplicationController < ActionController::Base
 
   def logged_in?
    Rails.logger.info "---luserin #{User.current.id} #{User.current.inspect}"
-   Rails.logger.info "---luserin? #{not User.current}"
+   Rails.logger.info "---luserin? #{not User.current.nil?}"
    not User.current.nil?
   end
 
-  def get_accounts
+  def get_accounts_in
    Rails.logger.info "---get acc"
    if logged_in?
     @accounts = current_user.accounts.where(:blocked => false)
@@ -79,7 +79,7 @@ class ApplicationController < ActionController::Base
    end
   end
 
-  def check_account
+  def check_account_cur
    Rails.logger.info "---acc #{User.current.id}"
    if User.current and User.current.current_account
     #p "::current_user", current_user
