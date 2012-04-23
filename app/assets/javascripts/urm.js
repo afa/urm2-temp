@@ -232,7 +232,8 @@ function activateSearchAllowOrderButton(){
   $("div#cart_store input").add("div#cart_store textarea").each(function(i, item){ item.disabled = 'disabled'; });
   $("table.search-products").parents("form").hide();
   $("#save_cart_button").hide();
-  $(".delete-from-cart").unbind("click");
+  //$(".delete-from-cart").unbind("click");
+  $(".delete-from-cart").hide();
   activateSearchCancelButton();
   $("#order .commit.button a.commit-button").bind("click", function(){onSelectSendForm(this); return false;});
   return false;
