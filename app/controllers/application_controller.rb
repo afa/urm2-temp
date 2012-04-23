@@ -44,9 +44,9 @@ class ApplicationController < ActionController::Base
    u = user_from_cookie
    if u 
     User.current = u
-    Rails.logger.info "---luser #{u.id} #{u.inspect}"
+    Rails.logger.info "---luser #{u.inspect}"
    end
-   Rails.logger.info "---luser #{User.current.id} #{User.current.inspect}"
+   Rails.logger.info "---luser #{User.current.inspect}"
   end
 
   def current_user
@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in?
-   Rails.logger.info "---luserin #{User.current.id} #{User.current.inspect}"
+   Rails.logger.info "---luserin #{User.current.inspect}"
    Rails.logger.info "---luserin? #{not User.current.nil?}"
    not User.current.nil?
   end
@@ -80,7 +80,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_account_cur
-   Rails.logger.info "---acc #{User.current.id}"
+   Rails.logger.info "---acc #{User.current.inspect}"
    if User.current and User.current.current_account
     #p "::current_user", current_user
     if User.current.current_account.blocked? or User.current.accounts.where(:id => User.current.current_account_id).count == 0
