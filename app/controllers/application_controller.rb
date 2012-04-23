@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
     User.current = u
     Rails.logger.info "---luser #{u.id} #{u.inspect}"
    end
-   Rails.logger.info "---luser #{User.current.id} #{User.current}"
+   Rails.logger.info "---luser #{User.current.id} #{User.current.inspect}"
   end
 
   def current_user
@@ -65,6 +65,8 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in?
+   Rails.logger.info "---luserin #{User.current.id} #{User.current.inspect}"
+   Rails.logger.info "---luserin? #{not User.current}"
    not User.current.nil?
   end
 
