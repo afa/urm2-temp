@@ -549,12 +549,12 @@ function ordersRenderCreate(){
  $('.button-style').button();
  $('.switch').switchControl();
  
+ if(gon.redirect_to.length > 0){
+  redirectTo("", gon.redirect_to);
+ }
  if(gon.results.length > 0){
   placeResults(gon.results); //!!!!!
   //$("div.results").html("#{escape_javascript([t(:created_orders), @results.join(', ')].join(' ').html_safe)}");
- }
- if(gon.redirect_to.length > 0){
-  redirectTo("", gon.redirect_to);
  }
 }
 
