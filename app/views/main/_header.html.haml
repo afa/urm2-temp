@@ -141,9 +141,6 @@
 .tabs-block
  %a.tab{:href=>"#", :class=>"tab-search", :style=>"display:none"} Поиск
 .clear
-#flash_place
- - flash.each do |key, value|
-  .flash{ :class => key}= value
 .search-block
  .back-x
   .back-l
@@ -265,6 +262,9 @@
       .clear
 
 .clear
+#flash_place
+ - flash.each do |key, value|
+  .flash{ :class => key}= value
 .scroll-content-block
  .scroll-show
   .line
