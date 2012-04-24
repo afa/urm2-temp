@@ -555,7 +555,7 @@ function ordersRenderCreate(){
  }
  if(gon.redirect_to.length > 0){
   redirectTo("", gon.redirect_to);
- {
+ }
 }
 
 function placeResults(res){
