@@ -553,6 +553,9 @@ function ordersRenderCreate(){
   placeResults(gon.results); //!!!!!
   //$("div.results").html("#{escape_javascript([t(:created_orders), @results.join(', ')].join(' ').html_safe)}");
  }
+ if(gon.redirect_to.length > 0){
+  redirectTo("", gon.redirect_to);
+ {
 }
 
 function placeResults(res){
@@ -563,3 +566,28 @@ function placeResults(res){
  $("div#flash_place div.flash").slideDown(500).delay(5000).slideUp(500);
 }
 
+
+function redirectTo(title, url){
+    // Prepare
+    var History = window.History; // Note: We are using a capital H instead of a lower h
+    if ( !History.enabled ) {
+         // History.js is disabled for this browser.
+         // This is because we can optionally choose to support HTML4 browsers or not.
+        return false;
+    }
+
+    // Bind to StateChange Event
+    History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
+        var State = History.getState(); // Note: We are using History.getState() instead of event.state
+        History.log(State.data, State.title, State.url);
+    });
+
+    // Change our States
+    History.pushState({state:1}, title, url); // logs {state:1}, "State 1", "?state=1"
+    History.forward();
+    //History.back(); // logs {state:3}, "State 3", "?state=3"
+    //History.back(); // logs {state:1}, "State 1", "?state=1"
+    //History.back(); // logs {}, "Home Page", "?"
+    //History.go(2); // logs {state:3}, "State 3", "?state=3"
+
+}
