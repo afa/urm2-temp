@@ -585,6 +585,7 @@ function redirectTo(title, url){
     // Change our States
     History.pushState({state:1}, title, url); // logs {state:1}, "State 1", "?state=1"
     History.forward();
+    location.reload();
     //History.back(); // logs {state:3}, "State 3", "?state=3"
     //History.back(); // logs {state:1}, "State 1", "?state=1"
     //History.back(); // logs {}, "Home Page", "?"
