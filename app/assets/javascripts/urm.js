@@ -557,6 +557,6 @@ function ordersRenderCreate(){
 
 function placeResults(res){
  //place strings into .info .flash, setting timer for 10 secs
- $.each(res, function(i, item){$("div#flash_place").append(item)});
+ $.each(res, function(i, item){$("div#flash_place").append('<div class="' + item.name + '">' + item.value + '<div>')});
 }
 
