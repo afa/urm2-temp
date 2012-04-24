@@ -19,6 +19,6 @@
 //= require "jquery-ui-i18n"
 //= require "jquery.ui.datepicker-ru"
 //= require jquery.watch
-//= require ./history/history.adapter.jquery
-//= require ./history/history
+//= require "history/history.adapter.jquery"
+//= require "history/history"
 
