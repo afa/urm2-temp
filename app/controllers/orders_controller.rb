@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
    res = []
    res << "#{t :created_orders} #{@results[0]}" if @results[0]
    res << "#{t :created_quotations} #{@results[1]}" if @results[1]
-   gon.results = [res]
+   gon.results = res
   end
 
   def lines
