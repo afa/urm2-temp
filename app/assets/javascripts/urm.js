@@ -500,7 +500,7 @@ function cartsSaveCart(){
  $("div#order").children().remove();
  $("div#order").append(gon.order);
  $('.form-hide .item').dropDown();
- $("div#order").hide();
+ //! $("div#order").hide();
  if($(".calendar-input").length > 0){
   $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
  }
