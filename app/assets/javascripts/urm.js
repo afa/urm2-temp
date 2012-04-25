@@ -207,14 +207,14 @@ function insertBlock(blkType, val, after){
 function activateSearchCancelButton(){
  /*$("#order_cancel .button-style").click(function(){*/
  $("#order_cancel").click(function(){
-  $("#order").hide();
-  $("div.allow-order").show();
-  $("#order_cancel").hide();
-  $("div.cart input#cart_item_submit").show();
-  $("div#cart_store input").add("div#cart_store textarea").add("div#cart_store select").each(function(i, item){ item.disabled = ''; });
-  $("table.search-products").parents("form").show();
-  $("#save_cart_button").show();
-  $(".delete-from-cart").show();
+  //! $("#order").hide();
+  //! $("div.allow-order").show();
+  //! $("#order_cancel").hide();
+  //! $("div.cart input#cart_item_submit").show();
+  //! $("div#cart_store input").add("div#cart_store textarea").add("div#cart_store select").each(function(i, item){ item.disabled = ''; });
+  //! $("table.search-products").parents("form").show();
+  //! $("#save_cart_button").show();
+  //! $(".delete-from-cart").show();
   apply_hover_in_table_on_mmove();
   //handleCartDelete();
   /*$(".delete-from-cart").unbind("click");*/
@@ -226,15 +226,15 @@ function activateSearchCancelButton(){
 
 function activateSearchAllowOrderButton(){
  $("a#allow_order").click(function(){
-  $("#order").show();
-  $("div.allow-order").hide();
-  $("#order_cancel").show();
-  $("div.cart input#cart_item_submit").hide();
-  $("div#cart_store input").add("div#cart_store textarea").add("div#cart_store select").each(function(i, item){ item.disabled = 'disabled'; });
-  $("table.search-products").parents("form").hide();
-  $("#save_cart_button").hide();
-  //$(".delete-from-cart").unbind("click");
-  $(".delete-from-cart").hide();
+  //! $("#order").show();
+  //! $("div.allow-order").hide();
+  //! $("#order_cancel").show();
+  //! $("div.cart input#cart_item_submit").hide();
+  //! $("div#cart_store input").add("div#cart_store textarea").add("div#cart_store select").each(function(i, item){ item.disabled = 'disabled'; });
+  //! $("table.search-products").parents("form").hide();
+  //! $("#save_cart_button").hide();
+  //! //$(".delete-from-cart").unbind("click");
+  //! $(".delete-from-cart").hide();
   activateSearchCancelButton();
   $("#order .commit.button a.commit-button").bind("click", function(){onSelectSendForm(this); return false;});
   return false;

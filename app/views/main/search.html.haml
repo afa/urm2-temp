@@ -62,7 +62,7 @@
  .clear.block-padded &nbsp;
  .cart-table.block-padded
   .cart= render :partial => "carts/cart_table", :locals => {:cart => @carts, :app_list => @app_list}
- .allow-order.block-padded
+ -# .allow-order.block-padded
   = link_to t(:start_edit_order), new_order_path, :id => "allow_order", :class => "ajax"
 
  #order= render :partial => "main/order_edit"
@@ -72,7 +72,8 @@
  $(document).ready(function(){
   $('.slider').hide();
   if(#{User.current.cart_items.unprocessed.in_cart.count} == 0){
-   $('.cart-table').add('.allow-order').hide();
+   $('.cart-table').hide();
+   //$('.cart-table').add('.allow-order').hide();
   }
   if($(".calendar-input").length > 0){
    $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
@@ -81,9 +82,9 @@
   apply_hover_in_table_on_mmove();
   //load_dms_each(#{not to_bool(@only_store)});
   load_dms_bundle("#{main_mass_dms_url(:query_string => @search.query_string)}", #{not to_bool(@only_store)});
-  $("#order").hide();
+  //! $("#order").hide();
   activateSearchAllowOrderButton();
-  $("#cancel_order").hide();
+  //! $("#cancel_order").hide();
   activateSearchCancelButton();
   //$('a.button-style').click(function(){
   //$(this).parents('form').submit();
