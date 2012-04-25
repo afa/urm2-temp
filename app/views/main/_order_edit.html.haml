@@ -17,12 +17,11 @@
   - if @carts.detect{|c| c.is_a?(CartRequest) }
    .block-padded
     %h3 Параметры запроса
-    .form-hide
-     .item
-      .name
-       Добавить примечание к запросу
-      .hide
-       %textarea{:name => "comment"}
+    .item
+     .name
+      Добавить примечание к запросу
+     %div
+      %textarea{:name => "comment"}
     .padded
  .clear
  = render :partial => "shared/submit_button", :locals => {:title => t(:make)}
