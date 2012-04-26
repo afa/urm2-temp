@@ -1,4 +1,4 @@
-%tr{:id => "cart_str_#{cart_line.id.to_s}"}
+%tr{:id => "cart_str_#{cart_line.id.to_s}", :class => [cart_line.is_a?(CartWorld) ? "world" : nil, cart_line.is_a?(CartStore) ? "store" : nil, cart_line.is_a?(CartRequest) ? "request" : nil]}
  %td.icons
   .icon
    = link_to"", cart_path(cart_line), :class => ["delete", "delete-from-cart"], :remote => true, :method => :delete
@@ -34,8 +34,5 @@
    %td
     %span
      - if cart_line.allowed_actions.include?(act.to_s)
-      %input{:name => "cart_item[#{cart_line.id}][action]", :value => act.to_s, :type => "radio", :id => "radio_cart_item_#{cart_line.id}_#{act.to_s}", :checked => (act.to_s == cart_line.action)}
+      %input.radio.line-type{:name => "cart_item[#{cart_line.id}][action]", :value => act.to_s, :type => "radio", :id => "radio_cart_item_#{cart_line.id}_#{act.to_s}", :checked => (act.to_s == cart_line.action)}
       %label{:for => "radio_cart_item_#{cart_line.id}_#{act.to_s}"}= t(act)
-      -# = render :partial => "shared/check_button", :locals => {:name => "cart_item[#{cart_line.id}][#{act.to_s}]", :title => t(act), :opts => {:need_field => true, :value => cart_line.send(act)}}
- -# %td
-  = render :partial => "shared/check_button", :locals => {:name => "cart_item[#{cart_line.id}][destroy]", :title => t(:delete), :opts => {:need_field => true, :value => false}}

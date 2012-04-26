@@ -592,3 +592,7 @@ function redirectTo(title, url){
     //History.go(2); // logs {state:3}, "State 3", "?state=3"
 
 }
+
+function cartsHandleRadioPicks(){
+ $("input.radio.line-type:checked");
+}
