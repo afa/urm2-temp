@@ -3,26 +3,24 @@
 = form_for :order, :url => orders_path, :remote => true, :html => {:class => "js"} do |f|
  .block-padded
   %h2 Параметры заказа
-  - if @carts.detect{|c| not c.is_a?(CartRequest) }
-   .item
-    .name
-     Добавить примечание к заказу
-    %div
-     %textarea{:name => "order_comment"}
   .padded
    = render :partial => "shared/check_button", :locals => {:name => "order_needed", :title => t(:order_needed), :opts => {:need_field => true, :use_system => true}}
+  -# - if @carts.detect{|c| not c.is_a?(CartRequest) }
+  .item
+   .name
+    примечание к заказу
+   %div
+    %textarea{:name => "order_comment", :class => [@carts.detect{|c| not c.is_a?(CartRequest) } ? nil : "disabled"]}
    
-  - if @carts.detect{|c| c.pick or c.is_a?(CartWorld) }
-   = render :partial => "main/pick_options"
-  - if @carts.detect{|c| c.is_a?(CartRequest) }
-   .block-padded
-    %h3 Параметры запроса
-    .item
-     .name
-      Добавить примечание к запросу
-     %div
-      %textarea{:name => "comment"}
-    .padded
+  -# - if @carts.detect{|c| c.pick or c.is_a?(CartWorld) }
+  = render :partial => "main/pick_options"
+  -# - if @carts.detect{|c| c.is_a?(CartRequest) }
+  .item
+   .name
+    примечание к запросу
+   %div
+    %textarea{:name => "comment"}
+  .padded
  .clear
  = render :partial => "shared/submit_button", :locals => {:title => t(:make)}
  -#! %a.ajax#order_cancel{:href => "#", :style => "margin: 5px 21px; float: left;"}= t(:cancel)
