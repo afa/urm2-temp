@@ -595,6 +595,7 @@ function redirectTo(title, url){
 
 function cartsHandleRadioPicks(){
  $('#cart_store input[type="radio"]').on("click", function(){
+  alert(this.id + " " + this.value + " " + this.checked);
   if($("#order tr.request").length > 0){
    $("#order .item.request textarea").each(function(i, item){ item.disabled = ''; });
   } else {
