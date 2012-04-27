@@ -600,14 +600,16 @@ function cartsHandleRadioPicks(){
   } else {
    $("#order .item.request textarea").each(function(i, item){ item.disabled = 'disabled'; });
   }
-  if($("#cart_store tr.world").add("#order tr.store").length > 0){
+  if($("#cart_store tr.world").add("#cart_store tr.store").length > 0){
    $("#order .item.store textarea").each(function(i, item){ item.disabled = ''; });
   } else {
    $("#order .item.store textarea").each(function(i, item){ item.disabled = 'disabled'; });
   }
-  if($("#cart_store tr.world").add('#order tr.store:has(input:checked[type="radio"][value="pick"])').length > 0){
+  if($("#cart_store tr.world").add('#cart_store tr.store:has(input:checked[type="radio"][value="pick"])').length > 0){
+   $("#order .item.pick textarea").add("#order .item.pick input").each(function(i, item){ item.disabled = ''; });
    $("#order .item.pick select").add("#order .item.pick select").each(function(i, item){ item.disabled = ''; });
   } else {
+   $("#order .item.pick select").add("#order .item.pick select").each(function(i, item){ item.disabled = 'disabled'; });
    $("#order .item.pick textarea").add("#order .item.pick input").each(function(i, item){ item.disabled = 'disabled'; });
   }
  });
