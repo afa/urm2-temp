@@ -596,19 +596,19 @@ function redirectTo(title, url){
 function cartsHandleRadioPicks(){
  $('#cart_store input[type="radio"]').on("click", function(){
   if($("#order tr.request").length > 0){
-   $("#order .item.request textarea").enable();
+   $("#order .item.request textarea").each(function(i, item){ item.disabled = ''; });
   } else {
-   $("#order .item.request textarea").disable();
+   $("#order .item.request textarea").each(function(i, item){ item.disabled = 'disabled'; });
   }
   if($("#order tr.world").add("#order tr.store").length > 0){
-   $("#order .item.store textarea").enable();
+   $("#order .item.store textarea").each(function(i, item){ item.disabled = ''; });
   } else {
-   $("#order .item.store textarea").disable();
+   $("#order .item.store textarea").each(function(i, item){ item.disabled = 'disabled'; });
   }
   if($("#order tr.world").add('#order tr.store:has(input:checked[type="radio"][value="pick"])').length > 0){
-   $("#order .item.pick textarea").enable();
+   $("#order .item.pick textarea").each(function(i, item){ item.disabled = ''; });
   } else {
-   $("#order .item.pick textarea").disable();
+   $("#order .item.pick textarea").each(function(i, item){ item.disabled = 'disabled'; });
   }
  });
 }
