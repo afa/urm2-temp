@@ -614,3 +614,9 @@ function cartsHandleRadioPicks(){
   }
  });
 }
+
+function cartsHandleSaveOnFocusLost(){
+ $("#cart_store input").add("#cart_store textarea").on("focusout", function(evt){
+  $("#cart_store form").submit();
+ });
+}
