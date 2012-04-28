@@ -1,7 +1,7 @@
 class CartsController < ApplicationController
  respond_to :js, :html, :json
   def index
-   @carts = CartItem.where(:user_id => current_user.id).unprocessed.in_cart.all
+   @carts = User.current.cart_items.unprocessed.in_cart.order("product_name, product_brend")
    @deliveries = User.current.deliveries
   end
 
@@ -25,7 +25,7 @@ class CartsController < ApplicationController
      end
     end
     CartItem.uncached do
-     @carts = current_user.cart_items.unprocessed.in_cart.all
+     @carts = User.current.cart_items.unprocessed.in_cart.order("product_name, product_brend")
      gon.need_application = @carts.detect{|i| i.application_area_mandatory }
      @app_list = Axapta.application_area_list || []
      gon.app_list = @app_list
@@ -93,7 +93,7 @@ class CartsController < ApplicationController
     end
    end
    CartItem.uncached do
-    @carts = User.current.cart_items.unprocessed.in_cart.all
+    @carts = User.current.cart_items.unprocessed.in_cart.order("product_name, product_brend")
     @deliveries = User.current.deliveries
     gon.need_application = @carts.detect{|i| i.application_area_mandatory }
     @app_list = Axapta.application_area_list || []
@@ -117,13 +117,12 @@ class CartsController < ApplicationController
    @new = @old
    old.update_attributes(:amount => 0)
    #@new = old.setup_for(:amount => 0, :max_amount => old.max_amount).copy_on_write(:amount => 0, :cart => old.id)
-   @carts = User.current.cart_items.unprocessed.in_cart.all
    @deliveries = User.current.deliveries
-   gon.need_application = @carts.detect{|i| i.application_area_mandatory }
    @app_list = Axapta.application_area_list || []
    gon.app_list = @app_list
    CartItem.uncached do
-    @carts = current_user.cart_items.unprocessed.in_cart.all
+    @carts = User.current.cart_items.unprocessed.in_cart.order("product_name, product_brend")
+    gon.need_application = @carts.detect{|i| i.application_area_mandatory }
     @carts.each do |cart|
      cart.line = render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart, :app_list => @app_list}
      cart.offer_code = cart.signature
@@ -142,5 +141,4 @@ class CartsController < ApplicationController
     #format.json { render :json => {:carts_table => escape_javascript(render_to_string(:partial => "carts/cart_table", :locals => {:cart => @carts})), :old => @old, :new => @new, :carts_empty => @carts.empty?} }
    end
   end
-
 end
