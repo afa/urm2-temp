@@ -506,6 +506,8 @@ function cartsSaveCart(){
  }
  //activateSearchCancelButton();
  activateSearchAllowButton();
+ cartsHandleSaveOnFocusLost();
+ cartsHandleRadioPicks();
  $('.commit a.button-style').off("click");
  $('.commit a.button-style').on("click", function(){
   $(this).parents('form').submit();
