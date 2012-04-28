@@ -374,7 +374,7 @@ function ordersPickProcess(){
 //carts
 function cartsAddElementToCart(){
  if(gon.carts.length == 0){
-  $('.cart-table').add('.allow-order').hide();
+  $('.cart-table').add('#order').hide();
  }
  $("#cart_store table tr:has(td)").remove();
  $.each(gon.changes, function(idx, item){
@@ -385,7 +385,7 @@ function cartsAddElementToCart(){
    $("#cart_store table").append(item.line);
    $('table.search-products input.item-cart[value="' + item.obj_id +'"]').parents("tr").find('td.input-in-cart input[type="text"]').val(item.amount);
   });
-  $(".cart-table").add(".allow-order").show();
+  $(".cart-table").add("#order").show();
  }
  if($("#cart_store table tr").length >= 1){
   $("#cart_store").show();
@@ -434,9 +434,9 @@ function cartsRemoveElementFromCarts(){
   //$(".cart-table").add(".allow-order").show();
  }
  if($("#cart_store table tr").length > 1){
-  $("#cart_store").add(".allow-order").show();
+  $("#cart_store").add("#order").show();
  } else {
-  $("#cart_store").add(".allow-order").hide();
+  $("#cart_store").add("#order").hide();
  }
  activateSearchCancelButton();
  $("div#order").children().remove();
@@ -456,7 +456,7 @@ function cartsRemoveElementFromCarts(){
 function cartsSaveCart(){
  $("#cart_store table tr:has(td)").remove();
  if(gon.carts.length == 0){
-  $('.cart-table').add('.allow-order').hide();
+  $('.cart-table').add('#order').hide();
  }
  if (gon.carts.length > 0){ //empty?
   $.each(gon.carts, function(idx, item){
@@ -467,7 +467,7 @@ function cartsSaveCart(){
 
  if($("#cart_store table tr").length > 1){
   $("#cart_store").show();
-  $(".cart-table").add(".allow-order").show();
+  $(".cart-table").add("#order").show();
  } else {
   $("#cart_store").hide();
  }
@@ -507,7 +507,7 @@ function ordersRenderCreate(){
  // $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :locals => {:cart_line => crt, :app_list => @app_list}) }");
  //});
  if(gon.carts.length > 0){
-  $(".cart-table").add(".allow-order").show();
+  $(".cart-table").add("#order").show();
  }
  if($("#cart_store table tr").length > 1){
   $("#cart_store").show();
