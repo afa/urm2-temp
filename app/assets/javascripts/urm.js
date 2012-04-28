@@ -441,8 +441,8 @@ function cartsRemoveElementFromCarts(){
  activateSearchCancelButton();
  $("div#order").children().remove();
  $("div#order").append(gon.order);
- $("div#order").hide();
- $('.form-hide .item').dropDown();
+ //$("div#order").hide();
+ //$('.form-hide .item').dropDown();
  $('.commit a.button-style').off("click");
  $('.commit a.button-style').on("click", function(){
   $(this).parents('form').submit();
