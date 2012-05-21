@@ -1,14 +1,46 @@
-set :application, "Urm2"
-set :repository,  ""
+set :application, "urm"
+set :repository,  "git://staging.rbagroup.ru/urm2.git"
 
-set :scm, :subversion
+set :scm, :git
+set :deploy_via, :export
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-role :web, "your web-server here"                          # Your HTTP server, Apache/etc
-role :app, "your app-server here"                          # This may be the same as your `Web` server
-role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
-role :db,  "your slave db-server here"
+role :web, "staging.rbagroup.ru"                          # Your HTTP server, Apache/etc
+role :app, "staging.rbagroup.ru"                          # This may be the same as your `Web` server
+role :db,  "staging.rbagroup.ru", :primary => true # This is where Rails migrations will run
 
+desc "stage params"
+task :stage, :roles => :app do
+ set :user, "afa"
+ set :password, "massacre"
+ set :use_sudo, true
+ set :branch, "stage"
+ set :deploy_to, "/mnt/data/www/urm_stage"
+end
+
+after "deploy:update_code", :copy_database_config
+
+task :copy_database_config, :roles => :app do
+ run "ln -s #{shared_path}/database.yml #{release_path}/config/database.yml"
+ run "cd #{release_path} && bundle install"
+end
+
+
+
+namespace :deploy do
+ desc "start"
+ task :start, :roles => :app do
+  run "cd #{release_path} && bundle exec unicorn_rails -Dc config/unicorn.rb"
+ end
+ desc "stop"
+ task :stop, :roles => :app do
+  run "[ -f #{release_path}/tmp/pids/unicorn.pid ] && kill -QUIT `cat #{release_path}/tmp/pids/unicorn.pid`"
+ end
+ desc "restart"
+ task :restart, :roles => :app do
+  run "[ -f #{release_path}/tmp/pids/unicorn.pid ] && kill -USR2 `cat #{release_path}/tmp/pids/unicorn.pid` || cd #{release_path}; unicorn_rails -Dc config/unicorn.rb"
+ end
+end
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
 
