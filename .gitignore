@@ -7,3 +7,4 @@ config/database.yml
 Gemfile.lock
 coverage/
 .jhw-cache/
+config/deploy.rb
