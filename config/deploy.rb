@@ -27,21 +27,21 @@ task :copy_database_config, :roles => :app do
 end
 
 
-
-namespace :deploy do
- desc "start"
- task :start, :roles => :app do
-  run "cd #{release_path} && bundle exec unicorn_rails -Dc config/unicorn.rb"
- end
- desc "stop"
- task :stop, :roles => :app do
-  run "[ -f #{release_path}/tmp/pids/unicorn.pid ] && kill -QUIT `cat #{release_path}/tmp/pids/unicorn.pid`"
- end
- desc "restart"
- task :restart, :roles => :app do
-  run "[ -f #{release_path}/tmp/pids/unicorn.pid ] && kill -USR2 `cat #{release_path}/tmp/pids/unicorn.pid` || (cd #{release_path}&& unicorn_rails -Dc config/unicorn.rb)"
- end
-end
+require 'capistrano-unicorn'
+#namespace :deploy do
+# desc "start"
+# task :start, :roles => :app do
+#  run "cd #{release_path} && bundle exec unicorn_rails -Dc config/unicorn.rb"
+# end
+# desc "stop"
+# task :stop, :roles => :app do
+#  run "[ -f #{release_path}/tmp/pids/unicorn.pid ] && kill -QUIT `cat #{release_path}/tmp/pids/unicorn.pid`"
+# end
+# desc "restart"
+# task :restart, :roles => :app do
+#  run "[ -f #{release_path}/tmp/pids/unicorn.pid ] && kill -USR2 `cat #{release_path}/tmp/pids/unicorn.pid` || (cd #{release_path}&& unicorn_rails -Dc config/unicorn.rb)"
+# end
+#end
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
 
