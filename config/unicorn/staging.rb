@@ -1,5 +1,5 @@
 #setup user environment
-ENV['RAILS_ENV'] = 'production'
+ENV['RAILS_ENV'] = 'staging'
 prefix = Dir.getwd #"/mnt/data/www/urm2"
 worker_processes(3)
 preload_app true
