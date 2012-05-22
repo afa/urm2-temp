@@ -22,6 +22,7 @@ after "deploy:update_code", :copy_database_config
 
 task :copy_database_config, :roles => :app do
  run "ln -s #{shared_path}/database.yml #{release_path}/config/database.yml"
+ run "ln -fs #{shared_path}/tmp/pids #{release_path}/tmp"
  run "cd #{release_path} && bundle install"
 end
 
@@ -38,7 +39,7 @@ namespace :deploy do
  end
  desc "restart"
  task :restart, :roles => :app do
-  run "[ -f #{release_path}/tmp/pids/unicorn.pid ] && kill -USR2 `cat #{release_path}/tmp/pids/unicorn.pid` || cd #{release_path}; unicorn_rails -Dc config/unicorn.rb"
+  run "[ -f #{release_path}/tmp/pids/unicorn.pid ] && kill -USR2 `cat #{release_path}/tmp/pids/unicorn.pid` || (cd #{release_path}&& unicorn_rails -Dc config/unicorn.rb)"
  end
 end
 # if you're still using the script/reaper helper you will need
