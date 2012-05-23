@@ -29,7 +29,7 @@ end
 after "deploy:update_code", :copy_database_config
 
 task :copy_database_config, :roles => :app do
- run "ln -s #{shared_path}/log #{release_path}"
+ #run "ln -s #{shared_path}/log #{release_path}"
  run "chmod a+w #{release_path}/log"
  run "ln -s #{shared_path}/database.yml #{release_path}/config/database.yml"
  run "ln -fs #{shared_path}/tmp/pids #{release_path}/tmp"
