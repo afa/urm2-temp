@@ -3,7 +3,7 @@ ENV['RAILS_ENV'] = 'staging'
 prefix = Dir.getwd #"/mnt/data/www/urm2"
 worker_processes(3)
 preload_app true
-user('afa','devel')
+user('root','devel')
 timeout 90
 listen "/tmp/unicorn_#{File.basename(File.dirname(File.dirname(prefix)))}.sock"
 #listen "/tmp/unicorn_urm2.sock"
