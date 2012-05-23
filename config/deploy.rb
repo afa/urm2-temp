@@ -18,6 +18,7 @@ task :stage, :roles => :app do
  set :migrate_env, "staging"
  set :rails_env, "staging"
  set :app_env, "staging"
+ set :unicorn_env, "staging"
  set :deploy_to, "/mnt/data/www/urm_stage"
  set :current_path, File.join(deploy_to, current_dir)
  set :default_run_options, exists?(:default_run_options) ? fetch(:default_run_options).merge("RAILS_ENV" => "staging") : {"RAILS_ENV" => "staging"}
