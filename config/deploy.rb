@@ -35,6 +35,7 @@ task :copy_database_config, :roles => :app do
  run "ln -s #{shared_path}/database.yml #{release_path}/config/database.yml"
  run "ln -fs #{shared_path}/tmp/pids #{release_path}/tmp"
  run "cd #{release_path} && bundle install"
+ run "cd #{release_path} && rake assets:precompile"
 end
 
 
