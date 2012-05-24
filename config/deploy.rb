@@ -24,7 +24,6 @@ task :stage, :roles => :app do
  set :default_run_options, exists?(:default_run_options) ? fetch(:default_run_options).merge("RAILS_ENV" => "staging") : {"RAILS_ENV" => "staging"}
  set :unicorn_bin, "unicorn_rails"
  ENV["RAILS_ENV"] = "staging"
- puts "cap stage", rails_env, migrate_env, ENV["RAILS_ENV"]
 end
 
 after "deploy:update_code", :copy_database_config
@@ -35,7 +34,7 @@ task :copy_database_config, :roles => :app do
  run "ln -s #{shared_path}/database.yml #{release_path}/config/database.yml"
  run "ln -fs #{shared_path}/tmp/pids #{release_path}/tmp"
  run "cd #{release_path} && bundle install"
- run "cd #{release_path} && rake assets:precompile"
+ run "cd #{release_path} && RAILS_ENV=staging bundle exec rake assets:precompile --trace"
 end
 
 
