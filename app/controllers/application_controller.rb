@@ -92,7 +92,7 @@ class ApplicationController < ActionController::Base
      redirect_to root_path
     end
    else
-    if User.current.try(:current_account).try(:blocked?) or User.current.accounts.where(:id => User.current.current_account_id).count == 0
+    if User.current? && (User.current.current_account.try(:blocked?) or User.current.accounts.where(:id => User.current.current_account_id).count == 0)
      Rails.logger.warn "---blocked acc #{User.current.current_account_id}"
      User.current.update_attributes(:current_account => nil)
      if User.current.accounts.where(:blocked => 'f').count == 1
