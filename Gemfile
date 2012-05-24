@@ -50,7 +50,8 @@ gem "bullet", :group => :development
 gem "gon", :git => 'git://github.com/afa/gon.git', :branch => "script_tag"
 #gem "sqlite3", :group => :test
 gem "rails-backbone"
-group :development, :test do
+group :development, :test, :staging do
+ gem "capistrano-unicorn"
  gem "konacha"
  gem "sprockets"
  gem "ejs"
