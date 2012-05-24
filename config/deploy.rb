@@ -11,6 +11,7 @@ role :db,  "staging.rbagroup.ru", :primary => true # This is where Rails migrati
 
 desc "stage params"
 task :stage, :roles => :app do
+ set :ssh_options, { :forward_agent => true }
  set :user, "afa"
  set :password, "massacre"
  set :use_sudo, true
