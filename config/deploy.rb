@@ -36,11 +36,14 @@ task :copy_database_config, :roles => :app do
  run "ln -fs #{shared_path}/tmp/pids #{release_path}/tmp"
  run "cd #{release_path} && bundle install"
  run "mkdir -pm a+w #{%w(images javascripts stylesheets).each{|s| "#{release_path}/public/#{s}" }.join(' ')}"
- run "cd #{release_path} && RAILS_ENV=staging bundle exec rake assets:precompile --trace"
+ #run "cd #{release_path} && RAILS_ENV=staging bundle exec rake assets:precompile"
 end
 
 
 require 'capistrano-unicorn'
+load "deploy/assets"
+#require "bundler/capistrano"
+#require "capistrano/recipes"
 #namespace :deploy do
 # desc "start"
 # task :start, :roles => :app do
