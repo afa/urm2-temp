@@ -243,7 +243,7 @@ div.error a
   color: #9a9a9a
 
 .post-com-count
-  background-image: url(/images/bubble_bg.gif)
+  background-image: image-url(bubble_bg.gif)
   color: #fff
   span
     background-color: #bbb
@@ -280,21 +280,21 @@ input
     border-color: #666
 
 .button, .submit input, .button-secondary
-  background: #f2f2f2 url(/images/white-grad.png) repeat-x scroll left top
+  background: #f2f2f2 image-url(white-grad.png) repeat-x scroll left top
   text-shadow: rgba(255, 255, 255, 1) 0 1px 0
 
 .button:active, .submit input:active, .button-secondary:active
-  background: #eeeeee url(/images/white-grad-active.png) repeat-x scroll left top
+  background: #eeeeee image-url(white-grad-active.png) repeat-x scroll left top
 
 input.button-primary, button.button-primary, a.button-primary
   border-color: #298cba
   font-weight: bold
   color: #fff
-  background: #21759b url(/images/button-grad.png) repeat-x scroll left top
+  background: #21759b image-url(button-grad.png) repeat-x scroll left top
   text-shadow: rgba(0, 0, 0, 0.3) 0 -1px 0
 
 input.button-primary:active, button.button-primary:active, a.button-primary:active
-  background: #21759b url(/images/button-grad-active.png) repeat-x scroll left top
+  background: #21759b image-url(button-grad-active.png) repeat-x scroll left top
   color: #eaf2fa
 
 input.button-primary:hover, button.button-primary:hover
@@ -586,7 +586,7 @@ table.widefat span
   color: #000
 
 .curtime #timestamp
-  background-image: url(/images/date-button.gif)
+  background-image: image-url(date-button.gif)
 
 #quicktags #ed_link
   color: #00f
@@ -598,10 +598,10 @@ table.widefat span
     color: #448abd
 
 .tagchecklist span a, #bulk-titles div a
-  background: url(/images/xit.gif) no-repeat
+  background: image-url(xit.gif) no-repeat
 
 .tagchecklist span a:hover, #bulk-titles div a:hover
-  background: url(/images/xit.gif) no-repeat -10px 0
+  background: image-url(xit.gif) no-repeat -10px 0
 
 #update-nag, .update-nag
   background-color: #FFFBCC
@@ -650,9 +650,9 @@ table.widefat span
   color: #777
   &:hover
     color: #000
-  background: transparent url(/images/arrows.png) no-repeat right 3px
+  background: transparent image-url(arrows.png) no-repeat right 3px
   &.screen-meta-active
-    background: transparent url(/images/arrows.png) no-repeat right -33px
+    background: transparent image-url(arrows.png) no-repeat right -33px
 
 .login #backtoblog a
   color: #464646
@@ -721,7 +721,7 @@ table.widefat
   border-color: #ccc
 
 #adminmenushadow, #adminmenuback
-  background-image: url(/images/menu-shadow.png)
+  background-image: image-url(menu-shadow.png)
   background-position: top right
   background-repeat: repeat-y
 
@@ -733,9 +733,9 @@ table.widefat
     border-color: #e1e1e1
   li.wp-has-current-submenu
     &.wp-menu-open .wp-menu-toggle, &:hover .wp-menu-toggle
-      background: transparent url(/images/arrows-dark.png) no-repeat -1px 6px
+      background: transparent image-url(arrows-dark.png) no-repeat -1px 6px
   .wp-has-submenu:hover .wp-menu-toggle, .wp-menu-open .wp-menu-toggle
-    background: transparent url(/images/arrows.png) no-repeat -2px 6px
+    background: transparent image-url(arrows.png) no-repeat -2px 6px
   a.menu-top
     border-top-color: #f9f9f9
     border-bottom-color: #dfdfdf
@@ -872,154 +872,154 @@ table.widefat
   border-color: #aaa
 
 #collapse-button div
-  background: transparent url(/images/arrows.png) no-repeat 0 -72px
+  background: transparent image-url(arrows.png) no-repeat 0 -72px
 
 .folded #collapse-button div
   background-position: 0 -108px
 
 .icon16.icon-dashboard
-  background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -60px -33px
+  background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -60px -33px
 
 #adminmenu .menu-icon-dashboard
   div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -60px -33px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -60px -33px
   &:hover div.wp-menu-image, &.wp-has-current-submenu div.wp-menu-image, &.current div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -60px -1px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -60px -1px
 
 .icon16.icon-post
-  background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -271px -33px
+  background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -271px -33px
 
 #adminmenu .menu-icon-post
   div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -271px -33px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -271px -33px
   &:hover div.wp-menu-image, &.wp-has-current-submenu div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -271px -1px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -271px -1px
 
 .icon16.icon-media
-  background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -120px -33px
+  background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -120px -33px
 
 #adminmenu .menu-icon-media
   div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -120px -33px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -120px -33px
   &:hover div.wp-menu-image, &.wp-has-current-submenu div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -120px -1px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -120px -1px
 
 .icon16.icon-links
-  background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -90px -33px
+  background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -90px -33px
 
 #adminmenu .menu-icon-links
   div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -90px -33px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -90px -33px
   &:hover div.wp-menu-image, &.wp-has-current-submenu div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -90px -1px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -90px -1px
 
 .icon16.icon-page
-  background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -150px -33px
+  background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -150px -33px
 
 #adminmenu .menu-icon-page
   div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -150px -33px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -150px -33px
   &:hover div.wp-menu-image, &.wp-has-current-submenu div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -150px -1px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -150px -1px
 
 .icon16.icon-comments
-  background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -30px -33px
+  background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -30px -33px
 
 #adminmenu .menu-icon-comments
   div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -30px -33px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -30px -33px
   &:hover div.wp-menu-image, &.wp-has-current-submenu div.wp-menu-image, &.current div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -30px -1px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -30px -1px
 
 .icon16.icon-appearance
-  background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll 0 -33px
+  background: transparent image-url('menu.png?ver=20111128') no-repeat scroll 0 -33px
 
 #adminmenu .menu-icon-appearance
   div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll 0 -33px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll 0 -33px
   &:hover div.wp-menu-image, &.wp-has-current-submenu div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll 0 -1px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll 0 -1px
 
 .icon16.icon-plugins
-  background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -180px -33px
+  background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -180px -33px
 
 #adminmenu .menu-icon-plugins
   div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -180px -33px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -180px -33px
   &:hover div.wp-menu-image, &.wp-has-current-submenu div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -180px -1px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -180px -1px
 
 .icon16.icon-users
-  background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -300px -33px
+  background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -300px -33px
 
 #adminmenu .menu-icon-users
   div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -300px -33px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -300px -33px
   &:hover div.wp-menu-image, &.wp-has-current-submenu div.wp-menu-image, &.current div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -300px -1px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -300px -1px
 
 .icon16.icon-tools
-  background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -210px -33px
+  background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -210px -33px
 
 #adminmenu .menu-icon-tools
   div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -210px -33px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -210px -33px
   &:hover div.wp-menu-image, &.wp-has-current-submenu div.wp-menu-image, &.current div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -210px -1px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -210px -1px
 
 .icon16.icon-settings
-  background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -240px -33px
+  background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -240px -33px
 
 #adminmenu .menu-icon-settings
   div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -240px -33px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -240px -33px
   &:hover div.wp-menu-image, &.wp-has-current-submenu div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -240px -1px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -240px -1px
 
 .icon16.icon-site
-  background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -360px -33px
+  background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -360px -33px
 
 #adminmenu .menu-icon-site
   div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -360px -33px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -360px -33px
   &:hover div.wp-menu-image, &.wp-has-current-submenu div.wp-menu-image
-    background: transparent url('/images/menu.png?ver=20111128') no-repeat scroll -360px -1px
+    background: transparent image-url('menu.png?ver=20111128') no-repeat scroll -360px -1px
 
 .icon32.icon-post, #icon-edit, #icon-post
-  background: transparent url(/images/icons32.png?ver=20111206) no-repeat -552px -5px
+  background: transparent image-url(icons32.png?ver=20111206) no-repeat -552px -5px
 
 .icon32.icon-dashboard, #icon-index
-  background: transparent url(/images/icons32.png?ver=20111206) no-repeat -137px -5px
+  background: transparent image-url(icons32.png?ver=20111206) no-repeat -137px -5px
 
 .icon32.icon-media, #icon-upload
-  background: transparent url(/images/icons32.png?ver=20111206) no-repeat -251px -5px
+  background: transparent image-url(icons32.png?ver=20111206) no-repeat -251px -5px
 
 .icon32.icon-links, #icon-link-manager, #icon-link, #icon-link-category
-  background: transparent url(/images/icons32.png?ver=20111206) no-repeat -190px -5px
+  background: transparent image-url(icons32.png?ver=20111206) no-repeat -190px -5px
 
 .icon32.icon-page, #icon-edit-pages, #icon-page
-  background: transparent url(/images/icons32.png?ver=20111206) no-repeat -312px -5px
+  background: transparent image-url(icons32.png?ver=20111206) no-repeat -312px -5px
 
 .icon32.icon-comments, #icon-edit-comments
-  background: transparent url(/images/icons32.png?ver=20111206) no-repeat -72px -5px
+  background: transparent image-url(icons32.png?ver=20111206) no-repeat -72px -5px
 
 .icon32.icon-appearance, #icon-themes
-  background: transparent url(/images/icons32.png?ver=20111206) no-repeat -11px -5px
+  background: transparent image-url(icons32.png?ver=20111206) no-repeat -11px -5px
 
 .icon32.icon-plugins, #icon-plugins
-  background: transparent url(/images/icons32.png?ver=20111206) no-repeat -370px -5px
+  background: transparent image-url(icons32.png?ver=20111206) no-repeat -370px -5px
 
 .icon32.icon-users, #icon-users, #icon-profile, #icon-user-edit
-  background: transparent url(/images/icons32.png?ver=20111206) no-repeat -600px -5px
+  background: transparent image-url(icons32.png?ver=20111206) no-repeat -600px -5px
 
 .icon32.icon-tools, #icon-tools, #icon-admin
-  background: transparent url(/images/icons32.png?ver=20111206) no-repeat -432px -5px
+  background: transparent image-url(icons32.png?ver=20111206) no-repeat -432px -5px
 
 .icon32.icon-settings, #icon-options-general
-  background: transparent url(/images/icons32.png?ver=20111206) no-repeat -492px -5px
+  background: transparent image-url(icons32.png?ver=20111206) no-repeat -492px -5px
 
 .icon32.icon-site, #icon-ms-admin
-  background: transparent url(/images/icons32.png?ver=20111206) no-repeat -659px -5px
+  background: transparent image-url(icons32.png?ver=20111206) no-repeat -659px -5px
 
 table.diff
   .diff-deletedline
@@ -1103,13 +1103,13 @@ fieldset.inline-edit-col-right .inline-edit-col
   color: #D54E21
 
 .meta-box-sortables .postbox:hover .handlediv
-  background: transparent url(/images/arrows.png) no-repeat 6px 7px
+  background: transparent image-url(arrows.png) no-repeat 6px 7px
 
 .tablenav .tablenav-pages
   color: #555
   a
     border-color: #e3e3e3
-    background: #eeeeee url('/images/menu-bits.gif?ver=20100610') repeat-x scroll left -379px
+    background: #eeeeee image-url('menu-bits.gif?ver=20100610') repeat-x scroll left -379px
     &:hover, &:focus
       color: #d54e21
     &.disabled
@@ -1164,16 +1164,16 @@ body.press-this ul.category-tabs li.tabs a
 
 .view-switch
   #view-switch-list
-    background: transparent url(/images/list.png) no-repeat 0 0
+    background: transparent image-url(list.png) no-repeat 0 0
   .current #view-switch-list
-    background: transparent url(/images/list.png) no-repeat -40px 0
+    background: transparent image-url(list.png) no-repeat -40px 0
   #view-switch-excerpt
-    background: transparent url(/images/list.png) no-repeat -20px 0
+    background: transparent image-url(list.png) no-repeat -20px 0
   .current #view-switch-excerpt
-    background: transparent url(/images/list.png) no-repeat -60px 0
+    background: transparent image-url(list.png) no-repeat -60px 0
 
 #header-logo
-  background: transparent url(/images/wp-logo.png?ver=20110504) no-repeat scroll center center
+  background: transparent image-url(wp-logo.png?ver=20110504) no-repeat scroll center center
 
 .popular-tags, .feature-filter
   background-color: #fff
@@ -1212,10 +1212,10 @@ div.widgets-sortables, #widgets-left .inactive
     color: black
 
 .sidebar-name-arrow
-  background: transparent url(/images/arrows.png) no-repeat 5px 9px
+  background: transparent image-url(arrows.png) no-repeat 5px 9px
 
 .sidebar-name:hover .sidebar-name-arrow
-  background: transparent url(/images/arrows-dark.png) no-repeat 5px 9px
+  background: transparent image-url(arrows-dark.png) no-repeat 5px 9px
 
 .in-widget-title
   color: #606060
@@ -1297,11 +1297,11 @@ div.widgets-sortables, #widgets-left .inactive
   color: #f00
 
 .nav-menus-php .item-edit
-  background: transparent url(/images/arrows.png) no-repeat 8px 10px
+  background: transparent image-url(arrows.png) no-repeat 8px 10px
   border-bottom-color: #eee
 
 .item-edit:hover
-  background: transparent url(/images/arrows-dark.png) no-repeat 8px 10px
+  background: transparent image-url(arrows-dark.png) no-repeat 8px 10px
 
 .menu-item-settings
   border-color: #dfdfdf
@@ -1411,20 +1411,20 @@ div.widgets-sortables, #widgets-left .inactive
     border-right-color: none
     border-left-color: #99d
   .post-com-count
-    background-image: url(/images/bubble_bg-rtl.gif)
+    background-image: image-url(bubble_bg-rtl.gif)
   #screen-meta-links a.show-settings
     background-position: left 3px
     &.screen-meta-active
       background-position: left -33px
   #adminmenushadow, #adminmenuback
-    background-image: url(/images/menu-shadow-rtl.png)
+    background-image: image-url(menu-shadow-rtl.png)
     background-position: top left
   #adminmenu
     li.wp-has-current-submenu
       &.wp-menu-open .wp-menu-toggle, &:hover .wp-menu-toggle
-        background: transparent url(/images/arrows-dark.png) no-repeat 8px 6px
+        background: transparent image-url(arrows-dark.png) no-repeat 8px 6px
     .wp-has-submenu:hover .wp-menu-toggle, .wp-menu-open .wp-menu-toggle
-      background: transparent url(/images/arrows.png) no-repeat 8px 6px
+      background: transparent image-url(arrows.png) no-repeat 8px 6px
     .wp-submenu .wp-submenu-head
       border-right-color: none
       border-left-color: #dfdfdf
@@ -1441,14 +1441,14 @@ div.widgets-sortables, #widgets-left .inactive
   &.folded #collapse-button div
     background-position: 0 -72px
   .meta-box-sortables .postbox:hover .handlediv
-    background: transparent url(/images/arrows.png) no-repeat 6px 7px
+    background: transparent image-url(arrows.png) no-repeat 6px 7px
   .tablenav .tablenav-pages a
     border-color: #e3e3e3
-    background: #eeeeee url('/images/menu-bits-rtl.gif?ver=20100610') repeat-x scroll right -379px
+    background: #eeeeee image-url('menu-bits-rtl.gif?ver=20100610') repeat-x scroll right -379px
   #post-body .misc-pub-section
     border-right-color: none
     border-left-color: #eee
   .sidebar-name-arrow
-    background: transparent url(/images/arrows.png) no-repeat 5px 9px
+    background: transparent image-url(arrows.png) no-repeat 5px 9px
   .sidebar-name:hover .sidebar-name-arrow
-    background: transparent url(/images/arrows-dark.png) no-repeat 5px 9px
+    background: transparent image-url(arrows-dark.png) no-repeat 5px 9px
