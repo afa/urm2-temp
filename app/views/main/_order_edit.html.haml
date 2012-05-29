@@ -3,14 +3,16 @@
 = form_for :order, :url => orders_path, :remote => true, :html => {:class => "js"} do |f|
  .block-padded
   %h2 Параметры заказа
-  .padded
-   = render :partial => "shared/check_button", :locals => {:name => "order_needed", :title => t(:order_needed), :opts => {:need_field => true, :use_system => true}}
-  -# - if @carts.detect{|c| not c.is_a?(CartRequest) }
-  .item.store
-   .name
-    примечание к заказу
-   %div
-    %textarea{:name => "order_comment", :class => [@carts.detect{|c| not c.is_a?(CartRequest) } ? nil : "disabled"]}
+  - @stores.each do |store|
+   %h3 К складу #{store}
+   .padded
+    = render :partial => "shared/check_button", :locals => {:name => "order_needed[#{store}]", :title => t(:order_needed), :opts => {:need_field => true, :use_system => true}}
+   -# - if @carts.detect{|c| not c.is_a?(CartRequest) }
+   .item.store
+    .name
+     примечание к заказу
+    %div
+     %textarea{:name => "order_comment[#{store}]", :class => [@carts.detect{|c| not c.is_a?(CartRequest) } ? nil : "disabled"]}
    
   -# - if @carts.detect{|c| c.pick or c.is_a?(CartWorld) }
   .item.pick
