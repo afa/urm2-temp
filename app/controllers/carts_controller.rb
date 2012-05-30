@@ -29,6 +29,7 @@ class CartsController < ApplicationController
      gon.need_application = @carts.detect{|i| i.application_area_mandatory }
      @app_list = Axapta.application_area_list || []
      gon.app_list = @app_list
+     @stores = @carts.map(&:location_link).uniq.compact
      @carts.each do |cart|
       cart.line = render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart, :app_list => @app_list}
       cart.offer_code = cart.signature
@@ -37,6 +38,7 @@ class CartsController < ApplicationController
      end
      gon.carts = @carts.map{|c| c.to_hash.merge(:obj_id => c.id)}
      gon.changes = @changed
+     gon.stores = @stores
      @deliveries = User.current.deliveries
      gon.order = render_to_string :partial => "main/order_edit"
     end
