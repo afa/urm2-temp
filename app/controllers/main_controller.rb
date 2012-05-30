@@ -26,7 +26,7 @@ class MainController < ApplicationController
    CartItem.uncached do
     @carts = CartItem.where(:user_id => current_user.id).in_cart.unprocessed.order("product_name, product_brend").all
    end
-   @stores = @carts.map(&:location_link).uniq.compact || []
+   @stores = @items.map(&:location_id).uniq.compact
    @reqs = @carts.partition{|i| i.is_a? CartRequest }[0]
    @nreqs = @carts.partition{|i| i.is_a? CartRequest }[1]
    @deliveries = User.current.deliveries

@@ -32,15 +32,7 @@
       %tr
        %td{:colspan => 22}= t :items_not_found
      - else
-      - @stores.each do |store|
-       %tr
-        %td{:colspan => 22}= store
-       = render :partial => "items_line", :collection => @items.select{|i| (not i.is_a?(CartRequest)) && i.location_link == store }, :locals => {:need_links => true, :form => frm}
-      - if @items.detect{|i| i.is_a?(CartRequest) }
-       %tr
-        %td{:colspan => 22}= t :requests
-      - else
-       = render :partial => "items_line", :collection => @items.select{|i| i.is_a?(CartRequest) }, :locals => {:need_links => true, :form => frm}
+      = render :partial => "items_line", :collection => @items, :locals => {:need_links => true, :form => frm}
 
      - if @items.size > 5
       %tr.title-header-bottom
