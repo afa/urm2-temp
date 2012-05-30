@@ -105,7 +105,9 @@ class CartsController < ApplicationController
      cart.offer_code = cart.signature
      cart.line_code = cart.base_signature
     end
+    @stores = @carts.map(&:location_link).uniq.compact
     gon.carts = @carts.map{|c| c.to_hash.merge(:obj_id => c.id)}
+    gon.stores = @stores
     gon.order = render_to_string :partial => "main/order_edit"
    end
 
@@ -133,8 +135,10 @@ class CartsController < ApplicationController
     end
     gon.carts = @carts.map{|c| c.to_hash.merge(:obj_id => c.id)}
     gon.deleted = @old
+    @stores = @carts.map(&:location_link).uniq.compact
     #gon.changes = @changed
     @deliveries = User.current.deliveries
+    gon.stores = @stores
     gon.order = render_to_string :partial => "main/order_edit"
    end
 
