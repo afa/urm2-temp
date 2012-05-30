@@ -44,6 +44,17 @@ end
 
 require 'capistrano-unicorn'
 load "deploy/assets"
+namespace :unicorn do
+ desc 'Restart Unicorn'
+ task :restart, :roles => :app, :except => {:no_release => true} do
+  pid = unicorn_get_pid
+  unless pid.nil?
+   logger.important("Restarting...", "Unicorn")
+   unicorn.stop
+  end
+  unicorn.start
+ end
+end
 #require "bundler/capistrano"
 #require "capistrano/recipes"
 #namespace :deploy do
