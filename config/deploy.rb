@@ -24,7 +24,9 @@ task :stage, :roles => :app do
  set :current_path, File.join(deploy_to, current_dir)
  set :default_run_options, exists?(:default_run_options) ? fetch(:default_run_options).merge("RAILS_ENV" => "staging") : {"RAILS_ENV" => "staging"}
  set :unicorn_bin, "unicorn_rails"
+ set :unicorn_pid, File.join(shared_path, "tmp/pids/unicorn.pid")
  ENV["RAILS_ENV"] = "staging"
+ puts current_path, release_path, shared_path
 end
 
 after "deploy:update_code", :copy_database_config
