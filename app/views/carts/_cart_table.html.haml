@@ -20,10 +20,11 @@
     -# %th
    - logger.info "---stores #{@stores.join(' ')}"
    - @stores.each do |store|
-    %tr
-     %td{:colspan => 16}= store
-    = render :partial => "carts/cart_line", :collection => cart.select{|i| (not i.is_a?(CartRequest)) && i.location_link == store }, :locals => {:app_list => app_list}
-   - if @items.detect{|i| i.is_a?(CartRequest) }
+    - if cart.detect{|i| (not i.is_a?(CartRequest)) && i.location_link == store }
+     %tr
+      %td{:colspan => 16}= store
+     = render :partial => "carts/cart_line", :collection => cart.select{|i| (not i.is_a?(CartRequest)) && i.location_link == store }, :locals => {:app_list => app_list}
+   - if cart.detect{|i| i.is_a?(CartRequest) }
     %tr
      %td{:colspan => 16}= t :requests
     = render :partial => "carts/cart_line", :collection => cart.select{|i| i.is_a?(CartRequest) }, :locals => {:app_list => app_list}
