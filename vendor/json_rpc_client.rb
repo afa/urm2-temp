@@ -107,8 +107,9 @@ class JsonRpcClient
   def self.method_missing(name, *args)
     system_describe unless (@no_auto_config || @service_description)
     name = name.to_s
-    req_wrapper = @get_procs.include?(name) ? Get.new(self, name, args) : 
-                                              Post.new(self, name, args, @uri_encode_post_bodies)
+    req_wrapper = Post.new(self, name, args, @uri_encode_post_bodies)
+    #req_wrapper = @get_procs.include?(name) ? Get.new(self, name, args) : 
+    #                                          Post.new(self, name, args, @uri_encode_post_bodies)
     req = req_wrapper.req
     remaining_retries = @retry_strategy[:max_retries]
     started_at = Time.now
