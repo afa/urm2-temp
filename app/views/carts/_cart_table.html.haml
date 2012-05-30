@@ -25,8 +25,8 @@
     = render :partial => "carts/cart_line", :collection => cart.select{|i| (not i.is_a?(CartRequest)) && i.location_link == store }, :locals => {:app_list => app_list}
    - if @items.detect{|i| i.is_a?(CartRequest) }
     %tr
-     %td{:colspan => 22}= t :requests
-   = render :partial => "carts/cart_line", :collection => cart.select{|i| i.is_a?(CartRequest) }, :locals => {:app_list => app_list}
+     %td{:colspan => 16}= t :requests
+    = render :partial => "carts/cart_line", :collection => cart.select{|i| i.is_a?(CartRequest) }, :locals => {:app_list => app_list}
 
    -# = render :partial => "carts/cart_line", :collection => cart, :locals => {:app_list => app_list}
 
