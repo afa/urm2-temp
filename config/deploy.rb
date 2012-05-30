@@ -50,9 +50,9 @@ namespace :unicorn do
   pid = unicorn_get_pid
   unless pid.nil?
    logger.important("Restarting...", "Unicorn")
-   unicorn.stop
+   stop
   end
-  unicorn.start
+  start
  end
 end
 #require "bundler/capistrano"
