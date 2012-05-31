@@ -25,6 +25,7 @@ class OrdersController < ApplicationController
    @changed = []
    @results = User.current.make_order(params[:date_picker], params[:delivery_type], :order_needed => params[:order_needed], :order_comment => params[:order_comment], :request_comment => params[:request_comment])
    @carts = current_user.cart_items.unprocessed.in_cart.order("product_name, product_brend").all
+   @stores = @carts.map(&:location_id).uniq.compact.sort{|a, b| a == User.current.current_account.invent_location_id ? -1 : a <=> b }
    gon.need_application = @carts.detect{|i| i.application_area_mandatory }
    @app_list = Axapta.application_area_list || []
    gon.app_list = @app_list
