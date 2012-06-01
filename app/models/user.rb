@@ -105,7 +105,7 @@ class User < ActiveRecord::Base
    res = []
    unless reqs[1].empty?
     ors = []
-    reqs[1].map(&:location_link).uniq.compact.sort{|a, b| a == current_account.envent_location_id ? -1 : a <=> b }.each do |loc|
+    reqs[1].map(&:location_link).uniq.compact.sort{|a, b| a == current_account.invent_location_id ? -1 : a <=> b }.each do |loc|
      begin
       ors << Axapta.make_order(:comment => ar[:order_comment].try(:[], loc), :sales_lines => reqs[1].select{|c| c.location_link == loc }.map{|i| i.to_sales_lines }, :date_dead_line => dead_line, :customer_delivery_type_id => delivery).try(:[], "sales_id")
       reqs[1].select{|i| i.location_link == loc }.each{|i| i.update_attributes :processed => true, :order => ors.last }
