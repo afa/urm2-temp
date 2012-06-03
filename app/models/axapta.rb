@@ -118,13 +118,11 @@ class Axapta
   end
 
   def self.make_order(hsh)
-   hsh.merge!(:user_hash => axapta_hash, :main_invent_location => User.current.current_account.invent_location_id)
-   AxaptaRequest.make_order(hsh)
+   AxaptaRequest.make_order(hsh.merge(:user_hash => axapta_hash, :main_invent_location => User.current.current_account.invent_location_id))
   end
 
   def self.create_quotation(hsh)
-   hsh.merge!(:user_hash => axapta_hash)
-   AxaptaRequest.create_quotation(hsh)
+   AxaptaRequest.create_quotation(hsh.merge!(:user_hash => axapta_hash))
   end
 
   def self.sales_info(*args)

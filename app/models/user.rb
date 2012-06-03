@@ -104,15 +104,20 @@ class User < ActiveRecord::Base
    reqs = cart_items.unprocessed.in_cart.all.partition{|c| c.is_a?(CartRequest) }
    res = []
    unless reqs[1].empty?
-    begin
-     res << Axapta.make_order(:sales_lines => reqs[1].map{|i| i.to_sales_lines }, :date_dead_line => dead_line, :customer_delivery_type_id => delivery).try(:[], "sales_id")
-     reqs[1].each{|i| i.update_attributes :processed => true, :order => res.last }
-     if ar.has_key?(:order_needed) and ar[:order_needed] == '1'
-      Axapta.create_invoice(res.last)
+    ors = []
+    reqs[1].map(&:location_link).uniq.compact.sort{|a, b| a == current_account.invent_location_id ? -1 : a <=> b }.each do |loc|
+     begin
+      clct = reqs[1].select{|c| c.location_link == loc }
+      ors << Axapta.make_order(:comment => ar[:order_comment].try(:[], loc), :sales_lines => clct.map(&:to_sales_lines), :date_dead_line => dead_line, :customer_delivery_type_id => delivery).try(:[], "sales_id")
+      clct.each{|i| i.update_attributes :processed => true, :order => ors.last }
+      if ar.has_key?(:order_needed) and ar[:order_needed].try[:[], loc] == '1'
+       Axapta.create_invoice(ors.last)
+      end
+     rescue Exception => e
+      p "---makeorder_exc!request", e
      end
-    rescue Exception => e
-     p "---makeorder_exc!request", e
     end
+    res << ors.blank? ? [] : ors
    end
    unless reqs[0].empty?
     begin

@@ -18,13 +18,13 @@
     %th= t :application_mandatory
     %th{:colspan => 3}= t :action
     -# %th
-   - logger.info "---stores #{@stores.join(' ')}"
-   - @stores.each do |store|
+   = render :partial => "carts/cart_collection", :locals => {:app_list => app_list, :stores => @stores, :cart => cart}
+   -# - @stores.each do |store|
     - if cart.detect{|i| (not i.is_a?(CartRequest)) && i.location_link == store }
      %tr
       %td{:colspan => 16}= store
      = render :partial => "carts/cart_line", :collection => cart.select{|i| (not i.is_a?(CartRequest)) && i.location_link == store }, :locals => {:app_list => app_list}
-   - if cart.detect{|i| i.is_a?(CartRequest) }
+   -# - if cart.detect{|i| i.is_a?(CartRequest) }
     %tr
      %td{:colspan => 16}= t :requests
     = render :partial => "carts/cart_line", :collection => cart.select{|i| i.is_a?(CartRequest) }, :locals => {:app_list => app_list}
