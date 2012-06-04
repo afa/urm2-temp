@@ -428,8 +428,9 @@ function cartsRemoveElementFromCarts(){
 
  $("#cart_store table tr:has(td)").remove();
  if (gon.carts.length > 0){ //empty?
+  $("#cart_store table").append(gon.rendered);
   $.each(gon.carts, function(idx, item){
-   $("#cart_store table").append(item.line);
+   //$("#cart_store table").append(item.line);
    $('table.search-products input.item-cart[value="' + item.obj_id +'"]').parents("tr").find('td.input-in-cart input[type="text"]').val(item.amount);
   });
   //$(".cart-table").add(".allow-order").show();
@@ -460,8 +461,9 @@ function cartsSaveCart(){
   $('.cart-table').add('#order').hide();
  }
  if (gon.carts.length > 0){ //empty?
+  $("#cart_store table").append(gon.rendered);
   $.each(gon.carts, function(idx, item){
-   $("#cart_store table").append(item.line);
+   //$("#cart_store table").append(item.line);
    $('table.search-products input.item-cart[value="' + item.obj_id +'"]').parents("tr").find('td.input-in-cart input[type="text"]').val(item.amount);
   });
  }

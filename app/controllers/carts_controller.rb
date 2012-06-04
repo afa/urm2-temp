@@ -98,6 +98,7 @@ class CartsController < ApplicationController
    end
    CartItem.uncached do
     @carts = User.current.cart_items.unprocessed.in_cart.order("product_name, product_brend")
+    @stores = @carts.map(&:location_link).uniq.compact.sort{|a, b| a == User.current.current_account.invent_location_id ? -1 : a <=> b }
     @deliveries = User.current.deliveries
     gon.need_application = @carts.detect{|i| i.application_area_mandatory }
     @app_list = Axapta.application_area_list || []
@@ -107,7 +108,9 @@ class CartsController < ApplicationController
      cart.offer_code = cart.signature
      cart.line_code = cart.base_signature
     end
-    @stores = @carts.map(&:location_link).uniq.compact
+    i#@stores = @carts.map(&:location_link).uniq.compact
+    @rendered = render_to_string :partial => "carts/cart_collection", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores}
+    gon.rendered = @rendered
     gon.carts = @carts.map{|c| c.to_hash.merge(:obj_id => c.id)}
     gon.stores = @stores
     gon.order = render_to_string :partial => "main/order_edit"
@@ -128,6 +131,7 @@ class CartsController < ApplicationController
    gon.app_list = @app_list
    CartItem.uncached do
     @carts = User.current.cart_items.unprocessed.in_cart.order("product_name, product_brend")
+    @stores = @carts.map(&:location_link).uniq.compact.sort{|a, b| a == User.current.current_account.invent_location_id ? -1 : a <=> b }
     gon.need_application = @carts.detect{|i| i.application_area_mandatory }
     @carts.each do |cart|
      cart.line = render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart, :app_list => @app_list}
@@ -135,9 +139,11 @@ class CartsController < ApplicationController
      cart.line_code = cart.base_signature
      #cart.line = view_context.escape_javascript(render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart})
     end
+    @rendered = render_to_string :partial => "carts/cart_collection", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores}
+    gon.rendered = @rendered
     gon.carts = @carts.map{|c| c.to_hash.merge(:obj_id => c.id)}
     gon.deleted = @old
-    @stores = @carts.map(&:location_link).uniq.compact
+    #@stores = @carts.map(&:location_link).uniq.compact
     #gon.changes = @changed
     @deliveries = User.current.deliveries
     gon.stores = @stores
