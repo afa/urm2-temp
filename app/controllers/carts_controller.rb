@@ -72,7 +72,6 @@ class CartsController < ApplicationController
    carts = params[:cart_item].keys.map{|i| CartItem.find i }
    carts.each do |cart|
     hsh = params[:cart_item][cart.id.to_s]
-    p hsh
     act = hsh[:action]
     if act
      case act
@@ -85,7 +84,6 @@ class CartsController < ApplicationController
      end
     end
     [:destroy, :pick, :reserve].each{|s| hsh[s] = WebUtils.parse_bool(hsh[s]) if hsh.has_key?(s) }
-    p hsh
     v_destroy = hsh[:destroy]
     hsh.reject!{|k,v| k == :destroy or k == 'destroy' }
     if v_destroy
@@ -113,7 +111,8 @@ class CartsController < ApplicationController
     gon.rendered = @rendered
     gon.carts = @carts.map{|c| c.to_hash.merge(:obj_id => c.id)}
     gon.stores = @stores
-    gon.order = render_to_string :partial => "main/order_edit"
+    @order = render_to_string :partial => "main/order_edit"
+    gon.order = @order
    end
 
   end
