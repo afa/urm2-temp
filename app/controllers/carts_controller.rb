@@ -108,7 +108,7 @@ class CartsController < ApplicationController
      cart.offer_code = cart.signature
      cart.line_code = cart.base_signature
     end
-    i#@stores = @carts.map(&:location_link).uniq.compact
+    #@stores = @carts.map(&:location_link).uniq.compact
     @rendered = render_to_string :partial => "carts/cart_collection", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores}
     gon.rendered = @rendered
     gon.carts = @carts.map{|c| c.to_hash.merge(:obj_id => c.id)}
