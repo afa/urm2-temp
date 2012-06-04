@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
    gon.results = res
    gon.redirect_to = quotation_path(@results[1]) if @results[1]
    p "---results make_order", @results
-   gon.redirect_to = order_path(@results[0].try(:[], 0)) if @results[0].try(:[], 0)
+   gon.redirect_to = order_path(@results[0].try(:[], 0)) if @results[0] && @results[0][0]
   end
 
   def lines

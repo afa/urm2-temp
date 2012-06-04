@@ -102,7 +102,7 @@ class User < ActiveRecord::Base
    #, :order_needed => params[:order_needed], :order_comment => params[:order_comment], :request_comment => params[:request_comment]
    ar = {}.merge(*args) rescue {}
    reqs = cart_items.unprocessed.in_cart.all.partition{|c| c.is_a?(CartRequest) }
-   res = []
+   res = [[], nil]
    unless reqs[1].empty?
     ors = []
     reqs[1].map(&:location_link).uniq.compact.sort{|a, b| a == current_account.invent_location_id ? -1 : a <=> b }.each do |loc|
@@ -117,11 +117,11 @@ class User < ActiveRecord::Base
       p "---makeorder_exc!request", e
      end
     end
-    res << ors.blank? ? [] : ors
+    res[0] = ors
    end
    unless reqs[0].empty?
     begin
-     res << Axapta.create_quotation(:sales_lines => reqs[0].map{|i| i.to_sales_lines }).try(:[], "quotation_id")
+     res[1] = Axapta.create_quotation(:sales_lines => reqs[0].map{|i| i.to_sales_lines }).try(:[], "quotation_id")
      #res << Axapta.make_order(:sales_lines => reqs[0].map{|i| i.to_sales_lines }, :date_dead_line => dead_line).try(:[], "sales_id")
      reqs[0].each{|i| i.update_attributes :processed => true, :order => res.last }
     rescue Exception => e
