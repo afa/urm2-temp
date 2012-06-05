@@ -591,6 +591,7 @@ function cartsProcessRadioPicks(){
   $("#order .item.pick select").add("#order .item.pick select").each(function(i, item){ item.disabled = 'disabled'; });
   $("#order .item.pick textarea").add("#order .item.pick input").each(function(i, item){ item.disabled = 'disabled'; });
  }
+ $("#cart_store form").submit();
 }
 
 function cartsHandleRadioPicks(){

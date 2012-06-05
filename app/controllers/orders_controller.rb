@@ -33,12 +33,12 @@ class OrdersController < ApplicationController
    gon.app_list = @app_list
    gon.carts = render_to_string :partial => "carts/cart_line", :locals => {:app_list => @app_list}, :collection => @carts
    res = []
-   res << {:name => "info", :value => "#{t :created_orders} #{@results[0]}"} if @results[0]
+   @results[0].each{|r| res << {:name => "info", :value => "#{t :created_orders} #{r[0]}"} } if @results[0]
    res << {:name => "info", :value => "#{t :created_quotations} #{@results[1]}"} if @results[1]
    gon.results = res
    gon.redirect_to = quotation_path(@results[1]) if @results[1]
    p "---results make_order", @results
-   gon.redirect_to = order_path(@results[0].try(:[], 0)) if @results[0] && @results[0][0]
+   gon.redirect_to = order_path(@results[0][0]) if @results[0] && @results[0][0]
   end
 
   def lines
