@@ -416,7 +416,7 @@ function cartsAddElementToCart(){
  $('.form-hide .item').dropDown();
  cartsHandleRadioPicks();
  cartsHandleSaveOnFocusLost();
- cartsProcessRadioPicks();
+ //cartsProcessRadioPicks();
 }
 
 //destroy
@@ -452,7 +452,7 @@ function cartsRemoveElementFromCarts(){
  });
  cartsHandleRadioPicks();
  cartsHandleSaveOnFocusLost();
- cartsProcessRadioPicks();
+ //cartsProcessRadioPicks();
 }
 
 function cartsSaveCart(){
@@ -485,7 +485,7 @@ function cartsSaveCart(){
  activateSearchAllowButton();
  cartsHandleSaveOnFocusLost();
  cartsHandleRadioPicks();
- cartsProcessRadioPicks();
+ //cartsProcessRadioPicks();
  $('.commit a.button-style').off("click");
  $('.commit a.button-style').on("click", function(){
   $(this).parents('form').submit();
@@ -585,11 +585,11 @@ function cartsProcessRadioPicks(){
   $("#order .item.store textarea").each(function(i, item){ item.disabled = 'disabled'; });
  }
  if($("#cart_store tr.world").add('#cart_store tr.store:has(input:checked[type="radio"][value="pick"])').length > 0){
-  $("#order .item.pick textarea").add("#order .item.pick input").each(function(i, item){ item.disabled = ''; });
-  $("#order .item.pick select").add("#order .item.pick select").each(function(i, item){ item.disabled = ''; });
+  $("#order .item.pick select").add("#order .item.pick input").each(function(i, item){ item.disabled = ''; });
+  //$("#order .item.pick textarea").add("#order .item.pick select").each(function(i, item){ item.disabled = ''; });
  } else {
-  $("#order .item.pick select").add("#order .item.pick select").each(function(i, item){ item.disabled = 'disabled'; });
-  $("#order .item.pick textarea").add("#order .item.pick input").each(function(i, item){ item.disabled = 'disabled'; });
+  //$("#order .item.pick textarea").add("#order .item.pick select").each(function(i, item){ item.disabled = 'disabled'; });
+  $("#order .item.pick select").add("#order .item.pick input").each(function(i, item){ item.disabled = 'disabled'; });
  }
  $("#cart_store form").submit();
 }
