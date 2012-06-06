@@ -591,11 +591,10 @@ function cartsProcessRadioPicks(){
   //$("#order .item.pick textarea").add("#order .item.pick select").each(function(i, item){ item.disabled = 'disabled'; });
   $("#order .item.pick select").add("#order .item.pick input").each(function(i, item){ item.disabled = 'disabled'; });
  }
- $("#cart_store form").submit();
 }
 
 function cartsHandleRadioPicks(){
- $('#cart_store input[type="radio"]').on("click", cartsProcessRadioPicks);
+ $('#cart_store input[type="radio"]').on("click", function(){cartsProcessRadioPicks(); $("#cart_store form").submit();});
 }
 
 function cartsHandleSaveOnFocusLost(){
