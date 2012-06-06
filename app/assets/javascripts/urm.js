@@ -416,7 +416,7 @@ function cartsAddElementToCart(){
  $('.form-hide .item').dropDown();
  cartsHandleRadioPicks();
  cartsHandleSaveOnFocusLost();
- //cartsProcessRadioPicks();
+ cartsProcessRadioPicks();
 }
 
 //destroy
@@ -452,7 +452,7 @@ function cartsRemoveElementFromCarts(){
  });
  cartsHandleRadioPicks();
  cartsHandleSaveOnFocusLost();
- //cartsProcessRadioPicks();
+ cartsProcessRadioPicks();
 }
 
 function cartsSaveCart(){
@@ -485,7 +485,7 @@ function cartsSaveCart(){
  activateSearchAllowButton();
  cartsHandleSaveOnFocusLost();
  cartsHandleRadioPicks();
- //cartsProcessRadioPicks();
+ cartsProcessRadioPicks();
  $('.commit a.button-style').off("click");
  $('.commit a.button-style').on("click", function(){
   $(this).parents('form').submit();
