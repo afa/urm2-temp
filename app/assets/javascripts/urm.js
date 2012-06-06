@@ -486,11 +486,11 @@ function cartsSaveCart(){
  cartsHandleSaveOnFocusLost();
  cartsHandleRadioPicks();
  cartsProcessRadioPicks();
- $('.commit a.button-style').off("click");
- $('.commit a.button-style').on("click", function(){
-  $(this).parents('form').submit();
-  return false;
- });
+ //$('.commit a.button-style').off("click");
+ //$('.commit a.button-style').on("click", function(){
+ // $(this).parents('form').submit();
+ // return false;
+ //});
  $('.select').selectList();
  $('.button-style').button();
  $('.switch').switchControl();
