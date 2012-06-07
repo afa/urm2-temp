@@ -114,7 +114,9 @@ class CartsController < ApplicationController
     @order = render_to_string :partial => "main/order_edit"
     gon.order = @order
    end
-
+   respond_with do |format|
+    format.js { render :layout => false }
+   end
   end
 
   def destroy
