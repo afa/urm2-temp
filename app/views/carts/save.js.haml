@@ -1,26 +1,26 @@
 = include_gon(:need_script_tag => false)
 
-$('.slider').hide();
-if(gon.carts.length == 0){
-$('.cart-table').hide();
-//$('.cart-table').add('.allow-order').hide();
-}
-if($(".calendar-input").length > 0){
-$(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
-}
-//search_icons_handle();
-//apply_hover_in_table_on_mmove();
-//load_dms_each(#{not to_bool(@only_store)});
-//load_dms_bundle("#{main_mass_dms_url(:query_string => @search.query_string)}", #{not to_bool(@only_store)});
-//! $("#order").hide();
-activateSearchAllowOrderButton();
-//! $("#cancel_order").hide();
-activateSearchCancelButton();
-//$('a.button-style').click(function(){
-//$(this).parents('form').submit();
-//return false;
-//});
-cartsHandleRadioPicks();
-cartsHandleSaveOnFocusLost();
-cartsProcessRadioPicks();
+//$('.slider').hide();
+//if(gon.carts.length == 0){
+//$('.cart-table').hide();
+////$('.cart-table').add('.allow-order').hide();
+//}
+//if($(".calendar-input").length > 0){
+//$(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
+//}
+////search_icons_handle();
+////apply_hover_in_table_on_mmove();
+////load_dms_each(#{not to_bool(@only_store)});
+////load_dms_bundle("#{main_mass_dms_url(:query_string => @search.query_string)}", #{not to_bool(@only_store)});
+////! $("#order").hide();
+//activateSearchAllowOrderButton();
+////! $("#cancel_order").hide();
+//activateSearchCancelButton();
+////$('a.button-style').click(function(){
+////$(this).parents('form').submit();
+////return false;
+////});
+//cartsHandleRadioPicks();
+//cartsHandleSaveOnFocusLost();
+//cartsProcessRadioPicks();
 cartsSaveCart();
