@@ -457,9 +457,6 @@ function cartsRemoveElementFromCarts(){
 
 function cartsSaveCart(){
  $("#cart_store table tr:has(td)").remove();
- if(gon.carts.length == 0){
-  $('.cart-table').add('#order').hide();
- }
  if (gon.carts.length > 0){ //empty?
   $("#cart_store table").append(gon.rendered);
   $.each(gon.carts, function(idx, item){
@@ -473,6 +470,7 @@ function cartsSaveCart(){
   $(".cart-table").add("#order").show();
  } else {
   $("#cart_store").hide();
+  $('.cart-table').add('#order').hide();
  }
  $("div#order").children().remove();
  $("div#order").append(gon.order);
@@ -504,23 +502,16 @@ function ordersRenderCreate(){
  $("table.search-products tr:has(td)").add("table.search-products tr.heading").remove();
  $("input#search_query_string").val('');
  $("#cart_store table tr:has(td)").remove();
- $("#cancel_order").hide();
  $("#cart_store table").append(gon.carts);
- //$.each(gon.carts, function(i, crt){
- // $("#cart_store table").append("#{ escape_javascript(render :partial => "carts/cart_line", :locals => {:cart_line => crt, :app_list => @app_list}) }");
- //});
+ $("#cancel_order").hide();
  if(gon.carts.length > 0){
   $(".cart-table").add("#order").show();
  }
  if($("#cart_store table tr").length > 1){
   $("#cart_store").show();
-  //! $("div.allow-order").show();
  } else {
   $("#cart_store").hide();
-  //! $("div.allow-order").hide();
  }
- //! $("div#order").hide();
- 
  $('.commit a.button-style').click(function(){
   $(this).parents('form').submit();
   return false;
@@ -534,7 +525,6 @@ function ordersRenderCreate(){
  }
  if(gon.results.length > 0){
   placeResults(gon.results); //!!!!!
-  //$("div.results").html("#{escape_javascript([t(:created_orders), @results.join(', ')].join(' ').html_safe)}");
  }
 }
 
@@ -594,11 +584,12 @@ function cartsProcessRadioPicks(){
 }
 
 function cartsHandleRadioPicks(){
- $('#cart_store input[type="radio"]').on("click", function(){cartsProcessRadioPicks(); $("#cart_store form").submit();});
+ $('#cart_store input[type="radio"]').on("click", function(){cartsProcessRadioPicks(); $("#cart_store form").submit(); return false;});
 }
 
 function cartsHandleSaveOnFocusLost(){
  $("#cart_store input").add("#cart_store textarea").on("focusout", function(evt){
   $("#cart_store form").submit();
+  return false;
  });
 }
