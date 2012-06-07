@@ -584,7 +584,7 @@ function cartsProcessRadioPicks(){
 }
 
 function cartsHandleRadioPicks(){
- $('#cart_store input[type="radio"]').on("click", function(){cartsProcessRadioPicks(); $("#cart_store form").submit(); return false;});
+ $('#cart_store input[type="radio"]').on("click", function(){$("#cart_store form").submit(); return false;});
 }
 
 function cartsHandleSaveOnFocusLost(){
