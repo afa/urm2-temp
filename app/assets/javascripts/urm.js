@@ -483,9 +483,6 @@ function cartsSaveCart(){
  }
  //activateSearchCancelButton();
  activateSearchAllowButton();
- cartsHandleSaveOnFocusLost();
- cartsHandleRadioPicks();
- cartsProcessRadioPicks();
  //$('.commit a.button-style').off("click");
  //$('.commit a.button-style').on("click", function(){
  // $(this).parents('form').submit();
@@ -497,6 +494,9 @@ function cartsSaveCart(){
  $('.js').bind('ajax:success', function(evt, xhr, status){
   eval(xhr.responseText);
  });
+ cartsHandleRadioPicks();
+ cartsHandleSaveOnFocusLost();
+ cartsProcessRadioPicks();
 }
 
 function ordersRenderCreate(){
