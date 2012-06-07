@@ -154,6 +154,9 @@
      %a.active{:href=>"#"}
       %span
        %span Поиск по наименованию
+     %a{:href=>"#"}
+      %span
+       %span Дополнительные возможности
      -# %a{:href=>"#"}
       %span
        %span Артикул ДМС (Farnel, Newark)
@@ -185,17 +188,10 @@
         %i.br &nbsp;
       .clear
     .search-tab-block
-     -# %form{:action=>" "}
      = form_for :search, :url => search_path do |f|
-      -# .fields
       %div
        .field
-        -# = f.label :query_string
         = f.text_field :query_string
-        -# = f.hidden_field :only_available
-        -# = f.hidden_field :only_store
-        -# = f.submit :find
-       -# %input{:type=>"text", :value=>"TDA2003;OR;300"}
        - unless @only_store.nil?
         - unless to_bool(@only_store)
          %div.dms_loader{:style=>"float=right;"}
@@ -232,6 +228,43 @@
         %a{:href=>"search_result_group.html"}
          %span Прогноз поставки
 
+    .search-tab-block
+     = form_for :request, :url => search_path do |f|
+      %div
+       .field
+        = f.label :request_string
+        = f.text_field :request_string
+       .field
+        = f.label :requested_count
+        = f.text_field :requested_count
+       .field
+        = f.label :manager_comment
+        = f.text_area :manager_comment
+       -# - unless @only_store.nil?
+        - unless to_bool(@only_store)
+         %div.dms_loader{:style=>"float=right;"}
+          %img{:src => image_path('ajax-loader.gif')}
+       .button.commit
+        %a.button-style{:href=>"#"}
+         %i.t &nbsp;
+         %i.b &nbsp;
+         %i.tl &nbsp;
+         %i.tr &nbsp;
+         %span Отправить!
+         %i.bl &nbsp;
+         %i.br &nbsp;
+      .clear
+      .fields
+       Искать:
+       = render :partial => "shared/check_button", :locals => {:name => "search[only_available]", :title => "Только в наличии", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@search.only_available)}}
+       = render :partial => "shared/check_button", :locals => {:name => "search[only_store]", :title => "Только склад", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@search.only_store)}}
+       - if defined?(@use_alt_price)
+        %span.switch{:class=>"radio"}
+         Цены:
+         %a{:href=>"#", :class=>[@use_alt_price ? nil : "active", "usd"]}
+          %span USD
+         %a{:href=>"#", :class => [@use_alt_price ? "active" : nil, "rub"]}
+          %span RUB
     -# .search-tab-block{:style=>"display:none;"}
      %form{:action=>" "}
       .field
