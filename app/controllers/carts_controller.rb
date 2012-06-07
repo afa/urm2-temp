@@ -102,7 +102,7 @@ class CartsController < ApplicationController
     @app_list = Axapta.application_area_list || []
     gon.app_list = @app_list
     @carts.each do |cart|
-     cart.line = render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart, :app_list => @app_list}
+     #cart.line = render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart, :app_list => @app_list}
      cart.offer_code = cart.signature
      cart.line_code = cart.base_signature
     end
@@ -114,7 +114,9 @@ class CartsController < ApplicationController
     @order = render_to_string :partial => "main/order_edit"
     gon.order = @order
    end
-
+   respond_with do |format|
+    format.js { render :layout => false }
+   end
   end
 
   def destroy
