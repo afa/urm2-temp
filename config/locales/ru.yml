@@ -151,3 +151,6 @@ ru:
  application_mandatory: Требовать указать применение
  invoice_generation: Выставление счета
  order_comment: Комментарий
+ request_string: Запрос
+ requested_count: Количество
+ manager_comment: Сообщение менеджеру
