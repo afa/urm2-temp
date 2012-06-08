@@ -47,7 +47,8 @@ gem "rb-readline"
 gem "airbrake" #, :group => [:development, :production]
 #gem "airbrake", :group => [:development, :production]
 gem "bullet", :group => :development
-gem "gon", :git => 'git://github.com/afa/gon.git', :branch => "script_tag"
+gem "gon"
+#gem "gon", :git => 'git://github.com/afa/gon.git', :branch => "script_tag"
 #gem "sqlite3", :group => :test
 gem "rails-backbone"
 group :development, :test, :staging do
@@ -63,7 +64,7 @@ group :development, :test, :staging do
  #gem "rcov"
  gem "simplecov"
  #gem "jasmine"
- #gem "jasmine-headless-webkit"
+ gem "jasmine-headless-webkit"
  gem "mustang"
  gem "headless"
  gem "execjs"
