@@ -64,7 +64,7 @@ group :development, :test, :staging do
  gem "simplecov"
  #gem "jasmine"
  #gem "jasmine-headless-webkit"
- #gem "mustang"
+ gem "mustang"
  gem "headless"
  gem "execjs"
  #gem "therubyracer"
