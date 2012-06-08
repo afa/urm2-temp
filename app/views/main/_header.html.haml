@@ -232,17 +232,17 @@
      = form_for :request, :url => manager_request_path do |f|
       .fields.splitted
        .field.request.long
-        = f.label :request_string, t :request_string
+        = f.label :request_string, t(:request_string)
         = f.text_field :request_string
       .clear
       .fields.splitted
        .field.request.tiny
-        = f.label :requested_count, t :requested_count
+        = f.label :requested_count, t(:requested_count)
         = f.text_field :requested_count
       .clear
       .fields.splitted
        .field.request.long
-        = f.label :manager_comment, t :manager_comment
+        = f.label :manager_comment, t(:manager_comment)
         = f.text_area :manager_comment, :style => "height:3em;"
        -# - unless @only_store.nil?
         - unless to_bool(@only_store)
