@@ -68,7 +68,7 @@ group :development, :test, :staging do
  gem "mustang"
  gem "headless"
  gem "execjs"
- #gem "therubyracer"
+ gem "therubyracer"
  #gem "capybara"
  #gem "selenium-webdriver"
 # gem 'webrat'
