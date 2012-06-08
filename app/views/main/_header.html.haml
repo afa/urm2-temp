@@ -241,9 +241,9 @@
         = f.text_field :requested_count
       .clear
       .fields.splitted
-       .field.request.medium
+       .field.request.long
         = f.label :manager_comment
-        = f.text_area :manager_comment
+        = f.text_area :manager_comment, :style => "height:3em;"
        -# - unless @only_store.nil?
         - unless to_bool(@only_store)
          %div.dms_loader{:style=>"float=right;"}
