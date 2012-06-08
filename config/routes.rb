@@ -40,6 +40,8 @@ Urm::Application.routes.draw do
   end
   get "main/index"
   root :to => "main#index"
+  post "main/manager_request"
+  match "/manager_request" => "main#manager_request"
   post "main/search"
   match "/search" => "main#search"
   #post "main/extended"
