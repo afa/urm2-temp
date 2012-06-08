@@ -946,14 +946,22 @@ div#cart_store
 
 .search-block
   .field
+    &.request
+      label
+        display: inline-block
+        width: 10em
     &.long
       input, textarea
         +filtered-input
-        width: 20em
+        width: 25em
     &.medium
       input, textarea
         +filtered-input
         width: 20em
+    &.short
+      input, textarea
+        +filtered-input
+        width: 15em
     &.tiny
       input, textarea
         +filtered-input
