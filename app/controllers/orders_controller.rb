@@ -195,6 +195,9 @@ class OrdersController < ApplicationController
  protected
   def get_filter
    @filter_hash = params[:filter] || {}
+   if @filter_hash[:this_sales_origin].blank?
+    @filter_hash[:this_sales_origin]='0'
+   end
    @filter = OpenStruct.new(@filter_hash)
    @page = params[:page] || 1
   end
