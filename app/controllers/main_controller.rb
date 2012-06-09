@@ -167,6 +167,10 @@ class MainController < ApplicationController
    end
   end
 
+  def manager_request
+   @request = OpenStruct.new(params[:request]) unless params[:request].blank?
+   # запросить 
+  end
  protected
   #def get_accounts
   # @accounts = current_user.accounts.where(:blocked => false)
