@@ -14,7 +14,9 @@
  %td.text-right= showed_line.sales_qty
  %td.text-right= showed_line.price
  -# TODO %td.text-right= text_field_tag "order[#{showed_line.sales_id}][user_price]", showed_line.user_price
- %td.text-right= showed_line.amount
+ %td.text-right
+  .readable-amount= showed_line.amount
+  .editable-amount= text_field_tag "order[#{showed_line.sales_id}][line][#{iid}][qty]", showed_line.amount
  %td= showed_line.qty_in_debt
  %td.reserve_data.tiny{:style => "display: none;"}= text_field_tag "order[#{showed_line.sales_id}][line][#{iid}][process_qty]", showed_line.process_qty
  %td= showed_line.reserve_qty
