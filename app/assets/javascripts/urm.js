@@ -255,7 +255,7 @@ function ordersOnClickEnableMainOptions(){
  $("tr th.main_options_header").show();
  $("tr td div.readable-amount").hide();
  $("tr td div.editable-amount").show();
- $("tr td div.editable-amount input").enable();
+ $("tr td div.editable-amount input").each(function(i, item){ item.disabled = ''; });
  $("tr td.main_options_data").show();
  $("tr td.main_options_data").each(function(i, item){
   if($(item).hasClass("note-option")){
@@ -276,7 +276,7 @@ function ordersOnClickEnableReserveLines(){
  }
  $("tr td div.readable-amount").show();
  $("tr td div.editable-amount").hide();
- $("tr td div.editable-amount input").disable();
+ $("tr td div.editable-amount input").each(function(i, item){ item.disabled = 'disabled'; });
  $('tr th.reserve_header').show();
  $("tr td.reserve_data").show();
  $("tr td.reserve_data").each(function(i, item){
@@ -291,7 +291,7 @@ function ordersOnClickEnablePickLines(){
  }
  $("tr td div.readable-amount").show();
  $("tr td div.editable-amount").hide();
- $("tr td div.editable-amount input").disable();
+ $("tr td div.editable-amount input").each(function(i, item){ item.disabled = 'disabled'; });
  $('tr th.reserve_header').show();
  $("tr td.reserve_data").show();
  $("tr td.reserve_data").each(function(i, item){
@@ -306,7 +306,7 @@ function ordersOnClickEnableReserveTransfer(){
  }
  $("tr td div.readable-amount").show();
  $("tr td div.editable-amount").hide();
- $("tr td div.editable-amount input").disable();
+ $("tr td div.editable-amount input").each(function(i, item){ item.disabled = 'disabled'; });
 }
 
 function ordersOnClickEnableRemoveLines(){
@@ -315,7 +315,7 @@ function ordersOnClickEnableRemoveLines(){
  }
  $("tr td div.readable-amount").show();
  $("tr td div.editable-amount").hide();
- $("tr td div.editable-amount input").disable();
+ $("tr td div.editable-amount input").each(function(i, item){ item.disabled = 'disabled'; });
  $('tr th.select_header').show();
  $("tr td.select_data").show();
  $('tr td.select_data input[type="checkbox"]').remove();
