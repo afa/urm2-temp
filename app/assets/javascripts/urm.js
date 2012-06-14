@@ -253,6 +253,9 @@ function ordersOnClickEnableMainOptions(){
  }
 
  $("tr th.main_options_header").show();
+ $("tr td div.readable-amount").hide();
+ $("tr td div.editable-amount").show();
+ $("tr td div.editable-amount input").enable();
  $("tr td.main_options_data").show();
  $("tr td.main_options_data").each(function(i, item){
   if($(item).hasClass("note-option")){
@@ -271,6 +274,9 @@ function ordersOnClickEnableReserveLines(){
  if($(this).parents(".tabbed_box").find(".dialogs .page").eq(1).hasClass("active")){
   return;
  }
+ $("tr td div.readable-amount").show();
+ $("tr td div.editable-amount").hide();
+ $("tr td div.editable-amount input").disable();
  $('tr th.reserve_header').show();
  $("tr td.reserve_data").show();
  $("tr td.reserve_data").each(function(i, item){
@@ -283,6 +289,9 @@ function ordersOnClickEnablePickLines(){
  if($(this).parents(".tabbed_box").find(".dialogs .page").eq(2).hasClass("active")){
   return;
  }
+ $("tr td div.readable-amount").show();
+ $("tr td div.editable-amount").hide();
+ $("tr td div.editable-amount input").disable();
  $('tr th.reserve_header').show();
  $("tr td.reserve_data").show();
  $("tr td.reserve_data").each(function(i, item){
@@ -295,12 +304,18 @@ function ordersOnClickEnableReserveTransfer(){
  if($(this).parents(".tabbed_box").find(".dialogs .page").eq(3).hasClass("active")){
   return;
  }
+ $("tr td div.readable-amount").show();
+ $("tr td div.editable-amount").hide();
+ $("tr td div.editable-amount input").disable();
 }
 
 function ordersOnClickEnableRemoveLines(){
  if($(this).parents(".tabbed_box").find(".dialogs .page").eq(4).hasClass("active")){
   return;
  }
+ $("tr td div.readable-amount").show();
+ $("tr td div.editable-amount").hide();
+ $("tr td div.editable-amount input").disable();
  $('tr th.select_header').show();
  $("tr td.select_data").show();
  $('tr td.select_data input[type="checkbox"]').remove();
