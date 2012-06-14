@@ -236,6 +236,8 @@ function ordersTabOnClick(){
 
 function ordersHideInactiveControls(){
  $('tr th.main_options_header').hide();
+ $("tr td div.readable-amount").hide();
+ $("tr td div.editable-amount").show();
  $("tr td.main_options_data").hide();
  $('tr th.reserve_header').hide();
  $("tr td.reserve_data").hide();
@@ -343,6 +345,7 @@ function ordersCopyToHidden(item, after){
 
 function ordersSaveOnClick(){
  var curr = this;
+ $('input[name^="order["][name$="][qty]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
  $('input[name^="order["][name$="][line_id]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
  $('td.main_options_data input[type="text"][name^="order["][name$="][note]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
  $('td.main_options_data input[type="text"][name^="order["][name$="][requirement]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
