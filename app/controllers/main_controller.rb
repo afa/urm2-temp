@@ -149,7 +149,7 @@ class MainController < ApplicationController
 
   def manager_request
    @request = OpenStruct.new(params[:request]) unless params[:request].blank?
-   cart = CartRequest.new :user_id => User.current.id, :product_name => @request.request_string, :amount => @request.requested_amount, :comment => @request.manager_comment
+   cart = CartRequest.create :user_id => User.current.id, :product_name => @request.request_string, :amount => @request.requested_amount, :comment => @request.manager_comment
    redirect_to :back
    # запросить 
   end
