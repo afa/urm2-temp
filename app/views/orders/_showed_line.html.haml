@@ -11,7 +11,7 @@
   = hidden_field_tag "order[#{showed_line.sales_id}][line][#{iid}][selected]", ""
  %td.text-left= showed_line.item_name
  %td.text-left= showed_line.brend
- %td.text-right
+ %td.text-right.tiny
   .readable-amount= showed_line.sales_qty
   .editable-amount= text_field_tag "order[#{showed_line.sales_id}][line][#{iid}][qty]", showed_line.sales_qty
  %td.text-right= showed_line.price
