@@ -12,7 +12,7 @@
  %td.text-left= showed_line.item_name
  %td.text-left= showed_line.brend
  %td.text-right.tiny
-  .readable-amount= showed_line.sales_qty
+  .readable-amount{:disabled => true}= showed_line.sales_qty
   .editable-amount= text_field_tag "order[#{showed_line.sales_id}][line][#{iid}][qty]", showed_line.sales_qty
  %td.text-right= showed_line.price
  -# TODO %td.text-right= text_field_tag "order[#{showed_line.sales_id}][user_price]", showed_line.user_price
