@@ -1,2 +1,8 @@
-%h1 Admin::HelpArticle#index
-%p Find me in app/views/admin/help_article/index.html.haml
+%table
+ %tr
+  %th Название
+  %th (ключ)
+ - @articles.each do |article|
+  %tr
+   %td= article.name
+   %td= article.key || "нет"
