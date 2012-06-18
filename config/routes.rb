@@ -1,13 +1,5 @@
 Urm::Application.routes.draw do
 
-  get "help_article/index"
-
-  get "help_article/show"
-
-  get "help_article/edit"
-
-  get "help_article/new"
-
   resources :news, :only => [:index]
   resources :carts, :except => [:show] do
    collection do
