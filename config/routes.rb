@@ -1,5 +1,13 @@
 Urm::Application.routes.draw do
 
+  get "help_article/index"
+
+  get "help_article/show"
+
+  get "help_article/edit"
+
+  get "help_article/new"
+
   resources :news, :only => [:index]
   resources :carts, :except => [:show] do
    collection do
@@ -54,6 +62,7 @@ Urm::Application.routes.draw do
 
   namespace :admin do
    #resources :main, :only => [:index]
+   resources :help
    resources :news
    get "main/index"
    root :to => "main#index"
