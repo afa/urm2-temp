@@ -54,7 +54,7 @@ Urm::Application.routes.draw do
 
   namespace :admin do
    #resources :main, :only => [:index]
-   resources :help
+   resources :help_article
    resources :news
    get "main/index"
    root :to => "main#index"
