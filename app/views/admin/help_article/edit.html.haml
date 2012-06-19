@@ -1,2 +1,14 @@
-%h1 Admin::HelpArticle#edit
-%p Find me in app/views/admin/help_article/edit.html.haml
+=form_for :article, :url => admin_help_article_index_path, :method => :put do |f|
+ .field
+  = f.label :name
+  = f.text_field :name
+
+ .field
+  = f.label :body
+  = f.text_area :body
+
+ .field
+  = f.label :key
+  = f.text_field :key
+
+ = f.submit "save"
