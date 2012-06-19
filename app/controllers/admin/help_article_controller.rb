@@ -1,5 +1,9 @@
 class Admin::HelpArticleController < Admin::ApplicationController
+
+ before_filter :get_articles, :only => [:index]
+ before_filter :get_article, :only => [:show, :edit, :update, :destroy]
   def index
+   @articles = HelpArticle.order('name asc').all
   end
 
   def show
@@ -19,4 +23,12 @@ class Admin::HelpArticleController < Admin::ApplicationController
    redirect_to admin_help_article_index_path
   end
 
+ protected
+
+  def get_article
+   @article = HelpArticle.find(params[:id])
+  end
+  def get_articles
+   @articles = HelpArticle.order('name asc').all
+  end
 end
