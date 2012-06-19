@@ -20,7 +20,11 @@ class Admin::HelpArticleController < Admin::ApplicationController
   end
 
   def create
-   redirect_to admin_help_article_index_path
+   if @article = HelpArticle.create(params[:article])
+    redirect_to admin_help_article_index_path
+   else
+    render :new
+   end
   end
 
  protected
