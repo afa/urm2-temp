@@ -21,4 +21,4 @@
 //= require jquery.watch
 //= require "history/history.adapter.jquery"
 //= require "history/history"
-
+//= require_tree "admin"
