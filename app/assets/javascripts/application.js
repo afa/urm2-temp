@@ -22,4 +22,5 @@
 //= require "history/history.adapter.jquery"
 //= require "history/history"
 //= require redactor
+//= require redactor_ru
 //= require_tree ./admin
