@@ -23,4 +23,5 @@
 //= require "history/history"
 //= require redactor
 //= require redactor_ru
+//= require redactor_toolbar_default
 //= require_tree ./admin
