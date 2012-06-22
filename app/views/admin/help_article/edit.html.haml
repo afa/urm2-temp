@@ -1,4 +1,4 @@
-=form_for :article, :url => admin_help_article_index_path, :method => :put do |f|
+=form_for :article, :url => admin_help_article_path(@article.id), :method => :put do |f|
  .field
   = f.label :name
   = f.text_field :name
