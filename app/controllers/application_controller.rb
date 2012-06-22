@@ -73,7 +73,7 @@ class ApplicationController < ActionController::Base
   def get_accounts_in
    Rails.logger.info "---get acc"
    if logged_in?
-    @accounts = current_user.accounts.where(:blocked => false)
+    @accounts = User.current.accounts.where(:blocked => false)
    else
     @accounts = []
    end
@@ -108,10 +108,10 @@ class ApplicationController < ActionController::Base
    srch = params[:search] || {}
    requ = params[:request] || {}
    if logged_in?
-    srch[:only_available] = current_user.settings.where(:name => 'search.only_available').first.try(:value) if srch[:only_available].nil?
-    srch[:only_store] = current_user.settings.where(:name => 'search.only_store').first.try(:value) if srch[:only_store].nil?
-    requ[:only_available] = current_user.settings.where(:name => 'search.only_available').first.try(:value) if srch[:only_available].nil?
-    requ[:only_store] = current_user.settings.where(:name => 'search.only_store').first.try(:value) if srch[:only_store].nil?
+    srch[:only_available] = User.current.settings.where(:name => 'search.only_available').first.try(:value) if srch[:only_available].nil?
+    srch[:only_store] = User.current.settings.where(:name => 'search.only_store').first.try(:value) if srch[:only_store].nil?
+    requ[:only_available] = User.current.settings.where(:name => 'search.only_available').first.try(:value) if srch[:only_available].nil?
+    requ[:only_store] = User.current.settings.where(:name => 'search.only_store').first.try(:value) if srch[:only_store].nil?
    end
    @search = OpenStruct.new(srch)
    @request = OpenStruct.new(requ)
