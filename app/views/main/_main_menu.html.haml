@@ -32,13 +32,13 @@
      %a{:class => [current_page?(orders_path) ? "active" : nil], :href=>orders_path}
       %span Список заказов
     %li
-     %a{:class => [current_page?(orders_path) ? "active" : nil], :href=>control_orders_path}
+     %a{:class => [current_page?(control_orders_path) ? "active" : nil], :href=>control_orders_path}
       %span Контроль продолжительности резервирования
     %li
      %a{:class => [current_page?(lines_orders_path) ? "active" : nil], :href=>lines_orders_path()}
       %span Открытые строки
     %li
-     %a{:class => [current_page?(orders_path) ? "active" : nil], :href=>client_lines_orders_path}
+     %a{:class => [current_page?(client_lines_orders_path) ? "active" : nil], :href=>client_lines_orders_path}
       %span Строки заказов клиента
  .button{:class => [(params[:controller] == "quotations") ? "active" : nil]}
   .button-shadow

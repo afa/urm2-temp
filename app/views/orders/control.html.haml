@@ -1,24 +1,27 @@
 .nav-title
  %span= link_to "Заказы", orders_path
  %span >
- %span.current Строки заказов
+ %span.current Контроль продолжительности резервирования
 
+Текущая сумма резерва: 1 165,95
+Доступная сумма резерва: 9 400,06
+Коэффициент эффективности: 62,12
+Количество дней резервирования: 5
 .content-wrap
  .filter-block
   = form_for :filter, :url => lines_orders_path, :html => {:method => :get} do |f|
    .filter
     %table
+
      %tr
-      %th= f.label :item_name, t(:item_name) + ':'
+      %th= f.label :item_name, t(:item_name)
       %td.long= f.text_field :item_name
      %tr
-      %th Дата отгрузки:
-      %td.tiny
-       с&nbsp;
-       %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from}
-       -# .calendar-input= @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from
-       &nbsp;по&nbsp;
-       %input.calendar-input{:type => "text", :name => 'filter[date_to]', :value => @filter.try(:date_to).blank? ? Date.current.strftime("%Y-%m-%d") : @filter.date_to}
+      %th= f.label :reservation_end, t(:reservation_end) + 'Количество дней до разрезервирования:'# !!! todo fix field name
+      %td.tiny= f.text_field :reservation_end
+     %tr
+      %th= f.label :only_my, t(:only_my) + 'Только мои позиции:' 
+      %td.tiny= f.text_field :only_my
        -# #ui-datepicker-div-container{:style=>"position: relative;"}
      %tr
       %th
@@ -34,28 +37,20 @@
     -# = render :partial => "shared/pagination", :locals => {:page => @lines.page.to_i, :pages => @lines.total.to_i}
     %table.table-style{:class => "order-list"}
      %tr
-      %th ROHS
+      %th Код номенклатуры
       %th= t(:item_name)
       %th Производитель
       %th Количество
-      %th Цена
       %th Сумма
       %th Поставка
-      %th Резерв
-      %th В обработке складом
-      %th Получено
-      %th Продано
-      %th Дата готовности
-      %th Ожидаемая дата поставки
+      %th Зарезервировано
+      %th Разрезервировать
       %th Заказ
+      %th Web
       %th Контактное лицо
-      %th Проект
+      %th Менеджер
 
      = render :partial => "orders/item_line", :collection => @lines.items
 
-:javascript
- if($(".calendar-input").length > 0){
- $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd', popupContainer: $('#ui-datepicker-div-container')});
- }
 
 
