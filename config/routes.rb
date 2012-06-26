@@ -9,6 +9,8 @@ Urm::Application.routes.draw do
   resources :orders, :only => [:index, :new, :show, :create] do
    collection do
     get :lines
+    get :control
+    get :client_lines
    end
    member do
     post :save

@@ -45,6 +45,14 @@ class OrdersController < ApplicationController
    @lines = Axapta.sales_lines_paged(@page, @filter_hash.merge(:only_open => true))
   end
 
+  def client_lines
+   @lines = Axapta.sales_lines_paged(@page, @filter_hash.merge(:only_open => true))
+  end
+
+  def control
+   @lines = Axapta.sales_lines_paged(@page, @filter_hash.merge(:only_open => true))
+  end
+
   def show
    @close_reasons = Axapta.sales_close_reason_list
    @order_info = Axapta.sales_info(:sales_id => params[:id], :show_external_invoice_num => true, :show_max_quotation_prognosis => true).first

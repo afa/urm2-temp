@@ -1,0 +1,108 @@
+.main-menu
+ -#TODO: поправить меню, актуализировать
+ .corner-l
+ .corner-r
+ .button{:class => [(params[:controller] == "main") || current_page?(root_path) ? "active" : nil]}
+  .button-shadow
+   %i.b1
+   %i.b2
+   %i.b3
+    %i
+   %a.link{:href=>root_path} Главная
+ .button{:class => [(params[:controller] == "orders") ? "active" : nil]}
+  .button-shadow
+   %i.b1
+   %i.b2
+   %i.b3
+    %i
+   %a.link{:href=>"#"} Заказы
+  .submenu-shadow
+   %i.b1
+   %i.b2
+   %i.b3
+   %i.b4
+    %i
+   %i.b5
+    %i
+   %i.b6
+   %i.b7
+   %i.b8
+   %ul.submenu
+    %li
+     %a{:class => [current_page?(orders_path) ? "active" : nil], :href=>orders_path}
+      %span Список заказов
+    %li
+     %a{:class => [current_page?(orders_path) ? "active" : nil], :href=>control_orders_path}
+      %span Контроль продолжительности резервирования
+    %li
+     %a{:class => [current_page?(lines_orders_path) ? "active" : nil], :href=>lines_orders_path()}
+      %span Открытые строки
+    %li
+     %a{:class => [current_page?(orders_path) ? "active" : nil], :href=>client_lines_orders_path}
+      %span Строки заказов клиента
+ .button{:class => [(params[:controller] == "quotations") ? "active" : nil]}
+  .button-shadow
+   %i.b1
+   %i.b2
+   %i.b3
+    %i
+   %a.link{:href=>"#"} Запросы
+  .submenu-shadow
+   %i.b1
+   %i.b2
+   %i.b3
+   %i.b4
+    %i
+   %i.b5
+    %i
+   %i.b6
+   %i.b7
+   %i.b8
+   %ul.submenu
+    %li
+     %a{:class => [current_page?(quotations_path) ? "active" : nil], :href=>quotations_path}
+      %span Список запросов
+    %li
+     %a{:class => [current_page?(lines_quotations_path) ? "active" : nil], :href=>lines_quotations_path()}
+      %span Открытые строки
+    -# %li
+     %a{:href=>"#"}
+      %span Грузы
+    -# %li
+     %a{:href=>"#"}
+      %span Исходящие грузы
+     %ul
+      %li
+       %a{:href=>"#"}
+        %span Строки заказа
+      %li
+       %a{:href=>"#"}
+        %span Контроль продолжительности резервирования
+      %li
+       %a{:href=>"#"}
+        %span Открытые строки заказов
+      %li
+       %a{:href=>"#"}
+        %span Строки заказа клиента
+    -# %li.active
+     %a{:href=>"#"}
+      %span Накладные
+ -# .button
+  .button-shadow
+   %i.b1
+   %i.b2
+   %i.b3
+    %i
+   %a.link{:href=>"#"} Аналитика
+ -# .button
+  .button-shadow
+   %i.b1
+   %i.b2
+   %i.b3
+    %i
+   %a.link{:href=>"#"}
+    Сообщения &nbsp; 
+    %span.counter
+     %i.c1
+     %i.c2
+     327
