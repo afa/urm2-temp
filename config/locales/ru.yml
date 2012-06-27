@@ -154,3 +154,6 @@ ru:
  request_string: Запрос
  requested_count: Количество
  manager_comment: Сообщение менеджеру
+
+ only_my_orders: "Только мои позиции:"
+ reservation_end: "Количество дней до разрезервирования:"

@@ -17,10 +17,13 @@
       %th= f.label :item_name, t(:item_name)
       %td.long= f.text_field :item_name
      %tr
-      %th= f.label :reservation_end, t(:reservation_end) + 'Количество дней до разрезервирования:'# !!! todo fix field name
+      %th= f.label :reservation_end, t(:reservation_end) # !!! todo fix field name
       %td.tiny= f.text_field :reservation_end
      %tr
-      %th= f.label :only_my, t(:only_my) + 'Только мои позиции:' 
+      %th
+      %td= render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my_orders), :opts => {:use_system => true, :value => params[:filter].try(:[], :only_my).try(:==, '1')}}
+     -#
+      %th= f.label :only_my, t(:only_my_orders)
       %td.tiny= f.text_field :only_my
       -# #ui-datepicker-div-container{:style=>"position: relative;"}
      %tr
