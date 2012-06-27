@@ -7,12 +7,9 @@
  %td.text-right.tiny= control_line.sales_qty
  -# TODO %td.text-right= text_field_tag "order[#{showed_line.sales_id}][user_price]", showed_line.user_price
  %td.text-right= control_line.amount
- %td= control_line.qty_in_debt
- %td.reserve_data.tiny{:style => "display: none;"}= text_field_tag "order[#{control_line.sales_id}][line][#{iid}][process_qty]", control_line.process_qty
  %td= control_line.reserve_qty
- %td= control_line.qty_in_processing
- %td= control_line.qty_receive
- %td= control_line.invoiced_in_total
- %td= control_line.date_dead_line
- %td= control_line.confirmed_dlv_date
- %td.text-right= control_line.price
+ %td= control_line.reservation_end
+ %td= link_to control_line.sales_id, order_path(control_line.sales_id)
+ %td= control_line.invoiced_in_total #web
+ %td= control_line.date_dead_line #contact
+ %td= control_line.confirmed_dlv_date #manager
