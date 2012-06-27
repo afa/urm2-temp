@@ -5,7 +5,7 @@
 
 .content-wrap
  .filter-block
-  = form_for :filter, :url => lines_orders_path, :html => {:method => :get} do |f|
+  = form_for :filter, :url => client_lines_orders_path, :html => {:method => :get} do |f|
    .filter
     %table
      %tr
@@ -51,7 +51,7 @@
       %th Контактное лицо
       %th Проект
 
-     = render :partial => "orders/item_line", :collection => @lines.items
+     = render :partial => "orders/client_line", :collection => @lines.items
 
 :javascript
  if($(".calendar-input").length > 0){

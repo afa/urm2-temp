@@ -9,7 +9,7 @@
 Количество дней резервирования: 5
 .content-wrap
  .filter-block
-  = form_for :filter, :url => lines_orders_path, :html => {:method => :get} do |f|
+  = form_for :filter, :url => control_orders_path, :html => {:method => :get} do |f|
    .filter
     %table
 
@@ -53,7 +53,7 @@
       %th Контактное лицо
       %th Менеджер
 
-     = render :partial => "orders/item_line", :collection => @lines.items
+     = render :partial => "orders/control_line", :collection => @lines.items
 
 
 
