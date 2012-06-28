@@ -3,10 +3,22 @@
  %span >
  %span.current Контроль продолжительности резервирования
 
-Текущая сумма резерва: 1 165,95
-Доступная сумма резерва: 9 400,06
-Коэффициент эффективности: 62,12
-Количество дней резервирования: 5
+%table
+ %tr
+  %th
+   Текущая сумма резерва:
+  %td= @info.reserve_used
+ %tr
+  %th
+   Доступная сумма резерва:
+  %td= @info.reserve_available
+ %tr
+  %th
+   Коэффициент эффективности:
+  %td= @info.reserve_coefficient
+ -# %tr
+  %th
+   Количество дней резервирования: 5
 .content-wrap
  .filter-block
   = form_for :filter, :url => control_orders_path, :html => {:method => :get} do |f|
