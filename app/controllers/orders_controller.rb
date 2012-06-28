@@ -51,7 +51,7 @@ class OrdersController < ApplicationController
 
   def control
    @info = Axapta.custom_limits
-   @lines = Axapta.sales_lines_paged(@page, @filter_hash.merge(:only_open => true))
+   @lines = Axapta.sales_lines_paged(@page, @filter_hash.merge(:only_reserve => true, :show_reserve_qty => true))
   end
 
   def show
