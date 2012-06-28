@@ -46,7 +46,7 @@ class OrdersController < ApplicationController
   end
 
   def client_lines
-   @info = Axapta.custom_limits.try(:reserve)
+   @info = Axapta.custom_limits.try(:reserve) || OpenStruct.new
    @lines = Axapta.sales_lines_paged(@page, @filter_hash.merge(:only_open => true))
   end
 
