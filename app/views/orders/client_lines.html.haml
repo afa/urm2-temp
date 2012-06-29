@@ -5,6 +5,11 @@
 
 .content-wrap
  .filter-block
+  %table
+   %th
+    Название клиента
+   %td
+    = User.current.name
   = form_for :filter, :url => client_lines_orders_path, :html => {:method => :get} do |f|
    .filter
     %table
@@ -12,7 +17,7 @@
       %th= f.label :item_name, t(:item_name) + ':'
       %td.long= f.text_field :item_name
      %tr
-      %th Дата отгрузки:
+      %th Дата накладной:
       %td.tiny
        с&nbsp;
        %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from}
@@ -32,24 +37,21 @@
    .table-scrolling
     = render :partial => "shared/pagination", :locals => {:page => @lines.page.to_i, :pages => @lines.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей: #{@lines.records}&nbsp;&nbsp;Страниц: #{@lines.total}&nbsp;&nbsp;".html_safe, :text_before_current => "Страница: "}}
     -# = render :partial => "shared/pagination", :locals => {:page => @lines.page.to_i, :pages => @lines.total.to_i}
+Номенклатура  ROHS  Наименование  Производитель Корпус  Количество  Цена ед. изм. Валюта  Сумма Заказ Накладная Дата
     %table.table-style{:class => "order-list"}
      %tr
+      %th Номенклатура
       %th ROHS
       %th= t(:item_name)
       %th Производитель
+      %th Корпус
       %th Количество
-      %th Цена
+      %th Цена ед. изм.
+      %th Валюта
       %th Сумма
-      %th Поставка
-      %th Резерв
-      %th В обработке складом
-      %th Получено
-      %th Продано
-      %th Дата готовности
-      %th Ожидаемая дата поставки
       %th Заказ
-      %th Контактное лицо
-      %th Проект
+      %th Накладная
+      %th Дата
 
      = render :partial => "orders/client_line", :collection => @lines.items
 

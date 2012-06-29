@@ -1,14 +1,9 @@
 - iid = client_line.line_id
 %tr
- %td.select_data{:style => "display: none;"}
-  = check_box_tag "order[#{client_line.sales_id}][line][#{iid}][selected]", "1", false
+ %td
+  = client_line.item_id
  %td
   = client_line.rohs
-  = hidden_field_tag "order[#{client_line.sales_id}][line][#{iid}][line_id]", client_line.line_id # сртпв item_id to line_id ??
-  = hidden_field_tag "order[#{client_line.sales_id}][line][#{iid}][note]", client_line.note
-  = hidden_field_tag "order[#{client_line.sales_id}][line][#{iid}][requirement]", client_line.requirements
-  = hidden_field_tag "order[#{client_line.sales_id}][line][#{iid}][process_qty]", client_line.process_qty
-  = hidden_field_tag "order[#{client_line.sales_id}][line][#{iid}][selected]", ""
  %td.text-left= client_line.item_name
  %td.text-left= client_line.brend
  %td.text-right.tiny
