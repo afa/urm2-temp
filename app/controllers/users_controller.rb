@@ -66,6 +66,14 @@ class UsersController < ApplicationController
    end
   end
 
+  def limits
+   @info = nil
+  end
+
+  def balance
+   @info = Axapta.info_cust_balance
+  end
+
  protected
   def get_user
    @user = User.find(params[:id])

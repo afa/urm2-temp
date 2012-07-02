@@ -227,6 +227,15 @@ class Axapta
    end
   end
 
+  def self.info_cust_balance
+   begin
+    OpenStruct.new(AxaptaRequest.info_cust_balance(:user_hash => axapta_hash)["balance"])
+   rescue Exception => e
+    parse_exc(e)
+    OpenStruct.new
+   end
+  end
+
   def self.application_area_list
    begin
     AxaptaRequest.application_area_list(:user_hash => axapta_hash)["area_list"].map{|x| OpenStruct.new(x)}

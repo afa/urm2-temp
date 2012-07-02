@@ -1,2 +1,18 @@
 .info
- = @info.try(:balance)
+ %table
+  %tr
+   %th Фирма
+   %th Валюта
+   %th Свободные средства
+   %th Замороженные средства
+   %th Задолженность
+   %th Баланс в валюте
+   %th Баланс
+  %tr
+   %td= @info.company
+   %td= @info.currency
+   %td= @info.amount_free
+   %td= @info.amount_tied
+   %td= @info.cust_debt
+   %td= @info.balance_cur
+   %td= @info.balance
