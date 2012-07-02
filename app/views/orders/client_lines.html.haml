@@ -9,7 +9,7 @@
    %th
     Название клиента
    %td
-    = User.current.name
+    = User.current.current_account.name
   = form_for :filter, :url => client_lines_orders_path, :html => {:method => :get} do |f|
    .filter
     %table
