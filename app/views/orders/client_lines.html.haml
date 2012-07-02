@@ -5,14 +5,14 @@
 
 .content-wrap
  .filter-block
-  %table
-   %th
-    Название клиента
-   %td
-    = User.current.current_account.name
   = form_for :filter, :url => client_lines_orders_path, :html => {:method => :get} do |f|
    .filter
     %table
+     %tr
+      %th
+       Название клиента
+      %td
+       = User.current.current_account.name
      %tr
       %th= f.label :item_name, t(:item_name) + ':'
       %td.long= f.text_field :item_name
