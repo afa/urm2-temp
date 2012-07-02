@@ -232,6 +232,7 @@ class Axapta
     OpenStruct.new(AxaptaRequest.info_cust_balance(:user_hash => axapta_hash)["balance"])
    rescue Exception => e
     parse_exc(e)
+    raise
     OpenStruct.new
    end
   end
