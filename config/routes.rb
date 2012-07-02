@@ -30,6 +30,9 @@ Urm::Application.routes.draw do
   resources :users do
    collection do
     get :current_account
+    get :balance
+    get :limits
+    get :sales_report
    end
    resources :accounts
   end

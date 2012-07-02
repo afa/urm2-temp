@@ -65,6 +65,31 @@
     %li
      %a{:class => [current_page?(lines_quotations_path) ? "active" : nil], :href=>lines_quotations_path()}
       %span Открытые строки
+ .button{:class => [(params[:controller] == "users") ? "active" : nil]}
+  .button-shadow
+   %i.b1
+   %i.b2
+   %i.b3
+    %i
+   %a.link{:href=>"#"} Информация
+  .submenu-shadow
+   %i.b1
+   %i.b2
+   %i.b3
+   %i.b4
+    %i
+   %i.b5
+    %i
+   %i.b6
+   %i.b7
+   %i.b8
+   %ul.submenu
+    %li
+     %a{:class => [current_page?(balance_users_path) ? "active" : nil], :href=>balance_users_path}
+      %span Баланс
+    %li
+     %a{:class => [current_page?(limits_users_path) ? "active" : nil], :href=>limits_users_path()}
+      %span Лимиты
     -# %li
      %a{:href=>"#"}
       %span Грузы
