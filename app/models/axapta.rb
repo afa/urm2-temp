@@ -242,13 +242,12 @@ class Axapta
     AxaptaRequest.application_area_list(:user_hash => axapta_hash)["area_list"].map{|x| OpenStruct.new(x)}
    rescue Exception => e
     parse_exc(e)
-    []
    end
   end
 
   def self.custom_limits
    #begin
-    OpenStruct.new(AxaptaRequest.info_cust_limits(:user_hash => axapta_hash)["reserve"])
+    OpenStruct.new(AxaptaRequest.info_cust_limits(:user_hash => axapta_hash).try(:[], "reserve"))
    #rescue Exception => e
    # parse_exc(e)
    # OpenStruct.new
