@@ -21,26 +21,28 @@
 %h2 История расчетов
 
 .filter
- %table
-  %tr
-   %th Период
-   %td
-    с:  
-    по:   
-  %tr
-   %th Валюта:
-   %td
-  %tr
-   %th Фирма:
-   %td
-  %tr
-   %th
-    показать проводки привязки/отвязки
-   %td
-  %tr
-   %th
-    показать проводки курсовой разницы
-   %td
+ = form_for :filter, :url => balance_users_path, :method => :get do |form|
+  %table
+   %tr
+    %th Период
+    %td
+     с:  
+     по:   
+   %tr
+    %th Валюта:
+    %td
+   %tr
+    %th Фирма:
+    %td
+   %tr
+    %th
+     показать проводки привязки/отвязки
+    %td
+   %tr
+    %th
+     показать проводки курсовой разницы
+    %td
+  = form.submit "show"
 - unless @transes.blank?
  Общий баланс на начало периода: 0,0000; на конец периода: 1205,3962
  %table
