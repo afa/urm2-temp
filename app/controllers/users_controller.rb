@@ -67,7 +67,7 @@ class UsersController < ApplicationController
   end
 
   def limits
-   @info = nil
+   @info = Axapta.info_cust_limits
   end
 
   def balance

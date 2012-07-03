@@ -1,2 +1,31 @@
 .info
  = @info.try(:limit)
+ Товарный кредит
+ %table
+  %tr
+   %th Сумма непогашенного кредита
+   %td= @info.com_credit.credit_amount
+  %tr
+   %th Отгружено на сумму
+   %td= @info.com_credit.credit_invoiced
+
+ Кредитные лимиты
+ %table
+  %tr
+   %th Лимит товарного кредита
+   %td= @info.credit_limits.credit_limit
+
+ Резервы
+ %table
+  %tr
+   %th Коэффициент эффективности
+   %td= @info.reserve.reserve_coefficient
+  %tr
+   %th Разрешенная сумма резерва
+   %td= @info.reserve.reserve_max
+  %tr
+   %th Текущая сумма резерва
+   %td= @info.reserve.reserve_used
+  %tr
+   %th Доступная сумма резерва
+   %td= @info.reserve.reserve_available
