@@ -229,8 +229,7 @@ class Axapta
 
   def self.info_cust_balance
    #begin
-   p AxaptaRequest.info_cust_balance(:user_hash => axapta_hash)
-   AxaptaRequest.info_cust_balance(:user_hash => axapta_hash).try(:[], "balance").try(:first).inject(OpenStruct.new){|r, (k, v)| r.send(k + '=', v); r  }
+   AxaptaRequest.info_cust_balance(:user_hash => axapta_hash).try(:[], "balance").map{|req| req.inject(OpenStruct.new){|r, (k, v)| r.send(k + '=', v); r  } }
    #rescue Exception => e
    # parse_exc(e)
    # raise

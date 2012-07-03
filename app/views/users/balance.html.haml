@@ -8,11 +8,54 @@
    %th Задолженность
    %th Баланс в валюте
    %th Баланс
+  - @info.each do |info|
+   %tr
+    %td= info.company
+    %td= info.currency
+    %td= info.amount_free
+    %td= info.amount_tied
+    %td= info.cust_debt
+    %td= info.balance_cur
+    %td= info.balance
+
+%h2 История расчетов
+
+.filter
+ %table
   %tr
-   %td= @info.company
-   %td= @info.currency
-   %td= @info.amount_free
-   %td= @info.amount_tied
-   %td= @info.cust_debt
-   %td= @info.balance_cur
-   %td= @info.balance
+   %th Период
+   %td
+    с:  
+    по:   
+  %tr
+   %th Валюта:
+   %td
+  %tr
+   %th Фирма:
+   %td
+  %tr
+   %th
+    показать проводки привязки/отвязки
+   %td
+  %tr
+   %th
+    показать проводки курсовой разницы
+   %td
+- unless 
+Общий баланс на начало периода: 0,0000; на конец периода: 1205,3962
+%table
+ %tr
+  %th Дата
+  %th Операция
+  %th Тип операции
+  %th Документ
+  %th Фирма
+  %th Валюта
+  %th Приход в валюте
+  %th Расход в валюте
+  %th Сумма
+  %th Баланс в валюте
+  %th Общий баланс в валюте
+  %th Баланс
+  %th Общий баланс
+ - 
