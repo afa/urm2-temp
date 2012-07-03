@@ -247,7 +247,7 @@ class Axapta
 
   def self.custom_limits
    #begin
-    OpenStruct.new(AxaptaRequest.info_cust_limits(:user_hash => axapta_hash).try(:[], "reserve"))
+    AxaptaRequest.info_cust_limits(:user_hash => axapta_hash).try(:[], "reserve").inject(OpenStruct.new){|r, x| r.send(x[0] + '=', x[1])  }
    #rescue Exception => e
    # parse_exc(e)
    # OpenStruct.new
