@@ -4,6 +4,7 @@ class UsersController < ApplicationController
  before_filter :get_user, :only => [:edit, :update, :show, :destroy]
  before_filter :check_user, :only => [:edit, :update, :show, :destroy]
  before_filter :get_accounts, :only => [:edit, :update]
+ before_filter :get_filter, :only => [:balance]
   def index
    @children = current_user.axapta_children
    @parent = current_user.parent
@@ -72,7 +73,7 @@ class UsersController < ApplicationController
 
   def balance
    @info = Axapta.info_cust_balance
-   #unless filter[]
+   unless @filter[]
   end
 
  protected
@@ -86,5 +87,9 @@ class UsersController < ApplicationController
 
   def get_accounts
    @accounts = @user.accounts.where(:blocked => false)
+  end
+
+  def get_filter
+   @filter = OpenStruct.new(params[:filter])
   end
 end
