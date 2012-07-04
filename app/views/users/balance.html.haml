@@ -27,13 +27,17 @@
     %th Период
     %td
      с:  
+     %input.calendar-input{:type => "text", :name => "filter[date_from]", :value => Date.today.strftime("%Y-%m-%d")}
      по:   
+     %input.calendar-input{:type => "text", :name => "filter[date_from]", :value => Date.today.strftime("%Y-%m-%d")}
    %tr
     %th Валюта:
-    %td= form.text_field :currency
+    %td
+     = render :partial => "shared/select_list", :locals => {:list_items => @currencies, :name => "filter[currency]", :title => '', :opts => {:use_system => true} }
    %tr
     %th Фирма:
     %td
+     = render :partial => "shared/select_list", :locals => {:list_items => @companies, :name => "filter[company]", :title => '', :opts => {:use_system => true} }
    %tr
     %th
      показать проводки привязки/отвязки

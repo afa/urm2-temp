@@ -263,6 +263,10 @@ class Axapta
    end
   end
 
+  def self.info_cust_limits(hsh)
+    AxaptaRequest.info_cust_trans(hsh.merge(:user_hash => axapta_hash)).map{|a| OpenStruct.new(a)  }
+  end
+
  private
   def self.axapta_hash
    unless User.current

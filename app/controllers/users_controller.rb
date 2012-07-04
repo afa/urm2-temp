@@ -73,7 +73,10 @@ class UsersController < ApplicationController
 
   def balance
    @info = Axapta.info_cust_balance
-   unless @filter.commit.blank?
+   @currencies = @info.map(&:currency)
+   @companies = @info.map(&:company)
+   unless @filter.blank?
+    @transes = Axapta.info_cust_trans(params[:filter])
    end
   end
 
@@ -91,6 +94,6 @@ class UsersController < ApplicationController
   end
 
   def get_filter
-   @filter = OpenStruct.new(params[:filter])
+   @filter = OpenStruct.new(params[:filter]) unless params[:filter].empty?
   end
 end
