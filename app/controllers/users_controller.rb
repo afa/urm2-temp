@@ -73,7 +73,8 @@ class UsersController < ApplicationController
 
   def balance
    @info = Axapta.info_cust_balance
-   unless @filter[]
+   unless @filter.commit.blank?
+   end
   end
 
  protected
