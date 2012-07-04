@@ -30,7 +30,7 @@
      по:   
    %tr
     %th Валюта:
-    %td
+    %td= form.text_field :currency
    %tr
     %th Фирма:
     %td
@@ -42,6 +42,15 @@
     %th
      показать проводки курсовой разницы
     %td
+       .button.commit
+        %a.button-style{:href=>"#"}
+         %i.t &nbsp;
+         %i.b &nbsp;
+         %i.tl &nbsp;
+         %i.tr &nbsp;
+         %span Найти!
+         %i.bl &nbsp;
+         %i.br &nbsp;
   = form.submit "show"
 - unless @transes.blank?
  Общий баланс на начало периода: 0,0000; на конец периода: 1205,3962
