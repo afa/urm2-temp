@@ -21,7 +21,7 @@
 %h2 История расчетов
 
 .filter
- = form_for @filter, :url => balance_users_path, :method => :get do |form|
+ = form_for :filter, :url => balance_users_path, :method => :get do |form|
   %table
    %tr
     %th Период
