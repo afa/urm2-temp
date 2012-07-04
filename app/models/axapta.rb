@@ -255,12 +255,12 @@ class Axapta
   end
 
   def self.info_cust_limits
-   begin
+   #begin
     AxaptaRequest.info_cust_limits(:user_hash => axapta_hash).inject(OpenStruct.new){|r, (k, v)| r.send(k + '=', OpenStruct.new(v)) ; r }
-   rescue Exception => e
-    parse_exc(e)
-    OpenStruct.new
-   end
+   #rescue Exception => e
+   # parse_exc(e)
+   # OpenStruct.new
+   #end
   end
 
  private
