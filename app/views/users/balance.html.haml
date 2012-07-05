@@ -59,7 +59,7 @@
 .clear.padding
 - unless @transes.blank?
  Общий баланс на начало периода: #{@transes.first.common_balance_amount.to_f - @transes.first.amount.to_f}; на конец периода: #{@transes.last.common_balance_amount}
- %table
+ %table.table-style
   %tr
    %th Дата
    %th Операция
