@@ -73,18 +73,18 @@
    %th Общий баланс в валюте
    %th Баланс
    %th Общий баланс
- - @transes.each do |tr|
-  %tr
-   %td= tr.trans_date
-   %td= tr.voucher
-   %td= tr.trans_type
-   %td= tr.document_number
-   %td= tr.company_code
-   %td= tr.currency_code
-   %td= tr.debet_amount_cur
-   %td= tr.credit_amount_cur
-   %td= tr.amount
-   %td= tr.balance_amount_cur
-   %td= tr.common_balance_amount_cur
-   %td= tr.balance_amount
-   %td= tr.common_balance_amount
+  - @transes.each do |tr|
+   %tr
+    %td= tr.trans_date
+    %td= tr.voucher
+    %td= tr.trans_type
+    %td= tr.document_number
+    %td= tr.company_code
+    %td= tr.currency_code
+    %td= tr.debet_amount_cur
+    %td= tr.credit_amount_cur
+    %td= tr.amount
+    %td= tr.balance_amount_cur
+    %td= tr.common_balance_amount_cur
+    %td= tr.balance_amount
+    %td= tr.common_balance_amount
