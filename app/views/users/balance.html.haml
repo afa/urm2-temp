@@ -40,12 +40,14 @@
      = render :partial => "shared/select_list", :locals => {:list_items => @companies.map{|i| [i, i]}, :name => "filter[company]", :title => '', :opts => {:use_system => true} }
    %tr
     %th
-     показать проводки привязки/отвязки
+     
     %td
+     = render :partial => "shared/check_button", :locals => {:name => "filter[show_linked]", :title => "показать проводки привязки/отвязки", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@filter.show_linked)}}
    %tr
     %th
-     показать проводки курсовой разницы
+     
     %td
+     = render :partial => "shared/check_button", :locals => {:name => "filter[show_delta]", :title => "показать проводки курсовой разницы", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@filter.show_delta)}}
   .button.commit
    %a.button-style{:href=>"#"}
     %i.t &nbsp;
@@ -76,12 +78,12 @@
    %th Общий баланс
   - @transes.each do |tr|
    %tr
-    %td= tr.trans_date
-    %td= tr.voucher
-    %td= tr.trans_type
-    %td= tr.document_number
-    %td= tr.company_code
-    %td= tr.currency_code
+    %td.text-left= tr.trans_date
+    %td.text-left= tr.voucher
+    %td.text-left= tr.trans_type
+    %td.text-left= tr.document_number
+    %td.text-left= tr.company_code
+    %td.text-left= tr.currency_code
     %td.text-right= tr.debet_amount_cur
     %td.text-right= tr.credit_amount_cur
     %td.text-right= tr.amount
