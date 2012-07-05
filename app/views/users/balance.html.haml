@@ -27,9 +27,9 @@
     %th Период
     %td
      с:  
-     %input.calendar-input{:type => "text", :name => "filter[date_from]", :value => Date.today.strftime("%Y-%m-%d")}
+     %input.calendar-input{:type => "text", :name => "filter[date_from]", :value => @filter.try(:date_from) || (Date.today - Date.today.mday + 1).strftime("%Y-%m-%d")}
      по:   
-     %input.calendar-input{:type => "text", :name => "filter[date_from]", :value => Date.today.strftime("%Y-%m-%d")}
+     %input.calendar-input{:type => "text", :name => "filter[date_to]", :value => @filter.try(:date_to) || Date.today.strftime("%Y-%m-%d")}
    %tr
     %th Валюта:
     %td
