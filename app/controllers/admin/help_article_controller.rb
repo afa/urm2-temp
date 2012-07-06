@@ -13,7 +13,11 @@ class Admin::HelpArticleController < Admin::ApplicationController
   end
 
   def update
-   redirect_to admin_help_article_path(params[:id])
+   if @article.update_attributes(params[:article])
+    redirect_to admin_help_article_path(params[:id])
+   else
+    render :edit
+   end
   end
 
   def new
