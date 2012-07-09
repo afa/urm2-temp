@@ -42,7 +42,7 @@
     %th
      
     %td
-     = render :partial => "shared/check_button", :locals => {:name => "filter[show_linked]", :title => "показать проводки привязки/отвязки", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@filter.show_linked)}}
+     = render :partial => "shared/check_button", :locals => {:name => "filter[show_linked]", :title => "показать проводки привязки/отвязки", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@filter.try(:show_linked))}}
    %tr
     %th
      
