@@ -77,7 +77,7 @@ class UsersController < ApplicationController
    @companies = @info.map(&:company)
    unless @filter.blank?
     p "---balance info", @info, @filter
-    @transes = Axapta.info_cust_trans(params[:filter])
+    @transes = Axapta.info_cust_trans(params[:filter] || {})
     p "---balance transes", @transes
    end
   end
