@@ -97,5 +97,6 @@ class UsersController < ApplicationController
 
   def get_filter
    @filter = OpenStruct.new(params[:filter]) unless params[:filter].blank?
+   @filter ||= OpenStruct.new
   end
 end
