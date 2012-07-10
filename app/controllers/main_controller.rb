@@ -155,7 +155,7 @@ class MainController < ApplicationController
   end
 
   def help
-
+   @help = HelpArticle.find(params[:id])
   end
  protected
   #def get_accounts
