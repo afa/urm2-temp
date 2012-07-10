@@ -1,5 +1,5 @@
 .help-link
- = link_to "[?]", main_help_path(HelpArticle.where(:key => 'main.index').first.try(:id))
+ = link_to "[?]", help_main_index_path(HelpArticle.where(:key => 'main.index').first.try(:id))
 - unless @news.blank?
  %h2= t(:news)
  = render :partial => "news/item_on_main", :collection => @news
