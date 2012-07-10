@@ -156,6 +156,7 @@ class MainController < ApplicationController
 
   def help
    @help = HelpArticle.find(params[:id])
+   render :help, :layout => "simple"
   end
  protected
   #def get_accounts
