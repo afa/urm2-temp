@@ -5,4 +5,4 @@
  - @articles.each do |article|
   %tr
    %td= article.name
-   %td= article.key || "нет"
+   %td= link_to article.key || "нет", edit_help_article_path(article.id)
