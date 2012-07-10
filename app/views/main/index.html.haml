@@ -1,4 +1,4 @@
-.help-item
+.help-link
  = link_to "[?]", main_help_path(HelpArticle.where(:name => 'main.index').first.try(:id))
 - unless @news.blank?
  %h2= t(:news)
