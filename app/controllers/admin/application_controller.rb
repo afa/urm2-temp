@@ -1,7 +1,9 @@
 class Admin::ApplicationController < ActionController::Base
   layout "admin/application"
   helper Admin::ApplicationHelper
-  before_filter :authenticate!
+  skip_before_filter :login_from_cookie
+  skip_before_filter :authenticate!
+  before_filter :man_authenticate!
   protect_from_forgery
    def sign_in(user)
     if user
@@ -27,7 +29,7 @@ class Admin::ApplicationController < ActionController::Base
       end
     end
 
-  def authenticate!
+  def man_authenticate!
    unless logged_in?
     redirect_to new_admin_session_path
    end
