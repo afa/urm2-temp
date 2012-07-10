@@ -153,6 +153,10 @@ class MainController < ApplicationController
    redirect_to :back
    # запросить 
   end
+
+  def help
+
+  end
  protected
   #def get_accounts
   # @accounts = current_user.accounts.where(:blocked => false)

@@ -56,6 +56,7 @@ Urm::Application.routes.draw do
   get "main/analog"
   get "main/info"
   get "main/set"
+  get "main/help"
 
   namespace :admin do
    #resources :main, :only => [:index]
