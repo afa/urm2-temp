@@ -43,20 +43,31 @@ Urm::Application.routes.draw do
     delete :destroy
    end
   end
-  get "main/index"
+  resources :main, :only => [:index] do
+   collection do
+    post :manager_request
+    post :search
+    get :dms
+    get :analog
+    get :info
+    get :set
+    get :help
+   end
+  end
+  #get "main/index"
   root :to => "main#index"
-  post "main/manager_request"
+  #post "main/manager_request"
   match "/manager_request" => "main#manager_request"
-  post "main/search"
+  #post "main/search"
   match "/search" => "main#search"
   #post "main/extended"
   #match "/extended" => "main#extended"
-  get "main/dms"
-  get "main/mass_dms"
-  get "main/analog"
-  get "main/info"
-  get "main/set"
-  get "main/help"
+  #get "main/dms"
+  #get "main/mass_dms"
+  #get "main/analog"
+  #get "main/info"
+  #get "main/set"
+  #get "main/help"
 
   namespace :admin do
    #resources :main, :only => [:index]
