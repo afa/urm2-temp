@@ -81,7 +81,7 @@
   search_icons_handle();
   apply_hover_in_table_on_mmove();
   //load_dms_each(#{not to_bool(@only_store)});
-  load_dms_bundle("#{main_mass_dms_url(:query_string => @search.query_string)}", #{not to_bool(@only_store)});
+  load_dms_bundle("#{mass_dms_main_index_url(:query_string => @search.query_string)}", #{not to_bool(@only_store)});
   //! $("#order").hide();
   activateSearchAllowOrderButton();
   //! $("#cancel_order").hide();
