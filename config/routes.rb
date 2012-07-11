@@ -48,6 +48,7 @@ Urm::Application.routes.draw do
     get :mass_dms
     post :manager_request
     post :search
+    post :export
     get :dms
     get :analog
     get :info
