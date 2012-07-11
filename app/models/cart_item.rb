@@ -3,6 +3,12 @@ require "class_attributes_inheritance"
 class CartItem < ActiveRecord::Base
  class CartParamRequired < StandardError; end
 
+ FORMATTER = {
+  :csv => proc {|hdr, data|
+   hdr.to_csv + data.to_csv
+  }
+ }
+
  include ClassLevelInheritableAttributes
  include WebSignature
  cattr_inheritable :base_signature_fields, :signature_fields
@@ -23,6 +29,10 @@ class CartItem < ActiveRecord::Base
  before_validation :setup_price
  after_initialize :deserialize_offer
  before_validation :serialize_offer
+
+  def self.export(format)
+
+  end
 
   def action
 

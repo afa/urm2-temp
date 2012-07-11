@@ -2,7 +2,7 @@ require "ostruct"
 require "web_utils"
 class MainController < ApplicationController
 
- respond_to :js, :html, :json
+ respond_to :js, :html, :json, :csv, :xls
 
  skip_before_filter :check_account_cur, :only => [:index]
  #before_filter :get_users, :only => [:index]
@@ -35,6 +35,14 @@ class MainController < ApplicationController
    @app_list = Axapta.application_area_list || []
    gon.app_list = @app_list
 
+  end
+
+  def export
+   respond_with do |format|
+    format.csv do
+     send_data CartItem.export(:csv), :type => "application/csv", :disposition => :attachment
+    end
+   end
   end
 
   def dms
