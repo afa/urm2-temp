@@ -2,7 +2,7 @@ require "ostruct"
 require "web_utils"
 class MainController < ApplicationController
 
- respond_to :js, :html, :json, :csv, :xls
+ respond_to :js, :html, :json, :csv#, :xls
 
  skip_before_filter :check_account_cur, :only => [:index]
  #before_filter :get_users, :only => [:index]
