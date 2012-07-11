@@ -43,6 +43,7 @@ class MainController < ApplicationController
      send_data CartItem.export(:csv), :type => "application/csv", :disposition => :attachment
     end
    end
+   render :nothing => true
   end
 
   def dms
