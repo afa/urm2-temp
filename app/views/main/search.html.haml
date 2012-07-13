@@ -3,7 +3,7 @@
  .table-block
   .table-scrolling
    .padded
-    = form_for :export_fields, :url => export_main_index_path, :method => :post, :html=>{:class => "js"}, :remote => true do |f|
+    = form_for :export_fields, :url => export_main_index_path(:format => :csv), :method => :post, :html=>{:class => "js"}, :remote => true do |f|
      = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "items[export]"}
 
    = form_for :cart_fields, :url => carts_path, :method => :post, :html=>{:class => "js"}, :remote => true do |frm|
