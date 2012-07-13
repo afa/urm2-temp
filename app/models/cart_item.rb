@@ -1,3 +1,4 @@
+#coding: UTF-8
 require "web_utils"
 require "class_attributes_inheritance"
 class CartItem < ActiveRecord::Base
