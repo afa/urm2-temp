@@ -13,7 +13,7 @@ class CartItem < ActiveRecord::Base
  }
 
  EXPORTABLE_FIELDS = {
-  :csv => [[:type, "Тип"], [:product_name, "Наименование"]]
+  :csv => [[:type, "Тип"], [:product_name, "Наименование"], [:product_brend, "Производитель"], [:product_rohs, "ROHS"], [:current_price, "Цена"], [:quantity, "Количество"], [:location_link, "Склад"], [:prognosis, "Прогноз"], [:comment, "Примечание"], [:requirement, "Requirement"], [:user_price, "Цена клиента"], [:application_area_mandatory, "Требовать указать применение"], [:action, "Действие"]]
  }
 
  include ClassLevelInheritableAttributes
