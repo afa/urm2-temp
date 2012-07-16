@@ -36,7 +36,7 @@ class CartItem < ActiveRecord::Base
  before_validation :serialize_offer
 
   def self.export(format)
-   parms = EXPORTABLE_FIELDS.transpose
+   parms = EXPORTABLE_FIELDS[format].transpose
    p "---export", parms, FORMATTER[format].call(parms[1], User.current.cart_items.unprocessed.in_cart.all.map{|i| parms[0].map{|j| i.send(j) } })
    FORMATTER[format].call(parms[1], User.current.cart_items.unprocessed.in_cart.all.map{|i| parms[0].map{|j| i.send(j) } })
   end
