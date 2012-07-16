@@ -6,24 +6,11 @@
   = client_line.rohs
  %td.text-left= client_line.item_name
  %td.text-left= client_line.brend
- %td.text-right.tiny
-  .readable-amount{:style => "display: none;"}= client_line.sales_qty
-  .editable-amount= text_field_tag "order[#{client_line.sales_id}][line][#{iid}][qty]", client_line.sales_qty
+ %td.text-left= client_line.package_name
+ %td.text-right= client_line.sales_qty
  %td.text-right= client_line.price
- -# TODO %td.text-right= text_field_tag "order[#{showed_line.sales_id}][user_price]", showed_line.user_price
+ %td.text-left= client_line.currency_code
  %td.text-right= client_line.amount
- %td= client_line.qty_in_debt
- %td.reserve_data.tiny{:style => "display: none;"}= text_field_tag "order[#{client_line.sales_id}][line][#{iid}][process_qty]", client_line.process_qty
- %td= client_line.reserve_qty
- %td= client_line.qty_in_processing
- %td= client_line.qty_receive
- %td= client_line.invoiced_in_total
+ %td.text-left= link_to client_line.sales_id, order_path(client_line.sales_id)
+ %td
  %td= client_line.date_dead_line
- %td= client_line.confirmed_dlv_date
- %td.note-option.main_options_data.medium= text_field_tag "order[#{client_line.sales_id}][line][#{iid}][note]", client_line.note
- %td.requirement-option.main_options_data.medium= text_field_tag "order[#{client_line.sales_id}][line][#{iid}][requirement]", client_line.requirements
- %td
- %td
-
-  Номенклатура  ROHS  Наименование  Производитель Корпус  Количество  Цена ед. изм. Валюта  Сумма Заказ Накладная Дата
-

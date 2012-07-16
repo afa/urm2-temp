@@ -2,6 +2,10 @@
 .table-navigation-block{:class => "scroll"}
  .table-block
   .table-scrolling
+   .padded
+    = form_for :export_fields, :url => export_main_index_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
+     = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "items[export]"}
+
    = form_for :cart_fields, :url => carts_path, :method => :post, :html=>{:class => "js"}, :remote => true do |frm|
     %table.table-style{:class => "search-products"}
      - unless @items.empty?
@@ -81,7 +85,7 @@
   search_icons_handle();
   apply_hover_in_table_on_mmove();
   //load_dms_each(#{not to_bool(@only_store)});
-  load_dms_bundle("#{main_mass_dms_url(:query_string => @search.query_string)}", #{not to_bool(@only_store)});
+  load_dms_bundle("#{mass_dms_main_index_path(:query_string => @search.query_string)}", #{not to_bool(@only_store)});
   //! $("#order").hide();
   activateSearchAllowOrderButton();
   //! $("#cancel_order").hide();

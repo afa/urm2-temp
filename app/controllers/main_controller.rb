@@ -2,7 +2,7 @@ require "ostruct"
 require "web_utils"
 class MainController < ApplicationController
 
- respond_to :js, :html, :json
+ respond_to :js, :html, :json, :csv#, :xls
 
  skip_before_filter :check_account_cur, :only => [:index]
  #before_filter :get_users, :only => [:index]
@@ -35,6 +35,15 @@ class MainController < ApplicationController
    @app_list = Axapta.application_area_list || []
    gon.app_list = @app_list
 
+  end
+
+  def export
+   respond_with do |format|
+    format.csv do
+     send_data CartItem.export(:csv), :type => "application/csv", :disposition => :attachment
+    end
+   end
+   #render :nothing => true
   end
 
   def dms
@@ -152,6 +161,11 @@ class MainController < ApplicationController
    cart = CartRequest.create :user_id => User.current.id, :product_name => @request.request_string, :amount => @request.requested_count, :comment => @request.manager_comment
    redirect_to :back
    # запросить 
+  end
+
+  def help
+   @help = HelpArticle.find(params[:id])
+   render :help, :layout => "simple"
   end
  protected
   #def get_accounts

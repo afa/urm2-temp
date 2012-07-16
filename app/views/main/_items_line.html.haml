@@ -7,17 +7,17 @@
   %input.item-code{:type => "hidden", :value => items_line.code, :name => "items[#{offer_code}][code]", :id => "code_#{line_code}"}
   %input.item-cart{:type => "hidden", :value => items_line.cart_id, :name => "items[#{offer_code}][cart]"}
   .icon
-   -# = link_to "", main_dms_path(:code => items_line["item_id"], :after => line_code), :class => "dms js", :remote => true
+   -# = link_to "", dms_main_index_path(:code => items_line["item_id"], :after => line_code), :class => "dms js", :remote => true
    .dms-req &nbsp;
    .slider &nbsp;
   .icon
    - if items_line.analog_exists
-    = link_to "", main_analog_path(:code => items_line.code, :after => line_code), :class => "replacement js active", :remote => true
+    = link_to "", analog_main_index_path(:code => items_line.code, :after => line_code), :class => "replacement js active", :remote => true
    - else
     .replacement &nbsp;
    .slider &nbsp;
 
- %td.text-left= link_to items_line.name, main_info_path(:code => items_line.code, :after => line_code), :class => "dms js", :title => "Описание позиции", :remote => true
+ %td.text-left= link_to items_line.name, info_main_index_path(:code => items_line.code, :after => line_code), :class => "dms js", :title => "Описание позиции", :remote => true
 
  %td.text-left
   - if items_line.brend_url.blank?
@@ -46,7 +46,7 @@
   .icons 
    .icon
     - if items_line.forecast_available
-     = link_to "", main_info_path(:code => items_line.code, :after => line_code), :class => "info js delivery active", :remote => true
+     = link_to "", info_main_index_path(:code => items_line.code, :after => line_code), :class => "info js delivery active", :remote => true
     - else
      .delivery &nbsp;
  -# %td= items_line["prognoz"]
