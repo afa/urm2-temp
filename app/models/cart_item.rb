@@ -43,7 +43,7 @@ class CartItem < ActiveRecord::Base
    # p "---export", parms, FORMATTER[format].call(parms[1], User.current.cart_items.unprocessed.in_cart.all.map{|i| parms[0].map{|j| i.send(j) } })
     FORMATTER[format].call(csv, parms[1], User.current.cart_items.unprocessed.in_cart.all.map{|i| parms[0].map{|j| i.send(j) } })
    end
-   out
+   out.force_encoding('utf8').encode('cp1251')
   end
 
   def action
