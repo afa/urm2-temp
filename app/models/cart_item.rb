@@ -1,12 +1,14 @@
 #coding: UTF-8
 require "web_utils"
 require "class_attributes_inheritance"
+require "faster_csv"
 class CartItem < ActiveRecord::Base
  class CartParamRequired < StandardError; end
 
  FORMATTER = {
-  :csv => proc {|hdr, data|
-   hdr.to_csv + data.to_csv
+  :csv => proc {|csv, hdr, data|
+   csv << hdr
+   data.each{|i| csv << i }
   }
  }
 
@@ -37,8 +39,11 @@ class CartItem < ActiveRecord::Base
 
   def self.export(format)
    parms = EXPORTABLE_FIELDS[format].transpose
-   p "---export", parms, FORMATTER[format].call(parms[1], User.current.cart_items.unprocessed.in_cart.all.map{|i| parms[0].map{|j| i.send(j) } })
-   FORMATTER[format].call(parms[1], User.current.cart_items.unprocessed.in_cart.all.map{|i| parms[0].map{|j| i.send(j) } })
+   out = FacterCSV.generate( {:col_sep => ";", :encoding => 'u'}) do |csv|
+   # p "---export", parms, FORMATTER[format].call(parms[1], User.current.cart_items.unprocessed.in_cart.all.map{|i| parms[0].map{|j| i.send(j) } })
+    FORMATTER[format].call(csv, parms[1], User.current.cart_items.unprocessed.in_cart.all.map{|i| parms[0].map{|j| i.send(j) } })
+   end
+   out
   end
 
   def action
