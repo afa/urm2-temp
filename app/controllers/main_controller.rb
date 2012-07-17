@@ -40,7 +40,7 @@ class MainController < ApplicationController
   def export
    respond_with do |format|
     format.csv do
-     send_data CartItem.export(:csv), :type => "application/csv", :disposition => :attachment
+     send_data CartItem.export(:csv, :cart), :type => "application/csv", :disposition => :attachment
     end
    end
    #render :nothing => true

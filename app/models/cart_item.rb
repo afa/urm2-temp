@@ -13,7 +13,11 @@ class CartItem < ActiveRecord::Base
  }
 
  EXPORTABLE_FIELDS = {
-  :csv => [[:type, "Тип"], [:product_name, "Наименование"], [:product_brend, "Производитель"], [:product_rohs, "ROHS"], [:current_price, "Цена"], [:quantity, "Количество"], [:location_link, "Склад"], [:prognosis, "Прогноз"], [:comment, "Примечание"], [:requirement, "Requirement"], [:user_price, "Цена клиента"], [:application_area_mandatory, "Требовать указать применение"], [:action, "Действие"]]
+  :csv => {
+   :cart =>[
+    [:type, "Тип"], [:product_name, "Наименование"], [:product_brend, "Производитель"], [:product_rohs, "ROHS"], [:current_price, "Цена"], [:quantity, "Количество"], [:location_link, "Склад"], [:prognosis, "Прогноз"], [:comment, "Примечание"], [:requirement, "Requirement"], [:user_price, "Цена клиента"], [:application_area_mandatory, "Требовать указать применение"], [:action, "Действие"]
+   ]
+  }
  }
 
  include ClassLevelInheritableAttributes
@@ -37,8 +41,8 @@ class CartItem < ActiveRecord::Base
  after_initialize :deserialize_offer
  before_validation :serialize_offer
 
-  def self.export(format)
-   parms = EXPORTABLE_FIELDS[format].transpose
+  def self.export(format, obj)
+   parms = EXPORTABLE_FIELDS[format][obj].transpose
    out = CSV.generate( {:col_sep => ";"}) do |csv|
    # p "---export", parms, FORMATTER[format].call(parms[1], User.current.cart_items.unprocessed.in_cart.all.map{|i| parms[0].map{|j| i.send(j) } })
     FORMATTER[format].call(csv, parms[1], User.current.cart_items.unprocessed.in_cart.all.map{|i| parms[0].map{|j| i.send(j) } })
