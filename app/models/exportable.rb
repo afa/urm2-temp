@@ -2,25 +2,23 @@
 module Exportable
  def self.included(base)
   base.extend(ClassMethods)
-  base.class_eval do
-   const_set(:FORMATTER, {
+ end
+ 
+ module ClassMethods
+   FORMATTER = {
    :csv => proc {|csv, hdr, data|
     csv << hdr
     data.each{|i| csv << i }
    }
-  })
+  }
 
-  const_set(:EXPORTABLE_FIELDS, {
+  EXPORTABLE_FIELDS = {
    :csv => {
     :cart =>[
      [:type, "Тип"], [:product_name, "Наименование"], [:product_brend, "Производитель"], [:product_rohs, "ROHS"], [:current_price, "Цена"], [:quantity, "Количество"], [:location_link, "Склад"], [:prognosis, "Прогноз"], [:comment, "Примечание"], [:requirement, "Requirement"], [:user_price, "Цена клиента"], [:application_area_mandatory, "Требовать указать применение"], [:action, "Действие"]
     ]
    }
-  })
-  end
- end
- 
- module ClassMethods
+  }
 
   def export(format, obj)
    parms = EXPORTABLE_FIELDS[format][obj].transpose
