@@ -1,3 +1,4 @@
+#coding: UTF-8
 module Exportable
  def self.included(base)
   base.extend(ClassMethods)
