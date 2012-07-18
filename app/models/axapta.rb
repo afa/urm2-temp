@@ -249,6 +249,7 @@ class Axapta
    begin
     AxaptaRequest.info_cust_limits(:user_hash => axapta_hash).try(:[], "reserve").inject(OpenStruct.new){|r, x| r.send(x[0] + '=', x[1])  }
    rescue Exception => e
+    p "---exc in cust limits", e
     parse_exc(e)
     OpenStruct.new
    end
