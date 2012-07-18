@@ -6,9 +6,12 @@ module Exportable
  
  module ClassMethods
    FORMATTER = {
-   :csv => proc {|csv, hdr, data|
-    csv << hdr
-    data.each{|i| csv << i }
+   :csv => proc {|hdr, data|
+    out = CSV.generate( {:col_sep => ";"}) do |csv|
+     csv << hdr
+     data.each{|i| csv << i }
+    end
+    out.force_encoding('UTF-8').encode('Windows-1251')
    }
   }
 
@@ -22,11 +25,8 @@ module Exportable
 
   def export(format, obj)
    parms = EXPORTABLE_FIELDS[format][obj].transpose
-   out = CSV.generate( {:col_sep => ";"}) do |csv|
    # p "---export", parms, FORMATTER[format].call(parms[1], User.current.cart_items.unprocessed.in_cart.all.map{|i| parms[0].map{|j| i.send(j) } })
-    FORMATTER[format].call(csv, parms[1], User.current.cart_items.unprocessed.in_cart.all.map{|i| parms[0].map{|j| i.send(j) } })
-   end
-   out.force_encoding('UTF-8').encode('Windows-1251')
+   FORMATTER[format].call(parms[1], User.current.cart_items.unprocessed.in_cart.all.map{|i| parms[0].map{|j| i.send(j) } })
   end
 
  end
