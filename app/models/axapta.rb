@@ -161,11 +161,11 @@ class Axapta
 
   def self.sales_lines_all(*args)
    prm = args.dup.as_hash
-   res = AxaptaRequest.sales_lines({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1), :records_per_page => 65535}.merge(prm))
+   res = AxaptaRequest.sales_lines({:user_hash => axapta_hash, :page_num => 1, :records_per_page => 65535}.merge(prm))
    #res = AxaptaRequest.sales_lines({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1)}.merge(*args))
    OpenStruct.new(:items => (res.try(:[], "sales_lines") || []).map do |sale|
     OpenStruct.new sale
-   end, :total => res.try(:[], "pages") || 1, :page => (page || prm[:page] || 1), :records => res.try(:[], "records") || 0)
+   end, :total => res.try(:[], "pages") || 1, :page => 1, :records => res.try(:[], "records") || 0)
   end
 
   def self.get_delivery_mode
