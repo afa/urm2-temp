@@ -182,6 +182,15 @@ class OrdersController < ApplicationController
    redirect_to order_path(id)
   end
 
+  def export_client_lines
+   respond_with do |format|
+    format.csv do
+     send_data CartItem.export(:csv, :open_sales_lines, Axapta.sales_lines_paged(@page, @filter_hash.merge(:only_open => true))), :type => "application/csv", :disposition => :attachment
+    end
+   end
+   
+  end
+
  protected
   def get_filter
    @filter_hash = params[:filter] || {}
