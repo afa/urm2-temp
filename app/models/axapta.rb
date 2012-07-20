@@ -149,7 +149,7 @@ class Axapta
   def self.sales_info_all(*args)
    prm = args.dup.as_hash
    begin
-    res = AxaptaRequest.sales_info({:user_hash => axapta_hash, :page_num => 1, :order_sales_id => "desc"}.merge(prm))
+    res = AxaptaRequest.sales_info({:user_hash => axapta_hash, :page_num => 1, :order_sales_id => "desc", :records_per_page => 65535}.merge(prm))
    rescue Exception => e
     return OpenStruct.new(:total => 0, :page => 0, :records => 0, :items => [], :error => e.to_s)
    end
