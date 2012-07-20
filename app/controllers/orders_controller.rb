@@ -191,6 +191,14 @@ class OrdersController < ApplicationController
    
   end
 
+  def export_list
+   respond_with do |format|
+    format.csv do
+     send_data CartItem.export(:csv, :sales, Axapta.sales_info_all(@filter_hash).items), :type => "application/csv", :disposition => :attachment
+    end
+   end
+  end
+
  protected
   def get_filter
    @filter_hash = params[:filter] || {}

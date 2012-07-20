@@ -146,6 +146,18 @@ class Axapta
    end, :total => res.try(:[], "pages") || 1, :page => (page || prm[:page] || 1), :records => res.try(:[], "records") || 0)
   end
 
+  def self.sales_info_all(*args)
+   prm = args.dup.as_hash
+   begin
+    res = AxaptaRequest.sales_info({:user_hash => axapta_hash, :page_num => 1, :order_sales_id => "desc"}.merge(prm))
+   rescue Exception => e
+    return OpenStruct.new(:total => 0, :page => 0, :records => 0, :items => [], :error => e.to_s)
+   end
+   OpenStruct.new(:items => (res.try(:[], "sales") || []).map do |sale|
+    OpenStruct.new sale
+   end, :total => res.try(:[], "pages") || 1, :page => 1, :records => res.try(:[], "records") || 0)
+  end
+
   def self.sales_lines(*args)
    sales_lines_paged(nil, *args).try(:items) || []
   end

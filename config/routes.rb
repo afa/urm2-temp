@@ -12,6 +12,7 @@ Urm::Application.routes.draw do
     get :control
     get :client_lines
     post :export_client_lines
+    post :export_list
    end
    member do
     post :save
