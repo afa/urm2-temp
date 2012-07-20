@@ -23,7 +23,7 @@ module Exportable
     :open_sales_lines => [[:item_id, "Номенклатура"], [:rohs, "ROHS"], [:item_name, "Наименование"], [:brend, "Производитель"], [:package_name, "Корпус"], [:sales_qty, "Количество"], [:price, "Цена ед. изм."], [:currency_code, "Валюта"], [:amount, "Сумма"], [:sales_id, "Заказ"], [:nomer_nakladnoy, "Накладная"], [:date_dead_line, "Дата"]],
     :order_lines => [[:rohs, "ROHS"], [:item_name, "Наименование"], [:brend, "Производитель"], [:sales_qty, "Количество"], [:price, "Цена"], [:amount, "Сумма"], [:qty_in_debt, "Поставка"], [:reserve_qty, "Резерв"], [:qty_in_processing, "В обработке складом"], [:qty_receive, "Получено"], [:invoiced_in_total, "Продано"], [:date_dead_line, "Дата готовности"], [:confirmed_dlv_date, "Ожидаемая дата поставки"], [:sales_id, "Заказ"]],
            #Контактное лицо Проект
-    :sales => [[:this_sales_origin, "УРМ"], [:sales_idm "Номер заказа"], [:official_number, "Офиц. номер"], [:amount, "Сумма"], [:sales_date, "Дата создания"], [:sales_status, "Статус"], [:comment, "Примечание"], [:contactperson_name, "Контактное лицо"], [:date_dead_line_delivery, "Дата готовности"], [:delivery_mode, "Код способа доставки"], [:document_number, "Счет"], [:sales_amount, "Сумма по счету"]]
+    :sales => [[:this_sales_origin, "УРМ"], [:sales_id, "Номер заказа"], [:official_number, "Офиц. номер"], [:amount, "Сумма"], [:sales_date, "Дата создания"], [:sales_status, "Статус"], [:comment, "Примечание"], [:contactperson_name, "Контактное лицо"], [:date_dead_line_delivery, "Дата готовности"], [:delivery_mode, "Код способа доставки"], [:document_number, "Счет"], [:sales_amount, "Сумма по счету"]]
    }
   }
 
