@@ -211,6 +211,11 @@ class Axapta
    OpenStruct.new(:items => (res.try(:[], "quotations") || []).map{|i| OpenStruct.new(i)}, :page => (page || hsh[:page] || 1), :total =>  res.try(:[], "pages") || 1, :records => res.try(:[], "records") || 0)
   end
 
+  def self.quotation_info_all(hsh)
+   res = AxaptaRequest.quotation_info({:page_num => 1}.merge(hsh).merge(:user_hash => axapta_hash))
+   OpenStruct.new(:items => (res.try(:[], "quotations") || []).map{|i| OpenStruct.new(i)}, :page => 1, :records_per_page => 65535, :total =>  res.try(:[], "pages") || 1, :records => res.try(:[], "records") || 0)
+  end
+
   def self.quotation_lines(hsh)
    quotation_lines_paged(nil, hsh).try(:items) || []
   end

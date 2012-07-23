@@ -24,6 +24,9 @@
       %th
       %td= render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
 
+  .padded
+   = form_for :export_fields, :url => export_list_orders_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
+    = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "items[export]"}
  .table-navigation-block{:class => "scroll"}
   .table-block
    .table-scrolling

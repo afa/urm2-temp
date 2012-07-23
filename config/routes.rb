@@ -27,6 +27,7 @@ Urm::Application.routes.draw do
   resources :quotations, :only => [:index, :show] do
    collection do
     get :lines
+    post :export_list
    end
   end
   resources :users do
