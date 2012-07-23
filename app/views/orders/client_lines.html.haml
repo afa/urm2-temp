@@ -39,18 +39,17 @@
     -# = render :partial => "shared/pagination", :locals => {:page => @lines.page.to_i, :pages => @lines.total.to_i}
     %table.table-style{:class => "order-list"}
      %tr
-      %th Номенклатура
-      %th ROHS
+      %th Код номенклатуры
       %th= t(:item_name)
       %th Производитель
-      %th Корпус
       %th Количество
-      %th Цена ед. изм.
-      %th Валюта
       %th Сумма
+      %th Зарезервировано
+      %th Разрезервировать
       %th Заказ
-      %th Накладная
-      %th Дата
+      %th Web
+      %th Контактное лицо
+      %th Менеджер
 
      = render :partial => "orders/client_line", :collection => @lines.items
     .padded

@@ -23,9 +23,7 @@ class OrdersController < ApplicationController
 
   def create
    @changed = []
-   p "---order create params", params
    @results = User.current.make_order(params[:date_picker], params[:delivery_type], :order_needed => params[:order_needed], :order_comment => params[:order_comment], :request_comment => params[:request_comment])
-   p "---create results", @results
    @carts = current_user.cart_items.unprocessed.in_cart.order("product_name, product_brend").all
    @stores = @carts.map(&:location_link).uniq.compact.sort{|a, b| a == User.current.current_account.invent_location_id ? -1 : a <=> b }
    gon.need_application = @carts.detect{|i| i.application_area_mandatory }
@@ -37,7 +35,6 @@ class OrdersController < ApplicationController
    res << {:name => "info", :value => "#{t :created_quotations} #{@results[1]}"} if @results[1]
    gon.results = res
    gon.redirect_to = quotation_path(@results[1]) if @results[1]
-   p "---results make_order", @results
    gon.redirect_to = order_path(@results[0][0]) if @results[0] && @results[0][0]
   end
 
@@ -183,6 +180,24 @@ class OrdersController < ApplicationController
   end
 
   def export_client_lines
+   respond_with do |format|
+    format.csv do
+     send_data CartItem.export(:csv, :open_sales_lines, Axapta.sales_lines_all(@filter_hash.merge(:only_open => true)).items), :type => "application/csv", :disposition => :attachment
+    end
+   end
+   
+  end
+
+  def export_lines
+   respond_with do |format|
+    format.csv do
+     send_data CartItem.export(:csv, :open_lines, Axapta.sales_lines_all(@filter_hash.merge(:only_open => true)).items), :type => "application/csv", :disposition => :attachment
+    end
+   end
+   
+  end
+
+  def export_control
    respond_with do |format|
     format.csv do
      send_data CartItem.export(:csv, :open_sales_lines, Axapta.sales_lines_all(@filter_hash.merge(:only_open => true)).items), :type => "application/csv", :disposition => :attachment
