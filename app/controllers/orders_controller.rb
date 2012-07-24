@@ -200,7 +200,7 @@ class OrdersController < ApplicationController
   def export_control
    respond_with do |format|
     format.csv do
-     send_data CartItem.export(:csv, :open_sales_lines, Axapta.sales_lines_all(@filter_hash.merge(:only_open => true)).items), :type => "application/csv", :disposition => :attachment
+     send_data CartItem.export(:csv, :order_control, Axapta.sales_lines_all(@filter_hash.merge(:only_reserve => true, :show_reserve_qty => true)).items), :type => "application/csv", :disposition => :attachment
     end
    end
    
