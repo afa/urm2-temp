@@ -24,7 +24,8 @@ module Exportable
     :order_lines => [[:rohs, "ROHS"], [:item_name, "Наименование"], [:brend, "Производитель"], [:sales_qty, "Количество"], [:price, "Цена"], [:amount, "Сумма"], [:qty_in_debt, "Поставка"], [:reserve_qty, "Резерв"], [:qty_in_processing, "В обработке складом"], [:qty_receive, "Получено"], [:invoiced_in_total, "Продано"], [:date_dead_line, "Дата готовности"], [:confirmed_dlv_date, "Ожидаемая дата поставки"], [:sales_id, "Заказ"]],
            #Контактное лицо Проект
     :sales => [[:this_sales_origin, "УРМ"], [:sales_id, "Номер заказа"], [:official_number, "Офиц. номер"], [:amount, "Сумма"], [:sales_date, "Дата создания"], [:sales_status, "Статус"], [:comment, "Примечание"], [:contactperson_name, "Контактное лицо"], [:date_dead_line_delivery, "Дата готовности"], [:delivery_mode, "Код способа доставки"], [:document_number, "Счет"], [:sales_amount, "Сумма по счету"]],
-    :quotations => [[:this_sales_origin, "УРМ"], [:quotation_id, "Номер запроса"], [:cust_account, "Код клиента"], [:quotation_date, "Дата создания"], [:prognosis_date, "Прогноз"], [:comment, "Примечание"], [:quotation_status, "Статус"], [:sales_responsible, "Менеджер"], [:contact_person_name, "Контактное лицо"]]
+    :quotations => [[:this_sales_origin, "УРМ"], [:quotation_id, "Номер запроса"], [:cust_account, "Код клиента"], [:quotation_date, "Дата создания"], [:prognosis_date, "Прогноз"], [:comment, "Примечание"], [:quotation_status, "Статус"], [:sales_responsible, "Менеджер"], [:contact_person_name, "Контактное лицо"]],
+    :order_control => [[:item_id, "Код номенклатуры"], [:item_name, "Наименование"], [:brend, "Производитель"], [:sales_qty, "Количество"], [:amount, "Сумма"], [:reserve_qty, "Зарезервировано"], [:reservation_end, "Разрезервировать"], [:sales_id, "Заказ"]] #Web Контактное лицо Менеджер
    }
   }
 
