@@ -43,7 +43,7 @@ class OrdersController < ApplicationController
   end
 
   def client_lines
-   @lines = Axapta.sales_lines_paged(@page, @filter_hash.merge(:only_open => true))
+   @lines = Axapta.sales_lines_paged(@page, @filter_hash.merge(:only_open => true)) #fix when made request
   end
 
   def control
@@ -179,7 +179,7 @@ class OrdersController < ApplicationController
    redirect_to order_path(id)
   end
 
-  def export_client_lines
+  def export_client_lines #fix when made request
    respond_with do |format|
     format.csv do
      send_data CartItem.export(:csv, :client_lines, Axapta.sales_lines_all(@filter_hash.merge(:only_open => true)).items), :type => "application/csv", :disposition => :attachment
