@@ -437,6 +437,19 @@ function cartsAddElementToCart(){
  cartsProcessRadioPicks();
 }
 
+function activateCommit(){
+ $('.commit a.button-style').off("click");
+ $('.commit.preload a.button-style').on("click", function(){
+  
+  $(this).parents('form').submit();
+  return false;
+ });
+ $('.commit:not(.preload) a.button-style').on("click", function(){
+  $(this).parents('form').submit();
+  return false;
+ });
+}
+
 //destroy
 function cartsRemoveElementFromCarts(){
  //-# $("#cart_store").replaceWith("#{escape_javascript(render :partial => "carts/cart_table", :locals => {:cart => @carts})}");

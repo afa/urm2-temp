@@ -12,6 +12,9 @@ Urm::Application.routes.draw do
     get :control
     get :client_lines
     post :export_client_lines
+    post :export_list
+    post :export_control
+    post :export_lines
    end
    member do
     post :save
@@ -26,6 +29,7 @@ Urm::Application.routes.draw do
   resources :quotations, :only => [:index, :show] do
    collection do
     get :lines
+    post :export_list
    end
   end
   resources :users do

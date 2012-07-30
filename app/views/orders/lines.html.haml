@@ -52,8 +52,12 @@
       %th Проект
 
      = render :partial => "orders/item_line", :collection => @lines.items
+    .padded
+     = form_for :export_fields, :url => export_lines_orders_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
+      = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "items[export]"}
 
-:javascript
- if($(".calendar-input").length > 0){
- $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd', popupContainer: $('#ui-datepicker-div-container')});
- }
+%div{:style => "z-index:9999;"}
+ :javascript
+  if($(".calendar-input").length > 0){
+  $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd', popupContainer: $('#ui-datepicker-div-container')});
+  }
