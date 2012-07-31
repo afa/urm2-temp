@@ -204,7 +204,8 @@ function activateSearchAllowOrderButton(){
   //! //$(".delete-from-cart").unbind("click");
   //! $(".delete-from-cart").hide();
   activateSearchCancelButton();
-  $("#order .commit.button a.commit-button").bind("click", function(){onSelectSendForm(this); return false;});
+  activateCommit();
+  //$("#order .commit.button a.commit-button").bind("click", function(){onSelectSendForm(this); return false;});
   return false;
  });
 }
@@ -417,11 +418,12 @@ function cartsAddElementToCart(){
  $('.select').selectList();
  $('.button-style').button();
  $('.switch').switchControl();
- $('.commit a.button-style').off("click");
- $('.commit a.button-style').on("click", function(){
-  $(this).parents('form').submit();
-  return false;
- });
+ activateCommit();
+ //$('.commit a.button-style').off("click");
+ //$('.commit a.button-style').on("click", function(){
+ // $(this).parents('form').submit();
+ // return false;
+ //});
  if($(".calendar-input").length > 0){
   $(".calendar-input").datepicker({ dateFormat: 'yy-mm-dd' });
  }
@@ -480,11 +482,12 @@ function cartsRemoveElementFromCarts(){
  $("div#order").append(gon.order);
  //$("div#order").hide();
  //$('.form-hide .item').dropDown();
- $('.commit a.button-style').off("click");
- $('.commit a.button-style').on("click", function(){
-  $(this).parents('form').submit();
-  return false;
- });
+ activateCommit();
+ //$('.commit a.button-style').off("click");
+ //$('.commit a.button-style').on("click", function(){
+ // $(this).parents('form').submit();
+ // return false;
+ //});
  cartsHandleRadioPicks();
  cartsHandleSaveOnFocusLost();
  cartsProcessRadioPicks();
@@ -506,11 +509,12 @@ function cartsSaveCart(){
  activateSearchCancelButton();
  $("div#order").children().remove();
  $("div#order").append(gon.order);
- $('.commit a.button-style').off("click");
- $('.commit a.button-style').on("click", function(){
-  $(this).parents('form').submit();
-  return false;
- });
+ activateCommit();
+ //$('.commit a.button-style').off("click");
+ //$('.commit a.button-style').on("click", function(){
+ // $(this).parents('form').submit();
+ // return false;
+ //});
  cartsHandleRadioPicks();
  cartsHandleSaveOnFocusLost();
  cartsProcessRadioPicks();
@@ -554,10 +558,11 @@ function ordersRenderCreate(){
  } else {
   $("#cart_store").hide();
  }
- $('.commit a.button-style').click(function(){
-  $(this).parents('form').submit();
-  return false;
- });
+ activateCommit();
+ //$('.commit a.button-style').click(function(){
+ // $(this).parents('form').submit();
+ // return false;
+ //});
  $('.select').selectList();
  $('.button-style').button();
  $('.switch').switchControl();
