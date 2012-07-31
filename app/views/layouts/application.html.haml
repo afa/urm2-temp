@@ -38,10 +38,11 @@
    }
 
    $(document).on("ready", function(){
-    $('.commit a.button-style').click(function(){
-     $(this).parents('form').submit();
-     return false;
-    });
+    activateCommit();
+    //$('.commit a.button-style').click(function(){
+    // $(this).parents('form').submit();
+    // return false;
+    //});
 
     //Шапка (файл: jquery.header.js)
     $('#header').header();
