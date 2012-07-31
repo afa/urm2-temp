@@ -441,14 +441,15 @@ function activateCommit(){
  $('.commit a.button-style').off("click");
  alert("start ld click");
  $('.commit a.button-style').on("click", function(){
-  var to_copy = $(this).parents('form').find('input.copiable').map(function(i, v){return v.value;});
+  var frm = $(this).parents('form');
+  var to_copy = frm.find('input.copiable').map(function(i, v){return v.value;});
   alert("click, "+to_copy);
   if(to_copy.length > 0){
-   alert("aply cp");
-   $.each(to_copy, function(idx, val){$(val).appendTo($(this).parents('form'))});
+   alert("aply cp"+to_copy.length);
+   $.each(to_copy, function(idx, val){$('<input type="hidden" name="' + $(val).attr('name') + '" value="' + val + '">').appendTo(frm);});
   }
   alert("don cp");
-  $(this).parents('form').submit();
+  frm.submit();
   return false;
  });
  alert("end ld click");
