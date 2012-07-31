@@ -439,14 +439,19 @@ function cartsAddElementToCart(){
 
 function activateCommit(){
  $('.commit a.button-style').off("click");
+ alert("start ld click");
  $('.commit a.button-style').on("click", function(){
   var to_copy = $(this).parents('form').find('input.copiable').map(function(i, v){return v.value;});
+  alert("click, "+to_copy);
   if(to_copy.length > 0){
+   alert("aply cp");
    $.each(to_copy, function(idx, val){$(val).appendTo($(this).parents('form'))});
   }
+  alert("don cp");
   $(this).parents('form').submit();
   return false;
  });
+ alert("end ld click");
  //$('.commit:not(.preload) a.button-style').on("click", function(){
  // $(this).parents('form').submit();
  // return false;
