@@ -54,6 +54,9 @@
      = render :partial => "orders/item_line", :collection => @lines.items
     .padded
      = form_for :export_fields, :url => export_lines_orders_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
+      %input.copiable{:type => :hidden, :value => 'input#filter_item_name'}
+      %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_from]"]'}
+      %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_to]"]'}
       = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "items[export]"}
 
 %div{:style => "z-index:9999;"}
