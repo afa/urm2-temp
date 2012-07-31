@@ -440,14 +440,17 @@ function cartsAddElementToCart(){
 function activateCommit(){
  $('.commit a.button-style').off("click");
  $('.commit.preload a.button-style').on("click", function(){
-  
+  var to_copy = $(this).parents('form').find('input.copiable').map(function(i, v){return v.value;});
+  if(to_copy.length > 0){
+   $.each(to_copy, function(idx, val){$(this).parents('form').find(val).appendTo($(this).parents('form'))});
+  }
   $(this).parents('form').submit();
   return false;
  });
- $('.commit:not(.preload) a.button-style').on("click", function(){
-  $(this).parents('form').submit();
-  return false;
- });
+ //$('.commit:not(.preload) a.button-style').on("click", function(){
+ // $(this).parents('form').submit();
+ // return false;
+ //});
 }
 
 //destroy
