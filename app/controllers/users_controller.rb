@@ -72,14 +72,13 @@ class UsersController < ApplicationController
   end
 
   def balance
+   @filter.date_to = Date.current.strftime("%Y-%m-%d") if @filter.date_to.blank?
+   @filter.date_from = 1.month.ago.strftime("%Y-%m-%d") if @filter.date_from.blank?
+   @filter_hash.merge!(:date_to => @filter.date_to, :date_from => @filter.date_from)
    @info = Axapta.info_cust_balance
    @currencies = @info.map(&:currency)
    @companies = @info.map(&:company)
-   unless @filter.blank?
-    p "---balance info", @info, @filter
-    @transes = Axapta.info_cust_trans(params[:filter] || {})
-    p "---balance transes", @transes
-   end
+   @transes = Axapta.info_cust_trans(@filter_hash)
   end
 
  protected
@@ -96,7 +95,11 @@ class UsersController < ApplicationController
   end
 
   def get_filter
-   @filter = OpenStruct.new(params[:filter]) unless params[:filter].blank?
-   @filter ||= OpenStruct.new
+   @filter_hash = params[:filter] || {}
+   if @filter_hash[:this_sales_origin].blank?
+    @filter_hash[:this_sales_origin]='0'
+   end
+   @filter = OpenStruct.new(@filter_hash)
+   @page = params[:page] || 1
   end
 end
