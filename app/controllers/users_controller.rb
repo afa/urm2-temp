@@ -4,7 +4,7 @@ class UsersController < ApplicationController
  before_filter :get_user, :only => [:edit, :update, :show, :destroy]
  before_filter :check_user, :only => [:edit, :update, :show, :destroy]
  before_filter :get_accounts, :only => [:edit, :update]
- before_filter :get_filter, :only => [:balance]
+ before_filter :get_filter, :only => [:balance, :export_balance]
   def index
    @children = current_user.axapta_children
    @parent = current_user.parent
@@ -78,6 +78,13 @@ class UsersController < ApplicationController
    @info = Axapta.info_cust_balance
    @currencies = @info.map(&:currency)
    @companies = @info.map(&:company)
+   @transes = Axapta.info_cust_trans(@filter_hash)
+  end
+
+  def export_balance
+   @filter.date_to = Date.current.strftime("%Y-%m-%d") if @filter.date_to.blank?
+   @filter.date_from = 1.month.ago.strftime("%Y-%m-%d") if @filter.date_from.blank?
+   @filter_hash.merge!(:date_to => @filter.date_to, :date_from => @filter.date_from)
    @transes = Axapta.info_cust_trans(@filter_hash)
   end
 
