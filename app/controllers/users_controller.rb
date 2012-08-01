@@ -86,8 +86,9 @@ class UsersController < ApplicationController
    @filter.date_from = 1.month.ago.strftime("%Y-%m-%d") if @filter.date_from.blank?
    @filter_hash.merge!(:date_to => @filter.date_to, :date_from => @filter.date_from)
    respond_with do |format|
-   format.csv do
-    send_data User.export(:csv, :balance, Axapta.info_cust_trans(@filter_hash)), :type => "application/csv", :disposition => :attachment
+    format.csv do
+     send_data User.export(:csv, :balance, Axapta.info_cust_trans(@filter_hash)), :type => "application/csv", :disposition => :attachment
+    end
    end
   end
 
