@@ -44,6 +44,8 @@ class OrdersController < ApplicationController
 
   def client_lines
    @lines = Axapta.sales_lines_paged(@page, @filter_hash.merge(:only_open => true)) #fix when made request
+   @filter.date_to = Date.current.strftime("%Y-%m-%d") if @filter.date_to.blank?
+   @filter.date_from = 1.month.ago.strftime("%Y-%m-%d") if @filter.date_from.blank?
   end
 
   def control
