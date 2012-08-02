@@ -70,8 +70,8 @@ group :development, :test, :staging do
  gem "headless"
  gem "execjs"
  gem "libv8", "=3.3.10.4"
- #gem "therubyracer-freebsd"
- gem "therubyracer"
+ gem "therubyracer-freebsd"
+ #gem "therubyracer"
  #gem "capybara"
  #gem "selenium-webdriver"
 # gem 'webrat'

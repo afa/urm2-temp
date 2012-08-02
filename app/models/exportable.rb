@@ -26,26 +26,7 @@ module Exportable
     :sales => [[:this_sales_origin, "УРМ"], [:sales_id, "Номер заказа"], [:official_number, "Офиц. номер"], [:amount, "Сумма"], [:sales_date, "Дата создания"], [:sales_status, "Статус"], [:comment, "Примечание"], [:contactperson_name, "Контактное лицо"], [:date_dead_line_delivery, "Дата готовности"], [:delivery_mode, "Код способа доставки"], [:document_number, "Счет"], [:sales_amount, "Сумма по счету"]],
     :quotations => [[:this_sales_origin, "УРМ"], [:quotation_id, "Номер запроса"], [:cust_account, "Код клиента"], [:quotation_date, "Дата создания"], [:prognosis_date, "Прогноз"], [:comment, "Примечание"], [:quotation_status, "Статус"], [:sales_responsible, "Менеджер"], [:contact_person_name, "Контактное лицо"]],
     :order_control => [[:item_id, "Код номенклатуры"], [:item_name, "Наименование"], [:brend, "Производитель"], [:sales_qty, "Количество"], [:amount, "Сумма"], [:reserve_qty, "Зарезервировано"], [:reservation_end, "Разрезервировать"], [:sales_id, "Заказ"]], #Web Контактное лицо Менеджер
-    :balance => [[:trans_date, "Дата"], [:voucher, ""], [:trans_type, ""], [:document_number, ""], [:company_code, ""], [:currency_code, ""], [:debet_amount_cur, ""], [:credit_amount_cur, ""], [:amount, ""], [:balance_amount_cur, ""], [:common_balance_amount_cur, ""], [:balance_amount, ""], [:common_balance_amount, ""]]
-    %td.text-right= tr.credit_amount_cur
-    %td.text-right= tr.amount
-    %td.text-right= tr.balance_amount_cur
-    %td.text-right= tr.common_balance_amount_cur
-    %td.text-right= tr.balance_amount
-    %td.text-right= tr.common_balance_amount
-   %th Дата
-   %th Операция
-   %th Тип операции
-   %th Документ
-   %th Фирма
-   %th Валюта
-   %th Приход в валюте
-   %th Расход в валюте
-   %th Сумма
-   %th Баланс в валюте
-   %th Общий баланс в валюте
-   %th Баланс
-   %th Общий баланс
+    :balance => [[:trans_date, "Дата"], [:voucher, "Операция"], [:trans_type, "Тип операции"], [:document_number, "Документ"], [:company_code, "Фирма"], [:currency_code, "Валюта"], [:debet_amount_cur, "Приход в валюте"], [:credit_amount_cur, "Расход в валюте"], [:amount, "Сумма"], [:balance_amount_cur, "Баланс в валюте"], [:common_balance_amount_cur, "Общий баланс в валюте"], [:balance_amount, "Баланс"], [:common_balance_amount, "Общий баланс"]]
    }
   }
 
