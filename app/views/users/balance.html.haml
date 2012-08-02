@@ -93,8 +93,8 @@
     %td.text-right= tr.common_balance_amount
  .padded
   = form_for :export_balance, :url => export_balance_users_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
-   %input.copiable{:type => :hidden, :value => 'input#filter_currency'}
-   %input.copiable{:type => :hidden, :value => 'input#filter_company'}
+   %input.copiable{:type => :hidden, :value => 'select#filter_currency'}
+   %input.copiable{:type => :hidden, :value => 'select#filter_company'}
    %input.copiable{:type => :hidden, :value => 'input#filter_show_linked'}
    %input.copiable{:type => :hidden, :value => 'input#filter_show_delta'}
    %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_from]"]'}
