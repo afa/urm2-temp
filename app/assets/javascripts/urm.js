@@ -443,9 +443,10 @@ function activateCommit(){
  $('.commit a.button-style').off("click");
  $('.commit a.button-style').on("click", function(){
   var frm = $(this).parents('form');
+  frm.find("input.copied[type='hidden']").remove();
   var to_copy = frm.find('input.copiable').map(function(i, v){return v.value;});
   if(to_copy.length > 0){
-   $.each(to_copy, function(idx, val){$('<input type="hidden" name="' + $(val).attr('name') + '" value="' + $(val).val() + '">').appendTo(frm);});
+   $.each(to_copy, function(idx, val){$('<input type="hidden" name="' + $(val).attr('name') + '" value="' + $(val).val() + '" class="copied">').appendTo(frm);});
   }
   frm.submit();
   return false;
