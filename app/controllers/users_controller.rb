@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+ respond_to :js, :html, :json, :csv#, :xls
  skip_before_filter :authenticate!, :only => [:new, :create]
  skip_before_filter :check_account, :only => [:new, :create]
  before_filter :get_user, :only => [:edit, :update, :show, :destroy]
