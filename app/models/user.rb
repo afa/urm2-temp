@@ -1,5 +1,7 @@
+require "csv"
 class User < ActiveRecord::Base
 
+ include Exportable
  has_many :accounts
  belongs_to :current_account, :class_name => 'Account'
  belongs_to :parent, :class_name => self.name, :foreign_key => :parent_id
