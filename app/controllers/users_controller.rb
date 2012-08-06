@@ -5,7 +5,7 @@ class UsersController < ApplicationController
  before_filter :get_user, :only => [:edit, :update, :show, :destroy]
  before_filter :check_user, :only => [:edit, :update, :show, :destroy]
  before_filter :get_accounts, :only => [:edit, :update]
- before_filter :get_filter, :only => [:balance, :export_balance]
+ before_filter :get_filter, :only => [:balance, :export_balance, :sold_orders, :export_sold_orders]
   def index
    @children = current_user.axapta_children
    @parent = current_user.parent
@@ -89,6 +89,22 @@ class UsersController < ApplicationController
    respond_with do |format|
     format.csv do
      send_data User.export(:csv, :balance, Axapta.info_cust_trans(@filter_hash)), :type => "application/csv", :disposition => :attachment
+    end
+   end
+  end
+
+  def sold_orders
+   @filter.date_to = Date.current.strftime("%Y-%m-%d") if @filter.date_to.blank?
+   @filter.date_from = 1.month.ago.strftime("%Y-%m-%d") if @filter.date_from.blank?
+  end
+
+  def export_sold_orders
+   @filter.date_to = Date.current.strftime("%Y-%m-%d") if @filter.date_to.blank?
+   @filter.date_from = 1.month.ago.strftime("%Y-%m-%d") if @filter.date_from.blank?
+   @filter_hash.merge!(:date_to => @filter.date_to, :date_from => @filter.date_from)
+   respond_with do |format|
+    format.csv do
+     send_data User.export(:csv, :balance, Axapta.sales_info(@filter_hash.merge(:status_filter => 'delivered'))), :type => "application/csv", :disposition => :attachment
     end
    end
   end

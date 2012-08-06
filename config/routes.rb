@@ -39,6 +39,8 @@ Urm::Application.routes.draw do
     post :export_balance
     get :limits
     get :sales_report
+    get :sold_orders
+    post :export_sold_orders
    end
    resources :accounts
   end
