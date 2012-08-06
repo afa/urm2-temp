@@ -1,5 +1,5 @@
 .filter
- = form_for :filter, :url => export_sold_orders_users_path, :method => :post do |form|
+ = form_for :filter, :url => export_sold_orders_users_path(:format => :csv), :method => :post do |form|
   %table
    %tr
     %th Период
