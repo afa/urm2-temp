@@ -104,7 +104,7 @@ class UsersController < ApplicationController
    @filter_hash.merge!(:date_to => @filter.date_to, :date_from => @filter.date_from)
    respond_with do |format|
     format.csv do
-     send_data User.export(:csv, :sold_orders, Axapta.sales_info(@filter_hash.merge(:status_filter => 'delivered'))), :type => "application/csv", :disposition => :attachment
+     send_data User.export(:csv, :sold_orders, Axapta.sales_lines_all(@filter_hash.merge(:status_filter => 'delivered'))), :type => "application/csv", :disposition => :attachment
     end
    end
   end
