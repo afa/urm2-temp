@@ -1,0 +1,97 @@
+= form_for :feedback, :url => feedback_main_index_path, :method => :post do |f|
+ .feedback
+  %fieldset#mail_form_group{:name=>"mail_form_group", :style=>"border: 1px solid rgb(102, 102, 102); position: absolute; background-color: rgb(255, 255, 255); top: 111px; right: 7px; z-index: 500; padding: 10px; display: block; background-position: initial initial; background-repeat: initial initial; "}
+   %legend Отправка сообщения
+   %select#mail_type{:name=>"mail_type"}
+    %option{:value=>"1"} Письмо менеджеру
+    %option{:value=>"0"} Письмо в информационно-техническую поддержку УРМ
+   %table{:border=>"0"}
+    %tr
+     %td
+      %label Ваше имя : 
+     %td
+      %input#person_name{:name=>"person_name", :style=>"width : 200px;", :type=>"text", :value="Гаврилова Инесса"}
+    %tr
+     %td
+      %label Контактный e-mail : 
+     %td
+      %input#person_email{:name=>"person_email", :style=>"width : 200px;", :type=>"text", :value=>"electro4@comch.ru"}
+    %tr
+     %td
+      %label Тема : 
+     %td
+      %input#message_subject{:name=>"message_subject", :size=>"70", :style=>"width: 500px;", :type=>"text", :value=>"УРМ: "}
+    %tr
+     %td{:valign=>"top"}
+      %label Ваше сообщение: 
+     %td
+      %textarea#message_body{:cols=>"40", :name=>"message_body", :rows=>"4", :style=>"width: 500px;"}
+-#    <script language="javascript">
+ var uploadFileCnt = 0;
+ var input;
+ </script>
+ <br><div id="upload_group1" name="upload_group1" style="display: none"><input id="uploadFile1" name="uploadFile1" type="file"><input id="isUpload1" name="isUpload1" type="hidden" value="1">&nbsp;<a href="#" onclick="uploadFileCnt++;
+ document.getElementById('upload_group1').style.display = 'none';
+ document.getElementById('isUpload1').value = '';
+ return false;">Удалить</a></div><div id="upload_group2" name="upload_group2" style="display: none"><input id="uploadFile2" name="uploadFile2" type="file"><input id="isUpload2" name="isUpload2" type="hidden" value="1">&nbsp;<a href="#" onclick="uploadFileCnt++;
+ document.getElementById('upload_group2').style.display = 'none';
+ document.getElementById('isUpload2').value = '';
+ return false;">Удалить</a></div><div id="upload_group3" name="upload_group3" style="display: none"><input id="uploadFile3" name="uploadFile3" type="file"><input id="isUpload3" name="isUpload3" type="hidden" value="1">&nbsp;<a href="#" onclick="uploadFileCnt++;
+ document.getElementById('upload_group3').style.display = 'none';
+ document.getElementById('isUpload3').value = '';
+ return false;">Удалить</a></div><div id="upload_group4" name="upload_group4" style="display: none"><input id="uploadFile4" name="uploadFile4" type="file"><input id="isUpload4" name="isUpload4" type="hidden" value="1">&nbsp;<a href="#" onclick="uploadFileCnt++;
+ document.getElementById('upload_group4').style.display = 'none';
+ document.getElementById('isUpload4').value = '';
+ return false;">Удалить</a></div><div id="upload_group5" name="upload_group5" style="display: none"><input id="uploadFile5" name="uploadFile5" type="file"><input id="isUpload5" name="isUpload5" type="hidden" value="1">&nbsp;<a href="#" onclick="uploadFileCnt++;
+ document.getElementById('upload_group5').style.display = 'none';
+ document.getElementById('isUpload5').value = '';
+ return false;">Удалить</a></div><div id="upload_group6" name="upload_group6" style="display: none"><input id="uploadFile6" name="uploadFile6" type="file"><input id="isUpload6" name="isUpload6" type="hidden" value="1">&nbsp;<a href="#" onclick="uploadFileCnt++;
+ document.getElementById('upload_group6').style.display = 'none';
+ document.getElementById('isUpload6').value = '';
+ return false;">Удалить</a></div><div id="upload_group7" name="upload_group7" style="display: none"><input id="uploadFile7" name="uploadFile7" type="file"><input id="isUpload7" name="isUpload7" type="hidden" value="1">&nbsp;<a href="#" onclick="uploadFileCnt++;
+ document.getElementById('upload_group7').style.display = 'none';
+ document.getElementById('isUpload7').value = '';
+ return false;">Удалить</a></div><div id="upload_group8" name="upload_group8" style="display: none"><input id="uploadFile8" name="uploadFile8" type="file"><input id="isUpload8" name="isUpload8" type="hidden" value="1">&nbsp;<a href="#" onclick="uploadFileCnt++;
+ document.getElementById('upload_group8').style.display = 'none';
+ document.getElementById('isUpload8').value = '';
+ return false;">Удалить</a></div><div id="upload_group9" name="upload_group9" style="display: none"><input id="uploadFile9" name="uploadFile9" type="file"><input id="isUpload9" name="isUpload9" type="hidden" value="1">&nbsp;<a href="#" onclick="uploadFileCnt++;
+ document.getElementById('upload_group9').style.display = 'none';
+ document.getElementById('isUpload9').value = '';
+ return false;">Удалить</a></div><div id="upload_group10" name="upload_group10" style="display: none"><input id="uploadFile10" name="uploadFile10" type="file"><input id="isUpload10" name="isUpload10" type="hidden" value="1">&nbsp;<a href="#" onclick="uploadFileCnt++;
+ document.getElementById('upload_group10').style.display = 'none';
+ document.getElementById('isUpload10').value = '';
+ return false;">Удалить</a></div><div id="upload_group11" name="upload_group11" style="display: none"><input id="uploadFile11" name="uploadFile11" type="file"><input id="isUpload11" name="isUpload11" type="hidden" value="1">&nbsp;<a href="#" onclick="uploadFileCnt++;
+ document.getElementById('upload_group11').style.display = 'none';
+ document.getElementById('isUpload11').value = '';
+ return false;">Удалить</a></div><div id="upload_group12" name="upload_group12" style="display: none"><input id="uploadFile12" name="uploadFile12" type="file"><input id="isUpload12" name="isUpload12" type="hidden" value="1">&nbsp;<a href="#" onclick="uploadFileCnt++;
+ document.getElementById('upload_group12').style.display = 'none';
+ document.getElementById('isUpload12').value = '';
+ return false;">Удалить</a></div><div id="upload_group13" name="upload_group13" style="display: none"><input id="uploadFile13" name="uploadFile13" type="file"><input id="isUpload13" name="isUpload13" type="hidden" value="1">&nbsp;<a href="#" onclick="uploadFileCnt++;
+ document.getElementById('upload_group13').style.display = 'none';
+ document.getElementById('isUpload13').value = '';
+ return false;">Удалить</a></div><div id="upload_group14" name="upload_group14" style="display: none"><input id="uploadFile14" name="uploadFile14" type="file"><input id="isUpload14" name="isUpload14" type="hidden" value="1">&nbsp;<a href="#" onclick="uploadFileCnt++;
+ document.getElementById('upload_group14').style.display = 'none';
+ document.getElementById('isUpload14').value = '';
+ return false;">Удалить</a></div><div id="upload_group15" name="upload_group15" style="display: none"><input id="uploadFile15" name="uploadFile15" type="file"><input id="isUpload15" name="isUpload15" type="hidden" value="1">&nbsp;<a href="#" onclick="uploadFileCnt++;
+ document.getElementById('upload_group15').style.display = 'none';
+ document.getElementById('isUpload15').value = '';
+ return false;">Удалить</a></div><div id="upload_group16" name="upload_group16" style="display: none"><input id="uploadFile16" name="uploadFile16" type="file"><input id="isUpload16" name="isUpload16" type="hidden" value="1">&nbsp;<a href="#" onclick="uploadFileCnt++;
+ document.getElementById('upload_group16').style.display = 'none';
+ document.getElementById('isUpload16').value = '';
+ return false;">Удалить</a></div><div id="upload_group17" name="upload_group17" style="display: none"><input id="uploadFile17" name="uploadFile17" type="file"><input id="isUpload17" name="isUpload17" type="hidden" value="1">&nbsp;<a href="#" onclick="uploadFileCnt++;
+ document.getElementById('upload_group17').style.display = 'none';
+ document.getElementById('isUpload17').value = '';
+ return false;">Удалить</a></div><div id="upload_group18" name="upload_group18" style="display: none"><input id="uploadFile18" name="uploadFile18" type="file"><input id="isUpload18" name="isUpload18" type="hidden" value="1">&nbsp;<a href="#" onclick="uploadFileCnt++;
+ document.getElementById('upload_group18').style.display = 'none';
+ document.getElementById('isUpload18').value = '';
+ return false;">Удалить</a></div><div id="upload_group19" name="upload_group19" style="display: none"><input id="uploadFile19" name="uploadFile19" type="file"><input id="isUpload19" name="isUpload19" type="hidden" value="1">&nbsp;<a href="#" onclick="uploadFileCnt++;
+ document.getElementById('upload_group19').style.display = 'none';
+ document.getElementById('isUpload19').value = '';
+ return false;">Удалить</a></div><div id="upload_group20" name="upload_group20" style="display: none"><input id="uploadFile20" name="uploadFile20" type="file"><input id="isUpload20" name="isUpload20" type="hidden" value="1">&nbsp;<a href="#" onclick="uploadFileCnt++;
+ document.getElementById('upload_group20').style.display = 'none';
+ document.getElementById('isUpload20').value = '';
+ return false;">Удалить</a></div><a href="#" onclick="uploadFileCnt++;
+ if (uploadFileCnt &gt; 20) return false;
+ document.getElementById('upload_group' + uploadFileCnt).style.display = '';
+ document.getElementById('isUpload' + uploadFileCnt).value = '1';
+ return false;">Прикрепить файл</a><br><br><input id="send_mail_feedback" name="send_mail_feedback" type="submit" value="Отправить">&nbsp;&nbsp;<input id="cancel_mail" name="cancel_mail" onclick="$('#mail_form_group').hide(); $('#mail_form_group_toggler').show(); return false;" type="submit" value="Отмена"></fieldset>
