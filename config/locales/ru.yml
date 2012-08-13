@@ -1,4 +1,8 @@
 ru:
+ number:
+  format:
+   delimiter: ','
+   separator: ''
  date:
   abbr_day_names: 
    - вс
