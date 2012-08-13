@@ -62,6 +62,7 @@ Urm::Application.routes.draw do
     get :info
     get :set
     get :help
+    post :feedback
    end
   end
   #get "main/index"
