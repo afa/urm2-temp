@@ -394,4 +394,115 @@ var header = false, //Шапка
 		
 	};
 
+	/*-----------------------------------------
+	  Поиск
+	-----------------------------------------*/
+	$.fn.feedbackBox = function(){
+		
+		return this.each(function(){
+			
+			var feedbackBlock = $(this);
+			
+			feedbackBox = {
+				feedbackBlock: feedbackBlock, //Блок поиска
+				buttonCloseFeedback: $('.close-link',feedbackBlock), //Кнопка "свернуть корзину"
+				tabFeedback: $('#header .tab-feedback'), //Кнопка сворачивания поиска
+				//searchTabBlocks: $('.feedback-tab-block',searchBlock), //Блоки поиска с параметрами
+				//searchTabs: $('.search-tabs a:not(.more)',searchBlock), //Табы переключения блоков поиска
+				timer: false, //Таймер
+				//listArea: $('.list-area',searchBlock), //Текстовое поле поиска по списку
+				//areaOpen: false,
+				
+				// Инициализация
+				init: function(){
+					
+					// Свернуть поиск
+					this.buttonCloseFeedback.click(function(e){
+						feedbackBox.feedbackBlock.hide();
+						header.heightMonitor.check();
+						feedbackBox.tabFeedback.show();
+						settings.feedbackBox.hide = true;
+						e.preventDefault();
+					});
+					
+					// Развернуть поиск
+					this.tabFeedback.click(function(e){
+						feedbackBox.feedbackBlock.show();
+						header.heightMonitor.check();
+						feedbackBox.tabFeedback.hide();
+						settings.feedbackBox.hide = false;
+						e.preventDefault();
+					});
+					
+					// Табы
+					this.feedbackTabs.click(function(e){
+						feedbackBox.feedbackTabs.removeClass('active');
+						$(this).addClass('active');
+						feedbackBox.feedbackTabBlocks.hide();
+						feedbackBox.feedbackTabBlocks.eq($(this).index()).show();
+						header.heightMonitor.check();
+						e.preventDefault();
+					});
+					
+					// Сворачивание/разворачивание поиска
+					/*this.listArea.parent().bind('mouseenter',function(){
+						if(searchBox.searchTabs.eq(0).hasClass('active') && !searchBox.listArea.hasClass('big') && !searchBox.areaOpen){
+							searchBox.listArea.addClass('big');
+							if(searchBox.timer) clearTimeout(searchBox.timer);
+							if(settings.animation){
+								searchBox.timer = setTimeout(
+									function(){
+										searchBox.listArea.animate({height:'13em'},500);
+									},150);
+							}else{
+								searchBox.timer = setTimeout(
+									function(){
+										searchBox.listArea.css({height:'13em'});
+									},150);
+							}
+						}
+					}).bind('focusout',function(){
+						searchBox.areaOpen = false;
+						if(searchBox.searchTabs.eq(0).hasClass('active') && searchBox.listArea.hasClass('big')){
+							searchBox.listArea.removeClass('big');
+							if(searchBox.timer) clearTimeout(searchBox.timer);
+							if(settings.animation){
+								searchBox.listArea.animate({height:'1.1em'},500); 
+							}else{
+								searchBox.listArea.css({height:'1.1em'}); 
+							}
+						}
+					})
+					.bind('mouseleave focusout',function(){
+						if(searchBox.searchTabs.eq(0).hasClass('active') && searchBox.listArea.hasClass('big') && !searchBox.areaOpen){
+							searchBox.listArea.removeClass('big');
+							if(searchBox.timer) clearTimeout(searchBox.timer);
+							if(settings.animation){
+								searchBox.timer = setTimeout(
+									function(){
+										searchBox.listArea.animate({height:'1.1em'},500); 
+									},1500);
+							}else{
+								searchBox.timer = setTimeout(
+									function(){
+										searchBox.listArea.css({height:'1.1em'}); 
+									},1500);
+							}
+						}
+					}).bind('focusin',function(){
+						searchBox.areaOpen = true;
+					});
+					*/
+				}
+				
+			}
+			
+			// Инициализация поиска
+			feedbackBox.init();
+			
+						  
+		});
+		
+	};
+
 })(jQuery);
