@@ -167,6 +167,10 @@ class MainController < ApplicationController
    @help = HelpArticle.find(params[:id])
    render :help, :layout => "simple"
   end
+
+  def feedback
+
+  end
  protected
   #def get_accounts
   # @accounts = current_user.accounts.where(:blocked => false)
