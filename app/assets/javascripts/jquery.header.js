@@ -435,14 +435,14 @@ var header = false, //Шапка
 					});
 					
 					// Табы
-					this.feedbackTabs.click(function(e){
+					/*this.feedbackTabs.click(function(e){
 						feedbackBox.feedbackTabs.removeClass('active');
 						$(this).addClass('active');
 						feedbackBox.feedbackTabBlocks.hide();
 						feedbackBox.feedbackTabBlocks.eq($(this).index()).show();
 						header.heightMonitor.check();
 						e.preventDefault();
-					});
+					});*/
 					
 					// Сворачивание/разворачивание поиска
 					/*this.listArea.parent().bind('mouseenter',function(){
