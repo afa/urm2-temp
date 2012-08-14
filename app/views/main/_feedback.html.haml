@@ -1,35 +1,36 @@
-= form_for :feedback, :url => feedback_main_index_path, :method => :post do |f|
- .feedback
-  %fieldset#mail_form_group{:name=>"mail_form_group", :style=>"border: 1px solid rgb(102, 102, 102); position: absolute; background-color: rgb(255, 255, 255); top: 111px; right: 7px; z-index: 500; padding: 10px; display: block; background-position: initial initial; background-repeat: initial initial; "}
-   %a.close-link{:href=>"#"}
-    %span свернуть
-   %legend Отправка сообщения
-   %select#mail_type{:name=>"mail_type"}
-    %option{:value=>"1"} Письмо менеджеру
-    -# %option{:value=>"0"} Письмо в информационно-техническую поддержку УРМ
-   %table{:border=>"0"}
-    %tr
-     %td
-      %label Ваше имя : 
-     %td
-      Гаврилова Инесса
-      -# %input#person_name{:name=>"person_name", :style=>"width : 200px;", :type=>"text", :value=>"Гаврилова Инесса"}
-    %tr
-     %td
-      %label Контактный e-mail : 
-     %td
-      electro4@comch.ru
-      -# %input#person_email{:name=>"person_email", :style=>"width : 200px;", :type=>"text", :value=>"electro4@comch.ru"}
-    %tr
-     %td
-      %label Тема : 
-     %td
-      %input#message_subject{:name=>"message_subject", :size=>"70", :style=>"width: 500px;", :type=>"text", :value=>"УРМ: "}
-    %tr
-     %td{:valign=>"top"}
-      %label Ваше сообщение: 
-     %td
-      %textarea#message_body{:cols=>"40", :name=>"message_body", :rows=>"4", :style=>"width: 500px;"}
+.feedback-block{:style => "display:none;"}
+ = form_for :feedback, :url => feedback_main_index_path, :method => :post do |f|
+  .feedback
+   %fieldset#mail_form_group{:name=>"mail_form_group", :style=>"border: 1px solid rgb(102, 102, 102); position: absolute; background-color: rgb(255, 255, 255); top: 111px; right: 7px; z-index: 500; padding: 10px; display: block; background-position: initial initial; background-repeat: initial initial; "}
+    %a.close-link{:href=>"#"}
+     %span свернуть
+    %legend Отправка сообщения
+    %select#mail_type{:name=>"mail_type"}
+     %option{:value=>"1"} Письмо менеджеру
+     -# %option{:value=>"0"} Письмо в информационно-техническую поддержку УРМ
+    %table{:border=>"0"}
+     %tr
+      %td
+       %label Ваше имя : 
+      %td
+       Гаврилова Инесса
+       -# %input#person_name{:name=>"person_name", :style=>"width : 200px;", :type=>"text", :value=>"Гаврилова Инесса"}
+     %tr
+      %td
+       %label Контактный e-mail : 
+      %td
+       electro4@comch.ru
+       -# %input#person_email{:name=>"person_email", :style=>"width : 200px;", :type=>"text", :value=>"electro4@comch.ru"}
+     %tr
+      %td
+       %label Тема : 
+      %td
+       %input#message_subject{:name=>"message_subject", :size=>"70", :style=>"width: 500px;", :type=>"text", :value=>"УРМ: "}
+     %tr
+      %td{:valign=>"top"}
+       %label Ваше сообщение: 
+      %td
+       %textarea#message_body{:cols=>"40", :name=>"message_body", :rows=>"4", :style=>"width: 500px;"}
 -#    <script language="javascript">
  var uploadFileCnt = 0;
  var input;
