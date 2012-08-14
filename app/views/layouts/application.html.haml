@@ -22,6 +22,9 @@
     searchBox: { //Блок поиска
      hide: false //Показать/скрыть
     },
+    feedbackBox: { //Блок поиска
+     hide: true //Показать/скрыть
+    },
     controls: { //Элементы управления
      inputInCart: { //Поле ввода "Добавить в корзину" для таблицы вывода списка продукции
       speedIconShow: true, //Наличие иконки быстрого оформления заказа
@@ -50,6 +53,7 @@
     $('.cart-block-slider').cartBox();
     //Поиск в шапке (файл: jquery.header.js)
     $('.search-block').searchBox();
+    $('.feedback-block').feedbackBox();
     //Таблица результатов поиска
     $('.table-navigation-block').table();
     //Скроллинг таблиц
