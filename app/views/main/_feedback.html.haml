@@ -13,13 +13,13 @@
       %td
        %label Ваше имя : 
       %td
-       Гаврилова Инесса
+       = User.current.current_account.name
        -# %input#person_name{:name=>"person_name", :style=>"width : 200px;", :type=>"text", :value=>"Гаврилова Инесса"}
      %tr
       %td
        %label Контактный e-mail : 
       %td
-       electro4@comch.ru
+       =User.current.current_account.contact_email
        -# %input#person_email{:name=>"person_email", :style=>"width : 200px;", :type=>"text", :value=>"electro4@comch.ru"}
      %tr
       %td
@@ -33,10 +33,11 @@
        %textarea#message_body{:cols=>"40", :name=>"message_body", :rows=>"4", :style=>"width: 500px;"}
      %tr.files
       %td
-       #upload
+       .upload
         %input{:name => "message_upload[]", :type => "file"}
       %td
        %a{:href => "#"} Удалить
+    %a.feedsend{:href => "#"} Отправить
 -#    <script language="javascript">
  var uploadFileCnt = 0;
  var input;
