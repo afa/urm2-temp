@@ -169,7 +169,8 @@ class MainController < ApplicationController
   end
 
   def feedback
-
+   Employee.feedback(User.current.current_account, params[:message_subject], params[:message_body], params[:message_upload]).deliver
+   redirect_to :back
   end
  protected
   #def get_accounts
