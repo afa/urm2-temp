@@ -1,5 +1,5 @@
 .feedback-block{:style => "display:none;"}
- = form_for :feedback, :url => feedback_main_index_path, :method => :post do |f|
+ = form_for :feedback, :url => feedback_main_index_path, :method => :post, :multipart => true, :remote => true do |f|
   .feedback
    %fieldset#mail_form_group{:name=>"mail_form_group", :style=>"border: 1px solid rgb(102, 102, 102); position: absolute; background-color: rgb(255, 255, 255); top: 111px; right: 7px; z-index: 500; padding: 10px; display: block; background-position: initial initial; background-repeat: initial initial; "}
     %a.close-link{:href=>"#"}

@@ -437,6 +437,7 @@ var header = false, //Шапка
 
      // commit
      this.feedbackSend.click(function(e){
+
       $(feedbackBox.feedbackSend).parents("form").submit();
       e.preventDefault();
      });
