@@ -31,6 +31,12 @@
        %label Ваше сообщение: 
       %td
        %textarea#message_body{:cols=>"40", :name=>"message_body", :rows=>"4", :style=>"width: 500px;"}
+     %tr.files
+      %td
+       #upload
+        %input{:name => "message_upload[]", :type => "file"}
+      %td
+       %a{:href => "#"} Удалить
 -#    <script language="javascript">
  var uploadFileCnt = 0;
  var input;
