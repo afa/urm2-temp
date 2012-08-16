@@ -408,6 +408,7 @@ var header = false, //Шапка
     buttonCloseFeedback: $('.close-link',feedbackBlock), //Кнопка "свернуть корзину"
     tabFeedback: $('#header .tab-feedback'), //Кнопка сворачивания поиска
     feedbackSend: $("a.feedsend", feedbackBlock),
+    feedbackFileAdd: $("a.feed-file-add", feedbackBlock),
     feedbackFileDrop: $("tr.files a.feed-file-drop", feedbackBlock),
     //searchTabBlocks: $('.feedback-tab-block',searchBlock), //Блоки поиска с параметрами
     //searchTabs: $('.search-tabs a:not(.more)',searchBlock), //Табы переключения блоков поиска
@@ -445,6 +446,9 @@ var header = false, //Шапка
      this.feedbackFileDrop.click(function(e){
       $(this).parents("tr.files").remove();
       e.preventsDefaults();
+     });
+     this.feedbackFileAdd.click(function(e){
+      $('<tr class="files"><td><div class="upload"><input name="message_upload[]" type="file"></div></td><td><a class="feed-file-drop" href="#">Удалить</a></td></tr>').appendTo($("table", feedbackBlock));
      });
 					
      // Табы
