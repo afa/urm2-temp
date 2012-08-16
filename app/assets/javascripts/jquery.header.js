@@ -408,6 +408,7 @@ var header = false, //Шапка
     buttonCloseFeedback: $('.close-link',feedbackBlock), //Кнопка "свернуть корзину"
     tabFeedback: $('#header .tab-feedback'), //Кнопка сворачивания поиска
     feedbackSend: $("a.feedsend", feedbackBlock),
+    feedbackFileDrop: $("tr.files a.feed-file-drop", feedbackBlock),
     //searchTabBlocks: $('.feedback-tab-block',searchBlock), //Блоки поиска с параметрами
     //searchTabs: $('.search-tabs a:not(.more)',searchBlock), //Табы переключения блоков поиска
     timer: false, //Таймер
@@ -440,6 +441,10 @@ var header = false, //Шапка
 
       $(feedbackBox.feedbackSend).parents("form").submit();
       e.preventDefault();
+     });
+     this.feedbackFileDrop.click(function(e){
+      $(this).parents("tr.files").remove();
+      e.preventsDefaults();
      });
 					
      // Табы
