@@ -445,10 +445,11 @@ var header = false, //Шапка
      });
      this.feedbackFileDrop.click(function(e){
       $(this).parents("tr.files").remove();
-      e.preventsDefaults();
+      e.preventDefault();
      });
      this.feedbackFileAdd.click(function(e){
-      $('<tr class="files"><td><div class="upload"><input name="message_upload[]" type="file"></div></td><td><a class="feed-file-drop" href="#">Удалить</a></td></tr>').appendTo($("table", feedbackBlock));
+      $('<tr class="files"><td><div class="upload"><input name="message_upload[]" type="file"></div></td><td><a class="feed-file-drop" href="#">Удалить</a></td></tr>').appendTo($("table", feedbackBlock)).click(function(e){ $(this).parents("tr.files").remove(); e.preventDefault(); });
+      e.preventDefault();
      });
 					
      // Табы
