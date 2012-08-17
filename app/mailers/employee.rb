@@ -9,7 +9,7 @@ class Employee < ActionMailer::Base
   def feedback acc, subj, body, attach
     @greeting = "Hi"
     (attach || []).dup.map{|a| a.blank? ? nil : a }.compact.each do |att|
-     attachments[att.original_filename] = File.read(att)
+     attachments[att.original_filename] = att.read
     end
     mail :to => acc.empl_email, :from => acc.contact_email, :subj => subj 
   end
