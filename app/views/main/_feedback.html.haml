@@ -1,5 +1,5 @@
 .feedback-block{:style => "display:none;"}
- = form_for :feedback, :url => feedback_main_index_path, :multipart => true, :method => :post do |f|
+ = form_for :feedback, :url => feedback_main_index_path, :html => {:multipart => true}, :method => :post do |f|
   .feedback
    %fieldset#mail_form_group{:name=>"mail_form_group", :style=>"border: 1px solid rgb(102, 102, 102); position: absolute; background-color: rgb(255, 255, 255); top: 111px; right: 7px; z-index: 500; padding: 10px; display: block; background-position: initial initial; background-repeat: initial initial; "}
     %a.close-link{:href=>"#"}
@@ -7,20 +7,20 @@
     %legend Отправка сообщения
     %select#mail_type{:name=>"mail_type"}
      %option{:value=>"1"} Письмо менеджеру
-     -# %option{:value=>"0"} Письмо в информационно-техническую поддержку УРМ
+     %option{:value=>"0"} Письмо в информационно-техническую поддержку УРМ
     %table{:border=>"0"}
      %tr
       %td
        %label Ваше имя : 
       %td
-       = User.current.current_account.name
-       -# %input#person_name{:name=>"person_name", :style=>"width : 200px;", :type=>"text", :value=>"Гаврилова Инесса"}
+       -# = 
+       %input#person_name{:name=>"person_name", :style=>"width : 200px;", :type=>"text", :value=>User.current.current_account.name}
      %tr
       %td
        %label Контактный e-mail : 
       %td
-       =User.current.current_account.contact_email
-       -# %input#person_email{:name=>"person_email", :style=>"width : 200px;", :type=>"text", :value=>"electro4@comch.ru"}
+       -# =
+       %input#person_email{:name=>"person_email", :style=>"width : 200px;", :type=>"text", :value=>User.current.current_account.contact_email}
      %tr
       %td
        %label Тема : 
