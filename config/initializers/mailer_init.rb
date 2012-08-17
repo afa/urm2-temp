@@ -1,3 +1,3 @@
 ActionMailer::Base.smtp_settings = {
- :address               => "smtp.rbagroup.ru"
+ :address               => "smtp.compel.ru"
 }
