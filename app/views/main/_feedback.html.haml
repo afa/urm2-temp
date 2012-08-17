@@ -1,5 +1,5 @@
 .feedback-block{:style => "display:none;"}
- = form_for :feedback, :url => feedback_main_index_path, :html => {:multipart => true}, :method => :post do |f|
+ = form_for :feedback, :url => feedback_main_index_path, :html => {:multipart => true, :target => 'feed_upload_frame'}, :method => :post do |f|
   .feedback
    %fieldset#mail_form_group{:name=>"mail_form_group", :style=>"border: 1px solid rgb(102, 102, 102); position: absolute; background-color: rgb(255, 255, 255); top: 111px; right: 7px; z-index: 500; padding: 10px; display: block; background-position: initial initial; background-repeat: initial initial; "}
     %a.close-link{:href=>"#"}
@@ -41,6 +41,7 @@
       %td
        %a.feed-file-drop{:href => "#"} Удалить
     %a.feedsend{:href => "#"} Отправить
+ %iframe#upload_frame{:name=>"upload_frame", :style=>"width:1px;height:1px;border:0px", :src=>"about:blank"}
 -#    <script language="javascript">
  var uploadFileCnt = 0;
  var input;
