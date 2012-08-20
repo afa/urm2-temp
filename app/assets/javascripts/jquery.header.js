@@ -445,6 +445,12 @@ var header = false, //Шапка
       $(feedbackBox.feedbackBlock).find("table input#message_subject").val("УРМ: ");
       $(feedbackBox.feedbackBlock).find("table textarea#message_body").val("");
       $(feedbackBox.feedbackBlock).find("select#mail_type").val(1);
+      makeAjaxCall("/users/account_info.json", function(data){
+       $("input#person_name", feedbackBox.feedbackBlock).val(data["name"]);
+       $("input#person_email", feedbackBox.feedbackBlock).val(data["email"]);
+      },
+      function(data){});
+      $(feedbackBox.feedbackBlock).hide();
       e.preventDefault();
      });
      this.feedbackFileDrop.click(function(e){

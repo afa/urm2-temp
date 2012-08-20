@@ -39,7 +39,7 @@
 = render :partial => "main/main_menu"
 .tabs-block
  %a.tab{:href=>"#", :class=>"tab-search", :style=>"display:none"} Поиск
- %a.tab{:href=>"#", :class=>"tab-feedback"} Feedback
+ %a.tab{:href=>"#", :class=>"tab-feedback"}= t :feedback
 .clear
 = render :partial => "main/feedback"
 = render :partial => "main/search_block"

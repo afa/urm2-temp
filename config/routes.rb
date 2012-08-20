@@ -35,6 +35,7 @@ Urm::Application.routes.draw do
   resources :users do
    collection do
     get :current_account
+    get :account_info
     get :balance
     post :export_balance
     get :limits

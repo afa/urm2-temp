@@ -68,6 +68,15 @@ class UsersController < ApplicationController
    end
   end
 
+  def account_info
+   respond_with do |format|
+    format.json do
+     render :json => {:account => {:name => User.current.current_account.name, :mail => User.current.current_account.empl_email}} #render_to_string( :partial => "main/dms_block.html", :locals => {:items => @items, :after => @after} ), :gap => render_to_string( :partial => "main/gap_line.html", :locals => {:after => @after}), :empty => render_to_string(:partial => "main/dms_empty.html", :locals => {:after => @after})}
+    end
+    #format.js { render :layout => false }
+   end
+  end
+
   def limits
    @info = Axapta.info_cust_limits
   end
