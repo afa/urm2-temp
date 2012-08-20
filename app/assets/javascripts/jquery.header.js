@@ -450,7 +450,10 @@ var header = false, //Шапка
        $("input#person_email", feedbackBox.feedbackBlock).val(data["email"]);
       },
       function(data){});
-      $(feedbackBox.feedbackBlock).hide();
+      feedbackBox.feedbackBlock.hide();
+      header.heightMonitor.check();
+      feedbackBox.tabFeedback.show();
+      settings.feedbackBox.hide = true;
       e.preventDefault();
      });
      this.feedbackFileDrop.click(function(e){
