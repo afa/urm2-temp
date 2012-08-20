@@ -441,6 +441,7 @@ var header = false, //Шапка
      this.feedbackSend.click(function(e){
 
       $(feedbackBox.feedbackSend).parents("form").submit();
+      alert("after submit");
       $(feedbackBox).find("table tr.files").remove();
       $(feedbackBox).find("table input#message_subject").val("УРМ: ");
       $(feedbackBox).find("table textarea#message_body").val("");
