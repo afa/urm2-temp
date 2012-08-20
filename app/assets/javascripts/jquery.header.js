@@ -441,11 +441,10 @@ var header = false, //Шапка
      this.feedbackSend.click(function(e){
 
       $(feedbackBox.feedbackSend).parents("form").submit();
-      alert("after submit");
-      $(feedbackBox).find("table tr.files").remove();
-      $(feedbackBox).find("table input#message_subject").val("УРМ: ");
-      $(feedbackBox).find("table textarea#message_body").val("");
-      $(feedbackBox).find("select#mail_type").val(1);
+      $(feedbackBox.feedbackBlock).find("table tr.files").remove();
+      $(feedbackBox.feedbackBlock).find("table input#message_subject").val("УРМ: ");
+      $(feedbackBox.feedbackBlock).find("table textarea#message_body").val("");
+      $(feedbackBox.feedbackBlock).find("select#mail_type").val(1);
       e.preventDefault();
      });
      this.feedbackFileDrop.click(function(e){
