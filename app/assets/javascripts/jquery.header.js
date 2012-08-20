@@ -446,8 +446,8 @@ var header = false, //Шапка
       $(feedbackBox.feedbackBlock).find("table textarea#message_body").val("");
       $(feedbackBox.feedbackBlock).find("select#mail_type").val(1);
       makeAjaxCall("/users/account_info.json", function(data){
-       $("input#person_name", feedbackBox.feedbackBlock).val(data["name"]);
-       $("input#person_email", feedbackBox.feedbackBlock).val(data["email"]);
+       $("input#person_name", feedbackBox.feedbackBlock).val(data["account"]["name"]);
+       $("input#person_email", feedbackBox.feedbackBlock).val(data["account"]["mail"]);
       },
       function(data){});
       feedbackBox.feedbackBlock.hide();
