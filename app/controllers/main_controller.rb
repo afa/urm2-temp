@@ -169,8 +169,8 @@ class MainController < ApplicationController
   end
 
   def feedback
-   uhsh = {}
-   Employee.feedback(User.current.current_account, params[:message_subject], params[:message_body], params[:message_upload]).deliver
+   uhsh = {"0" => :support, "1" => :feedback}
+   Employee.send(uhsh.fetch(params[:mail_type], :feedback), User.current.current_account, params[:person_name] || User.current.current_account.name, params[:person_email] || User.current.current_account.empl_email, params[:message_subject], params[:message_body], params[:message_upload]).deliver
    redirect_to :back
   end
  protected
