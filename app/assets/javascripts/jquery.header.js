@@ -442,7 +442,7 @@ var header = false, //Шапка
 
       $(feedbackBox.feedbackSend).parents("form").submit();
       $(feedbackBox.feedbackBlock).find("table tr.files").remove();
-      $(feedbackBox.feedbackBlock).find("table input#message_subject").val("УРМ: ");
+      $(feedbackBox.feedbackBlock).find("table input#message_subject").val("");
       $(feedbackBox.feedbackBlock).find("table textarea#message_body").val("");
       $(feedbackBox.feedbackBlock).find("select#mail_type").val(1);
       makeAjaxCall("/users/account_info.json", function(data){
