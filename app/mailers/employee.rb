@@ -12,7 +12,7 @@ class Employee < ActionMailer::Base
     end
     @body = body
     email = Setting.where(:name => "support.source.email").first
-    mail :to => acc.contact_email, :from => email, :subj => [t(:urm_email_subj_prefix), subj].join(' '), "Reply-To" => "#{acc_name} <#{acc_mail}>"
+    mail :to => acc.contact_email, :from => email, :subject => [t(:urm_email_subj_prefix), subj].join(' '), "Reply-To" => "#{acc_name} <#{acc_mail}>"
   end
 
   def support acc, acc_name, acc_mail, subj, body, attach
@@ -22,6 +22,6 @@ class Employee < ActionMailer::Base
     @body = body
     email = Setting.where(:name => "support.source.email").first
     dest = Setting.where(:name => "support.email").first
-    mail :to => dest, :from => email, :subj => [t(:urm_email_subj_prefix), subj].join(' '), "Reply-To" => "#{acc_name} <#{acc_mail}>"
+    mail :to => dest, :from => email, :subject => [t(:urm_email_subj_prefix), subj].join(' '), "Reply-To" => "#{acc_name} <#{acc_mail}>"
   end
 end
