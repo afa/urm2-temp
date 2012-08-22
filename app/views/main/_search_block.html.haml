@@ -16,7 +16,7 @@
        %span Дополнительные возможности
      %a{:href=>"#"}
       %span
-       %span Артикул ДМС (Farnel, Newark)
+       %span Артикул ДМС
      -# %a{:href=>"#"}
       %span
        %span По параметрам
@@ -116,10 +116,24 @@
          %i.br &nbsp;
       .clear
     .search-tab-block{:style=>"display:none;"}
-     %form{:action=>" "}
-      .field
+     = form_for :request, :url => manager_request_path do |f|
+      .fields.splitted
+       .field.request.long
+        = f.label :request_string, t(:request_string)
+        = f.text_field :request_string
+       .button.commit
+        %a.button-style{:href=>"#"}
+         %i.t &nbsp;
+         %i.b &nbsp;
+         %i.tl &nbsp;
+         %i.tr &nbsp;
+         %span Отправить!
+         %i.bl &nbsp;
+         %i.br &nbsp;
+      .clear
+      -# .field
        %input{:type=>"text", :value=>"TDA2003;OR;400"}
-      .button
+      -# .button
        %a.button-style{:href=>"#"}
         %i.t &nbsp;
         %i.b &nbsp;
@@ -128,7 +142,7 @@
         %span Найти!
         %i.bl &nbsp;
         %i.br &nbsp;
-      .clear
+      -# .clear
     -# .search-tab-block{:style=>"display:none;"}
      %form{:action=>" "}
       .field
