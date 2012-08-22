@@ -116,12 +116,13 @@
          %i.br &nbsp;
       .clear
     .search-tab-block{:style=>"display:none;"}
-     = form_for :request, :url => manager_request_path do |f|
+     = form_for :search, :url => search_path do |f|
       .fields.splitted
        .field.request.long
-        = f.label :request_string, t(:request_string)
-        = f.text_field :request_string
-       .button.commit
+        = f.label :external_code, t(:artikul)
+        = f.text_field :external_code
+       = render :partial => "shared/submit_button", :locals => {:title => t(:find)}
+       -# .button.commit
         %a.button-style{:href=>"#"}
          %i.t &nbsp;
          %i.b &nbsp;
