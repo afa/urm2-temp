@@ -26,7 +26,25 @@ task :stage, :roles => :app do
  set :unicorn_bin, "unicorn_rails"
  set :unicorn_pid, File.join(shared_path, "tmp/pids/unicorn.pid")
  ENV["RAILS_ENV"] = "staging"
- puts current_path, release_path, shared_path
+end
+
+desc "prod params"
+task :prod, :roles => :app do
+ set :ssh_options, { :forward_agent => true }
+ set :user, "afa"
+ set :password, "massacre"
+ set :use_sudo, true
+ set :branch, "master"
+ set :migrate_env, "production"
+ set :rails_env, "production"
+ set :app_env, "production"
+ set :unicorn_env, "production"
+ set :deploy_to, "/mnt/data/www/urm2"
+ set :current_path, File.join(deploy_to, current_dir)
+ set :default_run_options, exists?(:default_run_options) ? fetch(:default_run_options).merge("RAILS_ENV" => "production") : {"RAILS_ENV" => "production"}
+ set :unicorn_bin, "unicorn_rails"
+ set :unicorn_pid, File.join(shared_path, "tmp/pids/unicorn.pid")
+ ENV["RAILS_ENV"] = "production"
 end
 
 after "deploy:update_code", :copy_database_config
