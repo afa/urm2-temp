@@ -109,7 +109,7 @@
       .clear
     .search-tab-block{:style=>"display:none;"}
      = form_for :search, :url => search_path do |f|
-      .fields.splitted
+      %div
        .field.artikul
         = f.label :external_code, t(:artikul)
         = f.text_field :external_code
