@@ -118,7 +118,7 @@
     .search-tab-block{:style=>"display:none;"}
      = form_for :search, :url => search_path do |f|
       .fields.splitted
-       .field.request.long
+       .field.long
         = f.label :external_code, t(:artikul)
         = f.text_field :external_code
        = render :partial => "shared/submit_button", :locals => {:title => t(:find)}
