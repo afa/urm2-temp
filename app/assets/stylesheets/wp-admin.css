@@ -973,7 +973,6 @@ form.upgrade
     display: none
 
 #wp-fullscreen-buttons .mce_image .mce_image
-  background-image: image-url('menu.png?ver=20111128')
   background-position: -124px -38px
   &:hover
     background-position: -124px -6px
@@ -1672,7 +1671,6 @@ body.admin-bar
     font-size: 13px
     text-decoration: none
     &:before
-      background: image-url('xit.gif') 0 17% no-repeat
       content: ' '
       height: 100%
       width: 10px
@@ -1768,7 +1766,6 @@ table.fixed
   height: 4px
   margin-top: 8px
   margin-left: 7px
-  background-image: image-url(sort.gif)
   background-repeat: no-repeat
 
 .fixed .column-comments .sorting-indicator
@@ -2367,7 +2364,6 @@ td
 #post-body
   .wp_themeSkin .mceStatusbar a.mceResize
     display: block
-    background: transparent image-url(resize.gif) no-repeat scroll right bottom
     width: 12px
     cursor: se-resize
     margin: 0 2px
@@ -2943,7 +2939,6 @@ td.imgedit-settings input
 .imgedit-wait
   position: absolute
   top: 0
-  background: white image-url(wpspin_light.gif) no-repeat scroll 22px 10px
   opacity: .7
   filter: alpha(opacity = 70)
   width: 100%
@@ -2970,7 +2965,6 @@ td.imgedit-settings input
   position: relative
 
 .imgedit-crop
-  background: transparent image-url(imgedit-icons.png) no-repeat scroll -9px -31px
   margin: 0 8px 0 0
   &.disabled:hover
     background-position: -9px -31px
@@ -2978,7 +2972,6 @@ td.imgedit-settings input
     background-position: -9px -1px
 
 .imgedit-rleft
-  background: transparent image-url(imgedit-icons.png) no-repeat scroll -46px -31px
   margin: 0 3px
   &.disabled:hover
     background-position: -46px -31px
@@ -2986,7 +2979,6 @@ td.imgedit-settings input
     background-position: -46px -1px
 
 .imgedit-rright
-  background: transparent image-url(imgedit-icons.png) no-repeat scroll -77px -31px
   margin: 0 8px 0 3px
   &.disabled:hover
     background-position: -77px -31px
@@ -2994,7 +2986,6 @@ td.imgedit-settings input
     background-position: -77px -1px
 
 .imgedit-flipv
-  background: transparent image-url(imgedit-icons.png) no-repeat scroll -115px -31px
   margin: 0 3px
   &.disabled:hover
     background-position: -115px -31px
@@ -3002,7 +2993,6 @@ td.imgedit-settings input
     background-position: -115px -1px
 
 .imgedit-fliph
-  background: transparent image-url(imgedit-icons.png) no-repeat scroll -147px -31px
   margin: 0 8px 0 3px
   &.disabled:hover
     background-position: -147px -31px
@@ -3010,7 +3000,6 @@ td.imgedit-settings input
     background-position: -147px -1px
 
 .imgedit-undo
-  background: transparent image-url(imgedit-icons.png) no-repeat scroll -184px -31px
   margin: 0 3px
   &.disabled:hover
     background-position: -184px -31px
@@ -3018,7 +3007,6 @@ td.imgedit-settings input
     background-position: -184px -1px
 
 .imgedit-redo
-  background: transparent image-url(imgedit-icons.png) no-repeat scroll -215px -31px
   margin: 0 8px 0 3px
   &.disabled:hover
     background-position: -215px -31px
@@ -3484,7 +3472,6 @@ h2 .nav-tab
       -webkit-box-shadow: 0 10px 8px rgba(0, 0, 0, 0.7)
       -moz-box-shadow: 0 10px 8px rgba(0, 0, 0, 0.7)
     span
-      background: image-url(press-this.png) no-repeat -45px 5px
       padding: 8px 0 8px 32px
       display: inline-block
     &:after
@@ -3598,7 +3585,6 @@ html.ie8 .about-wrap img.element-screenshot
   font-size: 14px
   text-align: center
   margin: 0 -5px
-  background: image-url('wp-badge.png?ver=20111120') no-repeat
 
 .about-wrap
   .wp-badge
@@ -4366,7 +4352,6 @@ a.rsswidget
     p
       margin-bottom: 24px
   h1 a
-    /*background: image-url(logo-login.png) no-repeat top center*/
     width: 326px
     height: 67px
     text-indent: -9999px
@@ -5170,7 +5155,6 @@ img
     -ms-box-sizing: border-box
     box-sizing: border-box
   .tagchecklist span a
-    background: transparent image-url(xit.gif) no-repeat 0 0
   #titlediv
     margin: 0
   .wp-media-buttons
@@ -5237,7 +5221,6 @@ h3.tb
     min-width: 0
 
 .postbox:hover .handlediv, .stuffbox:hover .handlediv
-  background: transparent image-url(arrows.png) no-repeat 6px 7px
 
 .press-this #submitdiv:hover .handlediv
   background: none
@@ -5639,9 +5622,7 @@ a.widget-action
   display: none
 
 .widget-top a.widget-action
-  background: transparent image-url(arrows.png) no-repeat 4px 6px
   &:hover
-    background: transparent image-url(arrows-dark.png) no-repeat 4px 6px
 
 .widget
   .widget-inside, .widget-description
