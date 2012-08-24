@@ -8,3 +8,4 @@ Gemfile.lock
 coverage/
 .jhw-cache/
 config/deploy.rb
+public/assets/
