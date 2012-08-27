@@ -20,8 +20,10 @@ class ApplicationController < ActionController::Base
   end
 
   def sign_out
-   User.current.settings.update_all("value = '0'", "name = 'hideheader'")
-   User.current.reset_remember_token! if logged_in?
+   if logged_in?
+    User.current.settings.update_all("value = '0'", "name = 'hideheader'")
+    User.current.reset_remember_token! 
+   end
    cookies.delete(:user_remember_token)
    User.current = nil
   end
@@ -31,8 +33,6 @@ class ApplicationController < ActionController::Base
    token = cookies[:user_remember_token]
    if token
     return nil if token.blank?
-    #puts "::: user_from_cookie"
-    #p token
     u = User.where(:remember_token => token).first
     #cookies.delete(:user_remember_token) unless u
    end
@@ -40,13 +40,10 @@ class ApplicationController < ActionController::Base
   end
 
   def login_from_cookie
-   Rails.logger.info "---from coo!"
    u = user_from_cookie
    if u 
     User.current = u
-    Rails.logger.info "---luser #{u.inspect}"
    end
-   Rails.logger.info "---luser #{User.current.inspect}"
   end
 
   def current_user
@@ -65,9 +62,7 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in?
-   Rails.logger.info "---luserin #{User.current.inspect}"
-   Rails.logger.info "---luserin? #{not User.current.nil?}"
-   not User.current.nil?
+   User.logged?
   end
 
   def get_accounts_in

@@ -16,8 +16,8 @@ class Admin::ApplicationController < ActionController::Base
    end
 
    def sign_out
-    self.current_user.reset_remember_token! if self.current_user
-    cookies.delete(:remember_token)
+    self.current_user.reset_remember_token! if self.logged_in?
+    cookies.delete(:manager_remember_token)
     self.current_user = nil
    end
 
@@ -36,7 +36,7 @@ class Admin::ApplicationController < ActionController::Base
   end
 
  def current_user
-  User.current ||= user_from_cookie
+  User.current = user_from_cookie unless logged_in?
  end
 
  def current_user=(user)
@@ -44,6 +44,6 @@ class Admin::ApplicationController < ActionController::Base
  end
 
  def logged_in?
-  not current_user.blank?
+  User.logged?
  end
 end

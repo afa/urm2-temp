@@ -1,6 +1,8 @@
 require "csv"
 class User < ActiveRecord::Base
 
+ include Afauth::Model
+ post_auth :check_account_vitality
  include Exportable
  has_many :accounts
  belongs_to :current_account, :class_name => 'Account'
@@ -13,11 +15,9 @@ class User < ActiveRecord::Base
  validate :check_axapta_validity, :on => :create
  before_validation :check_current_account_activity
  attr_accessor :ext_hash, :password
- before_validation :make_salt, :if => lambda{ self.salt.blank? }
- before_validation :calc_password, :on => :create
+ #before_validation :make_salt, :if => lambda{ self.salt.blank? }
+ #before_validation :calc_password, :on => :create
  after_create :create_axapta_account
- before_validation :generate_remember_token, :if => lambda{ self.remember_token.blank? }
- before_save :encrypt_password, :unless => lambda{ self.password.blank? }
 
 #  def self.authenticate(username, password)
 #   return nil  unless user = find_by_name(username)
@@ -28,31 +28,6 @@ class User < ActiveRecord::Base
   # #Digest::MD5.hexdigest([salt, password].join) == encrypted_password
   # encrypt(password) == encrypted_password
   #end
-  def self.current=(user)
-   @current = user
-  end
-
-  def self.current
-   @current
-  end
-
-  def authenticated?(pwd)
-   self.encrypted_password == self.encrypt(pwd)
-  end
-
-  def make_salt
-   self.salt = Digest::MD5.hexdigest([Time.now.strftime("%Y%m%d%H%M%S"), Time.now.usec.to_s, sprintf("%x", rand(2**24))].join) unless self.salt
-  end
-
-  def encrypt_password
-   self.encrypted_password = self.encrypt(self.password)
-  end
-
-  def reset_remember_token!
-   self.generate_remember_token
-   save(:validate => false)
-  end
-
 
   def accounts_children
    accounts.inject({}){|res, account| res.merge(account.hash => account.children) }
@@ -62,31 +37,9 @@ class User < ActiveRecord::Base
    accounts_children.values.flatten.map(&:user).uniq
   end
 
- def self.authenticate(username, password)
-  return nil  unless user = find_by_username(username)
-  if user.current_account
-   axapta_params = Axapta.user_info(user.current_account.axapta_hash)
-   user.current_account.update_attributes :invent_location_id => axapta_params["invent_location_id"] unless user.current_account.invent_location_id == axapta_params["invent_location_id"]
-  end
-  return nil  if     user.accounts.all.all? {|a| a.blocked? }
-  return user if     user.authenticated?(password)
- end
-
-  def self.make_recover_pass
-   self.base62(Digest::MD5.hexdigest([self.base62(rand(62**8)), Time.now.strftime("%Y%m%d%H%M%S"), Time.now.usec.to_s].join).to_i(16), 20)
-  end
-
-  def self.locate_recoverable(email)
-   
-  end
-
  #  def authenticated?(password)
  #  Digest::MD5.hexdigest([salt, password].join) == encrypted_password
  # end
-
-  def calc_pass
-   User.base62(Digest::MD5.hexdigest([salt, Time.now.strftime("%Y%m%d%H%M%S"), Time.now.usec.to_s].join).to_i(16))
-  end
 
   def reload_accounts
    self.accounts.where(:blocked => false).each do |account|
@@ -138,26 +91,6 @@ class User < ActiveRecord::Base
    types.map{|t| [t["customer_delivery_type_id"], [t["delivery_type"], t["address"]["city"]].join(' ')] }
   end
  protected
-  def generate_hash(string)
-   if RUBY_VERSION >= '1.9'
-    Digest::SHA1.hexdigest(string).encode('UTF-8')
-   else
-    Digest::SHA1.hexdigest(string)
-   end
-  end
-
-  def generate_random_code(length = 20)
-   if RUBY_VERSION >= '1.9'
-    SecureRandom.hex(length).encode('UTF-8')
-   else
-    SecureRandom.hex(length)
-   end
-  end
-
-  def encrypt(string)
-   generate_hash("--#{self.class.name}--#{salt}--#{string}--")
-  end
-
   def generate_remember_token
    self.remember_token = generate_random_code
   end
@@ -176,14 +109,6 @@ class User < ActiveRecord::Base
    end
   end
 
-  def unique_hash
-   errors.add(:ext_hash, "account already exist, try recover password") if Account.find_by_axapta_hash(self.ext_hash)
-  end
-
-  def calc_password
-   self.password = calc_pass
-  end
-
   def create_axapta_account
    #self.update_attributes :encrypted_password => Digest::MD5.hexdigest([self.salt, self.password].join)
    if self.accounts.empty?
@@ -197,20 +122,26 @@ class User < ActiveRecord::Base
    #ext_hash = nil
   end
 
-  def self.base62(bin, max_length = 8)
-   dig = []
-   chrs = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-   max_length.times do
-    dig << chrs[bin % 62]
-    bin /= 62
-   end
-   dig.map{|i| sprintf("%c", i) }.join
-  end
-
   def check_current_account_activity
    if current_account.try(:blocked?)
     current_account = nil
    end
   end
 
+  def unique_hash
+   if Account.find_by_axapta_hash(self.ext_hash)
+    errors.add(:ext_hash, "account already exist, try recover password") 
+    raise Afauth::AuthError
+   end
+  end
+
+  def self.check_account_vitality(user)
+   if user.current_account
+    axapta_params = Axapta.user_info(user.current_account.axapta_hash)
+    user.current_account.update_attributes :invent_location_id => axapta_params["invent_location_id"] unless user.current_account.invent_location_id == axapta_params["invent_location_id"]
+   end
+   if user.accounts.all.all? {|a| a.blocked?}
+    raise Afauth::AuthError
+   end 
+  end
 end
