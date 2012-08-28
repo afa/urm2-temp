@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
     User.current.settings.update_all("value = '0'", "name = 'hideheader'")
     User.current.reset_remember_token! 
    end
-   cookies.delete(:user_remember_token)
+   cookies[:user_remember_token] = nil
    User.current = nil
   end
 
