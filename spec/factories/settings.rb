@@ -2,5 +2,7 @@
 
 FactoryGirl.define do
  factory :setting do
+  name
+  value
  end
 end
