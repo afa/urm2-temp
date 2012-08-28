@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   #before_filter :unmodify
+  before_filter :process_cookie
   before_filter :login_from_cookie
   before_filter :authenticate!
   before_filter :check_account_cur
@@ -29,6 +30,10 @@ class ApplicationController < ActionController::Base
   end
 
  protected
+  def process_cookie
+   p "---sess, coo", session, cookies
+  end
+
   def user_from_cookie
    token = cookies[:user_remember_token]
    if token
