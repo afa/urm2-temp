@@ -9,14 +9,13 @@ class ApplicationController < ActionController::Base
   #before_filter :put_sess
   protect_from_forgery
 
-  def sign_in(user, *opts)
+  def sign_in(user, opts = {})
    p "---param coo", opts
    if user
     val = {
       :value   => user.remember_token
     }
-    val.merge!(:expires => 1.day.from_now.utc)
-    #val.merge!(:expires => 1.day.from_now.utc) if (opts.is_a?(Array) and opts.first.is_a?(Hash) and opts.first[:remember]) || (opts.is_a?(Hash) && opts[:rememberme])
+    val.merge!(:expires => 1.day.from_now.utc) if opts.is_a?(Hash) && opts[:rememberme]
     cookies[:user_remember_token] = val
     User.current = user
    end
@@ -28,13 +27,15 @@ class ApplicationController < ActionController::Base
     User.current.settings.update_all("value = '0'", "name = 'hideheader'")
     User.current.reset_remember_token! 
    end
-   cookies[:user_remember_token] = nil
+   cookies.delete(:user_remember_token)
    User.current = nil
   end
 
  protected
   def process_cookie
-   p "---sess, coo", session, cookies
+   if cookies[:user_remember_token].blank? || User.where(:remember_token => cookies[:user_remember_token]).first.nil?
+    raise Afauth::AuthError
+   end
   end
 
   def user_from_cookie
