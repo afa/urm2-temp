@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
     redirect_to new_sessions_path, :flash => {:error => "Неверный пароль или имя пользователя."} 
     return
    end
-   sign_in(l_user) #unless logged_in?
+   sign_in(l_user, :rememberme => params[:rememberme]) #unless logged_in?
    if logged_in?
     current_user.reload_accounts
     redirect_to root_path
