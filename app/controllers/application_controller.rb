@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
   #before_filter :put_sess
   protect_from_forgery
 
+  rescue_from Afauth::AuthError do |e|
+   redirect_to new_session_path
+  end
+
   def sign_in(user, opts = {})
    p "---param coo", opts
    if user
