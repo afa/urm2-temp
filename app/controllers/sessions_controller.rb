@@ -1,7 +1,8 @@
 # coding: UTF-8
 class SessionsController < ApplicationController
 
- skip_filter :login_from_cookie, :except => :destroy
+ skip_before_filter :login_from_cookie, :except => :destroy
+ skip_before_filter :process_cookie, :except => :destroy
  skip_before_filter :authenticate!, :except => :destroy
  skip_before_filter :check_account_cur, :except => :destroy
  skip_before_filter :get_accounts_in, :except => :destroy
