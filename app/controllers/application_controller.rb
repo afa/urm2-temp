@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   def sign_in(user, *opts)
+   p "---param coo", opts
    if user
     val = {
       :value   => user.remember_token
@@ -18,6 +19,7 @@ class ApplicationController < ActionController::Base
     cookies[:user_remember_token] = val
     User.current = user
    end
+   p "---xoo sign", cookies
   end
 
   def sign_out
