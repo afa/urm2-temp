@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   rescue_from Afauth::AuthError do |e|
-   redirect_to new_session_path
+   redirect_to new_sessions_path
   end
 
   def sign_in(user, opts = {})
