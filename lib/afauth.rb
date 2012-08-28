@@ -114,4 +114,20 @@ module Afauth
   end
 
  end
+
+ module Controller
+  module App
+   def self.included(base)
+    base.extend ClassMethods
+   end
+   module ClassMethods
+    def remembered_cookie_name(name)
+     @cookie_name = name
+    end
+   end
+  end
+
+  module Session
+  end
+ end
 end

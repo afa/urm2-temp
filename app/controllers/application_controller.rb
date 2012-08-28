@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Afauth::Controller::App
+  remembered_cookie_name :user_remember_token
   #before_filter :unmodify
   before_filter :process_cookie
   before_filter :login_from_cookie
