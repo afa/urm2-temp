@@ -166,7 +166,7 @@ module Afauth
    def login_from_cookie
     u = user_from_cookie
     if u 
-     p "---lgn", self.class, self.class.user_model
+     p "---lgn", self.class, self.user_model
      self.class.user_model.current = u
     end
    end
