@@ -2,65 +2,15 @@ class ApplicationController < ActionController::Base
   include Afauth::Controller::App
   remembered_cookie_name :user_remember_token
   #before_filter :unmodify
-  before_filter :process_cookie
-  before_filter :login_from_cookie
-  before_filter :authenticate!
   before_filter :check_account_cur
   before_filter :get_accounts_in
   before_filter :take_search
-  #before_filter :put_sess
   protect_from_forgery
 
-  rescue_from Afauth::AuthError do |e|
-   redirect_to new_sessions_path
-  end
-
-  def sign_in(user, opts = {})
-   p "---param coo", opts
-   if user
-    val = {
-      :value   => user.remember_token
-    }
-    val.merge!(:expires => 1.day.from_now.utc) if opts.is_a?(Hash) && opts[:rememberme]
-    cookies[:user_remember_token] = val
-    User.current = user
-   end
-   p "---xoo sign", cookies
-  end
-
-  def sign_out
-   if logged_in?
-    User.current.settings.update_all("value = '0'", "name = 'hideheader'")
-    User.current.reset_remember_token! 
-   end
-   cookies.delete(:user_remember_token)
-   User.current = nil
-  end
+  auth_model User
+  auth_expired_in_days 1
 
  protected
-  def process_cookie
-   if cookies[:user_remember_token].blank? || User.where(:remember_token => cookies[:user_remember_token]).first.nil?
-    raise Afauth::AuthError
-   end
-  end
-
-  def user_from_cookie
-   token = cookies[:user_remember_token]
-   if token
-    return nil if token.blank?
-    u = User.where(:remember_token => token).first
-    #cookies.delete(:user_remember_token) unless u
-   end
-   u
-  end
-
-  def login_from_cookie
-   u = user_from_cookie
-   if u 
-    User.current = u
-   end
-  end
-
   def current_user
    User.current# ||= user_from_cookie
   end
@@ -70,18 +20,12 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate!
-   Rails.logger.info "auth!"
    unless logged_in?
     redirect_to new_sessions_path
    end
   end
 
-  def logged_in?
-   User.logged?
-  end
-
   def get_accounts_in
-   Rails.logger.info "---get acc"
    if logged_in?
     @accounts = User.current.accounts.where(:blocked => false)
    else
@@ -125,14 +69,10 @@ class ApplicationController < ActionController::Base
    end
    @search = OpenStruct.new(srch)
    @request = OpenStruct.new(requ)
-   #p ":::search", @search
   end
 
   def unmodify
    response.headers['Last-Modified'] = Time.zone.now.httpdate
   end
 
-  def put_sess
-   #p session
-  end
 end

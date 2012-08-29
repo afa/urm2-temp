@@ -119,10 +119,93 @@ module Afauth
   module App
    def self.included(base)
     base.extend ClassMethods
+    base.instance_eval do
+     @auth_model = User if defined?(User)
+     @auth_cookie_name = :remember_token
+     #@redirect_failed new_session_path
+     before_filter :process_cookie
+     before_filter :login_from_cookie
+     before_filter :authenticate!
+     rescue_from Afauth::AuthError do |e|
+      if @auth_redirect_on_failed
+       redirect_to @auth_redirect_on_failed
+      else
+       raise
+      end
+     end
+
+
+    end
    end
+
+   def sign_out
+    if logged_in?
+     User.current.settings.update_all("value = '0'", "name = 'hideheader'")
+     User.current.reset_remember_token! 
+    end
+    cookies.delete(:user_remember_token)
+    User.current = nil
+   end
+
+   def process_cookie
+    if cookies[:user_remember_token].blank? || User.where(:remember_token => cookies[:user_remember_token]).first.nil?
+     raise Afauth::AuthError
+    end
+   end
+
+   def user_from_cookie
+    token = cookies[:user_remember_token]
+    if token
+     return nil if token.blank?
+     u = User.where(:remember_token => token).first
+     #cookies.delete(:user_remember_token) unless u
+    end
+    u
+   end
+
+   def login_from_cookie
+    u = user_from_cookie
+    if u 
+     self.user_model.current = u
+    end
+   end
+
+   def logged_in?
+    self.user_model.logged?
+   end
+
+  def sign_in(user, opts = {})
+   if user
+    val = {
+      :value   => user.remember_token
+    }
+    val.merge!(:expires => self.auth_expired_in.day.from_now.utc) if opts.is_a?(Hash) && opts[:rememberme] && self.auth_cookie_name && self.auth_expired_in.to_i > 0
+    cookies[self.auth_cookie_name] = val
+    self.user_model.current = user
+   end
+  end
+
    module ClassMethods
+    #setup
+    def auth_model(klass)
+     @auth_model = klass.is_a?(Class) ? klass : instance_eval(klass.to_s)
+    end
+
     def remembered_cookie_name(name)
-     @cookie_name = name
+     @auth_cookie_name = name
+    end
+
+    def redirect_failed(rte)
+     @auth_redirect_on_failed = rte
+    end
+    #done
+
+    def user_model
+     @auth_model
+    end
+
+    def auth_cookie_name
+     @auth_cookie_name
     end
    end
   end
