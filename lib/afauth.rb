@@ -198,6 +198,10 @@ module Afauth
     def redirect_failed(rte)
      @auth_redirect_on_failed = rte
     end
+
+    def auth_expired_in_days(days)
+     @auth_expired_in_days = days
+    end
     #done
 
     def user_model
@@ -206,6 +210,10 @@ module Afauth
 
     def auth_cookie_name
      @auth_cookie_name
+    end
+
+    def auth_expired_in
+     @auth_expired_in_days
     end
    end
   end
