@@ -166,12 +166,12 @@ module Afauth
    def login_from_cookie
     u = user_from_cookie
     if u 
-     self.user_model.current = u
+     self.class.user_model.current = u
     end
    end
 
    def logged_in?
-    self.user_model.logged?
+    self.class.user_model.logged?
    end
 
   def sign_in(user, opts = {})
@@ -179,9 +179,9 @@ module Afauth
     val = {
       :value   => user.remember_token
     }
-    val.merge!(:expires => self.auth_expired_in.day.from_now.utc) if opts.is_a?(Hash) && opts[:rememberme] && self.auth_cookie_name && self.auth_expired_in.to_i > 0
-    cookies[self.auth_cookie_name] = val
-    self.user_model.current = user
+    val.merge!(:expires => self.class.auth_expired_in.day.from_now.utc) if opts.is_a?(Hash) && opts[:rememberme] && self.class.auth_cookie_name && self.class.auth_expired_in.to_i > 0
+    cookies[self.class.auth_cookie_name] = val
+    self.class.user_model.current = user
    end
   end
 
