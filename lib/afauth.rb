@@ -121,7 +121,7 @@ module Afauth
     base.extend ClassMethods
     base.instance_eval do
      auth_model User if defined?(User)
-     auth_cookie_name :remember_token
+     remembered_cookie_name :remember_token
      #@redirect_failed new_session_path
      before_filter :process_cookie
      before_filter :login_from_cookie
