@@ -1,14 +1,14 @@
 class ApplicationController < ActionController::Base
   include Afauth::Controller::App
   remembered_cookie_name :user_remember_token
+  auth_model User
+  auth_expired_in_days 1
   #before_filter :unmodify
   before_filter :check_account_cur
   before_filter :get_accounts_in
   before_filter :take_search
   protect_from_forgery
 
-  auth_model User
-  auth_expired_in_days 1
 
  protected
   def current_user

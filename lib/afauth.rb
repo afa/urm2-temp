@@ -3,7 +3,7 @@ module Afauth
  module Model
   def self.included(base)
    base.extend ClassMethods
-   base.instance_eval do
+   base.class_eval do
     before_validation :make_salt, :if => lambda{self.salt.blank?}
     before_validation :calc_password, :on => :create
     before_validation :generate_remember_token, :if => lambda{ self.remember_token.blank? }
@@ -119,9 +119,9 @@ module Afauth
   module App
    def self.included(base)
     base.extend ClassMethods
-    base.instance_eval do
-     auth_model User
-     remembered_cookie_name :remember_token
+    base.class_eval do
+     #auth_model User
+     #remembered_cookie_name :remember_token
      #@redirect_failed new_session_path
      before_filter :process_cookie
      before_filter :login_from_cookie
@@ -180,6 +180,7 @@ module Afauth
       :value   => user.remember_token
     }
     val.merge!(:expires => self.class.auth_expired_in.day.from_now.utc) if opts.is_a?(Hash) && opts[:rememberme] && self.class.auth_cookie_name && self.class.auth_expired_in.to_i > 0
+    p self.class.auth_cookie_name, self.class.user_model
     cookies[self.class.auth_cookie_name] = val
     self.class.user_model.current = user
    end
