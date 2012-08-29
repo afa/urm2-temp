@@ -166,8 +166,7 @@ module Afauth
    def login_from_cookie
     u = user_from_cookie
     if u 
-     p "---lgn", self.class, self.user_model
-     self.class.user_model.current = u
+     self.user_model.current = u
     end
    end
 
@@ -189,7 +188,8 @@ module Afauth
    module ClassMethods
     #setup
     def auth_model(klass)
-     @auth_model = klass.is_a?(Class) ? klass : instance_eval(klass.to_s)
+     @auth_model = klass
+     #@auth_model = klass.is_a?(Class) ? klass : instance_eval(klass.to_s)
     end
 
     def remembered_cookie_name(name)
