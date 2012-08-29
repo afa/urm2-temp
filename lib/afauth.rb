@@ -120,15 +120,15 @@ module Afauth
    def self.included(base)
     base.extend ClassMethods
     base.instance_eval do
-     @auth_model = User if defined?(User)
-     @auth_cookie_name = :remember_token
+     auth_model User if defined?(User)
+     auth_cookie_name :remember_token
      #@redirect_failed new_session_path
      before_filter :process_cookie
      before_filter :login_from_cookie
      before_filter :authenticate!
      rescue_from Afauth::AuthError do |e|
-      if @auth_redirect_on_failed
-       redirect_to @auth_redirect_on_failed
+      if auth_redirect_failed
+       redirect_to auth_redirect_failed
       else
        raise
       end
@@ -166,7 +166,7 @@ module Afauth
    def login_from_cookie
     u = user_from_cookie
     if u 
-     p "---lgn", self, self.class, self.class.user_model
+     p "---lgn", self.class, self.class.user_model
      self.class.user_model.current = u
     end
    end
@@ -215,6 +215,10 @@ module Afauth
 
     def auth_expired_in
      @auth_expired_in_days
+    end
+
+    def auth_redirect_failed
+     @auth_redirect_on_failed
     end
    end
   end
