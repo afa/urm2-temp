@@ -118,8 +118,11 @@ module Afauth
  module Controller
   module App
    def self.included(base)
-    base.extend ClassMethods
+    #base.extend ClassMethods
     base.class_eval do
+     class << self
+      extend ClassMethods
+     end
      #auth_model User
      #remembered_cookie_name :remember_token
      #@redirect_failed new_session_path
