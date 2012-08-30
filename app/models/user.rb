@@ -10,7 +10,8 @@ class User < ActiveRecord::Base
  has_many :settings, :as => :settingable
  has_many :children, :class_name => self.name, :foreign_key => :parent_id
  has_many :cart_items
- validates_uniqueness_of :username
+ #validates_uniqueness_of :username
+ validates :username, :presence => true, :uniqueness => true
  validate :unique_hash, :on => :create
  validate :check_axapta_validity, :on => :create
  before_validation :check_current_account_activity

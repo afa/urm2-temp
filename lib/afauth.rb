@@ -3,7 +3,7 @@ module Afauth
  module Model
   def self.included(base)
    base.extend ClassMethods
-   base.class_eval do
+   base.instance_eval do
     before_validation :make_salt, :if => lambda{self.salt.blank?}
     before_validation :calc_password, :on => :create
     before_validation :generate_remember_token, :if => lambda{ self.remember_token.blank? }
@@ -119,48 +119,47 @@ module Afauth
   module App
    def self.included(base)
     #base.extend ClassMethods
-    base.class_eval do
-     class << self
-      extend ClassMethods
-     end
-     #auth_model User
-     #remembered_cookie_name :remember_token
+    base.extend Controller::App::ClassMethods
+    base.instance_eval do
+     cattr_accessor :auth_model, :auth_cookie_name, :auth_redirect_on_failed, :auth_expired_in
+     #auth_model = User
+     #auth_cookie_name = :remember_token
      #@redirect_failed new_session_path
      before_filter :process_cookie
      before_filter :login_from_cookie
      before_filter :authenticate!
      rescue_from Afauth::AuthError do |e|
-      if auth_redirect_failed
-       redirect_to auth_redirect_failed
+      if auth_redirect_on_failed
+       redirect_to auth_redirect_on_failed
       else
        raise
       end
      end
-
-
     end
+    #base.auth_model = User if defined?(User)
+    base.auth_cookie_name = :remember_token
    end
 
    def sign_out
     if logged_in?
-     User.current.settings.update_all("value = '0'", "name = 'hideheader'")
-     User.current.reset_remember_token! 
+     auth_model.current.settings.update_all("value = '0'", "name = 'hideheader'")
+     auth_model.current.reset_remember_token! 
     end
-    cookies.delete(:user_remember_token)
-    User.current = nil
+    cookies.delete(auth_cookie_name)
+    auth_model.current = nil
    end
 
    def process_cookie
-    if cookies[:user_remember_token].blank? || User.where(:remember_token => cookies[:user_remember_token]).first.nil?
+    if cookies[auth_cookie_name].blank? || auth_model.where(:remember_token => cookies[auth_cookie_name]).first.nil?
      raise Afauth::AuthError
     end
    end
 
    def user_from_cookie
-    token = cookies[:user_remember_token]
+    token = cookies[auth_cookie_name]
     if token
      return nil if token.blank?
-     u = User.where(:remember_token => token).first
+     u = auth_model.where(:remember_token => token).first
      #cookies.delete(:user_remember_token) unless u
     end
     u
@@ -169,12 +168,12 @@ module Afauth
    def login_from_cookie
     u = user_from_cookie
     if u 
-     self.class.user_model.current = u
+     user_model.current = u
     end
    end
 
    def logged_in?
-    self.class.user_model.logged?
+    user_model.logged?
    end
 
   def sign_in(user, opts = {})
@@ -182,48 +181,33 @@ module Afauth
     val = {
       :value   => user.remember_token
     }
-    val.merge!(:expires => self.class.auth_expired_in.day.from_now.utc) if opts.is_a?(Hash) && opts[:rememberme] && self.class.auth_cookie_name && self.class.auth_expired_in.to_i > 0
-    p self.class.auth_cookie_name, self.class.user_model
-    cookies[self.class.auth_cookie_name] = val
-    self.class.user_model.current = user
+    val.merge!(:expires => auth_expired_in.day.from_now.utc) if opts.is_a?(Hash) && opts[:rememberme] && auth_cookie_name && auth_expired_in.to_i > 0
+    p "---aut", auth_cookie_name, auth_model
+    cookies[auth_cookie_name] = val
+    auth_model.current = user
    end
   end
 
    module ClassMethods
     #setup
-    def auth_model(klass)
-     @auth_model = klass
+    def user_model(klass)
+     auth_model = klass
      #@auth_model = klass.is_a?(Class) ? klass : instance_eval(klass.to_s)
     end
 
     def remembered_cookie_name(name)
-     @auth_cookie_name = name
+     auth_cookie_name = name
     end
 
     def redirect_failed(rte)
-     @auth_redirect_on_failed = rte
+     auth_redirect_on_failed = rte
     end
 
     def auth_expired_in_days(days)
-     @auth_expired_in_days = days
+     auth_expired_in = days
     end
     #done
 
-    def user_model
-     @auth_model
-    end
-
-    def auth_cookie_name
-     @auth_cookie_name
-    end
-
-    def auth_expired_in
-     @auth_expired_in_days
-    end
-
-    def auth_redirect_failed
-     @auth_redirect_on_failed
-    end
    end
   end
 
