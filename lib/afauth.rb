@@ -137,7 +137,7 @@ module Afauth
      end
     end
     #base.auth_model = User if defined?(User)
-    base.auth_cookie_name = :remember_token
+    #base.auth_cookie_name = :remember_token
    end
 
    def sign_out
