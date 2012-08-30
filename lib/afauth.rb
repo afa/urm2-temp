@@ -120,6 +120,13 @@ module Afauth
    def self.included(base)
     #base.extend ClassMethods
     base.extend Controller::App::ClassMethods
+    base.rescue_from Afauth::AuthError do |e|
+     if auth_redirect_on_failed
+      redirect_to auth_redirect_on_failed
+     else
+      raise
+     end
+    end
     base.instance_eval do
      cattr_accessor :auth_model, :auth_cookie_name, :auth_redirect_on_failed, :auth_expired_in
      #auth_model = User
@@ -128,13 +135,6 @@ module Afauth
      before_filter :process_cookie
      before_filter :login_from_cookie
      before_filter :authenticate!
-     rescue_from Afauth::AuthError do |e|
-      if auth_redirect_on_failed
-       redirect_to auth_redirect_on_failed
-      else
-       raise
-      end
-     end
     end
     #base.auth_model = User if defined?(User)
     #base.auth_cookie_name = :remember_token
