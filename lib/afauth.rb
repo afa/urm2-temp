@@ -130,9 +130,11 @@ module Afauth
      before_filter :login_from_cookie
      before_filter :authenticate!
      rescue_from Afauth::AuthError do |e|
-      p "---resc", self.class.name
+      Rails.logger.info "---rescue: need redirect, #{e}"
       if self.class.auth_redirect_on_failed
        redirect_to self.class.auth_redirect_on_failed
+      elsif self.class.auth_redirect_on_failed_cb
+       redirect_to self.class.auth_redirect_on_failed_cb.call
       else
        raise
       end
@@ -212,6 +214,9 @@ module Afauth
     end
     define_method(:redirect_failed) do |rte|
      auth_redirect_on_failed = rte
+    end
+    define_method(:redirect_failed_cb) do |prc|
+     auth_redirect_on_failed_cb = prc
     end
     define_method(:auth_expired_in_days) do |days|
      auth_expired_in = days
