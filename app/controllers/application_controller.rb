@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
   include Afauth::Controller::App
-  #auth_cookie_name = :user_remember_token
+  auth_cookie_name = :user_remember_token
   user_model User
-  #auth_expired_in = 1
+  auth_expired_in = 1
   #before_filter :unmodify
   before_filter :check_account_cur
   before_filter :get_accounts_in
