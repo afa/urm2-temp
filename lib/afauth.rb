@@ -146,10 +146,10 @@ module Afauth
 
    def sign_out
     if logged_in?
-     auth_model.current.settings.update_all("value = '0'", "name = 'hideheader'")
-     auth_model.current.reset_remember_token! 
+     self.class.auth_model.current.settings.update_all("value = '0'", "name = 'hideheader'")
+     self.class.auth_model.current.reset_remember_token! 
     end
-    cookies.delete(auth_cookie_name)
+    cookies.delete(self.class.auth_cookie_name)
     auth_model.current = nil
    end
 
