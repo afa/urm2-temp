@@ -152,16 +152,16 @@ module Afauth
    end
 
    def process_cookie
-    if cookies[auth_cookie_name].blank? || auth_model.where(:remember_token => cookies[auth_cookie_name]).first.nil?
+    if cookies[self.class.auth_cookie_name].blank? || self.class.auth_model.where(:remember_token => cookies[self.class.auth_cookie_name]).first.nil?
      raise Afauth::AuthError
     end
    end
 
    def user_from_cookie
-    token = cookies[auth_cookie_name]
+    token = cookies[self.class.auth_cookie_name]
     if token
      return nil if token.blank?
-     u = auth_model.where(:remember_token => token).first
+     u = self.class.auth_model.where(:remember_token => token).first
      #cookies.delete(:user_remember_token) unless u
     end
     u
@@ -170,12 +170,12 @@ module Afauth
    def login_from_cookie
     u = user_from_cookie
     if u 
-     user_model.current = u
+     self.class.auth_model.current = u
     end
    end
 
    def logged_in?
-    user_model.logged?
+    self.class.auth_model.logged?
    end
 
   def sign_in(user, opts = {})
@@ -183,8 +183,7 @@ module Afauth
     val = {
       :value   => user.remember_token
     }
-    val.merge!(:expires => auth_expired_in.day.from_now.utc) if opts.is_a?(Hash) && opts[:rememberme] && auth_cookie_name && auth_expired_in.to_i > 0
-    p "---aut", self.class.name, self.class.class_variables, self.class.auth_model, auth_cookie_name, auth_model
+    val.merge!(:expires => self.class.auth_expired_in.day.from_now.utc) if opts.is_a?(Hash) && opts[:rememberme] && self.class.auth_cookie_name && self.class.auth_expired_in.to_i > 0
     cookies[self.class.auth_cookie_name] = val
     self.class.auth_model.current = user
    end
