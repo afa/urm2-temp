@@ -190,7 +190,7 @@ module Afauth
 
    module ClassMethods
     #setup
-    %w(auth_model auth_cookie_name auth_redirect_on_failed auth_expired_in).each do |mtd|
+    %w(auth_model auth_cookie_name auth_redirect_on_failed auth_redirect_on_failed_cb auth_expired_in).each do |mtd|
      define_method(mtd) do
       begin
        class_variable_get("@@#{mtd}")
