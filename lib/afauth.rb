@@ -193,11 +193,9 @@ module Afauth
     #setup
     %w(auth_model auth_cookie_name auth_redirect_on_failed auth_expired_in).each do |mtd|
      define_method(mtd) do
-      p "---vars2", name, class_variables
       begin
        class_variable_get("@@#{mtd}")
       rescue NameError
-       p "---NE", self.name, self.superclass.name, mtd
        superclass.class_variable_get("@@#{mtd}")
       end
      end
@@ -207,34 +205,18 @@ module Afauth
      end
     end
     define_method(:user_model) do |klass|
-     p "---vars", self.name, self.class.name, class_variables
      auth_model = klass
-     p "---v2", self.name, self.class.name, class_variables
     end
     define_method(:remembered_cookie_name) do |name|
-     p "---vars", self.name, class_variables
      auth_cookie_name = name
     end
     define_method(:redirect_failed) do |rte|
-     p "---vars", self.name, class_variables
      auth_redirect_on_failed = rte
     end
     define_method(:auth_expired_in_days) do |days|
-     p "---vars", self.name, class_variables
      auth_expired_in = days
     end
 
-    #def remembered_cookie_name(name)
-    # auth_cookie_name = name
-    #end
-
-    #def redirect_failed(rte)
-    # auth_redirect_on_failed = rte
-    #end
-
-    #def auth_expired_in_days(days)
-    # auth_expired_in = days
-    #end
     #done
 
    end
