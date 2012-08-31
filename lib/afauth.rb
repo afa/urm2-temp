@@ -213,18 +213,15 @@ module Afauth
      p "---v2", self.name, self.class.name, class_variables
     end
     define_method(:remembered_cookie_name) do |name|
-     p "---vars", self.class.name, class_variables
-     p "---v2", self.class.name, self.class_variables, self.class.class_variables, self.class.auth_model, auth_cookie_name, auth_model
+     p "---vars", self.name, class_variables
      auth_cookie_name = name
     end
     define_method(:redirect_failed) do |rte|
-     p "---vars", self.class.name, class_variables
-     p "---v2", self.class.name, self.class_variables, self.class.class_variables, self.class.auth_model, auth_cookie_name, auth_model
+     p "---vars", self.name, class_variables
      auth_redirect_on_failed = rte
     end
     define_method(:auth_expired_in_days) do |days|
-     p "---vars", self.class.name, class_variables
-     p "---v2", self.class.name, self.class_variables, self.class.class_variables, self.class.auth_model, auth_cookie_name, auth_model
+     p "---vars", self.name, class_variables
      auth_expired_in = days
     end
 
