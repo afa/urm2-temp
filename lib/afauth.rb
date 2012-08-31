@@ -130,9 +130,9 @@ module Afauth
      before_filter :authenticate!
      rescue_from Afauth::AuthError do |e|
       Rails.logger.info "---rescue: need redirect, #{e}"
-      if self.class.auth_redirect_on_failed
+      if self.class.class_variable_defined?(:@@auth_redirect_on_failed) && self.class.auth_redirect_on_failed
        redirect_to self.class.auth_redirect_on_failed
-      elsif self.class.auth_redirect_on_failed_cb
+      elsif self.class.class_variable_defined?(:@@auth_redirect_on_failed_cb) && self.class.auth_redirect_on_failed_cb
        redirect_to self.class.auth_redirect_on_failed_cb.call
       else
        raise
@@ -207,6 +207,7 @@ module Afauth
     %w(auth_model auth_cookie_name auth_redirect_on_failed auth_redirect_on_failed_cb auth_expired_in).each do |mtd|
      define_method(mtd) do
       begin
+       p "---get", self.name, mtd
        class_variable_get("@@#{mtd}")
       rescue NameError
        superclass.class_variable_get("@@#{mtd}")
@@ -214,23 +215,29 @@ module Afauth
      end
 
      define_method("#{mtd}=") do |val|
+      p "---set", mtd, val, self.name
       class_variable_set("@@#{mtd}", val)
      end
     end
     define_method(:user_model) do |klass|
-     auth_model = klass
+     p "---a-m", klass.name, self.name
+     self.auth_model = klass
     end
     define_method(:remembered_cookie_name) do |name|
-     auth_cookie_name = name
+     p "---a-c", name, self.name
+     self.auth_cookie_name = name
     end
     define_method(:redirect_failed) do |rte|
-     auth_redirect_on_failed = rte
+     p "---a-f", rte, self.name
+     self.auth_redirect_on_failed = rte
     end
     define_method(:redirect_failed_cb) do |prc|
-     auth_redirect_on_failed_cb = prc
+     p "---a-b", prc, self.name
+     self.auth_redirect_on_failed_cb = prc
     end
     define_method(:auth_expired_in_days) do |days|
-     auth_expired_in = days
+     p "---a-e", days, self.name
+     self.auth_expired_in = days
     end
 
     #done
