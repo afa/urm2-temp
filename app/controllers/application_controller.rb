@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   remembered_cookie_name :user_remember_token
   user_model User
   auth_expired_in_days 1
-  redirect_failed new_sessions_path
+  redirect_failed_cb lambda { new_sessions_path }
 
 
  protected
