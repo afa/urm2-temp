@@ -120,21 +120,23 @@ module Afauth
    def self.included(base)
     #base.extend ClassMethods
     base.extend Controller::App::ClassMethods
-    base.rescue_from Afauth::AuthError do |e|
-     if auth_redirect_on_failed
-      redirect_to auth_redirect_on_failed
-     else
-      raise
-     end
-    end
     base.instance_eval do
-     cattr_accessor :auth_model, :auth_cookie_name, :auth_redirect_on_failed, :auth_expired_in
+     p "---cat", self.name
+     #cattr_accessor :auth_model, :auth_cookie_name, :auth_redirect_on_failed, :auth_expired_in
      #auth_model = User
      #auth_cookie_name = :remember_token
      #@redirect_failed new_session_path
      before_filter :process_cookie
      before_filter :login_from_cookie
      before_filter :authenticate!
+     rescue_from Afauth::AuthError do |e|
+      p "---resc", self.class.name
+      if self.class.auth_redirect_on_failed
+       redirect_to self.class.auth_redirect_on_failed
+      else
+       raise
+      end
+     end
     end
     #base.auth_model = User if defined?(User)
     #base.auth_cookie_name = :remember_token
@@ -182,30 +184,61 @@ module Afauth
       :value   => user.remember_token
     }
     val.merge!(:expires => auth_expired_in.day.from_now.utc) if opts.is_a?(Hash) && opts[:rememberme] && auth_cookie_name && auth_expired_in.to_i > 0
-    p "---aut", auth_cookie_name, auth_model
-    cookies[auth_cookie_name] = val
-    auth_model.current = user
+    p "---aut", self.class.name, self.class.class_variables, self.class.auth_model, auth_cookie_name, auth_model
+    cookies[self.class.auth_cookie_name] = val
+    self.class.auth_model.current = user
    end
   end
 
    module ClassMethods
     #setup
-    def user_model(klass)
-     auth_model = klass
-     #@auth_model = klass.is_a?(Class) ? klass : instance_eval(klass.to_s)
-    end
+    %w(auth_model auth_cookie_name auth_redirect_on_failed auth_expired_in).each do |mtd|
+     define_method(mtd) do
+      p "---vars2", name, class_variables
+      begin
+       class_variable_get("@@#{mtd}")
+      rescue NameError
+       p "---NE", self.name, self.superclass.name, mtd
+       superclass.class_variable_get("@@#{mtd}")
+      end
+     end
 
-    def remembered_cookie_name(name)
+     define_method("#{mtd}=") do |val|
+      class_variable_set("@@#{mtd}", val)
+     end
+    end
+    define_method(:user_model) do |klass|
+     p "---vars", self.name, self.class.name, class_variables
+     auth_model = klass
+     p "---v2", self.name, self.class.name, class_variables
+    end
+    define_method(:remembered_cookie_name) do |name|
+     p "---vars", self.class.name, class_variables
+     p "---v2", self.class.name, self.class_variables, self.class.class_variables, self.class.auth_model, auth_cookie_name, auth_model
      auth_cookie_name = name
     end
-
-    def redirect_failed(rte)
+    define_method(:redirect_failed) do |rte|
+     p "---vars", self.class.name, class_variables
+     p "---v2", self.class.name, self.class_variables, self.class.class_variables, self.class.auth_model, auth_cookie_name, auth_model
      auth_redirect_on_failed = rte
     end
-
-    def auth_expired_in_days(days)
+    define_method(:auth_expired_in_days) do |days|
+     p "---vars", self.class.name, class_variables
+     p "---v2", self.class.name, self.class_variables, self.class.class_variables, self.class.auth_model, auth_cookie_name, auth_model
      auth_expired_in = days
     end
+
+    #def remembered_cookie_name(name)
+    # auth_cookie_name = name
+    #end
+
+    #def redirect_failed(rte)
+    # auth_redirect_on_failed = rte
+    #end
+
+    #def auth_expired_in_days(days)
+    # auth_expired_in = days
+    #end
     #done
 
    end
