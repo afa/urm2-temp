@@ -121,7 +121,6 @@ module Afauth
     #base.extend ClassMethods
     base.extend Controller::App::ClassMethods
     base.instance_eval do
-     p "---cat", self.name
      #cattr_accessor :auth_model, :auth_cookie_name, :auth_redirect_on_failed, :auth_expired_in
      #auth_model = User
      #auth_cookie_name = :remember_token
@@ -140,8 +139,6 @@ module Afauth
       end
      end
     end
-    #base.auth_model = User if defined?(User)
-    #base.auth_cookie_name = :remember_token
    end
 
    def sign_out
@@ -198,7 +195,7 @@ module Afauth
       begin
        class_variable_get("@@#{mtd}")
       rescue NameError
-       superclass.class_variable_get("@@#{mtd}")
+       superclass.class_variable_get("@@#{mtd}") rescue nil
       end
      end
 
