@@ -1,31 +1,17 @@
 class ApplicationController < ActionController::Base
   include Afauth::Controller::App
+  remembered_cookie_name :user_remember_token
+  user_model User
+  auth_expired_in_days 1
+  redirect_failed_cb lambda { new_sessions_path }
   #before_filter :unmodify
   before_filter :check_account_cur
   before_filter :get_accounts_in
   before_filter :take_search
   protect_from_forgery
-  remembered_cookie_name :user_remember_token
-  user_model User
-  auth_expired_in_days 1
-  redirect_failed_cb lambda { new_sessions_path }
 
 
  protected
-  def current_user
-   User.current# ||= user_from_cookie
-  end
-
-  def current_user=(user)
-   User.current = user
-  end
-
-  def authenticate!
-   unless logged_in?
-    redirect_to new_sessions_path
-   end
-  end
-
   def get_accounts_in
    if logged_in?
     @accounts = User.current.accounts.where(:blocked => false)

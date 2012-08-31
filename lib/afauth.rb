@@ -141,13 +141,27 @@ module Afauth
     end
    end
 
+  def current_user
+   self.class.auth_model.current# ||= user_from_cookie
+  end
+
+  def current_user=(user)
+   self.class.auth_model.current = user
+  end
+
+  def authenticate!
+   unless logged_in?
+    redirect_to new_sessions_path
+   end
+  end
+
    def sign_out
-    if logged_in?
+    if logged_in? #before_signout
      self.class.auth_model.current.settings.update_all("value = '0'", "name = 'hideheader'")
      self.class.auth_model.current.reset_remember_token! 
     end
     cookies.delete(self.class.auth_cookie_name)
-    auth_model.current = nil
+    self.class.auth_model.current = nil
    end
 
    def process_cookie
@@ -195,7 +209,7 @@ module Afauth
       begin
        class_variable_get("@@#{mtd}")
       rescue NameError
-       superclass.class_variable_get("@@#{mtd}") rescue nil
+       superclass.class_variable_get("@@#{mtd}")
       end
      end
 
