@@ -2,7 +2,14 @@
 
 FactoryGirl.define do
  factory :setting do
-  name
-  value
+  trait :named do
+   name "nam"
+  end
+  trait :hashed_ru_value do
+   value { {1 => :tst_ru} }
+  end
+  trait :hashed_value do
+   value { {1 => :tst} }
+  end
  end
 end

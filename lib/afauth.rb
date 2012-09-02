@@ -1,3 +1,4 @@
+#coding: UTF-8
 module Afauth
  class AuthError < Exception; end
  module Model
@@ -9,6 +10,7 @@ module Afauth
     before_validation :generate_remember_token, :if => lambda{ self.remember_token.blank? }
     before_save :encrypt_password, :unless => lambda{ self.password.blank? }
    end
+
   end
 
   module ClassMethods
@@ -119,12 +121,8 @@ module Afauth
   module App
    def self.included(base)
     #base.extend ClassMethods
-    base.extend Controller::App::ClassMethods
+    base.extend ClassMethods
     base.instance_eval do
-     #cattr_accessor :auth_model, :auth_cookie_name, :auth_redirect_on_failed, :auth_expired_in
-     #auth_model = User
-     #auth_cookie_name = :remember_token
-     #@redirect_failed new_session_path
      before_filter :process_cookie
      before_filter :login_from_cookie
      before_filter :authenticate!
@@ -133,7 +131,7 @@ module Afauth
       if self.class.class_variable_defined?(:@@auth_redirect_on_failed) && self.class.auth_redirect_on_failed
        redirect_to self.class.auth_redirect_on_failed
       elsif self.class.class_variable_defined?(:@@auth_redirect_on_failed_cb) && self.class.auth_redirect_on_failed_cb
-       redirect_to self.class.auth_redirect_on_failed_cb.call
+       redirect_to self.send(self.class.auth_redirect_on_failed_cb)
       else
        raise
       end
@@ -157,8 +155,9 @@ module Afauth
 
    def sign_out
     if logged_in? #before_signout
-     self.class.auth_model.current.settings.update_all("value = '0'", "name = 'hideheader'")
-     self.class.auth_model.current.reset_remember_token! 
+     if self.class.class_variable_defined?(:@@auth_before_logout_cb)
+      self.send(self.class.class_variable_get(:@@auth_before_logout_cb))
+     end
     end
     cookies.delete(self.class.auth_cookie_name)
     self.class.auth_model.current = nil
@@ -204,10 +203,9 @@ module Afauth
 
    module ClassMethods
     #setup
-    %w(auth_model auth_cookie_name auth_redirect_on_failed auth_redirect_on_failed_cb auth_expired_in).each do |mtd|
+    %w(auth_model auth_cookie_name auth_redirect_on_failed auth_redirect_on_failed_cb auth_expired_in auth_before_logout_cb).each do |mtd|
      define_method(mtd) do
       begin
-       p "---get", self.name, mtd
        class_variable_get("@@#{mtd}")
       rescue NameError
        superclass.class_variable_get("@@#{mtd}")
@@ -215,37 +213,65 @@ module Afauth
      end
 
      define_method("#{mtd}=") do |val|
-      p "---set", mtd, val, self.name
       class_variable_set("@@#{mtd}", val)
      end
     end
     define_method(:user_model) do |klass|
-     p "---a-m", klass.name, self.name
      self.auth_model = klass
     end
     define_method(:remembered_cookie_name) do |name|
-     p "---a-c", name, self.name
      self.auth_cookie_name = name
     end
     define_method(:redirect_failed) do |rte|
-     p "---a-f", rte, self.name
      self.auth_redirect_on_failed = rte
     end
     define_method(:redirect_failed_cb) do |prc|
-     p "---a-b", prc, self.name
      self.auth_redirect_on_failed_cb = prc
     end
     define_method(:auth_expired_in_days) do |days|
-     p "---a-e", days, self.name
      self.auth_expired_in = days
     end
-
+    define_method(:before_logout_cb) do |prc|
+     self.auth_before_logout_cb = prc
+    end
     #done
 
    end
   end
 
   module Session
+   def self.included(base)
+    base.instance_eval do
+     skip_before_filter :login_from_cookie, :except => :destroy
+     skip_before_filter :process_cookie, :except => :destroy
+     skip_before_filter :authenticate!, :except => :destroy
+    end
+   end
+
+   def new
+   end
+
+   def create
+    sign_out if logged_in?
+    l_user = User.authenticate(params[:session].try(:[], :username), params[:session].try(:[], :password))
+    unless l_user
+     self.class.auth_model.current = nil
+     redirect_to new_sessions_path, :flash => {:error => "Неверный пароль или имя пользователя."} 
+     return
+    end
+    sign_in(l_user, :rememberme => params[:rememberme]) #unless logged_in?
+    if logged_in?
+     current_user.reload_accounts
+     redirect_to root_path
+    else
+     redirect_to new_sessions_path, :flash => {:error => "Неверный пароль или имя пользователя."}
+    end
+   end
+
+   def destroy
+    sign_out
+    redirect_to new_sessions_path
+   end
   end
  end
 end

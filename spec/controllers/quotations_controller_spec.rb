@@ -13,8 +13,8 @@ describe QuotationsController do
   @user.current_account = @user.accounts.first
   @user.save!
   controller.sign_in @user
-  FactoryGirl.create(:setting, :name => "hash.quotation_status", :value => YAML.dump({1=>'tst'}))
-  FactoryGirl.create(:setting, :name => "hash.quotation_status_ru", :value => YAML.dump({1=>'tst.ru'}))
+  FactoryGirl.create(:setting, :hashed_value, :named, :name => "hash.quotation_status", :value => YAML.dump({1=>'tst'}))
+  FactoryGirl.create(:setting, :hashed_value, :named, :name => "hash.quotation_status_ru", :value => YAML.dump({1=>'tst.ru'}))
  end
 
 

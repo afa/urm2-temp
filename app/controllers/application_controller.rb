@@ -3,7 +3,8 @@ class ApplicationController < ActionController::Base
   remembered_cookie_name :user_remember_token
   user_model User
   auth_expired_in_days 1
-  redirect_failed_cb lambda { p "---lmb", self.name; new_sessions_path }
+  redirect_failed_cb :cb_failed
+  before_logout_cb :cb_before_logout
   #before_filter :unmodify
   before_filter :check_account_cur
   before_filter :get_accounts_in
@@ -12,6 +13,15 @@ class ApplicationController < ActionController::Base
 
 
  protected
+  def cb_failed
+   new_sessions_path
+  end
+
+  def cb_before_logout
+   User.current.settings.update_all("value = '0'", "name = 'hideheader'")
+   User.current.reset_remember_token!
+  end
+
   def get_accounts_in
    if logged_in?
     @accounts = User.current.accounts.where(:blocked => false)
