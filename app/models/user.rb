@@ -64,7 +64,15 @@ class User < ActiveRecord::Base
     reqs[1].map(&:location_link).uniq.compact.sort{|a, b| a == current_account.invent_location_id ? -1 : a <=> b }.each do |loc|
      begin
       clct = reqs[1].select{|c| c.location_link == loc }
-      ors << Axapta.make_order(:comment => ar[:order_comment].try(:[], loc), :sales_lines => clct.map(&:to_sales_lines), :date_dead_line => dead_line, :customer_delivery_type_id => delivery).try(:[], "sales_id")
+      if ar[:sales][loc].blank?
+       ors << Axapta.make_order(:comment => ar[:order_comment].try(:[], loc), :sales_lines => clct.map(&:to_sales_lines), :date_dead_line => dead_line, :customer_delivery_type_id => delivery).try(:[], "sales_id")
+      else
+       Axapta.sales_lines_add(:sales_id => ar[:sales][loc], :sales_lines => clct.map(&:to_sales_lines))
+       unless ar[:order_comment].try(:[], loc).blank?
+        Axapta.sales_handle_header(:sales_id =? ar[:sales][loc], :comment => ar[:order_comment][loc])
+       end
+       ors << ar[:sales][loc]
+      end
       clct.each{|i| i.update_attributes :processed => true, :order => ors.last }
       if ar.has_key?(:order_needed) and ar[:order_needed].try[:[], loc] == '1'
        Axapta.create_invoice(ors.last)

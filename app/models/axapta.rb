@@ -129,6 +129,14 @@ class Axapta
    AxaptaRequest.create_quotation(hsh.merge!(:user_hash => axapta_hash))
   end
 
+  def self.sales_lines_add(hsh)
+   AxaptaRequest.sales_lines_add(hsh.merge(:user_hash => axapta_hash))
+  end
+
+  def self.sales_handle_header(hsh)
+   AxaptaRequest.sales_handle_header(hsh.merge(:user_hash => axapta_hash))
+  end
+
   def self.sales_info(*args)
    sales_info_paged(nil, *args).try(:items) || []
   end
