@@ -26,7 +26,7 @@
          .sub
           = link_to "-----", "#", :name => "0" unless current_user.current_account
           - @accounts.each do |a|
-           = link_to a.cust_account, "#", :name => a.id, :class => "showed"
+           = link_to a.human_readable, "#", :name => a.id, :class => "showed"
          = form.hidden_field :account, :value => current_user.try(:current_account).try(:id) || 0
        .account_selector
        = link_to t(:logout), sessions_path, :method => :delete, :class => "quite"
