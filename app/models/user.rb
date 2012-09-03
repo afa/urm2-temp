@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
       else
        Axapta.sales_lines_add(:sales_id => ar[:sales][loc], :sales_lines => clct.map(&:to_sales_lines))
        unless ar[:order_comment].try(:[], loc).blank?
-        Axapta.sales_handle_header(:sales_id =? ar[:sales][loc], :comment => ar[:order_comment][loc])
+        Axapta.sales_handle_header(:sales_id => ar[:sales][loc], :comment => ar[:order_comment][loc])
        end
        ors << ar[:sales][loc]
       end
