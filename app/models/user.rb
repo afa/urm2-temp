@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
       if ar[:sales][loc].blank?
        ors << Axapta.make_order(:comment => ar[:order_comment].try(:[], loc), :sales_lines => clct.map(&:to_sales_lines), :date_dead_line => dead_line, :customer_delivery_type_id => delivery).try(:[], "sales_id")
       else
-       Axapta.sales_lines_add(:sales_id => ar[:sales][loc], :sales_lines => clct.map(&:to_sales_lines))
+       Axapta.sales_handle_add(:sales_id => ar[:sales][loc], :sales_lines => clct.map(&:to_sales_lines))
        unless ar[:order_comment].try(:[], loc).blank?
         Axapta.sales_handle_header(:sales_id => ar[:sales][loc], :comment => ar[:order_comment][loc])
        end
