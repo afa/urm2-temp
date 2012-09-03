@@ -6,6 +6,8 @@
   - @stores.each do |store|
    %h3 К складу #{store}
    .padded
+    = render :partial => "shared/select_list", :locals => {:list_items => @avail_sales, :name => "use_sale[#{store}]", :title => t(:delivery_type), :opts => {:use_system => true} }
+   .padded
     = render :partial => "shared/check_button", :locals => {:name => "order_needed[#{store}]", :title => t(:order_needed), :opts => {:need_field => true, :use_system => true}}
    -# - if @carts.detect{|c| not c.is_a?(CartRequest) }
    .item.store

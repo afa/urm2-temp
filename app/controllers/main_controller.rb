@@ -27,6 +27,7 @@ class MainController < ApplicationController
     @carts = CartItem.where(:user_id => current_user.id).in_cart.unprocessed.order("product_name, product_brend").all
    end
    @stores = @carts.map(&:location_link).uniq.compact
+   @avail_sales = Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000)["items"].map{|s| s.sales_id }
    @reqs = @carts.partition{|i| i.is_a? CartRequest }[0]
    @nreqs = @carts.partition{|i| i.is_a? CartRequest }[1]
    @deliveries = User.current.deliveries
