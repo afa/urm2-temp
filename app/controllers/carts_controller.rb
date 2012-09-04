@@ -42,6 +42,7 @@ class CartsController < ApplicationController
      gon.changes = @changed
      gon.stores = @stores
      @deliveries = User.current.deliveries
+     @avail_sales = [""] + Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000).items.map{|s| [s.sales_id, s.sales_id] }
      gon.order = render_to_string :partial => "main/order_edit"
     end
     #redirect_to carts_path
