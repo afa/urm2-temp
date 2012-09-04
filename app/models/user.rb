@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
     reqs[1].map(&:location_link).uniq.compact.sort{|a, b| a == current_account.invent_location_id ? -1 : a <=> b }.each do |loc|
      begin
       clct = reqs[1].select{|c| c.location_link == loc }
-      if ar[:sales][loc].blank?
+      if ar[:sales][loc].blank? || ar[:sales][loc].to_i == 0
        ors << Axapta.make_order(:comment => ar[:order_comment].try(:[], loc), :sales_lines => clct.map(&:to_sales_lines), :date_dead_line => dead_line, :customer_delivery_type_id => delivery).try(:[], "sales_id")
       else
        Axapta.sales_handle_add(:sales_id => ar[:sales][loc], :sales_lines => clct.map(&:to_sales_lines))
