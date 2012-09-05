@@ -15,45 +15,28 @@
  %span >
  %span.current Запрос #{params[:id]}
 
--# .content-wrap
- .filter-block
-  = form_for :filter, :url => lines_quotations_path, :html => {:method => :get} do |f|
-   .filter
-    %table
-     %tr
-      %th= f.label :item_name, t(:item_name)
-      %td.long{:colspan => 3}= f.text_field :item_name
-     %tr
-      %th= f.label :quotation_id, t(:quotation_id)
-      %td.medium= f.text_field :quotation_id
-     %tr
-      %th= f.label :brend_alias, t(:brend_alias)
-      %td.medium= f.text_field :brend_alias
-     %tr
-      %td= render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
-   -# .fields
-    .field.urm
-     = f.label :quotation_id, t(:quotation_id)
-     = f.text_field :quotation_id
-    = render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
-   -# .clear.block-padded
-   -# .fields
-    .field.urm
-     = f.label :item_name, t(:item_name)
-     = f.text_field :item_name
-   -# .clear.block-padded
-   -# .fields
-    .field.urm
-     = f.label :brend_alias, t(:brend_alias)
-     = f.text_field :brend_alias
-   .clear.block-padded
-
-.clear
 .content-wrap
  .table-navigation-block{:class => "scroll"}
   .table-block
    .table-scrolling
-    -# = render :partial => "shared/pagination", :locals => {:page => @lines.page.to_i, :pages => @lines.total.to_i}
+    - content_for :quotation_base_info do
+     = render :partial => "quotations/info", :locals => {:quotation => @quotation_info}
+
+    - content_for :quotation_cancelation do
+     .close_sale
+      .header= t(:quotation_cancelation)
+      = form_for :quotation, :url => close_order_path(params[:id]) do |f2|
+       = render :partial => "shared/submit_button", :locals => {:title => t(:close)}
+       .clear
+
+    .clear
+    .handle_lines
+     .tabbed_box
+      .tabs
+       .tab.active= link_to t(:main_options), "#", :id => "enable_main_options", :class => "ajax"
+       .tab= link_to t(:reserve_lines), "#", :id => "enable_reserve_lines", :class => "ajax"
+
+    .clear
     = render :partial => "shared/pagination", :locals => {:page => @quotation.page.to_i, :pages => @quotation.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей: #{@quotation.records}&nbsp;&nbsp;Страниц: #{@quotation.total}&nbsp;&nbsp;".html_safe, :text_before_current => "Страница: "}}
     %table.table-style{:class => "order-list"}
      %tr

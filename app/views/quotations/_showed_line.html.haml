@@ -1,12 +1,12 @@
 - iid = showed_line.line_id
 %tr
  %td.select_data{:style => "display: none;"}
-  = check_box_tag "quotation[#{showed_line.sales_id}][line][#{iid}][selected]", "1", false
-  = hidden_field_tag "quotation[#{showed_line.sales_id}][line][#{iid}][line_id]", showed_line.line_id # сртпв item_id to line_id ??
-  = hidden_field_tag "quotation[#{showed_line.sales_id}][line][#{iid}][note]", showed_line.note
-  = hidden_field_tag "quotation[#{showed_line.sales_id}][line][#{iid}][requirement]", showed_line.requirements
-  = hidden_field_tag "quotation[#{showed_line.sales_id}][line][#{iid}][process_qty]", showed_line.process_qty
-  = hidden_field_tag "quotation[#{showed_line.sales_id}][line][#{iid}][selected]", ""
+  = check_box_tag "quotation[#{showed_line.quotation_id}][line][#{iid}][selected]", "1", false
+  = hidden_field_tag "quotation[#{showed_line.quotation_id}][line][#{iid}][line_id]", showed_line.line_id # сртпв item_id to line_id ??
+  = hidden_field_tag "quotation[#{showed_line.quotation_id}][line][#{iid}][note]", showed_line.note
+  = hidden_field_tag "quotation[#{showed_line.quotation_id}][line][#{iid}][requirement]", showed_line.requirements
+  = hidden_field_tag "quotation[#{showed_line.quotation_id}][line][#{iid}][process_qty]", showed_line.process_qty
+  = hidden_field_tag "quotation[#{showed_line.quotation_id}][line][#{iid}][selected]", ""
  %td= showed_line.quotation_id
  %td.text-left= showed_line.quotation_line_status
  %td.text-left= showed_line.rohs
@@ -14,7 +14,7 @@
  %td.text-right= showed_line.brend_alias
  %td.text-right.tiny
   .readable-amount{:style => "display: none;"}= showed_line.client_price
-  .editable-amount= text_field_tag "quotation[#{showed_line.sales_id}][line][#{iid}][qty]", showed_line.client_price
+  .editable-amount= text_field_tag "quotation[#{showed_line.quotation_id}][line][#{iid}][qty]", showed_line.client_price
  %td= showed_line.sales_price
  %td= showed_line.sales_qty
  %td= showed_line.quotation_prognosis_id
