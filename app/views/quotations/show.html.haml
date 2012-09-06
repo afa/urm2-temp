@@ -35,22 +35,47 @@
       .tabs
        .tab.active= link_to t(:main_options), "#", :id => "enable_main_options", :class => "ajax"
        .tab= link_to t(:reserve_lines), "#", :id => "enable_reserve_lines", :class => "ajax"
+      .table
+       = render :partial => "shared/pagination", :locals => {:page => @quotation.page.to_i, :pages => @quotation.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей: #{@quotation.records}&nbsp;&nbsp;Страниц: #{@quotation.total}&nbsp;&nbsp;".html_safe, :text_before_current => "Страница: "}}
+       %table.table-style{:class => "order-list"}
+        %tr
+         %th Код запроса
+         %th Статус
+         %th ROHS
+         %th= t(:item_name)
+         %th Производитель
+         %th Цена клиента
+         %th Цена предложения
+         %th Текущее количество
+         %th Прогноз
+         %th Примечание
+         %th Сумма
+         %th Код номенклатуры
 
-    .clear
-    = render :partial => "shared/pagination", :locals => {:page => @quotation.page.to_i, :pages => @quotation.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей: #{@quotation.records}&nbsp;&nbsp;Страниц: #{@quotation.total}&nbsp;&nbsp;".html_safe, :text_before_current => "Страница: "}}
-    %table.table-style{:class => "order-list"}
-     %tr
-      %th Код запроса
-      %th Статус
-      %th ROHS
-      %th= t(:item_name)
-      %th Производитель
-      %th Цена клиента
-      %th Цена предложения
-      %th Текущее количество
-      %th Прогноз
-      %th Примечание
-      %th Сумма
-      %th Код номенклатуры
+        = render :partial => "quotations/showed_line", :collection => @quotation.items
 
-     = render :partial => "quotations/showed_line", :collection => @quotation.items
+      .dialogs
+       .page.active
+        .main_options
+         .x4
+          = yield :quotation_base_info
+         .x4
+          .header= t(:quotation_comment)
+          = form_for :order, :url => save_quotation_path(params[:id]) do |f6|
+           -# = label_tag "order_#{params[:id]}_comment", t(:order_comment)
+           = text_area_tag "order[#{params[:id]}][comment]", @order_info.comment
+           = render :partial => "shared/submit_button", :locals => {:title => t(:save), :opts => {:id => "save_order"}}
+         .x4
+          = yield :order_base_make
+         .x4
+          = yield :order_base_close
+       .page
+        .reserve_lines
+         = form_for :order, :url => reserve_order_path(params[:id]) do |f3|
+          -# .link [#{t(:reserve)}]
+          = render :partial => "shared/submit_button", :locals => {:title => t(:reserve), :opts => {:id => "reserve_order"}}
+          .clear
+         = form_for :order, :url => unreserve_order_path(params[:id]) do |f3|
+          -# .link [#{t(:unreserve_all)}]
+          = render :partial => "shared/submit_button", :locals => {:title => t(:unreserve_all), :opts => {:id => "unreserve_all_orders"}}
+
