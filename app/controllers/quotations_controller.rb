@@ -14,7 +14,7 @@ class QuotationsController < ApplicationController
   end
 
   def show
-   @quotation_info = Axapta.quotation_info(:quotation_id => params[:id])
+   @quotation_info = Axapta.quotation_info(:quotation_id => params[:id]).first
    @quotation = Axapta.quotation_lines_paged(@page, :quotation_id => params[:id])#, :only_open => true)
   end
 
