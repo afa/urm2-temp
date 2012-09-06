@@ -1,0 +1,86 @@
+
+.quotation_info
+ %table
+  %tr
+   %th
+    %span.title= "Расчётный счёт:"
+   %td
+    = quotation.bank_account
+  %tr
+   %th
+    %span.title= "Комментарий:"
+   %td
+    .content
+     = quotation.comment
+  %tr
+   %th
+    %span.title= "Фирма:"
+   %td
+    = quotation.company_code
+  %tr
+   %th
+    %span.title= "Валюта:"
+   %td
+    = quotation.currency_code
+  %tr
+   %th
+    %span.title= "Дата готовности:"
+   %td
+    = quotation.date_dead_line_delivery
+  %tr
+   %th
+    %span.title= "Способ поставки:"
+   %td
+    = quotation.delivery_mode
+  %tr
+   %th
+    %span.title= "Счёт:"
+   %td
+    = quotation.document_number
+  %tr
+   %th
+    %span.title= "Накладная ТК:"
+   %td
+    = quotation.external_invoice_num
+  %tr
+   %th
+    %span.title= "Срок поставки:"
+   %td
+    = quotation.max_quotation_prognosis
+  %tr
+   %th
+    %span.title= "Способ оплаты:"
+   %td
+    = quotation.paym_mode
+  %tr
+   %th
+    %span.title= "Статус оплаты:"
+   %td
+    = quotation.payment_status
+  %tr
+   %th
+    %span.title= "Сумма:"
+   %td
+    = quotation.sales_amount
+  %tr
+   %th
+    %span.title= "Дата заказа:"
+   %td
+    = quotation.sales_date
+  %tr
+   %th
+    %span.title= "Статус в СОД:"
+   %td
+    = quotation.sales_ecommerce_status
+  %tr
+   %th
+    %span.title= "Номер заказа:"
+   %td
+    = quotation.sales_id
+  %tr
+   %th
+    %span.title= "Статус:"
+   %td
+    = quotation.sales_status
+
+
