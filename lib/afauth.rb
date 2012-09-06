@@ -127,7 +127,7 @@ module Afauth
      before_filter :login_from_cookie
      before_filter :authenticate!
      rescue_from Afauth::AuthError do |e|
-      Rails.logger.info "---rescue: need redirect, #{e}, #{e.backtrace.first}"
+      Rails.logger.info "---rescue: need redirect, #{e}, #{e.backtrace.first(3)}"
       if self.class.class_variable_defined?(:@@auth_redirect_on_failed) && self.class.auth_redirect_on_failed
        redirect_to self.class.auth_redirect_on_failed
       elsif self.class.class_variable_defined?(:@@auth_redirect_on_failed_cb) && self.class.auth_redirect_on_failed_cb
