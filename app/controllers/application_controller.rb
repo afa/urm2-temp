@@ -31,8 +31,8 @@ class ApplicationController < ActionController::Base
   end
 
   def check_account_cur
-   Rails.logger.info "---acc #{User.current.inspect}"
    if User.current and User.current.current_account
+    Rails.logger.info "---acc #{User.current.inspect}"
     #p "::current_user", current_user
     if User.current.current_account.blocked? or User.current.accounts.where(:id => User.current.current_account_id).count == 0
      Rails.logger.warn "---blocked acc #{User.current.current_account_id}"
