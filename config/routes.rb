@@ -33,6 +33,7 @@ Urm::Application.routes.draw do
    end
    member do
     post :save
+    post :cancelation
    end
   end
   resources :users do
