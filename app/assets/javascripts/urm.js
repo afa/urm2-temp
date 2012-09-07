@@ -642,10 +642,43 @@ function cartsHandleSaveOnFocusLost(){
  });
 }
 
+function quotationsHideInactiveControls(){
+ $('tr th.main_options_header').hide();
+ $("tr td div.readable-amount").hide();
+ $("tr td div.editable-amount").show();
+ $("tr td.main_options_data").hide();
+ $('tr th.reserve_header').hide();
+ $("tr td.reserve_data").hide();
+ $('tr th.select_header').hide();
+ $('tr td.select_data').hide();
+ $('input[type="checkbox"][name^="order["][name*="][line]["][name$="][selected]"]').remove();
+ $('input[type="text"][name^="order["][name*="][line]["][name$="][note]"]').remove();
+ $('input[type="text"][name^="order["][name*="][line]["][name$="][requirement]"]').remove();
+ $('input[type="text"][name^="order["][name*="][line]["][name$="][process_qty]"]').remove();
+}
+
+function quotationsTabOnClick(){
+ var lst = $(this).parents(".tabbed_box").find(".dialogs .page");
+ var tabs = $(this).parents(".tabbed_box").find(".tabs .tab");
+ var idx = $(this).parents(".tabbed_box").find(".tabs .tab a").index($(this));
+ if(idx == -1){
+  return false;
+ }
+ var page = lst.eq(idx);
+ var tab = tabs.eq(idx);
+ if(page.hasClass("active")){
+  page.removeClass("active");
+  tab.removeClass("active");
+ } else {
+  lst.removeClass("active");
+  page.addClass("active");
+  tabs.removeClass("active");
+  tab.addClass("active");
+ }
+ return false;
+}
+
 function quotationsTabsProcess(){
- $(".tabbed_box .tabs .tab a#enable_main_options").click(ordersHideInactiveControls).click(ordersOnClickEnableMainOptions).click(ordersTabOnClick);
- $(".tabbed_box .tabs .tab a#enable_reserve_lines").click(ordersHideInactiveControls).click(ordersOnClickEnableReserveLines).click(ordersTabOnClick);
- $(".tabbed_box .tabs .tab a#enable_pick_lines").click(ordersHideInactiveControls).click(ordersOnClickEnablePickLines).click(ordersTabOnClick);
- $(".tabbed_box .tabs .tab a#enable_reserve_transfer").click(ordersHideInactiveControls).click(ordersOnClickEnableReserveTransfer).click(ordersTabOnClick);
- $(".tabbed_box .tabs .tab a#enable_remove_lines").click(ordersHideInactiveControls).click(ordersOnClickEnableRemoveLines).click(ordersTabOnClick);
+ $(".tabbed_box .tabs .tab a#enable_main_options").click(quotationsHideInactiveControls).click(quotationsOnClickEnableMainOptions).click(quotationsTabOnClick);
+ $(".tabbed_box .tabs .tab a#enable_cancelation").click(quotationsHideInactiveControls).click(quotationsOnClickEnableCancelation).click(quotationsTabOnClick);
 }
