@@ -31,6 +31,9 @@ Urm::Application.routes.draw do
     get :lines
     post :export_list
    end
+   member do
+    post :save
+   end
   end
   resources :users do
    collection do
