@@ -5,6 +5,13 @@ require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
 Urm::Application.load_tasks
-Cucumber::Rake::Task.new do |t|
- #t.rcov = true
+desc 'Run factory specs.'
+RSpec::Core::RakeTask.new(:factory_specs) do |t|
+  t.pattern = './spec/factories_spec.rb'
 end
+
+task spec: :factory_specs
+
+#Cucumber::Rake::Task.new do |t|
+# #t.rcov = true
+#end

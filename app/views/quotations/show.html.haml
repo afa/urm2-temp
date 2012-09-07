@@ -70,7 +70,7 @@
          .x4
           = yield :order_base_close
        .page
-        .reserve_lines
+        .
          = form_for :order, :url => reserve_order_path(params[:id]) do |f3|
           -# .link [#{t(:reserve)}]
           = render :partial => "shared/submit_button", :locals => {:title => t(:reserve), :opts => {:id => "reserve_order"}}
@@ -79,3 +79,10 @@
           -# .link [#{t(:unreserve_all)}]
           = render :partial => "shared/submit_button", :locals => {:title => t(:unreserve_all), :opts => {:id => "unreserve_all_orders"}}
 
+
+:javascript
+ quotationsTabsProcess();
+ quotationsSaveProcess();
+ quotationsReserveProcess();
+ quotationsPickProcess();
+ quotationsRemoveProcess();
