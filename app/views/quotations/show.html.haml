@@ -61,9 +61,9 @@
           = yield :quotation_base_info
          .x4
           .header= t(:quotation_comment)
-          = form_for :order, :url => save_quotation_path(params[:id]) do |f6|
+          = form_for :quotation, :url => save_quotation_path(params[:id]) do |f6|
            -# = label_tag "order_#{params[:id]}_comment", t(:order_comment)
-           = text_area_tag "order[#{params[:id]}][comment]", @order_info.comment
+           = text_area_tag "quotation[#{params[:id]}][comment]", @quotation_info.comment
            = render :partial => "shared/submit_button", :locals => {:title => t(:save), :opts => {:id => "save_order"}}
          .x4
           = yield :order_base_make
