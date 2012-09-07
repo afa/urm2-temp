@@ -678,6 +678,44 @@ function quotationsTabOnClick(){
  return false;
 }
 
+function quotationsOnClickEnableMainOptions(){
+ if($(this).parents(".tabbed_box").find(".dialogs .page").eq(0).hasClass("active")){
+  return;
+ }
+
+ $("tr th.main_options_header").show();
+ $("tr td div.readable-amount").hide();
+ $("tr td div.editable-amount").show();
+ $("tr td div.editable-amount input").each(function(i, item){ item.disabled = ''; });
+ $("tr td.main_options_data").show();
+ $("tr td.main_options_data").each(function(i, item){
+  if($(item).hasClass("note-option")){
+   var cp = $(item).parents("tr").find('td input[type="hidden"][name^="order["][name*="][line]["][name$="][note]"]').eq(0);
+   $(item).append('<input type="text" name="' + cp.attr("name") + '" value="' + cp.val()+ '">');
+  }
+  if($(item).hasClass("requirement-option")){
+   var cp = $(item).parents("tr").find('td input[type="hidden"][name^="order["][name*="][line]["][name$="][requirement]"]').eq(0);
+   $(item).append('<input type="text" name="' + cp.attr("name") + '" value="' + cp.val()+ '">');
+  }
+ });
+
+}
+
+function quotationsOnClickEnableCancelation(){
+ if($(this).parents(".tabbed_box").find(".dialogs .page").eq(1).hasClass("active")){
+  return;
+ }
+ $("tr td div.readable-amount").show();
+ $("tr td div.editable-amount").hide();
+ $("tr td div.editable-amount input").each(function(i, item){ item.disabled = 'disabled'; });
+ $('tr th.reserve_header').show();
+ $("tr td.reserve_data").show();
+ $("tr td.reserve_data").each(function(i, item){
+  var cp = $(item).parents("tr").find('td input[type="hidden"][name^="order["][name*="][line]["][name$="][process_qty]"]').eq(0);
+  $(item).append('<input type="text" name="' + cp.attr("name") + '" value="' + cp.val()+ '">');
+ });
+}
+
 function quotationsTabsProcess(){
  $(".tabbed_box .tabs .tab a#enable_main_options").click(quotationsHideInactiveControls).click(quotationsOnClickEnableMainOptions).click(quotationsTabOnClick);
  $(".tabbed_box .tabs .tab a#enable_cancelation").click(quotationsHideInactiveControls).click(quotationsOnClickEnableCancelation).click(quotationsTabOnClick);
