@@ -642,6 +642,10 @@ function cartsHandleSaveOnFocusLost(){
  });
 }
 
+function quotationsCopyToHidden(item, after){
+ $('<input type="hidden" name="' + item.name + '" value="' + $(item).val() + '">').insertAfter($(after));
+}
+
 function quotationsHideInactiveControls(){
  $('tr th.main_options_header').hide();
  $("tr td div.readable-amount").hide();
@@ -699,6 +703,16 @@ function quotationsOnClickEnableMainOptions(){
   }
  });
 
+}
+
+function quotationsSaveOnClick(){
+ var curr = this;
+ $('input[name^="quotation["][name$="][qty]"]').each(function(i, item){ quotationsCopyToHidden(item, curr); });
+ $('input[name^="quotation["][name$="][line_id]"]').each(function(i, item){ quotationsCopyToHidden(item, curr); });
+ $('td.main_options_data input[type="text"][name^="quotation["][name$="][note]"]').each(function(i, item){ quotationsCopyToHidden(item, curr); });
+ $('td.main_options_data input[type="text"][name^="quotation["][name$="][requirement]"]').each(function(i, item){ quotationsCopyToHidden(item, curr); });
+ $('textarea[id^="quotation_"][id$="_comment"]').each(function(i, item){ quotationsCopyToHidden(item, curr); });
+ $(this).parents("form").submit();
 }
 
 function quotationsSaveProcess(){
