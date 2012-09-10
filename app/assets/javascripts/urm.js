@@ -701,6 +701,10 @@ function quotationsOnClickEnableMainOptions(){
 
 }
 
+function quotationsSaveProcess(){
+ $("#save_quotation a.button-style").click(quotationsSaveOnClick);
+}
+
 function quotationsOnClickEnableCancelation(){
  if($(this).parents(".tabbed_box").find(".dialogs .page").eq(1).hasClass("active")){
   return;
