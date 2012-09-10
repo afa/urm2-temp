@@ -702,7 +702,7 @@ function quotationsCancelOnClick(){
  $(this).parents("form").submit();
 }
 
-function quotationCancelProcess(){
+function quotationsCancelProcess(){
  $("#remove_order a.button-style").click(quotationsCancelOnClick);
 }
 
