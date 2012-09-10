@@ -18,6 +18,6 @@
  %td= showed_line.sales_price
  %td= showed_line.sales_qty
  %td= showed_line.quotation_prognosis_id
- %td.note-option.main_options_data.medium= text_field_tag "quotation[#{showed_line.sales_id}][line][#{iid}][line_comment]", showed_line.line_comment
+ %td.note-option.main_options_data.medium= text_field_tag "quotation[#{showed_line.sales_id}][line][#{iid}][note]", showed_line.line_comment
  %td= showed_line.line_amount
  %td= showed_line.item_id
