@@ -26,6 +26,10 @@ class QuotationsController < ApplicationController
    end
   end
 
+  def cancelation
+   
+  end
+
  protected
   def get_filter
    @filter = OpenStruct.new()
