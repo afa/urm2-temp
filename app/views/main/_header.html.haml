@@ -35,7 +35,7 @@
        .padded
         .account_selector
         = form_for :logout, :url => sessions_path, :html => {:method => :delete} do |f| #, :class => "quite"
-         = render :partial => "shared/submit_button", :locals => {:title => t(:logout)}
+         = render :partial => "shared/submit_button", :locals => {:title => t(:logout), :opts => {:style => "margin-left:60px; margin-top:5px;"}}
        .clear
       .clear
 .button-slide-panel
