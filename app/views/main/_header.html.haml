@@ -22,6 +22,7 @@
          -# .comp= current_user.current_account.try(:business)
         - else
          %span= t :select_account
+       .clear
        .padded
         = form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
          .select
@@ -30,6 +31,7 @@
            - @accounts.each do |a|
             = link_to a.human_readable, "#", :name => a.id, :class => "showed"
           = form.hidden_field :account, :value => current_user.try(:current_account).try(:id) || 0
+       .clear
        .account_selector
        = form_for :logout, :url => sessions_path, :html => {:method => :delete} do |f| #, :class => "quite"
         = render :partial => "shared/submit_button", :locals => {:title => t(:logout)}
