@@ -25,7 +25,7 @@
        .clear
        .padded
         = form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
-         .select
+         .select{:style => "margin-left: 20px;"}
           .sub
            = link_to "-----", "#", :name => "0" unless current_user.current_account
            - @accounts.each do |a|
