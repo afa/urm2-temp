@@ -16,18 +16,20 @@
      .line
      - if logged_in?
       .user-block
-       - if current_user.current_account
-        %span.name{:title => current_user.username}= [current_user.current_account.contact_first_name, current_user.current_account.contact_middle_name, current_user.current_account.contact_last_name].compact.join(' ')
-        -# .comp= current_user.current_account.try(:business)
-       - else
-        %span= t :select_account
-       = form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
-        .select
-         .sub
-          = link_to "-----", "#", :name => "0" unless current_user.current_account
-          - @accounts.each do |a|
-           = link_to a.human_readable, "#", :name => a.id, :class => "showed"
-         = form.hidden_field :account, :value => current_user.try(:current_account).try(:id) || 0
+       .padded
+        - if current_user.current_account
+         %span.name{:title => current_user.username}= [current_user.current_account.contact_first_name, current_user.current_account.contact_middle_name, current_user.current_account.contact_last_name].compact.join(' ')
+         -# .comp= current_user.current_account.try(:business)
+        - else
+         %span= t :select_account
+       .padded
+        = form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
+         .select
+          .sub
+           = link_to "-----", "#", :name => "0" unless current_user.current_account
+           - @accounts.each do |a|
+            = link_to a.human_readable, "#", :name => a.id, :class => "showed"
+          = form.hidden_field :account, :value => current_user.try(:current_account).try(:id) || 0
        .account_selector
        = form_for :logout, :url => sessions_path, :html => {:method => :delete} do |f| #, :class => "quite"
         = render :partial => "shared/submit_button", :locals => {:title => t(:logout)}
