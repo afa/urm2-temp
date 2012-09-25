@@ -29,7 +29,8 @@
            = link_to a.human_readable, "#", :name => a.id, :class => "showed"
          = form.hidden_field :account, :value => current_user.try(:current_account).try(:id) || 0
        .account_selector
-       = link_to t(:logout), sessions_path, :method => :delete, :class => "quite"
+       = form_for :logout, :url => sessions_path, :html => {:method => :delete} do |f| #, :class => "quite"
+        = render :partial => "shared/submit_button", :locals => {:title => t(:logout)}
 
       .clear
 .button-slide-panel
