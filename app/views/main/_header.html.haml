@@ -18,7 +18,7 @@
       .user-block
        - if current_user.current_account
         %span.name{:title => current_user.username}= [current_user.current_account.contact_first_name, current_user.current_account.contact_middle_name, current_user.current_account.contact_last_name].compact.join(' ')
-        .comp= current_user.current_account.try(:business)
+        -# .comp= current_user.current_account.try(:business)
        - else
         %span= t :select_account
        = form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
