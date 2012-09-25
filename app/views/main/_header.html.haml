@@ -32,10 +32,11 @@
             = link_to a.human_readable, "#", :name => a.id, :class => "showed"
           = form.hidden_field :account, :value => current_user.try(:current_account).try(:id) || 0
        .clear
-       .account_selector
-       = form_for :logout, :url => sessions_path, :html => {:method => :delete} do |f| #, :class => "quite"
-        = render :partial => "shared/submit_button", :locals => {:title => t(:logout)}
-
+       .padded
+        .account_selector
+        = form_for :logout, :url => sessions_path, :html => {:method => :delete} do |f| #, :class => "quite"
+         = render :partial => "shared/submit_button", :locals => {:title => t(:logout)}
+       .clear
       .clear
 .button-slide-panel
  %a.button-slide{:href=>"#", :class => "up"}
