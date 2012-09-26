@@ -69,8 +69,8 @@ ru:
     user:
      attributes:
       username:
-       taken: уже используется
-       blank: не может быть пустым
+       taken: Логин уже используется
+       blank: Логин не может быть пустым
     account:
      attributes:
       axapta_hash:
