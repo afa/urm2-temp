@@ -66,6 +66,11 @@ ru:
  activerecord:
   errors:
    models:
+    user:
+     attributes:
+      username:
+       taken: уже используется
+       blank: не может быть пустым
     account:
      attributes:
       axapta_hash:
