@@ -30,6 +30,21 @@ class QuotationsController < ApplicationController
    
   end
 
+  def save
+   id = params[:id]
+   lines = params.try(:[], :quotation).try(:[], id).try(:[], :line) || []
+   if lines.empty?
+    redirect_to quotation_path(id), :flash => {:error => "empty lines"}
+    return
+   end
+   comment = params[:quotation][id][:comment]
+   #@order = Axapta.sales_info(:sales_id => id.to_i)
+   #@lines = Axapta.sales_lines(:sales_id => id.to_i)
+   Axapta.quotation_handle_header(:comment => comment, :quotation_id => id)
+   Axapta.quotation_handle_edit(:quotation_lines => lines.map{|k, v| v.merge(:line_id => k).merge(:requirements => v[:requirement]) }, :quotation_id => id) #TODO fix line_id for line_id
+   redirect_to quotation_path(id)
+  end
+
  protected
   def get_filter
    @filter = OpenStruct.new()
