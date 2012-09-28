@@ -26,11 +26,16 @@ class UsersController < ApplicationController
 
   def create
    @user = User.new(params[:user])
-   @user.save
-   if @user.valid?
-    flash[:info] = "ok"
-    render :layout => "simple"
-   else
+   begin
+    if @user.valid?
+     @user.save
+     flash[:info] = "ok"
+     render :layout => "simple"
+    else
+     flash[:error] = "fail"
+     render :new, :layout => "simple"
+    end
+   raise Exception => er
     flash[:error] = "fail"
     render :new, :layout => "simple"
    end
