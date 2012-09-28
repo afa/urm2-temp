@@ -38,7 +38,7 @@ class UsersController < ApplicationController
      flash[:error] = "fail"
      render :new, :layout => "simple"
     end
-   raise Exception => er
+   rescue Exception => er
     flash[:error] = "fail"
     render :new, :layout => "simple"
    end
