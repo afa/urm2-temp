@@ -28,7 +28,7 @@
     - else
      = hidden_field_tag name, val, (opts[:field_opts] || {}).merge(id.blank? ? {} : :id => id)
      -# %input{:name => name, :id => id, :value => val}
-   .sub{:style => "z-index:4;"}
+   .sub{:style => "z-index:#{opts[:zindex] ? opts[:zindex] : 4};"}
     - (blank + list_items).each do |a|
      = link_to a[1], "#", :name => a[0], :class => "showed", :style => "white-space:nowrap;min-width:#{sz}ex;"
    -# %a{:href=>"#", :name => name, :class => [val == '1' ? "active" : nil]}
