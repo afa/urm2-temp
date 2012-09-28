@@ -4,6 +4,9 @@ class UsersController < ApplicationController
  skip_before_filter :login_from_cookie, :only => [:new, :create]
  skip_before_filter :authenticate!, :only => [:new, :create]
  skip_before_filter :check_account, :only => [:new, :create]
+ skip_before_filter :check_account_cur, :only => [:new, :create]
+ skip_before_filter :get_accounts_in, :only => [:new, :create]
+ skip_before_filter :take_search
  before_filter :get_user, :only => [:edit, :update, :show, :destroy]
  before_filter :check_user, :only => [:edit, :update, :show, :destroy]
  before_filter :get_accounts, :only => [:edit, :update]
