@@ -5,7 +5,7 @@ class Axapta
  include ActiveModel::Serialization
 
   def self.parse_exc(e)
-   if e kind_of?(JsonRpcClient::Error)
+   if e.kind_of?(JsonRpcClient::Error)
     @last_parsed_error = ActiveSupport::JSON.decode(e.message.scan(/JSON-RPC error ::\((.+)\)::.+\{.+\}/)[0][0])
     {"_error" => @last_parsed_error}
    else
