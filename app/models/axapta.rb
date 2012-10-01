@@ -4,9 +4,9 @@ class Axapta
  include ActiveModel
  include ActiveModel::Serialization
 
-  def self.parse_exc(e)
-   if e.kind_of?(JsonRpcClient::Error)
-    @last_parsed_error = ActiveSupport::JSON.decode(e.message.scan(/JSON-RPC error ::\((.+)\)::.+\{.+\}/)[0][0])
+  def self.parse_exc(e, klas = "")
+   if klas =~ /JsonRpcClient::ServiceError/
+    @last_parsed_error = ActiveSupport::JSON.decode(e.scan(/JSON-RPC error ::\((.+)\)::.+\{.+\}/)[0][0])
     {"_error" => @last_parsed_error}
    else
     raise
@@ -31,7 +31,7 @@ class Axapta
    begin
     @config ||= AxaptaRequest.describe_methods
    rescue Exception => e
-    parse_exc(e)
+    parse_exc(e.message, e.class.name)
     {}
    end
   end
@@ -71,7 +71,7 @@ class Axapta
    begin
     res = AxaptaRequest.search_item_name_h(ar).try(:[], "items") || []
    rescue Exception => e
-    parse_exc(e)
+    parse_exc(e.message, e.class.name)
     []
    end
   end
@@ -83,7 +83,7 @@ class Axapta
    begin
     res = AxaptaRequest.search_item_name_dms_h(ar).try(:[], "items") || []
    rescue Exception => e
-    parse_exc(e)
+    parse_exc(e.message, e.class.name)
     []
    end
   end
@@ -93,7 +93,7 @@ class Axapta
    begin
     AxaptaRequest.item_info(ar) || []
    rescue Exception => e
-    parse_exc(e)
+    parse_exc(e.message, e.class.name)
     []
    end
   end
@@ -196,7 +196,7 @@ class Axapta
    begin
     AxaptaRequest.create_invoice(:user_hash => axapta_hash, :sales_id => order, :send_by_email => send)
    rescue Exception => e
-    parse_exc(e)
+    parse_exc(e.message, e.class.name)
     raise AxaptaError
    end
   end
@@ -205,7 +205,7 @@ class Axapta
    begin
     AxaptaRequest.invoice_paym(:user_hash => axapta_hash, :sales_id => order, :send_by_email => send)
    rescue Exception => e
-    parse_exc(e)
+    parse_exc(e.message, e.class.name)
     raise AxaptaError
    end
   end
@@ -242,7 +242,7 @@ class Axapta
    begin
     AxaptaRequest.sales_handle_header(hsh.merge(:user_hash => axapta_hash))
    rescue Exception => e
-    parse_exc(e)
+    parse_exc(e.message, e.class.name)
     raise AxaptaError
    end
   end
@@ -251,7 +251,7 @@ class Axapta
    begin
     AxaptaRequest.sales_handle_edit(hsh.merge(:user_hash => axapta_hash))
    rescue Exception => e
-    parse_exc(e)
+    parse_exc(e.message, e.class.name)
     raise AxaptaError
    end
   end
@@ -260,7 +260,7 @@ class Axapta
    begin
     AxaptaRequest.sales_close_reason_list(:user_hash => axapta_hash)["reason_list"].map{|x| [x["close_reason_description"], x["close_reason_id"]] } #return [[desc, id]]
    rescue Exception => e
-    parse_exc(e)
+    parse_exc(e.message, e.class.name)
     []
    end
   end
@@ -279,7 +279,7 @@ class Axapta
    begin
     AxaptaRequest.application_area_list(:user_hash => axapta_hash)["area_list"].map{|x| OpenStruct.new(x)}
    rescue Exception => e
-    parse_exc(e)
+    parse_exc(e.message, e.class.name)
    end
   end
 
@@ -288,7 +288,7 @@ class Axapta
     AxaptaRequest.info_cust_limits(:user_hash => axapta_hash).try(:[], "reserve").inject(OpenStruct.new){|r, x| r.send(x[0] + '=', x[1]); r  }
    rescue Exception => e
     p "---exc in cust limits", e
-    parse_exc(e)
+    parse_exc(e.message, e.class.name)
     OpenStruct.new
    end
   end
@@ -297,7 +297,7 @@ class Axapta
    begin
     AxaptaRequest.info_cust_limits(:user_hash => axapta_hash).inject(OpenStruct.new){|r, (k, v)| r.send(k + '=', OpenStruct.new(v)) ; r }
    rescue Exception => e
-    parse_exc(e)
+    parse_exc(e.message, e.class.name)
     OpenStruct.new
    end
   end

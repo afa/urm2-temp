@@ -10,25 +10,12 @@ class User < ActiveRecord::Base
  has_many :settings, :as => :settingable
  has_many :children, :class_name => self.name, :foreign_key => :parent_id
  has_many :cart_items
- #validates_uniqueness_of :username
  validates :username, :presence => true, :uniqueness => true
  validate :unique_hash, :on => :create
  validate :check_axapta_validity, :on => :create
  before_validation :check_current_account_activity
  attr_accessor :ext_hash, :password
- #before_validation :make_salt, :if => lambda{ self.salt.blank? }
- #before_validation :calc_password, :on => :create
  after_create :create_axapta_account
-
-#  def self.authenticate(username, password)
-#   return nil  unless user = find_by_name(username)
-#   return user if     user.authenticated?(password)
-#  end
-
-  #def authenticated?(password)
-  # #Digest::MD5.hexdigest([salt, password].join) == encrypted_password
-  # encrypt(password) == encrypted_password
-  #end
 
   def accounts_children
    accounts.inject({}){|res, account| res.merge(account.hash => account.children) }
@@ -37,10 +24,6 @@ class User < ActiveRecord::Base
   def axapta_children
    accounts_children.values.flatten.map(&:user).uniq
   end
-
- #  def authenticated?(password)
- #  Digest::MD5.hexdigest([salt, password].join) == encrypted_password
- # end
 
   def reload_accounts
    self.accounts.where(:blocked => false).each do |account|
@@ -114,7 +97,7 @@ class User < ActiveRecord::Base
     #TODO: no need check more
     #current_account.update_attributes :invent_location_id => axapta_params["invent_location_id"] unless current_account.invent_location_id == axapta_params["invent_location_id"]
    rescue Exception => e
-    errors.add(:ext_hash, "#{e.class.name}:#{Axaptaparse_exc(e.message)[:_error]}")
+    errors.add(:ext_hash, "#{e.class.name}:#{Axapta.parse_exc(e.message, e.class.name)[:_error]}")
    end
   end
 
