@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe 'validate FactoryGirl factories' do
-  FactoryGirl.factories.each do |factory|
+  FactoryGirl.factories.select{|f| f.name != :user }.each do |factory|
     context "with factory for :#{factory.name}" do
       subject { FactoryGirl.build(factory.name) }
 
