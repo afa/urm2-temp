@@ -2,8 +2,7 @@
 %tr
  %td
   = client_line.item_id
- %td
-  = client_line.rohs
+ %td= client_line.rohs
  %td.text-left= client_line.item_name
  %td.text-left= client_line.brend
  %td.text-left= client_line.package_name
@@ -14,3 +13,4 @@
  %td.text-left= link_to client_line.sales_id, order_path(client_line.sales_id)
  %td
  %td= client_line.date_dead_line
+-#

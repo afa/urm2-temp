@@ -40,17 +40,18 @@
     %table.table-style{:class => "order-list"}
      %tr
       %th Код номенклатуры
+      %th ROHS
       %th= t(:item_name)
-      %th Производитель
+      %th Производитель\
+      %th Корпус
       %th Количество
+      %th Цена ед. изм.
+      %th Валюта
       %th Сумма
-      %th Зарезервировано
-      %th Разрезервировать
       %th Заказ
-      %th Web
-      %th Контактное лицо
-      %th Менеджер
-
+      %th Накладная
+      %th Дата
+      -# Номенклатура ROHS  Наименование  Производитель Корпус  Количество  Цена ед. изм. Валюта  Сумма Заказ Накладная Дата
      = render :partial => "orders/client_line", :collection => @lines.items
     .padded
      = form_for :export_fields, :url => export_client_lines_orders_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|

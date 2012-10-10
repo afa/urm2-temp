@@ -189,7 +189,7 @@ class OrdersController < ApplicationController
   def export_client_lines #fix when made request
    respond_with do |format|
     format.csv do
-     send_data CartItem.export(:csv, :client_lines, Axapta.sales_lines_all(@filter_hash.merge(:only_open => true)).items), :type => "application/csv", :disposition => :attachment
+     send_data CartItem.export(:csv, :open_client_lines, Axapta.sales_lines_all(@filter_hash.merge(:only_open => true)).items), :type => "application/csv", :disposition => :attachment
     end
    end
    
