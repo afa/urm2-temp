@@ -50,16 +50,6 @@ class Axapta
    AxaptaRequest.user_info(args)
   end
 
-  def self.renew_structure(hash) #REFACTOR: move to account
-   accnt = Account.find_by_axapta_hash(hash)
-   accnt.update_attributes Account.filter_account_attributes(self.user_info(hash))
-   accnt.parent.update_attributes Account.filter_account_attributes(self.user_info(accnt.parent.axapta_hash)) if accnt.parent
-   self.load_child_hashes(hash).each do |hsh|
-    acc = Account.find_by_axapta_user_id(hsh["user_id"])
-     acc.update_attributes Account.filter_account_attributes(hsh) if acc
-   end
-  end
-
   def self.load_child_hashes(hash)
    AxaptaRequest.user_list("user_hash" => hash)["users"].map{|u| u["user_id"] }.map{|u| self.user_info(hash, u) }
   end

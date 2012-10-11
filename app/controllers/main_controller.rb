@@ -5,9 +5,6 @@ class MainController < ApplicationController
  respond_to :js, :html, :json, :csv#, :xls
 
  skip_before_filter :check_account_cur, :only => [:index]
- #before_filter :get_users, :only => [:index]
- #before_filter :get_accounts, :only => [:index, :search, :extended]
- #before_filter :check_account#, :only => [:search, :extended, :dms]
   def index
    @news = NewsArticle.order("created_at desc").all
   end
@@ -175,18 +172,5 @@ class MainController < ApplicationController
    redirect_to :back
   end
  protected
-  #def get_accounts
-  # @accounts = current_user.accounts.where(:blocked => false)
-  #end
-
-  #def check_account
-  # if current_user.current_account
-  #  if current_user.current_account.blocked? or current_user.accounts.where(:id => current_user.current_account_id).count == 0
-  #   redirect_to root_path
-  #  end
-  # else
-  #  redirect_to root_path
-  # end
-  #end
 
 end
