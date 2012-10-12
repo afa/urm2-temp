@@ -48,7 +48,12 @@ class Axapta
   def self.user_info(hash, axapta_uid = nil)
    args = {"user_hash" => hash}
    args.merge!("user_id" => axapta_uid) if axapta_uid
-   AxaptaRequest.user_info(args)
+   begin
+    AxaptaRequest.user_info(args)
+   rescue Exception => e
+    parse_exc(e.message, e.class.name)
+    {}
+   end
   end
 
   def self.load_child_hashes(hash)

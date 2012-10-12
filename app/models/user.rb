@@ -95,6 +95,7 @@ class User < ActiveRecord::Base
    begin
     axapta_params = Axapta.user_info(ext_hash)
     p "---erh", errors.full_messages
+    p "---era", axapta_params
     #TODO: no need check more
     #current_account.update_attributes :invent_location_id => axapta_params["invent_location_id"] unless current_account.invent_location_id == axapta_params["invent_location_id"]
    rescue Exception => e
