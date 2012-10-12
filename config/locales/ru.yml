@@ -76,6 +76,7 @@ ru:
       axapta_hash:
        blank: не может быть пустым
        taken: уже используется. Воспользуйтесь восстановлением пароля
+ account_already_exist: уже используется. Обратитесь к менеджеру.
 #search page
  item_name: Наименование
  item_brend: Произв.

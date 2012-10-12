@@ -122,7 +122,7 @@ class User < ActiveRecord::Base
 
   def unique_hash
    if Account.find_by_axapta_hash(self.ext_hash)
-    errors.add(:ext_hash, "account already exist, try recover password") 
+    errors.add(:ext_hash, t(:account_already_exist)) 
     raise Afauth::AuthError
    end
   end
