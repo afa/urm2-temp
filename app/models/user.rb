@@ -98,6 +98,7 @@ class User < ActiveRecord::Base
     #current_account.update_attributes :invent_location_id => axapta_params["invent_location_id"] unless current_account.invent_location_id == axapta_params["invent_location_id"]
    rescue Exception => e
     errors.add(:ext_hash, "#{e.class.name}:#{Axapta.parse_exc(e.message, e.class.name)[:_error]}")
+    p "---e-h", Axapta.parse_exc(e.message, e.class.name)
    end
   end
 
