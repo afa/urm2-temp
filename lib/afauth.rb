@@ -115,6 +115,10 @@ module Afauth
    self.password = calc_pass
   end
 
+  def generate_remember_token
+   self.remember_token = generate_random_code
+  end
+
  end
 
  module Controller

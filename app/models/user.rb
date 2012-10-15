@@ -83,13 +83,6 @@ class User < ActiveRecord::Base
    types.map{|t| [t["customer_delivery_type_id"], [t["delivery_type"], t["address"]["city"]].join(' ')] }
   end
  protected
-  def generate_remember_token
-   self.remember_token = generate_random_code
-  end
-
-#  def make_salt
-#   self.salt = Digest::MD5.hexdigest([Time.now.strftime("%Y%m%d%H%M%S"), Time.now.usec.to_s, ext_hash].join) unless self.salt
-#  end
 
   def check_axapta_validity
    begin
