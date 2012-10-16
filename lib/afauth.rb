@@ -212,7 +212,7 @@ module Afauth
 
    module ClassMethods
     #setup
-    %w(auth_model auth_cookie_name auth_redirect_on_failed auth_redirect_on_failed_cb auth_expired_in auth_before_logout_cb).each do |mtd|
+    %w(auth_model auth_cookie_name auth_redirect_on_failed auth_redirect_on_failed_cb auth_expired_in auth_before_logout_cb auth_field_name).each do |mtd|
      define_method(mtd) do
       begin
        class_variable_get("@@#{mtd}")
@@ -242,6 +242,9 @@ module Afauth
     end
     define_method(:before_logout_cb) do |prc|
      self.auth_before_logout_cb = prc
+    end
+    define_method(:auth_field_name) do |nm|
+     self.auth_field_name = nm
     end
     #done
 
@@ -280,6 +283,16 @@ module Afauth
    def destroy
     sign_out
     redirect_to new_sessions_path
+   end
+  end
+  module Helper
+   def self.included(base)
+    #base.instance_eval do
+    #end
+   end
+
+   def auth_field_name
+    controller.class.auth_field_name || :username
    end
   end
  end
