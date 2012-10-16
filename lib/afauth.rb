@@ -29,7 +29,7 @@ module Afauth
    end
 
    def auth_field_name(symb)
-    @auth_field = symb
+    @auth_field_name = symb
    end
 
    def failed_auth(*list)
