@@ -96,8 +96,8 @@ class UsersController < ApplicationController
    @filter.date_from = 1.month.ago.strftime("%Y-%m-%d") if @filter.date_from.blank?
    @filter_hash.merge!(:date_to => @filter.date_to, :date_from => @filter.date_from)
    @info = Axapta.info_cust_balance
-   @currencies = @info.map(&:currency)
-   @companies = @info.map(&:company)
+   @currencies = @info.map(&:currency).uniq
+   @companies = @info.map(&:company).uniq
    @transes = Axapta.info_cust_trans(@filter_hash)
   end
 
