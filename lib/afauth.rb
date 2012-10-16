@@ -42,6 +42,7 @@ module Afauth
    end
 
    def authenticate(username, password)
+    p "---aname", @auth_field_name
     unless user = where((@auth_field_name || :username) => username).first
      @failed_methods.each{|m| send(m, nil) } unless @failed_methods.blank?
      raise AuthError
