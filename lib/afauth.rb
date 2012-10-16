@@ -262,7 +262,7 @@ module Afauth
 
    def create
     sign_out if logged_in?
-    l_user = User.authenticate(params[:session].try(:[], :username), params[:session].try(:[], :password))
+    l_user = self.class.auth_model.authenticate(params[:session].try(:[], :username), params[:session].try(:[], :password))
     unless l_user
      self.class.auth_model.current = nil
      redirect_to new_sessions_path, :flash => {:error => "Неверный пароль или имя пользователя."} 
