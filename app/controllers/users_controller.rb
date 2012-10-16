@@ -6,7 +6,7 @@ class UsersController < ApplicationController
  skip_before_filter :check_account, :only => [:new, :create]
  skip_before_filter :check_account_cur, :only => [:new, :create]
  skip_before_filter :get_accounts_in, :only => [:new, :create]
- skip_before_filter :take_search
+ skip_before_filter :take_search, :only => [:new, :create]
  before_filter :get_user, :only => [:edit, :update, :show, :destroy]
  before_filter :check_user, :only => [:edit, :update, :show, :destroy]
  before_filter :get_accounts, :only => [:edit, :update]
