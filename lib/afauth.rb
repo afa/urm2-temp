@@ -267,6 +267,7 @@ module Afauth
    end
 
    def create
+    p "---sesaucr", params[:session], self.class.name, self.class.auth_model.auth_field_name
     sign_out if logged_in?
     l_user = self.class.auth_model.authenticate(params[:session].try(:[], self.class.auth_model.auth_field_name), params[:session].try(:[], :password))
     unless l_user
@@ -279,7 +280,13 @@ module Afauth
      current_user.reload_accounts
      redirect_to root_path
     else
-     redirect_to self.class.auth_redirect_on_failed_cb, :flash => {:error => "Неверный пароль или имя пользователя."}
+     if self.class.class_variable_defined?(:@@auth_redirect_on_failed) && self.class.auth_redirect_on_failed
+      redirect_to self.class.auth_redirect_on_failed, :flash => {:error => "Неверный пароль или имя пользователя."}
+     elsif self.class.class_variable_defined?(:@@auth_redirect_on_failed_cb) && self.class.auth_redirect_on_failed_cb
+      redirect_to self.send(self.class.auth_redirect_on_failed_cb), :flash => {:error => "Неверный пароль или имя пользователя."}
+     else
+      raise Afauth::AuthError
+     end
     end
    end
 
