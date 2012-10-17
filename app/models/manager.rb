@@ -1,6 +1,6 @@
 class Manager < ActiveRecord::Base
  include Afauth::Model
- auth_field_name :name
+ authen_field_name :name
  
  validates_uniqueness_of :name
  attr_accessor :password

@@ -28,7 +28,7 @@ module Afauth
     @post_methods += list unless list.empty?
    end
 
-   def auth_field_name(symb)
+   def authen_field_name(symb)
     @auth_field_name = symb
    end
 
