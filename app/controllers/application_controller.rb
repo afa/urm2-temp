@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  helper ApplicationHelper
   include Afauth::Controller::App
   remembered_cookie_name :user_remember_token
   user_model User
