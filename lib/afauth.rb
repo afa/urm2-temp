@@ -43,6 +43,7 @@ module Afauth
 
    def authenticate(username, password)
     p "---aname", @auth_field_name
+    p username, password
     unless user = where((@auth_field_name || :username) => username).first
      @failed_methods.each{|m| send(m, nil) } unless @failed_methods.blank?
      raise AuthError
@@ -265,7 +266,7 @@ module Afauth
 
    def create
     sign_out if logged_in?
-    l_user = self.class.auth_model.authenticate(params[:session].try(:[], :username), params[:session].try(:[], :password))
+    l_user = self.class.auth_model.authenticate(params[:session].try(:[], self.class.auth_model.auth_field_name), params[:session].try(:[], :password))
     unless l_user
      self.class.auth_model.current = nil
      redirect_to new_sessions_path, :flash => {:error => "Неверный пароль или имя пользователя."} 
