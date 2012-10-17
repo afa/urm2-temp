@@ -149,7 +149,7 @@ module Afauth
    end
 
   def current_user
-   self.class.auth_model.current# ||= user_from_cookie
+   self.class.auth_model.current
   end
 
   def current_user=(user)
