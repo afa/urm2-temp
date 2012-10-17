@@ -150,6 +150,7 @@ module Afauth
    end
 
   def current_user
+   p "---c-u", self, self.class.name, self.class.auth_model
    self.class.auth_model.current
   end
 
