@@ -1,8 +1,8 @@
 %h2 Sign in
 = form_for :session, :url => admin_sessions_path do |f|
  .field
-  = f.label controller.class.auth_model.auth_field_name
-  = f.text_field controller.class.auth_model.auth_field_name
+  = f.label "session_name"
+  = f.text_field :name
  .field
   = f.label :password
   = f.password_field :password
