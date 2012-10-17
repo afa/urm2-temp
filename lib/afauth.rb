@@ -271,7 +271,7 @@ module Afauth
     l_user = self.class.auth_model.authenticate(params[:session].try(:[], self.class.auth_model.auth_field_name), params[:session].try(:[], :password))
     unless l_user
      self.class.auth_model.current = nil
-     redirect_to new_sessions_path, :flash => {:error => "Неверный пароль или имя пользователя."} 
+     redirect_to self.class.auth_redirect_on_failed_cb, :flash => {:error => "Неверный пароль или имя пользователя."} 
      return
     end
     sign_in(l_user, :rememberme => params[:rememberme]) #unless logged_in?
@@ -279,7 +279,7 @@ module Afauth
      current_user.reload_accounts
      redirect_to root_path
     else
-     redirect_to new_sessions_path, :flash => {:error => "Неверный пароль или имя пользователя."}
+     redirect_to self.class.auth_redirect_on_failed_cb, :flash => {:error => "Неверный пароль или имя пользователя."}
     end
    end
 
@@ -294,9 +294,9 @@ module Afauth
     #end
    end
 
-   def auth_field_name
-    controller.class.auth_field_name || :username
-   end
+   #def auth_field_name
+   # controller.class.auth_field_name || :username
+   #end
   end
  end
 end
