@@ -5,10 +5,10 @@ module Admin::ApplicationHelper
 #   Manager.find_by_remember_token(token)
 #  end
 # end
- def current_user
-  controller.current_user
- end
- def logged_in?
-  not controller.current_user.blank?
- end
+# def current_user
+#  controller.current_user
+# end
+# def logged_in?
+#  not controller.current_user.blank?
+# end
 end
