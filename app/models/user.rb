@@ -2,6 +2,7 @@ require "csv"
 class User < ActiveRecord::Base
 
  include Afauth::Model
+ authen_field_name :username
  post_auth :check_account_vitality
  include Exportable
  has_many :accounts

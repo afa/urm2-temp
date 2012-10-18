@@ -13,6 +13,7 @@ describe MainController do
   @user.current_account = @user.accounts.first
   @user.save!
   controller.sign_in @user
+  cookies[:user_remember_token] = @user.remember_token
  end
 
  describe "GET 'index'" do
