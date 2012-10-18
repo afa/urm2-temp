@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   auth_expired_in_days 1
   redirect_failed_cb :cb_failed
   before_logout_cb :cb_before_logout
+  post_logout_cb :cb_post_logout
   authen_field_name :username
   post_sign_cb :cb_logged
   #before_filter :unmodify
@@ -18,6 +19,10 @@ class ApplicationController < ActionController::Base
  protected
   def cb_logged
    current_user.reload_accounts
+   redirect_to root_path
+  end
+
+  def cb_post_logout
    redirect_to root_path
   end
 

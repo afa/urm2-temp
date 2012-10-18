@@ -215,7 +215,7 @@ module Afauth
 
    module ClassMethods
     #setup
-    %w(auth_model auth_cookie_name auth_redirect_on_failed auth_redirect_on_failed_cb auth_expired_in auth_before_logout_cb auth_field_name auth_post_sign_cb).each do |mtd|
+    %w(auth_model auth_cookie_name auth_redirect_on_failed auth_redirect_on_failed_cb auth_expired_in auth_before_logout_cb auth_field_name auth_post_sign_cb auth_post_logout_cb).each do |mtd|
      define_method(mtd) do
       begin
        class_variable_get("@@#{mtd}")
@@ -257,6 +257,9 @@ module Afauth
     end
     define_method(:post_sign_cb) do |mtd|
      self.auth_post_sign_cb = mtd
+    end
+    define_method(:post_logout_cb) do |mtd|
+     self.auth_post_logout_cb = mtd
     end
     #done
 
@@ -304,7 +307,11 @@ module Afauth
 
    def destroy
     sign_out
-    redirect_to new_sessions_path
+    if self.class.class_variable_defined?(:@@auth_post_logout_cb) && self.class.auth_post_logout_cb
+     [self.class.auth_post_logout_cb].flatten.each do |mtd|
+      self.send(mtd)
+     end
+    end
    end
   end
   module Helper
