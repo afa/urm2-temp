@@ -29,6 +29,8 @@ FactoryGirl.define do
   name { Factory.next :manager_name }
   password "password"
   after_build {|m| m.send(:make_salt) }
+  after_build {|m| m.send(:encrypt_password) }
+  after_build {|m| m.send(:generate_remember_token) }
  end
 
  sequence :email do |n|

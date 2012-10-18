@@ -5,7 +5,7 @@ describe Admin::SessionsController do
 
  describe "unloged" do
   before do
-   User.current = nil
+   Manager.current = nil
   end
   describe "GET 'new'" do
    it "should be successful" do
@@ -15,7 +15,7 @@ describe Admin::SessionsController do
   end
 
   it "should be redirect to new session on delete" do
-   Axapta.stub!(:user_info).with({})
+   #Axapta.stub!(:user_info).with({})
    delete :destroy
    response.should redirect_to(new_admin_session_path)
   end
@@ -36,7 +36,7 @@ describe Admin::SessionsController do
     it "should be successful" do
      post 'create', :session => {:name => @manager.name, :password => "password"}
      response.should redirect_to(admin_root_path)
-     User.current.should be_is_a(Manager)
+     Manager.current.should be_is_a(Manager)
     end
    end
 
@@ -55,7 +55,7 @@ describe Admin::SessionsController do
    it "should be successful" do
     delete 'destroy'
     response.should redirect_to(new_admin_session_path)
-    User.current.should be_nil
+    Manager.current.should be_nil
     cookies[:manager_remember_token].should be_nil
    end
   end
