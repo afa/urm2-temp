@@ -6,6 +6,7 @@ class Admin::ApplicationController < ActionController::Base
   redirect_failed_cb :cb_failed
   before_logout_cb :cb_before_logout
   authen_field_name :name
+  post_sign_cb :cb_logged
   layout "admin/application"
   helper Admin::ApplicationHelper
   protect_from_forgery
@@ -17,6 +18,10 @@ class Admin::ApplicationController < ActionController::Base
    Manager.current.reset_remember_token!
   end
 
-    protected
+ protected
+  def cb_logged
+   redirect_to admin_root_path
+  end
+
 
 end
