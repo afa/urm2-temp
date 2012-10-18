@@ -17,8 +17,8 @@ describe ApplicationController do
 
  specify { controller.should be_respond_to(:current_user) }
  it "should define accounts" do
-  controller.should be_respond_to(:get_accounts)
-  controller.send(:get_accounts)
+  controller.should be_respond_to(:get_accounts_in)
+  controller.send(:get_accounts_in)
   assigns[:accounts].should_not be_nil
   assigns[:accounts].should be_respond_to(:length)
   assigns[:accounts].should_not be_empty

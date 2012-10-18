@@ -230,6 +230,9 @@ module Afauth
     end
     define_method(:user_model) do |klass|
      self.auth_model = klass
+     if (class_variable_defined?(:@@auth_field_name) || superclass.class_variable_defined?(:@@auth_field_name)) && !auth_field_name.nil?
+      self.auth_model.authen_field_name nm
+     end
     end
     define_method(:remembered_cookie_name) do |name|
      self.auth_cookie_name = name
@@ -246,8 +249,11 @@ module Afauth
     define_method(:before_logout_cb) do |prc|
      self.auth_before_logout_cb = prc
     end
-    define_method(:auth_field_name) do |nm|
+    define_method(:authen_field_name) do |nm|
      self.auth_field_name = nm
+     if (class_variable_defined?(:@@user_model) || superclass.class_variable_defined?(:@@user_model)) && !auth_model.nil?
+      auth_model.authen_field_name nm
+     end
     end
     #done
 
@@ -267,9 +273,9 @@ module Afauth
    end
 
    def create
-    p "---sesaucr", params[:session], self.class.name, self.class.auth_model.auth_field_name
+    p "---sesaucr", params[:session], self.class.name, self.class.auth_field_name
     sign_out if logged_in?
-    l_user = self.class.auth_model.authenticate(params[:session].try(:[], self.class.auth_model.auth_field_name), params[:session].try(:[], :password))
+    l_user = self.class.auth_model.authenticate(params[:session].try(:[], self.class.auth_field_name), params[:session].try(:[], :password))
     unless l_user
      self.class.auth_model.current = nil
      redirect_to self.class.auth_redirect_on_failed_cb, :flash => {:error => "Неверный пароль или имя пользователя."} 

@@ -3,7 +3,6 @@ class User < ActiveRecord::Base
 
  include Afauth::Model
  post_auth :check_account_vitality
- authen_field_name :username
  include Exportable
  has_many :accounts
  belongs_to :current_account, :class_name => 'Account'

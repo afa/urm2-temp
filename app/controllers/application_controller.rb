@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   auth_expired_in_days 1
   redirect_failed_cb :cb_failed
   before_logout_cb :cb_before_logout
+  authen_field_name :username
   #before_filter :unmodify
   before_filter :check_account_cur
   before_filter :get_accounts_in
