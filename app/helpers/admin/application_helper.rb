@@ -4,6 +4,6 @@ module Admin::ApplicationHelper
   controller.current_user
  end
  def logged_in?
-  not controller.current_user.blank?
+  current_user.logged?
  end
 end

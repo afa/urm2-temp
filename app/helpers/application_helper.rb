@@ -3,6 +3,6 @@ module ApplicationHelper
   controller.current_user# ||= User.find_by_id(session[:user])
  end
  def logged_in?
-  controller.logged?
+  current_user.logged?
  end
 end
