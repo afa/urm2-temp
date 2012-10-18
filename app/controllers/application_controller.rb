@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   redirect_failed_cb :cb_failed
   before_logout_cb :cb_before_logout
   authen_field_name :username
+  post_sign_cb :cb_logged
   #before_filter :unmodify
   before_filter :check_account_cur
   before_filter :get_accounts_in
@@ -15,6 +16,11 @@ class ApplicationController < ActionController::Base
 
 
  protected
+  def cb_logged
+   current_user.reload_accounts
+   redirect_to root_path
+  end
+
   def cb_failed
    new_sessions_path
   end

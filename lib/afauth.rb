@@ -215,7 +215,7 @@ module Afauth
 
    module ClassMethods
     #setup
-    %w(auth_model auth_cookie_name auth_redirect_on_failed auth_redirect_on_failed_cb auth_expired_in auth_before_logout_cb auth_field_name).each do |mtd|
+    %w(auth_model auth_cookie_name auth_redirect_on_failed auth_redirect_on_failed_cb auth_expired_in auth_before_logout_cb auth_field_name auth_post_sign_cb).each do |mtd|
      define_method(mtd) do
       begin
        class_variable_get("@@#{mtd}")
@@ -255,6 +255,9 @@ module Afauth
       auth_model.authen_field_name nm
      end
     end
+    define_method(:post_sign_cb) do |mtd|
+     self.auth_post_sign_cb = mtd
+    end
     #done
 
    end
@@ -283,8 +286,11 @@ module Afauth
     end
     sign_in(l_user, :rememberme => params[:rememberme]) #unless logged_in?
     if logged_in?
-     current_user.reload_accounts
-     redirect_to root_path
+     if self.class.class_variable_defined?(:@@auth_post_sign_cb) && self.class.auth_post_sign_cb
+      [self.class.auth_post_sign_cb].flatten.each do |mtd|
+       self.send(mtd)
+      end
+     end
     else
      if self.class.class_variable_defined?(:@@auth_redirect_on_failed) && self.class.auth_redirect_on_failed
       redirect_to self.class.auth_redirect_on_failed, :flash => {:error => "Неверный пароль или имя пользователя."}
