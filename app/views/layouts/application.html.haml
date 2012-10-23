@@ -20,8 +20,8 @@
      speedAnimation: 500  //Скорость анимации
     },
     searchBox: { //Блок поиска
-     hide: #{WebUtils.parse_bool(current_user.settings.where(:name => "search.show_box").first.try(:value)).to_s }, //Показать/скрыть
-     hide: false //Показать/скрыть
+     hide: #{not WebUtils.parse_bool(current_user.settings.where(:name => "search.show_box").first.try(:value)).to_s }, //Показать/скрыть
+     //hide: false //Показать/скрыть
     },
     feedbackBox: { //Блок поиска
      hide: true //Показать/скрыть
