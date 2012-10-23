@@ -1,4 +1,5 @@
-.search-block
+- # if WebUtils.parse_bool(@search.only_available)
+.search-block{:style => "#{WebUtils.parse_bool(@search.show_box) ? "" : "display:none;"}"}
  .back-x
   .back-l
    .back-r

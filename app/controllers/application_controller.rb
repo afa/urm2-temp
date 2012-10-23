@@ -74,6 +74,7 @@ class ApplicationController < ActionController::Base
    if logged_in?
     srch[:only_available] = User.current.settings.where(:name => 'search.only_available').first.try(:value) if srch[:only_available].nil?
     srch[:only_store] = User.current.settings.where(:name => 'search.only_store').first.try(:value) if srch[:only_store].nil?
+    srch[:show_box] = User.current.settings.where(:name => 'search.show_box').first.try(:value) if srch[:show_box].nil?
     requ[:only_available] = User.current.settings.where(:name => 'search.only_available').first.try(:value) if srch[:only_available].nil?
     requ[:only_store] = User.current.settings.where(:name => 'search.only_store').first.try(:value) if srch[:only_store].nil?
    end

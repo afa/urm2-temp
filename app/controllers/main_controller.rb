@@ -41,7 +41,6 @@ class MainController < ApplicationController
      send_data CartItem.export(:csv, :cart, User.current.cart_items.unprocessed.in_cart.all), :type => "application/csv", :disposition => :attachment
     end
    end
-   #render :nothing => true
   end
 
   def dms
@@ -50,9 +49,6 @@ class MainController < ApplicationController
    @code = params[:code]
    @brend = params[:brend]
    @items = @code.blank? ? Offer::World.by_query(@seek, @brend) : Offer::World.by_code(@code)
-   #@hash = current_user.current_account.try(:axapta_hash)
-   #@items = conv_dms_items(Axapta.search_dms_names(:user_hash => @hash, :item_id_search => @code, :query_string => @seek, :search_brend => @brend))
-   #CartWorld.prepare_codes(@items)
    respond_with do |format|
     format.json do
      render :json => {:dms => render_to_string( :partial => "main/dms_block.html", :locals => {:items => @items, :after => @after} ), :gap => render_to_string( :partial => "main/gap_line.html", :locals => {:after => @after}), :empty => render_to_string(:partial => "main/dms_empty.html", :locals => {:after => @after})}
