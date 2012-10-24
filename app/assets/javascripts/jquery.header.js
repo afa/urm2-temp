@@ -311,6 +311,7 @@ var header = false, //Шапка
 						header.heightMonitor.check();
 						searchBox.tabSearch.show();
 						settings.searchBox.hide = true;
+                                                makeAjaxCall("/main/set?id=search.show_box&value=0", function(){}, function(){});
 						e.preventDefault();
 					});
 					
@@ -320,6 +321,7 @@ var header = false, //Шапка
 						header.heightMonitor.check();
 						searchBox.tabSearch.hide();
 						settings.searchBox.hide = false;
+                                                makeAjaxCall("/main/set?id=search.show_box&value=1", function(){}, function(){});
 						e.preventDefault();
 					});
 					
