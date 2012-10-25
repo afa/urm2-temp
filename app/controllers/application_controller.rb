@@ -31,7 +31,8 @@ class ApplicationController < ActionController::Base
   end
 
   def cb_before_logout
-   User.current.settings.update_all("value = '0'", "name = 'hideheader'")
+   Setting.by_name("hideheader").by_user(User.current.id).update_all("value = '0'")
+   #User.current.settings.update_all("value = '0'", "name = 'hideheader'")
    User.current.reset_remember_token!
   end
 
@@ -72,11 +73,11 @@ class ApplicationController < ActionController::Base
    srch = params[:search] || {}
    requ = params[:request] || {}
    if logged_in?
-    srch[:only_available] = User.current.settings.where(:name => 'search.only_available').first.try(:value) if srch[:only_available].nil?
-    srch[:only_store] = User.current.settings.where(:name => 'search.only_store').first.try(:value) if srch[:only_store].nil?
-    srch[:show_box] = User.current.settings.where(:name => 'search.show_box').first.try(:value) if srch[:show_box].nil?
-    requ[:only_available] = User.current.settings.where(:name => 'search.only_available').first.try(:value) if srch[:only_available].nil?
-    requ[:only_store] = User.current.settings.where(:name => 'search.only_store').first.try(:value) if srch[:only_store].nil?
+    srch[:only_available] = Setting.by_user(User.current.id).by_name('search.only_available').first.try(:value) if srch[:only_available].nil?
+    srch[:only_store] = Setting.by_user(User.current.id).by_name('search.only_store').first.try(:value) if srch[:only_store].nil?
+    srch[:show_box] = Setting.by_user(User.current.id).by_name('search.show_box').first.try(:value) if srch[:show_box].nil?
+    requ[:only_available] = Setting.by_user(User.current.id).by_name('search.only_available').first.try(:value) if srch[:only_available].nil?
+    requ[:only_store] = Setting.by_user(User.current.id).by_name('search.only_store').first.try(:value) if srch[:only_store].nil?
    end
    @search = OpenStruct.new(srch)
    @request = OpenStruct.new(requ)

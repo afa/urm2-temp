@@ -1,6 +1,9 @@
 require "spec_helper"
 
 describe Employee do
+  before do
+
+  end
   describe "feedback" do
     let(:mail) { Employee.feedback }
 

@@ -29,7 +29,7 @@ describe Account do
    #@account.update_attributes :axapta_user_id => Factory.next(:axapta_user_id)
    #@account = FactoryGirl.create(:account, :user => @user, :axapta_hash => 'asdfg')
    Axapta.stub!(:load_child_hashes).with(@account.axapta_hash).and_return([])
-   Axapta.renew_structure(@account.axapta_hash)
+   Account.renew_structure(@account.axapta_hash)
   end
   subject { @account }
   it "should reload axapta info" do
@@ -52,7 +52,7 @@ describe Account do
     @account.save!
     Axapta.stub!(:user_info).with(@user.current_account.axapta_hash).and_return({})
     Axapta.stub!(:user_info).with(@puser.current_account.axapta_hash).and_return({:business => 'test'})
-    Axapta.renew_structure(@user.current_account.axapta_hash)
+    Account.renew_structure(@user.current_account.axapta_hash)
    end
    it "with hash" do
     Account.find(@prnt.id).business.should == 'test'
@@ -81,7 +81,7 @@ describe Account do
     #@chld.each{|u| Axapta.stub!(:user_info).with(u.axapta_hash).and_return({:business => 'test'}) }
     Axapta.stub!(:load_child_hashes).with(@user.current_account.axapta_hash).and_return(@user.accounts.first.children.map{|c| {"business" => 'tst', "user_id" => c.axapta_user_id} })
     @chld.each {|c| Axapta.stub!(:user_info).with(c.axapta_hash).and_return(:business => 'tst') }
-    Axapta.renew_structure(@user.current_account.axapta_hash)
+    Account.renew_structure(@user.current_account.axapta_hash)
    end
    it "with hash" do
     @chld.each{|a| Account.find(a.id).business.should == 'tst' }

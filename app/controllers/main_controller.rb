@@ -11,12 +11,12 @@ class MainController < ApplicationController
 
   def search
    @only_store = params[:search].try(:[], :only_store) || false
-   stor = current_user.settings.where(:name => "search.only_store").first || current_user.settings.where(:name => "search.only_store").new
+   stor = Setting.by_user(current_user.id).by_name("search.only_store").first || Setting.by_user(current_user.id).by_name("search.only_store").new
    stor.value = @only_store
    stor.save!
    gon.only_store = WebUtils.to_bool(@only_store)
    @only_available = params[:search].try(:[], :only_available) || false
-   avail = current_user.settings.where(:name => "search.only_available").first || current_user.settings.where(:name => "search.only_available").new
+   avail = Setting.by_user(current_user.id).by_name("search.only_available").first || Setting.by_user(current_user.id).by_name("search.only_available").new
    avail.value = @only_available
    avail.save!
    @items = Offer::Store.search(params[:search])
@@ -140,7 +140,7 @@ class MainController < ApplicationController
 
   def set
    val = params[:value] || false
-   stor = current_user.settings.where(:name => params[:id]).first || current_user.settings.where(:name => params[:id]).new
+   stor = Setting.by_user(current_user.id).by_name(params[:id]).first || Setting.by_user(current_user.id).by_name(params[:id]).new
    stor.value = val
    stor.save!
    respond_with do |format|
