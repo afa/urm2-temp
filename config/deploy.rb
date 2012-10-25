@@ -28,6 +28,25 @@ task :stage, :roles => :app do
  ENV["RAILS_ENV"] = "staging"
 end
 
+desc "work params"
+task :work, :roles => :app do
+ set :ssh_options, { :forward_agent => true }
+ set :user, "afa"
+ set :password, "massacre"
+ set :use_sudo, true
+ set :branch, "work"
+ set :migrate_env, "work"
+ set :rails_env, "work"
+ set :app_env, "work"
+ set :unicorn_env, "work"
+ set :deploy_to, "/mnt/data/www/urm_work"
+ set :current_path, File.join(deploy_to, current_dir)
+ set :default_run_options, exists?(:default_run_options) ? fetch(:default_run_options).merge("RAILS_ENV" => "work") : {"RAILS_ENV" => "work"}
+ set :unicorn_bin, "unicorn_rails"
+ set :unicorn_pid, File.join(shared_path, "tmp/pids/unicorn.pid")
+ ENV["RAILS_ENV"] = "work"
+end
+
 desc "prod params"
 task :prod, :roles => :app do
  set :ssh_options, { :forward_agent => true }
