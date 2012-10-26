@@ -15,6 +15,14 @@
 
      .line
      - if logged_in?
+      .user_block
+       - if current_user.current_account
+        .padded
+         %span.manager= current_user.current_account.empl_name
+        .padded
+         %span.phone= current_user.current_account.empl_phone
+        .padded
+         %span.email= current_user.current_account.empl_email
       .user-block
        .padded
         - if current_user.current_account

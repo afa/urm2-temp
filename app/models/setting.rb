@@ -1,7 +1,7 @@
 class Setting < ActiveRecord::Base
  require "yaml"
  belongs_to :settingable, :polymorphic => true
- scope :by_user, lambda {|u_id| where(:user_id => u_id) }
+ scope :by_user, lambda {|u_id| where(:settingable_id => u_id, :settingable_type => 'User') }
  scope :by_name, lambda {|nm| where(:name => nm) }
   def self.load_default
    File.open(File.join(Rails.root, "config", "settings.yaml"), 'r') do |f|
