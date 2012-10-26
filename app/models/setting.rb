@@ -13,4 +13,8 @@ class Setting < ActiveRecord::Base
   def self.or_default(name)
    @@defaults[name]
   end
+
+  def self.get(name)
+   or_default(name)
+  end
 end

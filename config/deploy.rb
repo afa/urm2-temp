@@ -35,13 +35,14 @@ task :work, :roles => :app do
  set :password, "massacre"
  set :use_sudo, true
  set :branch, "work"
- set :migrate_env, "work"
+ #set :migrate_env, "work"
  set :rails_env, "work"
  set :app_env, "work"
  set :unicorn_env, "work"
  set :deploy_to, "/mnt/data/www/urm_work"
  set :current_path, File.join(deploy_to, current_dir)
  set :default_run_options, exists?(:default_run_options) ? fetch(:default_run_options).merge("RAILS_ENV" => "work") : {"RAILS_ENV" => "work"}
+ p fetch(:default_run_options)
  set :unicorn_bin, "unicorn_rails"
  set :unicorn_pid, File.join(shared_path, "tmp/pids/unicorn.pid")
  ENV["RAILS_ENV"] = "work"
@@ -67,6 +68,7 @@ task :prod, :roles => :app do
 end
 
 after "deploy:update_code", :copy_database_config
+after :copy_database_config, "deploy:migrate"
 
 task :copy_database_config, :roles => :app do
  #run "ln -s #{shared_path}/log #{release_path}"
@@ -75,6 +77,7 @@ task :copy_database_config, :roles => :app do
  run "ln -fs #{shared_path}/tmp/pids #{release_path}/tmp"
  run "cd #{release_path} && bundle install"
  run "mkdir -pm a+w #{%w(images javascripts stylesheets).each{|s| "#{release_path}/public/#{s}" }.join(' ')}"
+ #run "cd #{release_path} && rake RAILS_ENV=work db:create"
  #run "cd #{release_path} && RAILS_ENV=staging bundle exec rake assets:precompile"
 end
 

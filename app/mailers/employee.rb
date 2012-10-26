@@ -11,7 +11,7 @@ class Employee < ActionMailer::Base
      attachments[att.original_filename] = att.read
     end
     @body = body
-    email = Setting.where(:name => "support.source.email").first.try(:value)
+    email = Setting.get("support.source.email")
     mail :to => acc.contact_email, :from => email, :subject => [t(:urm_email_subj_prefix), subj].join(' '), "Reply-To" => "#{acc_name} <#{acc_mail}>"
   end
 
@@ -20,8 +20,8 @@ class Employee < ActionMailer::Base
      attachments[att.original_filename] = att.read
     end
     @body = body
-    email = Setting.where(:name => "support.source.email").first.try(:value)
-    dest = Setting.where(:name => "support.email").first.try(:value)
+    email = Setting.get("support.source.email")
+    dest = Setting.get("support.email")
     mail :to => dest, :from => email, :subject => [t(:urm_email_subj_prefix), subj].join(' '), "Reply-To" => "#{acc_name} <#{acc_mail}>"
   end
 end
