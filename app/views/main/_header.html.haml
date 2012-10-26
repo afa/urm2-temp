@@ -23,34 +23,35 @@
          %span.phone= current_user.current_account.empl_phone
         .padded
          %span.email= current_user.current_account.empl_email
-      .user-block
-       .padded
-        - if current_user.current_account
-         %span.name{:title => current_user.username}= [current_user.current_account.contact_first_name, current_user.current_account.contact_middle_name, current_user.current_account.contact_last_name].compact.join(' ')
-         -# .comp= current_user.current_account.try(:business)
-        - else
-         %span= t :select_account
-       .clear
-
-       .padded
-        - if @accounts.size > 1
-         = form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
-          = render :partial => "shared/select_list", :locals => {:list_items => @accounts.map{|a| [a.id, a.human_readable] }, :name => "current_account[account]", :opts => {:selected => (current_user.try(:current_account).try(:id).to_s || ''), :with_blank => true, :blank_name => "0", :zindex => 5, :need_field => true}}
-          -# .select{:style => "margin-left: 20px;"}
-           .sub
-            = link_to "-----", "#", :name => "0" unless current_user.current_account
-            - @accounts.each do |a|
-             = link_to a.human_readable, "#", :name => a.id, :class => "showed"
-           = form.hidden_field :account, :value => current_user.try(:current_account).try(:id) || 0
-        - else
-         #{@accounts.first.human_readable}
-       .clear
-       .padded
-        .account_selector
-        = form_for :logout, :url => sessions_path, :html => {:method => :delete} do |f| #, :class => "quite"
-         = render :partial => "shared/submit_button", :locals => {:title => t(:logout), :opts => {:style => "margin-left:60px; margin-top:5px;"}}
-       .clear
+     .line
+     .user-block
+      .padded
+       - if current_user.current_account
+        %span.name{:title => current_user.username}= [current_user.current_account.contact_first_name, current_user.current_account.contact_middle_name, current_user.current_account.contact_last_name].compact.join(' ')
+        -# .comp= current_user.current_account.try(:business)
+       - else
+        %span= t :select_account
       .clear
+
+      .padded
+       - if @accounts.size > 1
+        = form_for :current_account, :url => current_account_users_path, :html => {:method => :get} do |form|
+         = render :partial => "shared/select_list", :locals => {:list_items => @accounts.map{|a| [a.id, a.human_readable] }, :name => "current_account[account]", :opts => {:selected => (current_user.try(:current_account).try(:id).to_s || ''), :with_blank => true, :blank_name => "0", :zindex => 5, :need_field => true}}
+         -# .select{:style => "margin-left: 20px;"}
+          .sub
+           = link_to "-----", "#", :name => "0" unless current_user.current_account
+           - @accounts.each do |a|
+            = link_to a.human_readable, "#", :name => a.id, :class => "showed"
+          = form.hidden_field :account, :value => current_user.try(:current_account).try(:id) || 0
+       - else
+        #{@accounts.first.human_readable}
+      .clear
+      .padded
+       .account_selector
+       = form_for :logout, :url => sessions_path, :html => {:method => :delete} do |f| #, :class => "quite"
+        = render :partial => "shared/submit_button", :locals => {:title => t(:logout), :opts => {:style => "margin-left:60px; margin-top:5px;"}}
+      .clear
+     .clear
 .button-slide-panel
  %a.button-slide{:href=>"#", :class => "up"}
 
