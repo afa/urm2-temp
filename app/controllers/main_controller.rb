@@ -169,7 +169,7 @@ class MainController < ApplicationController
   end
 
   def profile
-
+   @profile = OpenStruct.new(:only_my => Setting.get(""))
   end
  protected
 

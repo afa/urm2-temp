@@ -1,13 +1,20 @@
 .line
  .heading Персональные настройки
+ .values &mdash;
 .line
  .heading Только мои заказы
+ .values
+  = render :partial => "shared/check_button", :locals => {:name => "profile[only_my]", :title => "Только мои", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_my)}}
+ 
 .line
 .heading Применение для производителя
+ .values &mdash;
 .line
  .headingНастройка оповещений
+ .values &mdash;
 
 .line
  .heading На фирме
+ .values &mdash;
 .line
  .heading Количество дней резервирования
