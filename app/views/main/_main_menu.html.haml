@@ -93,6 +93,9 @@
     %li
      %a{:class => [current_page?(sold_orders_users_path) ? "active" : nil], :href=>sold_orders_users_path()}
       %span Отчет о проданных заказах
+    %li
+     %a{:class => [current_page?(profile_path) ? "active" : nil], :href=>profile_path()}
+      %span Настройки
     -# %li
      %a{:href=>"#"}
       %span Грузы

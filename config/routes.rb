@@ -68,8 +68,10 @@ Urm::Application.routes.draw do
     get :set
     get :help
     post :feedback
+    get :profile
    end
   end
+  match "/profile" => "main#profile"
   #get "main/index"
   root :to => "main#index"
   #post "main/manager_request"
