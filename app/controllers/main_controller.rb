@@ -171,6 +171,11 @@ class MainController < ApplicationController
   def profile
    @profile = OpenStruct.new(:only_my => Setting.get("order.only_my"), :only_store => Setting.get("search.only_store"), :only_available => Setting.get("search.only_available"), :show_box => Setting.get("search.show_box"))
   end
+
+  def update_profile
+   Setting.set_all(params[:profile])
+   redirect_to profile_path
+  end
  protected
 
 end

@@ -15,6 +15,12 @@ class Setting < ActiveRecord::Base
   end
 
   def self.get(name)
-   or_default(name)
+   (by_user(User.current.id).by_name(name).first || by_user(nil).by_name(name)).try(:value) || or_default(name)
+  end
+
+  def self.set_all(hsh)
+   hsh.each do |k, v|
+    (Setting.by_user(User.current_user.id).by_name(k).first || Setting.by_user(User.current_user.id).by_name(k).create).update_attribute :value, v
+   end
   end
 end
