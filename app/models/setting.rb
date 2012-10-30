@@ -15,7 +15,7 @@ class Setting < ActiveRecord::Base
   end
 
   def self.get(name)
-   (by_user(User.current.id).by_name(name).first || by_user(nil).by_name(name)).try(:value) || or_default(name)
+   (by_user(User.current.id).by_name(name).first || by_user(nil).by_name(name).first).try(:value) || or_default(name)
   end
 
   def self.set_all(hsh)
