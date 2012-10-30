@@ -2,6 +2,8 @@
  .heading Персональные настройки
  .values
   = render :partial => "shared/check_button", :locals => {:name => "profile[show_box]", :title => "Показывать поиск", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.show_box)}}
+  = render :partial => "shared/check_button", :locals => {:name => "profile[only_store]", :title => "Только на складе", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_store)}}
+  = render :partial => "shared/check_button", :locals => {:name => "profile[only_available]", :title => "Только доступные", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_available)}}
   
 .line
  .heading Только мои заказы
