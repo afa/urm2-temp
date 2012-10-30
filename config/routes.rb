@@ -69,9 +69,11 @@ Urm::Application.routes.draw do
     get :help
     post :feedback
     get :profile
+    post :update_profile
    end
   end
   match "/profile" => "main#profile"
+  match "/update_profile" => "main#update_profile"
   #get "main/index"
   root :to => "main#index"
   #post "main/manager_request"
