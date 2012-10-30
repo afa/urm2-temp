@@ -223,11 +223,14 @@ class OrdersController < ApplicationController
 
  protected
   def get_filter
-   @filter_hash = params[:filter] || {:only_my => Setting.get("order.only_my")}
+   @filter_hash = params[:filter] || {:only_my => Setting.get("order.only_my"), :reservation_end => Setting.get("order.reservation_end")}
    if @filter_hash[:this_sales_origin].blank?
     @filter_hash[:this_sales_origin]='0'
    end
    @filter = OpenStruct.new(@filter_hash)
+   if params[:filter]
+    Setting.set_all(Hash[params[:filter].delete_if{|k, v| not [:only_my, :reservation_end].include?(k) }.map{|k, v| ["order.#{k.to_s}", v] }])
+   end
    @page = params[:page] || 1
   end
 end

@@ -48,11 +48,8 @@ class QuotationsController < ApplicationController
  protected
   def get_filter
    @filter = OpenStruct.new()
-   @filter_hash = (params[:filter] || {:only_my => Setting.get("order.only_my"), :reservation_end => Setting.get("order.reservation_end")}).merge(:quotation_statuses => YAML.load(Setting.get("hash.quotation_status")).zip(YAML.load(Setting.get("hash.quotation_status_rus"))))
+   @filter_hash = (params[:filter] || {:only_my => Setting.get("order.only_my")}).merge(:quotation_statuses => YAML.load(Setting.get("hash.quotation_status")).zip(YAML.load(Setting.get("hash.quotation_status_rus"))))
    @filter = OpenStruct.new(@filter_hash)
-   if params[:filter]
-    Setting.set_all(Hash[params[:filter].delete_if{|k, v| not [:only_my, :reservation_end].include?(k) }.map{|k, v| ["order.#{k.to_s}", v] }])
-   end
    @page = params[:page] || 1
    
   end
