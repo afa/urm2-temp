@@ -169,7 +169,7 @@ class MainController < ApplicationController
   end
 
   def profile
-   @profile = OpenStruct.new(:only_my => Setting.get("order.only_my"), :only_store => Setting.get("search.only_store", :only_available => Setting.get("search.only_available"), :show_box => Setting.get("search.show_box")))
+   @profile = OpenStruct.new(:only_my => Setting.get("order.only_my"), :only_store => Setting.get("search.only_store"), :only_available => Setting.get("search.only_available"), :show_box => Setting.get("search.show_box"))
   end
  protected
 
