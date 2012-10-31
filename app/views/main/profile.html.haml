@@ -26,4 +26,5 @@
   .values &mdash;
  .line
   .heading Количество дней резервирования
+  .values= @profile.reservation_end
  = render :partial => "shared/submit_button", :locals => {:title => "Save", :name => "submit"}
