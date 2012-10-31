@@ -5,7 +5,7 @@
  %table
   %tr
    %th Сумма непогашенного кредита
-   %td= @info.com_credit.credit_amount
+   %td= number_to_currency @info.com_credit.credit_amount, :precision => 4, :delimiter => ' ', :separator => ','
   %tr
    %th Отгружено на сумму
    %td= @info.com_credit.credit_invoiced
