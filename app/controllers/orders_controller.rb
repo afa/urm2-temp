@@ -230,8 +230,8 @@ class OrdersController < ApplicationController
    end
    @filter = OpenStruct.new(@filter_hash)
    if params[:filter]
-    p "---hshfilter", Hash[params[:filter].delete_if{|k, v| not [:only_my, :reservation_end].include?(k) }.map{|k, v| ["order.#{k.to_s}", v] }]
-    Setting.set_all(Hash[params[:filter].delete_if{|k, v| not [:only_my, :reservation_end].include?(k) }.map{|k, v| ["order.#{k.to_s}", v] }])
+    p "---hshfilter", Hash[params[:filter].delete_if{|k, v| not %w(only_my reservation_end).include?(k) }.map{|k, v| ["order.#{k}", v] }]
+    Setting.set_all(Hash[params[:filter].delete_if{|k, v| not %w(only_my reservation_end).include?(k) }.map{|k, v| ["order.#{k}", v] }])
    end
    @page = params[:page] || 1
   end
