@@ -16,7 +16,7 @@ task :stage, :roles => :app do
  set :password, "massacre"
  set :use_sudo, true
  set :branch, "stage"
- set :migrate_env, "staging"
+ #set :migrate_env, "staging"
  set :rails_env, "staging"
  set :app_env, "staging"
  set :unicorn_env, "staging"
@@ -55,7 +55,7 @@ task :prod, :roles => :app do
  set :password, "massacre"
  set :use_sudo, true
  set :branch, "master"
- set :migrate_env, "production"
+ #set :migrate_env, "production"
  set :rails_env, "production"
  set :app_env, "production"
  set :unicorn_env, "production"
