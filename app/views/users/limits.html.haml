@@ -27,6 +27,7 @@
   %tr
    %th Доступная сумма резерва
    %td= number_to_currency @info.reserve.reserve_available, :precision => 4, :delimiter => ' ', :separator => ',', :unit => '', :raise => true
+ %table
   %tr
-   %th Коэффициент эффективности
-   %td= number_to_currency @info.reserve.reserve_coefficient, :precision => 4, :delimiter => ' ', :separator => ',', :unit => '', :raise => true
+   %th Коэффициент эффективности использования резервирования
+   %td= number_to_currency @info.reserve.reserve_coefficient, :precision => 2, :delimiter => ' ', :separator => ',', :unit => '', :raise => true
