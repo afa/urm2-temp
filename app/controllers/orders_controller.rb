@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+ include Paginable::Controller
 
  respond_to :html, :js
  before_filter :get_filter

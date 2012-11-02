@@ -9,9 +9,16 @@ module Paginable
 
   def paginate(parm = {})
    if parm.has_key?(:derid) && parm[:derid].is_a?(Hash)
-
+    options = {:outer_window => 1, :inner_window => 3, :undotted_count => 1, :page => 1, :pages => 0}.merge(parm)
+    m_col = ((page - options[:inner_window] > 1 ? page - options[:inner_window] : 1)..(page + options[:inner_window] < pages ? page + 2 : pages)).to_a
+    f_col = [pages > 1 ? 1 : nil].compact - m_col
+    e_col = [pages > 1 ? pages : nil].compact - m_col
+    fm_col = (f_col.last || 1)..(m_col.first) - f_col - m_col
+    me_col = (m_col.last)..(e_col.first || pages) - e_col - m_col
+    render_to_string :text => "<div class=\"pagination\">#{f_col.empty? ? "" : f_col.map{|i| "<a href=\"#{params.merge(:page => i)}\">" } }</div>"
    else
-    options = {:show_numbers => true, :show_prevnext => false, :show_firstlast => false}.merge(defined?(opts) ? opts : {})
+    render_to_string :nothing => true
+=begin    options = {:show_numbers => true, :show_prevnext => false, :show_firstlast => false}.merge(defined?(opts) ? opts : {})
     content_for :text_before_current do
      if options[:text_before_current]
       render options[:text_before_current]
@@ -91,6 +98,7 @@ module Paginable
       render options[:text_after]
      end
     end
+=end
    end
   end
  end
