@@ -17,7 +17,7 @@ module Paginable
     e_col = [pages > 1 ? pages : nil].compact - m_col
     fm_col = ((f_col.last || 1)..(m_col.first || 1)).to_a - f_col - m_col
     me_col = ((m_col.last || pages)..(e_col.first || pages)).to_a - e_col - m_col
-    render_to_string :text => "<div class=\"pagination\">#{f_col.empty? ? "" : f_col.map{|i| "<a href=\"#{url_for(params.merge(:page => i))}\">#{i}</a>"} }#{fm_col.size > options[:undotted_count] ? '...' : fm_col.map{|i| "<a href=\"#{ url_for(params.merge(:page => i))}\">#{i}</a>"}}</div>".html_safe
+    render_to_string(:text => "<div class=\"pagination\">#{f_col.empty? ? "" : f_col.map{|i| "<a href=\"#{url_for(params.merge(:page => i))}\">#{i}</a>"}.join }#{fm_col.size > options[:undotted_count] ? '...' : fm_col.map{|i| "<a href=\"#{ url_for(params.merge(:page => i))}\">#{i}</a>"}.join}</div>").html_safe
    else
     render_to_string :nothing => true
 =begin    options = {:show_numbers => true, :show_prevnext => false, :show_firstlast => false}.merge(defined?(opts) ? opts : {})
