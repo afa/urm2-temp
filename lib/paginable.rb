@@ -12,11 +12,13 @@ module Paginable
     options = {:outer_window => 1, :inner_window => 3, :undotted_count => 1, :page => 1, :pages => 0}.merge(parm)
     page = options[:page].to_i
     pages = options[:pages].to_i
+    p "---page", page, pages
     m_col = ((page - options[:inner_window] > 1 ? page - options[:inner_window] : 1)..(page + options[:inner_window] < pages ? page + options[:inner_window] : pages)).to_a
     f_col = [pages > 1 ? 1 : nil].compact - m_col
     e_col = [pages > 1 ? pages : nil].compact - m_col
     fm_col = ((f_col.last || 1)..(m_col.first || 1)).to_a - f_col - m_col
     me_col = ((m_col.last || pages)..(e_col.first || pages)).to_a - e_col - m_col
+    p "---page-ar", f_col, fm_col, m_col, me_col, e_col
     render_to_string(:text => "<div class=\"pagination\">#{f_col.empty? ? "" : f_col.map{|i| "<a href=\"#{url_for(params.merge(:page => i))}\">#{i}</a>"}.join }#{fm_col.size > options[:undotted_count] ? '...' : fm_col.map{|i| "<a href=\"#{ url_for(params.merge(:page => i))}\">#{i}</a>"}.join}#{m_col.map{|i| i.to_i == page ? "<span class=\"current\">#{i}</span>" : "<a href=\"#{ url_for(params.merge(:page => i))}\">#{i}</a>" }.join}#{me_col.size > options[:undotted_count] ? '...' : me_col.map{|i| "<a href=\"#{ url_for(params.merge(:page => i))}\">#{i}</a>"}.join}#{e_col.empty? ? "" : e_col.map{|i| "<a href=\"#{url_for(params.merge(:page => i))}\">#{i}</a>"}.join }</div>").html_safe
    else
     render_to_string :nothing => true
