@@ -12,11 +12,11 @@ module Paginable
     options = {:outer_window => 1, :inner_window => 3, :undotted_count => 1, :page => 1, :pages => 0}.merge(parm)
     page = options[:page].to_i
     pages = options[:pages].to_i
-    m_col = ((page - options[:inner_window] > 1 ? page - options[:inner_window] : 1)..(page + options[:inner_window] < pages ? page + 2 : pages)).to_a
+    m_col = ((page - options[:inner_window] > 1 ? page - options[:inner_window] : 1)..(page + options[:inner_window] < pages ? page + options[:inner_window] : pages)).to_a
     f_col = [pages > 1 ? 1 : nil].compact - m_col
     e_col = [pages > 1 ? pages : nil].compact - m_col
-    fm_col = (f_col.last || 1)..(m_col.first) - f_col - m_col
-    me_col = (m_col.last)..(e_col.first || pages) - e_col - m_col
+    fm_col = ((f_col.last || 1)..(m_col.first || 1)).to_a - f_col - m_col
+    me_col = ((m_col.last)..(e_col.first || pages)).to_a - e_col - m_col
     render_to_string :text => "<div class=\"pagination\">#{f_col.empty? ? "" : f_col.map{|i| "<a href=\"#{params.merge(:page => i)}\">" } }#{fm_col.size > options[:undotted_count] ? '...' : fm_col.map{|i| "<a href=\"#{params.merge(:page => i)}\">" }}</div>"
    else
     render_to_string :nothing => true
