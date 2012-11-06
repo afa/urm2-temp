@@ -10,6 +10,8 @@ module Paginable
   def paginate(parm = {})
    if parm.has_key?(:derid) && parm[:derid].is_a?(Hash)
     options = {:outer_window => 1, :inner_window => 3, :undotted_count => 1, :page => 1, :pages => 0}.merge(parm)
+    page = options[:page].to_i
+    pages = options[:pages].to_i
     m_col = ((page - options[:inner_window] > 1 ? page - options[:inner_window] : 1)..(page + options[:inner_window] < pages ? page + 2 : pages)).to_a
     f_col = [pages > 1 ? 1 : nil].compact - m_col
     e_col = [pages > 1 ? pages : nil].compact - m_col
