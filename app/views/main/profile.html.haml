@@ -1,5 +1,5 @@
 = form_for :profile, :url => update_profile_path do |form|
- .line.profile
+ .profile_line
   .heading Персональные настройки
   .values
    = render :partial => "shared/check_button", :locals => {:name => "profile[search.show_box]", :title => "Показывать поиск", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.show_box)}}
@@ -9,22 +9,22 @@
    = render :partial => "shared/check_button", :locals => {:name => "profile[search.only_available]", :title => "Только доступные", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_available)}}
   .values
   
- .line.profile
+ .profile_line
   .heading Только мои заказы
   .values
    = render :partial => "shared/check_button", :locals => {:name => "profile[order.only_my]", :title => "Только мои", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_my)}}
  
- .line.profile
+ .profile_line
   .heading Применение для производителя
   .values &mdash;
- .line.profile
+ .profile_line
   .heading Настройка оповещений
   .values &mdash;
 
- .line.profile
+ .profile_line
   .heading На фирме
   .values &mdash;
- .line.profile
+ .profile_line
   .heading Количество дней резервирования
   .values= @profile.reservation_end
  = render :partial => "shared/submit_button", :locals => {:title => "Save", :name => "submit"}
