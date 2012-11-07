@@ -12,6 +12,9 @@ module Paginable
     options = {:outer_window => 1, :inner_window => 3, :undotted_count => 1, :page => 1, :pages => 0}.merge(parm)
     page = options[:page].to_i
     pages = options[:pages].to_i
+    page = 1 if page < 1
+    pages = 1 if pages < 1
+    page = pages if page > pages
     p "---page", page, pages
     m_col = ((page - options[:inner_window] > 1 ? page - options[:inner_window] : 1)..(page + options[:inner_window] < pages ? page + options[:inner_window] : pages)).to_a
     f_col = [pages > 1 ? 1 : nil].compact - m_col
