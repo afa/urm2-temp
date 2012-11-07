@@ -35,13 +35,11 @@
     -# = render :partial => "shared/pagination", :locals => {:page => @quotations.page.to_i, :pages => @quotations.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей: #{@quotations.records}&nbsp;&nbsp;Страниц: #{@quotations.total} Страница "}}
     %table.table-style.quotation-list
      %tr
-      %th УРМ
       %th.text-left Номер запроса
-      %th.text-left Код клиента
       %th Дата создания
-      %th Прогноз
-      %th Примечание
       %th Статус
-      %th Менеджер
+      %th Примечание
       %th.text-right Контактное лицо
+      %th Менеджер
+      %th УРМ
      = render :partial => "quotations/list_line", :collection => @quotations.items
