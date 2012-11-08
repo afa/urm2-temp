@@ -174,3 +174,6 @@ ru:
 
  info_account_changed: Аккаунт сменен
  quotation_id_filter: Поиск по номеру запроса
+ quotation_status_filter: Фильтр по статусу запроса
+ this_sales_origin_quotations: Только запросы из УРМ
+ only_my_quotations: Только мои запросы
