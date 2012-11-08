@@ -87,8 +87,10 @@ function load_dms_bundle(from_where, need_load){
    $("div.dms_loader").hide();
    for(var kk in data){
     $(data[kk]).insertAfter($("tr.item_" + kk).last());
+    $("tr.dms_item_" + kk + " .icon .dms").addClass("active");
     $("tr.dms_item_" + kk + " th .plus").click(function(){
      var obj = $(this).parents("tr").find("th .icon input.after").first().val();
+     $("tr.item_" + obj + " td.icons div.icon div.dms").removeClass('active');
      $("tr.dms_item_" + obj).hide();
      $("tr.dms_item_" + obj).addClass("hidden");
      if($("tr.analog_item_" + obj).add("tr.info_item_" + obj).not(".hidden").length == 0){
