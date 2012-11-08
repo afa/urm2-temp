@@ -27,7 +27,7 @@
     %abbr{:title => items_line.brend_name}= items_line.brend
   - else
    %a{:href => [items_line.brend_url.strip].map{|s| s[0, 7].downcase == "http://" ? s : "http://#{s}" }.first, :title => items_line.brend_name, :target => "_blank"}= items_line.brend
- %td= items_line.body_name
+ %td.text-left= items_line.body_name
  %td= items_line.rohs
  %td.input-in-cart
   %div
