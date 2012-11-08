@@ -9,7 +9,7 @@
     %td
      = form_for :filter, :url => quotations_path, :html => {:method => :get} do |f|
       .filter
-       = f.label :quotation_id, t(:quotation_id) + ':'
+       = f.label :quotation_id, t(:quotation_id_filter) + ':'
        = f.text_field :quotation_id
        = render :partial => "shared/submit_button", :locals => {:title => "Найти"}
     %td
@@ -21,13 +21,9 @@
        = render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:use_system => true, :need_field => false, :value => @filter.try(:only_my).try(:==, '1')}}
        = render :partial => "shared/submit_button", :locals => {:title => "Показать"}
 
-  .padded
-   = form_for :export_fields, :url => export_list_quotations_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
-    = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "items[export]"}
  .table-navigation-block{:class => "scroll"}
   .table-block
    .table-scrolling
-    = paginate(:derid => {:page => @quotations.page.to_i, :pages => @quotations.total.to_i})
     -# = render :partial => "shared/pagination", :locals => {:page => @quotations.page.to_i, :pages => @quotations.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей: #{@quotations.records}&nbsp;&nbsp;Страниц: #{@quotations.total}&nbsp;&nbsp;".html_safe, :text_before_current => "Страница: "}}
     -# = render :partial => "shared/pagination", :locals => {:page => @quotations.page.to_i, :pages => @quotations.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей: #{@quotations.records}&nbsp;&nbsp;Страниц: #{@quotations.total} Страница "}}
     %table.table-style.quotation-list
@@ -40,3 +36,7 @@
       %th.text-left Менеджер
       %th.text-left УРМ
      = render :partial => "quotations/list_line", :collection => @quotations.items
+    = paginate(:derid => {:page => @quotations.page.to_i, :pages => @quotations.total.to_i})
+  .padded
+   = form_for :export_fields, :url => export_list_quotations_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
+    = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "items[export]"}
