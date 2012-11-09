@@ -1,33 +1,33 @@
 .info
  -# = @info.try(:limit)
  %h1 Лимиты
- %h2 Товарный кредит
+ %h3 Товарный кредит
  %table
   %tr
-   %th Сумма непогашенного кредита
+   %th.text-left Сумма непогашенного кредита
    %td= number_to_currency @info.com_credit.credit_amount, :precision => 4, :delimiter => ' ', :separator => ',', :unit => '', :raise => true
   %tr
-   %th Отгружено на сумму
+   %th.text-left Отгружено на сумму
    %td= number_to_currency @info.com_credit.credit_invoiced, :precision => 4, :delimiter => ' ', :separator => ',', :unit => '', :raise => true
 
- %h2 Кредитные лимиты
+ %h3 Кредитные лимиты
  %table
   %tr
-   %th Лимит товарного кредита
+   %th.text-left Лимит товарного кредита
    %td= number_to_currency @info.credit_limits.credit_limit, :precision => 4, :delimiter => ' ', :separator => ',', :unit => '', :raise => true
 
- %h2 Резервы
+ %h3 Резервы
  %table
   %tr
-   %th Разрешенная сумма резерва
+   %th.text-left Разрешенная сумма резерва
    %td= number_to_currency @info.reserve.reserve_max, :precision => 4, :delimiter => ' ', :separator => ',', :unit => '', :raise => true
   %tr
-   %th Текущая сумма резерва
+   %th.text-left Текущая сумма резерва
    %td= number_to_currency @info.reserve.reserve_used, :precision => 4, :delimiter => ' ', :separator => ',', :unit => '', :raise => true
   %tr
-   %th Доступная сумма резерва
+   %th.text-left Доступная сумма резерва
    %td= number_to_currency @info.reserve.reserve_available, :precision => 4, :delimiter => ' ', :separator => ',', :unit => '', :raise => true
  %table
   %tr
-   %th Коэффициент эффективности использования резервирования
+   %th.text-left Коэффициент эффективности использования резервирования
    %td= number_to_currency @info.reserve.reserve_coefficient, :precision => 2, :delimiter => ' ', :separator => ',', :unit => '', :raise => true
