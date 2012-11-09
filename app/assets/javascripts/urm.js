@@ -148,7 +148,7 @@ function showDms(evt){
    $("tr.item_" + row_id + " .icon .slider").hide();
    $("tr.item_" + row_id + " .icon .dms").show().removeClass("active");
   });
-  return; 
+  //return; 
  } else {
   $("tr.dms_item_" + row_id).toggle();
   $("tr.dms_item_" + row_id).toggleClass("hidden");
