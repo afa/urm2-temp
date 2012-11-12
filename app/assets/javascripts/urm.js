@@ -101,6 +101,7 @@ function load_dms_bundle(from_where, need_load){
     $("tr.item_" + kk + " .icon .dms").addClass("active");
     $("tr.dms_item_" + kk + " th .plus").click(function(){
      var obj = $(this).parents("tr").find("th .icon input.after").first().val();
+     dms_item_hide(obj);
      return false;
     });
    }
