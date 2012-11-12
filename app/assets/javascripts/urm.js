@@ -147,7 +147,7 @@ function showDms(evt){
    } else {
     $(data["dms"]).insertAfter($("tr.info_item_" + row_id).add("tr.item_" + row_id).last());
     insertGap(row_id, data["gap"]);
-    $("tr.item_" + row_id + " .icon .dms").addClass("active");
+    //$("tr.item_" + row_id + " .icon .dms").addClass("active");
    }
    //$(data["gap"]).insertAfter($("tr.info_item_" + row_id).add("tr.analog_item_" + row_id).add("tr.dms_item_" + row_id).last());
   }, function(data){
