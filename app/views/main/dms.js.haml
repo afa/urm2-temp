@@ -14,4 +14,5 @@ $("tr.dms_item_#{@after}").remove();
 if($("tr.analog_item_#{@after}").add("tr.info_item_#{@after}").length == 0){
 $("tr.gap_#{@after}").remove();
 }
+return false;
 });

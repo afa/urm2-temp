@@ -97,6 +97,7 @@ function load_dms_bundle(from_where, need_load){
       $("tr.gap_" + obj).hide();
       $("tr.gap_" + obj).addClass("hidden");
      }
+     return false;
     });
    }
 
