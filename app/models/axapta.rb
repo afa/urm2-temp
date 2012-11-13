@@ -195,8 +195,10 @@ class Axapta
     locs[loc["location_id"]] ||= []
     Rails.logger.info "---dlvprg"
     Rails.logger.info loc.inspect
-    loc["delivery_prognosis"].each do |dlv|
-     locs[loc["location_id"]] << {:date => dlv["delivery_date"], :qty => dlv["delivery_qty"]}
+    (loc.try(:[], "locations")||[]).each do |dl|
+     dl.try(:[], "delivery_prognosis").each do |dlv|
+      locs[loc["location_id"]] << {:date => dlv["delivery_date"], :qty => dlv["delivery_qty"]}
+     end
     end
    end
    cnt = []
