@@ -197,7 +197,7 @@ class Axapta
     Rails.logger.info loc.inspect
     (loc.try(:[], "locations")||[]).each do |dl|
      dl.try(:[], "delivery_prognosis").each do |dlv|
-      locs[loc["location_id"]] << {:date => dlv["delivery_date"], :qty => dlv["delivery_qty"]}
+      locs[dl["location_id"]] << {:date => dlv["delivery_date"], :qty => dlv["delivery_qty"]}
      end
     end
    end
