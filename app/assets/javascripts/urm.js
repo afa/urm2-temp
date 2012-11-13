@@ -149,6 +149,7 @@ function showDms(evt){
     insertGap(row_id, data["gap"]);
     //$("tr.item_" + row_id + " .icon .dms").addClass("active");
    }
+   $("tr.dms_item_" + row_id + ".heading th.icons .icon a.hide.plus").click(function(){});//!!!!!!!
    //$(data["gap"]).insertAfter($("tr.info_item_" + row_id).add("tr.analog_item_" + row_id).add("tr.dms_item_" + row_id).last());
   }, function(data){
    $("tr.item_" + row_id + " .icon .slider").hide();

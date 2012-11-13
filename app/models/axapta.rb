@@ -188,6 +188,31 @@ class Axapta
    AxaptaRequest.get_dlv_mode(:user_hash => axapta_hash)
   end
 
+  def self.get_delivery_prognosis(code, lc = nil)
+   locs = {}
+   pp = lc.nil? ? {} : {:location_id => lc
+   (AxaptaRequest(pp.merge(:user_hash => axapta_hash, :item_id_search => code, :show_delivery_prognosis => true)).try(:[], "items") || []).each do |loc|
+    locs[loc["location_id"]] ||= []
+    loc["delivery_prognosis"].each do |dlv|
+     locs[loc["location_id"]] << {:date => dlv["delivery_date"], :qty => dlv["delivery_qty"]}
+    end
+   end
+   cnt = []
+   locs.each do |k, v|
+    cnt << v.size
+   end
+   sz = cnt.max
+   return [] if sz < 1
+   rez = []
+   sz.times do |idx|
+    rez << Hash[ locs.map{|k, v| [k, v[idx] ] } ]
+   end
+   rez.each do |r|
+    r.delete_if{|k, v| v.nil? || v == 0 }
+   end
+   rez.map{|r| r.empty? ? nil : r }.compact
+  end
+
   def self.create_invoice(order, send = false)
    begin
     AxaptaRequest.create_invoice(:user_hash => axapta_hash, :sales_id => order, :send_by_email => send)

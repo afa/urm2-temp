@@ -1,4 +1,5 @@
 - prices = info_block.delete("prices")
+- dates = info_block.delete("dates")
 - keys = info_block.inject({}){|r, (k, v)| (not (v.blank? || v.to_s == '0')) ? r.merge(k => v) : r }.keys
 - cnt = (keys.size/2.0).ceil
 %tr.sub-row-block{:class => "info_item_#{after}"}
@@ -33,3 +34,16 @@
           %tr
            %td{:style => "border-bottom: 0;"}= prices["count#{idx + 1}"]
            %td{:style => "border-bottom: 0;"}= prices["price#{idx + 1}"]
+     %td{:style => "border-bottom: 0;"}
+      - unless dates.blank?
+       - Rails.logger.info "---dates"
+       - Rails.logger.info dates.inspect
+       %table
+        %tr
+         %th К
+         %th Д
+        
+        - dates.each do |r|
+         %tr
+          %td{:style => "border-bottom: 0;"}= r["qty"]
+          %td{:style => "border-bottom: 0;"}= r["date"]
