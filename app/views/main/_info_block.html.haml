@@ -45,5 +45,5 @@
         
         - dates.each do |r|
          %tr
-          %td{:style => "border-bottom: 0;"}= r["qty"]
-          %td{:style => "border-bottom: 0;"}= r["date"]
+          %td{:style => "border-bottom: 0;"}= r.values.first[:qty]
+          %td{:style => "border-bottom: 0;"}= r.values.first[:date]
