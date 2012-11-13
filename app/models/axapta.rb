@@ -192,10 +192,10 @@ class Axapta
    locs = {}
    pp = lc.nil? ? {} : {:location_id => lc}
    (AxaptaRequest.search_item_name_h(pp.merge(:user_hash => axapta_hash, :item_id_search => code, :show_delivery_prognosis => true)).try(:[], "items") || []).each do |loc|
-    locs[loc["location_id"]] ||= []
     Rails.logger.info "---dlvprg"
     Rails.logger.info loc.inspect
     (loc.try(:[], "locations")||[]).each do |dl|
+     locs[dl["location_id"]] ||= []
      dl.try(:[], "delivery_prognosis").each do |dlv|
       locs[dl["location_id"]] << {:date => dlv["delivery_date"], :qty => dlv["delivery_qty"]}
      end
