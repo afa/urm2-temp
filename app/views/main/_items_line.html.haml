@@ -46,7 +46,7 @@
   .icons 
    .icon
     - if items_line.forecast_available
-     = link_to "", info_main_index_path(:code => items_line.code, :after => line_code), :class => "info js delivery active", :remote => true
+     = link_to "", info_main_index_path(:code => items_line.code, :after => line_code, :loc => items_line.location_id), :class => "info js delivery active", :remote => true
     - else
      .delivery &nbsp;
  -# %td= items_line["prognoz"]

@@ -208,7 +208,8 @@ class Axapta
     rez << Hash[ locs.map{|k, v| [k, v[idx] ] } ]
    end
    rez.each do |r|
-    r.delete_if{|k, v| v.nil? || v == 0 }
+    r.delete_if{|k, v| v.nil? }
+    #r.delete_if{|k, v| v.nil? || v == 0 }
    end
    rez.map{|r| r.empty? ? nil : r }.compact
   end

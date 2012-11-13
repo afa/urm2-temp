@@ -115,6 +115,7 @@ class MainController < ApplicationController
 
   def info
    @after = params[:after]
+   @location = params[:loc]
    @code = params[:code]
    @hash = current_user.current_account.try(:axapta_hash)
    logger.info "--- request_start: #{Time.now}"
@@ -133,7 +134,7 @@ class MainController < ApplicationController
     @data["prices"] = []
    end
    begin
-    @data["dates"] = Axapta.get_delivery_prognosis(@code)
+    @data["dates"] = Axapta.get_delivery_prognosis(@code, @location)
    rescue Exception => e
     p "---exc in prognos #{Time.now}", e, e.backtrace
     logger.info e.to_s
