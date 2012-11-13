@@ -274,7 +274,7 @@
 				});
 				
 				// Выпадающий блок "ДМС"
-				$('.icons .dms',table).click( function(e){
+				/*$('.icons .dms',table).click( function(e){
 					var curLink = $(this);
 					var tr = curLink.parents('tr:first');
 					var trM = tr;
@@ -336,7 +336,7 @@
 					
 					e.preventDefault();
 					
-				});
+				});*/
 				
 				// Выпадающий блок "Описание"
 				$('.name a, .producer a',table).click( function(e){
