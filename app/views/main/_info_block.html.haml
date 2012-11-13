@@ -35,9 +35,9 @@
            %td{:style => "border-bottom: 0;"}= prices["count#{idx + 1}"]
            %td{:style => "border-bottom: 0;"}= prices["price#{idx + 1}"]
      %td{:style => "border-bottom: 0;"}
+      - Rails.logger.info "---dates"
+      - Rails.logger.info dates.inspect
       - unless dates.blank?
-       - Rails.logger.info "---dates"
-       - Rails.logger.info dates.inspect
        %table
         %tr
          %th К
