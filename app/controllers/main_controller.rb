@@ -138,6 +138,7 @@ class MainController < ApplicationController
    rescue Exception => e
     p "---exc in prognos #{Time.now}", e, e.backtrace
     logger.info e.to_s
+    logger.info e.backtrace.first(3)
     @data["dates"] = []
    end
    respond_with do |format|
