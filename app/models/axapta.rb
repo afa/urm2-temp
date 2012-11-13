@@ -191,7 +191,7 @@ class Axapta
   def self.get_delivery_prognosis(code, lc = nil)
    locs = {}
    pp = lc.nil? ? {} : {:location_id => lc}
-   (AxaptaRequest(pp.merge(:user_hash => axapta_hash, :item_id_search => code, :show_delivery_prognosis => true)).try(:[], "items") || []).each do |loc|
+   (AxaptaRequest.search_item_name_h(pp.merge(:user_hash => axapta_hash, :item_id_search => code, :show_delivery_prognosis => true)).try(:[], "items") || []).each do |loc|
     locs[loc["location_id"]] ||= []
     loc["delivery_prognosis"].each do |dlv|
      locs[loc["location_id"]] << {:date => dlv["delivery_date"], :qty => dlv["delivery_qty"]}
