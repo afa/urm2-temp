@@ -93,7 +93,6 @@ function dms_item_hide(obj){
 }
 
 function hide_dms_on_plus_click(obj_id){
- alert(obj_id);
  $("tr.dms_item_" + obj_id + " th .plus").click(function(e){
   var obj = $(this).parents("tr").find("th .icon input.after").first().val();
   dms_item_hide(obj);
@@ -145,7 +144,6 @@ function showDms(evt){
  if($("tr.dms_item_" + row_id).length == 0){
   makeAjaxCall("/main/dms?code=" + code + "&after=" + row_id, function(data){
   //$.getJSON("/main/dms?code=" + code + "&after=" + row_id, "", function(data){
-   alert("dmscall " + row_id);
    $("tr.item_" + row_id + " .icon .slider").hide();
    $("tr.item_" + row_id + " .icon .dms").show().addClass("active");
    if(/^\s*$/.test(data["dms"])){
