@@ -145,6 +145,7 @@ function showDms(evt){
  if($("tr.dms_item_" + row_id).length == 0){
   makeAjaxCall("/main/dms?code=" + code + "&after=" + row_id, function(data){
   //$.getJSON("/main/dms?code=" + code + "&after=" + row_id, "", function(data){
+   alert("dmscall " + row_id);
    $("tr.item_" + row_id + " .icon .slider").hide();
    $("tr.item_" + row_id + " .icon .dms").show().addClass("active");
    if(/^\s*$/.test(data["dms"])){
@@ -155,7 +156,7 @@ function showDms(evt){
     insertGap(row_id, data["gap"]);
     //$("tr.item_" + row_id + " .icon .dms").addClass("active");
    }
-   $("tr.dms_item_" + row_id + ".heading th.icons .icon a.hide.plus").click(function(){});//!!!!!!!
+   hide_dms_on_plus_click(row_id);
    //$(data["gap"]).insertAfter($("tr.info_item_" + row_id).add("tr.analog_item_" + row_id).add("tr.dms_item_" + row_id).last());
   }, function(data){
    $("tr.item_" + row_id + " .icon .slider").hide();
