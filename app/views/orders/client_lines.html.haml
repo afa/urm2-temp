@@ -47,10 +47,10 @@
       %th Дата
       -# Номенклатура ROHS  Наименование  Производитель Корпус  Количество  Цена ед. изм. Валюта  Сумма Заказ Накладная Дата
      = render :partial => "orders/client_line", :collection => @lines.items
-    = paginate(:derid => {:page => @lines.page.to_i, :pages => @lines.total.to_i, :align => "left"})
     .padded
      = form_for :export_fields, :url => export_client_lines_orders_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
       = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "items[export]", :opts => {:style => "float: right;"}}
+     = paginate(:derid => {:page => @lines.page.to_i, :pages => @lines.total.to_i, :align => "left"})
 
 :javascript
  if($(".calendar-input").length > 0){
