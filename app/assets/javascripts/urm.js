@@ -93,7 +93,7 @@ function dms_item_hide(obj){
 }
 
 function hide_dms_on_plus_click(obj_id){
- alert(obj_id)
+ alert(obj_id);
  $("tr.dms_item_" + obj_id + " th .plus").click(function(e){
   var obj = $(this).parents("tr").find("th .icon input.after").first().val();
   dms_item_hide(obj);

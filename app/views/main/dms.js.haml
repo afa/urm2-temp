@@ -1,6 +1,7 @@
 -# if($("tr.dms_item_#{@after}").length > 0){
 -# $("tr.dms_item_#{@after}").remove();
 -# }
+alert("dmscall");
 - if @items.empty?
  $("#{escape_javascript(render(:partial => "dms_empty", :locals => {:after => @after}))}").insertAfter($("tr.item_#{@after}").add("tr.info_item_#{@after}").last());
 - else
