@@ -13,7 +13,7 @@
         = form_for :filter, :url => quotations_path, :html => {:method => :get} do |f|
          .filter
           = render :partial => "shared/submit_button", :locals => {:title => "Найти"}
-          = f.label{:style => "font-weight: bold;"} :quotation_id, t(:quotation_id_filter) + ':'
+          = f.label :quotation_id, t(:quotation_id_filter) + ':', :style => "font-weight: bold;"
           = f.text_field :quotation_id, :style => "width: 80px;"
        %td{:style => "white-space: nowrap;padding-left:50px;"}
         = form_for :filter, :url => quotations_path, :html => {:method => :get} do |f|
