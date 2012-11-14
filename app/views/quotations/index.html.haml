@@ -28,13 +28,13 @@
     -# = render :partial => "shared/pagination", :locals => {:page => @quotations.page.to_i, :pages => @quotations.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей: #{@quotations.records}&nbsp;&nbsp;Страниц: #{@quotations.total} Страница "}}
     %table.table-style.quotation-list
      %tr
+      %th.text-left УРМ
       %th.text-center Номер запроса
       %th.text-center Дата создания
       %th.text-left Статус
-      %th.text-left Примечание
-      %th.text-left Контактное лицо
-      %th.text-left Менеджер
-      %th.text-left УРМ
+      %th.text-left{:style => "min-width:180px;"} Контактное лицо
+      %th.text-left{:style => "min-width:250px;"} Менеджер
+      %th.text-left{:style => "min-width:400px;"} Примечание
      = render :partial => "quotations/list_line", :collection => @quotations.items
     = paginate(:derid => {:page => @quotations.page.to_i, :pages => @quotations.total.to_i, :align => "left"})
     .padded
