@@ -92,6 +92,14 @@ function dms_item_hide(obj){
  }
 }
 
+function hide_dms_on_plus_click(obj_id){
+ $("tr.dms_item_" + obj_id + " th .plus").click(function(){
+  var obj = $(this).parents("tr").find("th .icon input.after").first().val();
+  dms_item_hide(obj);
+  return false;
+ });
+}
+
 function load_dms_bundle(from_where, need_load){
  if(need_load){
   $.getJSON(from_where, "", function(data){
@@ -99,11 +107,7 @@ function load_dms_bundle(from_where, need_load){
    for(var kk in data){
     $(data[kk]).insertAfter($("tr.item_" + kk).last());
     $("tr.item_" + kk + " .icon .dms").addClass("active");
-    $("tr.dms_item_" + kk + " th .plus").click(function(){
-     var obj = $(this).parents("tr").find("th .icon input.after").first().val();
-     dms_item_hide(obj);
-     return false;
-    });
+    hide_dms_on_plus_click(kk);
    }
 
   },

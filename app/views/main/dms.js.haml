@@ -9,11 +9,12 @@
  if($("tr.gap_#{@after}").length == 0  ){
  $("#{escape_javascript(render(:partial => "gap_line", :locals => {:after => @after}))}").insertAfter($("tr.dms_item_#{@after}").add("tr.analog_item_#{@after}").add("tr.info_item_#{@after}").last());
  }
-$("tr.dms_item_#{@after} th .plus").click(function(){
-dms_item_hide("#{@after}");
+ hide_dms_on_plus_click("#{@after}");
+-# $("tr.dms_item_#{@after} th .plus").click(function(){
+-# dms_item_hide("#{@after}");
 -# $("tr.dms_item_#{@after}").remove();
 -# if($("tr.analog_item_#{@after}").add("tr.info_item_#{@after}").length == 0){
 -# $("tr.gap_#{@after}").remove();
 -# }
-return false;
-});
+-# return false;
+-# });
