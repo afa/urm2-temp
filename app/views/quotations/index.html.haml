@@ -9,13 +9,13 @@
     .filter-block
      %table
       %tr
-       %td
+       %td{:style => "white-space: nowrap;"}
         = form_for :filter, :url => quotations_path, :html => {:method => :get} do |f|
          .filter
           = f.label :quotation_id, t(:quotation_id_filter) + ':'
           = f.text_field :quotation_id, :style => "width: 80px;"
           = render :partial => "shared/submit_button", :locals => {:title => "Найти"}
-       %td
+       %td{:style => "white-space: nowrap;"}
         = form_for :filter, :url => quotations_path, :html => {:method => :get} do |f|
          .filter
           = t(:quotation_status_filter) + ':'
