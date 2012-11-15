@@ -9,15 +9,15 @@
      -# %a{:href=>"#"}
       %span
        %span Список
-     %a.active{:href=>"#"}
+     %a{:href=>"#", :class => [@search.external_code.blank? ? "active" : nil]}
       %span
        %span Поиск по наименованию
      %a{:href=>"#"}
       %span
        %span Дополнительные возможности
-     %a{:href=>"#"}
+     %a{:href=>"#", :class => [@search.external_code.blank? ? nil : "active"]}
       %span
-       %span Артикул ДМС
+       %span Поиск по артикулу
      -# %a{:href=>"#"}
       %span
        %span По параметрам
@@ -45,7 +45,7 @@
         %i.bl &nbsp;
         %i.br &nbsp;
       .clear
-    .search-tab-block
+    .search-tab-block{:style => @search.external_code.blank? ? "" : "display:none;"}
      = form_for :search, :url => search_path do |f|
       %div
        .field
@@ -54,15 +54,7 @@
         - unless to_bool(@only_store)
          %div.dms_loader{:style=>"float=right;"}
           %img{:src => image_path('ajax-loader.gif')}
-       .button.commit
-        %a.button-style{:href=>"#"}
-         %i.t &nbsp;
-         %i.b &nbsp;
-         %i.tl &nbsp;
-         %i.tr &nbsp;
-         %span Найти!
-         %i.bl &nbsp;
-         %i.br &nbsp;
+       = render :partial => "shared/submit_button", :locals => {:title => t(:find)}
       .clear
       .fields
        Искать:
@@ -106,13 +98,13 @@
         - unless to_bool(@only_store)
          %div.dms_loader{:style=>"float=right;"}
           %img{:src => image_path('ajax-loader.gif')}
-       = render :partial => "shared/submit_button", :locals => {:title => "Отправить!"}
+       = render :partial => "shared/submit_button", :locals => {:title => "Отправить"}
       .clear
-    .search-tab-block{:style=>"display:none;"}
+    .search-tab-block{:style => @search.external_code.blank? ? "display:none;" : ""}
      = form_for :search, :url => search_path do |f|
       %div
        .field.artikul
-        = f.label :external_code, t(:artikul)
+        -# = f.label :external_code, t(:artikul)
         = f.text_field :external_code
        = render :partial => "shared/submit_button", :locals => {:title => t(:find)}
        -# .button.commit
