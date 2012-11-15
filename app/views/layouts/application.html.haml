@@ -61,21 +61,25 @@
     $('.switch.radio a.rub').click(function(){
     $('.alt.price').addClass('active').removeClass('hidden');
     $('.real.price').addClass('hidden').removeClass('active');
+    $('.switch.radio a.usd').removeClass('active');
+    $('.switch.radio a.rub').addClass('active');
     });
     $('.switch.radio a.usd').click(function(){
     $('.alt.price').addClass('hidden').removeClass('active');
     $('.real.price').addClass('active').removeClass('hidden');
+    $('.switch.radio a.rub').removeClass('active');
+    $('.switch.radio a.usd').addClass('active');
     });
     tableScroller.refresh();
     //Выпадающие списки (файл: jquery.controls.js)
-    $('.switch.radio a.rub').click(function(){
+    /*$('.switch.radio a.rub').click(function(){
     $('.alt.price').addClass('active').removeClass('hidden');
     $('.real.price').addClass('hidden').removeClass('active');
     });
     $('.switch.radio a.usd').click(function(){
     $('.alt.price').addClass('hidden').removeClass('active');
     $('.real.price').addClass('active').removeClass('hidden');
-    });
+    });*/
     $('.select').selectList();
     //Кнопки
     $('.button-style').button();
