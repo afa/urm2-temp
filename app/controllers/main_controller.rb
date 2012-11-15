@@ -38,7 +38,7 @@ class MainController < ApplicationController
   def export
    respond_with do |format|
     format.csv do
-     send_data CartItem.export(:csv, :cart, User.current.cart_items.unprocessed.in_cart.all), :type => "application/csv", :disposition => :attachment, :filename => "export_#{User.current.current_account.business}_#{[params[:controller], params[:action]].join('_')}_#{Date.today.strftime("%Y%m%d")}.csv"
+     send_data CartItem.export(:csv, :cart, User.current.cart_items.unprocessed.in_cart.all), :type => "application/csv", :disposition => :attachment, :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.csv"
     end
    end
   end
