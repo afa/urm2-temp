@@ -1,7 +1,7 @@
 .nav-title
  %span= link_to "Заказы", orders_path
  %span >
- %span.current Строки заказов
+ %span.current Открытые строки заказов
 
 .content-wrap
  .filter-block
@@ -12,8 +12,8 @@
       %th= f.label :item_name, t(:item_name) + ':'
       %td.long= f.text_field :item_name
      %tr
-      %th Дата отгрузки:
-      %td.tiny
+      %th{:style => "vertical-align: bottom;"} Дата отгрузки:
+      %td.tiny{:style => "vertical-align: bottom;"}
        с&nbsp;
        %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from}
        -# .calendar-input= @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from
@@ -22,7 +22,7 @@
        -# #ui-datepicker-div-container{:style=>"position: relative;"}
      %tr
       %th
-      %td= render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
+      %td= render :partial => "shared/submit_button", :locals => {:title => "Найти"}
       
    .clear.block-padded
 
@@ -30,7 +30,6 @@
  .table-navigation-block{:class => "scroll"}
   .table-block
    .table-scrolling
-    = paginate(:derid => {:page => @lines.page.to_i, :pages => @lines.total.to_i})
     -# = render :partial => "shared/pagination", :locals => {:page => @lines.page.to_i, :pages => @lines.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей: #{@lines.records}&nbsp;&nbsp;Страниц: #{@lines.total}&nbsp;&nbsp;".html_safe, :text_before_current => "Страница: "}}
     -# = render :partial => "shared/pagination", :locals => {:page => @lines.page.to_i, :pages => @lines.total.to_i}
     %table.table-style{:class => "order-list"}
@@ -58,7 +57,8 @@
       %input.copiable{:type => :hidden, :value => 'input#filter_item_name'}
       %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_from]"]'}
       %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_to]"]'}
-      = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "items[export]"}
+      = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "items[export]", :opts => {:style => "float: right;"}}
+      = paginate(:derid => {:page => @lines.page.to_i, :pages => @lines.total.to_i, :align => "left"})
 
 %div{:style => "z-index:9999;"}
  :javascript
