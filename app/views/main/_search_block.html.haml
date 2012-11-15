@@ -107,6 +107,15 @@
         -# = f.label :external_code, t(:artikul)
         = f.text_field :external_code
        = render :partial => "shared/submit_button", :locals => {:title => t(:find)}
+      .clear
+      .fields
+       - if defined?(@use_alt_price)
+        %span.switch{:class=>"radio"}
+         Цены:
+         %a{:href=>"#", :class=>[@use_alt_price ? nil : "active", "usd"]}
+          %span USD
+         %a{:href=>"#", :class => [@use_alt_price ? "active" : nil, "rub"]}
+          %span RUB
        -# .button.commit
         %a.button-style{:href=>"#"}
          %i.t &nbsp;
