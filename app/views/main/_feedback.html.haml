@@ -1,4 +1,6 @@
 .feedback-block{:style => "display:none;"}
+ %a.close-link{:href=>"#"}
+  %span свернуть
  = form_for :feedback, :url => feedback_main_index_path, :html => {:multipart => true, :target => 'feed_upload_frame'}, :method => :post, :remote => true do |f|
   .feedback
    %fieldset#mail_form_group{:name=>"mail_form_group", :style=>"border: 1px solid rgb(102, 102, 102); position: absolute; background-color: rgb(255, 255, 255); top: 111px; right: 7px; z-index: 500; padding: 10px; display: block; background-position: initial initial; background-repeat: initial initial; "}
@@ -11,22 +13,22 @@
     %table{:border=>"0"}
      %tr
       %td
-       %label Ваше имя : 
+       %label Ваше имя
       %td
        %input#person_name{:name=>"person_name", :style=>"width : 200px;", :type=>"text", :value=>User.current.current_account.name}
      %tr
       %td
-       %label Контактный e-mail : 
+       %label Контактный e-mail
       %td
        %input#person_email{:name=>"person_email", :style=>"width : 200px;", :type=>"text", :value=>User.current.current_account.contact_email}
      %tr
       %td
-       %label Тема : 
+       %label Тема
       %td
        %input#message_subject{:name=>"message_subject", :size=>"70", :style=>"width: 500px;", :type=>"text", :value=>""}
      %tr
       %td{:valign=>"top"}
-       %label Ваше сообщение: 
+       %label Ваше сообщение
       %td
        %textarea#message_body{:cols=>"40", :name=>"message_body", :rows=>"4", :style=>"width: 500px;"}
      %tr
