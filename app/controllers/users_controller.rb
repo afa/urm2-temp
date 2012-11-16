@@ -124,7 +124,7 @@ class UsersController < ApplicationController
    @filter_hash.merge!(:date_to => @filter.date_to, :date_from => @filter.date_from)
    respond_with do |format|
     format.csv do
-     send_data ["Отчет по проданным заказам", "за период с #{@filter.date_from} по #{@filter.date_to}", "Не является финансовым документом. Возможна погрешность округления"].map{|s| "#{s}\n" } + User.export(:csv, :sold_orders, Axapta.sales_info_all(@filter_hash.merge(:status_filter => 'delivered')).items), :type => "application/csv", :disposition => 'attachment', :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.csv"
+     send_data ["Отчет по проданным заказам", "за период с #{@filter.date_from} по #{@filter.date_to}", "Не является финансовым документом. Возможна погрешность округления"].map{|s| "#{s}\n" }.join + User.export(:csv, :sold_orders, Axapta.sales_info_all(@filter_hash.merge(:status_filter => 'delivered')).items), :type => "application/csv", :disposition => 'attachment', :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.csv"
     end
    end
   end
