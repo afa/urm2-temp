@@ -1,3 +1,4 @@
+#coding: UTF-8
 class UsersController < ApplicationController
  respond_to :js, :html, :json, :csv#, :xls
  skip_before_filter :process_cookie, :only => [:new, :create]
