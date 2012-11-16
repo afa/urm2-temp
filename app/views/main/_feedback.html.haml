@@ -18,7 +18,7 @@
        %input#person_name{:name=>"person_name", :style=>"width : 200px;", :type=>"text", :value=>User.current.current_account.name}
      %tr
       %td
-       %label Контактный e-mail
+       %label Обратный адрес
       %td
        %input#person_email{:name=>"person_email", :style=>"width : 200px;", :type=>"text", :value=>User.current.current_account.contact_email}
      %tr
@@ -32,7 +32,11 @@
       %td
        %textarea#message_body{:cols=>"40", :name=>"message_body", :rows=>"4", :style=>"width: 500px;"}
      %tr
-      %td{:colspan => 2}
-       %a.feed-file-add{:href => "#"} Добавить файл
-    %a.feedsend{:href => "#"} Отправить
+      %td
+      %td
+       %a.feed-file-add{:href => "#"} Прикрепить файл
+     %tr
+      %td
+      %td
+       %a.feedsend{:href => "#"} Отправить
  %iframe#upload_frame{:name=>"upload_frame", :style=>"width:1px;height:1px;border:0px", :src=>"about:blank"}
