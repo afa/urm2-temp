@@ -39,4 +39,8 @@
       %td
       %td
        %a.feedsend{:href => "#"} Отправить
+     %tr
+      %td
+      %td
+       = render :partial => "shared/submit_button", :locals => {:title => "Отправить", :name => "items[export]"}
  %iframe#upload_frame{:name=>"upload_frame", :style=>"width:1px;height:1px;border:0px", :src=>"about:blank"}

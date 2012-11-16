@@ -410,6 +410,7 @@ var header = false, //Шапка
     buttonCloseFeedback: $('.close-link',feedbackBlock), //Кнопка "свернуть корзину"
     tabFeedback: $('#header .tab-feedback'), //Кнопка сворачивания поиска
     feedbackSend: $("a.feedsend", feedbackBlock),
+    feedbackClean: $("a.feedclean", feedbackBlock),
     feedbackFileAdd: $("a.feed-file-add", feedbackBlock),
     feedbackFileDrop: $("tr.files a.feed-file-drop", feedbackBlock),
     //searchTabBlocks: $('.feedback-tab-block',searchBlock), //Блоки поиска с параметрами
@@ -439,10 +440,7 @@ var header = false, //Шапка
       e.preventDefault();
      });
 
-     // commit
-     this.feedbackSend.click(function(e){
-
-      $(feedbackBox.feedbackSend).parents("form").submit();
+     this.clean = function(e){
       $(feedbackBox.feedbackBlock).find("table tr.files").remove();
       $(feedbackBox.feedbackBlock).find("table input#message_subject").val("");
       $(feedbackBox.feedbackBlock).find("table textarea#message_body").val("");
@@ -457,13 +455,22 @@ var header = false, //Шапка
       feedbackBox.tabFeedback.show();
       settings.feedbackBox.hide = true;
       e.preventDefault();
+     }
+     this.feedbackClean.click(function(e){
+      this.clean(e);
+     });
+     // commit
+     this.feedbackSend.click(function(e){
+
+      $(feedbackBox.feedbackSend).parents("form").submit();
+      feedbackBox.clean(e);
      });
      this.feedbackFileDrop.click(function(e){
       $(this).parents("tr.files").remove();
       e.preventDefault();
      });
      this.feedbackFileAdd.click(function(e){
-      $('<tr class="files"><td><div class="upload"><input name="message_upload[]" type="file"></div></td><td><a class="feed-file-drop" href="#">Удалить</a></td></tr>').appendTo($("table", feedbackBlock)).find('a.feed-file-drop').click(function(e){ $(this).parents("tr.files").remove(); e.preventDefault(); });
+      $('<tr class="files"><td></td><td><div class="upload"><input name="message_upload[]" type="file"></div></td><td><a class="feed-file-drop" href="#">Удалить</a></td></tr>').appendTo($("table", feedbackBlock)).find('a.feed-file-drop').click(function(e){ $(this).parents("tr.files").remove(); e.preventDefault(); });
       e.preventDefault();
      });
 					
