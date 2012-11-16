@@ -457,11 +457,10 @@ var header = false, //Шапка
       e.preventDefault();
      }
      this.feedbackClean.click(function(e){
-      this.clean(e);
+      feedbackBox.clean(e);
      });
      // commit
      this.feedbackSend.click(function(e){
-
       $(feedbackBox.feedbackSend).parents("form").submit();
       feedbackBox.clean(e);
      });
