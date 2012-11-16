@@ -409,7 +409,7 @@ var header = false, //Шапка
     feedbackBlock: feedbackBlock, //Блок поиска
     buttonCloseFeedback: $('.close-link',feedbackBlock), //Кнопка "свернуть корзину"
     tabFeedback: $('#header .tab-feedback'), //Кнопка сворачивания поиска
-    feedbackSend: $("a.feedsend", feedbackBlock),
+    feedbackSend: $(".feedsend a.button-style", feedbackBlock),
     feedbackClean: $("a.feedclean", feedbackBlock),
     feedbackFileAdd: $("a.feed-file-add", feedbackBlock),
     feedbackFileDrop: $("tr.files a.feed-file-drop", feedbackBlock),
