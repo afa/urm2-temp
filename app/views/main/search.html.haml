@@ -3,10 +3,11 @@
  .table-block
   .table-scrolling
    .padded
-    = form_for :export_fields, :url => export_main_index_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
+    -# = form_for :export_fields, :url => export_main_index_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
      = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "items[export]"}
 
    = form_for :cart_fields, :url => carts_path, :method => :post, :html=>{:class => "js"}, :remote => true do |frm|
+    = render :partial => "shared/submit_button", :locals => {:title => t(:add_to_cart), :name => "items[commit]"}
     %table.table-style{:class => "search-products"}
      - unless @items.empty?
       %tr
@@ -62,7 +63,6 @@
       %tr.title-header-bottom
        %th.double-cell{:colspan => 3}= t :avail
     .padded
-    = render :partial => "shared/submit_button", :locals => {:title => t(:add_to_cart), :name => "items[commit]"}
  .clear.block-padded &nbsp;
  .cart-table.block-padded
   .cart= render :partial => "carts/cart_table", :locals => {:cart => @carts, :app_list => @app_list}
