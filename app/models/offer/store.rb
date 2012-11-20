@@ -45,7 +45,8 @@ class Offer::Store < Offer::Base
       loc.try(:[], "delivery_prognosis").each do |dlv|
        n.dlv_prognoses << {:date => dlv["delivery_date"], :qty => dlv["delivery_qty"]}
       end
-      n.forecast_available &&= n.dlv_prognoses.detect{|x| x[:qty].to_i > 0 }
+      n.dlv_prognoses.delete_if{|x| x[:qty].to_i == 0 }
+      n.forecast_available &&= n.dlv_prognoses.size > 0
       n.application_area_mandatory = WebUtils.parse_bool(hsh["application_area_mandatory"])
       #n.vend_proposal_date = nil
       CartStore.prepare_code(n)
