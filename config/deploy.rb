@@ -42,7 +42,6 @@ task :work, :roles => :app do
  set :deploy_to, "/mnt/data/www/urm_work"
  set :current_path, File.join(deploy_to, current_dir)
  set :default_run_options, exists?(:default_run_options) ? fetch(:default_run_options).merge("RAILS_ENV" => "work") : {"RAILS_ENV" => "work"}
- p fetch(:default_run_options)
  set :unicorn_bin, "unicorn_rails"
  set :unicorn_pid, File.join(shared_path, "tmp/pids/unicorn.pid")
  ENV["RAILS_ENV"] = "work"
