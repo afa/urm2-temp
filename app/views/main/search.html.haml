@@ -8,6 +8,7 @@
 
    = form_for :cart_fields, :url => carts_path, :method => :post, :html=>{:class => "js"}, :remote => true do |frm|
     = render :partial => "shared/submit_button", :locals => {:title => t(:add_to_cart), :name => "items[commit]"}
+    .clear.padded
     %table.table-style{:class => "search-products"}
      - unless @items.empty?
       %tr
