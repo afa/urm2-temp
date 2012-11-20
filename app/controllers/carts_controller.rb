@@ -151,6 +151,7 @@ class CartsController < ApplicationController
     gon.stores = @stores
     gon.order = render_to_string :partial => "main/order_edit"
    end
+   @avail_sales = [""] + Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000).items.map{|s| [s.sales_id, s.sales_id] }
 
    respond_with do |format|
     format.js { render :layout => false }
