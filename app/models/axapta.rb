@@ -188,7 +188,7 @@ class Axapta
    AxaptaRequest.get_dlv_mode(:user_hash => axapta_hash)
   end
 
-  def self.get_delivery_prognosis(code, lc = nil)
+  def self.get_delivery_prognosis(code, lc = nil) #TODO refactor && move to offer::store#fabricate
    locs = {}
    pp = lc.nil? ? {} : {:location_id => lc}
    (AxaptaRequest.search_item_name_h(pp.merge(:user_hash => axapta_hash, :item_id_search => code, :show_delivery_prognosis => true)).try(:[], "items") || []).each do |loc|
@@ -212,8 +212,8 @@ class Axapta
     rez << Hash[ locs.map{|k, v| [k, v[idx] ] } ]
    end
    rez.each do |r|
-    r.delete_if{|k, v| v.nil? }
-    #r.delete_if{|k, v| v.nil? || v == 0 }
+    #r.delete_if{|k, v| v.nil? }
+    r.delete_if{|k, v| v.nil? || v == 0 }
    end
    rez.map{|r| r.empty? ? nil : r }.compact
   end
