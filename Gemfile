@@ -57,6 +57,7 @@ group :development, :test, :staging do
  gem "konacha"
  gem "sprockets"
  gem "ejs"
+ gem "rspec"
  gem "rspec-rails"
  gem "cucumber", "1.0.6"
  gem "cucumber-rails"
