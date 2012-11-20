@@ -93,10 +93,10 @@ function dms_item_hide(obj){
 }
 
 function hide_dms_on_plus_click(obj_id){
- $("tr.dms_item_" + obj_id + " th .plus").click(function(e){
+ $("tr.dms_item_" + obj_id + " th .plus").click(function(){
   var obj = $(this).parents("tr").find("th .icon input.after").first().val();
   dms_item_hide(obj);
-  e.preventDefaults();
+  //e.preventDefaults();
   return false;
  });
 }
