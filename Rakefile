@@ -12,6 +12,10 @@ RSpec::Core::RakeTask.new(:factory_specs) do |t|
   t.pattern = './spec/factories_spec.rb'
 end
 
+
+desc "Run specs"
+RSpec::Core::RakeTask.new
+
 task spec: :factory_specs
 
 #Cucumber::Rake::Task.new do |t|
