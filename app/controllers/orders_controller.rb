@@ -5,7 +5,8 @@ class OrdersController < ApplicationController
  before_filter :get_filter
 
   def index
-   @orders = Axapta.sales_info_paged(@page, {:user_hash => current_user.current_account.axapta_hash}.merge(@filter_hash))
+   p "---fltr", @filter_hash
+   @orders = Axapta.sales_info_paged(@page, @filter_hash)
   end
 
   def new
