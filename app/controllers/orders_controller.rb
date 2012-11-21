@@ -226,7 +226,7 @@ class OrdersController < ApplicationController
  protected
   def get_filter
    p "---fh", params[:filter]
-   @filter_hash = {:only_my => Setting.get("order.only_my"), :reservation_end => Setting.get("order.reservation_end")}.merge(params[:filter])
+   @filter_hash = {:only_my => Setting.get("order.only_my"), :reservation_end => Setting.get("order.reservation_end")}.merge(params[:filter] || {})
    if @filter_hash[:this_sales_origin].blank?
     @filter_hash[:this_sales_origin]='0'
    end
