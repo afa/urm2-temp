@@ -12,7 +12,12 @@
    %tr
     %td
     %td
-     %input{:type => "radio", :value => "csv", :name => "format"} CSV
+     %label
+      %input{:type => "radio", :value => "csv", :name => "format"}
+      CSV
+     %label
+      %input{:type => "radio", :value => "xls", :name => "format"}
+      XLS
   = render :partial => "shared/submit_button", :locals => {:title => "Сформировать"}
   -# .button.commit
    %a.button-style{:href=>"#"}
