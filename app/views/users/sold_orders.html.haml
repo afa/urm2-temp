@@ -1,20 +1,26 @@
 .filter
- = form_for :filter, :url => export_sold_orders_users_path(:format => :csv), :method => :post do |form|
+ -# = form_for :filter, :url => export_sold_orders_users_path(:format => :csv), :method => :post do |form|
+ = form_for :filter, :url => export_sold_orders_users_path, :method => :post do |form|
   %table
-   %tr
+   %tr{:style => "vertical-align: middle;"}
     %th Период
     %td
      с:  
      %input.calendar-input{:type => "text", :name => "filter[date_from]", :value => @filter.try(:date_from) || (Date.today - Date.today.mday + 1).strftime("%Y-%m-%d")}
      по:   
      %input.calendar-input{:type => "text", :name => "filter[date_to]", :value => @filter.try(:date_to) || Date.today.strftime("%Y-%m-%d")}
-  .button.commit
+   %tr
+    %td
+    %td
+     %input{:type => "radio", :value => "csv", :name => "format"} CSV
+  = render :partial => "shared/submit_button", :locals => {:title => "Сформировать"}
+  -# .button.commit
    %a.button-style{:href=>"#"}
     %i.t &nbsp;
     %i.b &nbsp;
     %i.tl &nbsp;
     %i.tr &nbsp;
-    %span Найти!
+    %span Сформировать
     %i.bl &nbsp;
     %i.br &nbsp;
   -# = form.submit "show"
