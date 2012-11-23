@@ -1,6 +1,6 @@
 #coding: UTF-8
 class UsersController < ApplicationController
- respond_to :js, :html, :json, :csv#, :xls
+ respond_to :js, :html, :json, :csv, :xls
  skip_before_filter :process_cookie, :only => [:new, :create]
  skip_before_filter :login_from_cookie, :only => [:new, :create]
  skip_before_filter :authenticate!, :only => [:new, :create]
@@ -109,6 +109,9 @@ class UsersController < ApplicationController
    respond_with do |format|
     format.csv do
      send_data User.export(:csv, :balance, Axapta.info_cust_trans(@filter_hash)), :type => "application/csv", :disposition => :attachment
+    end
+    format.xls do
+     send_data User.export(:xls, :balance, Axapta.info_cust_trans(@filter_hash)), :type => "application/csv", :disposition => :attachment
     end
    end
   end
