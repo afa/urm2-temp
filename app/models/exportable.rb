@@ -37,9 +37,8 @@ module Exportable
 
       end
       book.write io
-      io.rewind
      end
-     io.read
+     io.string
     end
    end
   }
