@@ -132,7 +132,7 @@ class UsersController < ApplicationController
     end
     format.xls do
      #!!!!!! use sales_report when ready
-     send_data User.export(:xls, :sold_orders, Axapta.sales_info_all(@filter_hash.merge(:status_filter => 'delivered')).items, {:preheader => ["Отчет по проданным заказам", "за период с #{@filter.date_from} по #{@filter.date_to}", "Не является финансовым документом. Возможна погрешность округления"]}), :type => "application/vnd.ms-excel", :disposition => 'attachment', :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.xls"
+     send_data User.export(:xls, :sold_orders, Axapta.sales_report(@filter_hash).items, {:preheader => [["Отчет по проданным заказам"], ["за период с #{@filter.date_from} по #{@filter.date_to}"], ["Не является финансовым документом. Возможна погрешность округления"]]}), :type => "application/vnd.ms-excel", :disposition => 'attachment', :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.xls"
     end
    end
   end

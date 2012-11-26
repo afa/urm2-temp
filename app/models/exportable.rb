@@ -13,13 +13,30 @@ module Exportable
     end
     out.force_encoding('UTF-8').encode('Windows-1251')
    },
-   :xls => proc {|hdr, data, opts = {}|
-    Spreadsheet::Workbook.new{|book|
-     book.create_worksheet{|shit|
-      shit.row(0)
-     }
-    }
-   }
+   :xls => proc do |hdr, data, opts = {}|
+    c_row = 0
+    Spreadsheet::Workbook.new do |book|
+     book.create_worksheet do |shit|
+      if opts.has_key? :preheader
+       opts[:preheader].each do |ln|
+        ln.each do |c|
+         shit.row(c_row) << c
+        end
+        c_row += 1
+       end
+      end
+      hdr.each{|c| shit.row(c_row) << c }
+      c_row += 1
+      data.each do |ln|
+       ln.each do |c|
+        shit.row(c_row) << c
+       end
+       c_row += 1
+      end
+
+     end
+    end
+   end
   }
 
   EXPORTABLE_FIELDS = {
