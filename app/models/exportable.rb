@@ -38,6 +38,7 @@ module Exportable
       end
       book.write io
      end
+     io
     end
    end
   }
