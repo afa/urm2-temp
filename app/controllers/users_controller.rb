@@ -128,11 +128,11 @@ class UsersController < ApplicationController
    respond_with do |format|
     format.csv do
      #!!!!!! use sales_report when ready
-     send_data ["Отчет по проданным заказам", "за период с #{@filter.date_from} по #{@filter.date_to}", "Не является финансовым документом. Возможна погрешность округления"].map{|s| "#{s}\n" }.join.encode('Windows-1251') + User.export(:csv, :sold_orders, Axapta.sales_info_all(@filter_hash.merge(:status_filter => 'delivered')).items), :type => "application/csv", :disposition => 'attachment', :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.csv"
+     send_data ["Отчет по проданным заказам", "за период с #{@filter.date_from} по #{@filter.date_to}", "Не является финансовым документом. Возможна погрешность округления"].map{|s| "#{s}\n" }.join.encode('Windows-1251') + User.export(:csv, :sold_orders, Axapta.sales_report_all(@filter_hash).items), :type => "application/csv", :disposition => 'attachment', :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.csv"
     end
     format.xls do
      #!!!!!! use sales_report when ready
-     send_data User.export(:xls, :sold_orders, Axapta.sales_report(@filter_hash).items, {:preheader => [["Отчет по проданным заказам"], ["за период с #{@filter.date_from} по #{@filter.date_to}"], ["Не является финансовым документом. Возможна погрешность округления"]]}), :type => "application/vnd.ms-excel", :disposition => 'attachment', :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.xls"
+     send_data User.export(:xls, :sold_orders, Axapta.sales_report_all(@filter_hash).items, {:preheader => [["Отчет по проданным заказам"], ["за период с #{@filter.date_from} по #{@filter.date_to}"], ["Не является финансовым документом. Возможна погрешность округления"]]}), :type => "application/vnd.ms-excel", :disposition => 'attachment', :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.xls"
     end
    end
   end
