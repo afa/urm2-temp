@@ -15,25 +15,28 @@ module Exportable
    },
    :xls => proc do |hdr, data, opts = {}|
     c_row = 0
-    Spreadsheet::Workbook.new do |book|
-     book.create_worksheet do |shit|
-      if opts.has_key? :preheader
-       opts[:preheader].each do |ln|
+    StringIO.open do |io|
+     Spreadsheet::Workbook.new do |book|
+      book.create_worksheet do |shit|
+       if opts.has_key? :preheader
+        opts[:preheader].each do |ln|
+         ln.each do |c|
+          shit.row(c_row) << c
+         end
+         c_row += 1
+        end
+       end
+       hdr.each{|c| shit.row(c_row) << c }
+       c_row += 1
+       data.each do |ln|
         ln.each do |c|
          shit.row(c_row) << c
         end
         c_row += 1
        end
-      end
-      hdr.each{|c| shit.row(c_row) << c }
-      c_row += 1
-      data.each do |ln|
-       ln.each do |c|
-        shit.row(c_row) << c
-       end
-       c_row += 1
-      end
 
+      end
+      book.write io
      end
     end
    end
