@@ -12,8 +12,8 @@
       %th= f.label :item_name, t(:item_name) + ':'
       %td.long= f.text_field :item_name
      %tr
-      %th Дата накладной:
-      %td.tiny{:style => "vertical-align: bottom;"}
+      %th{:style => "vertical-align: middle;"} Дата накладной:
+      %td.tiny{:style => "vertical-align: middle;"}
        с&nbsp;
        %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from}
        -# .calendar-input= @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from
