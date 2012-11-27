@@ -17,6 +17,7 @@ class CartWorld < CartItem
 
 
   def setup_price
+   self.location_link ||= User.current.invent_location_id
    self.max_amount ||= 0
    self.min_amount ||= 0
    if self.amount and self.amount > 0
