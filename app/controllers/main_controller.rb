@@ -58,7 +58,7 @@ class MainController < ApplicationController
     format.json do
      #render :json => {:dms => render_to_string( :partial => "main/dms_block.html", :locals => {:items => @items, :after => @after} ), :gap => render_to_string( :partial => "main/gap_line.html", :locals => {:after => @after}), :empty => render_to_string(:partial => "main/dms_empty.html", :locals => {:after => @after})}
      begin
-     crt = render_to_string(:partial => "carts/cart_collection", :locals => {:cart => @carts, :app_list => @app_list})
+     crt = render_to_string(:partial => "carts/cart_collection", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores})
      rescue Exception => e
      p "---mce", e, e.backtrace
      p "---mc-crt", crt
