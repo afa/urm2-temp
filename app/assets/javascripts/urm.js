@@ -151,6 +151,10 @@ function showDms(evt){
     $("tr.item_" + row_id + " .icon .dms").removeClass("active");
    } else {
     $(data["dms"]).insertAfter($("tr.info_item_" + row_id).add("tr.item_" + row_id).last());
+    if(!/^\s*$/.test(data["cart"])){
+     $(".cart").empty();
+     $(data["cart"]).appendTo($(".cart"));
+    }
     insertGap(row_id, data["gap"]);
     //$("tr.item_" + row_id + " .icon .dms").addClass("active");
    }

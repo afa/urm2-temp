@@ -50,11 +50,16 @@ class MainController < ApplicationController
    @code = params[:code]
    @brend = params[:brend]
    @items = @code.blank? ? Offer::World.by_query(@seek, @brend) : Offer::World.by_code(@code)
+   CartItem.uncached do
+    @carts = CartItem.where(:user_id => current_user.id).in_cart.unprocessed.order("product_name, product_brend").all
+    @carts.select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
+   end
+   @app_list = Axapta.application_area_list || []
    respond_with do |format|
     format.json do
-     render :json => {:dms => render_to_string( :partial => "main/dms_block.html", :locals => {:items => @items, :after => @after} ), :gap => render_to_string( :partial => "main/gap_line.html", :locals => {:after => @after}), :empty => render_to_string(:partial => "main/dms_empty.html", :locals => {:after => @after})}
+     render :json => {:dms => render_to_string( :partial => "main/dms_block.html", :locals => {:items => @items, :after => @after} ), :gap => render_to_string( :partial => "main/gap_line.html", :locals => {:after => @after}), :empty => render_to_string(:partial => "main/dms_empty.html", :locals => {:after => @after}), :cart => render_to_string(:partial => "carts/cart_table", :locals => {:cart => @carts, :app_list => @app_list})}
     end
-    format.js { render :layout => false }
+    #format.js { render :layout => false }
     format.html do
      redirect_to root_path
     end
