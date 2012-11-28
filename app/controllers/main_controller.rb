@@ -50,10 +50,8 @@ class MainController < ApplicationController
    @code = params[:code]
    @brend = params[:brend]
    @items = @code.blank? ? Offer::World.by_query(@seek, @brend) : Offer::World.by_code(@code)
-   CartItem.uncached do
-    @carts = CartItem.where(:user_id => current_user.id).in_cart.unprocessed.order("product_name, product_brend").all
-    @carts.select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
-   end
+   @carts = CartItem.where(:user_id => current_user.id).in_cart.unprocessed.order("product_name, product_brend").all
+   @carts.select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
    @app_list = Axapta.application_area_list || []
    @stores = @carts.map(&:location_link).uniq.compact
    respond_with do |format|

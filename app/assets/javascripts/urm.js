@@ -144,6 +144,7 @@ function showDms(evt){
  if($("tr.dms_item_" + row_id).length == 0){
   makeAjaxCall("/main/dms?code=" + code + "&after=" + row_id, function(data){
   //$.getJSON("/main/dms?code=" + code + "&after=" + row_id, "", function(data){
+   alert("ld" + data);
    $("tr.item_" + row_id + " .icon .slider").hide();
    $("tr.item_" + row_id + " .icon .dms").show().addClass("active");
    if(/^\s*$/.test(data["dms"])){
