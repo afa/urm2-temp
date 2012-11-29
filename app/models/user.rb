@@ -43,6 +43,7 @@ class User < ActiveRecord::Base
    ar = {}.merge(*args) rescue {}
    p "---makeorder", ar
    reqs = cart_items.unprocessed.in_cart.all.partition{|c| c.is_a?(CartRequest) }
+   reqs[1].select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
    res = [[], nil]
    p "---makeorder-ors", reqs
    unless reqs[1].empty?
