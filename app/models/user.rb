@@ -44,6 +44,7 @@ class User < ActiveRecord::Base
    p "---makeorder", ar
    reqs = cart_items.unprocessed.in_cart.all.partition{|c| c.is_a?(CartRequest) }
    res = [[], nil]
+   p "---makeorder-ors", reqs
    unless reqs[1].empty?
     ors = []
     reqs[1].map(&:location_link).uniq.compact.sort{|a, b| a == current_account.invent_location_id ? -1 : a <=> b }.each do |loc|
