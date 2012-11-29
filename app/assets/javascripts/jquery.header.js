@@ -473,65 +473,6 @@ var header = false, //Шапка
       e.preventDefault();
      });
 					
-     // Табы
-     /*this.feedbackTabs.click(function(e){
-      feedbackBox.feedbackTabs.removeClass('active');
-      $(this).addClass('active');
-      feedbackBox.feedbackTabBlocks.hide();
-      feedbackBox.feedbackTabBlocks.eq($(this).index()).show();
-      header.heightMonitor.check();
-      e.preventDefault();
-     });*/
-					
-     // Сворачивание/разворачивание поиска
-     /*this.listArea.parent().bind('mouseenter',function(){
-      if(searchBox.searchTabs.eq(0).hasClass('active') && !searchBox.listArea.hasClass('big') && !searchBox.areaOpen){
-       searchBox.listArea.addClass('big');
-       if(searchBox.timer) clearTimeout(searchBox.timer);
-       if(settings.animation){
-       searchBox.timer = setTimeout(
-        function(){
-         searchBox.listArea.animate({height:'13em'},500);
-        },150);
-     }else{
-      searchBox.timer = setTimeout(
-       function(){
-        searchBox.listArea.css({height:'13em'});
-       },150);
-      }
-     }
-     }).bind('focusout',function(){
-      searchBox.areaOpen = false;
-      if(searchBox.searchTabs.eq(0).hasClass('active') && searchBox.listArea.hasClass('big')){
-       searchBox.listArea.removeClass('big');
-       if(searchBox.timer) clearTimeout(searchBox.timer);
-       if(settings.animation){
-        searchBox.listArea.animate({height:'1.1em'},500); 
-       }else{
-        searchBox.listArea.css({height:'1.1em'}); 
-       }
-      }
-     })
-     .bind('mouseleave focusout',function(){
-      if(searchBox.searchTabs.eq(0).hasClass('active') && searchBox.listArea.hasClass('big') && !searchBox.areaOpen){
-       searchBox.listArea.removeClass('big');
-       if(searchBox.timer) clearTimeout(searchBox.timer);
-       if(settings.animation){
-        searchBox.timer = setTimeout(
-         function(){
-          searchBox.listArea.animate({height:'1.1em'},500); 
-         },1500);
-       }else{
-        searchBox.timer = setTimeout(
-         function(){
-          searchBox.listArea.css({height:'1.1em'}); 
-         },1500);
-       }
-      }
-     }).bind('focusin',function(){
-      searchBox.areaOpen = true;
-     });
-*/
     }
 			
    }

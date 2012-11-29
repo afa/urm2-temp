@@ -413,7 +413,7 @@ function ordersPickProcess(){
 }
 
 //carts
-(function($){
+/*(function($){
  $.fn.cart = function(){
   return this.each(function(){
    addElementToCart: function(){
@@ -422,7 +422,7 @@ function ordersPickProcess(){
    }
   });
  };
-})(jQuery);
+})(jQuery);*/
 function cartsAddElementToCart(){
  if(gon.carts.length == 0){
   $('.cart-table').add('#order').hide();
