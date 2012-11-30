@@ -36,7 +36,7 @@
       %span Контроль продолжительности резервирования
     %li
      %a{:class => [current_page?(lines_orders_path) ? "active" : nil], :href=>lines_orders_path()}
-      %span Открытые строки заказов
+      %span= t :open_lines_title
     %li
      %a{:class => [current_page?(client_lines_orders_path) ? "active" : nil], :href=>client_lines_orders_path}
       %span Строки заказов клиента
