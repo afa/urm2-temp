@@ -494,8 +494,8 @@ function cartsRemoveElementFromCarts(){
  //-# $("#cart_store").replaceWith("#{escape_javascript(render :partial => "carts/cart_table", :locals => {:cart => @carts})}");
  $('table.search-products tr:has(td input.item-cart[value="' + gon.deleted + '"])').find("td.input-in-cart").removeClass("exist speed");
  $('table.search-products tr:has(td input.item-cart[value="' + gon.deleted + '"])').find("td.input-in-cart input").val("");
- $('table.search-products tr:has(td input.dms-cart[value="' + gon.deleted + '"])').find("td.input-in-cart").removeClass("exist speed");
- $('table.search-products tr:has(td input.dms-cart[value="' + gon.deleted + '"])').find("td.input-in-cart input").val("");
+ $('table.search-products tr:has(input.dms-cart[value="' + gon.deleted + '"])').find("td.input-in-cart").removeClass("exist speed");
+ $('table.search-products tr:has(input.dms-cart[value="' + gon.deleted + '"])').find("td.input-in-cart input").val("");
  // need? $("table.search-products tr td input.item-cart[value=\"#{@old}\"]").val("#{@new}");
 
  $("#cart_store table tr:has(td)").remove();
