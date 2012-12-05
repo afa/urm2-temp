@@ -128,6 +128,7 @@ class OrdersController < ApplicationController
   def reserve
    id = params[:id]
    lines = params.try(:[], :order).try(:[], id).try(:[], :line) || []
+   p "---rs-l", params, id, lines
    if lines.empty?
     redirect_to order_path(id), :flash => {:error => "empty lines"}
     return
@@ -135,6 +136,7 @@ class OrdersController < ApplicationController
    begin
     Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:line_id => k, :is_reserv => 1) }, :sales_id => id) #TODO fix line_id for line_id
    rescue AxaptaError
+    
     redirect_to order_path(id), :flash =>{:error => Axapta.get_last_exc["_error"]["message"]}
     return
    end
