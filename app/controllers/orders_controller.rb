@@ -5,7 +5,6 @@ class OrdersController < ApplicationController
  before_filter :get_filter
 
   def index
-   p "---fltr", @filter_hash
    @orders = Axapta.sales_info_paged(@page, @filter_hash)
   end
 
@@ -128,7 +127,6 @@ class OrdersController < ApplicationController
   def reserve
    id = params[:id]
    lines = params.try(:[], :order).try(:[], id).try(:[], :line) || []
-   p "---rs-l", params, id, lines
    if lines.empty?
     redirect_to order_path(id), :flash => {:error => "empty lines"}
     return
@@ -229,7 +227,6 @@ class OrdersController < ApplicationController
 
  protected
   def get_filter
-   p "---fh", params[:filter]
    @filter_hash = {:only_my => Setting.get("order.only_my"), :reservation_end => Setting.get("order.reservation_end")}.merge(params[:filter] || {})
    if @filter_hash[:this_sales_origin].blank?
     @filter_hash[:this_sales_origin]='0'
