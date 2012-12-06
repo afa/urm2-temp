@@ -1,9 +1,15 @@
 = form_for :news_article, :url => admin_news_index_path do |f|
  %div
-  =f.label :name
+  =f.label :name#, t(:name)
   = f.text_field :name
  %div
-  = f.label :body
-  = f.text_area :body
+  = f.label :body#, t(:body)
+  = f.text_area :body, :class => "redactor"
  %div
-  = f.submit "save"
+  =f.label :publication_start#, t(:publication_start)
+  = f.text_field :publication_start
+ %div
+  =f.label :publication_end#, t(:publication_end)
+  = f.text_field :publication_end
+ %div
+  = f.submit t(:save)

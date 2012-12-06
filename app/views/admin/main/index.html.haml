@@ -6,7 +6,7 @@
 %h1 Новости
 - @news.each do |art|
  %div
-  = link_to "#{art.created_at} &mdash; #{art.name}", edit_admin_news_path(art)
+  = link_to "#{art.created_at} - #{art.name}", edit_admin_news_path(art)
 %h1 help
 %table
  %tr

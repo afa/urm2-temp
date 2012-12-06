@@ -135,6 +135,25 @@ function insertGap(after, gap){
  }
  toggleGap(after);
 }
+function placeDmsData(data){
+ var row_id = $(this).parents("tr").prop("class").match(/\bitem_(\w+)\b/)[1];
+ var code = $(this).parents("tr").find(".icons input.item-code").val();
+ //$.getJSON("/main/dms?code=" + code + "&after=" + row_id, "", function(data){
+ $("tr.item_" + row_id + " .icon .slider").hide();
+ $("tr.item_" + row_id + " .icon .dms").show().addClass("active");
+ if(/^\s*$/.test(data["dms"])){
+  $(data["empty"]).insertAfter($("tr.info_item_" + row_id).add("tr.item_" + row_id).last());
+  $("tr.item_" + row_id + " .icon .dms").removeClass("active");
+ } else {
+  $(data["dms"]).insertAfter($("tr.info_item_" + row_id).add("tr.item_" + row_id).last());
+  if(!/^\s*$/.test(data["cart"])){
+   $(".cart").empty();
+   $(data["cart"]).appendTo($(".cart"));
+  }
+  insertGap(row_id, data["gap"]);
+ }
+ hide_dms_on_plus_click(row_id);
+}
 // on-click for dms button
 function showDms(evt){
  var row_id = $(this).parents("tr").prop("class").match(/\bitem_(\w+)\b/)[1];
@@ -142,42 +161,18 @@ function showDms(evt){
  $(this).parents(".icon").find(".dms").hide();
  $(this).parents(".icon").find(".slider").show();
  if($("tr.dms_item_" + row_id).length == 0){
-  makeAjaxCall("/main/dms?code=" + code + "&after=" + row_id, function(data){
-  //$.getJSON("/main/dms?code=" + code + "&after=" + row_id, "", function(data){
-   $("tr.item_" + row_id + " .icon .slider").hide();
-   $("tr.item_" + row_id + " .icon .dms").show().addClass("active");
-   if(/^\s*$/.test(data["dms"])){
-    $(data["empty"]).insertAfter($("tr.info_item_" + row_id).add("tr.item_" + row_id).last());
-    $("tr.item_" + row_id + " .icon .dms").removeClass("active");
-   } else {
-    $(data["dms"]).insertAfter($("tr.info_item_" + row_id).add("tr.item_" + row_id).last());
-    if(!/^\s*$/.test(data["cart"])){
-     $(".cart").empty();
-     $(data["cart"]).appendTo($(".cart"));
-    }
-    insertGap(row_id, data["gap"]);
-    //$("tr.item_" + row_id + " .icon .dms").addClass("active");
-   }
-   hide_dms_on_plus_click(row_id);
-   //$(data["gap"]).insertAfter($("tr.info_item_" + row_id).add("tr.analog_item_" + row_id).add("tr.dms_item_" + row_id).last());
-  }, function(data){
-   $("tr.item_" + row_id + " .icon .slider").hide();
-   $("tr.item_" + row_id + " .icon .dms").show().removeClass("active");
+  makeAjaxCall("/main/dms?code=" + code + "&after=" + row_id,
+   placeDmsData,
+   function(data){
+    $("tr.item_" + row_id + " .icon .slider").hide();
+    $("tr.item_" + row_id + " .icon .dms").show().removeClass("active");
   });
-  //return; 
  } else {
   $("tr.dms_item_" + row_id).toggle();
   $("tr.dms_item_" + row_id).toggleClass("hidden");
   toggleGap(row_id);
-  /*if($("tr.dms_item_" + row_id).add("tr.analog_item_" + row_id).add("tr.info_item_" + row_id).not(".hidden").length == 0){
-   $("tr.gap_" + row_id).hide();
-   $("tr.gap_" + row_id).addClass("hidden");
-  } else {
-   $("tr.gap_" + row_id).show();
-   $("tr.gap_" + row_id).removeClass("hidden");
-  }*/
-   $("tr.item_" + row_id + " .icon .slider").hide();
-   $("tr.item_" + row_id + " .icon .dms").show();
+  $("tr.item_" + row_id + " .icon .slider").hide();
+  $("tr.item_" + row_id + " .icon .dms").show();
  }
  evt.preventDefault();
 }
@@ -392,8 +387,8 @@ function ordersRemoveProcess(){
 
 function ordersReserveOnClick(){
  var curr = this;
- $('input[name^="order["][name$="][line_id]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
- $('td.reserve_data input[type="text"][name^="order["][name$="][process_qty]"]').each(function(i, item){ if($(item).val().match(/^\d+$/)){ ordersCopyToHidden(item, curr);} });
+ $('input[name^="order["][name$="][line_id]"]').each(function(i, item){ ordersCopyToHidden(item, $(curr)); });
+ $('td.reserve_data input[type="text"][name^="order["][name$="][process_qty]"]').each(function(i, item){ if($(item).val().match(/^\d+$/)){ ordersCopyToHidden(item, $(curr));} });
  $(this).parents("form").submit();
 }
 

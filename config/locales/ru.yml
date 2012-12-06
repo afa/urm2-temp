@@ -59,11 +59,14 @@ ru:
  activerecord:
   models:
    user: Пользователь
+   news_article: Новость
   attributes:
    user:
     username: Имя
     password: Пароль
- activerecord:
+   news_article:
+    name: Заголовок новости
+    body: Текст новости
   errors:
    models:
     user:
@@ -179,3 +182,4 @@ ru:
  only_my_quotations: Только мои запросы
  requests: Запросы
  open_lines_title: Строки открытых заказов
+ created_orders: Созданы заказы
