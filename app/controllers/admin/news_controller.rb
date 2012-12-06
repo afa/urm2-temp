@@ -10,7 +10,7 @@ class Admin::NewsController < Admin::ApplicationController
   end
 
   def create
-   NewsArticle.create params[:news_article]
+   NewsArticle.create(params[:news_article].merge(:last_editor_id => Manager.current.id))
    redirect_to admin_root_path
   end
 
@@ -18,7 +18,7 @@ class Admin::NewsController < Admin::ApplicationController
   end
 
   def update
-   @news_article.update_attributes(params[:news_article])
+   @news_article.update_attributes(params[:news_article].merge(:last_editor_id => Manager.current.id))
    redirect_to admin_root_path
   end
 

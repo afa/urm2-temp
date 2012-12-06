@@ -6,4 +6,10 @@
   = f.label :body, t(:body)
   = f.text_area :body, :class => "redactor"
  %div
+  =f.label :publication_start, t(:publication_start)
+  = f.text_field :publication_start
+ %div
+  =f.label :publication_end, t(:publication_end)
+  = f.text_field :publication_end
+ %div
   = f.submit t(:save)
