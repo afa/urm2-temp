@@ -1,9 +1,9 @@
 = form_for :news_article, :url => admin_news_index_path do |f|
  %div
-  =f.label :name
+  =f.label t :name
   = f.text_field :name
  %div
-  = f.label :body
-  = f.text_area :body
+  = f.label t :body
+  = f.text_area :body, :class => "redactor"
  %div
-  = f.submit "save"
+  = f.submit t :save

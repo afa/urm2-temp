@@ -59,11 +59,14 @@ ru:
  activerecord:
   models:
    user: Пользователь
+   news_article: Новость
   attributes:
    user:
     username: Имя
     password: Пароль
- activerecord:
+   news_article:
+    name: Заголовок новости
+    body: Текст новости
   errors:
    models:
     user:
