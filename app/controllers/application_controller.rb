@@ -10,15 +10,19 @@ class ApplicationController < ActionController::Base
   authen_field_name :username
   post_sign_cb :cb_logged
   #before_filter :unmodify
+  before_filter :prepare_decor
   before_filter :check_account_cur
   before_filter :get_accounts_in
   before_filter :take_search
-  @usd_decor = CurrencyPresenter.new(:usd)
-  @rub_decor = CurrencyPresenter.new(:rub)
   protect_from_forgery
 
 
  protected
+  def prepare_decor
+   @usd_decor = CurrencyPresenter.new(:usd)
+   @rub_decor = CurrencyPresenter.new(:rub)
+  end
+
   def cb_logged
    current_user.reload_accounts
    redirect_to root_path
