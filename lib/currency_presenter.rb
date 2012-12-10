@@ -1,6 +1,6 @@
 class CurrencyPresenter
  CURRENCY_RULES = {
-  :usd => { :separator = > ',', :delimiter => ' ', :precision => 4, :unit => ''},
+  :usd => { :separator => ',', :delimiter => ' ', :precision => 4, :unit => ''},
   :rub => { :separator => ',', :delimiter => ' ', :precision => 2, :unit => ''},
   :csv => { :separator => ',', :delimiter => '', :precision => 4, :unit => ''}
  }
