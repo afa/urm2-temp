@@ -6,7 +6,7 @@
  %td.text-left= cart_line.product_name
  %td.text-left= cart_line.product_brend
  %td.text-left= cart_line.product_rohs
- %td.text-right= cart_line.current_price
+ %td.text-right= @usd_decor.decore(cart_line.current_price)
  %td.text-right= cart_line.amount
  %td.text-left= cart_line.location_link
  %td.text-left= cart_line.prognosis

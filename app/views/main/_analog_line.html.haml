@@ -25,13 +25,13 @@
  %td.double-last-cell &nbsp;
  -# %td= analog_line["prognosis_id"]
  %td= analog_line.location_id
- %td= analog_line.prices[0]
+ %td= @usd_decor.decore(analog_line.prices[0])
  %td.green= analog_line.counts[1]
- %td= analog_line.prices[1]
+ %td= @usd_decor.decore(analog_line.prices[1])
  %td.green= analog_line.counts[2]
- %td= analog_line.prices[2]
+ %td= @usd_decor.decore(analog_line.prices[2])
  %td.green= analog_line.counts[3]
- %td= analog_line.prices[3]
+ %td= @usd_decor.decore(analog_line.prices[3])
  %td.grey= analog_line.qty_in_pack
  %td.font-small
   %span.color-red= analog_line.vend_proposal_date
