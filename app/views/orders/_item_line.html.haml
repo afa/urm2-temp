@@ -3,7 +3,7 @@
  %td.text-left= item_line.item_name
  %td.text-left= item_line.brend
  %td.text-right= item_line.sales_qty
- %td.text-right= item_line.price
+ %td.text-right= @usd_decor.decore(item_line.price)
  %td.text-right= item_line.amount
  %td= item_line.qty_in_debt
  %td= item_line.reserve_qty
