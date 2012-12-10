@@ -13,6 +13,8 @@ class ApplicationController < ActionController::Base
   before_filter :check_account_cur
   before_filter :get_accounts_in
   before_filter :take_search
+  @usd_decor = CurrencyPresenter.new(:usd)
+  @rub_decor = CurrencyPresenter.new(:rub)
   protect_from_forgery
 
 

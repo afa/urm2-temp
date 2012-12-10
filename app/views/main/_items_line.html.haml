@@ -52,31 +52,31 @@
  -# %td= items_line["prognoz"]
  %td
   %span{:class => ["price", "real", @use_alt_price ? "hidden" : "active"]}
-   = items_line.prices[0]
+   = @usd_decor.decore(items_line.prices[0])
   %span{:class => ["price", "alt", @use_alt_price ? "active" : "hidden"]}
-   = items_line.alt_prices[0]
+   = @rub_decor.decore(items_line.alt_prices[0])
   
  %td.green= items_line.counts[1]
  -# %td= items_line.prices[1]
  %td
   %span{:class => ["price", "real", @use_alt_price ? "hidden" : "active"]}
-   = items_line.prices[1]
+   = @usd_decor.decore(items_line.prices[1])
   %span{:class => ["price", "alt", @use_alt_price ? "active" : "hidden"]}
-   = items_line.alt_prices[1]
+   = @rub_decor.decore(items_line.alt_prices[1])
  %td.green= items_line.counts[2]
  -# %td= items_line.prices[2]
  %td
   %span{:class => ["price", "real", @use_alt_price ? "hidden" : "active"]}
-   = items_line.prices[2]
+   = @usd_decor.decore(items_line.prices[2])
   %span{:class => ["price", "alt", @use_alt_price ? "active" : "hidden"]}
-   = items_line.alt_prices[2]
+   = @rub_decor.decore(items_line.alt_prices[2])
  %td.green= items_line.counts[3]
  -# %td= items_line.prices[3]
  %td
   %span{:class => ["price", "real", @use_alt_price ? "hidden" : "active"]}
-   = items_line.prices[3]
+   = @usd_decor.decore(items_line.prices[3])
   %span{:class => ["price", "alt", @use_alt_price ? "active" : "hidden"]}
-   = items_line.alt_prices[3]
+   = @rub_decor.decore(items_line.alt_prices[3])
  %td.grey= items_line.qty_in_pack
  -# %td
  -# %td
