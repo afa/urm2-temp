@@ -128,6 +128,7 @@ class MainController < ApplicationController
    logger.info "--- request_start: #{Time.now}"
    begin
     @data = Axapta.item_info({:user_hash => @hash, :item_id => @code})
+    logger.info "---datainfo", @data
    rescue Exception => e
     p "---exc in info #{Time.now}", e, e.backtrace
     logger.info e.to_s
