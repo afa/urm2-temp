@@ -17,10 +17,13 @@
  %td.text-left= item_line.rohs
  %td.text-right= item_line.item_name
  %td.text-right= item_line.brend_alias
- %td.text-right= @price_decor[item_line.currency_code].decore(item_line.client_price)
- %td= @price_decor[item_line.currency_code].decore(item_line.sales_price)
+ %td.text-right= item_line.client_price
+ -# %td.text-right= @price_decor[item_line.currency_code].decore(item_line.client_price)
+ %td= item_line.sales_price
+ -# %td= @price_decor[item_line.currency_code].decore(item_line.sales_price)
  %td= item_line.sales_qty
  %td= item_line.quotation_prognosis_id
  %td= item_line.line_comment
- %td= @price_decor[item_line.currency_code].decore(item_line.line_amount)
+ %td= item_line.line_amount
+ -# %td= @price_decor[item_line.currency_code].decore(item_line.line_amount)
  %td= item_line.item_id
