@@ -13,11 +13,11 @@
  %td.text-right= showed_line.item_name
  %td.text-right= showed_line.brend_alias
  %td.text-right.tiny
-  .readable-amount{:style => "display: none;"}= showed_line.client_price
+  .readable-amount{:style => "display: none;"}= @price_decor[showed_line.currency_code].decore(showed_line.client_price)
   .editable-amount= text_field_tag "quotation[#{showed_line.quotation_id}][line][#{iid}][qty]", showed_line.client_price
- %td= showed_line.sales_price
+ %td= @price_decor[showed_line.currency_code].decore(showed_line.sales_price)
  %td= showed_line.sales_qty
  %td= showed_line.quotation_prognosis_id
  %td.note-option.main_options_data.medium= text_field_tag "quotation[#{showed_line.sales_id}][line][#{iid}][note]", showed_line.line_comment
- %td= showed_line.line_amount
+ %td= @price_decor[showed_line.currency_code].decore(showed_line.line_amount)
  %td= showed_line.item_id
