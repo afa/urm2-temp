@@ -6,7 +6,7 @@
  %td.text-left= control_line.brend
  %td.text-right.tiny= control_line.sales_qty
  -# TODO %td.text-right= text_field_tag "order[#{showed_line.sales_id}][user_price]", showed_line.user_price
- %td.text-right= control_line.amount
+ %td.text-right= @price_decor[control_line.currency_code].decore(control_line.amount)
  %td= control_line.reserve_qty
  %td= control_line.reservation_end
  %td= link_to control_line.sales_id, order_path(control_line.sales_id)

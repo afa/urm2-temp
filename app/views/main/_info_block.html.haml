@@ -33,7 +33,7 @@
          -if prices.has_key?("price#{idx + 1}")
           %tr
            %td{:style => "border-bottom: 0;"}= prices["count#{idx + 1}"]
-           %td{:style => "border-bottom: 0;"}= prices["price#{idx + 1}"]
+           %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices["price#{idx + 1}"])
      %td{:style => "border-bottom: 0;"}
       - Rails.logger.info "---dates"
       - Rails.logger.info dates.inspect

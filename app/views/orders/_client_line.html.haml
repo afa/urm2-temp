@@ -7,9 +7,9 @@
  %td.text-left= client_line.brend
  %td.text-left= client_line.package_name
  %td.text-right= client_line.sales_qty
- %td.text-right= client_line.price
+ %td.text-right= @price_decor[client_line.currency_code].decore(client_line.price)
  %td.text-left= client_line.currency_code
- %td.text-right= client_line.amount
+ %td.text-right= @price_decor[client_line.currency_code].decore(client_line.amount)
  %td.text-left= link_to client_line.sales_id, order_path(client_line.sales_id)
  %td
  %td= client_line.date_dead_line

@@ -21,6 +21,10 @@ class ApplicationController < ActionController::Base
   def prepare_decor
    @usd_decor = CurrencyPresenter.new(:usd)
    @rub_decor = CurrencyPresenter.new(:rub)
+   @price_decor = {
+    "RUR" => @rub_decor,
+    "USD" => @usd_decor
+   }
   end
 
   def cb_logged
