@@ -136,7 +136,7 @@ ru:
  class_name: Класс
  packing_type: Вид упаковки
  volume: "Брутто-объём, мм куб."
- qty_in_pack: Упаковочное количество
+ qty_in_pack: Количество в упаковке
  weight: Вес брутто, г
  quotation_id: Код запроса
  quotation_status: Статус запроса
