@@ -136,8 +136,10 @@ function insertGap(after, gap){
  toggleGap(after);
 }
 function placeDmsData(data){
- var row_id = $(this).parents("tr").prop("class").match(/\bitem_(\w+)\b/)[1];
- var code = $(this).parents("tr").find(".icons input.item-code").val();
+ //var row_id = $(this).parents("tr").prop("class").match(/\bitem_(\w+)\b/)[1];
+ //var code = $(this).parents("tr").find(".icons input.item-code").val();
+ var row_id = data["row_id"];
+ var code = data["code"];
  //$.getJSON("/main/dms?code=" + code + "&after=" + row_id, "", function(data){
  $("tr.item_" + row_id + " .icon .slider").hide();
  $("tr.item_" + row_id + " .icon .dms").show().addClass("active");
