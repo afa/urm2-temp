@@ -96,7 +96,7 @@
          = form_for :order, :url => pick_order_path(params[:id]) do |f4|
           .param= render :partial => "main/pick_options"
           -# .link [#{t(:pick)}]
-          = render :partial => "shared/submit_button", :locals => {:title => t(:pick), :opts => {:id => "pick_lines"}}
+          = render :partial => "shared/button", :locals => {:title => t(:pick), :opts => {:id => "pick_lines"}}
        .page
         .reserve_transfer
          = form_for :order, :url => order_path, :html => {:method => "GET"} do |f5|
@@ -108,7 +108,7 @@
          = form_for :order, :url => erase_order_path(params[:id]) do |f6|
           .param= select_tag "order[#{params[:id]}][close_reason_id]", options_for_select(@close_reasons)
           -# .link [#{t(:remove)}]
-          = render :partial => "shared/submit_button", :locals => {:title => t(:remove), :opts => {:id => "remove_order"}}
+          = render :partial => "shared/button", :locals => {:title => t(:remove), :opts => {:id => "remove_order"}}
      .clear
      -# TODO .price_request
       .param ???
