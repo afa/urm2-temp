@@ -34,16 +34,22 @@
       - unless prices.blank?
        %table
         %tr
-         %th K
-         %th Ц
-        - 4.times do |idx|
-         -if prices.has_key?("price#{idx + 1}")
-          %tr
-           %td{:style => "border-bottom: 0;"}= prices["count#{idx + 1}"]
-           %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices["price#{idx + 1}"])
+         %th Цена1
+         %th К2
+         %th Ц2
+         %th K3
+         %th Ц3
+         %th К4
+         %th Ц4
+        %tr
+         %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices["price1"])
+         %td{:style => "border-bottom: 0;"}= prices["count2"]
+         %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices["price2"])
+         %td{:style => "border-bottom: 0;"}= prices["count3"]
+         %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices["price3"])
+         %td{:style => "border-bottom: 0;"}= prices["count4"]
+         %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices["price4"])
      %td{:style => "border-bottom: 0;"}
-      - Rails.logger.info "---dates"
-      - Rails.logger.info dates.inspect
       - unless dates.blank?
        %table
         %tr
