@@ -1,4 +1,5 @@
 #cart_store
+ %h3= t(:selected_positions)
  = form_for :cart_item, :html => {:class => 'js', :method => :put}, :url => save_carts_path, :remote => true do |ff|
 
   %table.table-style

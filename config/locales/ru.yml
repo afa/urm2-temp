@@ -185,3 +185,5 @@ ru:
  created_orders: Созданы заказы
  position_discontinued: Позиция снята с производства
  segment_produkcii: Сегмент продукции
+ selected_positions: Отобранные позиции
+ requirement: Требования к позиции
