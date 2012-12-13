@@ -22,9 +22,14 @@
   %tr.sub-row-block{:class => "info_item_#{after}"}
    %td
    %td
-    .item
-     = t(:segment_produkcii)
-     %span.color-black= info_block["segment_rus"]
+    .item{:style => "font-weight:bold;"}
+     = t(:position_discontinued)
+ - if info_block["description"]
+  %tr.sub-row-block{:class => "info_item_#{after}"}
+   %td
+   %td
+    .item{:style => "font-style:italic;"}
+     = t(:position_discontinued)
  %tr.sub-row-block{:class => "info_item_#{after}"}
   %td.border-l &nbsp;
   %td.border-r{:colspan=>"17", :valign => "top"}
