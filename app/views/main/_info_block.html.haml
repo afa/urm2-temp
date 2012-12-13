@@ -12,24 +12,25 @@
     -# %a{:href=>"#"}Описание
     Описание
 - unless keys.empty?
- %tr.sub-row-block{:class => "info_item_#{after}"}
-  %td
-  %td
-   .item
-    = t(:segment_produkcii)
-    %span.color-black= info_block["segment_rus"]
+ - unless info_block["segment_rus"].blank?
+  %tr.sub-row-block{:class => "info_item_#{after}"}
+   %td
+   %td
+    .item
+     = t(:segment_produkcii)
+     %span.color-black= info_block["segment_rus"]
  - if info_block["discontinued"]
   %tr.sub-row-block{:class => "info_item_#{after}"}
    %td
    %td
     .item{:style => "font-weight:bold;"}
      = t(:position_discontinued)
- - if info_block["description"]
+ - unless info_block["description"].blank?
   %tr.sub-row-block{:class => "info_item_#{after}"}
    %td
    %td
     .item{:style => "font-style:italic;"}
-     = t(:position_discontinued)
+     = info_block["description"]
  %tr.sub-row-block{:class => "info_item_#{after}"}
   %td.border-l &nbsp;
   %td.border-r{:colspan=>"17", :valign => "top"}
