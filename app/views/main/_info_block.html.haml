@@ -35,6 +35,12 @@
          %td{:style => "border-bottom: 0;"}
           .item{:style => "font-style:italic;"}
            = info_block["description"]
+       - unless info_block["qty_in_pack"].blank?
+        %tr.sub-row-block
+         %td{:style => "border-bottom: 0;"}
+          .item
+           = t(:qty_in_pack)
+           %span.color-black= info_block["qty_in_pack"]
      -# - keys.each_slice(cnt) do |blk|
       %td{:style => "border-bottom: 0;"}
        - blk.each do |key|
@@ -45,13 +51,13 @@
       - unless prices.blank?
        %table
         %tr
-         %th Цена1
-         %th К2
-         %th Ц2
-         %th K3
-         %th Ц3
-         %th К4
-         %th Ц4
+         %th t(:price1)
+         %th t(:count2)
+         %th t(:price2)
+         %th t(:count3)
+         %th t(:price3)
+         %th t(:count4)
+         %th t(:price4)
         %tr
          %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices["price1"])
          %td{:style => "border-bottom: 0;"}= prices["count2"]
