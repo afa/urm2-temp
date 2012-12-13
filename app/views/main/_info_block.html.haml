@@ -20,18 +20,18 @@
      %td
       %table
        - unless info_block["segment_rus"].blank?
-        %tr.sub-row-block{:class => "info_item_#{after}"}
+        %tr.sub-row-block
          %td
           .item
            = t(:segment_produkcii)
            %span.color-black= info_block["segment_rus"]
        - if info_block["discontinued"]
-        %tr.sub-row-block{:class => "info_item_#{after}"}
+        %tr.sub-row-block
          %td
           .item{:style => "font-weight:bold;"}
            = t(:position_discontinued)
        - unless info_block["description"].blank?
-        %tr.sub-row-block{:class => "info_item_#{after}"}
+        %tr.sub-row-block
          %td
           .item{:style => "font-style:italic;"}
            = info_block["description"]
