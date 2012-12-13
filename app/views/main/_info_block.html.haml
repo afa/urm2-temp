@@ -51,13 +51,13 @@
       - unless prices.blank?
        %table
         %tr
-         %th t(:price1)
-         %th t(:count2)
-         %th t(:price2)
-         %th t(:count3)
-         %th t(:price3)
-         %th t(:count4)
-         %th t(:price4)
+         %th= t(:price1)
+         %th= t(:count2)
+         %th= t(:price2)
+         %th= t(:count3)
+         %th= t(:price3)
+         %th= t(:count4)
+         %th= t(:price4)
         %tr
          %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices["price1"])
          %td{:style => "border-bottom: 0;"}= prices["count2"]
