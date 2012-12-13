@@ -14,11 +14,17 @@
 - unless keys.empty?
  %tr.sub-row-block{:class => "info_item_#{after}"}
   %td
+  %td
    .item
     = t(:segment_produkcii)
     %span.color-black= info_block["segment_rus"]
-  %td
-   .item
+ - if info_block["discontinued"]
+  %tr.sub-row-block{:class => "info_item_#{after}"}
+   %td
+   %td
+    .item
+     = t(:segment_produkcii)
+     %span.color-black= info_block["segment_rus"]
  %tr.sub-row-block{:class => "info_item_#{after}"}
   %td.border-l &nbsp;
   %td.border-r{:colspan=>"17", :valign => "top"}
