@@ -16,23 +16,25 @@
   %td.border-l &nbsp;
   %td.border-r{:colspan=>"17", :valign => "top"}
    %table
-    -# %tr
-    - unless info_block["segment_rus"].blank?
-     %tr.sub-row-block{:class => "info_item_#{after}"}
-      %td
-       .item
-        = t(:segment_produkcii)
-        %span.color-black= info_block["segment_rus"]
-    - if info_block["discontinued"]
-     %tr.sub-row-block{:class => "info_item_#{after}"}
-      %td
-       .item{:style => "font-weight:bold;"}
-        = t(:position_discontinued)
-    - unless info_block["description"].blank?
-     %tr.sub-row-block{:class => "info_item_#{after}"}
-      %td
-       .item{:style => "font-style:italic;"}
-        = info_block["description"]
+    %tr
+     %td
+      %table
+       - unless info_block["segment_rus"].blank?
+        %tr.sub-row-block{:class => "info_item_#{after}"}
+         %td
+          .item
+           = t(:segment_produkcii)
+           %span.color-black= info_block["segment_rus"]
+       - if info_block["discontinued"]
+        %tr.sub-row-block{:class => "info_item_#{after}"}
+         %td
+          .item{:style => "font-weight:bold;"}
+           = t(:position_discontinued)
+       - unless info_block["description"].blank?
+        %tr.sub-row-block{:class => "info_item_#{after}"}
+         %td
+          .item{:style => "font-style:italic;"}
+           = info_block["description"]
      -# - keys.each_slice(cnt) do |blk|
       %td{:style => "border-bottom: 0;"}
        - blk.each do |key|
