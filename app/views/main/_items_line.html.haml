@@ -38,9 +38,9 @@
    -# %input{:type=>"text", :class=>"validate[custom[onlyNumber],max[#{items_line["max_qty"] || 0}]]"}
    %a.count{:href=>"#"}
  
- %td.double-first-cell= items_line.min_qty
- %td= items_line.max_qty
- %td.double-last-cell &nbsp;
+ %td.double-first-cell.text-right= items_line.min_qty
+ %td.text-right= items_line.max_qty
+ %td.text-right.double-last-cell &nbsp;
  %td.with-icons{:class => "text-left"}
   = items_line.location_id
   .icons 
@@ -50,29 +50,29 @@
     - else
      .delivery &nbsp;
  -# %td= items_line["prognoz"]
- %td
+ %td.text-right
   %span{:class => ["price", "real", @use_alt_price ? "hidden" : "active"]}
    = @usd_decor.decore(items_line.prices[0])
   %span{:class => ["price", "alt", @use_alt_price ? "active" : "hidden"]}
    = @rub_decor.decore(items_line.alt_prices[0])
   
- %td.green= items_line.counts[1]
+ %td.green.text-right= items_line.counts[1]
  -# %td= items_line.prices[1]
- %td
+ %td.text-right
   %span{:class => ["price", "real", @use_alt_price ? "hidden" : "active"]}
    = @usd_decor.decore(items_line.prices[1])
   %span{:class => ["price", "alt", @use_alt_price ? "active" : "hidden"]}
    = @rub_decor.decore(items_line.alt_prices[1])
- %td.green= items_line.counts[2]
+ %td.green.text-right= items_line.counts[2]
  -# %td= items_line.prices[2]
- %td
+ %td.text-right
   %span{:class => ["price", "real", @use_alt_price ? "hidden" : "active"]}
    = @usd_decor.decore(items_line.prices[2])
   %span{:class => ["price", "alt", @use_alt_price ? "active" : "hidden"]}
    = @rub_decor.decore(items_line.alt_prices[2])
- %td.green= items_line.counts[3]
+ %td.green.text-right= items_line.counts[3]
  -# %td= items_line.prices[3]
- %td
+ %td.text-right
   %span{:class => ["price", "real", @use_alt_price ? "hidden" : "active"]}
    = @usd_decor.decore(items_line.prices[3])
   %span{:class => ["price", "alt", @use_alt_price ? "active" : "hidden"]}
