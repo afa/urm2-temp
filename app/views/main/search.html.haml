@@ -70,13 +70,14 @@
   .cart= render :partial => "carts/cart_table", :locals => {:cart => @carts, :app_list => @app_list}
  -# .allow-order.block-padded
   = link_to t(:start_edit_order), new_order_path, :id => "allow_order", :class => "ajax"
-
+ #allow-order= render :partial => 'shared/button', :locals => {:title => t(:start_edit_order)}
  #order= render :partial => "main/order_edit"
  .results
 
 :javascript
  $(document).ready(function(){
   $('.slider').hide();
+  $('#order').hide();
   if(#{User.current.cart_items.unprocessed.in_cart.count} == 0){
    $('.cart-table').hide();
    //$('.cart-table').add('.allow-order').hide();
