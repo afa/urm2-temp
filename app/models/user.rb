@@ -1,3 +1,4 @@
+# coding: UTF-8
 require "csv"
 class User < ActiveRecord::Base
 
@@ -52,6 +53,7 @@ class User < ActiveRecord::Base
      begin
       clct = reqs[1].select{|c| c.location_link == loc }
       if ar[:sales][loc].blank? || ar[:sales][loc].to_i == 0
+       p "---mo-cl", clct.map(&:to_sales_lines)
        ors << Axapta.make_order(:comment => ar[:order_comment].try(:[], loc), :sales_lines => clct.map(&:to_sales_lines), :date_dead_line => dead_line, :customer_delivery_type_id => delivery).try(:[], "sales_id")
       else
        Axapta.sales_handle_add(:sales_id => ar[:sales][loc], :sales_lines => clct.map(&:to_sales_lines))
