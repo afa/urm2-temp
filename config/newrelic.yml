@@ -225,3 +225,7 @@ staging:
   <<: *default_settings
   monitor_mode: true
   app_name: Urm2 (Staging)
+work:
+  <<: *default_settings
+  monitor_mode: true
+  app_name: Urm2 (Work)
