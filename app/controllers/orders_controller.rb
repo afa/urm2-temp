@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
  include Paginable::Controller
 
- respond_to :html, :js
+ respond_to :html, :js, :json
  before_filter :get_filter
 
   def index
@@ -16,6 +16,7 @@ class OrdersController < ApplicationController
    @deliveries = User.current.deliveries
    respond_with do |format|
     format.js { render :layout => false }
+    format.json { render :json => {:order => render_to_string(:partial => "main/order_edit")}, :layout => false }
     format.html do
      render
     end
