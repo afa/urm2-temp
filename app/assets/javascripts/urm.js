@@ -234,16 +234,16 @@ function onSelectSendForm(obj){
 }
 
 function runAllowOrder(){
- $('#allow_order .button').click(function(){
+ $('#allow-order .button').click(function(){
   $('#order').show();
-  $('#allow_order').hide();
+  $('#allow-order').hide();
   makeAjaxCall("/orders/new",
    function(data){
     $("#order").html(data["order"]);
    },
    function(data){
     $("#order").hide();
-    $("#allow_order").show();
+    $("#allow-order").show();
   });
  });
 }
