@@ -233,7 +233,7 @@ function onSelectSendForm(obj){
  $(obj).parents("form").submit();
 }
 
-fnction runAllowOrder(){
+function runAllowOrder(){
  $('#allow_order .button').click(function(){
   $('#order').show();
   $('#allow_order').hide();
