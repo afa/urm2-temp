@@ -237,7 +237,7 @@ function runAllowOrder(){
  $('#allow-order .button').click(function(){
   $('#order').show();
   $('#allow-order').hide();
-  makeAjaxCall("/orders/new",
+  makeAjaxCall("/orders/new.json",
    function(data){
     $("#order").html(data["order"]);
    },
