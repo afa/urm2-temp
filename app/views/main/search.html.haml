@@ -71,7 +71,8 @@
  -# .allow-order.block-padded
   = link_to t(:start_edit_order), new_order_path, :id => "allow_order", :class => "ajax"
  #allow-order= render :partial => 'shared/button', :locals => {:title => t(:start_edit_order)}
- #order= render :partial => "main/order_edit"
+ #order
+ -# #order= render :partial => "main/order_edit"
  .results
 
 :javascript
@@ -100,5 +101,6 @@
   cartsHandleRadioPicks();
   cartsHandleSaveOnFocusLost();
   cartsProcessRadioPicks();
+  runAllowOrder();
  });
 

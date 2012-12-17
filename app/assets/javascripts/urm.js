@@ -233,6 +233,19 @@ function onSelectSendForm(obj){
  $(obj).parents("form").submit();
 }
 
+fnction runAllowOrder(){
+ $('#allow_order .button').click(function(){
+  $('#order').show();
+  $('#allow_order').hide();
+  makeAjaxCall("/orders/new",
+   placeDmsData,
+   function(data){
+    $("#order").hide();
+    $("#allow_order").show();
+  });
+ });
+}
+
 function ordersTabOnClick(){
  var lst = $(this).parents(".tabbed_box").find(".dialogs .page");
  var tabs = $(this).parents(".tabbed_box").find(".tabs .tab");
