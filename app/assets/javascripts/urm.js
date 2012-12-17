@@ -238,7 +238,9 @@ function runAllowOrder(){
   $('#order').show();
   $('#allow_order').hide();
   makeAjaxCall("/orders/new",
-   placeDmsData,
+   function(data){
+    $("#order").html(data["order"]);
+   },
    function(data){
     $("#order").hide();
     $("#allow_order").show();
