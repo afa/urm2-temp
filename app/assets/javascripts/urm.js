@@ -239,7 +239,9 @@ function runAllowOrder(){
   $('#allow-order').hide();
   makeAjaxCall("/orders/new.json",
    function(data){
+    alert(data);
     $("#order").html(data["order"]);
+    return false;
    },
    function(data){
     $("#order").hide();
