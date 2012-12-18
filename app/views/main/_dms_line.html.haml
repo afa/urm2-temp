@@ -19,7 +19,7 @@
    %a.count{:href=>"#"}
  %td.double-first-cell= dms_line.min_qty
  - p "---dmscnt", dms_line.code, dms_line.counts
- %td.double-cell= dms_line.counts.max || 0
+ %td.double-cell= dms_line.qtys.map{|i| i.max_qty }.max || 0
  -# %td.double-cell= dms_line.vend_qty
  %td.double-last-cell= dms_line.qty_multiples
  %td= dms_line.prognoz
