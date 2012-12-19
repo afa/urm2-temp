@@ -42,8 +42,6 @@ module Afauth
    end
 
    def authenticate(username, password)
-    p "---aname", @auth_field_name
-    p username, password
     unless user = where((@auth_field_name || :username) => username).first
      @failed_methods.each{|m| send(m, nil) } unless @failed_methods.blank?
      raise AuthError
@@ -151,12 +149,10 @@ module Afauth
    end
 
   def current_user
-   p "---c-u", self.class.name, self.class.auth_model
    self.class.auth_model.current
   end
 
   def current_user=(user)
-   p "---c-u=", self.class.name, self.class.auth_model, user
    self.class.auth_model.current = user
   end
 
@@ -280,7 +276,6 @@ module Afauth
    end
 
    def create
-    p "---sesaucr", params[:session], self.class.name, self.class.auth_field_name
     sign_out if logged_in?
     l_user = self.class.auth_model.authenticate(params[:session].try(:[], self.class.auth_field_name), params[:session].try(:[], :password))
     unless l_user
