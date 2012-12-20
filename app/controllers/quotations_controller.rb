@@ -1,3 +1,4 @@
+#coding: UTF-8
 class QuotationsController < ApplicationController
  include Paginable::Controller
 
