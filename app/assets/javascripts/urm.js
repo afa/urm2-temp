@@ -242,13 +242,12 @@ function runAllowOrder(){
     $("#order").html(data["order"]);
     $("#cart_store .icon").hide();
     $("#cart_store textarea").add("#cart_store input").disable();
-    return false;
    },
    function(data){
     $("#order").hide();
     $("#allow-order").show();
-    return false;
   });
+  event.preventDefault();
  });
 }
 
