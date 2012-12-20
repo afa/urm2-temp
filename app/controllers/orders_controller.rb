@@ -19,7 +19,7 @@ class OrdersController < ApplicationController
    
    respond_with do |format|
     format.js { render :layout => false }
-    format.json { p "---ctl", render_to_string(:partial => "main/order_edit.html"); render :json => {:order => render_to_string(:partial => "main/order_edit.html")}}
+    format.json { render :json => {:order => render_to_string(:partial => "main/order_edit.html")} }
     format.html do
      render
     end
