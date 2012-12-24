@@ -242,7 +242,7 @@ function runAllowOrder(){
     $("#order").html(data["order"]);
     $("#cart_store .icon").hide();
     $("#cart_store textarea").add("#cart_store input").each(function(idx, item){
-     item.attr("disabled", 'disabled');
+     $(item).attr("disabled", 'disabled');
     });
    },
    function(data){
