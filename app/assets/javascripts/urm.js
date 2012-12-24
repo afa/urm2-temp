@@ -245,6 +245,7 @@ function runAllowOrder(){
      $(item).attr("disabled", 'disabled');
     });
     $("form:has(table.search-products)").hide();
+    activateCommit();
    },
    function(data){
     $("#order").hide();
