@@ -241,7 +241,7 @@ function runAllowOrder(){
    function(data){
     $("#order").html(data["order"]);
     $("#cart_store .icon").hide();
-    $("#cart_store textarea").add("#cart_store input").each(function(item){
+    $("#cart_store textarea").add("#cart_store input").each(function(idx, item){
      item.attr("disabled", 'disabled');
     });
    },
