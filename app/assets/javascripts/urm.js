@@ -244,6 +244,7 @@ function runAllowOrder(){
     $("#cart_store textarea").add("#cart_store input").each(function(idx, item){
      $(item).attr("disabled", 'disabled');
     });
+    $("form:has(table.search-products)").hide();
    },
    function(data){
     $("#order").hide();

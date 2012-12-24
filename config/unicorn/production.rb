@@ -4,7 +4,7 @@ prefix = Dir.getwd #"/mnt/data/www/urm2"
 worker_processes(3)
 preload_app true
 #user('www','devel')
-timeout 90
+timeout 600
 listen "/tmp/unicorn_#{File.basename(File.dirname(File.dirname(prefix)))}.sock"
 #listen "/tmp/unicorn_urm2.sock"
 #listen '/var/sockets/cup-of.cup-of.sock'
