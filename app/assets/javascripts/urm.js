@@ -246,10 +246,11 @@ function runAllowOrder(){
     });
     $("form:has(table.search-products)").hide();
     activateCommit();
-    $("div.button a#cancel_order").click(function(){
+    $("div.button#cancel_order a").click(function(){
      $("#order").empty();
      $("#cart_store .icon").show();
      $("#cart_store textarea").add("#cart_store input").removeAttr("disabled");
+     event.preventDefault();
     });
    },
    function(data){
