@@ -477,8 +477,9 @@ function cartsAddElementToCart(){
   $("#allow-order").hide();
  }
  //! $("div#order").hide();
- $("div#order").children().remove();
- $("div#order").append(gon.order);
+ //$("div#order").children().remove();
+ //$("div#order").append(gon.order);
+ //? need form processing? :TODO:
  $('.select').selectList();
  $('.button-style').button();
  $('.switch').switchControl();
@@ -545,8 +546,8 @@ function cartsRemoveElementFromCarts(){
   $("#cart_store").add("#order").add("#allow-order").hide();
  }
  activateSearchCancelButton();
- $("div#order").children().remove();
- $("div#order").append(gon.order);
+ //$("div#order").children().remove();
+ //$("div#order").append(gon.order);
  //$("div#order").hide();
  //$('.form-hide .item').dropDown();
  activateCommit();
