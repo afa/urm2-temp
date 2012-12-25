@@ -205,8 +205,8 @@ class Axapta
   def self.get_delivery_prognosis(code, lc = nil) #TODO refactor && move to offer::store#fabricate
    locs = {}
    pp = lc.nil? ? {} : {:location_id => lc}
-   rz = AxaptaRequest.delivery_prognosis(:item_id => code, :user_hash => axapta_hash)).try(:items)
-   return rz unless rz.empty?
+   #rz = AxaptaRequest.delivery_prognosis(:item_id => code, :user_hash => axapta_hash)).try(:items)
+   #return rz unless rz.empty?
    (AxaptaRequest.search_item_name_h(pp.merge(:user_hash => axapta_hash, :item_id_search => code, :show_delivery_prognosis => true)).try(:[], "items") || []).each do |loc|
     Rails.logger.info "---dlvprg"
     Rails.logger.info loc.inspect

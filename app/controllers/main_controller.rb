@@ -143,6 +143,7 @@ class MainController < ApplicationController
    end
    begin
     @data["dates"] = Axapta.get_delivery_prognosis(@code, @location)
+    p "---dates", @data["dates"]
    rescue Exception => e
     p "---exc in prognos #{Time.now}", e, e.backtrace
     logger.info e.to_s
