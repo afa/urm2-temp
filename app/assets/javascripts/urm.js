@@ -470,8 +470,10 @@ function cartsAddElementToCart(){
  }
  if($("#cart_store table tr").length >= 1){
   $("#cart_store").show();
+  $("#allow-order").show();
  } else {
   $("#cart_store").hide();
+  $("#allow-order").hide();
  }
  //! $("div#order").hide();
  $("div#order").children().remove();
@@ -537,9 +539,9 @@ function cartsRemoveElementFromCarts(){
   //$(".cart-table").add(".allow-order").show();
  }
  if($("#cart_store table tr").length > 1){
-  $("#cart_store").add("#order").show();
+  $("#cart_store").add("#order").add("#allow-order").show();
  } else {
-  $("#cart_store").add("#order").hide();
+  $("#cart_store").add("#order").add("#allow-order").hide();
  }
  activateSearchCancelButton();
  $("div#order").children().remove();
