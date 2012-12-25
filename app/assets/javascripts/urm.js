@@ -246,6 +246,7 @@ function runAllowOrder(){
     });
     $("form:has(table.search-products)").hide();
     activateCommit();
+    cartsProcessRadioPicks();
     $("div.button#cancel_order a").click(function(){
      $("#order").empty();
      $("#cart_store .icon").show();
