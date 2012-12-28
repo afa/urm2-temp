@@ -2,12 +2,12 @@
  %td= list_line.this_sales_origin
  %td.text-left= link_to list_line.sales_id, order_path(list_line.sales_id)
  %td.text-left= list_line.official_number
- %td= @usd_decor.decore(list_line.amount)
- %td= list_line.sales_date
- %td= list_line.sales_status
+ %td.text-right= @usd_decor.decore(list_line.amount)
+ %td.text-left= list_line.sales_date
+ %td.text-left= list_line.sales_status
  %td{:style => "max-width: 400px;white-space: normal; word-wrap: break-word; text-align: left;"}= list_line.comment
  %td.text-right= list_line.contactperson_name
  %td.text-right= list_line.date_dead_line_delivery
  %td.text-right= list_line.delivery_mode
  %td.text-right= list_line.document_number
- %td.text-right= list_line.sales_amount
+ %td.text-right= @usd_decor.decore(list_line.sales_amount)
