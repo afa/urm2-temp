@@ -1,3 +1,3 @@
 class Stat::Event < ActiveRecord::Base
- inheritance_column :type_cast
+ set_inheritance_column :type_cast
 end
