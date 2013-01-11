@@ -8,23 +8,23 @@ class AxaptaRequest < JsonRpcClient
   def self.method_missing(name, *args)
    begin
     key = "json_rpc-#{Time.now.to_f}"
-    strt = Stat::Event.create(:type => "Stat::Before", :key => key, :name => name, :data => args.to_json)
+    strt = Stat::Event.create( :key => key, :name => name, :data => args.to_json){|ev| ev.type = "Stat::Before" }
     rslt = super
-    Stat::Event.create(:type => "Stat::Done", :key => key, :name => name, :data => rslt.to_json)
+    Stat::Event.create( :key => key, :name => name, :data => rslt.to_json){|ev| ev.type = "Stat::Done" }
     return rslt
    rescue JsonRpcClient::NotAService => e
-    Stat::Event.create(:type => "Stat::Exception", :key => key, :name => "JsonRpcClient::NotAService", :data => [e.to_s, e.backtrace].to_json)
+    Stat::Event.create( :key => key, :name => "JsonRpcClient::NotAService", :data => [e.to_s, e.backtrace].to_json){|ev| ev.type = "Stat::Exception" }
     begin
-     strt = Stat::Event.create(:type => "Stat::Rescue", :key => key, :name => name, :data => args.to_json)
+     strt = Stat::Event.create( :key => key, :name => name, :data => args.to_json){|ev| ev.type = "Stat::Rescue" }
      rslt = super
-     Stat::Event.create(:type => "Stat::Done", :key => key, :name => name, :data => rslt.to_json)
+     Stat::Event.create( :key => key, :name => name, :data => rslt.to_json){|ev| ev.type = "Stat::Done" }
      return rslt
     rescue Exception => e
-     Stat::Event.create(:type => "Stat::Exception", :key => key, :name => "JsonRpcClient::NotAService", :data => [e.to_s, e.backtrace].to_json)
+     Stat::Event.create( :key => key, :name => "JsonRpcClient::NotAService", :data => [e.to_s, e.backtrace].to_json){|ev| ev.type = "Stat::Exception" }
      raise
     end
    rescue Exception => e
-    Stat::Event.create(:type => "Stat::Exception", :key => key, :name => e.to_s, :data => [e.to_s, e.backtrace].to_json)
+    Stat::Event.create( :key => key, :name => e.to_s, :data => [e.to_s, e.backtrace].to_json){|ev| ev.type = "Stat::Exception" }
     raise
    end
   end 
