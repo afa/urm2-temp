@@ -24,7 +24,7 @@ class AxaptaRequest < JsonRpcClient
      raise
     end
    rescue Exception => e
-    Stat::Event.create( :key => key, :name => e.to_s, :data => [e.to_s, e.backtrace].to_json){|ev| ev.type = "Stat::Exception" }
+    Stat::Event.create( :key => key, :name => e.to_s[0..255], :data => [e.to_s, e.backtrace].to_json){|ev| ev.type = "Stat::Exception" }
     raise
    end
   end 
