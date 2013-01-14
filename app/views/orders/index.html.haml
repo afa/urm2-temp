@@ -47,7 +47,6 @@
  .table-navigation-block{:class => "scroll"}
   .table-block
    .table-scrolling
-    = paginate(:derid => {:page => @orders.page.to_i, :pages => @orders.total.to_i})
     - #= render :partial => "shared/pagination", :locals => {:page => @orders.page.to_i, :pages => @orders.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей: #{@orders.records}&nbsp;&nbsp;Страниц: #{@orders.total}&nbsp;&nbsp;".html_safe, :text_before_current => "Страница: "}}
     -# = render :partial => "shared/pagination", :locals => {:page => @orders.page.to_i, :pages => @orders.total.to_i}
     %table.table-style{:class => "order-list"}
