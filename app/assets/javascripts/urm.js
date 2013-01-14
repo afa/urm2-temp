@@ -241,7 +241,7 @@ function runAllowOrder(){
    function(data){
     $("#order").html(data["order"]);
     $("#cart_store .icon").hide();
-    $("#cart_store textarea").add("#cart_store input").each(function(idx, item){
+    $("#cart_store textarea").add("#cart_store input").add("#cart_store select").each(function(idx, item){
      $(item).attr("disabled", 'disabled');
     });
     $("form:has(table.search-products)").hide();
@@ -250,7 +250,7 @@ function runAllowOrder(){
     $("div.button#cancel_order a").click(function(){
      $("#order").empty();
      $("#cart_store .icon").show();
-     $("#cart_store textarea").add("#cart_store input").removeAttr("disabled");
+     $("#cart_store textarea").add("#cart_store input").add("#cart_store select").removeAttr("disabled");
      $('#allow-order').show();
      $("form:has(table.search-products)").show();
      event.preventDefault();
