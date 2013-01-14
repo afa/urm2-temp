@@ -27,5 +27,5 @@
     %textarea{:name => "comment"}
   .padded
  .clear
- = render :partial => "shared/submit_button", :locals => {:title => t(:make), :opts  => {:style => "margin-right: 1em;"}}
+ = render :partial => "shared/submit_button", :locals => {:title => t(:make), :opts  => {:inner_style => "margin-right: 1em;"}}
  = render :partial => "shared/button", :locals => {:title => t(:cancel_order), :opts => {:id => :cancel_order}}

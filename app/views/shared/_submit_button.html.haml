@@ -1,5 +1,5 @@
 .commit.button{:id => [defined?(opts) && opts[:id] ? opts[:id] : nil], :class => [defined?(opts) && opts[:class] ? opts[:class] : nil], :style => (defined?(opts) && opts[:style] ? opts[:style] : "")}
- %a.button-style{:href=>"#"}
+ %a.button-style{:href=>"#", :style => (defined?(opts) && opts[:inner_style] ? opts[:inner_style] : "")}
   %i.t &nbsp;
   %i.b &nbsp;
   %i.tl &nbsp;
