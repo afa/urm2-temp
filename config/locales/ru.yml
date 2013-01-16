@@ -67,6 +67,8 @@ ru:
    news_article:
     name: Заголовок новости
     body: Текст новости
+    publication_start: Публиковать c
+    publication_end: по
   errors:
    models:
     user:
