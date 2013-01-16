@@ -1,3 +1,9 @@
 // Place all the styles related to the News controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.article.name
+  font-size: 2em
+.article.time
+  padding: 0.5em
+.article.body
+  padding-bottom: 2em
