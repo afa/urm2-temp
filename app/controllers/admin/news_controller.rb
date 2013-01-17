@@ -1,5 +1,6 @@
 class Admin::NewsController < Admin::ApplicationController
  before_filter :get_article, :only => [:show, :edit, :update, :destroy]
+ before_filter :new_article, :only => [:new]
   def index
   end
 
@@ -28,5 +29,8 @@ class Admin::NewsController < Admin::ApplicationController
  protected
   def get_article
    @news_article = NewsArticle.find(params[:id])
+  end
+  def new_article
+   @news_article = NewsArticle.new
   end
 end
