@@ -11,7 +11,7 @@ class AxaptaRequest < JsonRpcClient
     strt = Stat::Event.create( :key => key, :name => name, :data => args.to_json){|ev| ev.type = "Stat::Before" }
     rslt = super
     Stat::Event.create( :key => key, :name => name, :data => rslt.to_json){|ev| ev.type = "Stat::Done" }
-    return rslt
+    return rslt.merge(:_error => nil)
    rescue JsonRpcClient::NotAService => e
     Stat::Event.create( :key => key, :name => "JsonRpcClient::NotAService", :data => [e.to_s, e.backtrace].to_json){|ev| ev.type = "Stat::Exception" }
     begin
