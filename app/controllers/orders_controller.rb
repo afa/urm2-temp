@@ -70,7 +70,7 @@ class OrdersController < ApplicationController
    @order_info = Axapta.sales_info(:sales_id => params[:id], :show_external_invoice_num => true, :show_max_quotation_prognosis => true).first
    @lines = Axapta.sales_lines_paged(@page, :sales_id => params[:id], :show_reserve_qty => true, :show_status_qty => true, :only_open => true)
    @deliveries = current_user.deliveries
-   render :404 if @order_info.nil?
+   render :status => 404 if @order_info.nil?
   end
 
   def save
