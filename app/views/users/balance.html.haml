@@ -36,11 +36,11 @@
     %tr
      %th Валюта
      %td
-      = render :partial => "shared/select_list", :locals => {:list_items => @currencies.map{|i| [i, i]}, :name => "filter[currency]", :title => '', :opts => {:use_system => true} }
+      = render :partial => "shared/select_list", :locals => {:list_items => @currencies.map{|i| [i, i]}, :name => "filter[currency]", :title => '', :opts => {:use_system => true, :with_blank => true, :blank_name => "все"} }
     %tr
      %th Фирма
      %td
-      = render :partial => "shared/select_list", :locals => {:list_items => @companies.map{|i| [i, i]}, :name => "filter[company]", :title => '', :opts => {:use_system => true} }
+      = render :partial => "shared/select_list", :locals => {:list_items => @companies.map{|i| [i, i]}, :name => "filter[company]", :title => '', :opts => {:use_system => true, :with_blank => true, :blank_name => "все"} }
     %tr
      %th
       
