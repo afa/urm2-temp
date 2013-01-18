@@ -51,7 +51,7 @@
       
      %td
       = render :partial => "shared/check_button", :locals => {:name => "filter[show_delta]", :title => "показать проводки курсовой разницы", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@filter.show_delta)}}
-   = render :partial => "shared/commit_button", :locals => {:name => "filter[submit]", :title => t(:find)}
+   = render :partial => "shared/submit_button", :locals => {:name => "filter[submit]", :title => t(:find)}
  .clear.padding
  - unless @transes.blank?
   Общий баланс на начало периода: #{@rub_decor.decore(@transes.first.common_balance_amount.to_f - @transes.first.amount.to_f)}; на конец периода: #{@rub_decor.decore @transes.last.common_balance_amount}
