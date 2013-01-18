@@ -5,22 +5,22 @@
  .info
   %table
    %tr
-    %th.text-left Фирма
-    %th.text-left Валюта
-    %th.text-left Свободные средства
-    %th.text-left Замороженные средства
-    %th.text-left Задолженность
-    %th.text-left Баланс в валюте
-    %th.text-left Баланс
+    %th.bold.text-left Фирма
+    %th.bold.text-left Валюта
+    %th.bold.text-left Свободные средства
+    %th.bold.text-left Замороженные средства
+    %th.bold.text-left Задолженность
+    %th.bold.text-left Баланс в валюте
+    %th.bold.text-left Баланс
    - @info.each do |info|
     %tr
-     %td.text-left= info.company
-     %td.text-left= info.currency
-     %td.text-left= @rub_decor.decore info.amount_free
-     %td.text-left= @rub_decor.decore info.amount_tied
-     %td.text-left= @rub_decor.decore info.cust_debt
-     %td.text-left= @usd_decor.decore info.balance_cur
-     %td.text-left= @rub_decor.decore info.balance
+     %td.bold.text-left= info.company
+     %td.bold.text-left= info.currency
+     %td.bold.text-left= @rub_decor.decore info.amount_free
+     %td.bold.text-left= @rub_decor.decore info.amount_tied
+     %td.bold.text-left= @rub_decor.decore info.cust_debt
+     %td.bold.text-left= @usd_decor.decore info.balance_cur
+     %td.bold.text-left= @rub_decor.decore info.balance
 
  %h2 История расчетов
 
