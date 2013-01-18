@@ -1,102 +1,106 @@
-.info
- %table
-  %tr
-   %th Фирма
-   %th Валюта
-   %th Свободные средства
-   %th Замороженные средства
-   %th Задолженность
-   %th Баланс в валюте
-   %th Баланс
-  - @info.each do |info|
-   %tr
-    %td= info.company
-    %td= info.currency
-    %td= info.amount_free
-    %td= info.amount_tied
-    %td= info.cust_debt
-    %td= info.balance_cur
-    %td= info.balance
+.nav-title
+ %span= link_to t(:balance), balance_user_path
+.content-wrap
 
-%h2 История расчетов
-
-.filter
- = form_for :filter, :url => balance_users_path, :method => :get do |form|
+ .info
   %table
    %tr
-    %th Период
-    %td
-     с:  
-     %input.calendar-input{:type => "text", :name => "filter[date_from]", :value => @filter.try(:date_from) || (Date.today - Date.today.mday + 1).strftime("%Y-%m-%d")}
-     по:   
-     %input.calendar-input{:type => "text", :name => "filter[date_to]", :value => @filter.try(:date_to) || Date.today.strftime("%Y-%m-%d")}
+    %th Фирма
+    %th Валюта
+    %th Свободные средства
+    %th Замороженные средства
+    %th Задолженность
+    %th Баланс в валюте
+    %th Баланс
+   - @info.each do |info|
+    %tr
+     %td= info.company
+     %td= info.currency
+     %td= info.amount_free
+     %td= info.amount_tied
+     %td= info.cust_debt
+     %td= info.balance_cur
+     %td= info.balance
+
+ %h2 История расчетов
+
+ .filter
+  = form_for :filter, :url => balance_users_path, :method => :get do |form|
+   %table
+    %tr
+     %th Период
+     %td
+      с:  
+      %input.calendar-input{:type => "text", :name => "filter[date_from]", :value => @filter.try(:date_from) || (Date.today - Date.today.mday + 1).strftime("%Y-%m-%d")}
+      по:   
+      %input.calendar-input{:type => "text", :name => "filter[date_to]", :value => @filter.try(:date_to) || Date.today.strftime("%Y-%m-%d")}
+    %tr
+     %th Валюта:
+     %td
+      = render :partial => "shared/select_list", :locals => {:list_items => @currencies.map{|i| [i, i]}, :name => "filter[currency]", :title => '', :opts => {:use_system => true} }
+    %tr
+     %th Фирма:
+     %td
+      = render :partial => "shared/select_list", :locals => {:list_items => @companies.map{|i| [i, i]}, :name => "filter[company]", :title => '', :opts => {:use_system => true} }
+    %tr
+     %th
+      
+     %td
+      = render :partial => "shared/check_button", :locals => {:name => "filter[show_linked]", :title => "показать проводки привязки/отвязки", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@filter.try(:show_linked))}}
+    %tr
+     %th
+      
+     %td
+      = render :partial => "shared/check_button", :locals => {:name => "filter[show_delta]", :title => "показать проводки курсовой разницы", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@filter.show_delta)}}
+   .button.commit
+    %a.button-style{:href=>"#"}
+     %i.t &nbsp;
+     %i.b &nbsp;
+     %i.tl &nbsp;
+     %i.tr &nbsp;
+     %span Найти!
+     %i.bl &nbsp;
+     %i.br &nbsp;
+   -# = form.submit "show"
+ .clear.padding
+ - unless @transes.blank?
+  Общий баланс на начало периода: #{@transes.first.common_balance_amount.to_f - @transes.first.amount.to_f}; на конец периода: #{@transes.last.common_balance_amount}
+  %table.table-style
    %tr
-    %th Валюта:
-    %td
-     = render :partial => "shared/select_list", :locals => {:list_items => @currencies.map{|i| [i, i]}, :name => "filter[currency]", :title => '', :opts => {:use_system => true} }
-   %tr
-    %th Фирма:
-    %td
-     = render :partial => "shared/select_list", :locals => {:list_items => @companies.map{|i| [i, i]}, :name => "filter[company]", :title => '', :opts => {:use_system => true} }
-   %tr
-    %th
-     
-    %td
-     = render :partial => "shared/check_button", :locals => {:name => "filter[show_linked]", :title => "показать проводки привязки/отвязки", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@filter.try(:show_linked))}}
-   %tr
-    %th
-     
-    %td
-     = render :partial => "shared/check_button", :locals => {:name => "filter[show_delta]", :title => "показать проводки курсовой разницы", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@filter.show_delta)}}
-  .button.commit
-   %a.button-style{:href=>"#"}
-    %i.t &nbsp;
-    %i.b &nbsp;
-    %i.tl &nbsp;
-    %i.tr &nbsp;
-    %span Найти!
-    %i.bl &nbsp;
-    %i.br &nbsp;
-  -# = form.submit "show"
-.clear.padding
-- unless @transes.blank?
- Общий баланс на начало периода: #{@transes.first.common_balance_amount.to_f - @transes.first.amount.to_f}; на конец периода: #{@transes.last.common_balance_amount}
- %table.table-style
-  %tr
-   %th Дата
-   %th Операция
-   %th Тип операции
-   %th Документ
-   %th Фирма
-   %th Валюта
-   %th Приход в валюте
-   %th Расход в валюте
-   %th Сумма
-   %th Баланс в валюте
-   %th Общий баланс в валюте
-   %th Баланс
-   %th Общий баланс
-  - @transes.each do |tr|
-   %tr
-    %td.text-left= tr.trans_date
-    %td.text-left= tr.voucher
-    %td.text-left= tr.trans_type
-    %td.text-left= tr.document_number
-    %td.text-left= tr.company_code
-    %td.text-left= tr.currency_code
-    %td.text-right= tr.debet_amount_cur
-    %td.text-right= tr.credit_amount_cur
-    %td.text-right= tr.amount
-    %td.text-right= tr.balance_amount_cur
-    %td.text-right= tr.common_balance_amount_cur
-    %td.text-right= tr.balance_amount
-    %td.text-right= tr.common_balance_amount
- .padded
-  = form_for :export_balance, :url => export_balance_users_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
-   %input.copiable{:type => :hidden, :value => 'select#filter_currency'}
-   %input.copiable{:type => :hidden, :value => 'select#filter_company'}
-   %input.copiable{:type => :hidden, :value => 'input#filter_show_linked'}
-   %input.copiable{:type => :hidden, :value => 'input#filter_show_delta'}
-   %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_from]"]'}
-   %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_to]"]'}
-   = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "balance[export]"}
+    %th Дата
+    %th Операция
+    %th Тип операции
+    %th Документ
+    %th Фирма
+    %th Валюта
+    %th Приход в валюте
+    %th Расход в валюте
+    %th Сумма
+    %th Баланс в валюте
+    %th Общий баланс в валюте
+    %th Баланс
+    %th Общий баланс
+   - @transes.each do |tr|
+    %tr
+     %td.text-left= tr.trans_date
+     %td.text-left= tr.voucher
+     %td.text-left= tr.trans_type
+     %td.text-left= tr.document_number
+     %td.text-left= tr.company_code
+     %td.text-left= tr.currency_code
+     %td.text-right= tr.debet_amount_cur
+     %td.text-right= tr.credit_amount_cur
+     %td.text-right= tr.amount
+     %td.text-right= tr.balance_amount_cur
+     %td.text-right= tr.common_balance_amount_cur
+     %td.text-right= tr.balance_amount
+     %td.text-right= tr.common_balance_amount
+  .padded
+   = form_for :export_balance, :url => export_balance_users_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
+    %input.copiable{:type => :hidden, :value => 'select#filter_currency'}
+    %input.copiable{:type => :hidden, :value => 'select#filter_company'}
+    %input.copiable{:type => :hidden, :value => 'input#filter_show_linked'}
+    %input.copiable{:type => :hidden, :value => 'input#filter_show_delta'}
+    %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_from]"]'}
+    %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_to]"]'}
+    = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "balance[export]"}
