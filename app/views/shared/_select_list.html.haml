@@ -12,7 +12,7 @@
  - if defined?(opts)
   - id = opts[:id].blank? ? name.to_s.split(/[\[\]\-]/).map{|s| s.blank? ? nil : s }.compact.join('_') : opts[:id]
   - val = opts.has_key?(:selected) ? opts[:selected] : ''
-  - blank = opts[:with_blank] ? [[opts[:blank_name] || "", ""]] : []
+  - blank = opts[:with_blank] ? [["", opts[:blank_name] || ""]] : []
   - if opts[:use_system]
    -# %input{:type => "checkbox", :id => id, :value => '1', :name => name, :checked => (val == '1')}
    -# %label{:for => id}= title
