@@ -1,0 +1,10 @@
+%table
+ - @events.each do |event|
+  %tr
+   %td= link_to event.id.to_s, admin_stat_path(event.id)
+   %td= event.key
+   %td= event.type
+   %td= event.name
+   %td= event.data
+   %td= event.created_at
+
