@@ -68,49 +68,54 @@
    Общий баланс на начало периода: #{@rub_decor.decore(@transes.first.common_balance_amount.to_f - @transes.first.amount.to_f)}; на конец периода: #{@rub_decor.decore @transes.last.common_balance_amount}
   .clear
   .padded
-  %table.table-style
-   %tr
-    %th Дата
-    %th Операция
-    %th Тип операции
-    %th Документ
-    %th Фирма
-    %th Валюта
-    %th Приход в валюте
-    %th Расход в валюте
-    %th Сумма
-    %th Баланс в валюте
-    %th Общий баланс в валюте
-    %th Баланс
-    %th Общий баланс
-   - @transes.each do |tr|
-    %tr
-     %td.text-left= tr.trans_date
-     %td.text-left= tr.voucher
-     %td.text-left= tr.trans_type
-     %td.text-left= tr.document_number
-     %td.text-left= tr.company_code
-     %td.text-left= tr.currency_code
-     %td.text-right= @usd_decor.decore tr.debet_amount_cur
-     %td.text-right= @usd_decor.decore tr.credit_amount_cur
-     %td.text-right= @rub_decor.decore tr.amount
-     %td.text-right= @usd_decor.decore tr.balance_amount_cur
-     %td.text-right= @usd_decor.decore tr.common_balance_amount_cur
-     %td.text-right= @rub_decor.decore tr.balance_amount
-     %td.text-right= @rub_decor.decore tr.common_balance_amount
-  .padded
-   = form_for :export_balance, :url => export_balance_users_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
-    %input.copiable{:type => :hidden, :value => 'select#filter_currency'}
-    %input.copiable{:type => :hidden, :value => 'select#filter_company'}
-    %input.copiable{:type => :hidden, :value => 'input#filter_show_linked'}
-    %input.copiable{:type => :hidden, :value => 'input#filter_show_delta'}
-    %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_from]"]'}
-    %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_to]"]'}
-    = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "balance[export]", :opts => {:class => "preload", :style => "float: right;"}}
-    .padded
-     = form_for :export_fields, :url => export_list_orders_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
-      %input.copiable{:type => :hidden, :value => 'input#filter_sales_id'}
-      %input.copiable{:type => :hidden, :value => 'input#filter_official_number'}
-      %input.copiable{:type => :hidden, :value => 'input#filter_this_sales_origin:checked'}
-      %input.copiable{:type => :hidden, :value => 'input#filter_only_my:checked'}
-      = render :partial => "shared/submit_button", :locals => {:opts => {:class => "preload", :style => "float: right;"}, :title => "Export", :name => "items[export]"}
+  .table-navigation-block
+   .table-block
+    .table-scrolling
+     %table.table-style
+      %tr
+       %th Дата
+       %th Операция
+       %th Тип операции
+       %th Документ
+       %th Фирма
+       %th Валюта
+       %th Приход в валюте
+       %th Расход в валюте
+       %th Сумма
+       %th Баланс в валюте
+       %th Общий баланс в валюте
+       %th Баланс
+       %th Общий баланс
+      - @transes.each do |tr|
+       %tr
+        %td.text-left= tr.trans_date
+        %td.text-left= tr.voucher
+        %td.text-left= tr.trans_type
+        %td.text-left= tr.document_number
+        %td.text-left= tr.company_code
+        %td.text-left= tr.currency_code
+        %td.text-right= @usd_decor.decore tr.debet_amount_cur
+        %td.text-right= @usd_decor.decore tr.credit_amount_cur
+        %td.text-right= @rub_decor.decore tr.amount
+        %td.text-right= @usd_decor.decore tr.balance_amount_cur
+        %td.text-right= @usd_decor.decore tr.common_balance_amount_cur
+        %td.text-right= @rub_decor.decore tr.balance_amount
+        %td.text-right= @rub_decor.decore tr.common_balance_amount
+     .padded
+      = form_for :export_balance, :url => export_balance_users_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
+       %input.copiable{:type => :hidden, :value => 'select#filter_currency'}
+       %input.copiable{:type => :hidden, :value => 'select#filter_company'}
+       %input.copiable{:type => :hidden, :value => 'input#filter_show_linked'}
+       %input.copiable{:type => :hidden, :value => 'input#filter_show_delta'}
+       %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_from]"]'}
+       %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_to]"]'}
+       = render :partial => "shared/submit_button", :locals => {:title => t(:export_csv), :name => "balance[export]", :opts => {:class => "preload", :style => "float: right;"}}
+     .padded
+      = form_for :export_balance, :url => export_balance_users_path(:format => :xls), :method => :post, :html=>{:class => "js"} do |f|
+       %input.copiable{:type => :hidden, :value => 'select#filter_currency'}
+       %input.copiable{:type => :hidden, :value => 'select#filter_company'}
+       %input.copiable{:type => :hidden, :value => 'input#filter_show_linked'}
+       %input.copiable{:type => :hidden, :value => 'input#filter_show_delta'}
+       %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_from]"]'}
+       %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_to]"]'}
+       = render :partial => "shared/submit_button", :locals => {:opts => {:class => "preload", :style => "float: right;"}, :title => t(:export_xls), :name => "balance[export]"}
