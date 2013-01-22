@@ -38,6 +38,7 @@ module Exportable
       end
       book.write io
      end
+     p "---exp-io", io, io.string
      io.string
     end
    end
