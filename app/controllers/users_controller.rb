@@ -93,9 +93,6 @@ class UsersController < ApplicationController
   end
 
   def balance
-   @filter.date_to = Date.current.strftime("%Y-%m-%d") if @filter.date_to.blank?
-   @filter.date_from = 1.month.ago.strftime("%Y-%m-%d") if @filter.date_from.blank?
-   @filter_hash.merge!(:date_to => @filter.date_to, :date_from => @filter.date_from)
    @info = Axapta.info_cust_balance
    @currencies = @info.map(&:currency).uniq
    @companies = @info.map(&:company).uniq
@@ -103,12 +100,10 @@ class UsersController < ApplicationController
   end
 
   def export_balance
-   @filter.date_to = Date.current.strftime("%Y-%m-%d") if @filter.date_to.blank?
-   @filter.date_from = 1.month.ago.strftime("%Y-%m-%d") if @filter.date_from.blank?
-   @filter_hash.merge!(:date_to => @filter.date_to, :date_from => @filter.date_from)
+   p "---exp-bal", @filter_hash
    respond_with do |format|
     format.csv do
-     send_data User.export(:csv, :balance, Axapta.info_cust_trans(@filter_hash)), :type => "application/csv", :disposition => :attachment, :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.csv"
+     send_data User.export(:csv, :balance, Axapta.info_cust_trans(@filter_hash)), :type => "application/csv", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.csv"
     end
     format.xls do
      send_data User.export(:xls, :balance, Axapta.info_cust_trans(@filter_hash)), :type => "application/vnd.ms-excel", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.xls"
@@ -156,6 +151,9 @@ class UsersController < ApplicationController
     @filter_hash[:this_sales_origin]='0'
    end
    @filter = OpenStruct.new(@filter_hash)
+   @filter.date_to = Date.current.strftime("%Y-%m-%d") if @filter.date_to.blank?
+   @filter.date_from = 1.month.ago.strftime("%Y-%m-%d") if @filter.date_from.blank?
+   @filter_hash.merge!(:date_to => @filter.date_to, :date_from => @filter.date_from)
    @page = params[:page] || 1
   end
 end

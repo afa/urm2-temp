@@ -1,9 +1,5 @@
 Urm::Application.routes.draw do
 
-  get "stat/index"
-
-  get "stat/show"
-
   resources :news, :only => [:index]
   resources :carts, :except => [:show] do
    collection do
@@ -95,6 +91,7 @@ Urm::Application.routes.draw do
 
   namespace :admin do
    #resources :main, :only => [:index]
+   resources :stat, :only => [:show, :index]
    resources :help_article
    resources :news
    get "main/index"

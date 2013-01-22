@@ -1,4 +1,4 @@
-class Admin::StatController < ApplicationController
+class Admin::StatController < Admin::ApplicationController
   def index
    @events = Stat::Event.order("created_at desc").limit(1000)
   end

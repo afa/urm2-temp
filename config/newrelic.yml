@@ -9,6 +9,8 @@
 
 # Here are the settings that are common to all environments:
 common: &default_settings
+  audit_log:
+    enabled: true
   # ============================== LICENSE KEY ===============================
 
   # You must specify the license key associated with your New Relic
