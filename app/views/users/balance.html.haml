@@ -23,7 +23,7 @@
      %td.bold.text-right= @rub_decor.decore info.balance
      %td.bold.text-right= @rub_decor.decore info.balance
 
- .nav-title История расчетов
+ %div{:style => "padding-left: 10px;"} История расчетов
 
  .filter
   = form_for :filter, :url => balance_users_path, :method => :get do |form|
