@@ -57,17 +57,17 @@
      %td
       = render :partial => "shared/submit_button", :locals => {:name => "filter[submit]", :title => "Показать"}
  .clear
- .padding
+ .padded
  - if @transes.blank?
   .clear
-  .padding
+  .padded
    За указанный период операций не найдено
  - else
   .clear
-  .padding
+  .padded
    Общий баланс на начало периода: #{@rub_decor.decore(@transes.first.common_balance_amount.to_f - @transes.first.amount.to_f)}; на конец периода: #{@rub_decor.decore @transes.last.common_balance_amount}
   .clear
-  .padding
+  .padded
   %table.table-style
    %tr
     %th Дата
