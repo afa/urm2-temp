@@ -15,7 +15,7 @@ module Exportable
    },
    :xls => proc do |hdr, data, opts = {}|
     c_row = 0
-    StringIO.open do |io|
+    return StringIO.open do |io|
      Spreadsheet::Workbook.new do |book|
       book.create_worksheet do |shit|
        if opts.has_key? :preheader

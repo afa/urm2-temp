@@ -100,6 +100,7 @@ class UsersController < ApplicationController
   end
 
   def export_balance
+   p "---exp-bal", @filter_hash
    respond_with do |format|
     format.csv do
      send_data User.export(:csv, :balance, Axapta.info_cust_trans(@filter_hash)), :type => "application/csv", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.csv"
