@@ -59,11 +59,11 @@
  .clear.padding
  - if @transes.blank?
   .clear.padding
-  За указанный период операций не найдено
+   За указанный период операций не найдено
  - else
   .clear.padding
-  Общий баланс на начало периода: #{@rub_decor.decore(@transes.first.common_balance_amount.to_f - @transes.first.amount.to_f)}; на конец периода: #{@rub_decor.decore @transes.last.common_balance_amount}
-  .clear.padding
+   Общий баланс на начало периода: #{@rub_decor.decore(@transes.first.common_balance_amount.to_f - @transes.first.amount.to_f)}; на конец периода: #{@rub_decor.decore @transes.last.common_balance_amount}
+  .clear.padding &nbsp;
   %table.table-style
    %tr
     %th Дата
