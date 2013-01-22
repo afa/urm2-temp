@@ -192,3 +192,5 @@ ru:
  cancel_order: Вернуться к поиску
  sign_out: Выйти
  balance: Баланс
+ export_csv: выгрузить в csv файл
+ export_xls: выгрузить в excel файл
