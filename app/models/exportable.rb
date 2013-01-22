@@ -38,7 +38,8 @@ module Exportable
      end
      book.write io
     end
-    p "---exp-io", io, io.string
+    p "---exp-io", io, io.string, io.size
+    io.rewind
     io.string
    end
   }
