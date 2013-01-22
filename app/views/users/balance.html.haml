@@ -101,21 +101,21 @@
         %td.text-right= @usd_decor.decore tr.common_balance_amount_cur
         %td.text-right= @rub_decor.decore tr.balance_amount
         %td.text-right= @rub_decor.decore tr.common_balance_amount
-     .padded
-      = form_for :export_balance, :url => export_balance_users_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
-       %input.copiable{:type => :hidden, :value => 'select#filter_currency'}
-       %input.copiable{:type => :hidden, :value => 'select#filter_company'}
-       %input.copiable{:type => :hidden, :value => 'input#filter_show_linked'}
-       %input.copiable{:type => :hidden, :value => 'input#filter_show_delta'}
-       %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_from]"]'}
-       %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_to]"]'}
-       = render :partial => "shared/submit_button", :locals => {:title => t(:export_csv), :name => "balance[export]", :opts => {:class => "preload", :style => "float: right;"}}
-     .padded
-      = form_for :export_balance, :url => export_balance_users_path(:format => :xls), :method => :post, :html=>{:class => "js"} do |f|
-       %input.copiable{:type => :hidden, :value => 'select#filter_currency'}
-       %input.copiable{:type => :hidden, :value => 'select#filter_company'}
-       %input.copiable{:type => :hidden, :value => 'input#filter_show_linked'}
-       %input.copiable{:type => :hidden, :value => 'input#filter_show_delta'}
-       %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_from]"]'}
-       %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_to]"]'}
-       = render :partial => "shared/submit_button", :locals => {:opts => {:class => "preload", :style => "float: right;"}, :title => t(:export_xls), :name => "balance[export]"}
+     -# .padded
+     = form_for :export_balance, :url => export_balance_users_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
+      %input.copiable{:type => :hidden, :value => 'select#filter_currency'}
+      %input.copiable{:type => :hidden, :value => 'select#filter_company'}
+      %input.copiable{:type => :hidden, :value => 'input#filter_show_linked'}
+      %input.copiable{:type => :hidden, :value => 'input#filter_show_delta'}
+      %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_from]"]'}
+      %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_to]"]'}
+      = render :partial => "shared/submit_button", :locals => {:title => t(:export_csv), :name => "balance[export]", :opts => {:class => "preload", :style => "float: right;"}}
+     -# .padded
+     = form_for :export_balance, :url => export_balance_users_path(:format => :xls), :method => :post, :html=>{:class => "js"} do |f|
+      %input.copiable{:type => :hidden, :value => 'select#filter_currency'}
+      %input.copiable{:type => :hidden, :value => 'select#filter_company'}
+      %input.copiable{:type => :hidden, :value => 'input#filter_show_linked'}
+      %input.copiable{:type => :hidden, :value => 'input#filter_show_delta'}
+      %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_from]"]'}
+      %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_to]"]'}
+      = render :partial => "shared/submit_button", :locals => {:opts => {:class => "preload", :style => "float: right;"}, :title => t(:export_xls), :name => "balance[export]"}
