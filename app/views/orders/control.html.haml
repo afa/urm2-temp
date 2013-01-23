@@ -9,15 +9,15 @@
    %tr
     %th.text-left.pad-right
      Текущая сумма резерва
-    %td= @usd_decor.decore @info.reserve_used
+    %td.text-right= @usd_decor.decore @info.reserve_used
    %tr
     %th.text-left.pad-right
      Доступная сумма резерва
-    %td= @usd_decor.decore @info.reserve_available
+    %td.text-right= @usd_decor.decore @info.reserve_available
    %tr
     %th.text-left.pad-right
      Коэффициент эффективности
-    %td= @rub_decor.decore @info.reserve_coefficient
+    %td.text-right= @rub_decor.decore @info.reserve_coefficient
    -# %tr
     %th
      Количество дней резервирования: 5

@@ -170,8 +170,8 @@ ru:
  requested_count: Количество
  manager_comment: Сообщение менеджеру
 
- only_my_orders: "Только мои позиции:"
- reservation_end: "Количество дней до разрезервирования:"
+ only_my_orders: "Только мои позиции"
+ reservation_end: "Количество дней до разрезервирования"
 
  feedback: Обратная связь
  urm_email_subj_prefix: "УРМ:"
