@@ -5,17 +5,17 @@
 
 %table
  %tr
-  %th
-   Текущая сумма резерва:
-  %td= @info.reserve_used
+  %th.text-left.pad-right
+   Текущая сумма резерва
+  %td= @usd_decor.decore @info.reserve_used
  %tr
-  %th
-   Доступная сумма резерва:
-  %td= @info.reserve_available
+  %th.text-left.pad-right
+   Доступная сумма резерва
+  %td= @usd_decor.decore @info.reserve_available
  %tr
-  %th
-   Коэффициент эффективности:
-  %td= @info.reserve_coefficient
+  %th.text-left.pad-right
+   Коэффициент эффективности
+  %td= @rur_decor.decore @info.reserve_coefficient
  -# %tr
   %th
    Количество дней резервирования: 5
@@ -40,7 +40,7 @@
       -# #ui-datepicker-div-container{:style=>"position: relative;"}
      %tr
       %th
-      %td= render :partial => "shared/submit_button", :locals => {:title => "Найти!"}
+      %td= render :partial => "shared/submit_button", :locals => {:title => t(:find)}
       
    .clear.block-padded
 
