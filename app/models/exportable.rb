@@ -14,6 +14,7 @@ module Exportable
     out.force_encoding('UTF-8').encode('Windows-1251')
    },
    :xls => proc do |hdr, data, opts = {}|
+    p "---exp-xl", hdr, data, opts
     c_row = 0
     io = StringIO.new
     Spreadsheet::Workbook.new do |book|
@@ -62,8 +63,9 @@ module Exportable
 
 
   def export(format, obj, arr, opts = {})#User.current.cart_items.unprocessed.in_cart.all
+   p "---exp-prm", format, obj, arr, opts
    parms = EXPORTABLE_FIELDS[obj][:types].transpose
-   # p "---export", parms, FORMATTER[format].call(parms[1], User.current.cart_items.unprocessed.in_cart.all.map{|i| parms[0].map{|j| i.send(j) } })
+   p "---exp-prm", parms
    FORMATTER[format].call(parms[1], arr.map{|i| parms[0].map{|j| i.send(j) } }, opts)
   end
 
