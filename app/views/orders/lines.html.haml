@@ -1,6 +1,6 @@
 .nav-title
  %span= link_to "Заказы", orders_path
- %span &raquo;
+ %span >
  %span.current= t :open_lines_title
 
 .content-wrap
@@ -9,10 +9,10 @@
    .filter
     %table
      %tr
-      %th= f.label :item_name, t(:item_name) + ':'
+      %th= f.label :item_name, t(:item_name)
       %td.long= f.text_field :item_name
      %tr
-      %th{:style => "vertical-align: middle;"} Дата отгрузки:
+      %th{:style => "vertical-align: middle;"} Дата отгрузки
       %td.tiny{:style => "vertical-align: middle;"}
        с&nbsp;
        %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from}
@@ -22,7 +22,7 @@
        -# #ui-datepicker-div-container{:style=>"position: relative;"}
      %tr
       %th
-      %td= render :partial => "shared/submit_button", :locals => {:title => "Найти"}
+      %td= render :partial => "shared/submit_button", :locals => {:title => t(:find)}
       
    .clear.block-padded
 
