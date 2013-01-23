@@ -120,6 +120,10 @@ class UsersController < ApplicationController
    @filter.date_to = Date.current.strftime("%Y-%m-%d") if @filter.date_to.blank?
    @filter.date_from = 1.month.ago.strftime("%Y-%m-%d") if @filter.date_from.blank?
    @filter_hash.merge!(:date_to => @filter.date_to, :date_from => @filter.date_from)
+   unless @filter.format
+    redirect_to sold_orders_users_path, :flash => {:error => "не задан формат"}
+    return
+   end
    respond_with do |format|
     format.csv do
      #!!!!!! use sales_report when ready
