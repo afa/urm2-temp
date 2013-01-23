@@ -14,33 +14,27 @@ module Exportable
     out.force_encoding('UTF-8').encode('Windows-1251')
    },
    :xls => proc do |hdr, data, opts = {}|
-    p "---exp-xl", hdr, data, opts
     c_row = 0
     io = StringIO.new
     book = Spreadsheet::Workbook.new(io)
-    p "---exp-book"
     shit = book.create_worksheet(:name => "List")
     if opts.has_key? :preheader
      opts[:preheader].each do |ln|
-      ln.each do |c|
-       shit.row(c_row) << c
+      ln.each_with_index do |c, i|
+       shit.row(c_row)[i] = c
       end
       c_row += 1
      end
     end
-    p "---exp-ph-cnt", c_row
-    hdr.each{|c| shit.row(c_row) << c }
+    hdr.each_with_index{|c, i| shit.row(c_row)[i] = c }
     c_row += 1
-    p "---exp-hd-cnt", c_row
     data.each do |ln|
      ln.each_with_index do |c, i|
       shit.row(c_row)[i] = c
      end
      c_row += 1
-     p "---exp-dt-cnt", c_row
     end
     book.write io
-    p "---exp-io", io, io.string, io.size
     io.rewind
     io.string
    end
@@ -60,9 +54,7 @@ module Exportable
 
 
   def export(format, obj, arr, opts = {})#User.current.cart_items.unprocessed.in_cart.all
-   p "---exp-prm", format, obj, arr, opts
    parms = EXPORTABLE_FIELDS[obj][:types].transpose
-   p "---exp-prm", parms
    FORMATTER[format].call(parms[1], arr.map{|i| parms[0].map{|j| i.send(j) } }, opts)
   end
 
