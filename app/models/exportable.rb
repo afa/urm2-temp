@@ -17,6 +17,7 @@ module Exportable
     c_row = 0
     io = StringIO.new
     Spreadsheet::Workbook.new do |book|
+     p "---exp-book"
      book.create_worksheet do |shit|
       if opts.has_key? :preheader
        opts[:preheader].each do |ln|
@@ -26,13 +27,16 @@ module Exportable
         c_row += 1
        end
       end
+      p "---exp-ph-cnt", c_row
       hdr.each{|c| shit.row(c_row) << c }
       c_row += 1
+      p "---exp-hd-cnt", c_row
       data.each do |ln|
        ln.each do |c|
         shit.row(c_row) << c
        end
        c_row += 1
+       p "---exp-dt-cnt", c_row
       end
 
      end
