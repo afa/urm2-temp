@@ -18,28 +18,28 @@ module Exportable
     c_row = 0
     io = StringIO.new
     book = Spreadsheet::Workbook.new(io)
-     p "---exp-book"
-     shit = book.create_worksheet(:name => "List")
-      if opts.has_key? :preheader
-       opts[:preheader].each do |ln|
-        ln.each do |c|
-         shit.row(c_row) << c
-        end
-        c_row += 1
-       end
+    p "---exp-book"
+    shit = book.create_worksheet(:name => "List")
+    if opts.has_key? :preheader
+     opts[:preheader].each do |ln|
+      ln.each do |c|
+       shit.row(c_row) << c
       end
-      p "---exp-ph-cnt", c_row
-      hdr.each{|c| shit.row(c_row) << c }
       c_row += 1
-      p "---exp-hd-cnt", c_row
-      data.each do |ln|
-       ln.each do |c|
-        shit.row(c_row) << c
-       end
-       c_row += 1
-       p "---exp-dt-cnt", c_row
-      end
-     book.write io
+     end
+    end
+    p "---exp-ph-cnt", c_row
+    hdr.each{|c| shit.row(c_row) << c }
+    c_row += 1
+    p "---exp-hd-cnt", c_row
+    data.each do |ln|
+     ln.each_with_index do |c, i|
+      shit.row(c_row)[i] = c
+     end
+     c_row += 1
+     p "---exp-dt-cnt", c_row
+    end
+    book.write io
     p "---exp-io", io, io.string, io.size
     io.rewind
     io.string
