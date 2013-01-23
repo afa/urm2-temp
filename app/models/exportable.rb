@@ -17,9 +17,9 @@ module Exportable
     p "---exp-xl", hdr, data, opts
     c_row = 0
     io = StringIO.new
-    Spreadsheet::Workbook.new do |book|
+    book = Spreadsheet::Workbook.new(io)
      p "---exp-book"
-     book.create_worksheet do |shit|
+     shit = book.create_worksheet(:name => "List")
       if opts.has_key? :preheader
        opts[:preheader].each do |ln|
         ln.each do |c|
@@ -39,10 +39,7 @@ module Exportable
        c_row += 1
        p "---exp-dt-cnt", c_row
       end
-
-     end
      book.write io
-    end
     p "---exp-io", io, io.string, io.size
     io.rewind
     io.string
