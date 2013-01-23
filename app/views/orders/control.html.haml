@@ -3,23 +3,23 @@
  %span >
  %span.current Контроль продолжительности резервирования
 
-%table
- %tr
-  %th.text-left.pad-right
-   Текущая сумма резерва
-  %td= @usd_decor.decore @info.reserve_used
- %tr
-  %th.text-left.pad-right
-   Доступная сумма резерва
-  %td= @usd_decor.decore @info.reserve_available
- %tr
-  %th.text-left.pad-right
-   Коэффициент эффективности
-  %td= @rub_decor.decore @info.reserve_coefficient
- -# %tr
-  %th
-   Количество дней резервирования: 5
 .content-wrap
+ %table
+  %tr
+   %th.text-left.pad-right
+    Текущая сумма резерва
+   %td= @usd_decor.decore @info.reserve_used
+  %tr
+   %th.text-left.pad-right
+    Доступная сумма резерва
+   %td= @usd_decor.decore @info.reserve_available
+  %tr
+   %th.text-left.pad-right
+    Коэффициент эффективности
+   %td= @rub_decor.decore @info.reserve_coefficient
+  -# %tr
+   %th
+    Количество дней резервирования: 5
  .filter-block
   = form_for :filter, :url => control_orders_path, :html => {:method => :get} do |f|
    .filter
