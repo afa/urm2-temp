@@ -1,6 +1,6 @@
 .nav-title
  %span= link_to "Заказы", orders_path
- %span &raquo;
+ %span >
  %span.current= t :open_lines_title
 
 .content-wrap
@@ -9,10 +9,10 @@
    .filter
     %table
      %tr
-      %th= f.label :item_name, t(:item_name) + ':'
+      %th= f.label :item_name, t(:item_name)
       %td.long= f.text_field :item_name
      %tr
-      %th{:style => "vertical-align: middle;"} Дата отгрузки:
+      %th{:style => "vertical-align: middle;"} Дата отгрузки
       %td.tiny{:style => "vertical-align: middle;"}
        с&nbsp;
        %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from}
@@ -22,7 +22,7 @@
        -# #ui-datepicker-div-container{:style=>"position: relative;"}
      %tr
       %th
-      %td= render :partial => "shared/submit_button", :locals => {:title => "Найти"}
+      %td= render :partial => "shared/submit_button", :locals => {:title => t(:find)}
       
    .clear.block-padded
 
@@ -57,7 +57,12 @@
       %input.copiable{:type => :hidden, :value => 'input#filter_item_name'}
       %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_from]"]'}
       %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_to]"]'}
-      = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "items[export]", :opts => {:style => "float: right;"}}
+      = render :partial => "shared/submit_button", :locals => {:title => t(:export_csv), :name => "items[export]", :opts => {:style => "float: right;"}}
+     = form_for :export_fields, :url => export_lines_orders_path(:format => :xls), :method => :post, :html=>{:class => "js"} do |f|
+      %input.copiable{:type => :hidden, :value => 'input#filter_item_name'}
+      %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_from]"]'}
+      %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_to]"]'}
+      = render :partial => "shared/submit_button", :locals => {:title => t(:export_xls), :name => "items[export]", :opts => {:style => "float: right;"}}
       = paginate(:derid => {:page => @lines.page.to_i, :pages => @lines.total.to_i, :align => "left"})
 
 %div{:style => "z-index:9999;"}

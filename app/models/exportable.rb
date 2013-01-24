@@ -16,29 +16,25 @@ module Exportable
    :xls => proc do |hdr, data, opts = {}|
     c_row = 0
     io = StringIO.new
-    Spreadsheet::Workbook.new do |book|
-     book.create_worksheet do |shit|
-      if opts.has_key? :preheader
-       opts[:preheader].each do |ln|
-        ln.each do |c|
-         shit.row(c_row) << c
-        end
-        c_row += 1
-       end
+    book = Spreadsheet::Workbook.new(io)
+    shit = book.create_worksheet(:name => "List")
+    if opts.has_key? :preheader
+     opts[:preheader].each do |ln|
+      ln.each_with_index do |c, i|
+       shit.row(c_row)[i] = c
       end
-      hdr.each{|c| shit.row(c_row) << c }
       c_row += 1
-      data.each do |ln|
-       ln.each do |c|
-        shit.row(c_row) << c
-       end
-       c_row += 1
-      end
-
      end
-     book.write io
     end
-    p "---exp-io", io, io.string, io.size
+    hdr.each_with_index{|c, i| shit.row(c_row)[i] = c }
+    c_row += 1
+    data.each do |ln|
+     ln.each_with_index do |c, i|
+      shit.row(c_row)[i] = c
+     end
+     c_row += 1
+    end
+    book.write io
     io.rewind
     io.string
    end
@@ -59,7 +55,6 @@ module Exportable
 
   def export(format, obj, arr, opts = {})#User.current.cart_items.unprocessed.in_cart.all
    parms = EXPORTABLE_FIELDS[obj][:types].transpose
-   # p "---export", parms, FORMATTER[format].call(parms[1], User.current.cart_items.unprocessed.in_cart.all.map{|i| parms[0].map{|j| i.send(j) } })
    FORMATTER[format].call(parms[1], arr.map{|i| parms[0].map{|j| i.send(j) } }, opts)
   end
 

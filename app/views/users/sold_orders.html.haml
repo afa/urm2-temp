@@ -1,23 +1,28 @@
-%h1 Отчет по проданным заказам
-.filter
- = form_for :filter, :url => export_sold_orders_users_path, :method => :post do |form|
-  %table
-   %tr
-    %th{:style => "vertical-align: middle;"} Отчет за период с
-    %td{:style => "vertical-align: middle;"}
-     %input.calendar-input{:type => "text", :name => "filter[date_from]", :value => @filter.try(:date_from) || (Date.today - Date.today.mday + 1).strftime("%Y-%m-%d")}
-     по
-     %input.calendar-input{:type => "text", :name => "filter[date_to]", :value => @filter.try(:date_to) || Date.today.strftime("%Y-%m-%d")}
-   %tr
-    %th{:style => "vertical-align: middle;"} в формате
-    %td{:style => "vertical-align: middle;"}
-     %label
-      %input{:type => "radio", :value => "csv", :name => "format"}
-      CSV
-     или
-     %label
-      %input{:type => "radio", :value => "xls", :name => "format"}
-      XLS
-  = render :partial => "shared/submit_button", :locals => {:title => "Сформировать"}
+.nav-title
+ %span Отчет по проданным заказам
+.content-wrap
+ .filter
+  = form_for :filter, :url => export_sold_orders_users_path, :method => :post do |form|
+   %table
+    %tr
+     %th.text-right{:style => "vertical-align: middle;"} Отчет за период с
+     %td{:style => "vertical-align: middle;"}
+      %input.calendar-input{:type => "text", :name => "filter[date_from]", :value => @filter.try(:date_from) || (Date.today - Date.today.mday + 1).strftime("%Y-%m-%d")}
+      по
+      %input.calendar-input{:type => "text", :name => "filter[date_to]", :value => @filter.try(:date_to) || Date.today.strftime("%Y-%m-%d")}
+    %tr
+     %th.text-right{:style => "vertical-align: middle;"} в формате
+     %td{:style => "vertical-align: middle;"}
+      %label
+       %input{:type => "radio", :value => "csv", :name => "format"}
+       %span.bold CSV
+      или
+      %label
+       %input{:type => "radio", :value => "xls", :name => "format"}
+       %span.bold XLS
+    %tr
+     %th
+     %td
+      = render :partial => "shared/submit_button", :locals => {:title => "Сформировать"}
 
 
