@@ -1,4 +1,10 @@
+.nav-title
+ %span.current Настройки
 = form_for :profile, :url => update_profile_path do |form|
+ .profile_line
+  .heading Применение для производителя
+  .values
+   = render :partial => "shared/select_list", :locals => {:list_items => Axapta.application_area_list.map{|a| [a.application_area_id, a.application_area_name] }, :name => "area_list", :title => "Применение для производителя", :opts => {:use_system =>true, :selected => @profile.application_area}}
  .profile_line
   .heading Персональные настройки
   .values
@@ -15,9 +21,6 @@
    = render :partial => "shared/check_button", :locals => {:name => "profile[order.only_my]", :title => "Только мои", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_my)}}
  
  .profile_line
-  .heading Применение для производителя
-  .values &mdash;
- .profile_line
   .heading Настройка оповещений
   .values &mdash;
 
@@ -27,4 +30,35 @@
  .profile_line
   .heading Количество дней резервирования
   .values= @profile.reservation_end
- = render :partial => "shared/submit_button", :locals => {:title => "Save", :name => "submit"}
+ = render :partial => "shared/submit_button", :locals => {:title => t(:save_setting), :name => "submit"}
+
+
+-# Описание
+
+ 1) Добавить на страницу заголовок: .Настройки.
+ 2) Настройки выводить в двух группах, следующим образом:
+
+ Персональные настройки
+ Применение для производителя, выбранное по умолчанию (select, интерфейсное)
+ (checkbox, метод не определён) Отправлять оповещения в УРМ
+ (checkbox, метод не определён) Отправлять оповещения на электронную почту
+
+ (checkbox, интерфейсное) Показывать окно .Поиск. на всех страницах
+ (checkbox, интерфейсное) Устанавливать настройку .Только склад. в окне .Поиск.
+ (checkbox, интерфейсное) Устанавливать настройку .Только в наличии. в окне .Поиск.
+ (checkbox, интерфейсное) Устанавливать настройку .Только мои. там, где она есть
+ 
+ Общие для всех сотрудников
+ Продолжительность резервирования товара X дней. (X - в поле для ввода, поле в состоянии disabled)
+ Требования к упаковке (набор checkbox'ов в состоянии disabled).
+ Тип упаковки, выбранный по умолчанию (select в состоянии disabled).
+
+ 3) Кнопку .Save. переименовать в .Сохранить настройки..
+
+ Список применений можно получить методом application_area_list. Перед выводом в select необходимо их отсортировать по умолчанию.
+
+ note:
+ ) нужны методы для чтения/записи настроек отправки оповещений
+ ) метод для чтения настройки требований к упаковке
+ ) метод для чтения настройки типа упаковки
+ ) метод для чтения продолжительности резервирования товара
