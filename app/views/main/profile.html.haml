@@ -4,7 +4,7 @@
  .profile_line
   .heading Применение для производителя
   .values
-   = render :partial => "shared/select_list", :locals => {:list_items => Axapta.application_area_list.map{|a| [a.application_area_id, a.application_area_name] }, :name => "area_list", :opts => {:use_system =>true, :selected => @profile.application_area}}
+   = render :partial => "shared/select_list", :locals => {:list_items => Axapta.application_area_list.map{|a| [a.application_area_id, a.application_area_name] }, :name => "area_list", :title => "Применение для производителя", :opts => {:use_system =>true, :selected => @profile.application_area}}
  .profile_line
   .heading Персональные настройки
   .values
