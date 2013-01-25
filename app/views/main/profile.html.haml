@@ -1,4 +1,10 @@
+.nav-title
+ %span.current Настройки
 = form_for :profile, :url => update_profile_path do |form|
+ .profile_line
+  .heading Применение для производителя
+  .values
+   = render :partial => "shared/select_list", :locals => {:items => Axapta.application_area_list, :name => "area_list"}
  .profile_line
   .heading Персональные настройки
   .values
@@ -15,9 +21,6 @@
    = render :partial => "shared/check_button", :locals => {:name => "profile[order.only_my]", :title => "Только мои", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_my)}}
  
  .profile_line
-  .heading Применение для производителя
-  .values &mdash;
- .profile_line
   .heading Настройка оповещений
   .values &mdash;
 
@@ -27,4 +30,4 @@
  .profile_line
   .heading Количество дней резервирования
   .values= @profile.reservation_end
- = render :partial => "shared/submit_button", :locals => {:title => "Save", :name => "submit"}
+ = render :partial => "shared/submit_button", :locals => {:title => t(:save_setting), :name => "submit"}
