@@ -16,6 +16,7 @@ class OrdersController < ApplicationController
    @deliveries = User.current.deliveries
    @stores = @carts.map(&:location_link).uniq.compact.sort{|a, b| a == User.current.current_account.invent_location_id ? -1 : a <=> b }
    @avail_sales = Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000).items.map{|s| [s.sales_id, s.sales_id] }
+   p "---prndr", params[:format]
    
    respond_with do |format|
     format.js { render :layout => false }
