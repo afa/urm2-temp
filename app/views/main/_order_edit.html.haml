@@ -6,9 +6,9 @@
   - @stores.each do |store|
    %h3 К складу #{store}
    .padded
-    = render :partial => "shared/select_list", :locals => {:list_items => @avail_sales, :name => "use_sale[#{store}]", :title => t(:use_sale), :opts => {:use_system => true} }
+    = render :partial => "shared/select_list.html.haml", :locals => {:list_items => @avail_sales.select{|s| @sales_locs[s] == store }, :name => "use_sale[#{store}]", :title => t(:use_sale), :opts => {:use_system => true, :with_blank => true, :blank_name => t(:new_sale)} }
    .padded
-    = render :partial => "shared/check_button", :locals => {:name => "order_needed[#{store}]", :title => t(:order_needed), :opts => {:need_field => true, :use_system => true}}
+    = render :partial => "shared/check_button.html.haml", :locals => {:name => "order_needed[#{store}]", :title => t(:order_needed), :opts => {:need_field => true, :use_system => true}}
    -# - if @carts.detect{|c| not c.is_a?(CartRequest) }
    .item.store
     .name
@@ -18,7 +18,7 @@
    
   -# - if @carts.detect{|c| c.pick or c.is_a?(CartWorld) }
   .item.pick
-   = render :partial => "main/pick_options"
+   = render :partial => "main/pick_options.html.haml"
   -# - if @carts.detect{|c| c.is_a?(CartRequest) }
   .item.request
    .name
@@ -27,5 +27,5 @@
     %textarea{:name => "comment"}
   .padded
  .clear
- = render :partial => "shared/submit_button", :locals => {:title => t(:make), :opts  => {:inner_style => "margin-right: 1em;"}}
- = render :partial => "shared/button", :locals => {:title => t(:cancel_order), :opts => {:id => :cancel_order}}
+ = render :partial => "shared/submit_button.html.haml", :locals => {:title => t(:make), :opts  => {:inner_style => "margin-right: 1em;"}}
+ = render :partial => "shared/button.html.haml", :locals => {:title => t(:cancel_order), :opts => {:id => :cancel_order}}

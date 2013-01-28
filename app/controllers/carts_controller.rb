@@ -44,8 +44,10 @@ class CartsController < ApplicationController
      gon.changes = @changed
      gon.stores = @stores
      @deliveries = User.current.deliveries
-     @avail_sales = [""] + Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000).items.map{|s| [s.sales_id, s.sales_id] }
-     gon.order = render_to_string :partial => "main/order_edit"
+     sales = Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000).items
+     @sales_locs = sales.map{|s| [s.sales_id, s.location_id] }.as_hash
+     @avail_sales = sales.map{|s| [s.sales_id, s.sales_id] }
+     gon.order = render_to_string :partial => "main/order_edit.html.haml"
     end
     #redirect_to carts_path
     respond_with do |format|
@@ -115,8 +117,10 @@ class CartsController < ApplicationController
     gon.rendered = @rendered
     gon.carts = @carts.map{|c| c.to_hash.merge(:obj_id => c.id)}
     gon.stores = @stores
-    @avail_sales = [""] + Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000).items.map{|s| [s.sales_id, s.sales_id] }
-    @order = render_to_string :partial => "main/order_edit"
+    sales = Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000).items
+    @sales_locs = sales.map{|s| [s.sales_id, s.location_id] }.as_hash
+    @avail_sales = sales.map{|s| [s.sales_id, s.sales_id] }
+    @order = render_to_string :partial => "main/order_edit.html.haml"
     gon.order = @order
    end
    respond_with do |format|
@@ -154,8 +158,10 @@ class CartsController < ApplicationController
     #gon.changes = @changed
     @deliveries = User.current.deliveries
     gon.stores = @stores
-    @avail_sales = [""] + Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000).items.map{|s| [s.sales_id, s.sales_id] }
-    gon.order = render_to_string :partial => "main/order_edit"
+    sales = Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000).items
+    @sales_locs = sales.map{|s| [s.sales_id, s.location_id] }.as_hash
+    @avail_sales = sales.map{|s| [s.sales_id, s.sales_id] }
+    gon.order = render_to_string :partial => "main/order_edit.html.haml"
    end
 
    respond_with do |format|
