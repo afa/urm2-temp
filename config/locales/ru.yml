@@ -194,3 +194,5 @@ ru:
  balance: Баланс
  export_csv: выгрузить в csv файл
  export_xls: выгрузить в excel файл
+ use_sale: Заказ для добавления
+ new_sale: Новый заказ
