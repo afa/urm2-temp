@@ -17,11 +17,11 @@ class OrdersController < ApplicationController
    @stores = @carts.map(&:location_link).uniq.compact.sort{|a, b| a == User.current.current_account.invent_location_id ? -1 : a <=> b }
    @avail_sales = Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000).items.map{|s| [s.sales_id, s.sales_id] }
    p "---prndr", params[:format]
-   p "---rndr", render_to_string(:partial => "main/order_edit.html")
+   p "---rndr", render_to_string(:partial => "main/order_edit.html.haml")
    
    respond_with do |format|
     format.js { render :layout => false }
-    format.json { puts "---rndr", render_to_string(:partial => "main/order_edit.html");  render :json => {:order => render_to_string(:partial => "main/order_edit.html")} }
+    format.json { render :json => {:order => render_to_string(:partial => "main/order_edit.html")} }
     format.html do
      render
     end
