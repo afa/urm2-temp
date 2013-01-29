@@ -159,6 +159,18 @@ function placeDmsData(data){
 }
 
 function placeInfoData(data){
+ var row_id = data["row_id"];
+ var code = data["code"];
+ if(/^\s*$/.test(data["info"])){
+  $(data["empty"]).insertAfter($("tr.item_" + row_id).last());
+ } else {
+  $(data["info"]).insertAfter($("tr.item_" + row_id).last());
+  if(!/^\s*$/.test(data["cart"])){
+   $(".cart").empty();
+   $(data["cart"]).appendTo($(".cart"));
+  }
+  insertGap(row_id, data["gap"]);
+ }
  //return false;
 }
 

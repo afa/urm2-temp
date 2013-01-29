@@ -150,7 +150,7 @@ class MainController < ApplicationController
    end
    respond_with do |format|
     #format.js { render :layout => false }
-    format.json {}
+    format.json { render :json => {:row_id => @after, :code => @code, :info => render_to_string(:partial => "main/gap_line.html.haml", :locals => {:after => @after}), :info => render_to_string(:partial => "main/info_block.html.haml", :locals => {:after => @after, :info_block => @data})} }
    end
 
   end
