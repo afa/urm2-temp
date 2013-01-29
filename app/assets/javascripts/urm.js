@@ -158,8 +158,7 @@ function placeDmsData(data){
  hide_dms_on_plus_click(row_id);
 }
 
-function placeDmsData(data){
- event.preventDefault();
+function placeInfoData(data){
  //return false;
 }
 
