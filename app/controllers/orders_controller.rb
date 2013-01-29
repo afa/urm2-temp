@@ -19,7 +19,7 @@ class OrdersController < ApplicationController
    @sales_locs = sales.map{|s| [s.sales_id, s.location_id] }.as_hash
    @avail_sales = sales.map{|s| [s.sales_id, s.sales_id] }
    respond_with do |format|
-    format.js { render :layout => false }
+    #format.js { render :layout => false }
     format.json { render :json => {:order => render_to_string(:partial => "main/order_edit.html.haml")} }
     format.html do
      render
