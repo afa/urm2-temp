@@ -19,7 +19,8 @@ class MainController < ApplicationController
    avail = Setting.by_user(current_user.id).by_name("search.only_available").first || Setting.by_user(current_user.id).by_name("search.only_available").new
    avail.value = @only_available
    avail.save!
-   @items = Offer::Store.search(params[:search]).sort_by{|i| i.location_id }.sort_by{|i| i.rohs }.sort_by{|i| i.body_name }.sort_by{|i| i.brend_name }.sort_by{|i| i.name}
+   @items = Offer::Store.search(params[:search]).sort{|a, b| a.name == b.name ? (a.brend_name == b.brend_name ? (a.body_name == b.body_name ? (a.rohs == b.rohs ? (a.location_id <=> b.location_id) : a.rohs <=> b.rohs) : a.body_name <=> b.body_name) : a.brend_name <=> b.brend_name) : a.name <=> b.name}
+   #@items = Offer::Store.search(params[:search]).sort_by{|i| i.location_id }.sort_by{|i| i.rohs }.sort_by{|i| i.body_name }.sort_by{|i| i.brend_name }.sort_by{|i| i.name}
    CartItem.uncached do
     @carts = CartItem.where(:user_id => current_user.id).in_cart.unprocessed.order("product_name, product_brend").all
     @carts.select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
@@ -126,7 +127,7 @@ class MainController < ApplicationController
    @code = params[:code]
    @hash = current_user.current_account.try(:axapta_hash)
    begin
-    @data = Axapta.item_info({:user_hash => @hash, :item_id => @code})
+    @data = Axapta.item_info({:item_id => @code})
    rescue Exception => e
     p "---exc in info #{Time.now}", e, e.backtrace
     logger.info e.to_s
@@ -148,7 +149,8 @@ class MainController < ApplicationController
     @data["dates"] = []
    end
    respond_with do |format|
-    format.js { render :layout => false }
+    #format.js { render :layout => false }
+    format.json { render :json => {:row_id => @after, :code => @code, :info => render_to_string(:partial => "main/gap_line.html.haml", :locals => {:after => @after}), :info => render_to_string(:partial => "main/info_block.html.haml", :locals => {:after => @after, :info_block => @data})} }
    end
 
   end

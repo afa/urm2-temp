@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   authen_field_name :username
   post_sign_cb :cb_logged
   #before_filter :unmodify
+  before_filter :write_stat
   before_filter :prepare_decor
   before_filter :check_account_cur
   before_filter :get_accounts_in
@@ -18,6 +19,10 @@ class ApplicationController < ActionController::Base
 
 
  protected
+  def write_stat
+   Stat::Event.create( :key => "request-#{Time.now.to_f}", :name => "#{params[:controller]}##{params[:action]}.#{params[:format]}", :data => params.to_json){|ev| ev.type = "Stat::Before" }
+
+  end
   def prepare_decor
    @usd_decor = CurrencyPresenter.new(:usd)
    @rub_decor = CurrencyPresenter.new(:rub)
