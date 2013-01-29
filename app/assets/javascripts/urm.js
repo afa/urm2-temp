@@ -176,8 +176,7 @@ function showInfo(evt){
  }
  evt.preventDefault();
 }
- 
-}
+
 // on-click for dms button
 function showDms(evt){
  var row_id = $(this).parents("tr").prop("class").match(/\bitem_(\w+)\b/)[1];
