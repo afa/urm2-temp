@@ -89,7 +89,7 @@ class Axapta
   def self.item_info(*args)
    ar = args.as_hash
    begin
-    AxaptaRequest.item_info(ar) || []
+    AxaptaRequest.item_info(ar.merge(:user_hash => axapta_hash)) || []
    rescue Exception => e
     parse_exc(e.message, e.class.name)
     []
