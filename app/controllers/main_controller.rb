@@ -127,7 +127,7 @@ class MainController < ApplicationController
    @code = params[:code]
    @hash = current_user.current_account.try(:axapta_hash)
    begin
-    @data = Axapta.item_info({:user_hash => @hash, :item_id => @code})
+    @data = Axapta.item_info({:item_id => @code})
    rescue Exception => e
     p "---exc in info #{Time.now}", e, e.backtrace
     logger.info e.to_s
@@ -149,7 +149,8 @@ class MainController < ApplicationController
     @data["dates"] = []
    end
    respond_with do |format|
-    format.js { render :layout => false }
+    #format.js { render :layout => false }
+    format.json {}
    end
 
   end
