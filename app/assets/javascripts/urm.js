@@ -184,6 +184,7 @@ function showInfo(evt){
    placeInfoData,
    function(data){
     alert("err");
+    alert(data);
     //$("tr.item_" + row_id + " .icon .slider").hide();
     //$("tr.item_" + row_id + " .icon .dms").show().removeClass("active");
   });
