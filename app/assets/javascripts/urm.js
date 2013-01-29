@@ -158,6 +158,11 @@ function placeDmsData(data){
  hide_dms_on_plus_click(row_id);
 }
 
+function placeDmsData(data){
+ event.preventDefault();
+ //return false;
+}
+
 function showInfo(evt){
  var row_id = $(this).parents("tr").prop("class").match(/\bitem_(\w+)\b/)[1];
  if($("tr.info_item_" + row_id).length == 0){
