@@ -144,13 +144,11 @@ class MainController < ApplicationController
     p "---dates", @data["dates"]
    rescue Exception => e
     p "---exc in prognos #{Time.now}", e, e.backtrace
-    logger.info e.to_s
-    logger.info e.backtrace.first(3)
     @data["dates"] = []
    end
    respond_with do |format|
     #format.js { render :layout => false }
-    format.json { render :json => {:row_id => @after, :code => @code, :info => render_to_string(:partial => "main/gap_line.html.haml", :locals => {:after => @after}), :info => render_to_string(:partial => "main/info_block.html.haml", :locals => {:after => @after, :info_block => @data})} }
+    format.json { render :json => {:row_id => @after, :code => @code, :gap => render_to_string(:partial => "main/gap_line.html.haml", :locals => {:after => @after}), :info => render_to_string(:partial => "main/info_block.html.haml", :locals => {:after => @after, :info_block => @data})} }
    end
 
   end
