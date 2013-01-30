@@ -165,10 +165,10 @@ function placeInfoData(data){
   $(data["empty"]).insertAfter($("tr.item_" + row_id).last());
  } else {
   $(data["info"]).insertAfter($("tr.item_" + row_id).last());
-  if(!/^\s*$/.test(data["cart"])){
+  /*if(!/^\s*$/.test(data["cart"])){
    $(".cart").empty();
    $(data["cart"]).appendTo($(".cart"));
-  }
+  }*/
   insertGap(row_id, data["gap"]);
  }
  //return false;
