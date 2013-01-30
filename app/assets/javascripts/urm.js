@@ -180,7 +180,7 @@ function placeInfoData(data){
 function showInfo(evt){
  var row_id = $(this).parents("tr").prop("class").match(/\bitem_(\w+)\b/)[1];
  if($("tr.info_item_" + row_id).length == 0){
-  alert($(this).href);
+  alert(this.href);
   makeAjaxCall($(this).href,    //"/main/info?code=" + code + "&after=" + row_id,
    placeInfoData,
    function(data){
