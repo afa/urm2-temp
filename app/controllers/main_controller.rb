@@ -109,16 +109,16 @@ class MainController < ApplicationController
   def analog
    @after = params[:after]
    @code = params[:code]
-   #@hash = current_user.current_account.try(:axapta_hash)
-   
-   logger.info "--- request_start: #{Time.now}"
    begin
     data = Offer::Store.analogs(@code)
    rescue Exception => e
-    p "---exc in Main#analog:search #{Time.now}", e
+    data = []
     logger.info e.to_s
    end
    @items = data
+   respond_with do |format|
+    format.json { render :json => {:row_id => @after, :code => @code, :gap => render_to_string(:partial => "main/gap_line.html.haml", :locals => {:after => @after}), :hdr => render_to_string(:partial => "main/analog_header.html.haml", :locals => {:after => @after}), :analogs => render_to_string(:partial => "main/analog_line.html.haml", :collection => @items, :locals => {:after => @after})}, :empty => render_to_string(:partial => "main/analog_empty.html.haml", :locals => {:after => @after}), :layout => false }
+   end
   end
 
   def info
@@ -147,7 +147,6 @@ class MainController < ApplicationController
     @data["dates"] = []
    end
    respond_with do |format|
-    #format.js { render :layout => false }
     format.json { render :json => {:row_id => @after, :code => @code, :gap => render_to_string(:partial => "main/gap_line.html.haml", :locals => {:after => @after}), :info => render_to_string(:partial => "main/info_block.html.haml", :locals => {:after => @after, :info_block => @data}), :layout => false} }
    end
 
