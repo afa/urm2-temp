@@ -162,13 +162,10 @@ function placeInfoData(data){
  var row_id = data["row_id"];
  var code = data["code"];
  if(/^\s*$/.test(data["info"])){
-  alert("empty");
   $(data["empty"]).insertAfter($("tr.item_" + row_id).last());
  } else {
-  alert("info");
   $(data["info"]).insertAfter($("tr.item_" + row_id).last());
   if(!/^\s*$/.test(data["cart"])){
-   alert("cart");
    $(".cart").empty();
    $(data["cart"]).appendTo($(".cart"));
   }
@@ -183,8 +180,6 @@ function showInfo(evt){
   makeAjaxCall(this.href,    //"/main/info?code=" + code + "&after=" + row_id,
    placeInfoData,
    function(data){
-    alert("err");
-    alert(data);
     //$("tr.item_" + row_id + " .icon .slider").hide();
     //$("tr.item_" + row_id + " .icon .dms").show().removeClass("active");
   });
