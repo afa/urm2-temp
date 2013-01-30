@@ -55,6 +55,7 @@ function search_icons_handle(){
   $(this).parents('.icon').find('.slider').show();
  });
  $(".icon .dms.js").click(showDms);
+ $(".icon a.replacement.js").click(showAnalog);
  $("a.info.js").click(showInfo);
 }
 
@@ -158,20 +159,52 @@ function placeDmsData(data){
  hide_dms_on_plus_click(row_id);
 }
 
+function placeAnalogData(data){
+ var row_id = data["row_id"];
+ var code = data["code"];
+ if(/^\s*$/.test(data["analogs"])){
+  $(data["empty"]).insertAfter($("tr.item_" + row_id).last());
+ } else {
+  $(data["hdr"]).add(data["analogs"]).insertAfter($("tr.item_" + row_id).last());
+  /*if(!/^\s*$/.test(data["cart"])){
+   $(".cart").empty();
+   $(data["cart"]).appendTo($(".cart"));
+  }*/
+  insertGap(row_id, data["gap"]);
+ }
+ //return false;
+}
+
+function showAnalog(evt){
+ var row_id = $(this).parents("tr").prop("class").match(/\bitem_(\w+)\b/)[1];
+ if($("tr.analog_item_" + row_id).length == 0){
+  makeAjaxCall(this.href,    //"/main/info?code=" + code + "&after=" + row_id,
+   placeAnalogData,
+   function(data){
+    //$("tr.item_" + row_id + " .icon .slider").hide();
+    //$("tr.item_" + row_id + " .icon .dms").show().removeClass("active");
+  });
+ } else {
+  $("tr.analog_item_" + row_id).toggle();
+  $("tr.analog_item_" + row_id).toggleClass("hidden");
+  toggleGap(row_id);
+  //$("tr.item_" + row_id + " .icon .slider").hide();
+  //$("tr.item_" + row_id + " .icon .dms").show();
+ }
+ evt.preventDefault();
+}
+
 function placeInfoData(data){
  var row_id = data["row_id"];
  var code = data["code"];
  if(/^\s*$/.test(data["info"])){
-  alert("empty");
   $(data["empty"]).insertAfter($("tr.item_" + row_id).last());
  } else {
-  alert("info");
   $(data["info"]).insertAfter($("tr.item_" + row_id).last());
-  if(!/^\s*$/.test(data["cart"])){
-   alert("cart");
+  /*if(!/^\s*$/.test(data["cart"])){
    $(".cart").empty();
    $(data["cart"]).appendTo($(".cart"));
-  }
+  }*/
   insertGap(row_id, data["gap"]);
  }
  //return false;
@@ -180,11 +213,9 @@ function placeInfoData(data){
 function showInfo(evt){
  var row_id = $(this).parents("tr").prop("class").match(/\bitem_(\w+)\b/)[1];
  if($("tr.info_item_" + row_id).length == 0){
-  makeAjaxCall($(this).href,    //"/main/info?code=" + code + "&after=" + row_id,
+  makeAjaxCall(this.href,    //"/main/info?code=" + code + "&after=" + row_id,
    placeInfoData,
    function(data){
-    alert("err");
-    alert(data);
     //$("tr.item_" + row_id + " .icon .slider").hide();
     //$("tr.item_" + row_id + " .icon .dms").show().removeClass("active");
   });
