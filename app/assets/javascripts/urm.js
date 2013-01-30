@@ -55,7 +55,7 @@ function search_icons_handle(){
   $(this).parents('.icon').find('.slider').show();
  });
  $(".icon .dms.js").click(showDms);
- $(".icon .analog.js").click(showAnalog);
+ $(".icon a.replacement.js").click(showAnalog);
  $("a.info.js").click(showInfo);
 }
 

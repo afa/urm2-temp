@@ -12,7 +12,7 @@
    .slider &nbsp;
   .icon
    - if items_line.analog_exists
-    = link_to "", analog_main_index_path(:code => items_line.code, :after => line_code), :class => "replacement js active", :remote => true
+    = link_to "", analog_main_index_path(:code => items_line.code, :after => line_code, :format => :json), :class => "replacement js active"
    - else
     .replacement &nbsp;
    .slider &nbsp;
