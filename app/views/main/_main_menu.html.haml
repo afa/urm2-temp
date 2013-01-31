@@ -65,6 +65,59 @@
     %li
      %a{:class => [current_page?(lines_quotations_path) ? "active" : nil], :href=>lines_quotations_path()}
       %span Открытые строки
+ .button{:class => [(params[:controller] == "shipments") ? "active" : nil]}
+  .button-shadow
+   %i.b1
+   %i.b2
+   %i.b3
+    %i
+   %a.link{:href=>"#"} Отгрузка
+  .submenu-shadow
+   %i.b1
+   %i.b2
+   %i.b3
+   %i.b4
+    %i
+   %i.b5
+    %i
+   %i.b6
+   %i.b7
+   %i.b8
+   %ul.submenu
+    %li
+     %a{:class => [current_page?(shipments_path) ? "active" : nil], :href=>shipments_path}
+      %span Исходящие грузы
+    %li
+     %a{:class => [current_page?(archive_places_path) ? "active" : nil], :href=>archive_places_path}
+      %span Архив мест
+    %li
+     %a{:class => [current_page?(places_path) ? "active" : nil], :href=>places_path}
+      %span Отгрузка мест
+ .button{:class => [(params[:controller] == "invoices") ? "active" : nil]}
+  .button-shadow
+   %i.b1
+   %i.b2
+   %i.b3
+    %i
+   %a.link{:href=>"#"} Накладные
+  .submenu-shadow
+   %i.b1
+   %i.b2
+   %i.b3
+   %i.b4
+    %i
+   %i.b5
+    %i
+   %i.b6
+   %i.b7
+   %i.b8
+   %ul.submenu
+    %li
+     %a{:class => [current_page?(invoices_path) ? "active" : nil], :href=>invoices_path}
+      %span Неоплаченные накладные
+    %li
+     %a{:class => [current_page?(archive_invoices_path) ? "active" : nil], :href=>archive_invoices_path}
+      %span Журнал накладных
  .button{:class => [(params[:controller] == "users") ? "active" : nil]}
   .button-shadow
    %i.b1

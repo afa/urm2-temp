@@ -1,5 +1,20 @@
 Urm::Application.routes.draw do
 
+  resources :invoices, :only => [:index, :show] do
+   collection do
+    get :archive
+   end
+  end
+  resources :places, :only => [:index, :show] do
+   collection do
+    get :archive
+   end
+  end
+  resources :shipments, :only => [:index, :show] do
+   collection do
+    get :archive
+   end
+  end
   resources :news, :only => [:index]
   resources :carts, :except => [:show] do
    collection do
