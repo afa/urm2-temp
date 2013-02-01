@@ -22,5 +22,5 @@
    = render :partial => "carts/cart_collection.html.haml", :locals => {:app_list => app_list, :stores => @stores, :cart => cart}
   .padded
  .block-padded
-  %p Итого по заказу #{@usd_decor.decore cart.map{|i| i.current_price * i.amount }.inject(0.0){|r, i| r + i }} USD, в том числе по ДМС #{@usd_decor.decore cart.select{|i| i.is_a? CartWorld }.map{|i| i.current_price * i.amount }.inject(0.0){|r, i| r + i } USD.
+  %p Итого по заказу #{@usd_decor.decore cart.map{|i| i.current_price * i.amount }.inject(0.0){|r, i| r + i }} USD, в том числе по ДМС #{@usd_decor.decore cart.select{|i| i.is_a? CartWorld }.map{|i| i.current_price * i.amount }.inject(0.0){|r, i| r + i } } USD.
  .clear.block-padded
