@@ -85,14 +85,14 @@
    %i.b8
    %ul.submenu
     %li
-     %a{:class => [current_page?(shipments_path) ? "active" : nil], :href=>shipments_path}
-      %span Исходящие грузы
+     %a{:class => [current_page?(places_path) ? "active" : nil], :href=>places_path}
+      %span Отгрузка мест
     %li
      %a{:class => [current_page?(archive_places_path) ? "active" : nil], :href=>archive_places_path}
       %span Архив мест
     %li
-     %a{:class => [current_page?(places_path) ? "active" : nil], :href=>places_path}
-      %span Отгрузка мест
+     %a{:class => [current_page?(shipments_path) ? "active" : nil], :href=>shipments_path}
+      %span Исходящие грузы
  .button{:class => [(params[:controller] == "invoices") ? "active" : nil]}
   .button-shadow
    %i.b1
