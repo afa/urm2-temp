@@ -13,11 +13,11 @@
   .values
    = render :partial => "shared/check_button", :locals => {:name => "profile[search.show_box]", :title => "Показывать окно &#171;Поиск&#187; на всех страницах".html_safe, :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.show_box)}}
   .values
-   = render :partial => "shared/check_button", :locals => {:name => "profile[search.only_store]", :title => "Устанавливать настройку &laquo;Только склад&raquo; в окне &laquo;Поиск&raquo;", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_store)}}
+   = render :partial => "shared/check_button", :locals => {:name => "profile[search.only_store]", :title => "Устанавливать настройку &laquo;Только склад&raquo; в окне &laquo;Поиск&raquo;".html_safe, :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_store)}}
   .values
-   = render :partial => "shared/check_button", :locals => {:name => "profile[search.only_available]", :title => "Устанавливать настройку &laquo;Только в наличии&raquo; в окне &laquo;Поиск&raquo;", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_available)}}
+   = render :partial => "shared/check_button", :locals => {:name => "profile[search.only_available]", :title => "Устанавливать настройку &laquo;Только в наличии&raquo; в окне &laquo;Поиск&raquo;".html_safe, :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_available)}}
   .values
-   = render :partial => "shared/check_button", :locals => {:name => "profile[order.only_my]", :title => "Устанавливать настройку &laquo;Только мои&raquo; там, где она есть", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_my)}}
+   = render :partial => "shared/check_button", :locals => {:name => "profile[order.only_my]", :title => "Устанавливать настройку &laquo;Только мои&raquo; там, где она есть".html_safe, :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_my)}}
   
  .profile_line
   .heading Общие для всех сотрудников
