@@ -2,34 +2,28 @@
  %span.current Настройки
 = form_for :profile, :url => update_profile_path do |form|
  .profile_line
-  .heading Применение для производителя
+  .heading
+   Персональные настройки
   .values
-   = render :partial => "shared/select_list", :locals => {:list_items => Axapta.application_area_list.map{|a| [a.application_area_id, a.application_area_name] }, :name => "area_list", :title => "Применение для производителя", :opts => {:use_system =>true, :selected => @profile.application_area}}
- .profile_line
-  .heading Персональные настройки
+   = render :partial => "shared/select_list", :locals => {:list_items => Axapta.application_area_list.map{|a| [a.application_area_id, a.application_area_name] }, :name => "area_list", :title => "Применение для производителя, выбранное по умолчанию", :opts => {:use_system =>true, :selected => @profile.application_area}}
   .values
-   = render :partial => "shared/check_button", :locals => {:name => "profile[search.show_box]", :title => "Показывать поиск", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.show_box)}}
+   = render :partial => "shared/check_button", :locals => {:name => "profile[alert.urm]", :title => "Отправлять оповещения в УРМ", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.alert_urm)}}
   .values
-   = render :partial => "shared/check_button", :locals => {:name => "profile[search.only_store]", :title => "Только на складе", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_store)}}
+   = render :partial => "shared/check_button", :locals => {:name => "profile[alert.post]", :title => "Отправлять оповещения на электронную почту", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.alert_post)}}
   .values
-   = render :partial => "shared/check_button", :locals => {:name => "profile[search.only_available]", :title => "Только доступные", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_available)}}
+   = render :partial => "shared/check_button", :locals => {:name => "profile[search.show_box]", :title => "Показывать окно &laquo;Поиск&raquo; на всех страницах", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.show_box)}}
   .values
+   = render :partial => "shared/check_button", :locals => {:name => "profile[search.only_store]", :title => "Устанавливать настройку &laquo;Только склад&raquo; в окне &laquo;Поиск&raquo;", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_store)}}
+  .values
+   = render :partial => "shared/check_button", :locals => {:name => "profile[search.only_available]", :title => "Устанавливать настройку &laquo;Только в наличии&raquo; в окне &laquo;Поиск&raquo;", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_available)}}
+  .values
+   = render :partial => "shared/check_button", :locals => {:name => "profile[order.only_my]", :title => "Устанавливать настройку &laquo;Только мои&raquo; там, где она есть", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_my)}}
   
  .profile_line
-  .heading Только мои заказы
-  .values
-   = render :partial => "shared/check_button", :locals => {:name => "profile[order.only_my]", :title => "Только мои", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_my)}}
- 
- .profile_line
-  .heading Настройка оповещений
-  .values &mdash;
-
- .profile_line
-  .heading На фирме
-  .values &mdash;
- .profile_line
-  .heading Количество дней резервирования
-  .values= @profile.reservation_end
+  .heading Общие для всех сотрудников
+  .values Продолжительность резервирования товара #{@profile.reservation_end} дней
+  .values Требования к упаковке
+  .values Тип упаковки, выбранный по умолчанию
  = render :partial => "shared/submit_button", :locals => {:title => t(:save_setting), :name => "submit"}
 
 
