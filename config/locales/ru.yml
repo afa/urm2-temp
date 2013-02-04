@@ -163,7 +163,7 @@ ru:
  pick_lines: Бронь
  reserve_transfer: Перенос резерва
  remove_lines: Удаление строк
- application_mandatory: Требовать указать применение
+ application_mandatory: Применение для производителя
  invoice_generation: Выставление счета
  order_comment: Комментарий
  request_string: Запрос
@@ -196,3 +196,4 @@ ru:
  export_xls: выгрузить в excel файл
  use_sale: Заказ для добавления
  new_sale: Новый заказ
+ save_setting: Сохранить настройки

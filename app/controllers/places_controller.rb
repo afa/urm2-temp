@@ -4,4 +4,7 @@ class PlacesController < ApplicationController
 
   def show
   end
+
+  def archive
+  end
 end

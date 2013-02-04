@@ -1,2 +1,6 @@
-%h1 Shipments#show
-%p Find me in app/views/shipments/show.html.haml
+.nav-title
+ %span= link_to "Исходящие грузы", shipments_path
+ %span >
+ %span.current Груз #{@shipment.id}
+
+
