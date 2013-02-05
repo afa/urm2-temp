@@ -22,6 +22,7 @@
  .profile_line
   .heading Общие для всех сотрудников
   .values Продолжительность резервирования товара #{@profile.reservation_end} дней
+  -# #29754
   .values Требования к упаковке
   .values Тип упаковки, выбранный по умолчанию
  = render :partial => "shared/submit_button", :locals => {:title => t(:save_setting), :name => "submit"}
