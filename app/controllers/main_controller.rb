@@ -184,7 +184,6 @@ class MainController < ApplicationController
 
   def profile
    @profile = OpenStruct.new(:only_my => Setting.get("order.only_my"), :only_store => Setting.get("search.only_store"), :only_available => Setting.get("search.only_available"), :show_box => Setting.get("search.show_box"), :reservation_end => Setting.get('order.reservation_end'), :area_list => Setting.get('cart.area_list'))
-   p "---pro", @profile
   end
 
   def update_profile
