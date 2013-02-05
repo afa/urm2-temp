@@ -183,11 +183,12 @@ class MainController < ApplicationController
   end
 
   def profile
-   @profile = OpenStruct.new(:only_my => Setting.get("order.only_my"), :only_store => Setting.get("search.only_store"), :only_available => Setting.get("search.only_available"), :show_box => Setting.get("search.show_box"), :reservation_end => Setting.get('order.reservation_end'))
+   @profile = OpenStruct.new(:only_my => Setting.get("order.only_my"), :only_store => Setting.get("search.only_store"), :only_available => Setting.get("search.only_available"), :show_box => Setting.get("search.show_box"), :reservation_end => Setting.get('order.reservation_end'), :area_list => Setting.get('cart.area_list'))
   end
 
   def update_profile
-   Setting.set_all(params[:profile])
+   lut = {:only_store => "search.only_store", :only_my => "order.only_my", :only_available => "search.only_available", :show_box => "search.show_box", :reservation_end => 'order.reservation_end', :area_list => 'cart.area_list'}
+   Setting.set_all(params[:profile].inject({}){|r, (k, v)| lut.has_key?(k) ? r.merge(lut[k] => v) : r.merge(k => v) })
    redirect_to profile_path
   end
  protected

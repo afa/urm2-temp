@@ -5,7 +5,7 @@
   .heading
    Персональные настройки
   .values
-   = render :partial => "shared/select_list", :locals => {:list_items => Axapta.application_area_list.map{|a| [a.application_area_id, a.application_area_name] }, :name => "area_list", :title => "Применение для производителя, выбранное по умолчанию", :opts => {:use_system =>true, :selected => @profile.application_area}}
+   = render :partial => "shared/select_list", :locals => {:list_items => Axapta.application_area_list.map{|a| [a.application_area_id, a.application_area_name] }, :name => "profile[cart.area_list]", :title => "Применение для производителя, выбранное по умолчанию", :opts => {:use_system =>true, :selected => @profile.area_list}}
   .values
    = render :partial => "shared/check_button", :locals => {:name => "profile[alert.urm]", :title => "Отправлять оповещения в УРМ", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.alert_urm)}}
   .values
@@ -22,6 +22,7 @@
  .profile_line
   .heading Общие для всех сотрудников
   .values Продолжительность резервирования товара #{@profile.reservation_end} дней
+  -# #29754
   .values Требования к упаковке
   .values Тип упаковки, выбранный по умолчанию
  = render :partial => "shared/submit_button", :locals => {:title => t(:save_setting), :name => "submit"}
