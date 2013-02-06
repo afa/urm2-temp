@@ -18,7 +18,7 @@ module Paginable
     prt = case pages
      when 1..11 then "shared/page_1_11.html.haml"
      when 12 then page > 6 ? "shared/page_12_7.html.haml" : "shared/page_12_6.html.haml"
-     when > 12 then page > (pages - 6) ? "shared/page_13_last.html.haml"  : (page.between?(7, pages - 6) ? "shared/page_13_mid.html.haml" : "shared/page_13_first.html.haml")
+     when 12..1000000 then page > (pages - 6) ? "shared/page_13_last.html.haml"  : (page.between?(7, pages - 6) ? "shared/page_13_mid.html.haml" : "shared/page_13_first.html.haml")
     end
     render_to_string :partial => prt, :locals => {:page => page, :pages => pages, :opts => parm[:derid]}
 =begin
