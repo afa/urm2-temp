@@ -9,8 +9,9 @@ module Paginable
    # #29220
   def paginate(parm = {})
    if parm.has_key?(:derid) && parm[:derid].is_a?(Hash)
-    page = options[:page].to_i
-    pages = options[:pages].to_i
+    options = parm[:derid]
+    page = parm[:page].to_i
+    pages = parm[:pages].to_i
     page = 1 if page < 1
     pages = 1 if pages < 1
     page = pages if page > pages
