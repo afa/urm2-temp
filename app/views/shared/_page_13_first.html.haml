@@ -1,8 +1,8 @@
 .pagination{:style => "#{defined?(align) ? "text-align=#{align}" : ""}"}
  - 1..9 do |curr|
   - if curr == page
-   %a{:href => url_for(params.merge(:page => curr}= curr
+   %a{:href => url_for(params.merge(:page => curr))}= curr
   - else
    %span.current= curr
    %span ...
- %a{:href => url_for(params.merge(:page => pages}= pages
+ %a{:href => url_for(params.merge(:page => pages))}= pages
