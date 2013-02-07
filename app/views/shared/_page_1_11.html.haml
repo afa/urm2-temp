@@ -1,4 +1,4 @@
-.pagination{:style => "#{defined?(opts) && opts.has_key?(:align) ? "text-align=#{opts[:align]}" : ""}"}
+.pagination{:style => "#{defined?(opts) && opts.has_key?(:align) ? "text-align:#{opts[:align]};" : ""}"}
  - (1..pages).each do |curr|
   - if curr == page
    %span.current= curr
