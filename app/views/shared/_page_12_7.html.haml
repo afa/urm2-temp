@@ -1,1 +1,8 @@
-1 ... 4 5 6 7 8 9 10 11 12
+.pagination{:style => "#{defined?(opts) && opts.has_key?(:align) ? "text-align:#{opts[:align]};" : ""}"}
+ %a{:href => url_for(params.merge(:page => 1))} 1
+ %span ...
+ - (4..pages).each do |curr|
+  - if curr == page
+   %span.current= curr
+  - else
+   %a{:href => url_for(params.merge(:page => curr))}= curr
