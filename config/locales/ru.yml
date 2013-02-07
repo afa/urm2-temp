@@ -1,4 +1,9 @@
 ru:
+ strings:
+  one: всего %{count} строка
+  few: всего %{count} строки
+  many: всего %{count} строк
+  other: всего %{count} строк
  number:
   format:
    delimiter: ','
