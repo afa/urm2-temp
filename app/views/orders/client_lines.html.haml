@@ -50,7 +50,7 @@
     .padded
      = form_for :export_fields, :url => export_client_lines_orders_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
       = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "items[export]", :opts => {:style => "float: right;"}}
-     = paginate(:page => @lines.page.to_i, :pages => @lines.total.to_i, :derid => {:align => "left"})
+     = paginate(:page => @lines.page.to_i, :pages => @lines.total.to_i, :derid => {:align => "left", :hide_empty => true})
 
 :javascript
  if($(".calendar-input").length > 0){

@@ -64,8 +64,8 @@
       %th.text-right Счет
       %th.text-right Сумма по счету
      = render :partial => "orders/list_line", :collection => @orders.items
-    = paginate(:page => @orders.page.to_i, :pages => @orders.total.to_i, :derid => {:align => "left"})
     .padded
+     = paginate(:page => @orders.page.to_i, :pages => @orders.total.to_i, :derid => {:align => "left", :hide_empty => true})
      = form_for :export_fields, :url => export_list_orders_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
       %input.copiable{:type => :hidden, :value => 'input#filter_sales_id'}
       %input.copiable{:type => :hidden, :value => 'input#filter_official_number'}

@@ -49,7 +49,6 @@
  .table-navigation-block{:class => "scroll"}
   .table-block
    .table-scrolling
-    = paginate(:page => @lines.page.to_i, :pages => @lines.total.to_i, :derid => {})
     -# = render :partial => "shared/pagination", :locals => {:page => @lines.page.to_i, :pages => @lines.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей: #{@lines.records}&nbsp;&nbsp;Страниц: #{@lines.total}&nbsp;&nbsp;".html_safe, :text_before_current => "Страница: "}}
     -# = render :partial => "shared/pagination", :locals => {:page => @lines.page.to_i, :pages => @lines.total.to_i}
     %table.table-style{:class => "order-list"}
@@ -68,6 +67,7 @@
 
      = render :partial => "orders/control_line", :collection => @lines.items
     .padded
+     = paginate(:page => @lines.page.to_i, :pages => @lines.total.to_i, :derid => {:align => "left", :hide_empty => true})
      = form_for :export_fields, :url => export_control_orders_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
       = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "items[export]"}
 
