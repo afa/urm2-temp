@@ -6,7 +6,7 @@ class Offer::Store < Offer::Base
   def self.search(hsh)
    return [] if hsh.blank? || (hsh[:external_code].blank? && (hsh[:query_string].blank? || hsh[:query_string].size < 3))
    begin
-    data = Axapta.search_names({:show_forecast_availability => true, :show_analog_existence => true, :calc_price=>true, :calc_qty => true}.merge(hsh || {}).merge(:user_hash => User.current.current_account.try(:axapta_hash)))
+    data = Axapta.search_names({:show_delivery_prognosis => true, :show_forecast_availability => true, :show_analog_existence => true, :calc_price=>true, :calc_qty => true}.merge(hsh || {}).merge(:user_hash => User.current.current_account.try(:axapta_hash)))
    rescue Exception => e
     p "---exc in Store#search #{Time.now}", e, e.backtrace
     return []
