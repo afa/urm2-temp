@@ -53,7 +53,7 @@
          %th Код номенклатуры
 
         = render :partial => "quotations/showed_line", :collection => @quotation.items
-       = paginate(:page => @quotation.page.to_i, :pages => @quotation.total.to_i, :derid => {:align => "left"})
+       = paginate(:page => @quotation.page.to_i, :pages => @quotation.total.to_i, :derid => {:align => "left", :hide_empty => true})
 
       .dialogs
        .page.active
