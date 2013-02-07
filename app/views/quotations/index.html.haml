@@ -36,7 +36,7 @@
       %th.text-left{:style => "min-width:250px;"} Менеджер
       %th.text-left{:style => "min-width:400px;"} Примечание
      = render :partial => "quotations/list_line", :collection => @quotations.items
-    = paginate(:page => @quotations.page.to_i, :pages => @quotations.total.to_i, :derid => {:align => "left"})
     .padded
+     = paginate(:page => @quotations.page.to_i, :pages => @quotations.total.to_i, :derid => {:align => "left"})
      = form_for :export_fields, :url => export_list_quotations_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
       = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "items[export]", :opts => {:style => "float: right;"}}
