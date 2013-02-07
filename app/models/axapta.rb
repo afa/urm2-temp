@@ -142,7 +142,7 @@ class Axapta
   def self.sales_info_paged(page, *args)
    prm = args.dup.as_hash
    begin
-    res = AxaptaRequest.sales_info({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1), :order_sales_id => "desc"}.merge(prm))
+    res = AxaptaRequest.sales_info({:records_per_page => per_page, :user_hash => axapta_hash, :page_num => (page || prm[:page] || 1), :order_sales_id => "desc"}.merge(prm))
     #res = AxaptaRequest.sales_info({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1), :order_sales_id => "desc"}.merge(*args))
    rescue Exception => e
     return OpenStruct.new(:total => 0, :page => 0, :records => 0, :items => [], :error => e.to_s)
@@ -182,7 +182,7 @@ class Axapta
 
   def self.sales_lines_paged(page, *args)
    prm = args.dup.as_hash
-   res = AxaptaRequest.sales_lines({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1)}.merge(prm))
+   res = AxaptaRequest.sales_lines({:records_per_page => per_page, :user_hash => axapta_hash, :page_num => (page || prm[:page] || 1)}.merge(prm))
    #res = AxaptaRequest.sales_lines({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1)}.merge(*args))
    OpenStruct.new(:items => (res.try(:[], "sales_lines") || []).map do |sale|
     OpenStruct.new sale
@@ -257,7 +257,7 @@ class Axapta
   end
 
   def self.quotation_info_paged(page, hsh)
-   res = AxaptaRequest.quotation_info({:page_num => (page || hsh[:page] || 1)}.merge(hsh).merge(:user_hash => axapta_hash))
+   res = AxaptaRequest.quotation_info({:records_per_page => per_page, :page_num => (page || hsh[:page] || 1)}.merge(hsh).merge(:user_hash => axapta_hash))
    OpenStruct.new(:items => (res.try(:[], "quotations") || []).map{|i| OpenStruct.new(i)}, :page => (page || hsh[:page] || 1), :total =>  res.try(:[], "pages") || 1, :records => res.try(:[], "records") || 0)
   end
 
@@ -276,7 +276,7 @@ class Axapta
     fix[:item_name] += '*' if fix[:item_name].last != '*'
     fix[:item_name] = "" if fix[:item_name].mb_chars.length < 4
    end
-   res = AxaptaRequest.quotation_lines(hsh.merge(:page_num => (page || hsh[:page] || 1), :user_hash => axapta_hash).merge(fix))
+   res = AxaptaRequest.quotation_lines(hsh.merge(:records_per_page => per_page, :page_num => (page || hsh[:page] || 1), :user_hash => axapta_hash).merge(fix))
    OpenStruct.new(:items => (res.try(:[], "quotations_lines") || []).map{|i| OpenStruct.new(i)}, :page => (page || hsh[:page] || 1), :total =>  res.try(:[], "pages") || 1, :records => res.try(:[], "records") || 0)
   end
 
@@ -344,10 +344,14 @@ class Axapta
   end
 
   def self.info_cust_trans(hsh)
-    AxaptaRequest.info_cust_trans(hsh.merge(:user_hash => axapta_hash)).try(:[], "trans").map{|a| OpenStruct.new(a)  }
+    AxaptaRequest.info_cust_trans(hsh.merge(:records_per_page => per_page, :user_hash => axapta_hash)).try(:[], "trans").map{|a| OpenStruct.new(a)  }
   end
 
  private
+  def self.per_page
+   Setting.get("table.per_page") || 10
+  end
+
   def self.axapta_hash
    unless User.current
     @last_parsed_error = {"message" => "Non-selected user"}
