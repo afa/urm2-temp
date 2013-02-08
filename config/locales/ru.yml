@@ -1,5 +1,6 @@
 ru:
  strings:
+  zero: нет строк
   one: всего %{count} строка
   few: всего %{count} строки
   many: всего %{count} строк
