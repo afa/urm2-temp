@@ -55,10 +55,10 @@ class OrdersController < ApplicationController
   end
 
   def client_lines
-   @filter.date_to = Date.current.strftime("%Y-%m-%d") if @filter.date_to.blank?
-   @filter.date_from = 1.month.ago.strftime("%Y-%m-%d") if @filter.date_from.blank?
-   @filter_hash.merge!(:date_to => @filter.date_to, :date_from => @filter.date_from)
-   @lines = Axapta.sales_lines_paged(@page, @filter_hash.merge(:only_close => true)) #fix when made request
+   #@filter.date_to = Date.current.strftime("%Y-%m-%d") if @filter.date_to.blank?
+   #@filter.date_from = 1.month.ago.strftime("%Y-%m-%d") if @filter.date_from.blank?
+   #@filter_hash.merge!(:date_to => @filter.date_to, :date_from => @filter.date_from)
+   @lines = Axapta.invoice_lines_paged(@page, @filter_hash)
   end
 
   def control
@@ -241,9 +241,7 @@ class OrdersController < ApplicationController
     @filter_hash[:this_sales_origin]='0'
    end
    @filter = OpenStruct.new(@filter_hash)
-   p "---ords-filter", @filter
    if params[:filter]
-    p "---hshfilter", Hash[params[:filter].delete_if{|k, v| not %w(reservation_end only_my official_number sales_id this_sales_origin).include?(k) }.map{|k, v| ["order.#{k}", v] }]
     Setting.set_all(Hash[params[:filter].delete_if{|k, v| not %w(reservation_end only_my official_number sales_id this_sales_origin).include?(k) }.map{|k, v| ["order.#{k}", v] }])
    end
    @page = params[:page] || 1

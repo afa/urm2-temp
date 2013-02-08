@@ -72,4 +72,5 @@
       %th Код номенклатуры
 
      = render :partial => "quotations/item_line", :collection => @lines.items
+    = render :partial => "shared/stat.html.haml", :locals => {:mode => :strings, :value => @lines.records.to_i}
     = paginate(:page => @lines.page.to_i, :pages => @lines.total.to_i, :derid => {:align => "left", :hide_empty => true})

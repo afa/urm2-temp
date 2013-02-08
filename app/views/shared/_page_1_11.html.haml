@@ -3,4 +3,5 @@
   - if curr == page
    %span.current= curr
   - else
+   - p "---page_1", params
    %a{:href => url_for(params.merge(:page => curr))}= curr
