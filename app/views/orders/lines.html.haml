@@ -63,6 +63,7 @@
       %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_from]"]'}
       %input.copiable{:type => :hidden, :value => 'div.filter table input[name="filter[date_to]"]'}
       = render :partial => "shared/submit_button", :locals => {:title => t(:export_xls), :name => "items[export]", :opts => {:style => "float: right;"}}
+      = render :partial => "shared/stat.html.haml", :locals => {:mode => :strings, :value => @lines.records.to_i}
       = paginate(:page => @lines.page.to_i, :pages => @lines.total.to_i, :derid => {:align => "left", :hide_empty => true})
 
 %div{:style => "z-index:9999;"}
