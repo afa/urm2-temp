@@ -12,10 +12,10 @@
       %th{:style => "vertical-align: middle;"} Дата накладной
       %td.tiny{:style => "vertical-align: middle;"}
        с&nbsp;
-       %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from)}
+       %input#filter_date_from.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from)}
        -# .calendar-input= @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from
        &nbsp;по&nbsp;
-       %input.calendar-input{:type => "text", :name => 'filter[date_to]', :value => @filter.try(:date_to)}
+       %input#filter_date_to.calendar-input{:type => "text", :name => 'filter[date_to]', :value => @filter.try(:date_to)}
      %tr
       %th
       %td= render :partial => "shared/submit_button", :locals => {:title => "Найти"}
@@ -42,7 +42,9 @@
      = render :partial => "orders/client_line", :collection => @lines.items
     .padded
      = form_for :export_fields, :url => export_client_lines_orders_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
-      = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "items[export]", :opts => {:style => "float: right;"}}
+      %input.copiable{:type => :hidden, :value => 'input#filter_date_from'}
+      %input.copiable{:type => :hidden, :value => 'input#filter_date_to'}
+      = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "items[export]", :opts => {:class => "preload", :style => "float: right;"}}
      = render :partial => "shared/stat.html.haml", :locals => {:mode => :strings, :value => @lines.records.to_i}
      = paginate(:page => @lines.page.to_i, :pages => @lines.total.to_i, :derid => {:align => "left", :hide_empty => true})
 
