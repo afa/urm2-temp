@@ -1,10 +1,10 @@
 ru:
  strings:
   zero: нет строк
-  one: Всего: %{count}
-  few: Всего: %{count}
-  many: Всего: %{count}
-  other: Всего: %{count}
+  one: "Всего: %{count}"
+  few: "Всего: %{count}"
+  many: "Всего: %{count}"
+  other: "Всего: %{count}"
  number:
   format:
    delimiter: ','
