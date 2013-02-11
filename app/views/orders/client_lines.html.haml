@@ -41,15 +41,15 @@
       %th Валюта
      = render :partial => "orders/client_line", :collection => @lines.items
     .padded
-     %div{:style => "display:inline-block; float:right;"}
-      = form_for :export_fields, :url => export_client_lines_orders_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
-       %input.copiable{:type => :hidden, :value => 'input#filter_date_from'}
-       %input.copiable{:type => :hidden, :value => 'input#filter_date_to'}
-       = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "items[export]", :opts => {:class => "preload", :style => "float: right;"}}
-     %div{:style => "display:inline-block; float:left;"}
-      = paginate(:page => @lines.page.to_i, :pages => @lines.total.to_i, :derid => {:align => "left", :hide_empty => true})
-     %div{:style => "display:inline-block; float:left;"}
-      = render :partial => "shared/stat.html.haml", :locals => {:mode => :strings, :value => @lines.records.to_i}
+    %div{:style => "display:inline-block; float:right;"}
+     = form_for :export_fields, :url => export_client_lines_orders_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
+      %input.copiable{:type => :hidden, :value => 'input#filter_date_from'}
+      %input.copiable{:type => :hidden, :value => 'input#filter_date_to'}
+      = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "items[export]", :opts => {:class => "preload", :style => "float: right;"}}
+    %div{:style => "display:inline-block; float:left;"}
+     = paginate(:page => @lines.page.to_i, :pages => @lines.total.to_i, :derid => {:align => "left", :hide_empty => true})
+    %div{:style => "display:inline-block; float:left;"}
+     = render :partial => "shared/stat.html.haml", :locals => {:mode => :strings, :value => @lines.records.to_i}
 
 :javascript
  if($(".calendar-input").length > 0){
