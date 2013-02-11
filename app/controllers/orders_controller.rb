@@ -199,7 +199,15 @@ class OrdersController < ApplicationController
   def export_client_lines #fix when made request
    respond_with do |format|
     format.csv do
-     send_data CartItem.export(:csv, :open_client_lines, Axapta.sales_lines_all(@filter_hash.merge(:only_open => true)).items), :type => "application/csv", :disposition => :attachment
+     send_data CartItem.export(:csv, :client_lines, Axapta.invoice_lines_all(@filter_hash).items), :type => "application/csv", :disposition => :attachment
+    end
+   end
+   respond_with do |format|
+    format.csv do
+     send_data CartItem.export(:csv, :client_lines, Axapta.invoice_lines_all(@filter_hash).items), :type => "application/csv", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.csv"
+    end
+    format.xls do
+     send_data CartItem.export(:xls, :client_lines, Axapta.invoice_lines_all(@filter_hash).items), :type => "application/vnd.ms-excel", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.xls"
     end
    end
    
