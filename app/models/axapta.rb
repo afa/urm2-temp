@@ -231,7 +231,7 @@ class Axapta
     #r.delete_if{|k, v| v.nil? }
     r.delete_if{|k, v| v.nil? || v == 0 }
    end
-   rez.map{|r| r.empty? ? nil : r }.compact
+   Hash[rez.map{|r| r.empty? ? nil : r }.compact]
   end
 
   def self.create_invoice(order, send = false)
