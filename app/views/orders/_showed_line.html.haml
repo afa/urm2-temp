@@ -30,4 +30,5 @@
  - if @mandatory
   %td.note-option.main_options_data
    - if WebUtils.parse_bool(showed_line.application_area_mandatory)
+    - p "---mansd", showed_line.application_area_id
     = select_tag "order[#{showed_line.sales_id}][line][#{iid}][application_area_id]", options_from_collection_for_select(@application_area_list, "application_area_id", "application_area_name", showed_line.application_area_id)
