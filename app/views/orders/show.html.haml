@@ -61,7 +61,7 @@
          %th.main_options_header Примечание
          %th.main_options_header Требование к позиции
          - if @mandatory
-         %th.main_options_header Применение для производителя
+          %th.main_options_header Применение для производителя
 
         = render :partial => "orders/showed_line", :collection => @lines.items
        = render :partial => "shared/stat.html.haml", :locals => {:mode => :strings, :value => @lines.records.to_i}
