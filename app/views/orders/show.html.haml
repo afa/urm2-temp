@@ -60,6 +60,7 @@
          %th Ожидаемая дата поставки
          %th.main_options_header Примечание
          %th.main_options_header Требование к позиции
+         - if @mandatory
          %th.main_options_header Применение для производителя
 
         = render :partial => "orders/showed_line", :collection => @lines.items
