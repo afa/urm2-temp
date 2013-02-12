@@ -79,6 +79,7 @@ class OrdersController < ApplicationController
     @application_area_list = Axapta.application_area_list
     @mandatory = true
    end
+   p "---orsh", @lines
    @deliveries = current_user.deliveries
   end
 
