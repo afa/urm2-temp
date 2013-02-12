@@ -474,6 +474,7 @@ function ordersSaveOnClick(){
  $('td.main_options_data input[type="text"][name^="order["][name$="][note]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
  $('td.main_options_data input[type="text"][name^="order["][name$="][requirement]"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
  $('textarea[id^="order_"][id$="_comment"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
+ $('select[id^="order_"][id$="_application_area_id"]').each(function(i, item){ ordersCopyToHidden(item, curr); });
  $(this).parents("form").submit();
 }
 
