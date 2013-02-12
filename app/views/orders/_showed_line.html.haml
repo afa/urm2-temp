@@ -27,3 +27,5 @@
  %td= showed_line.confirmed_dlv_date
  %td.note-option.main_options_data.medium= text_field_tag "order[#{showed_line.sales_id}][line][#{iid}][note]", showed_line.note
  %td.requirement-option.main_options_data.medium= text_field_tag "order[#{showed_line.sales_id}][line][#{iid}][requirement]", showed_line.requirements
+ %td.note-option.main_options_data
+  = select_tag "order[#{showed_line.sales_id}][line][#{iid}][application_area_id]", options_from_collection_for_select(@application_area_list, "application_area_id", "application_area_name")

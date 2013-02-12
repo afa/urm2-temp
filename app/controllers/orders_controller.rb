@@ -73,7 +73,12 @@ class OrdersController < ApplicationController
     render :status => 404, :text => 'notfound'
     return
    end
-   @lines = Axapta.sales_lines_paged(@page, :sales_id => params[:id], :show_reserve_qty => true, :show_status_qty => true, :only_open => true)
+   @lines = Axapta.sales_lines_paged(@page, :sales_id => params[:id], :show_reserve_qty => true, :show_status_qty => true, :only_open => true, :order_item_name => "asc")
+   @mandatory = false
+   unless @lines.select{|l| l.application_area_mandatory }
+    @application_area_list = Axapta.application_area_list
+    @mandatory = true
+   end
    @deliveries = current_user.deliveries
   end
 
