@@ -13,7 +13,7 @@
  %td.text-left= showed_line.brend
  %td.text-right.tiny
   .readable-amount{:style => "display: none;"}= showed_line.sales_qty
-  .editable-amount= text_field_tag "order[#{showed_line.sales_id}][line][#{iid}][qty]", showed_line.sales_qty
+  .editable-amount= text_field_tag "order[#{showed_line.sales_id}][line][#{iid}][qty]", showed_line.sales_qty, :style => "text-align: right;"
  %td.text-right= @price_decor[showed_line.currency_code].decore(showed_line.price)
  -# TODO %td.text-right= text_field_tag "order[#{showed_line.sales_id}][user_price]", showed_line.user_price
  %td.text-right= @price_decor[showed_line.currency_code].decore(showed_line.amount)
@@ -27,5 +27,3 @@
  %td= showed_line.confirmed_dlv_date
  %td.note-option.main_options_data.medium= text_field_tag "order[#{showed_line.sales_id}][line][#{iid}][note]", showed_line.note
  %td.requirement-option.main_options_data.medium= text_field_tag "order[#{showed_line.sales_id}][line][#{iid}][requirement]", showed_line.requirements
- %td
- %td

@@ -1,7 +1,7 @@
 .nav-title
  %span= link_to "Заказы", orders_path
- %span &raquo;
- %span.current Заказ #{params[:id]}
+ %span >
+ %span.current Заказ #{@order_info.id.to_s}
 
 .content-wrap
  .table-navigation-block{:class => "scroll"}
@@ -58,10 +58,8 @@
          %th Продано
          %th Дата готовности
          %th Ожидаемая дата поставки
-         %th.main_options_header Комментарий
-         %th.main_options_header Требования
-         %th Контактное лицо
-         %th Проект
+         %th.main_options_header Примечание
+         %th.main_options_header Требование к позиции
 
         = render :partial => "orders/showed_line", :collection => @lines.items
        = render :partial => "shared/stat.html.haml", :locals => {:mode => :strings, :value => @lines.records.to_i}
