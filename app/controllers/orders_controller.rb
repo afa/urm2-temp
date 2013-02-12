@@ -75,7 +75,7 @@ class OrdersController < ApplicationController
    end
    @lines = Axapta.sales_lines_paged(@page, :sales_id => params[:id], :show_reserve_qty => true, :show_status_qty => true, :only_open => true, :order_item_name => "asc")
    @mandatory = false
-   unless @lines.select{|l| l.application_area_mandatory }
+   unless @lines.select{|l| WebUtils.parse_bool(l.application_area_mandatory) }.empty?
     @application_area_list = Axapta.application_area_list
     @mandatory = true
    end
