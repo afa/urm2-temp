@@ -171,7 +171,7 @@ ru:
  remove_lines: Удаление строк
  application_mandatory: Применение для производителя
  invoice_generation: Выставление счета
- order_comment: Комментарий
+ order_comment: Примечание
  request_string: Запрос
  requested_count: Количество
  manager_comment: Сообщение менеджеру
