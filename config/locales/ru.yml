@@ -1,10 +1,10 @@
 ru:
  strings:
   zero: нет строк
-  one: всего %{count} строка
-  few: всего %{count} строки
-  many: всего %{count} строк
-  other: всего %{count} строк
+  one: "Всего: %{count}"
+  few: "Всего: %{count}"
+  many: "Всего: %{count}"
+  other: "Всего: %{count}"
  number:
   format:
    delimiter: ','
@@ -124,6 +124,7 @@ ru:
  cart_world: ДМС
 
  save: Сохранить
+ save_order: Сохранить заказ
  start_edit_order: Оформить заказ
  make: Заказать
  cancel: Отмена
@@ -171,7 +172,7 @@ ru:
  remove_lines: Удаление строк
  application_mandatory: Применение для производителя
  invoice_generation: Выставление счета
- order_comment: Комментарий
+ order_comment: Примечание
  request_string: Запрос
  requested_count: Количество
  manager_comment: Сообщение менеджеру

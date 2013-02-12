@@ -1,7 +1,7 @@
 .nav-title
  %span= link_to "Заказы", orders_path
- %span &raquo;
- %span.current Заказ #{params[:id]}
+ %span >
+ %span.current Заказ #{@order_info.id.to_s}
 
 .content-wrap
  .table-navigation-block{:class => "scroll"}
@@ -58,10 +58,10 @@
          %th Продано
          %th Дата готовности
          %th Ожидаемая дата поставки
-         %th.main_options_header Комментарий
-         %th.main_options_header Требования
-         %th Контактное лицо
-         %th Проект
+         %th.main_options_header Примечание
+         %th.main_options_header Требование к позиции
+         - if @mandatory
+          %th.main_options_header Применение для производителя
 
         = render :partial => "orders/showed_line", :collection => @lines.items
        = render :partial => "shared/stat.html.haml", :locals => {:mode => :strings, :value => @lines.records.to_i}
@@ -76,8 +76,8 @@
           .header= t(:order_comment)
           = form_for :order, :url => save_order_path(params[:id]) do |f6|
            -# = label_tag "order_#{params[:id]}_comment", t(:order_comment)
-           = text_area_tag "order[#{params[:id]}][comment]", @order_info.comment
-           = render :partial => "shared/button", :locals => {:title => t(:save), :opts => {:id => "save_order"}}
+           = text_area_tag "order[#{params[:id]}][comment]", @order_info.comment, :cols=>40, :rows => 4
+           = render :partial => "shared/button", :locals => {:title => t(:save_order), :opts => {:id => "save_order"}}
          .x4
           = yield :order_base_make
          .x4

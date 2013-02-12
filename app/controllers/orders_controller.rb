@@ -69,9 +69,18 @@ class OrdersController < ApplicationController
   def show
    @close_reasons = Axapta.sales_close_reason_list
    @order_info = Axapta.sales_info(:sales_id => params[:id], :show_external_invoice_num => true, :show_max_quotation_prognosis => true).first
-   @lines = Axapta.sales_lines_paged(@page, :sales_id => params[:id], :show_reserve_qty => true, :show_status_qty => true, :only_open => true)
+   if @order_info.nil?
+    render :status => 404, :text => 'notfound'
+    return
+   end
+   @lines = Axapta.sales_lines_paged(@page, :sales_id => params[:id], :show_reserve_qty => true, :show_status_qty => true, :only_open => true, :order_item_name => "asc")
+   @mandatory = false
+   unless @lines.items.select{|l| l.application_area_mandatory }.empty?
+    @application_area_list = Axapta.application_area_list
+    @mandatory = true
+   end
+   p "---orsh", @lines
    @deliveries = current_user.deliveries
-   render :status => 404 if @order_info.nil?
   end
 
   def save
@@ -199,7 +208,10 @@ class OrdersController < ApplicationController
   def export_client_lines #fix when made request
    respond_with do |format|
     format.csv do
-     send_data CartItem.export(:csv, :open_client_lines, Axapta.sales_lines_all(@filter_hash.merge(:only_open => true)).items), :type => "application/csv", :disposition => :attachment
+     send_data CartItem.export(:csv, :client_lines, Axapta.invoice_lines_all(@filter_hash).items), :type => "application/csv", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.csv"
+    end
+    format.xls do
+     send_data CartItem.export(:xls, :client_lines, Axapta.invoice_lines_all(@filter_hash).items), :type => "application/vnd.ms-excel", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.xls"
     end
    end
    

@@ -231,7 +231,7 @@ class Axapta
     #r.delete_if{|k, v| v.nil? }
     r.delete_if{|k, v| v.nil? || v == 0 }
    end
-   rez.map{|r| r.empty? ? nil : r }.compact
+   Hash[rez.map{|r| r.empty? ? nil : r }.compact]
   end
 
   def self.create_invoice(order, send = false)
@@ -254,6 +254,11 @@ class Axapta
 
   def self.invoice_lines(hsh)
    invoice_lines_paged(nil, hsh).try(:items) || []
+  end
+
+  def self.invoice_lines_all(hsh)
+   res = AxaptaRequest.invoice_lines({:records_per_page => 65535, :page_num => 1}.merge(hsh).merge(:user_hash => axapta_hash))
+   OpenStruct.new(:items => (res.try(:[], "invoice_lines") || []).map{|i| OpenStruct.new(i)}, :page => 1, :total =>  res.try(:[], "pages") || 1, :records => res.try(:[], "records") || 0)
   end
 
   def self.invoice_lines_paged(page, hsh)
