@@ -10,6 +10,7 @@
   = hidden_field_tag "order[#{showed_line.sales_id}][line][#{iid}][process_qty]", showed_line.process_qty
   = hidden_field_tag "order[#{showed_line.sales_id}][line][#{iid}][selected]", ""
   = hidden_field_tag "order[#{showed_line.sales_id}][line][#{iid}][application_area_id]", showed_line.application_area_id
+  - p "---aai", showed_line.application_area_id
  %td.text-left= showed_line.item_name
  %td.text-left= showed_line.brend
  %td.text-right.tiny
