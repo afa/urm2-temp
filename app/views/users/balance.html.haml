@@ -63,9 +63,9 @@
    За указанный период операций не найдено
  - else
   .padded
-   Общий баланс на начало периода: #{@rub_decor.decore(@transes.first.common_balance_amount.to_f - @transes.first.amount.to_f)}; на конец периода: #{@rub_decor.decore @transes.last.common_balance_amount}
+   Общий баланс на начало периода: #{@usd_decor.decore(@transes.first.common_balance_amount.to_f - @transes.first.amount.to_f)} USD; на конец периода: #{@usd_decor.decore @transes.last.common_balance_amount} USD
   .padded
-  .table-navigation-block
+  .table-navigation-block.scroll
    .table-block
     .table-scrolling
      %table.table-style
