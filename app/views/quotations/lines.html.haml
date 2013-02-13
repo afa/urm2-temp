@@ -72,5 +72,18 @@
       %th Код номенклатуры
 
      = render :partial => "quotations/item_line", :collection => @lines.items
-    = render :partial => "shared/stat.html.haml", :locals => {:mode => :strings, :value => @lines.records.to_i}
-    = paginate(:page => @lines.page.to_i, :pages => @lines.total.to_i, :derid => {:align => "left", :hide_empty => true})
+    .padded
+    %div{:style => "display:inline-block; float:right;"}
+     - unless @lines.items.empty?
+      = form_for :export_fields, :url => export_lines_quotations_path(:format => :xls), :method => :post, :html=>{:class => "js", :style => "display: inline-block;"} do |f|
+       -# %input.copiable{:type => :hidden, :value => 'input#filter_date_from'}
+       -# %input.copiable{:type => :hidden, :value => 'input#filter_date_to'}
+       = render :partial => "shared/submit_button", :locals => {:title => t(:export_xls), :name => "items[export]", :opts => {:class => "preload", :style => "float: right;"}}
+      = form_for :export_fields, :url => export_lines_quotations_path(:format => :csv), :method => :post, :html=>{:class => "js", :style => "display: inline-block;"} do |f|
+       -# %input.copiable{:type => :hidden, :value => 'input#filter_date_from'}
+       -# %input.copiable{:type => :hidden, :value => 'input#filter_date_to'}
+       = render :partial => "shared/submit_button", :locals => {:title => t(:export_csv), :name => "items[export]", :opts => {:class => "preload", :style => "float: right;"}}
+    %div{:style => "display:inline-block; float:left;"}
+     = paginate(:page => @lines.page.to_i, :pages => @lines.total.to_i, :derid => {:align => "left", :hide_empty => true})
+    %div{:style => "display:inline-block; float:left;"}
+     = render :partial => "shared/stat.html.haml", :locals => {:mode => :strings, :value => @lines.records.to_i}

@@ -159,5 +159,6 @@ class UsersController < ApplicationController
    @filter.date_from = 1.month.ago.strftime("%Y-%m-%d") if @filter.date_from.blank?
    @filter_hash.merge!(:date_to => @filter.date_to, :date_from => @filter.date_from)
    @page = params[:page] || 1
+   p "---ufil", @filter, @filter_hash
   end
 end

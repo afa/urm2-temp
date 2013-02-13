@@ -14,16 +14,17 @@
     %th.bold.text-right Баланс
    - @info.each do |info|
     %tr
-     %td.bold.text-left= info.company
-     %td.bold.text-left= info.currency
-     %td.bold.text-right= @rub_decor.decore info.amount_free
-     %td.bold.text-right= @rub_decor.decore info.amount_tied
-     %td.bold.text-right= @rub_decor.decore info.cust_debt
-     %td.bold.text-right= @usd_decor.decore info.balance_cur
-     %td.bold.text-right= @rub_decor.decore info.balance
-     %td.bold.text-right= @rub_decor.decore info.balance
+     %td.text-left= info.company
+     %td.text-left= info.currency
+     %td.text-right= @usd_decor.decore info.amount_free
+     %td.text-right= @usd_decor.decore info.amount_tied
+     %td.text-right= @usd_decor.decore info.cust_debt
+     %td.text-right= @rub_decor.decore info.balance_cur
+     %td.text-right= @usd_decor.decore info.balance
+  .padded
+  Общий баланс составляет #{@usd_decor.decore(@info.inject(0.0){|r, i| r + i.balance })} USD
 
- %h2{:style => "padding-left: 10px;"} История расчетов
+ %h2{:style => "padding-left: 0px;"} История расчетов
 
  .filter
   = form_for :filter, :url => balance_users_path, :method => :get do |form|
@@ -56,19 +57,15 @@
      %th
      %td
       = render :partial => "shared/submit_button", :locals => {:name => "filter[submit]", :title => "Показать"}
- .clear
  .padded
  - if @transes.blank?
-  .clear
   .padded
    За указанный период операций не найдено
  - else
-  .clear
   .padded
-   Общий баланс на начало периода: #{@rub_decor.decore(@transes.first.common_balance_amount.to_f - @transes.first.amount.to_f)}; на конец периода: #{@rub_decor.decore @transes.last.common_balance_amount}
-  .clear
+   Общий баланс на начало периода: #{@usd_decor.decore(@transes.first.common_balance_amount.to_f - @transes.first.amount.to_f)} USD; на конец периода: #{@usd_decor.decore @transes.last.common_balance_amount} USD
   .padded
-  .table-navigation-block
+  .table-navigation-block.scroll
    .table-block
     .table-scrolling
      %table.table-style
@@ -94,14 +91,14 @@
         %td.text-left= tr.document_number
         %td.text-left= tr.company_code
         %td.text-left= tr.currency_code
-        %td.text-right= @usd_decor.decore tr.debet_amount_cur
-        %td.text-right= @usd_decor.decore tr.credit_amount_cur
-        %td.text-right= @rub_decor.decore tr.amount
-        %td.text-right= @usd_decor.decore tr.balance_amount_cur
-        %td.text-right= @usd_decor.decore tr.common_balance_amount_cur
-        %td.text-right= @rub_decor.decore tr.balance_amount
-        %td.text-right= @rub_decor.decore tr.common_balance_amount
-     -# .padded
+        %td.text-right= @rub_decor.decore tr.debet_amount_cur
+        %td.text-right= @rub_decor.decore tr.credit_amount_cur
+        %td.text-right= @usd_decor.decore tr.amount
+        %td.text-right= @rub_decor.decore tr.balance_amount_cur
+        %td.text-right= @rub_decor.decore tr.common_balance_amount_cur
+        %td.text-right= @usd_decor.decore tr.balance_amount
+        %td.text-right= @usd_decor.decore tr.common_balance_amount
+     .padded
      = form_for :export_balance, :url => export_balance_users_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
       %input.copiable{:type => :hidden, :value => 'select#filter_currency'}
       %input.copiable{:type => :hidden, :value => 'select#filter_company'}
