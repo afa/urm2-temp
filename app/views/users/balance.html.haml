@@ -91,13 +91,13 @@
         %td.text-left= tr.document_number
         %td.text-left= tr.company_code
         %td.text-left= tr.currency_code
-        %td.text-right= @usd_decor.decore tr.debet_amount_cur
-        %td.text-right= @usd_decor.decore tr.credit_amount_cur
-        %td.text-right= @rub_decor.decore tr.amount
-        %td.text-right= @usd_decor.decore tr.balance_amount_cur
-        %td.text-right= @usd_decor.decore tr.common_balance_amount_cur
-        %td.text-right= @rub_decor.decore tr.balance_amount
-        %td.text-right= @rub_decor.decore tr.common_balance_amount
+        %td.text-right= @rub_decor.decore tr.debet_amount_cur
+        %td.text-right= @rub_decor.decore tr.credit_amount_cur
+        %td.text-right= @usd_decor.decore tr.amount
+        %td.text-right= @rub_decor.decore tr.balance_amount_cur
+        %td.text-right= @rub_decor.decore tr.common_balance_amount_cur
+        %td.text-right= @usd_decor.decore tr.balance_amount
+        %td.text-right= @usd_decor.decore tr.common_balance_amount
      .padded
      = form_for :export_balance, :url => export_balance_users_path(:format => :csv), :method => :post, :html=>{:class => "js"} do |f|
       %input.copiable{:type => :hidden, :value => 'select#filter_currency'}
