@@ -45,6 +45,7 @@ Urm::Application.routes.draw do
    collection do
     get :lines
     post :export_list
+    post :export_lines
    end
    member do
     post :save
