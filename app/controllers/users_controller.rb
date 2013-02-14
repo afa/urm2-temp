@@ -96,17 +96,17 @@ class UsersController < ApplicationController
    @info = Axapta.info_cust_balance
    @currencies = @info.map(&:currency).uniq
    @companies = @info.map(&:company).uniq
-   @transes = Axapta.info_cust_trans(@filter_hash)
+   @transes = Axapta.info_cust_trans(@filter_hash).select{|t| @filter.company.blank? ? true : t.company_code == @filter.company }.select{|t| @filter.currency.blank? ? true : t.currency_code == @filter.currency }
   end
 
   def export_balance
    p "---exp-bal", @filter_hash
    respond_with do |format|
     format.csv do
-     send_data User.export(:csv, :balance, Axapta.info_cust_trans(@filter_hash)), :type => "application/csv", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.csv"
+     send_data User.export(:csv, :balance, Axapta.info_cust_trans(@filter_hash).select{|t| @filter.company.blank? ? true : t.company_code == @filter.company }.select{|t| @filter.currency.blank? ? true : t.currency_code == @filter.currency }), :type => "application/csv", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.csv"
     end
     format.xls do
-     send_data User.export(:xls, :balance, Axapta.info_cust_trans(@filter_hash)), :type => "application/vnd.ms-excel", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.xls"
+     send_data User.export(:xls, :balance, Axapta.info_cust_trans(@filter_hash).select{|t| @filter.company.blank? ? true : t.company_code == @filter.company }.select{|t| @filter.currency.blank? ? true : t.currency_code == @filter.currency }), :type => "application/vnd.ms-excel", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.xls"
     end
    end
   end
