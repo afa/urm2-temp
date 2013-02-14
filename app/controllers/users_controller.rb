@@ -96,7 +96,7 @@ class UsersController < ApplicationController
    @info = Axapta.info_cust_balance
    @currencies = @info.map(&:currency).uniq
    @companies = @info.map(&:company).uniq
-   @transes = Axapta.info_cust_trans(@filter_hash).select{|t| @filter.company.blank? ? true : t.company_code == @filter.company }.select{|t| @filter.currency.blank? ? true : t.currency_code == @filter.currency }.map{|i| i.trans_type = Hash[Setting.get("hash.trans_type").zip(Setting.get("hash.trans_type_rus"))][i.trans_type]; i }
+   @transes = Axapta.info_cust_trans(@filter_hash).select{|t| @filter.company.blank? ? true : t.company_code == @filter.company }.select{|t| @filter.currency.blank? ? true : t.currency_code == @filter.currency }.map{|i| i.trans_type = Hash[YAML.load(Setting.get("hash.trans_type")).zip(YAML.load(Setting.get("hash.trans_type_rus")))][i.trans_type]; i }
   end
 
   def export_balance
