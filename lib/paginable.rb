@@ -21,7 +21,7 @@ module Paginable
      when 12 then page > 6 ? "shared/page_12_7.html.haml" : "shared/page_12_6.html.haml"
      when 12..1000000 then page > (pages - 6) ? "shared/page_13_last.html.haml"  : (page.between?(7, pages - 6) ? "shared/page_13_mid.html.haml" : "shared/page_13_first.html.haml")
     end
-    render_to_string(:partial => prt, :locals => {:page => page, :pages => pages, :opts => parm[:derid]}).html_safe
+    render_to_string(:partial => prt, :locals => {:page => page, :pages => pages, :opts => parm[:derid], :parms => params}).html_safe
 =begin
     options = {:outer_window => 1, :inner_window => 3, :undotted_count => 1, :page => 1, :pages => 0, :hide_empty => true}.merge(parm[:derid])
     m_col = ((page - options[:inner_window] > 1 ? page - options[:inner_window] : 1)..(page + options[:inner_window] < pages ? page + options[:inner_window] : pages)).to_a
