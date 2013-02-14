@@ -6,7 +6,7 @@
  %td.text-left= client_line.producer
  %td= client_line.rohs
  %td.text-left= client_line.package
- %td.text-left= client_line.qty
- %td.text-left= @price_decor[client_line.currency].decore(client_line.sales_price)
- %td.text-left= @price_decor[client_line.currency].decore(client_line.amount)
+ %td.text-right= client_line.qty
+ %td.text-right= @price_decor[client_line.currency].decore(client_line.sales_price)
+ %td.text-right= @price_decor[client_line.currency].decore(client_line.amount)
  %td= client_line.currency

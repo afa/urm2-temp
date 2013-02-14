@@ -96,17 +96,17 @@ class UsersController < ApplicationController
    @info = Axapta.info_cust_balance
    @currencies = @info.map(&:currency).uniq
    @companies = @info.map(&:company).uniq
-   @transes = Axapta.info_cust_trans(@filter_hash)
+   @transes = Axapta.info_cust_trans(@filter_hash).select{|t| @filter.company.blank? ? true : t.company_code == @filter.company }.select{|t| @filter.currency.blank? ? true : t.currency_code == @filter.currency }.map{|i| i.trans_type = Hash[YAML.load(Setting.get("hash.trans_type")).zip(YAML.load(Setting.get("hash.trans_type_rus")))][i.trans_type]; i }
   end
 
   def export_balance
    p "---exp-bal", @filter_hash
    respond_with do |format|
     format.csv do
-     send_data User.export(:csv, :balance, Axapta.info_cust_trans(@filter_hash)), :type => "application/csv", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.csv"
+     send_data User.export(:csv, :balance, Axapta.info_cust_trans(@filter_hash).select{|t| @filter.company.blank? ? true : t.company_code == @filter.company }.select{|t| @filter.currency.blank? ? true : t.currency_code == @filter.currency }), :type => "application/csv", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.csv"
     end
     format.xls do
-     send_data User.export(:xls, :balance, Axapta.info_cust_trans(@filter_hash)), :type => "application/vnd.ms-excel", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.xls"
+     send_data User.export(:xls, :balance, Axapta.info_cust_trans(@filter_hash).select{|t| @filter.company.blank? ? true : t.company_code == @filter.company }.select{|t| @filter.currency.blank? ? true : t.currency_code == @filter.currency }), :type => "application/vnd.ms-excel", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.xls"
     end
    end
   end
@@ -120,7 +120,7 @@ class UsersController < ApplicationController
    @filter.date_to = Date.current.strftime("%Y-%m-%d") if @filter.date_to.blank?
    @filter.date_from = 1.month.ago.strftime("%Y-%m-%d") if @filter.date_from.blank?
    @filter_hash.merge!(:date_to => @filter.date_to, :date_from => @filter.date_from)
-   unless @filter.format
+   unless params[:format]
     redirect_to sold_orders_users_path, :flash => {:error => "не задан формат"}
     return
    end

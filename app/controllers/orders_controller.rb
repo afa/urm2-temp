@@ -254,7 +254,8 @@ class OrdersController < ApplicationController
    end
    @filter = OpenStruct.new(@filter_hash)
    if params[:filter]
-    Setting.set_all(Hash[params[:filter].delete_if{|k, v| not %w(reservation_end only_my official_number sales_id this_sales_origin).include?(k) }.map{|k, v| ["order.#{k}", v] }])
+    #Setting.set_all(Hash[params[:filter].delete_if{|k, v| not %w(reservation_end only_my official_number sales_id this_sales_origin).include?(k) }.map{|k, v| ["order.#{k}", v] }])
+    Setting.set_all(Hash[params[:filter].select{|k, v| %w(reservation_end only_my official_number sales_id this_sales_origin).include?(k) }.map{|k, v| ["order.#{k}", v] }])
    end
    @page = params[:page] || 1
   end
