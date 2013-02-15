@@ -22,6 +22,7 @@
      %td.text-right= @rub_decor.decore info.balance_cur
      %td.text-right= @usd_decor.decore info.balance
   .padded
+  .padded
    Общий баланс составляет #{@usd_decor.decore(@info.inject(0.0){|r, i| r + i.balance })} USD
 
  %h2{:style => "padding-left: 0px;"} История расчетов
