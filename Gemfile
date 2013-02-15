@@ -27,6 +27,7 @@ gem "jquery-rails"
 #gem "clearance"
 gem "cells"
 
+gem "json_pure"
 # Deploy with Capistrano
 gem 'capistrano'
 
