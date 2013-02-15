@@ -1,59 +1,31 @@
 .nav-title
  %span.current Настройки
-= form_for :profile, :url => update_profile_path do |form|
- .profile_line
-  .heading
-   Персональные настройки
-  .values
-   = render :partial => "shared/select_list", :locals => {:list_items => Axapta.application_area_list.map{|a| [a.application_area_id, a.application_area_name] }, :name => "profile[cart.area_list]", :title => "Применение для производителя, выбранное по умолчанию", :opts => {:use_system =>true, :selected => @profile.area_list}}
-  .values
-   = render :partial => "shared/check_button", :locals => {:name => "profile[alert.urm]", :title => "Отправлять оповещения в УРМ", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.alert_urm)}}
-  .values
-   = render :partial => "shared/check_button", :locals => {:name => "profile[alert.post]", :title => "Отправлять оповещения на электронную почту", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.alert_post)}}
-  .values
-   = render :partial => "shared/check_button", :locals => {:name => "profile[search.show_box]", :title => "Показывать окно &#171;Поиск&#187; на всех страницах".html_safe, :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.show_box)}}
-  .values
-   = render :partial => "shared/check_button", :locals => {:name => "profile[search.only_store]", :title => "Устанавливать настройку &laquo;Только склад&raquo; в окне &laquo;Поиск&raquo;".html_safe, :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_store)}}
-  .values
-   = render :partial => "shared/check_button", :locals => {:name => "profile[search.only_available]", :title => "Устанавливать настройку &laquo;Только в наличии&raquo; в окне &laquo;Поиск&raquo;".html_safe, :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_available)}}
-  .values
-   = render :partial => "shared/check_button", :locals => {:name => "profile[order.only_my]", :title => "Устанавливать настройку &laquo;Только мои&raquo; там, где она есть".html_safe, :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_my)}}
+.fixed-block
+ = form_for :profile, :url => update_profile_path do |form|
+  .profile_line
+   .heading
+    Персональные настройки
+   .values
+    = render :partial => "shared/select_list", :locals => {:list_items => Axapta.application_area_list.map{|a| [a.application_area_id, a.application_area_name] }, :name => "profile[cart.area_list]", :title => "Применение для производителя, выбранное по умолчанию", :opts => {:use_system =>true, :selected => @profile.area_list}}
+   .values
+    = render :partial => "shared/check_button", :locals => {:name => "profile[alert.urm]", :title => "Отправлять оповещения в УРМ", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.alert_urm)}}
+   .values
+    = render :partial => "shared/check_button", :locals => {:name => "profile[alert.post]", :title => "Отправлять оповещения на электронную почту", :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.alert_post)}}
+   .values
+    = render :partial => "shared/check_button", :locals => {:name => "profile[search.show_box]", :title => "Показывать окно &#171;Поиск&#187; на всех страницах".html_safe, :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.show_box)}}
+   .values
+    = render :partial => "shared/check_button", :locals => {:name => "profile[search.only_store]", :title => "Устанавливать настройку &laquo;Только склад&raquo; в окне &laquo;Поиск&raquo;".html_safe, :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_store)}}
+   .values
+    = render :partial => "shared/check_button", :locals => {:name => "profile[search.only_available]", :title => "Устанавливать настройку &laquo;Только в наличии&raquo; в окне &laquo;Поиск&raquo;".html_safe, :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_available)}}
+   .values
+    = render :partial => "shared/check_button", :locals => {:name => "profile[order.only_my]", :title => "Устанавливать настройку &laquo;Только мои&raquo; там, где она есть".html_safe, :opts => {:need_field => true, :use_system => true, :value => WebUtils.parse_bool(@profile.only_my)}}
   
- .profile_line
-  .heading Общие для всех сотрудников
-  .values Продолжительность резервирования товара #{@profile.reservation_end} дней
-  -# #29754
-  .values Требования к упаковке
-  .values Тип упаковки, выбранный по умолчанию
- = render :partial => "shared/submit_button", :locals => {:title => t(:save_setting), :name => "submit"}
+  .profile_line
+   .heading Общие для всех сотрудников
+   .values Продолжительность резервирования товара #{@profile.reservation_end} дней
+   -# #29754
+   .values Требования к упаковке
+   .values Тип упаковки, выбранный по умолчанию
+  = render :partial => "shared/submit_button", :locals => {:title => t(:save_setting), :name => "submit"}
 
 
--# Описание
-
- 1) Добавить на страницу заголовок: .Настройки.
- 2) Настройки выводить в двух группах, следующим образом:
-
- Персональные настройки
- Применение для производителя, выбранное по умолчанию (select, интерфейсное)
- (checkbox, метод не определён) Отправлять оповещения в УРМ
- (checkbox, метод не определён) Отправлять оповещения на электронную почту
-
- (checkbox, интерфейсное) Показывать окно .Поиск. на всех страницах
- (checkbox, интерфейсное) Устанавливать настройку .Только склад. в окне .Поиск.
- (checkbox, интерфейсное) Устанавливать настройку .Только в наличии. в окне .Поиск.
- (checkbox, интерфейсное) Устанавливать настройку .Только мои. там, где она есть
- 
- Общие для всех сотрудников
- Продолжительность резервирования товара X дней. (X - в поле для ввода, поле в состоянии disabled)
- Требования к упаковке (набор checkbox'ов в состоянии disabled).
- Тип упаковки, выбранный по умолчанию (select в состоянии disabled).
-
- 3) Кнопку .Save. переименовать в .Сохранить настройки..
-
- Список применений можно получить методом application_area_list. Перед выводом в select необходимо их отсортировать по умолчанию.
-
- note:
- ) нужны методы для чтения/записи настроек отправки оповещений
- ) метод для чтения настройки требований к упаковке
- ) метод для чтения настройки типа упаковки
- ) метод для чтения продолжительности резервирования товара
