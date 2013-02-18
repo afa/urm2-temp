@@ -87,7 +87,7 @@ class OrdersController < ApplicationController
    id = params[:id]
    lines = params.try(:[], :order).try(:[], id).try(:[], :line) || []
    if lines.empty?
-    redirect_to order_path(id), :flash => {:error => "empty lines"}
+    redirect_to order_path(id), :flash => {:error => t(:empty_lines)}
     return
    end
    lines.each do |key, line|
@@ -146,7 +146,7 @@ class OrdersController < ApplicationController
    id = params[:id]
    lines = params.try(:[], :order).try(:[], id).try(:[], :line) || []
    if lines.empty?
-    redirect_to order_path(id), :flash => {:error => "empty lines"}
+    redirect_to order_path(id), :flash => {:error => t(:empty_lines)}
     return
    end
    begin
@@ -164,7 +164,7 @@ class OrdersController < ApplicationController
    lines = Axapta.sales_lines(:sales_id => id, :show_reserve_qty => true)#, :only_open => true)
    #lines = params.try(:[], :order).try(:[], id).try(:[], :line) || []
    if lines.empty?
-    redirect_to order_path(id), :flash => {:error => "empty lines"}
+    redirect_to order_path(id), :flash => {:error => t(:empty_lines)}
     return
    end
    begin
@@ -180,7 +180,7 @@ class OrdersController < ApplicationController
    id = params[:id]
    lines = (params.try(:[], :order).try(:[], id).try(:[], :line) || []).select{|k, v| v[:process_qty].to_s.to_i != 0 }
    if lines.empty?
-    redirect_to order_path(id), :flash => {:error => "empty lines"}
+    redirect_to order_path(id), :flash => {:error => t(:empty_lines)}
     return
    end
    begin
@@ -196,7 +196,7 @@ class OrdersController < ApplicationController
    id = params[:id]
    lines = params.try(:[], :order).try(:[], id).try(:[], :line) || []
    if lines.empty?
-    redirect_to order_path(id), :flash => {:error => "empty lines"}
+    redirect_to order_path(id), :flash => {:error => t(:empty_lines)}
     return
    end
    begin
