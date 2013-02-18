@@ -15,10 +15,10 @@
       %th{:style => "vertical-align: middle;"} Дата отгрузки
       %td.tiny{:style => "vertical-align: middle;"}
        с&nbsp;
-       %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from}
+       %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from)}
        -# .calendar-input= @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from
        &nbsp;по&nbsp;
-       %input.calendar-input{:type => "text", :name => 'filter[date_to]', :value => @filter.try(:date_to).blank? ? Date.current.strftime("%Y-%m-%d") : @filter.date_to}
+       %input.calendar-input{:type => "text", :name => 'filter[date_to]', :value => @filter.try(:date_to)}
        -# #ui-datepicker-div-container{:style=>"position: relative;"}
      %tr
       %th
