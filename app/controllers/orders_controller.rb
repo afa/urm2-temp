@@ -90,6 +90,9 @@ class OrdersController < ApplicationController
     redirect_to order_path(id), :flash => {:error => "empty lines"}
     return
    end
+   lines.each do |key, line|
+    line[:qty] = 0 if line[:qty].to_s.to_i <= 0
+   end
    comment = params[:order][id][:comment]
    #@order = Axapta.sales_info(:sales_id => id.to_i)
    #@lines = Axapta.sales_lines(:sales_id => id.to_i)
