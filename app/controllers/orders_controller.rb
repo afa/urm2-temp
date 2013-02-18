@@ -178,7 +178,7 @@ class OrdersController < ApplicationController
 
   def pick
    id = params[:id]
-   lines = params.try(:[], :order).try(:[], id).try(:[], :line) || []
+   lines = (params.try(:[], :order).try(:[], id).try(:[], :line) || []).select{|k, v| v[:process_qty].to_s.to_i != 0 }
    if lines.empty?
     redirect_to order_path(id), :flash => {:error => "empty lines"}
     return
