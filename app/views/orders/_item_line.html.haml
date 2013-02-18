@@ -12,5 +12,5 @@
  %td= item_line.qty_receive
  %td= item_line.invoiced_in_total
  %td= item_line.date_dead_line
- %td= link_to item_line.sales_id.to_s, sale_path(item_line.sales_id.to_s)
+ %td= link_to item_line.sales_id.to_s, order_path(item_line.sales_id.to_s)
  %td
