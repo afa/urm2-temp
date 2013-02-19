@@ -3,15 +3,15 @@
 .content-wrap
 
  .info-line
-  %table
+  %table.table-style
    %tr
-    %th.bold.text-left Фирма
-    %th.bold.text-left Валюта
-    %th.bold.text-right Свободные средства
-    %th.bold.text-right Замороженные средства
-    %th.bold.text-right Задолженность
-    %th.bold.text-right Баланс в валюте
-    %th.bold.text-right Баланс
+    %th.text-left Фирма
+    %th.text-left Валюта
+    %th.text-right Свободные средства
+    %th.text-right Замороженные средства
+    %th.text-right Задолженность
+    %th.text-right Баланс в валюте
+    %th.text-right Баланс
    - @info.each do |info|
     %tr
      %td.text-left= info.company
@@ -22,9 +22,10 @@
      %td.text-right= @rub_decor.decore info.balance_cur
      %td.text-right= @usd_decor.decore info.balance
   .padded
-  Общий баланс составляет #{@usd_decor.decore(@info.inject(0.0){|r, i| r + i.balance })} USD
+  .padded
+   Общий баланс составляет <b>#{@usd_decor.decore(@info.inject(0.0){|r, i| r + i.balance })} USD</b>
 
- %h2{:style => "padding-left: 0px;"} История расчетов
+ %h2 История расчетов
 
  .filter
   = form_for :filter, :url => balance_users_path, :method => :get do |form|
@@ -63,26 +64,26 @@
    За указанный период операций не найдено
  - else
   .padded
-   Общий баланс на начало периода: #{@usd_decor.decore(@transes.first.common_balance_amount.to_f - @transes.first.amount.to_f)} USD; на конец периода: #{@usd_decor.decore @transes.last.common_balance_amount} USD
+   Общий баланс на начало периода: <b>#{@usd_decor.decore(@transes.first.common_balance_amount.to_f - @transes.first.amount.to_f)} USD</b>; на конец периода: <b>#{@usd_decor.decore @transes.last.common_balance_amount} USD</b>
   .padded
   .table-navigation-block.scroll
    .table-block
     .table-scrolling
      %table.table-style
       %tr
-       %th Дата
-       %th Операция
-       %th Тип операции
-       %th Документ
-       %th Фирма
-       %th Валюта
-       %th Приход в валюте
-       %th Расход в валюте
-       %th Сумма
-       %th Баланс в валюте
-       %th Общий баланс в валюте
-       %th Баланс
-       %th Общий баланс
+       %th.text-left Дата
+       %th.text-left Операция
+       %th.text-left Тип операции
+       %th.text-left Документ
+       %th.text-left Фирма
+       %th.text-left Валюта
+       %th.text-right Приход в валюте
+       %th.text-right Расход в валюте
+       %th.text-right Сумма
+       %th.text-right Баланс в валюте
+       %th.text-right Общий баланс в валюте
+       %th.text-right Баланс
+       %th.text-right Общий баланс
       - @transes.each do |tr|
        %tr
         %td.text-left= tr.trans_date

@@ -15,10 +15,10 @@
       %th{:style => "vertical-align: middle;"} Дата отгрузки
       %td.tiny{:style => "vertical-align: middle;"}
        с&nbsp;
-       %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from}
+       %input.calendar-input{:type => "text", :name => 'filter[date_from]', :value => @filter.try(:date_from)}
        -# .calendar-input= @filter.try(:date_from).blank? ? 1.month.ago.strftime("%Y-%m-%d") : @filter.date_from
        &nbsp;по&nbsp;
-       %input.calendar-input{:type => "text", :name => 'filter[date_to]', :value => @filter.try(:date_to).blank? ? Date.current.strftime("%Y-%m-%d") : @filter.date_to}
+       %input.calendar-input{:type => "text", :name => 'filter[date_to]', :value => @filter.try(:date_to)}
        -# #ui-datepicker-div-container{:style=>"position: relative;"}
      %tr
       %th
@@ -30,26 +30,23 @@
  .table-navigation-block.scroll
   .table-block
    .table-scrolling
-    -# = render :partial => "shared/pagination", :locals => {:page => @lines.page.to_i, :pages => @lines.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей: #{@lines.records}&nbsp;&nbsp;Страниц: #{@lines.total}&nbsp;&nbsp;".html_safe, :text_before_current => "Страница: "}}
-    -# = render :partial => "shared/pagination", :locals => {:page => @lines.page.to_i, :pages => @lines.total.to_i}
     %table.table-style.order-list
      %tr
-      %th ROHS
       %th= t(:item_name)
       %th Производитель
+      %th ROHS
       %th Количество
-      %th Цена
-      %th Сумма
+      %th.text-right Цена
+      %th.text-right Сумма
       %th Поставка
+      %th Ожидаемая дата поставки
       %th Резерв
       %th В обработке складом
       %th Получено
       %th Продано
       %th Дата готовности
-      %th Ожидаемая дата поставки
       %th Заказ
       %th Контактное лицо
-      %th Проект
 
      = render :partial => "orders/item_line", :collection => @lines.items
     .padded

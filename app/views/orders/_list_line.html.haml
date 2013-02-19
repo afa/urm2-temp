@@ -1,5 +1,5 @@
 %tr
- %td= list_line.this_sales_origin
+ %td= ((!current_user.current_account.sales_origin.blank?) and (list_line.sales_origin.to_s.force_encoding('UTF-8') == current_user.current_account.sales_origin.to_s.force_encoding('UTF-8'))) ? t(:urm) : ''
  %td.text-left= link_to list_line.sales_id, order_path(list_line.sales_id)
  %td.text-left= list_line.official_number
  %td.text-right= @usd_decor.decore(list_line.amount)

@@ -1,17 +1,16 @@
 %tr
- %td= item_line.rohs
  %td.text-left= item_line.item_name
  %td.text-left= item_line.brend
+ %td= item_line.rohs
  %td.text-right= item_line.sales_qty
- %td.text-right= @usd_decor.decore(item_line.price)
- %td.text-right= item_line.amount
- %td= item_line.qty_in_debt
+ %td.text-right= @price_decor[item_line.currency_code].decore(item_line.price)
+ %td.text-right= @price_decor[item_line.currency_code].decore(item_line.amount)
+ %td= item_line.qty_in_debt.abs
+ %td= item_line.confirmed_dlv_date
  %td= item_line.reserve_qty
  %td= item_line.qty_in_processing
  %td= item_line.qty_receive
  %td= item_line.invoiced_in_total
  %td= item_line.date_dead_line
- %td= item_line.confirmed_dlv_date
- %td= item_line.sales_id
- %td
+ %td= link_to item_line.sales_id.to_s, order_path(item_line.sales_id.to_s)
  %td

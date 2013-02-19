@@ -48,10 +48,10 @@ class OrdersController < ApplicationController
   end
 
   def lines
-   @filter.date_to = Date.current.strftime("%Y-%m-%d") if @filter.date_to.blank?
-   @filter.date_from = 1.year.ago.strftime("%Y-%m-%d") if @filter.date_from.blank?
-   @filter_hash.merge!(:date_to => @filter.date_to, :date_from => @filter.date_from)
-   @lines = Axapta.sales_lines_paged(@page, @filter_hash.merge(:only_open => true))
+   #@filter.date_to = Date.current.strftime("%Y-%m-%d") if @filter.date_to.blank?
+   #@filter.date_from = 1.year.ago.strftime("%Y-%m-%d") if @filter.date_from.blank?
+   #@filter_hash.merge!(:date_to => @filter.date_to, :date_from => @filter.date_from)
+   @lines = Axapta.sales_lines_paged(@page, @filter_hash.merge(:only_open => true, :order_item_name => true))
   end
 
   def client_lines
@@ -87,8 +87,11 @@ class OrdersController < ApplicationController
    id = params[:id]
    lines = params.try(:[], :order).try(:[], id).try(:[], :line) || []
    if lines.empty?
-    redirect_to order_path(id), :flash => {:error => "empty lines"}
+    redirect_to order_path(id), :flash => {:error => t(:empty_lines)}
     return
+   end
+   lines.each do |key, line|
+    line[:qty] = 0 if line[:qty].to_s.to_i <= 0
    end
    comment = params[:order][id][:comment]
    #@order = Axapta.sales_info(:sales_id => id.to_i)
@@ -143,7 +146,7 @@ class OrdersController < ApplicationController
    id = params[:id]
    lines = params.try(:[], :order).try(:[], id).try(:[], :line) || []
    if lines.empty?
-    redirect_to order_path(id), :flash => {:error => "empty lines"}
+    redirect_to order_path(id), :flash => {:error => t(:empty_lines)}
     return
    end
    begin
@@ -161,7 +164,7 @@ class OrdersController < ApplicationController
    lines = Axapta.sales_lines(:sales_id => id, :show_reserve_qty => true)#, :only_open => true)
    #lines = params.try(:[], :order).try(:[], id).try(:[], :line) || []
    if lines.empty?
-    redirect_to order_path(id), :flash => {:error => "empty lines"}
+    redirect_to order_path(id), :flash => {:error => t(:empty_lines)}
     return
    end
    begin
@@ -175,9 +178,9 @@ class OrdersController < ApplicationController
 
   def pick
    id = params[:id]
-   lines = params.try(:[], :order).try(:[], id).try(:[], :line) || []
+   lines = (params.try(:[], :order).try(:[], id).try(:[], :line) || []).select{|k, v| v[:process_qty].to_s.to_i != 0 }
    if lines.empty?
-    redirect_to order_path(id), :flash => {:error => "empty lines"}
+    redirect_to order_path(id), :flash => {:error => t(:empty_lines)}
     return
    end
    begin
@@ -193,7 +196,7 @@ class OrdersController < ApplicationController
    id = params[:id]
    lines = params.try(:[], :order).try(:[], id).try(:[], :line) || []
    if lines.empty?
-    redirect_to order_path(id), :flash => {:error => "empty lines"}
+    redirect_to order_path(id), :flash => {:error => t(:empty_lines)}
     return
    end
    begin

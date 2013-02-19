@@ -27,6 +27,7 @@ gem "jquery-rails"
 #gem "clearance"
 gem "cells"
 
+gem "json_pure"
 # Deploy with Capistrano
 gem 'capistrano'
 
@@ -48,7 +49,7 @@ gem "airbrake" #, :group => [:development, :production]
 #gem "airbrake", :group => [:development, :production]
 gem "bullet", :group => :development
 gem "gon"
-gem "spreadsheet"
+gem "spreadsheet", "=0.7.6"
 #gem "gon", :git => 'git://github.com/afa/gon.git', :branch => "script_tag"
 #gem "sqlite3", :group => :test
 gem "rails-backbone"

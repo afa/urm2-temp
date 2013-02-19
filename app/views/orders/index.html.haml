@@ -51,7 +51,7 @@
     -# = render :partial => "shared/pagination", :locals => {:page => @orders.page.to_i, :pages => @orders.total.to_i}
     %table.table-style{:class => "order-list"}
      %tr
-      %th УРМ
+      %th= t(:urm)
       %th.text-left Номер заказа
       %th.text-left Офиц. номер
       %th Сумма по заказу
