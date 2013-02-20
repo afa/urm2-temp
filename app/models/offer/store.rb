@@ -6,9 +6,8 @@ class Offer::Store < Offer::Base
   def self.search(hsh)
    return [] if hsh.blank? || (hsh[:external_code].blank? && (hsh[:query_string].blank? || hsh[:query_string].size < 3))
    begin
-    data = Axapta.search_names({:show_delivery_prognosis => true, :show_forecast_availability => true, :show_analog_existence => true, :calc_price=>true, :calc_qty => true}.merge(hsh || {}).merge(:user_hash => User.current.current_account.try(:axapta_hash)))
+    data = Axapta.search_names({:show_forecast_availability => true, :show_analog_existence => true, :calc_price=>true, :calc_qty => true}.merge(hsh || {}).merge(:user_hash => User.current.current_account.try(:axapta_hash)))# :show_delivery_prognosis => true,
    rescue Exception => e
-    p "---exc in Store#search #{Time.now}", e, e.backtrace
     return []
    end
    #TODO: to offers
@@ -46,7 +45,7 @@ class Offer::Store < Offer::Base
        n.dlv_prognoses << {:date => dlv["delivery_date"], :qty => dlv["delivery_qty"]}
       end
       n.dlv_prognoses.delete_if{|x| x[:qty].to_i == 0 }
-      n.forecast_available &&= n.dlv_prognoses.size > 0
+      #n.forecast_available &&= n.dlv_prognoses.size > 0
       n.application_area_mandatory = WebUtils.parse_bool(hsh["application_area_mandatory"])
       #n.vend_proposal_date = nil
       CartStore.prepare_code(n)
@@ -61,7 +60,6 @@ class Offer::Store < Offer::Base
    begin
     data = Axapta.search_analogs(:calc_price=>true, :calc_qty => true, :user_hash => User.current.current_account.try(:axapta_hash), :item_id_search => code)
    rescue Exception => e
-    p "---exc in Store#analogs:search #{Time.now}", e
     return []
    end
    fabricate(data)
