@@ -206,7 +206,8 @@ class Axapta
    locs = {}
    pp = {:location_id => lc}
    rz = AxaptaRequest.delivery_prognosis(pp.merge(:invent_location_id => (lc.nil? ? User.current.current_account.invent_location_id : lc), :item_id => code, :user_hash => axapta_hash)).try(:[], "delivery_prognosis").map{|i| {:date => i["delivery_date"], :qty => i[:delivery_qty]} }
-   return { "#{lc.nil? ? User.current.current_account.invent_location_id : lc}" => rz } unless rz.empty?
+   p "---dlvpr", lc, rz
+   return { "#{lc.nil? ? User.current.current_account.invent_location_id : lc}" => rz }# unless rz.empty?
    (AxaptaRequest.search_item_name_h(pp.merge(:user_hash => axapta_hash, :item_id_search => code, :show_delivery_prognosis => true)).try(:[], "items") || []).each do |loc|
     Rails.logger.info "---dlvprg"
     Rails.logger.info loc.inspect
