@@ -1,5 +1,5 @@
 - prices = info_block.delete("prices")
-- dates = Hash[info_block.delete("dates")]
+- dates = info_block.delete("dates")
 - keys = info_block.inject({}){|r, (k, v)| (not (v.blank? || v.to_s == '0')) ? r.merge(k => v) : r }.keys
 - cnt = (keys.size/2.0).ceil
 %tr.sub-row-block{:class => "info_item_#{after}"}
@@ -73,7 +73,7 @@
          %th К
          %th Д
         
-        - dates.each do |r|
+        - dates.map{|i| Hash[i]}.each do |r|
          %tr
           %td{:style => "border-bottom: 0;"}= r.values.first[:qty]
           %td{:style => "border-bottom: 0;"}= r.values.first[:date]
