@@ -1,5 +1,5 @@
 - prices = info_block.delete("prices")
-- dates = info_block.delete("dates")
+- dates = Hash[info_block.delete("dates")]
 - keys = info_block.inject({}){|r, (k, v)| (not (v.blank? || v.to_s == '0')) ? r.merge(k => v) : r }.keys
 - cnt = (keys.size/2.0).ceil
 %tr.sub-row-block{:class => "info_item_#{after}"}
