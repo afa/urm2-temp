@@ -147,7 +147,7 @@ class MainController < ApplicationController
     @data["dates"] = []
    end
    respond_with do |format|
-    format.json { render :json => {:row_id => @after, :code => @code, :gap => render_to_string(:partial => "main/gap_line.html.haml", :locals => {:after => @after}), :info => render_to_string(:partial => "main/info_block.html.haml", :locals => {:after => @after, :info_block => @data}), :layout => false} }
+    format.json { render :json => {:row_id => @after, :code => @code, :gap => render_to_string(:partial => "main/gap_line.html.haml", :locals => {:after => @after}), :info => render_to_string(:partial => "main/info_block.html.haml", :locals => {:after => @after, :info_block => @data})} }
    end
 
   end
