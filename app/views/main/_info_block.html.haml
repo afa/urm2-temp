@@ -73,7 +73,7 @@
          %th К
          %th Д
         - p "---dlvi", dates
-        - dates.map{|i| Hash[i]}.each do |r|
+        - dates.each do |k, r|
          %tr
-          %td{:style => "border-bottom: 0;"}= r.values.first.try(:[], :qty)
-          %td{:style => "border-bottom: 0;"}= r.values.first.try(:[], :date)
+          %td{:style => "border-bottom: 0;"}= r.first.try(:[], :qty)
+          %td{:style => "border-bottom: 0;"}= r.first.try(:[], :date)
