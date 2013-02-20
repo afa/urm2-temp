@@ -75,5 +75,5 @@
         
         - dates.map{|i| Hash[i]}.each do |r|
          %tr
-          %td{:style => "border-bottom: 0;"}= r.values.first[:qty]
-          %td{:style => "border-bottom: 0;"}= r.values.first[:date]
+          %td{:style => "border-bottom: 0;"}= r.values.first.try(:[], :qty)
+          %td{:style => "border-bottom: 0;"}= r.values.first(:[], :date)
