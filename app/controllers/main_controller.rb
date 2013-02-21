@@ -125,6 +125,8 @@ class MainController < ApplicationController
    @after = params[:after]
    @location = params[:loc]
    @code = params[:code]
+   locs = Axapta.search_names(:item_id_search => @code)
+   p "---info", loc
    @hash = current_user.current_account.try(:axapta_hash)
    begin
     @data = Axapta.item_info({:item_id => @code})

@@ -65,7 +65,7 @@ class Axapta
    ar["query_string"] += '*' if ar.has_key?("query_string") && ar["query_string"].last != '*'
    ar[:query_string] += '*' if ar.has_key?(:query_string) && ar[:query_string].last != '*'
    begin
-    res = AxaptaRequest.search_item_name_h(ar).try(:[], "items") || []
+    res = AxaptaRequest.search_item_name_h(ar.merge(:user_hash => axapta_hash)).try(:[], "items") || []
    rescue Exception => e
     parse_exc(e.message, e.class.name)
     []
