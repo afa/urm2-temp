@@ -125,7 +125,7 @@ class MainController < ApplicationController
    @after = params[:after]
    @location = params[:loc]
    @code = params[:code]
-   locs = Axapta.search_names(:item_id_search => @code)
+   locs = Axapta.search_names(:item_id_search => @code).first["locations"].map{|l| l["location_id"] }
    p "---info", locs
    @hash = current_user.current_account.try(:axapta_hash)
    begin
