@@ -11,18 +11,19 @@
  %td.text-left= cart_line.location_link
  %td.text-left= cart_line.prognosis
  %td
-  %textarea{:style => "height: 14px; padding: 2px 4px; border: 1px solid #9E9E9E", :cols => 20, :rows => 1, :id => "cart_item_#{cart_line.id}_comment", :name => "cart_item[#{cart_line.id}][comment]"}= cart_line.comment
+  %input{:type => "text", :style => "height: 14px; padding: 2px 4px; border: 1px solid #9E9E9E", :id => "cart_item_#{cart_line.id}_comment", :name => "cart_item[#{cart_line.id}][comment]"}= cart_line.comment
  %td
-  %textarea{:style => "height: 14px; padding: 2px 4px; border: 1px solid #9E9E9E", :cols => 20, :rows => 1, :id => "cart_item_#{cart_line.id}_requirement", :name => "cart_item[#{cart_line.id}][requirement]"}= cart_line.requirement
+  %iinput{:type => "text", :style => "height: 14px; padding: 2px 4px; border: 1px solid #9E9E9E", :id => "cart_item_#{cart_line.id}_requirement", :name => "cart_item[#{cart_line.id}][requirement]"}= cart_line.requirement
  %td.price-user
   - if cart_line.is_a?(CartRequest)
    %input{:type => :text, :size => "9", :value => cart_line.user_price, :id => "cart_item_#{cart_line.id}_user_price", :name => "cart_item[#{cart_line.id}][user_price]"}
- %td
-  - if cart_line.application_area_mandatory?
-   %select{:id => "cart_item_#{cart_line.id}_application_area_id", :name => "cart_item[#{cart_line.id}][application_area_id]", :style => "max-width: 200px;"}
-    %option
-    - app_list.each do |app|
-     %option{:value => app.application_area_id, :selected => (app.application_area_id == cart_line.application_area_id)}= app.application_area_name
+ - if @mandatory
+  %td
+   - if cart_line.application_area_mandatory?
+    %select{:id => "cart_item_#{cart_line.id}_application_area_id", :name => "cart_item[#{cart_line.id}][application_area_id]", :style => "max-width: 200px;"}
+     %option
+     - app_list.each do |app|
+      %option{:value => app.application_area_id, :selected => (app.application_area_id == cart_line.application_area_id)}= app.application_area_name
  - if cart_line.is_a?(CartWorld)
   %td &nbsp;
   %td &nbsp;

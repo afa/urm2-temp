@@ -34,7 +34,7 @@ class MainController < ApplicationController
    gon.need_application = @carts.detect{|i| i.application_area_mandatory }
    @app_list = Axapta.application_area_list || []
    gon.app_list = @app_list
-
+   @mandatory = @carts.detect{|c| c.application_area_mandatory }
   end
 
   def export
