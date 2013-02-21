@@ -2,6 +2,7 @@
 .block-padded
 = form_for :order, :url => orders_path, :remote => true, :html => {:class => "js"} do |f|
  = render :partial => "shared/button.html.haml", :locals => {:title => t(:cancel_order), :opts => {:id => :cancel_order}}
+ .clear
  .padded
  .block-padded
   %h2 Параметры заказа
