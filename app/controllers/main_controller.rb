@@ -32,7 +32,7 @@ class MainController < ApplicationController
    @deliveries = User.current.deliveries
    @use_alt_price = false if @items.detect{|i| i.alt_prices.size > 0 }
    gon.need_application = @carts.detect{|i| i.application_area_mandatory }
-   @app_list = Axapta.application_area_list || []
+   @app_list = (Axapta.application_area_list || []).sort_by{|l| l.application_area_name }
    gon.app_list = @app_list
    @mandatory = @carts.detect{|c| c.application_area_mandatory }
   end

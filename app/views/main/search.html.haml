@@ -72,7 +72,8 @@
   .cart= render :partial => "carts/cart_table", :locals => {:cart => @carts, :app_list => @app_list}
  -# .allow-order.block-padded
   = link_to t(:start_edit_order), new_order_path, :id => "allow_order", :class => "ajax"
- #allow-order= render :partial => 'shared/button', :locals => {:title => t(:start_edit_order)}
+ - unless @carts.empty?
+  #allow-order= render :partial => 'shared/button', :locals => {:title => t(:start_edit_order)}
  #order
  -# #order= render :partial => "main/order_edit"
  .results

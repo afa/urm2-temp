@@ -125,8 +125,8 @@ ru:
 
  save: Сохранить
  save_order: Сохранить заказ
- start_edit_order: Оформить заказ
- make: Заказать
+ start_edit_order: Перейти к оформлению заказа
+ make: Оформить заказ
  cancel: Отмена
 
  type: Тип
@@ -196,7 +196,7 @@ ru:
  segment_produkcii: Сегмент продукции
  selected_positions: Отобранные позиции
  requirement: Требования к позиции
- cancel_order: Вернуться к поиску
+ cancel_order: Вернуться к выбору позиций
  sign_out: Выйти
  balance: Баланс
  export_csv: выгрузить в csv файл

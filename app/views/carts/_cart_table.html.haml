@@ -23,7 +23,7 @@
    = render :partial => "carts/cart_collection.html.haml", :locals => {:app_list => app_list, :stores => @stores, :cart => cart}
   .padded
  .block-padded
-  %p Итого по заказу #{@usd_decor.decore cart.map{|i| i.current_price * i.amount }.inject(0.0){|r, i| r + i }} USD, в том числе по ДМС #{@usd_decor.decore cart.select{|i| i.is_a? CartWorld }.map{|i| i.current_price * i.amount }.inject(0.0){|r, i| r + i } } USD.
-  %p Итого товара к резервированию на сумму #{@usd_decor.decore cart.select{|i| i.action == "reserve" }.map{|i| i.current_price * i.amount }.inject(0.0){|r, i| r + i } } USD (доступная сумма резерва #{@usd_decor.decore Axapta.info_cust_limits.reserve.reserve_available} USD)
-  %p Суммарный вес #{cart.select{|i| not i.is_a? CartRequest }.map{|i| Axapta.item_info(:item_id => i.product_link)["weight"] || 0.0 }.inject(0.0){|r, i| r + i}/1000.0} кг (без учёта ряда позиций)
+  %p Итого по заказу <b>#{@usd_decor.decore cart.map{|i| i.current_price * i.amount }.inject(0.0){|r, i| r + i }}</b> USD, в том числе по ДМС <b>#{@usd_decor.decore cart.select{|i| i.is_a? CartWorld }.map{|i| i.current_price * i.amount }.inject(0.0){|r, i| r + i } }</b> USD.
+  %p Итого товара к резервированию на сумму <b>#{@usd_decor.decore cart.select{|i| i.action == "reserve" }.map{|i| i.current_price * i.amount }.inject(0.0){|r, i| r + i } }</b> USD (доступная сумма резерва <b>#{@usd_decor.decore Axapta.info_cust_limits.reserve.reserve_available}</b> USD)
+  %p Суммарный вес <b>#{cart.select{|i| not i.is_a? CartRequest }.map{|i| Axapta.item_info(:item_id => i.product_link)["weight"] || 0.0 }.inject(0.0){|r, i| r + i}/1000.0}</b> кг (без учёта ряда позиций)
  .clear.block-padded
