@@ -72,8 +72,10 @@
         %tr
          %th К
          %th Д
-        - p "---dlvi", dates
         - dates.each do |k, r|
          %tr
-          %td{:style => "border-bottom: 0;"}= r.first.try(:[], :qty)
-          %td{:style => "border-bottom: 0;"}= r.first.try(:[], :date)
+          %td{:colspan => 2}= k
+         - r.each do |s|
+          %tr
+           %td{:style => "border-bottom: 0;"}= s.try(:[], :qty)
+           %td{:style => "border-bottom: 0;"}= s.try(:[], :date)
