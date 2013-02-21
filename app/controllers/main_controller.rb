@@ -126,7 +126,6 @@ class MainController < ApplicationController
    @location = params[:loc]
    @code = params[:code]
    locs = Axapta.search_names(:item_id_search => @code).first["locations"].map{|l| l["location_id"] }
-   p "---info", locs
    @hash = current_user.current_account.try(:axapta_hash)
    begin
     @data = Axapta.item_info({:item_id => @code})
@@ -142,7 +141,7 @@ class MainController < ApplicationController
     @data["prices"] = []
    end
    begin
-    @data["dates"] = Axapta.get_delivery_prognosis(@code, @location)
+    @data["dates"] = locs.inject({}){|r, l| r.merge(Axapta.get_delivery_prognosis(@code, l))}
     p "---dates", @data["dates"]
    rescue Exception => e
     p "---exc in prognos #{Time.now}", e, e.backtrace
