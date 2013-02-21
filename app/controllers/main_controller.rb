@@ -32,9 +32,9 @@ class MainController < ApplicationController
    @deliveries = User.current.deliveries
    @use_alt_price = false if @items.detect{|i| i.alt_prices.size > 0 }
    gon.need_application = @carts.detect{|i| i.application_area_mandatory }
-   @app_list = Axapta.application_area_list || []
+   @app_list = (Axapta.application_area_list || []).sort_by{|l| l.application_area_name }
    gon.app_list = @app_list
-
+   @mandatory = @carts.detect{|c| c.application_area_mandatory }
   end
 
   def export
@@ -125,6 +125,7 @@ class MainController < ApplicationController
    @after = params[:after]
    @location = params[:loc]
    @code = params[:code]
+   locs = Axapta.search_names(:item_id_search => @code).first["locations"].map{|l| l["location_id"] }
    @hash = current_user.current_account.try(:axapta_hash)
    begin
     @data = Axapta.item_info({:item_id => @code})
@@ -140,14 +141,14 @@ class MainController < ApplicationController
     @data["prices"] = []
    end
    begin
-    @data["dates"] = Axapta.get_delivery_prognosis(@code, @location)
+    @data["dates"] = locs.inject({}){|r, l| r.merge(Axapta.get_delivery_prognosis(@code, l))}
     p "---dates", @data["dates"]
    rescue Exception => e
     p "---exc in prognos #{Time.now}", e, e.backtrace
     @data["dates"] = []
    end
    respond_with do |format|
-    format.json { render :json => {:row_id => @after, :code => @code, :gap => render_to_string(:partial => "main/gap_line.html.haml", :locals => {:after => @after}), :info => render_to_string(:partial => "main/info_block.html.haml", :locals => {:after => @after, :info_block => @data}), :layout => false} }
+    format.json { render :json => {:row_id => @after, :code => @code, :gap => render_to_string(:partial => "main/gap_line.html.haml", :locals => {:after => @after}), :info => render_to_string(:partial => "main/info_block.html.haml", :locals => {:after => @after, :info_block => @data})} }
    end
 
   end

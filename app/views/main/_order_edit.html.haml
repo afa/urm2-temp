@@ -1,6 +1,9 @@
 .clear
 .block-padded
 = form_for :order, :url => orders_path, :remote => true, :html => {:class => "js"} do |f|
+ = render :partial => "shared/button.html.haml", :locals => {:title => t(:cancel_order), :opts => {:id => :cancel_order}}
+ .clear
+ .padded
  .block-padded
   %h2 Параметры заказа
   - @stores.each do |store|
@@ -28,4 +31,3 @@
   .padded
  .clear
  = render :partial => "shared/submit_button.html.haml", :locals => {:title => t(:make), :opts  => {:inner_style => "margin-right: 1em;"}}
- = render :partial => "shared/button.html.haml", :locals => {:title => t(:cancel_order), :opts => {:id => :cancel_order}}

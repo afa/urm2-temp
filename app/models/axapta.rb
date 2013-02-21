@@ -65,7 +65,7 @@ class Axapta
    ar["query_string"] += '*' if ar.has_key?("query_string") && ar["query_string"].last != '*'
    ar[:query_string] += '*' if ar.has_key?(:query_string) && ar[:query_string].last != '*'
    begin
-    res = AxaptaRequest.search_item_name_h(ar).try(:[], "items") || []
+    res = AxaptaRequest.search_item_name_h(ar.merge(:user_hash => axapta_hash)).try(:[], "items") || []
    rescue Exception => e
     parse_exc(e.message, e.class.name)
     []
@@ -205,8 +205,9 @@ class Axapta
   def self.get_delivery_prognosis(code, lc = nil) #TODO refactor && move to offer::store#fabricate
    locs = {}
    pp = {:location_id => lc}
-   rz = AxaptaRequest.delivery_prognosis(pp.merge(:invent_location_id => (lc.nil? ? User.current.current_account.invent_location_id : lc), :item_id => code, :user_hash => axapta_hash)).try(:[], "delivery_prognosis").map{|i| {:date => i["delivery_date"], :qty => i[:delivery_qty]} }
-   return { "#{lc.nil? ? User.current.current_account.invent_location_id : lc}" => rz } unless rz.empty?
+   rz = AxaptaRequest.delivery_prognosis(pp.merge(:invent_location_id => (lc.nil? ? User.current.current_account.invent_location_id : lc), :item_id => code, :user_hash => axapta_hash)).try(:[], "delivery_prognosis").map{|i| {:date => i["delivery_date"], :qty => i["delivery_qty"]} }
+   p "---dlvpr", lc, rz
+   return { "#{lc.nil? ? User.current.current_account.invent_location_id : lc}" => rz }# unless rz.empty?
    (AxaptaRequest.search_item_name_h(pp.merge(:user_hash => axapta_hash, :item_id_search => code, :show_delivery_prognosis => true)).try(:[], "items") || []).each do |loc|
     Rails.logger.info "---dlvprg"
     Rails.logger.info loc.inspect
