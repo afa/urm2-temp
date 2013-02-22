@@ -55,7 +55,7 @@ class CartsController < ApplicationController
       render :json => {:need_application => @carts.detect{|i| i.application_area_mandatory }, :app_list => (Axapta.application_area_list || []).sort_by{|l| l.application_area_name }, :rendered => render_to_string(:partial => "carts/cart_table.html.haml", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores}) }
       #render :json => {:dms => render_to_string( :partial => "main/dms_block.html", :locals => {:items => @items, :after => @after} ), :gap => render_to_string( :partial => "main/gap_line.html", :locals => {:after => @after}), :empty => render_to_string(:partial => "main/dms_empty.html", :locals => {:after => @after})}
      end
-     format.js { render :layout => false }
+     #format.js { render :layout => false }
      format.html do
       redirect_to carts_path
      end
