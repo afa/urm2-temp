@@ -33,6 +33,18 @@ function makeAjaxDestroy(ajaxUrl, functionSuccess, functionFailure){
  });
 }
 
+function makeAjaxPost(ajaxUrl, dataHash, functionSuccess, functionFailure){
+ $.ajax({
+  type: "POST",
+  url: ajaxUrl,
+  contentType: "application/json; charset=utf-8",
+  data: $.param(dataHash),
+  dataType: "json",
+  success: functionSuccess,
+  error: functionFailure
+ });
+}
+
 function search_icons_handle(){
  var uniq = new Array();
  var ins = $(".icons input.item-code");
@@ -526,9 +538,16 @@ function ordersPickProcess(){
  };
 })(jQuery);*/
 function cartsAddElementToCart(){
- if(gon.carts.length == 0){
-  $('.cart-table').add('#order').hide();
- }
+ makeAjaxPost("/create.json", 
+  [],
+  function(data, reply, xhr){
+   if(data.carts.length == 0){
+    $('.cart-table').add('#order').hide();
+   }
+   
+  },
+  function(){}
+ );
  $("#cart_store table tr:has(td)").remove();
  $.each(gon.changes, function(idx, item){
   $('table.search-products tr input.item-cart[value="' + item[0] + '"]').val(item[1]);
