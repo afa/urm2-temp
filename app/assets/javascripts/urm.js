@@ -538,7 +538,7 @@ function ordersPickProcess(){
  };
 })(jQuery);*/
 function cartsAddElementToCart(){
- makeAjaxPost("/create.json", 
+ makeAjaxPost("/carts.json", 
   [],
   function(data, reply, xhr){
    if(data.carts.length == 0){
