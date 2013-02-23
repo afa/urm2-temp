@@ -7,8 +7,7 @@
      = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "items[export]"}
 
    = form_for :cart_fields, :url => carts_path, :method => :post, :html=>{:class => "js"}, :remote => true do |frm|
-    - unless @items.empty?
-     = render :partial => "shared/submit_button", :locals => {:title => t(:add_to_cart), :name => "items[commit]"}
+    = render :partial => "shared/submit_button", :locals => {:title => t(:add_to_cart), :name => "items[commit]", :opts => {:class => (@items.empty? ? "disabled" : nil)}}
     .clear.padded
     %table.table-style{:class => "search-products"}
      - unless @items.empty?
@@ -65,15 +64,13 @@
       %tr.title-header-bottom
        %th.double-cell{:colspan => 3}= t :avail
     .padded
-    - unless @items.empty?
-     = render :partial => "shared/submit_button", :locals => {:title => t(:add_to_cart), :name => "items[commit]"}
+    = render :partial => "shared/submit_button", :locals => {:title => t(:add_to_cart), :name => "items[commit]", :opts => {:class => (@items.empty? ? "disabled" : nil)}}
  .clear.block-padded &nbsp;
  .cart-table.block-padded
-  .cart= render :partial => "carts/cart_table", :locals => {:cart => @carts, :app_list => @app_list}
+  .cart= render :partial => "carts/cart_table.html.haml", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores}
  -# .allow-order.block-padded
   = link_to t(:start_edit_order), new_order_path, :id => "allow_order", :class => "ajax"
- - unless @carts.empty?
-  #allow-order= render :partial => 'shared/button', :locals => {:title => t(:start_edit_order)}
+ #allow-order{:class => [@carts.empty? ? "disabled" : nil]}= render :partial => 'shared/button', :locals => {:title => t(:start_edit_order)}
  #order
  -# #order= render :partial => "main/order_edit"
  .results
