@@ -69,6 +69,7 @@ function search_icons_handle(){
  $(".icon .dms.js").click(showDms);
  $(".icon a.replacement.js").click(showAnalog);
  $("a.info.js").click(showInfo);
+ $('form.json .button a.button-style').click(cartsAddElementToCart);
 }
 
 function apply_hover_in_table_on_mmove(){
