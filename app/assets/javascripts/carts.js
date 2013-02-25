@@ -1,5 +1,5 @@
 function cartsAddElementToCart(){
- var crts = new Array;
+ var crts = {};
  $("table.search-products tr:has(input.item-code)").each(function(idx, item){
   var key = $("input.item-code", item).attr("name");
   crts[key] = $("input.item-code", item).val();
