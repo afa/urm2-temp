@@ -1,14 +1,16 @@
 function cartsAddElementToCart(){
- var crts = [];
+ var crts = new Array;
  crts["items"] = new Array;
  $("table.search-products tr:has(input.item-code)").each(function(idx, item){
   var key = $("input.item-code", item).attr("name").match(/items\[(.+)\]\[code\]/)[1];
   crts["items"][key] = new Array;
   crts["items"][key]["code"] = $("input.item-code", item).val();
+  crts["items"][key]["amount"] = $("td.input-in-cart input", item).val();
+  crts["items"][key]["cart"] = $("input.item-cart", item).val();
  });
- alert(crts.length);
+ alert(crts["items"].length);
  makeAjaxPost("/carts.json", 
-  [],
+  crts,
   function(data, reply, xhr){
    if(data.carts.length == 0){
     $('.cart-table').add('#order').hide();
