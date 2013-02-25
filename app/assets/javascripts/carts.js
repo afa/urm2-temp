@@ -52,11 +52,11 @@ function cartsAddElementToCart(){
    cartsHandleRadioPicks();
    cartsHandleSaveOnFocusLost();
    cartsProcessRadioPicks();
-   event.preventDefaults();
    return false;
   },
   function(){}
  );
+ event.preventDefaults();
 }
 
 
