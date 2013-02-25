@@ -3,12 +3,18 @@ function cartsAddElementToCart(){
  $("table.search-products tr:has(input.item-code)").each(function(idx, item){
   var key = $("input.item-code", item).attr("name");
   crts[key] = $("input.item-code", item).val();
+  alert(key);
+  alert(crts[key]);
   key = $("td.input-in-cart input", item).attr("name");
   crts[key] = $("td.input-in-cart input", item).val();
+  alert(key);
+  alert(crts[key]);
   key = $("input.item-cart", item).attr("name");
   crts[key] = $("input.item-cart", item).val();
+  alert(key);
+  alert(crts[key]);
  });
- alert(crts);
+ alert(crts.length);
  makeAjaxPost("/carts.json", 
   crts,
   function(data, reply, xhr){
