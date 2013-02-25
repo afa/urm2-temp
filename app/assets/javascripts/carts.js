@@ -1,4 +1,10 @@
 function cartsAddElementToCart(){
+ var crts = [];
+ $("table.search-products tr:has(input.item-code)").each(function(idx, item){
+  var key = $("input.item-code", item).attr("name").match(/items\[(.+)\]\[code\]/)[0];
+  alert(key);
+  crts["items"][key] = new Array;
+ });
  makeAjaxPost("/carts.json", 
   [],
   function(data, reply, xhr){
