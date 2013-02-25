@@ -8,7 +8,7 @@ function cartsAddElementToCart(){
   key = $("input.item-cart", item).attr("name");
   crts[key] = $("input.item-cart", item).val();
  });
- alert(crts.length);
+ alert(crts);
  makeAjaxPost("/carts.json", 
   crts,
   function(data, reply, xhr){
