@@ -11,6 +11,7 @@ class CartsController < ApplicationController
 
   def create
    @changed = []
+   p "---cacrpar", params
    #if params[:items] and !params[:items].blank?
     (params[:items] || {}).reject{|k, v| k == :commit }.reject{|k, v| v[:amount].blank? }.each do |k, v|
      @changed << [v[:cart], CartStore.copy_on_write(v)]
