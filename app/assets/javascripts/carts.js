@@ -52,7 +52,8 @@ function cartsAddElementToCart(){
    cartsHandleRadioPicks();
    cartsHandleSaveOnFocusLost();
    cartsProcessRadioPicks();
-   event.preventDefault();
+   event.preventDefaults();
+   return false;
   },
   function(){}
  );
