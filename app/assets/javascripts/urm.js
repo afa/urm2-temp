@@ -34,6 +34,7 @@ function makeAjaxDestroy(ajaxUrl, functionSuccess, functionFailure){
 }
 
 function makeAjaxPost(ajaxUrl, dataHash, functionSuccess, functionFailure){
+ alert(dataHash.first());
  $.ajax({
   type: "POST",
   url: ajaxUrl,
