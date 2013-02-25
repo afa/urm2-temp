@@ -1,7 +1,7 @@
 function cartsAddElementToCart(){
  var crts = [];
  $("table.search-products tr:has(input.item-code)").each(function(idx, item){
-  var key = $("input.item-code", item).attr("name").match(/items\[(.+)\]\[code\]/)[0];
+  var key = $("input.item-code", item).attr("name").match(/items\[(.+)\]\[code\]/)[1];
   alert(key);
   crts["items"][key] = new Array;
  });
