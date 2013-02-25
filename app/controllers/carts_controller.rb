@@ -11,7 +11,7 @@ class CartsController < ApplicationController
 
   def create
    @changed = []
-   if params[:items] and !params[:items].blank?
+   #if params[:items] and !params[:items].blank?
     params[:items].reject{|k, v| k == :commit }.reject{|k, v| v[:amount].blank? }.each do |k, v|
      @changed << [v[:cart], CartStore.copy_on_write(v)]
     end
@@ -60,9 +60,9 @@ class CartsController < ApplicationController
      # redirect_to carts_path
      #end
     end
-   else
-    redirect_to :back
-   end
+   #else
+   # redirect_to :back
+   #end
   end
 
   def edit
