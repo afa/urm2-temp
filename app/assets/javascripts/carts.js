@@ -20,6 +20,7 @@ function cartsAddElementToCart(){
     $('table.search-products tr input.dms-cart[value="' + item[0] + '"]').val(item[1]);
    });
    if (data.carts.length > 0){ //empty?
+    alert("render");
     $(".cart-table .cart").html(data.rendered);
     $.each(data.carts, function(idx, item){
      //$("#cart_store table").append(item.line);
