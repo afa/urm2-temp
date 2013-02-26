@@ -1,7 +1,7 @@
 function cartsAddElementToCart(){
  var crts = {};
  $("table.search-products tr:has(input.item-code)").each(function(idx, item){
-  var key = $("input.item-code", item).attr("name");
+  var key = $("input.item-code", item).attr("name"); //TODO: refactor
   crts[key] = $("input.item-code", item).val();
   key = $("td.input-in-cart input", item).attr("name");
   crts[key] = $("td.input-in-cart input", item).val();
@@ -11,12 +11,9 @@ function cartsAddElementToCart(){
  makeAjaxPost("/carts.json", 
   crts,
   function(data, reply, xhr){
-   if(data.carts.length == 0){
-    $('.cart-table').add('#order').hide();
-    $("#cart_store").remove();
-   }
+    //$('.cart-table').add('#order').hide();
+   $("#cart_store").remove();
    $.each(data.changes, function(idx, item){
-    alert("chg");
     $('table.search-products tr input.item-cart[value="' + item[0] + '"]').val(item[1]);
     $('table.search-products tr input.dms-cart[value="' + item[0] + '"]').val(item[1]);
    });
