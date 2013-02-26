@@ -70,6 +70,7 @@ function cartsAddElementToCart(){
    cartsHandleRadioPicks();
    cartsHandleSaveOnFocusLost();
    cartsProcessRadioPicks();
+   $('#cart_store .icon a.delete').click(cartsRemoveElementFromCarts);
   },
   function(){}
  );
@@ -100,11 +101,13 @@ function cartsRemoveElementFromCarts(){
    } else {
     $("#cart_store").add("#order").add("#allow-order").hide();
    }
+   apply_hover_in_table_on_mmove();
    activateSearchCancelButton();
    activateCommit();
    cartsHandleRadioPicks();
    cartsHandleSaveOnFocusLost();
    cartsProcessRadioPicks();
+   $('#cart_store .icon a.delete').click(cartsRemoveElementFromCarts);
   },
   function(data){}
  );
