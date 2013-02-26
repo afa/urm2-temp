@@ -1,7 +1,7 @@
 %tr{:id => "cart_str_#{cart_line.id.to_s}", :class => [cart_line.is_a?(CartWorld) ? "world" : nil, cart_line.is_a?(CartStore) ? "store" : nil, cart_line.is_a?(CartRequest) ? "request" : nil]}
  %td.icons
   .icon
-   = link_to"", cart_path(cart_line), :class => ["delete", "delete-from-cart"], :remote => true, :method => :delete
+   = link_to "", cart_path(cart_line, :format => "json"), :class => ["delete", "delete-from-cart"]
  %td.text-left= cart_line.type_name
  %td.text-left= cart_line.product_name
  %td.text-left= cart_line.product_brend
