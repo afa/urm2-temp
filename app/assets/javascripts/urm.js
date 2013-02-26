@@ -71,6 +71,7 @@ function search_icons_handle(){
  $(".icon a.replacement.js").click(showAnalog);
  $("a.info.js").click(showInfo);
  $('form.json .button a.button-style').click(cartsAddElementToCart);
+ $('#cart_store .icon a.delete').click(cartsRemoveElementFromCarts);
 }
 
 function apply_hover_in_table_on_mmove(){
