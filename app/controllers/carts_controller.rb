@@ -11,7 +11,6 @@ class CartsController < ApplicationController
 
   def create
    @changed = []
-   p "---cacrpar", params
    #if params[:items] and !params[:items].blank?
     (params[:items] || {}).reject{|k, v| k == :commit }.reject{|k, v| v[:amount].blank? }.each do |k, v|
      @changed << [v[:cart], CartStore.copy_on_write(v)]
@@ -29,7 +28,7 @@ class CartsController < ApplicationController
     CartItem.uncached do
      @carts = User.current.cart_items.unprocessed.in_cart.order("product_name, product_brend")
      @carts.select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
-     #gon.need_application = @carts.detect{|i| i.application_area_mandatory }
+     @mandatory = @carts.detect{|i| i.application_area_mandatory }
      @app_list = Axapta.application_area_list || []
      #gon.app_list = @app_list
      @stores = @carts.map(&:location_link).uniq.compact.sort{|a, b| a == User.current.current_account.invent_location_id ? -1 : a <=> b }
@@ -39,21 +38,21 @@ class CartsController < ApplicationController
       cart.line_code = cart.base_signature
       #cart.line = view_context.escape_javascript(render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart})
      end
-     @rendered = render_to_string :partial => "carts/cart_collection.html.haml", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores}
+     @rendered = render_to_string :partial => "carts/cart_table.html.haml", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores}
      #gon.rendered = @rendered
      #gon.carts = @carts.map{|c| c.to_hash.merge(:obj_id => c.id)}
      #gon.changes = @changed
      #gon.stores = @stores
      @deliveries = User.current.deliveries
-     sales = Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000).items
-     @sales_locs = sales.map{|s| [s.sales_id, s.location_id] }.as_hash
-     @avail_sales = sales.map{|s| [s.sales_id, s.sales_id] }
+     #sales = Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000).items
+     #@sales_locs = sales.map{|s| [s.sales_id, s.location_id] }.as_hash
+     #@avail_sales = sales.map{|s| [s.sales_id, s.sales_id] }
      #gon.order = render_to_string :partial => "main/order_edit.html.haml"
     end
     #redirect_to carts_path
     respond_with do |format|
      format.json do
-      render :json => {:need_application => @carts.detect{|i| i.application_area_mandatory }, :app_list => (Axapta.application_area_list || []).sort_by{|l| l.application_area_name }, :rendered => render_to_string(:partial => "carts/cart_table.html.haml", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores}), :carts => @carts, :changes => @changed }
+      render :json => {:need_application => @carts.detect{|i| i.application_area_mandatory }, :app_list => @app_list.sort_by{|l| l.application_area_name }, :rendered => @rendered, :carts => @carts, :changes => @changed }
       #render :json => {:dms => render_to_string( :partial => "main/dms_block.html", :locals => {:items => @items, :after => @after} ), :gap => render_to_string( :partial => "main/gap_line.html", :locals => {:after => @after}), :empty => render_to_string(:partial => "main/dms_empty.html", :locals => {:after => @after})}
      end
      #format.js { render :layout => false }
