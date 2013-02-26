@@ -27,9 +27,11 @@ function cartsAddElementToCart(){
     //$(".cart-table").add("#order").show();
    }
    if($("#cart_store table tr").length >= 1){
+    alert("sh")
     $("#cart_store").show();
     $("#allow-order").show();
    } else {
+    alert("hi")
     $("#cart_store").hide();
     $("#allow-order").hide();
    }
