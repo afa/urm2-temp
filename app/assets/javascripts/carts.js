@@ -8,6 +8,22 @@ function cartsAddElementToCart(){
   key = $("input.item-cart", item).attr("name");
   crts[key] = $("input.item-cart", item).val();
  });
+ $("table.search-products tr:has(input.dms-code)").each(function(idx, item){
+  var key = $("input.dms-code", item).attr("name"); //TODO: refactor
+  crts[key] = $("input.dms-code", item).val();
+  key = $("td.input-in-cart input", item).attr("name");
+  crts[key] = $("td.input-in-cart input", item).val();
+  key = $("input.dms-cart", item).attr("name");
+  crts[key] = $("input.dms-cart", item).val();
+ });
+ $("table.search-products tr:has(input.analog-code)").each(function(idx, item){
+  var key = $("input.analog-code", item).attr("name"); //TODO: refactor
+  crts[key] = $("input.analog-code", item).val();
+  key = $("td.input-in-cart input", item).attr("name");
+  crts[key] = $("td.input-in-cart input", item).val();
+  key = $("input.analog-cart", item).attr("name");
+  crts[key] = $("input.analog-cart", item).val();
+ });
  makeAjaxPost("/carts.json", 
   crts,
   function(data, reply, xhr){
