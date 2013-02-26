@@ -37,9 +37,10 @@ function makeAjaxPost(ajaxUrl, dataHash, functionSuccess, functionFailure){
  $.ajax({
   type: "POST",
   url: ajaxUrl,
-  contentType: "application/json; charset=utf-8",
+  //contentType: "application/json; charset=utf-8",
   data: dataHash,
-  //dataType: "json",
+  dataType: "json",
+  processData: false,
   success: functionSuccess,
   error: functionFailure
  });
