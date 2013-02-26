@@ -28,11 +28,11 @@ function cartsAddElementToCart(){
    }
    if($("#cart_store table tr").length >= 1){
     alert("sh")
-    $("#cart_store").show();
+    $(".cart-table").show();
     $("#allow-order").show();
    } else {
     alert("hi")
-    $("#cart_store").hide();
+    $(".cart-table").hide();
     $("#allow-order").hide();
    }
    //! $("div#order").hide();
