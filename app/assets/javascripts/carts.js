@@ -1,28 +1,23 @@
+function takeValToHash(hash, seek, scope){
+  var key = $(seek, scope).attr("name"); //TODO: refactor
+  hash[key] = $(seek, scope).val();
+}
 function cartsAddElementToCart(){
  var crts = {};
  $("table.search-products tr:has(input.item-code)").each(function(idx, item){
-  var key = $("input.item-code", item).attr("name"); //TODO: refactor
-  crts[key] = $("input.item-code", item).val();
-  key = $("td.input-in-cart input", item).attr("name");
-  crts[key] = $("td.input-in-cart input", item).val();
-  key = $("input.item-cart", item).attr("name");
-  crts[key] = $("input.item-cart", item).val();
+  takeValToHash(crts, "input.item-code", item);
+  takeValToHash(crts, "td.input-in-cart input", item);
+  takeValToHash(crts, "input.item-cart", item);
  });
  $("table.search-products tr:has(input.dms-code)").each(function(idx, item){
-  var key = $("input.dms-code", item).attr("name"); //TODO: refactor
-  crts[key] = $("input.dms-code", item).val();
-  key = $("td.input-in-cart input", item).attr("name");
-  crts[key] = $("td.input-in-cart input", item).val();
-  key = $("input.dms-cart", item).attr("name");
-  crts[key] = $("input.dms-cart", item).val();
+  takeValToHash(crts, "input.dms-code", item);
+  takeValToHash(crts, "td.input-in-cart input", item);
+  takeValToHash(crts, "input.dms-cart", item);
  });
  $("table.search-products tr:has(input.analog-code)").each(function(idx, item){
-  var key = $("input.analog-code", item).attr("name"); //TODO: refactor
-  crts[key] = $("input.analog-code", item).val();
-  key = $("td.input-in-cart input", item).attr("name");
-  crts[key] = $("td.input-in-cart input", item).val();
-  key = $("input.analog-cart", item).attr("name");
-  crts[key] = $("input.analog-cart", item).val();
+  takeValToHash(crts, "input.analog-code", item);
+  takeValToHash(crts, "td.input-in-cart input", item);
+  takeValToHash(crts, "input.analog-cart", item);
  });
  makeAjaxPost("/carts.json", 
   crts,
@@ -81,6 +76,48 @@ function cartsAddElementToCart(){
   function(){}
  );
  return false;
+}
+
+//destroy
+function cartsRemoveElementFromCarts(){
+ alert(this.href);
+ return;
+ //makeAjaxDestroy("/carts.json/");
+ //-# $("#cart_store").replaceWith("#{escape_javascript(render :partial => "carts/cart_table", :locals => {:cart => @carts})}");
+ $('table.search-products tr:has(td input.item-cart[value="' + gon.deleted + '"])').find("td.input-in-cart").removeClass("exist speed");
+ $('table.search-products tr:has(td input.item-cart[value="' + gon.deleted + '"])').find("td.input-in-cart input").val("");
+ $('table.search-products tr:has(input.dms-cart[value="' + gon.deleted + '"])').find("td.input-in-cart").removeClass("exist speed");
+ $('table.search-products tr:has(input.dms-cart[value="' + gon.deleted + '"])').find("td.input-in-cart input").val("");
+ // need? $("table.search-products tr td input.item-cart[value=\"#{@old}\"]").val("#{@new}");
+
+ $("#cart_store table tr:has(td)").remove();
+ if (gon.carts.length > 0){ //empty?
+  $("#cart_store table").append(gon.rendered);
+  $.each(gon.carts, function(idx, item){
+   //$("#cart_store table").append(item.line);
+   $('table.search-products input.item-cart[value="' + item.obj_id +'"]').parents("tr").find('td.input-in-cart input[type="text"]').val(item.amount);
+  });
+  //$(".cart-table").add(".allow-order").show();
+ }
+ if($("#cart_store table tr").length > 1){
+  $("#cart_store").add("#order").add("#allow-order").show();
+ } else {
+  $("#cart_store").add("#order").add("#allow-order").hide();
+ }
+ activateSearchCancelButton();
+ //$("div#order").children().remove();
+ //$("div#order").append(gon.order);
+ //$("div#order").hide();
+ //$('.form-hide .item').dropDown();
+ activateCommit();
+ //$('.commit a.button-style').off("click");
+ //$('.commit a.button-style').on("click", function(){
+ // $(this).parents('form').submit();
+ // return false;
+ //});
+ cartsHandleRadioPicks();
+ cartsHandleSaveOnFocusLost();
+ cartsProcessRadioPicks();
 }
 
 

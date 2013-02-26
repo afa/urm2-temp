@@ -152,7 +152,7 @@ class CartsController < ApplicationController
      cart.line_code = cart.base_signature
      #cart.line = view_context.escape_javascript(render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart})
     end
-    @rendered = render_to_string :partial => "carts/cart_collection", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores}
+    @rendered = render_to_string :partial => "carts/cart_table.html.haml", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores}
     gon.rendered = @rendered
     gon.carts = @carts.map{|c| c.to_hash.merge(:obj_id => c.id)}
     gon.deleted = @old
@@ -169,6 +169,9 @@ class CartsController < ApplicationController
    respond_with do |format|
     format.js { render :layout => false }
     #format.json { render :json => {:carts_table => escape_javascript(render_to_string(:partial => "carts/cart_table", :locals => {:cart => @carts})), :old => @old, :new => @new, :carts_empty => @carts.empty?} }
+   end
+   format.json do
+    render :json => {:rendered => @rendered, :carts => @carts, :deleted => @old}
    end
   end
 end
