@@ -98,31 +98,28 @@ function cartsRemoveElementFromCarts(){
 }
 
 function cartsSaveCart(){
- $("#cart_store table tr:has(td)").remove();
- if (gon.carts.length > 0){ //empty?
-  $("#cart_store table").append(gon.rendered);
-  $.each(gon.carts, function(idx, item){
-   $('table.search-products input.item-cart[value="' + item.obj_id +'"]').parents("tr").find('td.input-in-cart input[type="text"]').val(item.amount);
-  });
- }
- if($("#cart_store table tr").length > 1){
-  $("#cart_store").add("#order").show();
- } else {
-  $("#cart_store").add("#order").hide();
- }
- activateSearchCancelButton();
- $("div#order").children().remove();
- $("div#order").append(gon.order);
- activateCommit();
- //$('.commit a.button-style').off("click");
- //$('.commit a.button-style').on("click", function(){
- // $(this).parents('form').submit();
- // return false;
- //});
- cartsHandleRadioPicks();
- cartsHandleSaveOnFocusLost();
- cartsProcessRadioPicks();
+ var crt = {};
+ takeValToHash(crt, "input[name=utf8]", $(this).parents("form"));
+ makeAjaxPost(
+  "/carts/save.json",
+  crt,
+  function(data, reply, xhr){
+   $("#cart_store table tr:has(td)").remove();
+   if (gon.carts.length > 0){ //empty?
+    $("#cart_store table").append(gon.rendered);
+    $.each(gon.carts, function(idx, item){
+     $('table.search-products input.item-cart[value="' + item.obj_id +'"]').parents("tr").find('td.input-in-cart input[type="text"]').val(item.amount);
+    });
+   }
+   if($("#cart_store table tr").length > 1){
+    $("#cart_store").add("#order").show();
+   } else {
+    $("#cart_store").add("#order").hide();
+   }
 
+  },
+  function(){}
+ );
 
  //$('.form-hide .item').dropDown();
  //! $("div#order").hide();

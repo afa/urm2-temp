@@ -33,9 +33,9 @@ function makeAjaxDestroy(ajaxUrl, functionSuccess, functionFailure){
  });
 }
 
-function makeAjaxPost(ajaxUrl, dataHash, functionSuccess, functionFailure){
+function makeAjaxPost(ajaxUrl, dataHash, functionSuccess, functionFailure, tp = "POST"){
  $.ajax({
-  type: "POST",
+  type: tp,
   url: ajaxUrl,
   //contentType: "application/json; charset=utf-8",
   data: $.param(dataHash),
