@@ -99,7 +99,9 @@ function cartsRemoveElementFromCarts(){
 
 function cartsSaveCart(){
  var crt = {};
- takeValToHash(crt, "input[name=utf8]", $(this).parents("form"));
+ takeValToHash(crt, "input[name=\"utf8\"]", $(this).parents("form"));
+ takeValToHash(crt, "input[name=\"_method\"]", $(this).parents("form"));
+ takeValToHash(crt, "input[name=\"authenticity_token\"]", $(this).parents("form"));
  makeAjaxPost(
   "/carts/save.json",
   crt,
@@ -142,6 +144,7 @@ function cartsSaveCart(){
  //cartsHandleRadioPicks();
  //cartsHandleSaveOnFocusLost();
  //cartsProcessRadioPicks();
+ return false;
 }
 
 
