@@ -89,43 +89,46 @@ class CartsController < ApplicationController
        hsh.merge(:pick => false, :reserve => false)
      end
     end
-    [:destroy, :pick, :reserve].each{|s| hsh[s] = WebUtils.parse_bool(hsh[s]) if hsh.has_key?(s) }
-    v_destroy = hsh[:destroy]
-    hsh.reject!{|k,v| k == :destroy or k == 'destroy' }
-    if v_destroy
-     cart.update_attributes hsh.merge(:amount => 0)
-     @changed << [cart.id.to_s, '0']
-    else
-     cart.update_attributes hsh
-     @changed << [cart.id.to_s, cart.amount.to_s]
-    end
+    [:pick, :reserve].each{|s| hsh[s] = WebUtils.parse_bool(hsh[s]) if hsh.has_key?(s) }
+    #v_destroy = hsh[:destroy]
+    #hsh.reject!{|k,v| k == :destroy or k == 'destroy' }
+    #if v_destroy
+    # cart.update_attributes hsh.merge(:amount => 0)
+    # @changed << [cart.id.to_s, '0']
+    #else
+    cart.update_attributes hsh
+    @changed << [cart.id.to_s, cart.amount.to_s]
+    #end
    end
    CartItem.uncached do
     @carts = User.current.cart_items.unprocessed.in_cart.order("product_name, product_brend")
     @carts.select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
     @stores = @carts.map(&:location_link).uniq.compact.sort{|a, b| a == User.current.current_account.invent_location_id ? -1 : a <=> b }
     @deliveries = User.current.deliveries
-    gon.need_application = @carts.detect{|i| i.application_area_mandatory }
+    @mandatory = @carts.detect{|i| i.application_area_mandatory }
     @app_list = Axapta.application_area_list || []
-    gon.app_list = @app_list
+    #gon.app_list = @app_list
     @carts.each do |cart|
      #cart.line = render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart, :app_list => @app_list}
      cart.offer_code = cart.signature
      cart.line_code = cart.base_signature
     end
     #@stores = @carts.map(&:location_link).uniq.compact
-    @rendered = render_to_string :partial => "carts/cart_collection", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores}
-    gon.rendered = @rendered
-    gon.carts = @carts.map{|c| c.to_hash.merge(:obj_id => c.id)}
-    gon.stores = @stores
-    sales = Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000).items
-    @sales_locs = sales.map{|s| [s.sales_id, s.location_id] }.as_hash
-    @avail_sales = sales.map{|s| [s.sales_id, s.sales_id] }
-    @order = render_to_string :partial => "main/order_edit.html.haml"
-    gon.order = @order
+    @rendered = render_to_string :partial => "carts/cart_table.html.haml", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores}
+    #gon.rendered = @rendered
+    #gon.carts = @carts.map{|c| c.to_hash.merge(:obj_id => c.id)}
+    #gon.stores = @stores
+    #sales = Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000).items
+    #@sales_locs = sales.map{|s| [s.sales_id, s.location_id] }.as_hash
+    #@avail_sales = sales.map{|s| [s.sales_id, s.sales_id] }
+    #@order = render_to_string :partial => "main/order_edit.html.haml"
+    #gon.order = @order
    end
    respond_with do |format|
-    format.js { render :layout => false }
+    #format.js { render :layout => false }
+    format.json do
+     render :json => {:stores => @stores, :carts => @carts, :rendered => @rendered, :changes => @changed}
+    end
    end
   end
 

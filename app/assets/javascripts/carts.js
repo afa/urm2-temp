@@ -106,17 +106,17 @@ function cartsSaveCart(){
   "/carts/save.json",
   crt,
   function(data, reply, xhr){
-   $("#cart_store table tr:has(td)").remove();
-   if (gon.carts.length > 0){ //empty?
+   $("#cart_store").remove();
+   if (data.carts.length > 0){ //empty?
     $("#cart_store table").append(gon.rendered);
-    $.each(gon.carts, function(idx, item){
-     $('table.search-products input.item-cart[value="' + item.obj_id +'"]').parents("tr").find('td.input-in-cart input[type="text"]').val(item.amount);
+    $.each(data.carts, function(idx, item){
+     $('table.search-products input.item-cart[value="' + item.id +'"]').parents("tr").find('td.input-in-cart input[type="text"]').val(item.amount);
     });
    }
    if($("#cart_store table tr").length > 1){
-    $("#cart_store").add("#order").show();
+    $("#cart_store").show();
    } else {
-    $("#cart_store").add("#order").hide();
+    $("#cart_store").hide();
    }
 
   },
