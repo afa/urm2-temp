@@ -132,6 +132,8 @@ function cartsSaveCart(){
    cartsHandleRadioPicks();
    cartsHandleSaveOnFocusLost();
    cartsProcessRadioPicks();
+   apply_hover_in_table_on_mmove();
+   $('#cart_store .icon a.delete').click(cartsRemoveElementFromCarts);
 
   },
   function(){}
