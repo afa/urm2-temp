@@ -646,14 +646,16 @@ function cartsProcessRadioPicks(){
 }
 
 function cartsHandleRadioPicks(){
- $('#cart_store input[type="radio"]').on("click", function(){$("#cart_store form").submit();});
+ $('#cart_store input[type="radio"]').on("click", cartsSaveCart);
+ //$('#cart_store input[type="radio"]').on("click", function(){$("#cart_store form").submit();});
 }
 
 function cartsHandleSaveOnFocusLost(){
- $("#cart_store input").add("#cart_store textarea").on("focusout", function(evt){
-  $("#cart_store form").submit();
-  return false;
- });
+ $("#cart_store input").add("#cart_store textarea").on("focusout", cartsSaveCart);
+ //$("#cart_store input").add("#cart_store textarea").on("focusout", function(evt){
+ // $("#cart_store form").submit();
+ // return false;
+ //});
 }
 
 function quotationsCopyToHidden(item, after){
