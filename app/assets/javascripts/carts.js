@@ -26,6 +26,7 @@ function cartsAddElementToCart(){
    $.each(data.changes, function(idx, item){
     $('table.search-products tr input.item-cart[value="' + item[0] + '"]').val(item[1]);
     $('table.search-products tr input.dms-cart[value="' + item[0] + '"]').val(item[1]);
+    $('table.search-products tr input.analog-cart[value="' + item[0] + '"]').val(item[1]);
    });
    if (data.carts.length > 0){ //empty?
     $(".cart-table .cart").html(data.rendered);
@@ -33,6 +34,7 @@ function cartsAddElementToCart(){
      //$("#cart_store table").append(item.line);
      $('table.search-products input.item-cart[value="' + item.id +'"]').parents("tr").find('td.input-in-cart input[type="text"]').val(item.amount);
      $('table.search-products input.dms-cart[value="' + item.id +'"]').parents("tr").find('td.input-in-cart input[type="text"]').val(item.amount);
+     $('table.search-products input.analog-cart[value="' + item.id +'"]').parents("tr").find('td.input-in-cart input[type="text"]').val(item.amount);
     });
    }
    if($("#cart_store table tr").length >= 1){
@@ -105,6 +107,9 @@ function cartsSaveCart(){
  $("input[id^=\"cart_item_\"]", $(this).parents("form")).each(function(idx, item){
   takeValToHash(crt, "#" + item.id, null);
  });
+ $("select[id^=\"cart_item_\"]", $(this).parents("form")).each(function(idx, item){
+  takeValToHash(crt, "#" + item.id, null);
+ });
  $("input[type=\"radio\"][id^=\"radio_cart_item_\"]:checked", $(this).parents("form")).each(function(idx, item){
   takeValToHash(crt, "#" + item.id, $(this).parents("form"));
  });
@@ -114,7 +119,7 @@ function cartsSaveCart(){
   function(data, reply, xhr){
    $("#cart_store").remove();
    if (data.carts.length > 0){ //empty?
-    $("#cart_store table").append(gon.rendered);
+    $(".cart-table .cart").html(data.rendered);
     $.each(data.carts, function(idx, item){
      $('table.search-products input.item-cart[value="' + item.id +'"]').parents("tr").find('td.input-in-cart input[type="text"]').val(item.amount);
     });
@@ -180,6 +185,7 @@ function cartsHandleRadioPicks(){
 
 function cartsHandleSaveOnFocusLost(){
  $("#cart_store input").add("#cart_store textarea").on("focusout", cartsSaveCart);
+ $("#cart_store select").on("change", cartsSaveCart);
  //$("#cart_store input").add("#cart_store textarea").on("focusout", function(evt){
  // $("#cart_store form").submit();
  // return false;

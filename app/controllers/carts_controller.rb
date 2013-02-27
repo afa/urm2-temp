@@ -77,7 +77,8 @@ class CartsController < ApplicationController
    @changed = []
    carts = params[:cart_item].keys.map{|i| CartItem.find i }
    carts.each do |cart|
-    hsh = params[:cart_item][cart.id.to_s]
+    old = cart.id.to_s
+    hsh = params[:cart_item][old]
     act = hsh[:action]
     if act
      case act
@@ -97,7 +98,7 @@ class CartsController < ApplicationController
     # @changed << [cart.id.to_s, '0']
     #else
     cart.update_attributes hsh
-    @changed << [cart.id.to_s, cart.amount.to_s]
+    @changed << [old, cart.id.to_s]
     #end
    end
    CartItem.uncached do
