@@ -102,6 +102,9 @@ function cartsSaveCart(){
  takeValToHash(crt, "input[name=\"utf8\"]", $(this).parents("form"));
  takeValToHash(crt, "input[name=\"_method\"]", $(this).parents("form"));
  takeValToHash(crt, "input[name=\"authenticity_token\"]", $(this).parents("form"));
+ $("input[id|=\"cart_item_\"]", $(this).parents("form")).each(function(idx, item){
+  takeValToHash(crt, item.id, $(this).parents("form"));
+ });
  makeAjaxPost(
   "/carts/save.json",
   crt,
@@ -118,6 +121,9 @@ function cartsSaveCart(){
    } else {
     $("#cart_store").hide();
    }
+   cartsHandleRadioPicks();
+   cartsHandleSaveOnFocusLost();
+   cartsProcessRadioPicks();
 
   },
   function(){}
@@ -141,10 +147,40 @@ function cartsSaveCart(){
  //$('.js').bind('ajax:success', function(evt, xhr, status){
  // eval(xhr.responseText);
  //});
- //cartsHandleRadioPicks();
- //cartsHandleSaveOnFocusLost();
- //cartsProcessRadioPicks();
  return false;
+}
+
+function cartsProcessRadioPicks(){
+ //if($("#cart_store tr.request").length > 0){
+ // $("#order .item.request textarea").each(function(i, item){ item.disabled = ''; });
+ //} else {
+ // $("#order .item.request textarea").each(function(i, item){ item.disabled = 'disabled'; });
+ //}
+ //if($("#cart_store tr.world").add("#cart_store tr.store").length > 0){
+ // $("#order .item.store textarea").each(function(i, item){ item.disabled = ''; });
+ //} else {
+ // $("#order .item.store textarea").each(function(i, item){ item.disabled = 'disabled'; });
+ //}
+ //if($("#cart_store tr.world").add('#cart_store tr.store:has(input:checked[type="radio"][value="pick"])').length > 0){
+ // $("#order .item.pick select").add("#order .item.pick input").each(function(i, item){ item.disabled = ''; });
+ // //$("#order .item.pick textarea").add("#order .item.pick select").each(function(i, item){ item.disabled = ''; });
+ //} else {
+ // //$("#order .item.pick textarea").add("#order .item.pick select").each(function(i, item){ item.disabled = 'disabled'; });
+ // $("#order .item.pick select").add("#order .item.pick input").each(function(i, item){ item.disabled = 'disabled'; });
+ //}
+}
+
+function cartsHandleRadioPicks(){
+ $('#cart_store input[type="radio"]').on("click", cartsSaveCart);
+ //$('#cart_store input[type="radio"]').on("click", function(){$("#cart_store form").submit();});
+}
+
+function cartsHandleSaveOnFocusLost(){
+ $("#cart_store input").add("#cart_store textarea").on("focusout", cartsSaveCart);
+ //$("#cart_store input").add("#cart_store textarea").on("focusout", function(evt){
+ // $("#cart_store form").submit();
+ // return false;
+ //});
 }
 
 
