@@ -103,10 +103,10 @@ function cartsSaveCart(){
  takeValToHash(crt, "input[name=\"_method\"]", $(this).parents("form"));
  takeValToHash(crt, "input[name=\"authenticity_token\"]", $(this).parents("form"));
  $("input[id^=\"cart_item_\"]", $(this).parents("form")).each(function(idx, item){
-  takeValToHash(crt, item.id, null);
+  takeValToHash(crt, "#" + item.id, null);
  });
  $("input[type=\"radio\"][id^=\"radio_cart_item_\"]:checked", $(this).parents("form")).each(function(idx, item){
-  takeValToHash(crt, item.id, $(this).parents("form"));
+  takeValToHash(crt, "#" + item.id, $(this).parents("form"));
  });
  makeAjaxPost(
   "/carts/save.json",
