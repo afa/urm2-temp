@@ -21,12 +21,26 @@ function load_dms_bundle(from_where, need_load){
  if(need_load){
   $.getJSON(from_where, "", function(data){
    $("div.dms_loader").hide();
-   for(var kk in data){
+   for(var kk in data.dms){
     $(data[kk]).insertAfter($("tr.item_" + kk).last());
     $("tr.item_" + kk + " .icon .dms").addClass("active");
     hide_dms_on_plus_click(kk);
    }
-
+   $("#cart_store").remove();
+   $(".cart-table .cart").html(data.rendered);
+   if($("#cart_store table tr").length > 1){
+    $(".cart-table").show();
+    $("#allow-order").show();
+   } else {
+    $(".cart-table").hide();
+    $("#allow-order").hide();
+   }
+   apply_hover_in_table_on_mmove();
+   cartsHandleRadioPicks();
+   cartsHandleSaveOnFocusLost();
+   cartsProcessRadioPicks();
+   $('#cart_store .icon a.delete').click(cartsRemoveElementFromCarts);
+   
   },
   function(){
    $("div.dms_loader").hide();

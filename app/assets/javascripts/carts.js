@@ -37,7 +37,7 @@ function cartsAddElementToCart(){
      $('table.search-products input.analog-cart[value="' + item.id +'"]').parents("tr").find('td.input-in-cart input[type="text"]').val(item.amount);
     });
    }
-   if($("#cart_store table tr").length >= 1){
+   if($("#cart_store table tr").length > 1){
     $(".cart-table").show();
     $("#allow-order").show();
    } else {
