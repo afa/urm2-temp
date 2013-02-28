@@ -34,17 +34,21 @@ class OrdersController < ApplicationController
    @carts = current_user.cart_items.unprocessed.in_cart.order("product_name, product_brend").all
    @carts.select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
    @stores = @carts.map(&:location_link).uniq.compact.sort{|a, b| a == User.current.current_account.invent_location_id ? -1 : a <=> b }
-   gon.need_application = @carts.detect{|i| i.application_area_mandatory }
+   @mandatory = @carts.detect{|i| i.application_area_mandatory }
    @app_list = Axapta.application_area_list || []
-   gon.app_list = @app_list
-   gon.carts = render_to_string :partial => "carts/cart_line", :locals => {:app_list => @app_list}, :collection => @carts
+   #gon.app_list = @app_list
+   @cart = render_to_string :partial => "carts/cart_table.html.haml", :locals => {:app_list => @app_list, :cart => @carts, :stores => @stores}
    res = []
    @results[0].each{|r| res << {:name => "info", :value => "#{t :created_orders} #{r}"} } if @results[0]
    #@results[0].each{|r| res << {:name => "info", :value => "#{t :created_orders} #{r[0]}"} } if @results[0]
    res << {:name => "info", :value => "#{t :created_quotations} #{@results[1]}"} if @results[1]
-   gon.results = res
-   gon.redirect_to = quotation_path(@results[1]) if @results[1]
-   gon.redirect_to = order_path(@results[0][0]) if @results[0] && @results[0][0]
+   redirectto = quotation_path(@results[1]) if @results[1]
+   redirectto = order_path(@results[0][0]) if @results[0] && @results[0][0]
+   respond_with do |format|
+    format.json do
+     render :json => {:app_list => @app_list, :carts => @cart, :results => res, :redirect_to => redirectto}
+    end
+   end
   end
 
   def lines
