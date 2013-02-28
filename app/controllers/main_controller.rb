@@ -99,10 +99,23 @@ class MainController < ApplicationController
    end
    dat = {}
    hsh.keys.each do |k|
-    dat[k] = render_to_string :partial => "main/dms_block.html", :locals => {:items => hsh[k], :after => k}
+    dat[k] = render_to_string :partial => "main/dms_block.html.haml", :locals => {:items => hsh[k], :after => k}
    end
+   @carts = User.current.cart_items.unprocessed.in_cart.order("product_name, product_brend")
+   @carts.select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
+   @mandatory = @carts.detect{|i| i.application_area_mandatory }
+   @app_list = Axapta.application_area_list || []
+   #gon.app_list = @app_list
+   @stores = @carts.map(&:location_link).uniq.compact.sort{|a, b| a == User.current.current_account.invent_location_id ? -1 : a <=> b }
+   @carts.each do |cart|
+    cart.line = render_to_string :partial => "carts/cart_line.html.haml", :locals => {:cart_line => cart, :app_list => @app_list}
+    cart.offer_code = cart.signature
+    cart.line_code = cart.base_signature
+    #cart.line = view_context.escape_javascript(render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart})
+   end
+   @rendered = render_to_string :partial => "carts/cart_table.html.haml", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores}
    respond_with do |format|
-    format.json { render :json => dat }
+    format.json { render :json => {:dms => dat, :cart => @rendered }
    end
   end
 
