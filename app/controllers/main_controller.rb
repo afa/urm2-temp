@@ -115,7 +115,7 @@ class MainController < ApplicationController
    end
    @rendered = render_to_string :partial => "carts/cart_table.html.haml", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores}
    respond_with do |format|
-    format.json { render :json => {:dms => dat, :cart => @rendered }
+    format.json { render :json => {:dms => dat, :cart => @rendered } }
    end
   end
 
