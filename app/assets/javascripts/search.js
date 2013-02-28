@@ -48,4 +48,72 @@ function load_dms_bundle(from_where, need_load){
  }
 }
 
+function insertGap(after, gap){
+ var clctn = $("tr.dms_item_" + after).add("tr.info_item_" + after).add("tr.analog_item_" + after);
+ if($("tr.gap_" + after).length == 0){
+  if(clctn.length > 0){
+   $(gap).insertAfter(clctn.last());
+  }
+ }
+ toggleGap(after);
+}
+
+function placeDmsData(data){
+ var row_id = data["row_id"];
+ var code = data["code"];
+ $("tr.item_" + row_id + " .icon .slider").hide();
+ $("tr.item_" + row_id + " .icon .dms").show().addClass("active");
+ if(/^\s*$/.test(data["dms"])){
+  $(data["empty"]).insertAfter($("tr.info_item_" + row_id).add("tr.item_" + row_id).last());
+  $("tr.item_" + row_id + " .icon .dms").removeClass("active");
+ } else {
+  $(data["dms"]).insertAfter($("tr.info_item_" + row_id).add("tr.item_" + row_id).last());
+  insertGap(row_id, data["gap"]);
+ }
+ $("#cart_store").remove();
+ if(!/^\s*$/.test(data["cart"])){
+  $(".cart-table .cart").html(data.cart);
+ }
+ hide_dms_on_plus_click(row_id);
+}
+
+function placeAnalogData(data){
+ var row_id = data["row_id"];
+ var code = data["code"];
+ if(/^\s*$/.test(data["analogs"])){
+  $(data["empty"]).insertAfter($("tr.item_" + row_id).last());
+ } else {
+  $(data["hdr"]).add(data["analogs"]).insertAfter($("tr.item_" + row_id).last());
+  if(!/^\s*$/.test(data["cart"])){
+   $(".cart").empty();
+   $(data["cart"]).appendTo($(".cart"));
+  }
+  insertGap(row_id, data["gap"]);
+ }
+ $("#cart_store").remove();
+ if(!/^\s*$/.test(data["cart"])){
+  $(".cart-table .cart").html(data.cart);
+ }
+ //return false;
+}
+
+function showAnalog(evt){
+ var row_id = $(this).parents("tr").prop("class").match(/\bitem_(\w+)\b/)[1];
+ if($("tr.analog_item_" + row_id).length == 0){
+  makeAjaxCall(this.href,    //"/main/info?code=" + code + "&after=" + row_id,
+   placeAnalogData,
+   function(data){
+    //$("tr.item_" + row_id + " .icon .slider").hide();
+    //$("tr.item_" + row_id + " .icon .dms").show().removeClass("active");
+  });
+ } else {
+  $("tr.analog_item_" + row_id).toggle();
+  $("tr.analog_item_" + row_id).toggleClass("hidden");
+  toggleGap(row_id);
+  //$("tr.item_" + row_id + " .icon .slider").hide();
+  //$("tr.item_" + row_id + " .icon .dms").show();
+ }
+ evt.preventDefault();
+}
+
 
