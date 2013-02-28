@@ -15,6 +15,7 @@
 //= require jquery.ui.datepicker
 //= require urm
 //= require carts
+//= require search
 //= require "jquery.validationEngine-ru"
 //= require jquery.validationEngine
 //= require "jquery-ui-i18n"
