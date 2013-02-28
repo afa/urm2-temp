@@ -21,13 +21,14 @@ function load_dms_bundle(from_where, need_load){
  if(need_load){
   $.getJSON(from_where, "", function(data){
    $("div.dms_loader").hide();
+   alert(data.dms);
    for(var kk in data.dms){
     $(data[kk]).insertAfter($("tr.item_" + kk).last());
     $("tr.item_" + kk + " .icon .dms").addClass("active");
     hide_dms_on_plus_click(kk);
    }
    $("#cart_store").remove();
-   $(".cart-table .cart").html(data.rendered);
+   $(".cart-table .cart").html(data.cart);
    if($("#cart_store table tr").length > 1){
     $(".cart-table").show();
     $("#allow-order").show();
