@@ -232,8 +232,9 @@ function runAllowOrder(){
      $(item).attr("disabled", 'disabled');
     });
     $("form:has(table.search-products)").hide();
-    activateCommit();
+    //activateCommit();
     cartsProcessRadioPicks();
+    $(".button#make_order").click(ordersRenderCreate);
     $("div.button#cancel_order a").click(function(){
      $("#order").empty();
      $("#cart_store .icon").show();

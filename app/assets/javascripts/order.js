@@ -35,6 +35,7 @@ function ordersRenderCreate(){
   },
   function(){}
  );
+ return false;
 }
 
 function placeResults(res){
