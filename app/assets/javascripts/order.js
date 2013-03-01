@@ -6,12 +6,12 @@ function ordersRenderCreate(){
    $("table.search-products").parents("form").show();
    $("table.search-products tr:has(td)").add("table.search-products tr.heading").remove();
    $("input#search_query_string").val('');
-   $("#cart_store table tr:has(td)").remove();
+   $("#cart_store").remove();
    $(".cart-table .cart").html(data.carts);
    $("#cancel_order").hide();
-   if(data.carts.length > 0){
-    $(".cart-table").add("#order").show();
-   }
+   //if($("#cart_store tr:has(td)").length > 1){
+   // $(".cart-table").add("#order").show();
+   //}
    if($("#cart_store table tr").length > 1){
     $("#cart_store").show();
    } else {
@@ -26,7 +26,7 @@ function ordersRenderCreate(){
    $('.button-style').button();
    $('.switch').switchControl();
  
-   if(data.redirect_to.length > 0){
+   if(data.redirect_to){
     redirectTo("", data.redirect_to);
    }
    if(data.results.length > 0){
