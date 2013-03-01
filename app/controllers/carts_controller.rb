@@ -168,7 +168,7 @@ class CartsController < ApplicationController
    end
 
    respond_with do |format|
-    format.js { render :layout => false }
+    #format.js { render :layout => false }
     #format.json { render :json => {:carts_table => escape_javascript(render_to_string(:partial => "carts/cart_table", :locals => {:cart => @carts})), :old => @old, :new => @new, :carts_empty => @carts.empty?} }
     format.json do
      render :json => {:rendered => @rendered, :carts => @carts, :deleted => @old}
