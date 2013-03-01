@@ -1,6 +1,6 @@
 .clear
 .block-padded
-= form_for :order, :url => orders_path, :html => {:class => "json"} do |f|
+= form_for :order, :url => orders_path, :html => {:class => "json order"} do |f|
  = render :partial => "shared/button.html.haml", :locals => {:title => t(:cancel_order), :opts => {:id => :cancel_order}}
  .clear
  .padded

@@ -1,5 +1,13 @@
 function ordersRenderCreate(){
  var frm = {};
+ var prnt = $(this).parents("form");
+ takeValToHash(frm, "input[name=\"utf8\"]", prnt);
+ takeValToHash(frm, "input[name=\"_method\"]", prnt);
+ takeValToHash(frm, "input[name=\"authenticity_token\"]", prnt);
+ $("select[id^=\"cart_item_\"]", prnt).each(function(idx, item){
+  takeValToHash(frm, '#' + item.id, null);
+ });
+ takeValToHash(frm, "select[id=\"delivery_type\"]", prnt);
  makeAjaxPost('/orders.json',
   frm,
   function(data, reply, xhr){
