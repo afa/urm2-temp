@@ -81,6 +81,7 @@ class User < ActiveRecord::Base
      p "---createquotation_exc_request", e
     end
    end
+   p "---mores", res
    res
   end
 
