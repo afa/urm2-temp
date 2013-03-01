@@ -1,33 +1,40 @@
 function ordersRenderCreate(){
- $("table.search-products").parents("form").show();
- $("table.search-products tr:has(td)").add("table.search-products tr.heading").remove();
- $("input#search_query_string").val('');
- $("#cart_store table tr:has(td)").remove();
- $("#cart_store table").append(gon.carts);
- $("#cancel_order").hide();
- if(gon.carts.length > 0){
-  $(".cart-table").add("#order").show();
- }
- if($("#cart_store table tr").length > 1){
-  $("#cart_store").show();
- } else {
-  $("#cart_store").hide();
- }
- activateCommit();
- //$('.commit a.button-style').click(function(){
- // $(this).parents('form').submit();
- // return false;
- //});
- $('.select').selectList();
- $('.button-style').button();
- $('.switch').switchControl();
+ var frm = {};
+ makeAjaxPost('/orders.json',
+  frm,
+  function(data, reply, xhr){
+   $("table.search-products").parents("form").show();
+   $("table.search-products tr:has(td)").add("table.search-products tr.heading").remove();
+   $("input#search_query_string").val('');
+   $("#cart_store table tr:has(td)").remove();
+   $(".cart-table .cart").html(data.carts);
+   $("#cancel_order").hide();
+   if(data.carts.length > 0){
+    $(".cart-table").add("#order").show();
+   }
+   if($("#cart_store table tr").length > 1){
+    $("#cart_store").show();
+   } else {
+    $("#cart_store").hide();
+   }
+   activateCommit();
+   //$('.commit a.button-style').click(function(){
+   // $(this).parents('form').submit();
+   // return false;
+   //});
+   $('.select').selectList();
+   $('.button-style').button();
+   $('.switch').switchControl();
  
- if(gon.redirect_to.length > 0){
-  redirectTo("", gon.redirect_to);
- }
- if(gon.results.length > 0){
-  placeResults(gon.results); //!!!!!
- }
+   if(data.redirect_to.length > 0){
+    redirectTo("", data.redirect_to);
+   }
+   if(data.results.length > 0){
+    placeResults(data.results); //!!!!!
+   }
+  },
+  function(){}
+ );
 }
 
 function placeResults(res){
@@ -40,28 +47,28 @@ function placeResults(res){
 
 
 function redirectTo(title, url){
-    // Prepare
-    var History = window.History; // Note: We are using a capital H instead of a lower h
-    if ( !History.enabled ) {
-         // History.js is disabled for this browser.
-         // This is because we can optionally choose to support HTML4 browsers or not.
-        return false;
-    }
+ // Prepare
+ var History = window.History; // Note: We are using a capital H instead of a lower h
+ if ( !History.enabled ) {
+  // History.js is disabled for this browser.
+  // This is because we can optionally choose to support HTML4 browsers or not.
+  return false;
+ }
 
-    // Bind to StateChange Event
-    History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
-        var State = History.getState(); // Note: We are using History.getState() instead of event.state
-        History.log(State.data, State.title, State.url);
-    });
+ // Bind to StateChange Event
+ History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
+  var State = History.getState(); // Note: We are using History.getState() instead of event.state
+  History.log(State.data, State.title, State.url);
+ });
 
-    // Change our States
-    History.pushState({state:1}, title, url); // logs {state:1}, "State 1", "?state=1"
-    History.forward();
-    location.reload();
-    //History.back(); // logs {state:3}, "State 3", "?state=3"
-    //History.back(); // logs {state:1}, "State 1", "?state=1"
-    //History.back(); // logs {}, "Home Page", "?"
-    //History.go(2); // logs {state:3}, "State 3", "?state=3"
+ // Change our States
+ History.pushState({state:1}, title, url); // logs {state:1}, "State 1", "?state=1"
+ History.forward();
+ location.reload();
+ //History.back(); // logs {state:3}, "State 3", "?state=3"
+ //History.back(); // logs {state:1}, "State 1", "?state=1"
+ //History.back(); // logs {}, "Home Page", "?"
+ //History.go(2); // logs {state:3}, "State 3", "?state=3"
 
 }
 

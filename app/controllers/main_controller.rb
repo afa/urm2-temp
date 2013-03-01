@@ -14,7 +14,7 @@ class MainController < ApplicationController
    stor = Setting.by_user(current_user.id).by_name("search.only_store").first || Setting.by_user(current_user.id).by_name("search.only_store").new
    stor.value = @only_store
    stor.save!
-   gon.only_store = WebUtils.to_bool(@only_store)
+   gon.only_store = WebUtils.to_bool(@only_store) #TODO: clean gon
    @only_available = params[:search].try(:[], :only_available) || false
    avail = Setting.by_user(current_user.id).by_name("search.only_available").first || Setting.by_user(current_user.id).by_name("search.only_available").new
    avail.value = @only_available
@@ -31,9 +31,9 @@ class MainController < ApplicationController
    @nreqs = @carts.partition{|i| i.is_a? CartRequest }[1]
    @deliveries = User.current.deliveries
    @use_alt_price = false if @items.detect{|i| i.alt_prices.size > 0 }
-   gon.need_application = @carts.detect{|i| i.application_area_mandatory }
+   gon.need_application = @carts.detect{|i| i.application_area_mandatory } #TODO: clean gon
    @app_list = (Axapta.application_area_list || []).sort_by{|l| l.application_area_name }
-   gon.app_list = @app_list
+   gon.app_list = @app_list #TODO: clean gon
    @mandatory = @carts.detect{|c| c.application_area_mandatory }
   end
 
@@ -53,7 +53,7 @@ class MainController < ApplicationController
    @items = @code.blank? ? Offer::World.by_query(@seek, @brend) : Offer::World.by_code(@code)
    @carts = User.current.cart_items.in_cart.unprocessed.order("product_name, product_brend").all
    @carts.select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
-   @app_list = Axapta.application_area_list || []
+   @app_list = (Axapta.application_area_list || []).sort_by{|l| l.application_area_name }
    @stores = @carts.map(&:location_link).uniq.compact
    respond_with do |format|
     format.json do
@@ -104,7 +104,7 @@ class MainController < ApplicationController
    @carts = User.current.cart_items.unprocessed.in_cart.order("product_name, product_brend")
    @carts.select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
    @mandatory = @carts.detect{|i| i.application_area_mandatory }
-   @app_list = Axapta.application_area_list || []
+   @app_list = (Axapta.application_area_list || []).sort_by{|l| l.application_area_name }
    @stores = @carts.map(&:location_link).uniq.compact.sort{|a, b| a == User.current.current_account.invent_location_id ? -1 : a <=> b }
    @carts.each do |cart|
     cart.line = render_to_string :partial => "carts/cart_line.html.haml", :locals => {:cart_line => cart, :app_list => @app_list}
@@ -131,7 +131,7 @@ class MainController < ApplicationController
    @carts = User.current.cart_items.unprocessed.in_cart.order("product_name, product_brend")
    @carts.select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
    @mandatory = @carts.detect{|i| i.application_area_mandatory }
-   @app_list = Axapta.application_area_list || []
+   @app_list = (Axapta.application_area_list || []).sort_by{|l| l.application_area_name }
    @stores = @carts.map(&:location_link).uniq.compact.sort{|a, b| a == User.current.current_account.invent_location_id ? -1 : a <=> b }
    @carts.each do |cart|
     cart.line = render_to_string :partial => "carts/cart_line.html.haml", :locals => {:cart_line => cart, :app_list => @app_list}

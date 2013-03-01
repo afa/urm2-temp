@@ -11,6 +11,7 @@
 //= require jquery.controls
 //= require jquery.table
 //= require jquery.lightbox
+//= require utils
 //= require date
 //= require jquery.ui.datepicker
 //= require urm

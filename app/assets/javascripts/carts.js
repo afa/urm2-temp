@@ -1,7 +1,3 @@
-function takeValToHash(hash, seek, scope){
-  var key = $(seek, scope).attr("name"); //TODO: refactor
-  hash[key] = $(seek, scope).val();
-}
 function cartsAddElementToCart(){
  var crts = {};
  $("table.search-products tr:has(input.item-code)").each(function(idx, item){
