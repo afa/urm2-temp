@@ -227,6 +227,7 @@ function runAllowOrder(){
   makeAjaxCall("/orders/new.json",
    function(data){
     $("#order").html(data["order"]);
+    initCalendar();
     $("#cart_store .icon").hide();
     $("#cart_store textarea").add("#cart_store input").add("#cart_store select").each(function(idx, item){
      $(item).attr("disabled", 'disabled');
