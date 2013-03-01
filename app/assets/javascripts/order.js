@@ -12,6 +12,9 @@ function ordersRenderCreate(){
  takeValToHash(frm, "select[id=\"delivery_type\"]", prnt);
  takeValToHash(frm, "input[name=\"date_picker\"]", prnt);
  takeValToHash(frm, "textarea[name=\"comment\"]", prnt);
+ $('input[type="checkbox"][id^="order_needed_"]:checked').each(function(idx, item){
+  takeValToHash(frm, "#" + item.id, null);
+ });
  makeAjaxPost('/orders.json',
   frm,
   function(data, reply, xhr){
