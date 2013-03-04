@@ -32,6 +32,8 @@ Urm::Application.routes.draw do
     post :export_lines
    end
    member do
+    get :track
+    get :lines_track
     post :save
     post :close
     post :reserve

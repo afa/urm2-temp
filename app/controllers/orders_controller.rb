@@ -253,6 +253,17 @@ class OrdersController < ApplicationController
    end
   end
 
+  def track
+   respond_with do |format|
+    format.json do
+     
+    end
+   end
+  end
+
+  def lines_track
+  end
+
  protected
   def get_filter
    @filter_hash = {:only_my => Setting.get("order.only_my"), :reservation_end => Setting.get("order.reservation_end")}.merge(params[:filter] || {})
