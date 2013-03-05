@@ -100,9 +100,14 @@ class OrdersController < ApplicationController
    comment = params[:order][id][:comment]
    #@order = Axapta.sales_info(:sales_id => id.to_i)
    #@lines = Axapta.sales_lines(:sales_id => id.to_i)
-   Axapta.sales_handle_header(:comment => comment, :sales_id => id)
-   Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:line_id => k).merge(:requirements => v[:requirement]) }, :sales_id => id) #TODO fix line_id for line_id
-   redirect_to order_path(id)
+   begin
+    Axapta.sales_handle_header(:comment => comment, :sales_id => id)
+    Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:line_id => k).merge(:requirements => v[:requirement]) }, :sales_id => id) #TODO fix line_id for line_id
+   rescue AxaptaError => e
+    @err = Axapta.get_last_exc
+   end
+   redirect_to order_path(id), :flash => {:error => @err} if @err
+   redirect_to order_path(id) unless @err
   end
 
   def invoice

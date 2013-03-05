@@ -131,9 +131,13 @@ class Axapta
    AxaptaRequest.sales_handle_add(hsh.merge(:user_hash => axapta_hash))
   end
 
-  def self.sales_handle_header(hsh)
-   AxaptaRequest.sales_handle_header(hsh.merge(:user_hash => axapta_hash))
-  end
+  #def self.sales_handle_header(hsh)
+  # begin
+  # AxaptaRequest.sales_handle_header(hsh.merge(:user_hash => axapta_hash))
+  # rescue Exception => e
+  #  return OpenStruct.new(:total => 0, :page => 0, :records => 0, :items => [], :error => e.to_s)
+  # end
+  #end
 
   def self.sales_info(*args)
    sales_info_paged(nil, *args).try(:items) || []
@@ -206,11 +210,8 @@ class Axapta
    locs = {}
    pp = {:location_id => lc}
    rz = AxaptaRequest.delivery_prognosis(pp.merge(:invent_location_id => (lc.nil? ? User.current.current_account.invent_location_id : lc), :item_id => code, :user_hash => axapta_hash)).try(:[], "delivery_prognosis").map{|i| {:date => i["delivery_date"], :qty => i["delivery_qty"]} }
-   p "---dlvpr", lc, rz
    return { "#{lc.nil? ? User.current.current_account.invent_location_id : lc}" => rz }# unless rz.empty?
    (AxaptaRequest.search_item_name_h(pp.merge(:user_hash => axapta_hash, :item_id_search => code, :show_delivery_prognosis => true)).try(:[], "items") || []).each do |loc|
-    Rails.logger.info "---dlvprg"
-    Rails.logger.info loc.inspect
     (loc.try(:[], "locations")||[]).each do |dl|
      locs[dl["location_id"]] ||= []
      dl.try(:[], "delivery_prognosis").each do |dlv|
