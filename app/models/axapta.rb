@@ -363,6 +363,15 @@ class Axapta
     AxaptaRequest.info_cust_trans(hsh.merge(:records_per_page => per_page, :user_hash => axapta_hash)).try(:[], "trans").map{|a| OpenStruct.new(a)  }
   end
 
+  def self.sales_tracking(hsh)
+   begin
+    AxaptaRequest.sales_tracking(hsh.merge(:user_hash => axapta_hash)).try(:[], "lines").map{|h| OpenStruct.new(h) }
+   rescue Exception => e
+    parse_exc(e.message, e.class_name)
+    []
+   end
+  end
+
  private
   def self.per_page
    Setting.get("table.per_page") || 10
