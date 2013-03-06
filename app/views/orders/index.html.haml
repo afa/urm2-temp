@@ -24,31 +24,12 @@
      %tr
       %th
       %td= render :partial => "shared/submit_button", :locals => {:title => "Найти"}
-   -# .fields
-    .field.urm
-     = f.label :sales_id, t(:sales_id)
-     = f.text_field :sales_id
-    = render :partial => "shared/submit_button", :locals => {:title => "Найти"}
-   -# .clear.padded
-   -# .fields
-    .field.urm
-     = f.label :official_number, t(:official_number)
-     = f.text_field :official_number
-     -# = f.hidden_field :this_sales_origin
-     -# = f.hidden_field :only_my
-   -# .clear.padded
-   -# .fields.urm
-    -# Искать:
-    = render :partial => "shared/check_button", :locals => {:name => "filter[this_sales_origin]", :title => t(:this_sales_origin), :opts => {:use_system => true, :value => params[:filter].try(:[], :this_sales_origin).try(:==, '1')}}
-    = render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my), :opts => {:use_system => true, :value => params[:filter].try(:[], :only_my).try(:==, '1')}}
    .clear.padded
 
 
  .table-navigation-block{:class => "scroll"}
   .table-block
    .table-scrolling
-    - #= render :partial => "shared/pagination", :locals => {:page => @orders.page.to_i, :pages => @orders.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей: #{@orders.records}&nbsp;&nbsp;Страниц: #{@orders.total}&nbsp;&nbsp;".html_safe, :text_before_current => "Страница: "}}
-    -# = render :partial => "shared/pagination", :locals => {:page => @orders.page.to_i, :pages => @orders.total.to_i}
     %table.table-style{:class => "order-list"}
      %tr
       %th= t(:urm)
@@ -56,6 +37,7 @@
       %th.text-left Офиц. номер
       %th Сумма по заказу
       %th Дата создания
+      %th
       %th Статус
       %th{:style => "max-width: 400px;"} Примечание
       %th.text-right Контактное лицо

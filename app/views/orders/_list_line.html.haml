@@ -4,6 +4,7 @@
  %td.text-left= list_line.official_number
  %td.text-right= @usd_decor.decore(list_line.amount)
  %td.text-left= list_line.sales_date
+ %td= link_to image_tag(asset_path('plane3.gif')), track_order_path(list_line.line_id) if list_line.tracking
  %td.text-left= list_line.sales_status
  %td{:style => "max-width: 400px;white-space: normal; word-wrap: break-word; text-align: left;"}= list_line.comment
  %td.text-right= list_line.contactperson_name
