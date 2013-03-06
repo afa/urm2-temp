@@ -9,12 +9,12 @@
  %th Дата прояснения ситуации
 - tracks.each do |track|
  %tr.data
-  %td lines_track.item_name
-  %td lines_track.item_brend
-  %td lines_track.rohs
-  %td lines_track.qty
-  %td lines_track.status_rus
-  %td lines_track.expected_date
-  %td lines_track.issue
-  %td lines_track.resolution_date
+  %td.text-left= lines_track.item_name
+  %td.text-left= lines_track.item_brend
+  %td= lines_track.rohs
+  %td.text-right= lines_track.qty
+  %td.text-left= lines_track.status_rus
+  %td= lines_track.expected_date
+  %td= lines_track.issue
+  %td= lines_track.resolution_date
 
