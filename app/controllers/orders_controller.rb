@@ -263,8 +263,8 @@ class OrdersController < ApplicationController
     format.json do
      p "---tr", params[:id]
      r = render_to_string(:partial => "orders/track.html.haml", :locals => {:tracks => Axapta.sales_tracking(:sales_id => params[:id])})
-     render :json => {:rendered => r}
      p "---trr", r
+     render :json => {:rendered => r}
     end
    end
   end
@@ -274,8 +274,8 @@ class OrdersController < ApplicationController
     format.json do
      p "---ltr", params[:id]
      r = render_to_string(:partial => "orders/lines_track.html.haml", :locals => {:lines_tracks => Axapta.sales_tracking(:line_id => params[:id])})
-     render :json => {:rendered => r}
      p "---ltrr", r
+     render :json => {:rendered => r}
     end
    end
   end
