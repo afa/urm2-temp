@@ -7,14 +7,14 @@
  %th Ожидаемая дата поставки
  %th Внештатная ситуация
  %th Дата прояснения ситуации
-- tracks.each do |track|
+- lines_tracks.each do |track|
  %tr.data
-  %td.text-left= lines_track.item_name
-  %td.text-left= lines_track.item_brend
-  %td= lines_track.rohs
-  %td.text-right= lines_track.qty
-  %td.text-left= lines_track.status_rus
-  %td= lines_track.expected_date
-  %td= lines_track.issue
-  %td= lines_track.resolution_date
+  %td.text-left= track.item_name
+  %td.text-left= track.item_brend
+  %td= track.rohs
+  %td.text-right= track.qty
+  %td.text-left= track.status_rus
+  %td= track.expected_date
+  %td= track.issue
+  %td= track.resolution_date
 
