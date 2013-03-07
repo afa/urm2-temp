@@ -88,4 +88,46 @@ function redirectTo(title, url){
 
 }
 
+// on-click for dms button
+function showTrack(evt){
+ var row_id = $(this).parents("tr").prop("class").match(/\bitem_(\w+)\b/)[1];
+ var code = $(this).parents("tr").find(".icons input.item-code").val();
+ $(this).parents(".icon").find(".dms").hide();
+ $(this).parents(".icon").find(".slider").show();
+ if($("tr.dms_item_" + row_id).length == 0){
+  makeAjaxCall("/main/dms?code=" + code + "&after=" + row_id,
+   placeDmsData,
+   function(data){
+    $("tr.item_" + row_id + " .icon .slider").hide();
+    $("tr.item_" + row_id + " .icon .dms").show().removeClass("active");
+  });
+ } else {
+  $("tr.dms_item_" + row_id).toggle();
+  $("tr.dms_item_" + row_id).toggleClass("hidden");
+  toggleGap(row_id);
+  $("tr.item_" + row_id + " .icon .slider").hide();
+  $("tr.item_" + row_id + " .icon .dms").show();
+ }
+ evt.preventDefault();
+}
+
+function placeTrackData(data){
+ var row_id = data["row_id"];
+ var code = data["code"];
+ $("tr.item_" + row_id + " .icon .slider").hide();
+ $("tr.item_" + row_id + " .icon .dms").show().addClass("active");
+ if(/^\s*$/.test(data["dms"])){
+  $(data["empty"]).insertAfter($("tr.info_item_" + row_id).add("tr.item_" + row_id).last());
+  $("tr.item_" + row_id + " .icon .dms").removeClass("active");
+ } else {
+  $(data["dms"]).insertAfter($("tr.info_item_" + row_id).add("tr.item_" + row_id).last());
+  insertGap(row_id, data["gap"]);
+ }
+ $("#cart_store").remove();
+ if(!/^\s*$/.test(data["cart"])){
+  $(".cart-table .cart").html(data.cart);
+ }
+ hide_dms_on_plus_click(row_id);
+}
+
 

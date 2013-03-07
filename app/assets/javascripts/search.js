@@ -116,4 +116,27 @@ function showAnalog(evt){
  evt.preventDefault();
 }
 
+// on-click for dms button
+function showDms(evt){
+ var row_id = $(this).parents("tr").prop("class").match(/\bitem_(\w+)\b/)[1];
+ var code = $(this).parents("tr").find(".icons input.item-code").val();
+ $(this).parents(".icon").find(".dms").hide();
+ $(this).parents(".icon").find(".slider").show();
+ if($("tr.dms_item_" + row_id).length == 0){
+  makeAjaxCall("/main/dms?code=" + code + "&after=" + row_id,
+   placeDmsData,
+   function(data){
+    $("tr.item_" + row_id + " .icon .slider").hide();
+    $("tr.item_" + row_id + " .icon .dms").show().removeClass("active");
+  });
+ } else {
+  $("tr.dms_item_" + row_id).toggle();
+  $("tr.dms_item_" + row_id).toggleClass("hidden");
+  toggleGap(row_id);
+  $("tr.item_" + row_id + " .icon .slider").hide();
+  $("tr.item_" + row_id + " .icon .dms").show();
+ }
+ evt.preventDefault();
+}
+
 
