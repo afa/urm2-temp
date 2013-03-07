@@ -365,11 +365,13 @@ class Axapta
 
   def self.sales_tracking(hsh)
    begin
-    AxaptaRequest.sales_tracking(hsh.merge(:user_hash => axapta_hash)).try(:[], "lines").map{|h| OpenStruct.new(h) }
+    res = AxaptaRequest.sales_tracking(hsh.merge(:user_hash => axapta_hash)).try(:[], "lines").map{|h| OpenStruct.new(h) }
    rescue Exception => e
     parse_exc(e.message, e.class_name)
-    []
+    res = []
    end
+   p "---st", res
+   res
   end
 
  private
