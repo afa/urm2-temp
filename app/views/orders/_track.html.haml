@@ -1,19 +1,23 @@
-%tr.heading
- %th.text-left Наименование
- %th.text-left Производитель
- %th ROHS
- %th.text-right Количество
- %th.text-left Статус
- %th Ожидаемая дата поставки
- %th Внештатная ситуация
- %th Дата прояснения ситуации
-- tracks.each do |track|
- %tr.data
-  %td.text-left= track.item_name
-  %td.text-left= track.item_brend
-  %td= track.rohs
-  %td.text-right= track.qty
-  %td.text-left= track.status_rus
-  %td= track.expected_date
-  %td= track.issue
-  %td= track.resolution_date
+%tr.track_item_#{}
+ %td.icons
+ %td
+  %table
+   %tr.heading
+    %th.text-left Наименование
+    %th.text-left Производитель
+    %th ROHS
+    %th.text-right Количество
+    %th.text-left Статус
+    %th Ожидаемая дата поставки
+    %th Внештатная ситуация
+    %th Дата прояснения ситуации
+   - tracks.each do |track|
+    %tr.data
+     %td.text-left= track.item_name
+     %td.text-left= track.item_brend
+     %td= track.rohs
+     %td.text-right= track.qty
+     %td.text-left= track.status_rus
+     %td= track.expected_date
+     %td= track.issue
+     %td= track.resolution_date
