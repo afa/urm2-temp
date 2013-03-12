@@ -91,34 +91,35 @@ function redirectTo(title, url){
 // on-click for dms button
 function showTrack(evt){
  var row_id = $(this).parents("tr").prop("class").match(/\bitem_(\w+)\b/)[1];
- var code = $(this).parents("tr").find(".icons input.item-code").val();
- $(this).parents(".icon").find(".dms").hide();
- $(this).parents(".icon").find(".slider").show();
- if($("tr.dms_item_" + row_id).length == 0){
-  makeAjaxCall("/main/dms?code=" + code + "&after=" + row_id,
-   placeDmsData,
+ //var code = $(this).parents("tr").find(".icons input.item-code").val();
+ //$(this).parents(".icon").find(".dms").hide();
+ //$(this).parents(".icon").find(".slider").show();
+ $("tr.empty_item_" + row_id).remove();
+ if($("tr.track_item_" + row_id).length == 0){
+  makeAjaxCall(this.href,
+   placeTrackData,
    function(data){
-    $("tr.item_" + row_id + " .icon .slider").hide();
-    $("tr.item_" + row_id + " .icon .dms").show().removeClass("active");
+    //$("tr.item_" + row_id + " .icon .slider").hide();
+    //$("tr.item_" + row_id + " .icon .dms").show().removeClass("active");
   });
  } else {
-  $("tr.dms_item_" + row_id).toggle();
-  $("tr.dms_item_" + row_id).toggleClass("hidden");
-  toggleGap(row_id);
-  $("tr.item_" + row_id + " .icon .slider").hide();
-  $("tr.item_" + row_id + " .icon .dms").show();
+  $("tr.track_item_" + row_id).toggle();
+  $("tr.track_item_" + row_id).toggleClass("hidden");
+  //toggleGap(row_id);
+  //$("tr.item_" + row_id + " .icon .slider").hide();
+  //$("tr.item_" + row_id + " .icon .dms").show();
  }
  evt.preventDefault();
 }
 
 function placeTrackData(data){
  var row_id = data["row_id"];
- var code = data["code"];
- $("tr.item_" + row_id + " .icon .slider").hide();
- $("tr.item_" + row_id + " .icon .track").show().addClass("active");
+ //var code = data["code"];
+ //$("tr.item_" + row_id + " .icon .slider").hide();
+ //$("tr.item_" + row_id + " .icon .track").show().addClass("active");
  if(/^\s*$/.test(data["track"])){
-  $(data["empty"]).insertAfter($("tr.info_item_" + row_id).add("tr.item_" + row_id).last());
-  $("tr.item_" + row_id + " .icon .dms").removeClass("active");
+  $(data["empty"]).insertAfter($("tr.item_" + row_id).last());
+  //$("tr.item_" + row_id + " .icon .dms").removeClass("active");
  } else {
   $(data["track"]).insertAfter($("tr.item_" + row_id).last());
   //insertGap(row_id, data["gap"]);

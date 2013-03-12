@@ -65,3 +65,6 @@
      = paginate(:page => @orders.page.to_i, :pages => @orders.total.to_i, :derid => {:align => "left", :hide_empty => true})
     %div{:style => "display:inline-block; float:left;"}
      = render :partial => "shared/stat.html.haml", :locals => {:mode => :strings, :value => @orders.records.to_i}
+
+:javascript
+ $("tr td a.track").click(showTrack);
