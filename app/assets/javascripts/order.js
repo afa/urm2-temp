@@ -118,11 +118,11 @@ function placeTrackData(data){
  //var code = data["code"];
  //$("tr.item_" + row_id + " .icon .slider").hide();
  //$("tr.item_" + row_id + " .icon .track").show().addClass("active");
- if(/^\s*$/.test(data["track"])){
+ if(/^\s*$/.test(data["rendered"])){
   $(data["empty"]).insertAfter($("tr.item_" + row_id).last());
   //$("tr.item_" + row_id + " .icon .dms").removeClass("active");
  } else {
-  $(data["track"]).insertAfter($("tr.item_" + row_id).last());
+  $(data["rendered"]).insertAfter($("tr.item_" + row_id).last());
   //insertGap(row_id, data["gap"]);
  }
  hide_track_on_plus_click(row_id);
