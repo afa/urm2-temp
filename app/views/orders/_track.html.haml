@@ -1,5 +1,6 @@
-%tr{:class => ["track_item_#{}"]}
- %td.icons
+%tr{:class => ["track_item_#{row_id}"]}
+ %td.icons.plus
+  %input{:type => "hidden", :value => row_id}
  %td{:colspan => 12}
   %table{:width => "100%"}
    %tr.heading

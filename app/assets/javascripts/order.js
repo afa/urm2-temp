@@ -129,8 +129,8 @@ function placeTrackData(data){
 }
 
 function hide_track_on_plus_click(obj_id){
- $("tr.track_item_" + obj_id + " th .plus").click(function(){
-  var obj = $(this).parents("tr").find("th .icon input.after").first().val();
+ $("tr.track_item_" + obj_id + " td .plus").click(function(){
+  var obj = $(this).parents("tr").find("td .icon input.after").first().val();
   track_item_hide(obj);
   //e.preventDefaults();
   return false;
