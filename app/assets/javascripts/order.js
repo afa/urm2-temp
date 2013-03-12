@@ -109,7 +109,8 @@ function showTrack(evt){
   //$("tr.item_" + row_id + " .icon .slider").hide();
   //$("tr.item_" + row_id + " .icon .dms").show();
  }
- evt.preventDefault();
+ //evt.preventDefault();
+ return false;
 }
 
 function placeTrackData(data){
