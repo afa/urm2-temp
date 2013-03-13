@@ -6,7 +6,7 @@
  %td.text-right= @price_decor[item_line.currency_code].decore(item_line.price)
  %td.text-right= @price_decor[item_line.currency_code].decore(item_line.amount)
  %td= item_line.qty_in_debt.abs
- %td= I18n.l item_line.confirmed_dlv_date, :format => :short
+ %td= I18n.l item_line.confirmed_dlv_date, :format => :short unless item_line.confirmed_dlv_date.blank?
  %td= item_line.reserve_qty
  %td= item_line.qty_in_processing
  %td= item_line.qty_receive
