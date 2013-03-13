@@ -1,4 +1,4 @@
-%tr
+%tr{:class => ["item_#{item_line.line_id}"]}
  %td.text-left= item_line.item_name
  %td.text-left= item_line.brend
  %td= item_line.rohs
@@ -7,6 +7,7 @@
  %td.text-right= @price_decor[item_line.currency_code].decore(item_line.amount)
  %td= item_line.qty_in_debt.abs
  %td= I18n.l Date.strptime(item_line.confirmed_dlv_date, "%Y-%m-%d"), :format => :short unless item_line.confirmed_dlv_date.blank?
+ %td= link_to image_tag(asset_path('plane3.gif')), lines_track_order_path(item_line.line_id, :format => :json), :class => "track" if item_line.tracking
  %td= item_line.reserve_qty
  %td= item_line.qty_in_processing
  %td= item_line.qty_receive
