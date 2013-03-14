@@ -335,7 +335,7 @@ class Axapta
 
   def self.application_area_list
    begin
-    AxaptaRequest.application_area_list(:user_hash => axapta_hash)["area_list"].map{|x| OpenStruct.new(x)}
+    AxaptaRequest.application_area_list(:user_hash => axapta_hash)["area_list"].map{|x| OpenStruct.new(x)}.sort_by{|l| l.application_area_name }
    rescue Exception => e
     parse_exc(e.message, e.class.name)
    end
