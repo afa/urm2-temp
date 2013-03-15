@@ -6,7 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.core
+//= require jquery-ui
 //= require jquery.header
 //= require jquery.controls
 //= require jquery.table
@@ -20,8 +20,6 @@
 //= require order
 //= require "jquery.validationEngine-ru"
 //= require jquery.validationEngine
-//= require "jquery-ui-i18n"
-//= require "jquery.ui.datepicker-ru"
 //= require jquery.watch
 //= require "history/history.adapter.jquery"
 //= require "history/history"
