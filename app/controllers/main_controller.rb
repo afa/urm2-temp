@@ -216,6 +216,15 @@ class MainController < ApplicationController
    Setting.set_all(params[:profile].inject({}){|r, (k, v)| lut.has_key?(k) ? r.merge(lut[k] => v) : r.merge(k => v) })
    redirect_to profile_path
   end
+
+  def qnames
+   respond_with do |format|
+    format.json do
+     render :json => ["ttt"]
+    end
+   end
+   
+  end
  protected
 
 end

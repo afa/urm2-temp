@@ -76,6 +76,7 @@ Urm::Application.routes.draw do
   end
   resources :main, :only => [:index] do
    collection do
+    get :qnames
     get :mass_dms
     post :manager_request
     post :search
