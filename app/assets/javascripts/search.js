@@ -140,5 +140,5 @@ function showDms(evt){
 }
 
 function queryAutoComplete(rq, callback){
- return ["asd", "fasd"];
+ callback(["asd", "fasd"]);
 }
