@@ -140,8 +140,7 @@ function showDms(evt){
 }
 
 function queryAutoComplete(rq, callback){
- alert(rq);
- makeAjaxCall("/main/qnames.json/" + rq,
+ makeAjaxCall("/main/qnames/" + rq.val() + ".json",
   function(data){
    callback(data);
   },
