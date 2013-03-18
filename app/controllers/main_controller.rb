@@ -220,7 +220,7 @@ class MainController < ApplicationController
   def qnames
    respond_with do |format|
     format.json do
-     render :json => Axapta.search_item_name_quick(params[:id])
+     render :json => Axapta.search_item_name_quick(params[:query])
     end
    end
    

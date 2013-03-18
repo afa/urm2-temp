@@ -88,8 +88,6 @@ Urm::Application.routes.draw do
     post :feedback
     get :profile
     post :update_profile
-   end
-   member do
     get :qnames
    end
   end
