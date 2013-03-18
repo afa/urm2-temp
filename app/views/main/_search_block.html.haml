@@ -51,6 +51,7 @@
        .field
         = f.text_field :query_string
         #auto_complete_menu
+         .place
        - unless @only_store.nil?
         - unless to_bool(@only_store)
          %div.dms_loader{:style=>"float=right;"}
