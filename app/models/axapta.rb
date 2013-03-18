@@ -376,7 +376,7 @@ class Axapta
 
   def self.search_item_name_quick(mask)
    begin
-    (AxaptaRequest.search_item_name_quick(:user_hash => axapta_hash, :query_string => mask).try(:[], "items") || []).map{|k, v| v }
+    (AxaptaRequest.search_item_name_quick(:user_hash => axapta_hash, :query_string => mask).try(:[], "items") || []).map{|v| v["item_name"] }
    rescue Exception => e
     parse_exc(e.message, e.class_name)
     []
