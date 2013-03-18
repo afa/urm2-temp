@@ -374,6 +374,15 @@ class Axapta
    res
   end
 
+  def self.search_item_name_quick(mask)
+   begin
+    (AxaptaRequest.search_item_name_quick(:user_hash => axapta_hash, :query_string => mask).try(:[], "items") || []).map{|k, v| v }
+   rescue Exception => e
+    parse_exc(e.message, e.class_name)
+    []
+   end
+  end
+
  private
   def self.per_page
    Setting.get("table.per_page") || 10

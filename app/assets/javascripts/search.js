@@ -140,5 +140,10 @@ function showDms(evt){
 }
 
 function queryAutoComplete(rq, callback){
- callback(["asd", "fasd"]);
+ makeAjaxCall("/main/qnames/" + rq,
+  function(data){
+   callback(data);
+  },
+  function(){}
+ );
 }
