@@ -139,4 +139,6 @@ function showDms(evt){
  evt.preventDefault();
 }
 
-
+function queryAutoComplete(rq, callback){
+ return ["asd", "fasd"];
+}
