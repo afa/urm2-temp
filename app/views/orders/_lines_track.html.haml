@@ -1,10 +1,11 @@
 %tr{:class => ["track_item_#{row_id}"]}
- %td.icons
+ -# %td.icons
   .icon
    %input.after{:type=>"hidden", :value => row_id}
    %a.plus{:href=>"#", :class=>"hide"}
- %td{:colspan => 19}
-  %table{:width => "100%"}
+ %td{:colspan => 20, :style => "padding-top:20px;padding-bottom:20px;text-align:center;"}
+  %table
+   -# {:width => "100%"}
    %tr.heading
     %th.text-left Наименование
     %th.text-left Производитель
