@@ -1,4 +1,6 @@
 ru:
+ yes: Да
+ no: Нет
  strings:
   zero: нет строк
   one: "Всего: %{count}"
