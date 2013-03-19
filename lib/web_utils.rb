@@ -28,17 +28,17 @@ end
 module HumanizedBool
  module True
   def human_readable
-   I18n.t :yes
+   I18n.t :tr_yes
   end
  end
  module False
   def human_readable
-   I18n.t :no
+   I18n.t :tr_no
   end
  end
  module Nil
   def human_readable
-   I18n.t :no
+   I18n.t :tr_no
   end
  end
 end

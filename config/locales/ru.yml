@@ -1,6 +1,4 @@
 ru:
- yes: Да
- no: Нет
  strings:
   zero: нет строк
   one: "Всего: %{count}"
@@ -209,3 +207,5 @@ ru:
 
  urm: УРМ
  empty_lines: нет строк для обработки
+ tr_yes: Да
+ tr_no: Нет
