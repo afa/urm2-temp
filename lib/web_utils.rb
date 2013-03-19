@@ -24,3 +24,31 @@ module WebSignature
    WebUtils.escape_name(self.class.signature_fields.map{|a| send(a) }.join('_'))
   end
 end
+
+module HumanizedBool
+ module True
+  def human_readable
+   I18n.t :yes
+  end
+ end
+ module False
+  def human_readable
+   I18n.t :no
+  end
+ end
+ module Nil
+  def human_readable
+   I18n.t :no
+  end
+ end
+end
+
+class TrueClass
+ include HumanizedBool::True
+end
+class FalseClass
+ include HumanizedBool::False
+end
+class NilClass
+ include HumanizedBool::Nil
+end
