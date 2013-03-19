@@ -80,7 +80,8 @@
     $('.alt.price').addClass('hidden').removeClass('active');
     $('.real.price').addClass('active').removeClass('hidden');
     });*/
-    $("#search_query_string").autocomplete({appendTo: ".field:has(#search_query_string)", minLength: 3, source: queryAutoComplete, append_to: "#auto_complete_menu .place", autoFocus: true});
+    $("#search_query_string").autocomplete({appendTo: ".field:has(#search_query_string)", minLength: 3, source: queryAutoComplete});
+    //, appendTo: "#auto_complete_menu .place"
     $('.select').selectList();
     //Кнопки
     $('.button-style').button();
