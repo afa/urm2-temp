@@ -1,6 +1,16 @@
 class ApplicationController < ActionController::Base
   helper ApplicationHelper
   include Afauth::Controller::App
+  rescue_from Exception do |e|
+   Rails.logger.info "---rescue: need redirect, #{e}, #{e.backtrace.first(3)}"
+  # if self.class.class_variable_defined?(:@@auth_redirect_on_failed) && self.class.auth_redirect_on_failed
+  #  redirect_to self.class.auth_redirect_on_failed
+  # elsif self.class.class_variable_defined?(:@@auth_redirect_on_failed_cb) && self.class.auth_redirect_on_failed_cb
+  #  redirect_to self.send(self.class.auth_redirect_on_failed_cb)
+  # else
+    raise
+  # end
+  end
   remembered_cookie_name :user_remember_token
   user_model User
   auth_expired_in_days 1
@@ -63,10 +73,8 @@ class ApplicationController < ActionController::Base
 
   def check_account_cur
    if User.logged? and User.current and User.current.current_account
-    Rails.logger.info "---acc #{User.current.inspect}"
     #p "::current_user", current_user
     if User.current.current_account.blocked? or User.current.accounts.where(:id => User.current.current_account_id).count == 0
-     Rails.logger.warn "---blocked acc #{User.current.current_account_id}"
      User.current.update_attributes(:current_account => nil)
      if User.current.accounts.where(:blocked => 'f').count == 1
       User.current.update_attributes(:current_account => User.current.accounts.where(:blocked => 'f').first)
@@ -75,7 +83,6 @@ class ApplicationController < ActionController::Base
     end
    else
     if User.logged? && User.current && (User.current.current_account.try(:blocked?) or User.current.accounts.where(:id => User.current.current_account_id).count == 0)
-     Rails.logger.warn "---blocked acc #{User.current.current_account_id}"
      User.current.update_attributes(:current_account => nil)
      if User.current.accounts.where(:blocked => 'f').count == 1
       User.current.update_attributes(:current_account => User.current.accounts.where(:blocked => 'f').first)
