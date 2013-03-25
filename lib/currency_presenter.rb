@@ -15,3 +15,9 @@ class CurrencyPresenter
   number_to_currency(num, CURRENCY_RULES[@currency].merge(:raise => true)) rescue number_to_currency(num, CURRENCY_RULES[:csv])
  end
 end
+
+class NilClass
+  def decore(num)
+   num
+  end
+end

@@ -401,3 +401,21 @@ class Axapta
    User.current.current_account.axapta_hash
   end
 end
+
+class AxaptaResult < OpenStruct
+  def initialize(attrs = {})
+   @type = attrs.delete(:type) || attrs.delete("type")
+   @error = attrs.delete(:error) || attrs.delete("error")
+   @message = attrs.delete(:message) || attrs.delete("message")
+   super
+  end
+end
+
+class AxaptaResults < Array
+  def initialize(arr = [], opts = {})
+   @type = attrs.delete(:type) || attrs.delete("type")
+   @error = attrs.delete(:error) || attrs.delete("error")
+   @message = attrs.delete(:message) || attrs.delete("message")
+   super(arr)
+  end
+end
