@@ -1,5 +1,30 @@
 require "array_utils"
 class AxaptaError < Exception; end
+class AxaptaState
+ OK = 0
+ INTERNAL = 1
+ LOSTCONNECT = 2
+ INVALID = 3
+ NONVALID = 4
+end
+class AxaptaResult < OpenStruct
+  def initialize(attrs = {})
+   @type = attrs.delete(:type) || attrs.delete("type")
+   @error = attrs.delete(:error) || attrs.delete("error")
+   @message = attrs.delete(:message) || attrs.delete("message")
+   super
+  end
+end
+
+class AxaptaResults < Array
+  def initialize(arr = [], opts = {})
+   @type = attrs.delete(:type) || attrs.delete("type")
+   @error = attrs.delete(:error) || attrs.delete("error")
+   @message = attrs.delete(:message) || attrs.delete("message")
+   super(arr)
+  end
+end
+
 class Axapta
  include ActiveModel
  include ActiveModel::Serialization
@@ -402,27 +427,3 @@ class Axapta
   end
 end
 
-class AxaptaState
- OK = 0
- INTERNAL = 1
- LOSTCONNECT = 2
- INVALID = 3
- NONVALID = 4
-end
-class AxaptaResult < OpenStruct
-  def initialize(attrs = {})
-   @type = attrs.delete(:type) || attrs.delete("type")
-   @error = attrs.delete(:error) || attrs.delete("error")
-   @message = attrs.delete(:message) || attrs.delete("message")
-   super
-  end
-end
-
-class AxaptaResults < Array
-  def initialize(arr = [], opts = {})
-   @type = attrs.delete(:type) || attrs.delete("type")
-   @error = attrs.delete(:error) || attrs.delete("error")
-   @message = attrs.delete(:message) || attrs.delete("message")
-   super(arr)
-  end
-end
