@@ -410,6 +410,10 @@ class Axapta
   end
 
  private
+  def self.ask(method, *args)
+   res, err = AxaptaRequest.send(method, *args)
+  end
+
   def self.per_page
    Setting.get("table.per_page") || 10
   end
