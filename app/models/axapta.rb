@@ -401,7 +401,8 @@ class Axapta
 
   def self.search_item_name_quick(mask)
    begin
-    AxaptaResults.new((AxaptaRequest.search_item_name_quick(:user_hash => axapta_hash, :query_string => mask).try(:[], "items") || []).map{|v| v["item_name"] }.first(10), {:type => AxaptaState::OK})
+    res, err = AxaptaRequest.search_item_name_quick(:user_hash => axapta_hash, :query_string => mask).try(:[], "items")
+    AxaptaResults.new((res || []).map{|v| v["item_name"] }.first(10), {:type => AxaptaState::OK})
    rescue Exception => e
     AxaptaResults.new([], {:type => AxaptaState::INVALID, :error => e.class.name, :message => "Invalid current account for current user"})
    end
@@ -414,7 +415,6 @@ class Axapta
 
   def self.axapta_hash
    unless User.current
-    @last_parsed_error = {"message" => ""}
     @last_parsed_error = AxaptaResults([], {:type => AxaptaState::INVALID, :message => "Non-selected user"})
     raise AxaptaError
    end

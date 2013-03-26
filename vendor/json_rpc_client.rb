@@ -125,12 +125,13 @@ class JsonRpcClient
             raise NotAService,        "Returned #{res.content_type} (status code #{res.code}: #{res.message}) (#{host_and_port}) rather than application/json"
           end
           json = ActiveSupport::JSON.decode(res.body) rescue raise(ServiceReturnsJunk)
+          err = json['error']
           if json['error']
             @logger.error "JSON-RPC call to #{host_and_port}: #{self}.#{name}(#{args.inspect})" if @logger
             @logger.error "JSON-RPC error from #{host_and_port}: #{json['error'].inspect}" if @logger
             raise ServiceError, "JSON-RPC error ::(#{json['error'].to_json}):: from #{host_and_port}: #{json['error'].inspect}"
           end
-          return json['result']
+          return json['result'], err
         end
       rescue Errno::ECONNREFUSED
         raise ServiceDown, "Connection refused (#{host_and_port})"
