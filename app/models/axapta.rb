@@ -18,9 +18,9 @@ end
 
 class AxaptaResults < Array
   def initialize(arr = [], opts = {})
-   @type = attrs.delete(:type) || attrs.delete("type")
-   @error = attrs.delete(:error) || attrs.delete("error")
-   @message = attrs.delete(:message) || attrs.delete("message")
+   @type = opts.delete(:type) || opts.delete("type")
+   @error = opts.delete(:error) || opts.delete("error")
+   @message = opts.delete(:message) || opts.delete("message")
    super(arr)
   end
 end
