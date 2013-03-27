@@ -73,17 +73,12 @@ class Axapta
   def self.user_info(hash, axapta_uid = nil)
    args = {"user_hash" => hash}
    args.merge!("user_id" => axapta_uid) if axapta_uid
-   begin
-    res, err = AxaptaRequest.user_info(args) || [{}, {}]
-    res
-   rescue Exception => e
-    parse_exc(e.message, e.class.name)
-    {}
-   end
+   ask(:user_info, args)
   end
 
   def self.load_child_hashes(hash)
-   AxaptaRequest.user_list("user_hash" => hash)["users"].map{|u| u["user_id"] }.map{|u| self.user_info(hash, u) }
+   asks(:user_list, "users", {"user_hash" => hash}).map{|u| u["user_id"] }.map{|u| self.user_info(hash, u) }
+   #AxaptaRequest.user_list("user_hash" => hash)["users"].map{|u| u["user_id"] }.map{|u| self.user_info(hash, u) }
   end
 
   def self.search_names(*args)
