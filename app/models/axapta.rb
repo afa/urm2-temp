@@ -165,7 +165,9 @@ class Axapta
   end
 
   def self.sales_info_paged(page, *args)
-   prm = args.dup.as_hash
+   prm = {:records_per_page => per_page, :user_hash => axapta_hash, :page_num => (page || prm[:page] || 1), :order_sales_id => "desc"}.merge(args.dup.as_hash)
+   res = asks(:sales_info, nil, prm)
+   !!!!!!!!!
    begin
     res = AxaptaRequest.sales_info({:records_per_page => per_page, :user_hash => axapta_hash, :page_num => (page || prm[:page] || 1), :order_sales_id => "desc"}.merge(prm))
     #res = AxaptaRequest.sales_info({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1), :order_sales_id => "desc"}.merge(*args))
