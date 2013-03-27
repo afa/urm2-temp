@@ -12,7 +12,7 @@ class Account < ActiveRecord::Base
   end
 
   def self.filter_account_attributes(args)
-   args.inject({}){|r, a| r.merge(axapta_renames[a[0]].nil? ? {a[0] => a[1]}: {axapta_renames[a[0]] => a[1]}) }.delete_if{|k, v| not axapta_attributes.include?(k.to_s) }
+   args.marshal_dump.inject({}){|r, a| r.merge(axapta_renames[a[0]].nil? ? {a[0] => a[1]}: {axapta_renames[a[0]] => a[1]}) }.delete_if{|k, v| not axapta_attributes.include?(k.to_s) }
   end
 
   def human_readable
