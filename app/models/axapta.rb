@@ -396,7 +396,7 @@ class Axapta
   end
 
   def self.search_item_name_quick(mask)
-   asks(:search_item_name_quick, "items", :user_hash => axapta_hash, :query_string => mask)
+   res = asks(:search_item_name_quick, "items", :user_hash => axapta_hash, :query_string => mask)
    AxaptaResults.new(res.map{|v| v["item_name"] }.first(10), {:type => AxaptaState::OK})
   end
 
