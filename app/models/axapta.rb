@@ -33,7 +33,7 @@ class Axapta
    if klas =~ /JsonRpcClient::ServiceError/
     @last_parsed_error = ActiveSupport::JSON.decode(e.scan(/JSON-RPC error ::\((.+)\)::.+\{.+\}/)[0][1])
     p "---parsed exc", @last_parsed_error
-    {:_error => @last_parsed_error}
+    get_last_exc
    else
     raise
    end
@@ -412,7 +412,27 @@ class Axapta
 
  private
   def self.ask(method, *args)
-   res, err = AxaptaRequest.send(method, *args)
+   begin
+    res, err = AxaptaRequest.send(method, *args)
+    p "---errq", err
+    AxaptaResult.new(res.merge(:type => AxaptaState::OK))
+   rescue Exception => e
+    p "---errb", e
+    parse_exc(e.message, e.class.name)
+    AxaptaResult.new({:type => AxaptaState::INVALID, :error => e.class.name, :message => get_last_exc["_error"]})
+   end
+  end
+
+  def self.asks(method, items, *args)
+   begin
+    res, err = AxaptaRequest.send(method, *args)
+    p "---errq", err
+    AxaptaResults.new(res.send(items), {:type => AxaptaState::OK})
+   rescue Exception => e
+    p "---errb", e
+    parse_exc(e.message, e.class.name)
+    AxaptaResults.new([], {:type => AxaptaState::INVALID, :error => e.class.name, :message => get_last_exc["_error"]})
+   end
   end
 
   def self.per_page
