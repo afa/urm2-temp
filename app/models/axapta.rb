@@ -74,7 +74,8 @@ class Axapta
    args = {"user_hash" => hash}
    args.merge!("user_id" => axapta_uid) if axapta_uid
    begin
-    AxaptaRequest.user_info(args)
+    res, err = AxaptaRequest.user_info(args) || [{}, {}]
+    res
    rescue Exception => e
     parse_exc(e.message, e.class.name)
     {}
