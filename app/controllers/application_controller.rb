@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
    Rails.logger.info "resc auth #{e}"
    rescue_action_without_handler(e)
   end
-  rescue_from StandartError do |e|
+  rescue_from StandardError do |e|
    Rails.logger.info "---+rescue: need redirect, #{e}, #{e.backtrace.first(3)}"
   # if self.class.class_variable_defined?(:@@auth_redirect_on_failed) && self.class.auth_redirect_on_failed
   #  redirect_to self.class.auth_redirect_on_failed
