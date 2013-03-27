@@ -414,7 +414,8 @@ class Axapta
   def self.asks(method, items, *args)
    begin
     res, err = AxaptaRequest.send(method, *args)
-    AxaptaResults.new(res[items], {:type => AxaptaState::OK})
+    its = items ? res[items] : res
+    AxaptaResults.new(its, {:type => AxaptaState::OK})
    rescue Exception => e
     parse_exc(e.message, e.class.name)
     AxaptaResults.new([], {:type => AxaptaState::INVALID, :error => e.class.name, :message => get_last_exc["_error"]})
