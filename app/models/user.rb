@@ -133,7 +133,7 @@ class User < ActiveRecord::Base
   def self.check_account_vitality(user)
    if user.current_account
     axapta_params = Axapta.user_info(user.current_account.axapta_hash)
-    user.current_account.update_attributes :invent_location_id => axapta_params["invent_location_id"] unless user.current_account.invent_location_id == axapta_params["invent_location_id"]
+    user.current_account.update_attributes :invent_location_id => axapta_params.invent_location_id unless user.current_account.invent_location_id == axapta_params.invent_location_id
    end
    if user.accounts.all.all? {|a| a.blocked?}
     raise Afauth::AuthError
