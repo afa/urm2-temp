@@ -396,23 +396,16 @@ class Axapta
   end
 
   def self.search_item_name_quick(mask)
-   begin
-    res, err = AxaptaRequest.search_item_name_quick(:user_hash => axapta_hash, :query_string => mask)
-    AxaptaResults.new((res.try(:[], "items") || []).map{|v| v["item_name"] }.first(10), {:type => AxaptaState::OK})
-    p "---errq", err
-   rescue Exception => e
-    AxaptaResults.new([], {:type => AxaptaState::INVALID, :error => e.class.name, :message => "Invalid current account for current user"})
-   end
+   asks(:search_item_name_quick, "items", :user_hash => axapta_hash, :query_string => mask)
+   AxaptaResults.new(res.map{|v| v["item_name"] }.first(10), {:type => AxaptaState::OK})
   end
 
  private
   def self.ask(method, *args)
    begin
     res, err = AxaptaRequest.send(method, *args)
-    p "---errq", err
     AxaptaResult.new(res.merge(:type => AxaptaState::OK))
    rescue Exception => e
-    p "---errb", e
     parse_exc(e.message, e.class.name)
     AxaptaResult.new({:type => AxaptaState::INVALID, :error => e.class.name, :message => get_last_exc["_error"]})
    end
@@ -421,10 +414,8 @@ class Axapta
   def self.asks(method, items, *args)
    begin
     res, err = AxaptaRequest.send(method, *args)
-    p "---errq", err
     AxaptaResults.new(res[items], {:type => AxaptaState::OK})
    rescue Exception => e
-    p "---errb", e
     parse_exc(e.message, e.class.name)
     AxaptaResults.new([], {:type => AxaptaState::INVALID, :error => e.class.name, :message => get_last_exc["_error"]})
    end
