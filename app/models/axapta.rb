@@ -32,7 +32,7 @@ class Axapta
 
   def self.parse_exc(e, klas = "")
    if klas =~ /JsonRpcClient::ServiceError/
-    @last_parsed_error = ActiveSupport::JSON.decode(e.scan(/JSON-RPC error ::\((.+)\)::.+\{.+\}/)[0][1])
+    @last_parsed_error = ActiveSupport::JSON.decode(e.to_s.scan(/JSON-RPC error ::\((.+)\)::.+\{.+\}/)[0][1])
     p "---parsed exc", @last_parsed_error
     get_last_exc
    else
