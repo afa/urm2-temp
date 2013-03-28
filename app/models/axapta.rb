@@ -17,10 +17,11 @@ class AxaptaResult < OpenStruct
 end
 
 class AxaptaResults < Array
+  attr_accessor :type, :error, :message, :page
   def initialize(arr = [], opts = {})
-   @type = opts.delete(:type) || opts.delete("type")
-   @error = opts.delete(:error) || opts.delete("error")
-   @message = opts.delete(:message) || opts.delete("message")
+   self.type = opts.delete(:type) || opts.delete("type")
+   self.error = opts.delete(:error) || opts.delete("error")
+   self.message = opts.delete(:message) || opts.delete("message")
    super(arr)
   end
 end
@@ -85,12 +86,8 @@ class Axapta
    ar = args.as_hash
    ar["query_string"] += '*' if ar.has_key?("query_string") && ar["query_string"].last != '*'
    ar[:query_string] += '*' if ar.has_key?(:query_string) && ar[:query_string].last != '*'
-   begin
-    res = AxaptaRequest.search_item_name_h(ar.merge(:user_hash => axapta_hash)).try(:[], "items") || []
-   rescue Exception => e
-    parse_exc(e.message, e.class.name)
-    []
-   end
+   asks(:search_item_name_h, "items", ar.merge(:user_hash => axapta_hash))
+   #hash!
   end
 
   def self.search_dms_names(*args)
@@ -99,22 +96,12 @@ class Axapta
    ar[:query_string].strip! if ar.has_key?(:query_string)
    ar["query_string"] += '*' if ar.has_key?("query_string") && !ar["query_string"].blank? && ar["query_string"].last != '*'
    ar[:query_string] += '*' if ar.has_key?(:query_string) && !ar[:query_string].blank? && ar[:query_string].last != '*'
-   begin
-    res = AxaptaRequest.search_item_name_dms_h(ar).try(:[], "items") || []
-   rescue Exception => e
-    parse_exc(e.message, e.class.name)
-    []
-   end
+   asks(:search_item_name_dms_h, "items", ar)
   end
 
   def self.item_info(*args)
-   ar = args.as_hash
-   begin
-    AxaptaRequest.item_info(ar.merge(:user_hash => axapta_hash)) || []
-   rescue Exception => e
-    parse_exc(e.message, e.class.name)
-    []
-   end
+   ar = args.as_hash.merge(:user_hash => axapta_hash)
+   ask(:item_info, ar)
   end
 
   def self.search_analogs(*args)
@@ -141,15 +128,15 @@ class Axapta
   end
 
   def self.make_order(hsh)
-   AxaptaRequest.make_order(hsh.merge(:user_hash => axapta_hash, :main_invent_location => User.current.current_account.invent_location_id))
+   ask(:make_order, hsh.merge(:user_hash => axapta_hash, :main_invent_location => User.current.current_account.invent_location_id))
   end
 
   def self.create_quotation(hsh)
-   AxaptaRequest.create_quotation(hsh.merge!(:user_hash => axapta_hash))
+   ask(:create_quotation, hsh.merge!(:user_hash => axapta_hash))
   end
 
   def self.sales_handle_add(hsh)
-   AxaptaRequest.sales_handle_add(hsh.merge(:user_hash => axapta_hash))
+   ask(:sales_handle_add, hsh.merge(:user_hash => axapta_hash))
   end
 
   #def self.sales_handle_header(hsh)
@@ -161,13 +148,13 @@ class Axapta
   #end
 
   def self.sales_info(*args)
-   sales_info_paged(nil, *args).try(:items) || []
+   sales_info_paged(nil, *args).items || []
   end
 
   def self.sales_info_paged(page, *args)
    prm = {:records_per_page => per_page, :user_hash => axapta_hash, :page_num => (page || prm[:page] || 1), :order_sales_id => "desc"}.merge(args.dup.as_hash)
-   res = asks(:sales_info, nil, prm)
-   !!!!!!!!!
+   #res = ask_pages(:sales_info, nil, prm)
+   #!!!!!!!!!
    begin
     res = AxaptaRequest.sales_info({:records_per_page => per_page, :user_hash => axapta_hash, :page_num => (page || prm[:page] || 1), :order_sales_id => "desc"}.merge(prm))
     #res = AxaptaRequest.sales_info({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1), :order_sales_id => "desc"}.merge(*args))
@@ -226,7 +213,7 @@ class Axapta
   end
 
   def self.get_delivery_mode
-   AxaptaRequest.get_dlv_mode(:user_hash => axapta_hash)
+   ask(:get_dlv_mode, {:user_hash => axapta_hash})
   end
 
   def self.get_delivery_prognosis(code, lc = nil) #TODO refactor && move to offer::store#fabricate
@@ -260,21 +247,11 @@ class Axapta
   end
 
   def self.create_invoice(order, send = false)
-   begin
-    AxaptaRequest.create_invoice(:user_hash => axapta_hash, :sales_id => order, :send_by_email => send)
-   rescue Exception => e
-    parse_exc(e.message, e.class.name)
-    raise AxaptaError
-   end
+   ask(:create_invoice, {:user_hash => axapta_hash, :sales_id => order, :send_by_email => send})
   end
 
   def self.invoice_paym(order, send = false)
-   begin
-    AxaptaRequest.invoice_paym(:user_hash => axapta_hash, :sales_id => order, :send_by_email => send)
-   rescue Exception => e
-    parse_exc(e.message, e.class.name)
-    raise AxaptaError
-   end
+   ask(:invoice_paym, {:user_hash => axapta_hash, :sales_id => order, :send_by_email => send})
   end
 
   def self.invoice_lines(hsh)
@@ -320,70 +297,35 @@ class Axapta
   end
 
   def self.sales_handle_header(hsh)
-   begin
-    AxaptaRequest.sales_handle_header(hsh.merge(:user_hash => axapta_hash))
-   rescue Exception => e
-    parse_exc(e.message, e.class.name)
-    raise AxaptaError
-   end
+   ask(:sales_handle_header, hsh.merge(:user_hash => axapta_hash))
   end
 
   def self.sales_handle_edit(hsh)
-   begin
-    AxaptaRequest.sales_handle_edit(hsh.merge(:user_hash => axapta_hash))
-   rescue Exception => e
-    parse_exc(e.message, e.class.name)
-    raise AxaptaError
-   end
+   ask(:sales_handle_edit, hsh.merge(:user_hash => axapta_hash))
   end
 
   def self.sales_close_reason_list
-   begin
-    AxaptaRequest.sales_close_reason_list(:user_hash => axapta_hash)["reason_list"].map{|x| [x["close_reason_description"], x["close_reason_id"]] } #return [[desc, id]]
-   rescue Exception => e
-    parse_exc(e.message, e.class.name)
-    []
-   end
+   asks(:sales_close_reason_list, "reason_list", {:user_hash => axapta_hash}).map{|x| [x.close_reason_description, x.close_reason_id] } #return [[desc, id]]
   end
 
   def self.info_cust_balance
-   #begin
-   AxaptaRequest.info_cust_balance(:user_hash => axapta_hash).try(:[], "balance").map{|req| req.inject(OpenStruct.new){|r, (k, v)| r.send(k + '=', v); r  } }
-   #rescue Exception => e
-   # parse_exc(e)
-   # raise
-   # OpenStruct.new
-   #end
+   asks(:info_cust_balance, "balance", {:user_hash => axapta_hash})
   end
 
   def self.application_area_list
-   begin
-    AxaptaRequest.application_area_list(:user_hash => axapta_hash)["area_list"].map{|x| OpenStruct.new(x)}.sort_by{|l| l.application_area_name }
-   rescue Exception => e
-    parse_exc(e.message, e.class.name)
-   end
+   asks(:application_area_list, "area_list", {:user_hash => axapta_hash}).sort_by{|l| l.application_area_name }
   end
 
   def self.custom_limits
-   begin
-    AxaptaRequest.info_cust_limits(:user_hash => axapta_hash).try(:[], "reserve").inject(OpenStruct.new){|r, x| r.send(x[0] + '=', x[1]); r  }
-   rescue Exception => e
-    parse_exc(e.message, e.class.name)
-    OpenStruct.new
-   end
+   asks(:info_cust_limits, "reserve", {:user_hash => axapta_hash})
   end
 
   def self.info_cust_limits
-   begin
-    AxaptaRequest.info_cust_limits(:user_hash => axapta_hash).inject(OpenStruct.new){|r, (k, v)| r.send(k.to_s + '=', OpenStruct.new(v)) ; r }
-   rescue Exception => e
-    parse_exc(e.message, e.class.name)
-    OpenStruct.new
-   end
+   asks(:info_cust_limits, nil, {:user_hash => axapta_hash}).marshal_dump.inject(OpenStruct.new){|r, (k, v)| r.send(k.to_s + '=', OpenStruct.new(v)) ; r }
   end
 
   def self.info_cust_trans(hsh)
-    AxaptaRequest.info_cust_trans(hsh.merge(:records_per_page => per_page, :user_hash => axapta_hash)).try(:[], "trans").map{|a| OpenStruct.new(a)  }
+    asks(:info_cust_trans, "trans", hsh.merge(:records_per_page => per_page, :user_hash => axapta_hash))
   end
 
   def self.sales_tracking(hsh)
