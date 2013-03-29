@@ -23,7 +23,7 @@ class AxaptaResults < Array
    self.type = opts.delete(:type) || opts.delete("type")
    self.error = opts.delete(:error) || opts.delete("error")
    self.message = opts.delete(:message) || opts.delete("message")
-   super(arr.map{|i| OpenStruct.new(i) })
+   super(arr.map{|i| p "---os-g", i; OpenStruct.new(i) })
   end
 end
 
