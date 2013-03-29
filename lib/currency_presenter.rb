@@ -11,8 +11,8 @@ class CurrencyPresenter
  end
 
  def decore(num)
-  #val = num.is_a?(Float) ? num : num.to_f
-  number_to_currency(num, CURRENCY_RULES[@currency].merge(:raise => true)) rescue number_to_currency(num, CURRENCY_RULES[:csv])
+  val = num.is_a?(Float) ? num : num.to_f
+  number_to_currency(val, CURRENCY_RULES[@currency].merge(:raise => true)) rescue number_to_currency(val, CURRENCY_RULES[:csv])
  end
 end
 

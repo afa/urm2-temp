@@ -8,16 +8,17 @@ class AxaptaState
  NONVALID = 4
 end
 class AxaptaResult < OpenStruct
+  attr_accessor :type, :error, :message
   def initialize(attrs = {})
-   @type = attrs.delete(:type) || attrs.delete("type")
-   @error = attrs.delete(:error) || attrs.delete("error")
-   @message = attrs.delete(:message) || attrs.delete("message")
+   self.type = attrs.delete(:type) || attrs.delete("type")
+   self.error = attrs.delete(:error) || attrs.delete("error")
+   self.message = attrs.delete(:message) || attrs.delete("message")
    super
   end
 end
 
 class AxaptaResults < Array
-  attr_accessor :type, :error, :message, :page
+  attr_accessor :type, :error, :message
   def initialize(arr = [], opts = {})
    self.type = opts.delete(:type) || opts.delete("type")
    self.error = opts.delete(:error) || opts.delete("error")
@@ -26,6 +27,15 @@ class AxaptaResults < Array
   end
 end
 
+class AxaptaPages < AxaptaResults
+  attr_accessor :page, :pages, :records
+  def initialize(arr = [], opts = {})
+   self.page = opts.delete(:page) || opts.delete("page")
+   self.pages = opts.delete(:pages) || opts.delete("pages")
+   self.records = opts.delete(:records) || opts.delete("records")
+   super
+  end
+end
 class Axapta
  include ActiveModel
  include ActiveModel::Serialization
@@ -153,14 +163,7 @@ class Axapta
 
   def self.sales_info_paged(page, *args)
    prm = {:records_per_page => per_page, :user_hash => axapta_hash, :page_num => (page || prm[:page] || 1), :order_sales_id => "desc"}.merge(args.dup.as_hash)
-   #res = ask_pages(:sales_info, nil, prm)
-   #!!!!!!!!!
-   begin
-    res = AxaptaRequest.sales_info({:records_per_page => per_page, :user_hash => axapta_hash, :page_num => (page || prm[:page] || 1), :order_sales_id => "desc"}.merge(prm))
-    #res = AxaptaRequest.sales_info({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1), :order_sales_id => "desc"}.merge(*args))
-   rescue Exception => e
-    return OpenStruct.new(:total => 0, :page => 0, :records => 0, :items => [], :error => e.to_s)
-   end
+   res = ask_pages(:sales_info, nil, prm)
    OpenStruct.new(:items => (res.try(:[], "sales") || []).map do |sale|
     OpenStruct.new sale
    end, :total => res.try(:[], "pages") || 1, :page => (page || prm[:page] || 1), :records => res.try(:[], "records") || 0)
@@ -364,6 +367,18 @@ class Axapta
     parse_exc(e.message, e.class.name)
     AxaptaResults.new([], {:type => AxaptaState::INVALID, :error => e.class.name, :message => get_last_exc["_error"]})
    end
+  end
+
+  def self.ask_pages(method, page, items, *args)
+   begin
+    res, err = AxaptaRequest.send(method, *args)
+    its = items ? res[items] : res
+    AxaptaPages.new(its, {:page => page, :type => AxaptaState::OK})
+   rescue Exception => e
+    parse_exc(e.message, e.class.name)
+    AxaptaPages.new([], {:type => AxaptaState::INVALID, :error => e.class.name, :message => get_last_exc["_error"]})
+   end
+   
   end
 
   def self.per_page
