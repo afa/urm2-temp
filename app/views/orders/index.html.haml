@@ -45,10 +45,10 @@
       %th.text-right Код способа доставки
       %th.text-right Счет
       %th.text-right Сумма по счету
-     = render :partial => "orders/list_line", :collection => @orders.items
+     = render :partial => "orders/list_line", :collection => @orders
     .padded
     %div{:style => "display:inline-block; float:right;"}
-     - unless @orders.items.empty?
+     - unless @orders.empty?
       = form_for :export_fields, :url => export_list_orders_path(:format => :xls), :method => :post, :html=>{:class => "js", :style => "display: inline-block;"} do |f|
        %input.copiable{:type => :hidden, :value => 'input#filter_sales_id'}
        %input.copiable{:type => :hidden, :value => 'input#filter_official_number'}
