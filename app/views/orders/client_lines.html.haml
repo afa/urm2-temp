@@ -52,7 +52,7 @@
        %input.copiable{:type => :hidden, :value => 'input#filter_date_to'}
        = render :partial => "shared/submit_button", :locals => {:title => t(:export_csv), :name => "items[export]", :opts => {:class => "preload", :style => "float: right;"}}
     %div{:style => "display:inline-block; float:left;"}
-     = paginate(:page => @lines.page.to_i, :pages => @lines.total.to_i, :derid => {:align => "left", :hide_empty => true})
+     = paginate(:page => @lines.page.to_i, :pages => @lines.pages.to_i, :derid => {:align => "left", :hide_empty => true})
     %div{:style => "display:inline-block; float:left;"}
      = render :partial => "shared/stat.html.haml", :locals => {:mode => :strings, :value => @lines.records.to_i}
 

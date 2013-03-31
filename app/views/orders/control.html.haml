@@ -49,8 +49,6 @@
  .table-navigation-block{:class => "scroll"}
   .table-block
    .table-scrolling
-    -# = render :partial => "shared/pagination", :locals => {:page => @lines.page.to_i, :pages => @lines.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей: #{@lines.records}&nbsp;&nbsp;Страниц: #{@lines.total}&nbsp;&nbsp;".html_safe, :text_before_current => "Страница: "}}
-    -# = render :partial => "shared/pagination", :locals => {:page => @lines.page.to_i, :pages => @lines.total.to_i}
     %table.table-style{:class => "order-list"}
      %tr
       %th Код номенклатуры
@@ -65,10 +63,10 @@
       %th Контактное лицо
       %th Менеджер
 
-     = render :partial => "orders/control_line", :collection => @lines.items
+     = render :partial => "orders/control_line", :collection => @lines
     .padded
     %div{:style => "display:inline-block; float:right;"}
-     - unless @lines.items.empty?
+     - unless @lines.empty?
       = form_for :export_fields, :url => export_control_orders_path(:format => :xls), :method => :post, :html=>{:class => "js", :style => "display: inline-block;"} do |f|
        %input.copiable{:type => :hidden, :value => 'input#filter_item_name'}
        %input.copiable{:type => :hidden, :value => 'input#filter_reservation_end'}
@@ -80,6 +78,6 @@
        %input.copiable{:type => :hidden, :value => 'input#filter_only_my'}
        = render :partial => "shared/submit_button", :locals => {:title => t(:export_csv), :name => "items[export]", :opts => {:class => "preload", :style => "float: right;"}}
     %div{:style => "display:inline-block; float:left;"}
-     = paginate(:page => @lines.page.to_i, :pages => @lines.total.to_i, :derid => {:align => "left", :hide_empty => true})
+     = paginate(:page => @lines.page.to_i, :pages => @lines.pages.to_i, :derid => {:align => "left", :hide_empty => true})
     %div{:style => "display:inline-block; float:left;"}
      = render :partial => "shared/stat.html.haml", :locals => {:mode => :strings, :value => @lines.records.to_i}
