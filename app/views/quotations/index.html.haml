@@ -35,10 +35,10 @@
       %th.text-left{:style => "min-width:180px;"} Контактное лицо
       %th.text-left{:style => "min-width:250px;"} Менеджер
       %th.text-left{:style => "min-width:400px;"} Примечание
-     = render :partial => "quotations/list_line", :collection => @quotations.items
+     = render :partial => "quotations/list_line", :collection => @quotations
     .padded
     %div{:style => "display:inline-block; float:right;"}
-     - unless @quotations.items.empty?
+     - unless @quotations.empty?
       = form_for :export_fields, :url => export_list_quotations_path(:format => :xls), :method => :post, :html=>{:class => "js", :style => "display: inline-block;"} do |f|
        %input.copiable{:type => :hidden, :value => 'input#filter_quotation_id'}
        %input.copiable{:type => :hidden, :value => 'select#filter_quotation_status'}
