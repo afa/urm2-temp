@@ -33,7 +33,7 @@ class AxaptaPages < AxaptaResults
    self.page = opts.delete(:page) || opts.delete("page")
    self.pages = opts.delete(:pages) || opts.delete("pages")
    self.records = opts.delete(:records) || opts.delete("records")
-   super
+   super(arr, opts)
   end
 end
 class Axapta
