@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
    @nreqs = @carts.partition{|i| i.is_a? CartRequest }[1]
    @deliveries = User.current.deliveries
    @stores = @carts.map(&:location_link).uniq.compact.sort{|a, b| a == User.current.current_account.invent_location_id ? -1 : a <=> b }
-   sales = Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000).items
+   sales = Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000)
    @sales_locs = sales.map{|s| [s.sales_id, s.location_id] }.as_hash
    @avail_sales = sales.map{|s| [s.sales_id, s.sales_id] }
    respond_with do |format|
@@ -79,7 +79,7 @@ class OrdersController < ApplicationController
    end
    @lines = Axapta.sales_lines_paged(@page, :sales_id => params[:id], :show_reserve_qty => true, :show_status_qty => true, :only_open => true, :order_item_name => "asc")
    @mandatory = false
-   unless @lines.items.select{|l| l.application_area_mandatory }.empty?
+   unless @lines.select{|l| l.application_area_mandatory }.empty?
     @application_area_list = Axapta.application_area_list
     @mandatory = true
    end
@@ -220,10 +220,10 @@ class OrdersController < ApplicationController
   def export_client_lines #fix when made request
    respond_with do |format|
     format.csv do
-     send_data CartItem.export(:csv, :client_lines, Axapta.invoice_lines_all(@filter_hash).items), :type => "application/csv", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.csv"
+     send_data CartItem.export(:csv, :client_lines, Axapta.invoice_lines_all(@filter_hash)), :type => "application/csv", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.csv"
     end
     format.xls do
-     send_data CartItem.export(:xls, :client_lines, Axapta.invoice_lines_all(@filter_hash).items), :type => "application/vnd.ms-excel", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.xls"
+     send_data CartItem.export(:xls, :client_lines, Axapta.invoice_lines_all(@filter_hash)), :type => "application/vnd.ms-excel", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.xls"
     end
    end
    
@@ -232,10 +232,10 @@ class OrdersController < ApplicationController
   def export_lines
    respond_with do |format|
     format.csv do
-     send_data CartItem.export(:csv, :order_lines, Axapta.sales_lines_all(@filter_hash.merge(:only_open => true)).items), :type => "application/csv", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.csv"
+     send_data CartItem.export(:csv, :order_lines, Axapta.sales_lines_all(@filter_hash.merge(:only_open => true))), :type => "application/csv", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.csv"
     end
     format.xls do
-     send_data CartItem.export(:xls, :order_lines, Axapta.sales_lines_all(@filter_hash.merge(:only_open => true)).items), :type => "application/vnd.ms-excel", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.xls"
+     send_data CartItem.export(:xls, :order_lines, Axapta.sales_lines_all(@filter_hash.merge(:only_open => true))), :type => "application/vnd.ms-excel", :disposition => "attachment", :filename => "export_#{User.current.current_account.business}_#{[params[:controller].to_s, params[:action].to_s].join('_')}_#{Date.today.strftime("%Y%m%d")}.xls"
     end
    end
    
@@ -244,7 +244,7 @@ class OrdersController < ApplicationController
   def export_control
    respond_with do |format|
     format.csv do
-     send_data CartItem.export(:csv, :order_control, Axapta.sales_lines_all(@filter_hash.merge(:only_reserve => true, :show_reserve_qty => true)).items), :type => "application/csv", :disposition => :attachment
+     send_data CartItem.export(:csv, :order_control, Axapta.sales_lines_all(@filter_hash.merge(:only_reserve => true, :show_reserve_qty => true))), :type => "application/csv", :disposition => :attachment
     end
    end
    
@@ -253,7 +253,7 @@ class OrdersController < ApplicationController
   def export_list
    respond_with do |format|
     format.csv do
-     send_data CartItem.export(:csv, :sales, Axapta.sales_info_all(@filter_hash).items), :type => "application/csv", :disposition => :attachment
+     send_data CartItem.export(:csv, :sales, Axapta.sales_info_all(@filter_hash)), :type => "application/csv", :disposition => :attachment
     end
    end
   end
