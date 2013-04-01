@@ -39,10 +39,10 @@
       %th.text-right Цена
       %th.text-right Сумма с НДС
       %th Валюта
-     = render :partial => "orders/client_line", :collection => @lines.items
+     = render :partial => "orders/client_line", :collection => @lines
     .padded
     %div{:style => "display:inline-block; float:right;"}
-     - unless @lines.items.empty?
+     - unless @lines.empty?
       = form_for :export_fields, :url => export_client_lines_orders_path(:format => :xls), :method => :post, :html=>{:class => "js", :style => "display: inline-block;"} do |f|
        %input.copiable{:type => :hidden, :value => 'input#filter_date_from'}
        %input.copiable{:type => :hidden, :value => 'input#filter_date_to'}
