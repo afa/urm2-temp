@@ -323,7 +323,7 @@ class Axapta
 
   def self.custom_limits
    rs = ask(:info_cust_limits, {:user_hash => axapta_hash})
-   AxaptaResult.new(rs.reserve.last, rs.marshal_dump)
+   AxaptaResult.new(rs.reserve, rs.marshal_dump)
   end
 
   def self.info_cust_limits
