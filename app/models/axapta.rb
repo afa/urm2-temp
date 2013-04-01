@@ -196,25 +196,25 @@ class Axapta
   end
 
   def self.sales_lines(*args)
-   sales_lines_paged(nil, *args).try(:items) || []
+   sales_lines_paged(nil, *args) #.try(:items) || []
   end
 
   def self.sales_lines_paged(page, *args)
-   prm = args.dup.as_hash
-   res = AxaptaRequest.sales_lines({:records_per_page => per_page, :user_hash => axapta_hash, :page_num => (page || prm[:page] || 1)}.merge(prm))
+   prm = {:records_per_page => per_page, :user_hash => axapta_hash, :page_num => (page || prm[:page] || 1)}.merge(args.dup.as_hash)
+   ask_pages(:sales_lines, page, "sales_lines", prm)
    #res = AxaptaRequest.sales_lines({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1)}.merge(*args))
-   OpenStruct.new(:items => (res.try(:[], "sales_lines") || []).map do |sale|
-    OpenStruct.new sale
-   end, :total => res.try(:[], "pages") || 1, :page => (page || prm[:page] || 1), :records => res.try(:[], "records") || 0)
+   #OpenStruct.new(:items => (res.try(:[], "sales_lines") || []).map do |sale|
+   # OpenStruct.new sale
+   #end, :total => res.try(:[], "pages") || 1, :page => (page || prm[:page] || 1), :records => res.try(:[], "records") || 0)
   end
 
   def self.sales_lines_all(*args)
-   prm = args.dup.as_hash
-   res = AxaptaRequest.sales_lines({:user_hash => axapta_hash, :page_num => 1, :records_per_page => 65535}.merge(prm))
+   prm = {:user_hash => axapta_hash, :page_num => 1, :records_per_page => 65535}.merge(args.dup.as_hash)
+   ask_pages(:sales_lines, 1, "sales_lines", prm)
    #res = AxaptaRequest.sales_lines({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1)}.merge(*args))
-   OpenStruct.new(:items => (res.try(:[], "sales_lines") || []).map do |sale|
-    OpenStruct.new sale
-   end, :total => res.try(:[], "pages") || 1, :page => 1, :records => res.try(:[], "records") || 0)
+   #OpenStruct.new(:items => (res.try(:[], "sales_lines") || []).map do |sale|
+   # OpenStruct.new sale
+   #end, :total => res.try(:[], "pages") || 1, :page => 1, :records => res.try(:[], "records") || 0)
   end
 
   def self.get_delivery_mode
