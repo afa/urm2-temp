@@ -335,19 +335,12 @@ class Axapta
   end
 
   def self.sales_tracking(hsh)
-   begin
-    res = AxaptaRequest.sales_tracking(hsh.merge(:user_hash => axapta_hash)).try(:[], "lines").map{|h| OpenStruct.new(h) }
-   rescue Exception => e
-    parse_exc(e.message, e.class_name)
-    res = []
-   end
-   p "---st", res
-   res
+    asks(:sales_tracking, "lines", hsh.merge(:user_hash => axapta_hash))
   end
 
   def self.search_item_name_quick(mask)
    res = asks(:search_item_name_quick, "items", :user_hash => axapta_hash, :query_string => mask)
-   AxaptaResults.new(res.map{|v| v["item_name"] }.first(10), {:type => AxaptaState::OK})
+   AxaptaResults.new(res.map{|v| v["item_name"] }.first(10), res.marshal_dump)
   end
 
  private
