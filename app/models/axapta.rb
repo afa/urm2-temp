@@ -163,7 +163,7 @@ class Axapta
   end
 
   def self.sales_info_paged(page, *args)
-   prm = {:records_per_page => per_page, :user_hash => axapta_hash, :page_num => (page || prm[:page] || 1), :order_sales_id => "desc"}.merge(args.dup.as_hash)
+   prm = {:records_per_page => per_page, :user_hash => axapta_hash, :page_num => (page || args[:page] || 1), :order_sales_id => "desc"}.merge(args.dup.as_hash)
    res = ask_pages(:sales_info, page, "sales", prm)
    #res.total = res.pages
    #OpenStruct.new(:items => (res.try(:[], "sales") || []).map do |sale|
