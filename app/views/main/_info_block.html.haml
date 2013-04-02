@@ -1,6 +1,6 @@
-- prices = info_block.prices
-- dates = info_block.dates
-- keys = info_block.inject({}){|r, (k, v)| (not (v.blank? || v.to_s == '0')) ? r.merge(k => v) : r }.keys
+- prices = info_block.delete_field(:prices)
+- dates = info_block.delete_field(:dates)
+- keys = info_block.marshal_dump.inject({}){|r, (k, v)| (not (v.blank? || v.to_s == '0')) ? r.merge(k => v) : r }.keys
 - cnt = (keys.size/2.0).ceil
 %tr.sub-row-block{:class => "info_item_#{after}"}
  %th.icons{:class=>"border-l"}
@@ -19,28 +19,28 @@
     %tr
      %td{:style => "border-bottom: 0;"}
       %table
-       - unless info_block["segment_rus"].blank?
+       - unless info_block.segment_rus.blank?
         %tr.sub-row-block
          %td{:style => "border-bottom: 0;"}
           .item
            = t(:segment_produkcii)
-           %span.color-black= info_block["segment_rus"]
-       - if info_block["discontinued"]
+           %span.color-black= info_block.segment_rus
+       - if info_block.discontinued
         %tr.sub-row-block
          %td{:style => "border-bottom: 0;"}
           .item{:style => "font-weight:bold;"}
            = t(:position_discontinued)
-       - unless info_block["description"].blank?
+       - unless info_block.description.blank?
         %tr.sub-row-block
          %td{:style => "border-bottom: 0;"}
           .item{:style => "font-style:italic;"}
-           = info_block["description"]
-       - unless info_block["qty_in_pack"].blank?
+           = info_block.description
+       - unless info_block.qty_in_pack.blank?
         %tr.sub-row-block
          %td{:style => "border-bottom: 0;"}
           .item
            = t(:qty_in_pack)
-           %span.color-black= info_block["qty_in_pack"]
+           %span.color-black= info_block.qty_in_pack
      -# - keys.each_slice(cnt) do |blk|
       %td{:style => "border-bottom: 0;"}
        - blk.each do |key|

@@ -47,12 +47,12 @@ class Offer::World < Offer::Base
   def self.fabricate(arr)
    rez = []
    arr.each do |hsh|
-    hsh["prognosis"].each do |prgnz|
+    hsh.prognosis.each do |prgnz|
      rez << Offer::World.new do |n|
-      n.name = hsh["item_name"]
-      n.brend = hsh["item_brend"]
-      n.code = hsh["item_id"]
-      n.rohs = hsh["rohs"]
+      n.name = hsh.item_name
+      n.brend = hsh.item_brend
+      n.code = hsh.item_id
+      n.rohs = hsh.rohs
       n.prognoz = prgnz["prognosis_id"]
       n.vend_qty = prgnz["vend_qty"]
       n.qty_multiples = prgnz["qty_multiples"]
