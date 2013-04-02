@@ -17,14 +17,14 @@ class Offer::Store < Offer::Base
   def self.fabricate(arr)
    rez = []
    arr.each do |hsh|
-    hsh["locations"].each do |loc|
+    hsh.locations.each do |loc|
      rez << Offer::Store.new do |n|
-      n.name = hsh["item_name"]
-      n.brend = hsh["item_brend"]
-      n.brend_name = hsh["item_brend_name"]
-      n.brend_url = hsh["item_brend_url"]
-      n.code = hsh["item_id"]
-      n.rohs = hsh["rohs"]
+      n.name = hsh.item_name
+      n.brend = hsh.item_brend
+      n.brend_name = hsh.item_brend_name
+      n.brend_url = hsh.item_brend_url
+      n.code = hsh.item_id
+      n.rohs = hsh.rohs
       n.location_id = loc["location_id"]
       #n.vend_qty = prgnz["vend_qty"]
       n.qty_in_pack = loc["qty_in_pack"]
@@ -33,11 +33,11 @@ class Offer::Store < Offer::Base
       n.prices = n.qtys.map{|p| p.price }
       n.alt_prices = n.qtys.map{|p| p.price_ref }
       n.counts = n.qtys.map{|p| p.min_qty }
-      n.segment_rus = hsh["segment_rus"]
-      n.body_name = hsh["package_name"]
-      n.analog_exists = WebUtils.parse_bool(hsh["analog_exists"])
+      n.segment_rus = hsh.segment_rus
+      n.body_name = hsh.package_name
+      n.analog_exists = WebUtils.parse_bool(hsh.analog_exists)
       n.forecast_available = WebUtils.parse_bool(loc["forecast_available"])
-      n.min_qty = hsh["min_qty"]
+      n.min_qty = hsh.min_qty
       n.max_qty = loc["vend_qty"]
       n.raw_location = loc
       n.dlv_prognoses = []
@@ -46,7 +46,7 @@ class Offer::Store < Offer::Base
       end
       n.dlv_prognoses.delete_if{|x| x[:qty].to_i == 0 }
       #n.forecast_available &&= n.dlv_prognoses.size > 0
-      n.application_area_mandatory = WebUtils.parse_bool(hsh["application_area_mandatory"])
+      n.application_area_mandatory = WebUtils.parse_bool(hsh.application_area_mandatory)
       #n.vend_proposal_date = nil
       CartStore.prepare_code(n)
      end
