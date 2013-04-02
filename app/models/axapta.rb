@@ -194,7 +194,7 @@ class Axapta
 
   def self.sales_lines_paged(page, *args)
    prm = {:records_per_page => per_page, :user_hash => axapta_hash, :page_num => (page || prm[:page] || 1)}.merge(args.dup.as_hash)
-   ask_pages(:sales_lines, page, "sales_lines", prm)
+   ask_pages(:sales_lines, page || 1, "sales_lines", prm)
    #res = AxaptaRequest.sales_lines({:user_hash => axapta_hash, :page_num => (page || prm[:page] || 1)}.merge(*args))
    #OpenStruct.new(:items => (res.try(:[], "sales_lines") || []).map do |sale|
    # OpenStruct.new sale
@@ -257,7 +257,7 @@ class Axapta
   end
 
   def self.invoice_lines_all(hsh)
-   ask_pages(:invoice_lines, page, "invoice_lines", {:records_per_page => 65535, :page_num => 1}.merge(hsh).merge(:user_hash => axapta_hash))
+   ask_pages(:invoice_lines, 1, "invoice_lines", {:records_per_page => 65535, :page_num => 1}.merge(hsh).merge(:user_hash => axapta_hash))
    #res = AxaptaRequest.invoice_lines({:records_per_page => 65535, :page_num => 1}.merge(hsh).merge(:user_hash => axapta_hash))
    #OpenStruct.new(:items => (res.try(:[], "invoice_lines") || []).map{|i| OpenStruct.new(i)}, :page => 1, :total =>  res.try(:[], "pages") || 1, :records => res.try(:[], "records") || 0)
   end
@@ -273,13 +273,13 @@ class Axapta
   end
 
   def self.quotation_info_paged(page, hsh)
-   ask_pages(:quotation_info, page, "quotations", {:records_per_page => per_page, :page_num => (page || hsh[:page] || 1)}.merge(hsh).merge(:user_hash => axapta_hash))
+   ask_pages(:quotation_info, page || 1, "quotations", {:records_per_page => per_page, :page_num => (page || hsh[:page] || 1)}.merge(hsh).merge(:user_hash => axapta_hash))
    #res = AxaptaRequest.quotation_info({:records_per_page => per_page, :page_num => (page || hsh[:page] || 1)}.merge(hsh).merge(:user_hash => axapta_hash))
    #OpenStruct.new(:items => (res.try(:[], "quotations") || []).map{|i| OpenStruct.new(i)}, :page => (page || hsh[:page] || 1), :total =>  res.try(:[], "pages") || 1, :records => res.try(:[], "records") || 0)
   end
 
   def self.quotation_info_all(hsh)
-   ask_pages(:quotation_info, page, "quotations", {:records_per_page => per_page, :page_num => 1}.merge(hsh).merge(:user_hash => axapta_hash))
+   ask_pages(:quotation_info, 1, "quotations", {:records_per_page => 65535, :page_num => 1}.merge(hsh).merge(:user_hash => axapta_hash))
    #res = AxaptaRequest.quotation_info({:page_num => 1}.merge(hsh).merge(:user_hash => axapta_hash))
    #OpenStruct.new(:items => (res.try(:[], "quotations") || []).map{|i| OpenStruct.new(i)}, :page => 1, :records_per_page => 65535, :total =>  res.try(:[], "pages") || 1, :records => res.try(:[], "records") || 0)
   end
@@ -294,7 +294,7 @@ class Axapta
     fix[:item_name] += '*' if fix[:item_name].last != '*'
     fix[:item_name] = "" if fix[:item_name].mb_chars.length < 4
    end
-   ask_pages(:quotation_lines, page, "quotations_lines", hsh.merge(:records_per_page => per_page, :page_num => (page || hsh[:page] || 1), :user_hash => axapta_hash).merge(fix))
+   ask_pages(:quotation_lines, page || 1, "quotations_lines", hsh.merge(:records_per_page => per_page, :page_num => (page || hsh[:page] || 1), :user_hash => axapta_hash).merge(fix))
    #res = AxaptaRequest.quotation_lines(hsh.merge(:records_per_page => per_page, :page_num => (page || hsh[:page] || 1), :user_hash => axapta_hash).merge(fix))
    #OpenStruct.new(:items => (res.try(:[], "quotations_lines") || []).map{|i| OpenStruct.new(i)}, :page => (page || hsh[:page] || 1), :total =>  res.try(:[], "pages") || 1, :records => res.try(:[], "records") || 0)
   end
