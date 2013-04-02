@@ -140,17 +140,16 @@ class Axapta
    return [] unless args.first.has_key?("item_id_search") || args.first.has_key?(:item_id_search)
    srch = args.first["item_id_search"]
    srch = args.first[:item_id_search] unless srch
-   res = AxaptaRequest.search_item_an_h(*args).try(:[], "items") || []
-   res.select{|i| i.has_key?("item_id") && i["item_id"] != srch }
+   res = asks(:search_item_an_h, "items", args.as_hash)
+   AxaptaResults.new.from_prepared(res.select{|i| i.has_key?("item_id") && i["item_id"] != srch })
   end
 
   def self.retail_price(*args)
-   return [] unless args.first.has_key?("item_id") || args.first.has_key?(:item_id)
+   return AxaptaResults.new unless args.first.has_key?("item_id") || args.first.has_key?(:item_id)
    srch = args.first["item_id"]
    srch = args.first[:item_id] unless srch
-   res = AxaptaRequest.retail_price(*args).try(:[], "prices") || []
+   res = asks(:retail_price, "prices", args.as_hash)
    a = {}
-   p ":::ax retprice ", res
    locs = res.sort_by{|l| l["min_qty"] }[0, 4]
    a.merge!("price1" => locs[0]["price"], "count1" => locs[0]["min_qty"]) if locs[0]
    a.merge!("price2" => locs[1]["price"], "count2" => locs[1]["min_qty"]) if locs[1]
