@@ -149,17 +149,11 @@ class MainController < ApplicationController
    @after = params[:after]
    @location = params[:loc]
    @code = params[:code]
-   locs = Axapta.search_names(:item_id_search => @code).first["locations"].map{|l| l["location_id"] }
+   locs = Axapta.search_names(:item_id_search => @code).first.locations.map{|l| l["location_id"] }
    @hash = current_user.current_account.try(:axapta_hash)
+   @data = Axapta.item_info({:item_id => @code})
    begin
-    @data = Axapta.item_info({:item_id => @code})
-   rescue Exception => e
-    p "---exc in info #{Time.now}", e, e.backtrace
-    logger.info e.to_s
-    @data = {}
-   end
-   begin
-    @data["prices"] = Axapta.retail_price(:user_hash => @hash, :item_id => @code)
+    @data["prices"] = Axapta.retail_price(:item_id => @code)
    rescue Exception => e
     p "---exc in retail #{Time.now}", e, e.backtrace
     @data["prices"] = []
