@@ -30,6 +30,15 @@ class AxaptaResults < Array
    super(arr.map{|i| OpenStruct.new(i.as_hash) })
   end
 
+  def from_prepared(arr, parm)
+   self.clear
+   self.concat(arr)
+   self.type = parm.delete(:type) || parm.delete("type")
+   self.error = parm.delete(:error) || parm.delete("error")
+   self.message = parm.delete(:message) || parm.delete("message")
+   self
+  end
+
   def params
    {:type => type, :error => error, :message => message}
   end
@@ -350,7 +359,7 @@ class Axapta
 
   def self.search_item_name_quick(mask)
    res = asks(:search_item_name_quick, "items", {:user_hash => axapta_hash, :query_string => mask})
-   AxaptaResults.new(res.map{|v| v.item_name }.first(10), res.params)
+   AxaptaResults.new.from_prepared(res.map{|v| v.item_name }.first(10), res.params)
   end
 
  private
