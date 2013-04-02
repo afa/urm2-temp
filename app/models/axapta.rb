@@ -123,7 +123,7 @@ class Axapta
   end
 
   def self.search_dms_names(*args)
-   ar = args.as_hash
+   ar = args.as_hash.merge(:user_hash => axapta_hash)
    ar["query_string"].strip! if ar.has_key?("query_string")
    ar[:query_string].strip! if ar.has_key?(:query_string)
    ar["query_string"] += '*' if ar.has_key?("query_string") && !ar["query_string"].blank? && ar["query_string"].last != '*'
@@ -140,15 +140,15 @@ class Axapta
    return [] unless args.first.has_key?("item_id_search") || args.first.has_key?(:item_id_search)
    srch = args.first["item_id_search"]
    srch = args.first[:item_id_search] unless srch
-   res = asks(:search_item_an_h, "items", args.as_hash)
-   AxaptaResults.new.from_prepared(res.select{|i| i.has_key?("item_id") && i["item_id"] != srch })
+   res = asks(:search_item_an_h, "items", args.as_hash.merge(:user_hash => axapta_hash))
+   AxaptaResults.new.from_prepared(res.select{|i| i.item_id != srch })
   end
 
   def self.retail_price(*args)
    return AxaptaResults.new unless args.first.has_key?("item_id") || args.first.has_key?(:item_id)
    srch = args.first["item_id"]
    srch = args.first[:item_id] unless srch
-   res = asks(:retail_price, "prices", args.as_hash)
+   res = asks(:retail_price, "prices", args.as_hash.merge(:user_hash => axapta_hash))
    a = {}
    locs = res.sort_by{|l| l["min_qty"] }[0, 4]
    a.merge!("price1" => locs[0]["price"], "count1" => locs[0]["min_qty"]) if locs[0]
