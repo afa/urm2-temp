@@ -24,8 +24,6 @@
           = render :partial => "shared/check_button", :locals => {:name => "filter[this_sales_origin]", :title => t(:this_sales_origin_quotations), :opts => {:use_system => true, :need_field => false, :value => @filter.try(:this_sales_origin).try(:==, '1')}}
           = render :partial => "shared/check_button", :locals => {:name => "filter[only_my]", :title => t(:only_my_quotations), :opts => {:use_system => true, :need_field => false, :value => @filter.try(:only_my).try(:==, '1')}}
 
-    -# = render :partial => "shared/pagination", :locals => {:page => @quotations.page.to_i, :pages => @quotations.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей: #{@quotations.records}&nbsp;&nbsp;Страниц: #{@quotations.total}&nbsp;&nbsp;".html_safe, :text_before_current => "Страница: "}}
-    -# = render :partial => "shared/pagination", :locals => {:page => @quotations.page.to_i, :pages => @quotations.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей: #{@quotations.records}&nbsp;&nbsp;Страниц: #{@quotations.total} Страница "}}
     %table.table-style.quotation-list
      %tr
       %th.text-left= t(:urm)
@@ -48,6 +46,6 @@
        %input.copiable{:type => :hidden, :value => 'select#filter_quotation_status'}
        = render :partial => "shared/submit_button", :locals => {:title => t(:export_csv), :name => "items[export]", :opts => {:class => "preload", :style => "float: right;"}}
     %div{:style => "display:inline-block; float:left;"}
-     = paginate(:page => @quotations.page.to_i, :pages => @quotations.total.to_i, :derid => {:align => "left", :hide_empty => true})
+     = paginate(:page => @quotations.page.to_i, :pages => @quotations.pages.to_i, :derid => {:align => "left", :hide_empty => true})
     %div{:style => "display:inline-block; float:left;"}
      = render :partial => "shared/stat.html.haml", :locals => {:mode => :strings, :value => @quotations.records.to_i}

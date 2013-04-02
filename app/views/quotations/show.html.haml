@@ -36,7 +36,6 @@
        .tab.active= link_to t(:main_options), "#", :id => "enable_main_options", :class => "ajax"
        .tab= link_to t(:cancelation), "#", :id => "enable_cancelation", :class => "ajax"
       .table
-       -# = render :partial => "shared/pagination", :locals => {:page => @quotation.page.to_i, :pages => @quotation.total.to_i, :opts => {:show_numbers => false, :show_prevnext => true, :show_firstlast => true, :show_current => true, :text_before => "Записей: #{@quotation.records}&nbsp;&nbsp;Страниц: #{@quotation.total}&nbsp;&nbsp;".html_safe, :text_before_current => "Страница: "}}
        %table.table-style{:class => "order-list"}
         %tr
          %th Код запроса
@@ -52,10 +51,10 @@
          %th Сумма
          %th Код номенклатуры
 
-        = render :partial => "quotations/showed_line", :collection => @quotation.items
+        = render :partial => "quotations/showed_line", :collection => @quotation
        .padded
        %div{:style => "display:inline-block; float:right;"}
-        - unless @quotation.items.empty?
+        - unless @quotation.empty?
          = form_for :export_fields, :url => export_client_lines_orders_path(:format => :xls), :method => :post, :html=>{:class => "js", :style => "display: inline-block;"} do |f|
           %input.copiable{:type => :hidden, :value => 'input#filter_date_from'}
           %input.copiable{:type => :hidden, :value => 'input#filter_date_to'}
@@ -65,7 +64,7 @@
           %input.copiable{:type => :hidden, :value => 'input#filter_date_to'}
           = render :partial => "shared/submit_button", :locals => {:title => t(:export_csv), :name => "items[export]", :opts => {:class => "preload", :style => "float: right;"}}
        %div{:style => "display:inline-block; float:left;"}
-        = paginate(:page => @quotation.page.to_i, :pages => @quotation.total.to_i, :derid => {:align => "left", :hide_empty => true})
+        = paginate(:page => @quotation.page.to_i, :pages => @quotation.pages.to_i, :derid => {:align => "left", :hide_empty => true})
        %div{:style => "display:inline-block; float:left;"}
         = render :partial => "shared/stat.html.haml", :locals => {:mode => :strings, :value => @quotation.records.to_i}
 
