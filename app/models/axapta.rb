@@ -15,6 +15,10 @@ class AxaptaResult < OpenStruct
    self.message = attrs.delete(:message) || attrs.delete("message")
    super
   end
+
+  def params
+   {:type => type, :error => error, :message => message}
+  end
 end
 
 class AxaptaResults < Array
@@ -23,7 +27,11 @@ class AxaptaResults < Array
    self.type = opts.delete(:type) || opts.delete("type")
    self.error = opts.delete(:error) || opts.delete("error")
    self.message = opts.delete(:message) || opts.delete("message")
-   super(arr.map{|i| p "---os-g", i.as_hash; OpenStruct.new(i.as_hash) })
+   super(arr.map{|i| OpenStruct.new(i.as_hash) })
+  end
+
+  def params
+   {:type => type, :error => error, :message => message}
   end
 end
 
@@ -34,6 +42,10 @@ class AxaptaPages < AxaptaResults
    self.pages = opts.delete(:pages) || opts.delete("pages")
    self.records = opts.delete(:records) || opts.delete("records")
    super(arr, opts)
+  end
+
+  def params
+   {:pages => pages, :page => page, :records => records, :type => type, :error => error, :message => message}
   end
 end
 class Axapta
@@ -321,7 +333,7 @@ class Axapta
 
   def self.custom_limits
    rs = ask(:info_cust_limits, {:user_hash => axapta_hash})
-   AxaptaResult.new(rs.reserve.merge(rs.marshal_dump))
+   AxaptaResult.new(rs.reserve.merge(rs.params))
   end
 
   def self.info_cust_limits
@@ -338,7 +350,7 @@ class Axapta
 
   def self.search_item_name_quick(mask)
    res = asks(:search_item_name_quick, "items", :user_hash => axapta_hash, :query_string => mask)
-   AxaptaResults.new(res.map{|v| v.item_name }.first(10), res.marshal_dump)
+   AxaptaResults.new(res.map{|v| v.item_name }.first(10), )
   end
 
  private
