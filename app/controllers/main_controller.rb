@@ -152,18 +152,8 @@ class MainController < ApplicationController
    locs = Axapta.search_names(:item_id_search => @code).first.locations.map{|l| l["location_id"] }
    @hash = current_user.current_account.try(:axapta_hash)
    @data = Axapta.item_info({:item_id => @code})
-   begin
-    @data["prices"] = Axapta.retail_price(:item_id => @code)
-   rescue Exception => e
-    p "---exc in retail #{Time.now}", e, e.backtrace
-    @data["prices"] = []
-   end
-   begin
-    @data["dates"] = locs.inject({}){|r, l| r.merge(Axapta.get_delivery_prognosis(@code, l))}
-    p "---dates", @data["dates"]
-   rescue Exception => e
-    p "---exc in prognos #{Time.now}", e, e.backtrace
-    @data["dates"] = []
+    @data.prices = Axapta.retail_price(:item_id => @code)
+    @data.dates = locs.inject({}){|r, l| r.merge(Axapta.get_delivery_prognosis(@code, l))}
    end
    respond_with do |format|
     format.json { render :json => {:row_id => @after, :code => @code, :gap => render_to_string(:partial => "main/gap_line.html.haml", :locals => {:after => @after}), :info => render_to_string(:partial => "main/info_block.html.haml", :locals => {:after => @after, :info_block => @data})} }
