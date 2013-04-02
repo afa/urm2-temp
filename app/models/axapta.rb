@@ -269,7 +269,7 @@ class Axapta
   end
 
   def self.quotation_info(hsh)
-   quotation_info_paged(nil, hsh).try(:items) || []
+   quotation_info_paged(nil, hsh) #.try(:items) || []
   end
 
   def self.quotation_info_paged(page, hsh)
@@ -285,7 +285,7 @@ class Axapta
   end
 
   def self.quotation_lines(hsh)
-   quotation_lines_paged(nil, hsh).try(:items) || []
+   quotation_lines_paged(nil, hsh) #.try(:items) || []
   end
 
   def self.quotation_lines_paged(page, hsh)
