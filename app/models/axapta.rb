@@ -141,7 +141,7 @@ class Axapta
    srch = args.first["item_id_search"]
    srch = args.first[:item_id_search] unless srch
    res = asks(:search_item_an_h, "items", args.as_hash.merge(:user_hash => axapta_hash))
-   AxaptaResults.new.from_prepared(res.select{|i| i.item_id != srch })
+   AxaptaResults.new.from_prepared(res.select{|i| i.item_id != srch }, res.params)
   end
 
   def self.retail_price(*args)
