@@ -56,9 +56,10 @@ function ordersRenderCreate(){
 function placeResults(res){
  //place strings into .info .flash, setting timer for 10 secs
  $.each(res, function(i, item){
-  $("div#flash_place").append('<div class="flash ' + item.name + '">' + item.value + '</div>').children().hide();
+  processErrors(item);
+  //$("div#flash_place").append('<div class="flash ' + item.name + '">' + item.value + '</div>').children().hide();
  });
- $("div#flash_place div.flash").slideDown(500).delay(5000).slideUp(500);
+ //$("div#flash_place div.flash").slideDown(500).delay(5000).slideUp(500);
 }
 
 
