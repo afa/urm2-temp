@@ -24,4 +24,4 @@
  .padded
   %p Итого по заказу <b>#{@usd_decor.decore cart.map{|i| i.current_price * i.amount }.inject(0.0){|r, i| r + i }}</b> USD, в том числе по ДМС <b>#{@usd_decor.decore cart.select{|i| i.is_a? CartWorld }.map{|i| i.current_price * i.amount }.inject(0.0){|r, i| r + i } }</b> USD.
   %p Итого товара к резервированию на сумму <b>#{@usd_decor.decore cart.select{|i| i.action == "reserve" }.map{|i| i.current_price * i.amount }.inject(0.0){|r, i| r + i } }</b> USD (доступная сумма резерва <b>#{@usd_decor.decore Axapta.custom_limits.reserve_available.to_f}</b> USD)
-  %p Суммарный вес <b>#{cart.select{|i| not i.is_a? CartRequest }.map{|i| Axapta.item_info(:item_id => i.product_link)["weight"] || 0.0 }.inject(0.0){|r, i| r + i}/1000.0}</b> кг (без учёта ряда позиций)
+  %p Суммарный вес <b>#{cart.select{|i| not i.is_a? CartRequest }.map{|i| Axapta.item_info(:item_id => i.product_link).weight || 0.0 }.inject(0.0){|r, i| r + i}/1000.0}</b> кг (без учёта ряда позиций)
