@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
       clct = reqs[1].select{|c| c.location_link == loc }
       if ar[:sales][loc].blank? || ar[:sales][loc].to_i == 0
        p "---mo-cl", clct.map(&:to_sales_lines)
-       ors << Axapta.make_order(:comment => ar[:order_comment].try(:[], loc), :sales_lines => clct.map(&:to_sales_lines), :date_dead_line => dead_line, :customer_delivery_type_id => delivery).try(:[], "sales_id")
+       ors << Axapta.make_order(:comment => ar[:order_comment].try(:[], loc), :sales_lines => clct.map(&:to_sales_lines), :date_dead_line => dead_line, :customer_delivery_type_id => delivery).sales_id
       else
        Axapta.sales_handle_add(:sales_id => ar[:sales][loc], :sales_lines => clct.map(&:to_sales_lines))
        unless ar[:order_comment].try(:[], loc).blank?
@@ -74,7 +74,7 @@ class User < ActiveRecord::Base
    end
    unless reqs[0].empty?
     begin
-     res[1] = Axapta.create_quotation(:sales_lines => reqs[0].map{|i| i.to_sales_lines }).try(:[], "quotation_id")
+     res[1] = Axapta.create_quotation(:sales_lines => reqs[0].map{|i| i.to_sales_lines }).quotation_id
      #res << Axapta.make_order(:sales_lines => reqs[0].map{|i| i.to_sales_lines }, :date_dead_line => dead_line).try(:[], "sales_id")
      reqs[0].each{|i| i.update_attributes :processed => true, :order => res.last }
     rescue Exception => e
