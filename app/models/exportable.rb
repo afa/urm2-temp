@@ -56,6 +56,7 @@ module Exportable
 
   def export(format, obj, arr, opts = {})#User.current.cart_items.unprocessed.in_cart.all
    parms = EXPORTABLE_FIELDS[obj][:types].transpose
+   p "---exparr", arr
    FORMATTER[format].call(parms[1], arr.map{|i| parms[0].map{|j| i.send(j) } }, opts)
   end
 
