@@ -2,8 +2,8 @@ require "array_utils"
 class AxaptaError < Exception; end
 class AxaptaState
  OK = 0
- INTERNAL = 1
- LOSTCONNECT = 2
+ WARN = 1
+ FATAL = 2
  INVALID = 3
  NONVALID = 4
 end
@@ -70,6 +70,19 @@ end
 class Axapta
  include ActiveModel
  include ActiveModel::Serialization
+
+  def self.parse_err(err) #raise when returned true?
+   if err
+    p "---parserr", err
+    if [1,2,6].include?(err["type"])
+     return {:type => AxaptaState::WARN, :error => err["type"], :message => err["message"]}
+    else
+     return {:type => AxaptaState::FATAL, :error => err["type"], :message => err["message"]}
+    end
+   else
+    return {:type => AxaptaState::OK, :error => nil, :message => nil}
+   end
+  end
 
   def self.parse_exc(e, klas = "")
    if klas =~ /JsonRpcClient::ServiceError/
@@ -378,7 +391,7 @@ class Axapta
    begin
     res, err = AxaptaRequest.send(method, *args)
     p "--err-ask", err
-    AxaptaResult.new(res.merge(:type => AxaptaState::OK))
+    AxaptaResult.new(res.merge(parse_err(err)))
    rescue Exception => e
     parse_exc(e.message, e.class.name)
     AxaptaResult.new({:type => AxaptaState::INVALID, :error => e.class.name, :message => get_last_exc["_error"]})
@@ -389,8 +402,9 @@ class Axapta
    begin
     res, err = AxaptaRequest.send(method, *args)
     p "--err-asks", err
+    
     its = items ? res[items] : res
-    AxaptaResults.new(its, {:type => AxaptaState::OK})
+    AxaptaResults.new(its, parse_err(err))
    rescue Exception => e
     parse_exc(e.message, e.class.name)
     AxaptaResults.new([], {:type => AxaptaState::INVALID, :error => e.class.name, :message => get_last_exc["_error"]})
@@ -402,7 +416,7 @@ class Axapta
     res, err = AxaptaRequest.send(method, *args)
     p "--err-ask_pages", err
     its = items ? res[items] : res
-    AxaptaPages.new(its, {:page => page, :type => AxaptaState::OK})
+    AxaptaPages.new(its, {:page => page}.merge(parse_err(err)))
    rescue Exception => e
     parse_exc(e.message, e.class.name)
     AxaptaPages.new([], {:type => AxaptaState::INVALID, :error => e.class.name, :message => get_last_exc["_error"]})

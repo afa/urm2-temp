@@ -33,6 +33,17 @@ class ApplicationController < ActionController::Base
 
 
  protected
+  def chk_err(as)
+   rslt = OpenStruct.new
+   if as.type != AxaptaState::OK
+    case as.type
+     when AxaptaState::WARN then rslt.flash = {:warn => "#{as.error}:#{as.message}"}
+     when AxaptaState::FATAL then rslt.fatal = {:error => "#{as.error}:#{as.message}"}
+     else rslt.crit = {:critical => "#{as.error}:#{as.message}"}
+    end
+   else
+   end
+  end
   def write_stat
    Stat::Event.create( :key => "request-#{Time.now.to_f}", :name => "#{params[:controller]}##{params[:action]}.#{params[:format]}", :data => params.to_json){|ev| ev.type = "Stat::Before" }
 
