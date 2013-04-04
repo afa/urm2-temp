@@ -211,7 +211,7 @@ class Axapta
 
   def self.sales_report_all(*args)
    prm = {:user_hash => axapta_hash, :page_num => 1, :records_per_page => 65535}.merge(args.dup.as_hash)
-   res = ask(:sales_report, prm)
+   res = ask_pages(:sales_report, 1, "sales", prm)
    #res = ask_pages(:sales_report, 1, "sales", prm)
    #OpenStruct.new(:items => (res.try(:[], "sales") || []).map do |sale|
    # OpenStruct.new sale
