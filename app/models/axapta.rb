@@ -345,7 +345,7 @@ class Axapta
   end
 
   def self.info_cust_limits
-   asks(:info_cust_limits, nil, {:user_hash => axapta_hash})
+   ask(:info_cust_limits, nil, {:user_hash => axapta_hash})
    #.marshal_dump.inject(OpenStruct.new){|r, (k, v)| r.send(k.to_s + '=', OpenStruct.new(v)) ; r }
   end
 
