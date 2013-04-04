@@ -23,7 +23,7 @@ class QuotationsController < ApplicationController
   def export_list
    respond_with do |format|
     format.csv do
-     send_data CartItem.export(:csv, :quotations, Axapta.quotation_info_all(@filter_hash).items), :type => "application/csv", :disposition => :attachment
+     send_data CartItem.export(:csv, :quotations, Axapta.quotation_info_all(@filter_hash)), :type => "application/csv", :disposition => :attachment
     end
    end
   end
