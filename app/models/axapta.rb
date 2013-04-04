@@ -16,6 +16,16 @@ class AxaptaResult < OpenStruct
    super
   end
 
+  def from_prepared(hsh, parm)
+   dmp = hsh.is_a?(AxaptaResult) ? hsh.marshal_dump : hsh
+   #.marshal_dump.inject(OpenStruct.new){|r, (k, v)| r.send(k.to_s + '=', OpenStruct.new(v)) ; r }
+   dmp.inject(self){|r, (k, v)| r.send(k.to_s + '=', OpenStruct.new(v)); r }
+   self.type = parm.delete(:type) || parm.delete("type")
+   self.error = parm.delete(:error) || parm.delete("error")
+   self.message = parm.delete(:message) || parm.delete("message")
+   self
+  end
+
   def params
    {:type => type, :error => error, :message => message}
   end
@@ -345,7 +355,8 @@ class Axapta
   end
 
   def self.info_cust_limits
-   ask(:info_cust_limits, {:user_hash => axapta_hash})
+   lim = ask(:info_cust_limits, {:user_hash => axapta_hash})
+   AxaptaResult.new.from_prepared(lim, lim.params)
    #.marshal_dump.inject(OpenStruct.new){|r, (k, v)| r.send(k.to_s + '=', OpenStruct.new(v)) ; r }
   end
 
