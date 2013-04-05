@@ -19,7 +19,7 @@ class MainController < ApplicationController
    avail = Setting.by_user(current_user.id).by_name("search.only_available").first || Setting.by_user(current_user.id).by_name("search.only_available").new
    avail.value = @only_available
    avail.save!
-   @items = Offer::Store.search(params[:search]).process{sort{|a, b| a.name == b.name ? (a.brend_name == b.brend_name ? (a.body_name == b.body_name ? (a.rohs == b.rohs ? (a.location_id <=> b.location_id) : a.rohs <=> b.rohs) : a.body_name <=> b.body_name) : a.brend_name <=> b.brend_name) : a.name <=> b.name}}
+   @items = Offer::Store.search(params[:search]).process{|i| i.sort{|a, b| a.name == b.name ? (a.brend_name == b.brend_name ? (a.body_name == b.body_name ? (a.rohs == b.rohs ? (a.location_id <=> b.location_id) : a.rohs <=> b.rohs) : a.body_name <=> b.body_name) : a.brend_name <=> b.brend_name) : a.name <=> b.name}}
    p "---its", @items
    trr = chk_err(@items)
    p "---trr", trr
