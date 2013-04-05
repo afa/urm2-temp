@@ -32,14 +32,14 @@ class AxaptaResult < OpenStruct
 
   def run(&blk)
    if blk
-    yield
+    yield(self)
    end
    self
   end
 
   def process(&blk)
    if blk
-    from_prepared(yield, params)
+    from_prepared(yield(self), params)
    else
     self
    end
@@ -70,14 +70,14 @@ class AxaptaResults < Array
 
   def run(&blk)
    if blk
-    yield
+    yield(self)
    end
    self
   end
 
   def process(&blk)
    if blk
-    from_prepared(yield, params)
+    from_prepared(yield(self), params)
    else
     self
    end
