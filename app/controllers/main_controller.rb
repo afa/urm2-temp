@@ -21,7 +21,7 @@ class MainController < ApplicationController
    avail.save!
    its = Offer::Store.search(params[:search])
    @items = AxaptaResults.new.from_prepared(its.sort{|a, b| a.name == b.name ? (a.brend_name == b.brend_name ? (a.body_name == b.body_name ? (a.rohs == b.rohs ? (a.location_id <=> b.location_id) : a.rohs <=> b.rohs) : a.body_name <=> b.body_name) : a.brend_name <=> b.brend_name) : a.name <=> b.name}, its)
-   p "---msi", @items
+   p "---msi", @items.class
    p "---msI", its
    trr = chk_err(@items)
    flash.merge(trr.flash) if trr && trr.flash
