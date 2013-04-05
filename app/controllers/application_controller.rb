@@ -35,8 +35,7 @@ class ApplicationController < ActionController::Base
  protected
   def chk_err(as)
    rslt = OpenStruct.new
-   if as.type != AxaptaState::OK
-    p "---astype", as.type
+   if as.type && as.type != AxaptaState::OK
     case as.type
      when AxaptaState::WARN then rslt.flash = {:warn => "#{as.error}:#{as.message}"}
      when AxaptaState::FATAL then rslt.fatal = {:error => "#{as.error}:#{as.message}"}
