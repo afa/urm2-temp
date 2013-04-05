@@ -20,6 +20,9 @@ class MainController < ApplicationController
    avail.value = @only_available
    avail.save!
    @items = Offer::Store.search(params[:search]).sort{|a, b| a.name == b.name ? (a.brend_name == b.brend_name ? (a.body_name == b.body_name ? (a.rohs == b.rohs ? (a.location_id <=> b.location_id) : a.rohs <=> b.rohs) : a.body_name <=> b.body_name) : a.brend_name <=> b.brend_name) : a.name <=> b.name}
+   p "---msi", @items
+   trr = chk_err(@items)
+   flash.merge(trr.flash) if trr && trr.flash
    #@items = Offer::Store.search(params[:search]).sort_by{|i| i.location_id }.sort_by{|i| i.rohs }.sort_by{|i| i.body_name }.sort_by{|i| i.brend_name }.sort_by{|i| i.name}
    CartItem.uncached do
     @carts = CartItem.where(:user_id => current_user.id).in_cart.unprocessed.order("product_name, product_brend").all

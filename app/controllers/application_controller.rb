@@ -41,9 +41,12 @@ class ApplicationController < ActionController::Base
      when AxaptaState::FATAL then rslt.fatal = {:error => "#{as.error}:#{as.message}"}
      else rslt.crit = {:critical => "#{as.error}:#{as.message}"}
     end
+    return rslt
    else
+    return nil
    end
   end
+
   def write_stat
    Stat::Event.create( :key => "request-#{Time.now.to_f}", :name => "#{params[:controller]}##{params[:action]}.#{params[:format]}", :data => params.to_json){|ev| ev.type = "Stat::Before" }
 
