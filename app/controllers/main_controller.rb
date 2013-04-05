@@ -19,11 +19,10 @@ class MainController < ApplicationController
    avail = Setting.by_user(current_user.id).by_name("search.only_available").first || Setting.by_user(current_user.id).by_name("search.only_available").new
    avail.value = @only_available
    avail.save!
-   its = Offer::Store.search(params[:search])
-   @items = AxaptaResults.new.from_prepared(its.sort{|a, b| a.name == b.name ? (a.brend_name == b.brend_name ? (a.body_name == b.body_name ? (a.rohs == b.rohs ? (a.location_id <=> b.location_id) : a.rohs <=> b.rohs) : a.body_name <=> b.body_name) : a.brend_name <=> b.brend_name) : a.name <=> b.name}, its)
-   p "---msi", @items.class
-   p "---msI", its
+   @items = Offer::Store.search(params[:search]).process{sort{|a, b| a.name == b.name ? (a.brend_name == b.brend_name ? (a.body_name == b.body_name ? (a.rohs == b.rohs ? (a.location_id <=> b.location_id) : a.rohs <=> b.rohs) : a.body_name <=> b.body_name) : a.brend_name <=> b.brend_name) : a.name <=> b.name}}
+   p "---its", @items
    trr = chk_err(@items)
+   p "---trr", trr
    flash.merge(trr.flash) if trr && trr.flash
    #@items = Offer::Store.search(params[:search]).sort_by{|i| i.location_id }.sort_by{|i| i.rohs }.sort_by{|i| i.body_name }.sort_by{|i| i.brend_name }.sort_by{|i| i.name}
    CartItem.uncached do
@@ -37,7 +36,7 @@ class MainController < ApplicationController
    @deliveries = User.current.deliveries
    @use_alt_price = false if @items.detect{|i| i.alt_prices.size > 0 }
    gon.need_application = @carts.detect{|i| i.application_area_mandatory } #TODO: clean gon
-   @app_list = (Axapta.application_area_list || [])
+   @app_list = (Axapta.application_area_list)
    gon.app_list = @app_list #TODO: clean gon
    @mandatory = @carts.detect{|c| c.application_area_mandatory }
   end

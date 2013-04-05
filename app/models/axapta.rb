@@ -29,6 +29,21 @@ class AxaptaResult < OpenStruct
   def params
    {:type => type, :error => error, :message => message}
   end
+
+  def run(&blk)
+   if blk
+    yield
+   end
+   self
+  end
+
+  def process(&blk)
+   if blk
+    from_prepared(yield, params)
+   else
+    self
+   end
+  end
 end
 
 class AxaptaResults < Array
@@ -51,6 +66,21 @@ class AxaptaResults < Array
 
   def params
    {:type => type, :error => error, :message => message}
+  end
+
+  def run(&blk)
+   if blk
+    yield
+   end
+   self
+  end
+
+  def process(&blk)
+   if blk
+    from_prepared(yield, params)
+   else
+    self
+   end
   end
 end
 
