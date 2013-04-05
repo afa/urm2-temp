@@ -20,7 +20,6 @@ class MainController < ApplicationController
    avail.value = @only_available
    avail.save!
    @items = Offer::Store.search(params[:search]).process{|i| i.sort{|a, b| a.name == b.name ? (a.brend_name == b.brend_name ? (a.body_name == b.body_name ? (a.rohs == b.rohs ? (a.location_id <=> b.location_id) : a.rohs <=> b.rohs) : a.body_name <=> b.body_name) : a.brend_name <=> b.brend_name) : a.name <=> b.name}}
-   p "---its", @items
    trr = chk_err(@items)
    p "---trr", trr
    flash.merge(trr.flash) if trr && trr.flash
@@ -30,13 +29,22 @@ class MainController < ApplicationController
     @carts.select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
    end
    @stores = @carts.map(&:location_link).uniq.compact
-   @avail_sales = [""] + Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000).map{|s| [s.sales_id, s.sales_id] }
+   @avail_sales = Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000){|i| [""] + i.map{|s| [s.sales_id, s.sales_id] }}
+   trr = chk_err(@items)
+   p "---trr2", trr
+   flash.merge(trr.flash) if trr && trr.flash
    @reqs = @carts.partition{|i| i.is_a? CartRequest }[0]
    @nreqs = @carts.partition{|i| i.is_a? CartRequest }[1]
    @deliveries = User.current.deliveries
+   trr = chk_err(@items)
+   p "---trr3", trr
+   flash.merge(trr.flash) if trr && trr.flash
    @use_alt_price = false if @items.detect{|i| i.alt_prices.size > 0 }
    gon.need_application = @carts.detect{|i| i.application_area_mandatory } #TODO: clean gon
-   @app_list = (Axapta.application_area_list)
+   @app_list = Axapta.application_area_list
+   trr = chk_err(@items)
+   p "---trr4", trr
+   flash.merge(trr.flash) if trr && trr.flash
    gon.app_list = @app_list #TODO: clean gon
    @mandatory = @carts.detect{|c| c.application_area_mandatory }
   end
