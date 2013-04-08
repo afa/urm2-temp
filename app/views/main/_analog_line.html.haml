@@ -7,7 +7,8 @@
 
  %td.icons{:class => "border-l"}
   .icon
-   %a.pp{:href => "#"}
+   %span.bold{:title => analog_line.analog_description }= analog_line.analog_type
+   -# %a.pp{:href => "#"}
  %td.text-left{:class => "name"}
   %a{:href => "#"}= analog_line.name
  %td.text-left{:class => "producer"}= analog_line.brend
@@ -32,8 +33,8 @@
  %td.text-right= @usd_decor.decore(analog_line.prices[2])
  %td.text-right.green= analog_line.counts[3]
  %td.text-right= @usd_decor.decore(analog_line.prices[3])
- %td.text-right.grey= analog_line.qty_in_pack
- %td.font-small
+ -# %td.text-right.grey= analog_line.qty_in_pack
+ -# %td.font-small
   %span.color-red= analog_line.vend_proposal_date
  -# %td
  -# %td= analog_line["segment_rus"]
