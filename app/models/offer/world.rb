@@ -7,7 +7,7 @@ class Offer::World < Offer::Base
 
   def self.ask_axapta_by_id(product_id)
    return [] if product_id.blank?
-   hshs = Axapta.search_name(:user_hash => User.current.current_account.try(:axapta_hash), :item_id_search => product_id)
+   hshs = Axapta.search_name(:item_id_search => product_id)
    #:query_string, :search_brend
    rez = []
    hshs.each do |hsh|
@@ -38,10 +38,9 @@ class Offer::World < Offer::Base
 
   def self.by_code(product_code)
    return [] if product_code.blank?
-   hash = User.current.current_account.try(:axapta_hash)
-   items = Axapta.search_dms_names(:user_hash => hash, :item_id_search => product_code)
+   items = Axapta.search_dms_names(:item_id_search => product_code).process{|t| fabricate(t) }
    #items = conv_dms_items(Axapta.search_dms_names(:user_hash => hash, :item_id_search => product_code))
-   fabricate(items)
+   #fabricate(items)
   end
 
   def self.fabricate(arr)

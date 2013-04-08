@@ -21,7 +21,7 @@ class CartRequest < CartItem
 
 
   def offers(count) #ret hash product
-   Axapta.search_names(:calc_price => true, :calc_qty => true, :show_delivery_prognosis => true, :item_id_search => product_link, :invent_location_id => location_link, :user_hash => User.current.current_account.axapta_hash)
+   Axapta.search_names(:calc_price => true, :calc_qty => true, :show_delivery_prognosis => true, :item_id_search => product_link, :invent_location_id => location_link)
   end
 
   def self.prepare_code(search)

@@ -29,7 +29,7 @@ class CartsController < ApplicationController
      @carts = User.current.cart_items.unprocessed.in_cart.order("product_name, product_brend")
      @carts.select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
      @mandatory = @carts.detect{|i| i.application_area_mandatory }
-     @app_list = Axapta.application_area_list || []
+     @app_list = Axapta.application_area_list
      #gon.app_list = @app_list
      @stores = @carts.map(&:location_link).uniq.compact.sort{|a, b| a == User.current.current_account.invent_location_id ? -1 : a <=> b }
      @carts.each do |cart|
@@ -107,7 +107,7 @@ class CartsController < ApplicationController
     @stores = @carts.map(&:location_link).uniq.compact.sort{|a, b| a == User.current.current_account.invent_location_id ? -1 : a <=> b }
     @deliveries = User.current.deliveries
     @mandatory = @carts.detect{|i| i.application_area_mandatory }
-    @app_list = Axapta.application_area_list || []
+    @app_list = Axapta.application_area_list
     #gon.app_list = @app_list
     @carts.each do |cart|
      #cart.line = render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart, :app_list => @app_list}
@@ -142,7 +142,7 @@ class CartsController < ApplicationController
    old.update_attributes(:amount => 0)
    #@new = old.setup_for(:amount => 0, :max_amount => old.max_amount).copy_on_write(:amount => 0, :cart => old.id)
    @deliveries = User.current.deliveries
-   @app_list = Axapta.application_area_list || []
+   @app_list = Axapta.application_area_list
    #gon.app_list = @app_list
    CartItem.uncached do
     @carts = User.current.cart_items.unprocessed.in_cart.order("product_name, product_brend")

@@ -37,9 +37,21 @@ class ApplicationController < ActionController::Base
    rslt = OpenStruct.new
    if as.type && as.type != AxaptaState::OK
     case as.type
-     when AxaptaState::WARN then rslt.flash = {:warn => "#{as.error}:#{as.message}"}
-     when AxaptaState::FATAL then rslt.fatal = {:error => "#{as.error}:#{as.message}"}
-     else rslt.crit = {:critical => "#{as.error}:#{as.message}"}
+     when AxaptaState::WARN then do
+      rslt.flash = {:warn => "#{as.error}:#{as.message}"}
+      flash = rslt.flash
+     end
+     when AxaptaState::FATAL then do
+      rslt.fatal = {:error => "#{as.error}:#{as.message}"}
+      render :template => '/eint.html', :layout => false
+     end
+     when AxaptaState::INVALID then do
+      render :template => '/econ.html', :layout => false
+     end
+     else do
+      rslt.crit = {:critical => "#{as.error}:#{as.message}"}
+      render :status => 500, :layout => false, :none => true
+     end
     end
     return rslt
    else

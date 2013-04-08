@@ -42,7 +42,6 @@ class User < ActiveRecord::Base
   def make_order(dead_line, delivery, *args)
    #, :order_needed => params[:order_needed], :order_comment => params[:order_comment], :request_comment => params[:request_comment]
    ar = {}.merge(*args) rescue {}
-   p "---makeorder", ar
    reqs = cart_items.unprocessed.in_cart.all.partition{|c| c.is_a?(CartRequest) }
    reqs[1].select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
    res = [[], nil]
@@ -86,7 +85,7 @@ class User < ActiveRecord::Base
   end
 
   def deliveries
-   types = Axapta.get_delivery_mode.customer_delivery_types || []
+   types = Axapta.get_delivery_mode.customer_delivery_types
    types.map{|t| [t["customer_delivery_type_id"], [t["delivery_type"], t["address"]["city"]].join(' ')] }
   end
  protected

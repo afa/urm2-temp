@@ -126,7 +126,7 @@ class Axapta
   end
 
   def self.get_last_exc
-   {"_error" => @last_parsed_error}
+   {:type => AxaptaStat::INVALID, :error => @last_parsed_error["type"], :message => @last_parsed_error["message"]}
   end
 
   def self.clean_exc

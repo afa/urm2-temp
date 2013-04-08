@@ -5,13 +5,11 @@ class Offer::Store < Offer::Base
 
   def self.search(hsh)
    return [] if hsh.blank? || (hsh[:external_code].blank? && (hsh[:query_string].blank? || hsh[:query_string].size < 3))
-   begin
-    data = Axapta.search_names({:show_forecast_availability => true, :show_analog_existence => true, :calc_price=>true, :calc_qty => true}.merge(hsh || {}))# :show_delivery_prognosis => true,
-   rescue Exception => e
-    return []
-   end
+   data = Axapta.search_names({:show_forecast_availability => true, :show_analog_existence => true, :calc_price=>true, :calc_qty => true}.merge(hsh || {})).process{|d| fabricate(d) }
+
+# :show_delivery_prognosis => true,
    #TODO: to offers
-   fabricate(data)
+   #fabricate(data)
   end
 
   def self.fabricate(arr)
