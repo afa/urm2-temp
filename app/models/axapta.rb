@@ -389,7 +389,7 @@ class Axapta
   end
 
   def self.application_area_list
-   asks(:application_area_list, "area_list", {:user_hash => axapta_hash}).sort_by{|l| l.application_area_name }
+   asks(:application_area_list, "area_list", {:user_hash => axapta_hash}).process{|a| a.sort_by{|l| l.application_area_name }}
   end
 
   def self.custom_limits
