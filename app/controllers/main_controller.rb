@@ -39,6 +39,7 @@ class MainController < ApplicationController
    chk_err(@app_list)
    gon.app_list = @app_list #TODO: clean gon
    @mandatory = @carts.detect{|c| c.application_area_mandatory }
+   flash[:info] = t "errors.search.empty" if @items.empty?
   end
 
   def export
