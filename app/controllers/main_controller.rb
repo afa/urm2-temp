@@ -27,16 +27,16 @@ class MainController < ApplicationController
     @carts.select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
    end
    @stores = @carts.map(&:location_link).uniq.compact
-   @avail_sales = Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000){|i| [""] + i.map{|s| [s.sales_id, s.sales_id] }}
+   @avail_sales = Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000).process{|sales|  sales.map{|i| [""] + i.map{|s| [s.sales_id, s.sales_id] }}}
    chk_err(@items)
    @reqs = @carts.partition{|i| i.is_a? CartRequest }[0]
    @nreqs = @carts.partition{|i| i.is_a? CartRequest }[1]
    @deliveries = User.current.deliveries
-   chk_err(@items)
+   chk_err(@deliveries)
    @use_alt_price = false if @items.detect{|i| i.alt_prices.size > 0 }
    gon.need_application = @carts.detect{|i| i.application_area_mandatory } #TODO: clean gon
    @app_list = Axapta.application_area_list
-   chk_err(@items)
+   chk_err(@app_list)
    gon.app_list = @app_list #TODO: clean gon
    @mandatory = @carts.detect{|c| c.application_area_mandatory }
   end
@@ -125,17 +125,14 @@ class MainController < ApplicationController
   def analog
    @after = params[:after]
    @code = params[:code]
-   begin
-    data = Offer::Store.analogs(@code)
-   rescue Exception => e
-    data = []
-    logger.info e.to_s
-   end
+   data = Offer::Analog.analogs(@code)
+   chk_err(data)
    @items = data
    @carts = User.current.cart_items.unprocessed.in_cart.order("product_name, product_brend")
    @carts.select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
    @mandatory = @carts.detect{|i| i.application_area_mandatory }
-   @app_list = (Axapta.application_area_list || [])
+   @app_list = Axapta.application_area_list
+   chk_err(@app_list)
    @stores = @carts.map(&:location_link).uniq.compact.sort{|a, b| a == User.current.current_account.invent_location_id ? -1 : a <=> b }
    @carts.each do |cart|
     cart.line = render_to_string :partial => "carts/cart_line.html.haml", :locals => {:cart_line => cart, :app_list => @app_list}

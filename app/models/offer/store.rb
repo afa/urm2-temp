@@ -53,15 +53,5 @@ class Offer::Store < Offer::Base
    rez
   end
 
-  def self.analogs(code)
-   return [] if code.blank?
-   begin
-    data = Axapta.search_analogs(:calc_price=>true, :calc_qty => true, :user_hash => User.current.current_account.try(:axapta_hash), :item_id_search => code)
-   rescue Exception => e
-    return []
-   end
-   fabricate(data)
-  end
-
 
 end
