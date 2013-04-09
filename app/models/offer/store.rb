@@ -16,7 +16,7 @@ class Offer::Store < Offer::Base
    rez = AxaptaResults.new.from_prepared([], arr)
    arr.each do |hsh|
     hsh.locations.each do |loc|
-     rez << Offer::Store.new do |n|
+     rez << self.new do |n|
       n.name = hsh.item_name
       n.brend = hsh.item_brend
       n.brend_name = hsh.item_brend_name
