@@ -5,7 +5,7 @@ class Offer::Analog < Offer::Store
    data = Axapta.search_analogs(:calc_price=>true, :calc_qty => true, :item_id_search => code)
    fabricate(data).run do |its|
     its.each do |it|
-     d = data.index{|i| it.item_id == i.item_id }
+     d = data.index{|i| it.code == i.item_id }
      if d
       it.analog_description = data[d].analog_description
       it.analog_type = data[d].analog_type
