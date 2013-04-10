@@ -29,10 +29,15 @@ class ApplicationController < ActionController::Base
   before_filter :check_account_cur
   before_filter :get_accounts_in
   before_filter :take_search
+  before_filter :mk_errors
   protect_from_forgery
 
 
  protected
+  def mk_errors
+   @errors |= []
+  end
+
   def chk_err(as)
    rslt = OpenStruct.new
    if as.type && as.type != AxaptaState::OK
@@ -40,16 +45,20 @@ class ApplicationController < ActionController::Base
      when AxaptaState::WARN then begin
       rslt.flash = {:warn => "#{as.error}:#{as.message}"}
       flash = rslt.flash
+      @errors << rslt.flash
      end
      when AxaptaState::FATAL then begin
       rslt.fatal = {:error => "#{as.error}:#{as.message}"}
+      @errors << rslt.fatal
       render :template => '/eint.html', :layout => false
      end
      when AxaptaState::INVALID then begin
+      @errors << {:fatal => "#{as.error}:#{as.message}"}
       render :template => '/econ.html', :layout => false
      end
      else begin
       rslt.crit = {:critical => "#{as.error}:#{as.message}"}
+      @errors << rslt.crit
       render :status => 500, :layout => false, :none => true
      end
     end
