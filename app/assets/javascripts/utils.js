@@ -10,6 +10,9 @@ function takeValToHash(hash, seek, scope){
 }
 
 function processErrors(hash){
+ if(hash === undefined){
+  return
+ }
  var obj = {
   elem: $('<div class="flash ' + hash.name + '">' + hash.value + '</div>').appendTo("#flash_place"),
   func: function(){
