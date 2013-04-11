@@ -1,5 +1,5 @@
 set :application, "urm"
-set :repository,  "git://staging.rbagroup.ru/urm2.git"
+set :repository,  "git@github.com:afa/urm2-temp.git"
 
 set :scm, :git
 set :deploy_via, :export

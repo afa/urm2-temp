@@ -66,7 +66,7 @@ class MainController < ApplicationController
     format.json do
      #render :json => {:dms => render_to_string( :partial => "main/dms_block.html", :locals => {:items => @items, :after => @after} ), :gap => render_to_string( :partial => "main/gap_line.html", :locals => {:after => @after}), :empty => render_to_string(:partial => "main/dms_empty.html", :locals => {:after => @after})}
      crt = render_to_string(:partial => "carts/cart_table.html.haml", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores})
-     render :json => {:row_id => @after, :code => @code, :dms => render_to_string( :partial => "main/dms_block.html.haml", :locals => {:items => @items, :after => @after} ), :gap => render_to_string( :partial => "main/gap_line.html.haml", :locals => {:after => @after}), :empty => render_to_string(:partial => "main/dms_empty.html.haml", :locals => {:after => @after}), :cart => crt, (:error => @errors unless @errors.empty?)}
+     render :json => {:row_id => @after, :code => @code, :dms => render_to_string( :partial => "main/dms_block.html.haml", :locals => {:items => @items, :after => @after} ), :gap => render_to_string( :partial => "main/gap_line.html.haml", :locals => {:after => @after}), :empty => render_to_string(:partial => "main/dms_empty.html.haml", :locals => {:after => @after}), :cart => crt, :error => @errors unless @errors.empty?}
     end
     #format.js { render :layout => false }
     format.html do
