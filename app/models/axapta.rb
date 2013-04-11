@@ -433,8 +433,8 @@ class Axapta
     res, err = AxaptaRequest.send(method, *args)
     p "--err-asks", err
     
-    its = items ? res.send(:items) : res
-    AxaptaResults.new(its, parse_err(err))
+    its = items && res ? res.send(items) : res
+    AxaptaResults.new(its || [], parse_err(err))
    rescue Exception => e
     parse_exc(e.message, e.class.name)
     AxaptaResults.new([], {:type => AxaptaState::INVALID, :error => e.class.name, :message => get_last_exc["_error"]})
@@ -445,8 +445,8 @@ class Axapta
    begin
     res, err = AxaptaRequest.send(method, *args)
     p "--err-ask_pages", err
-    its = items ? res[items] : res
-    AxaptaPages.new(its, {:page => page}.merge(parse_err(err)))
+    its = items && res ? res.send(items) : res
+    AxaptaPages.new(its || [], {:page => page}.merge(parse_err(err)))
    rescue Exception => e
     parse_exc(e.message, e.class.name)
     AxaptaPages.new([], {:type => AxaptaState::INVALID, :error => e.class.name, :message => get_last_exc["_error"]})
