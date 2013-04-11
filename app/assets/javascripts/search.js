@@ -71,7 +71,7 @@ function placeDmsData(data){
   $(data["dms"]).insertAfter($("tr.info_item_" + row_id).add("tr.item_" + row_id).last());
   insertGap(row_id, data["gap"]);
  }
- renderErrors(data.errors);
+ renderErrors(data[errors]);
  $("#cart_store").remove();
  if(!/^\s*$/.test(data["cart"])){
   $(".cart-table .cart").html(data.cart);
@@ -92,6 +92,7 @@ function placeAnalogData(data){
   }
   insertGap(row_id, data["gap"]);
  }
+ renderErrors(data.errors);
  $("#cart_store").remove();
  if(!/^\s*$/.test(data["cart"])){
   $(".cart-table .cart").html(data.cart);
