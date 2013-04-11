@@ -6,7 +6,7 @@ class Offer::World < Offer::Base
   attr_accessor :prognoz, :vend_qty, :qty_multiples, :vend_proposal_date, :qtys, :prices, :counts, :need_more, :raw_prognosis, :alt_prices
 
   def self.ask_axapta_by_id(product_id)
-   return [] if product_id.blank?
+   return AxaptaResult.new([], {:type => AxaptaState::WARN, :error => "not found", :message => I18n.t("errors.search.empty")}) if product_id.blank?
    hshs = Axapta.search_name(:item_id_search => product_id)
    #:query_string, :search_brend
    rez = []
@@ -44,10 +44,10 @@ class Offer::World < Offer::Base
   end
 
   def self.fabricate(arr)
-   rez = []
+   rez = AxaptaResults.new.from_prepared([], arr)
    arr.each do |hsh|
     hsh.prognosis.each do |prgnz|
-     rez << Offer::World.new do |n|
+     rez << self.new do |n|
       n.name = hsh.item_name
       n.brend = hsh.item_brend
       n.code = hsh.item_id
@@ -69,11 +69,10 @@ class Offer::World < Offer::Base
   end
 
   def self.by_query(query, brend = nil)
-   return [] if query.blank?
-   hash = User.current.current_account.try(:axapta_hash)
-   items = Axapta.search_dms_names(:user_hash => hash, :query_string => query, :search_brend => brend)
+   return AxaptaResults.new([], {:type => AxaptaState::WARN, :error => "not found", :message => I18n.t("errors.search.empty")}) if query.blank?
+   items = Axapta.search_dms_names(:query_string => query, :search_brend => brend).process{|d| fabricate(d) }
    #items = conv_dms_items(Axapta.search_dms_names(:user_hash => hash, :query_string => query, :search_brend => brend))
-   fabricate(items)
+   #fabricate(items)
   end
 
 end
