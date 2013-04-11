@@ -23,11 +23,11 @@ function processErrors(hash){
 }
 
 function renderErrors(arr){
+ alert(arr);
  if(arr === undefined){
   return;
  }
  $.each(arr, function(i, item){
-  alert(item)
   processErrors(item);
  });
 }
