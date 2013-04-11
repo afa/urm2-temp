@@ -94,9 +94,8 @@ class MainController < ApplicationController
   end
 
   def mass_dms
-   puts "---mass dms start #{Time.now}"
-   @hash = current_user.current_account.try(:axapta_hash)
    @items = Offer::World.by_query(params[:query_string])
+   chk_err(@items)
    hsh = @items.inject({}) do |r, item|
     i = item.base_signature
     unless r.has_key?(i)
@@ -112,7 +111,8 @@ class MainController < ApplicationController
    @carts = User.current.cart_items.unprocessed.in_cart.order("product_name, product_brend")
    @carts.select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
    @mandatory = @carts.detect{|i| i.application_area_mandatory }
-   @app_list = (Axapta.application_area_list || [])
+   @app_list = Axapta.application_area_list
+   chk_err(@app_list)
    @stores = @carts.map(&:location_link).uniq.compact.sort{|a, b| a == User.current.current_account.invent_location_id ? -1 : a <=> b }
    @carts.each do |cart|
     cart.line = render_to_string :partial => "carts/cart_line.html.haml", :locals => {:cart_line => cart, :app_list => @app_list}
@@ -122,7 +122,7 @@ class MainController < ApplicationController
    end
    @rendered = render_to_string :partial => "carts/cart_table.html.haml", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores}
    respond_with do |format|
-    format.json { render :json => {:dms => dat, :cart => @rendered } }
+    format.json { render :json => {:dms => dat, :cart => @rendered, :error => @errors} }
    end
   end
 
@@ -155,7 +155,6 @@ class MainController < ApplicationController
    @location = params[:loc]
    @code = params[:code]
    locs = Axapta.search_names(:item_id_search => @code).first.locations.map{|l| l["location_id"] }
-   @hash = current_user.current_account.try(:axapta_hash)
    @data = Axapta.item_info({:item_id => @code})
    @data.prices = Axapta.retail_price(:item_id => @code)
    @data.dates = locs.inject({}){|r, l| r.merge(Axapta.get_delivery_prognosis(@code, l))}
