@@ -13,6 +13,8 @@ function processErrors(hash){
  if(hash === undefined){
   return;
  }
+ var els = {};
+ //$each
  var obj = {
   elem: $('<div class="flash ' + hash.name + '">' + hash.value + '</div>').appendTo("#flash_place"),
   func: function(){
