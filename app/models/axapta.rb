@@ -460,11 +460,11 @@ class Axapta
 
   def self.axapta_hash
    unless User.current
-    @last_parsed_error = AxaptaResults([], {:type => AxaptaState::INVALID, :message => "Non-selected user"})
+    @last_parsed_error = AxaptaResults.new([], {:type => AxaptaState::INVALID, :message => "Non-selected user"})
     raise AxaptaError
    end
    unless User.current.current_account
-    @last_parsed_error = AxaptaResults([], {:type => AxaptaState::INVALID, :message => "Invalid current account for current user"})
+    @last_parsed_error = AxaptaResults.new([], {:type => AxaptaState::INVALID, :message => "Invalid current account for current user"})
     raise AxaptaError
     
    end
