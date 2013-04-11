@@ -24,8 +24,8 @@ class Account < ActiveRecord::Base
    accnt.update_attributes self.filter_account_attributes(Axapta.user_info(hash))
    accnt.parent.update_attributes self.filter_account_attributes(Axapta.user_info(accnt.parent.axapta_hash)) if accnt.parent
    Axapta.load_child_hashes(hash).each do |hsh|
-    acc = self.find_by_axapta_user_id(hsh["user_id"])
-     acc.update_attributes self.filter_account_attributes(hsh) if acc
+    acc = self.find_by_axapta_user_id(hsh.user_id)
+     acc.update_attributes self.filter_account_attributes(hsh.marshal_dump) if acc
    end
   end
 end
