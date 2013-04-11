@@ -433,7 +433,7 @@ class Axapta
     res, err = AxaptaRequest.send(method, *args)
     p "--err-asks", err
     
-    its = items ? res[items] : res
+    its = items ? res.send(:items) : res
     AxaptaResults.new(its, parse_err(err))
    rescue Exception => e
     parse_exc(e.message, e.class.name)
