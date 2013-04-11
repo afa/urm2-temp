@@ -163,7 +163,7 @@ class Axapta
   end
 
   def self.load_child_hashes(hash)
-   asks(:user_list, "users", {"user_hash" => hash}).map{|u| u["user_id"] }.map{|u| self.user_info(hash, u) }
+   asks(:user_list, "users", {"user_hash" => hash}).map{|u| u.user_id }.map{|u| self.user_info(hash, u) }
    #AxaptaRequest.user_list("user_hash" => hash)["users"].map{|u| u["user_id"] }.map{|u| self.user_info(hash, u) }
   end
 
