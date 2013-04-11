@@ -19,3 +19,8 @@ function processErrors(hash){
  setTimeout(function(){obj.func.call(obj)}, 10000);
 }
 
+function renderErrors(arr){
+ $.each(arr, function(i, item){
+  processErrors(item);
+ });
+}

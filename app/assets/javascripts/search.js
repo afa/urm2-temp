@@ -39,6 +39,7 @@ function load_dms_bundle(from_where, need_load){
    cartsHandleRadioPicks();
    cartsHandleSaveOnFocusLost();
    cartsProcessRadioPicks();
+   processErrors(data.errors);
    $('#cart_store .icon a.delete').click(cartsRemoveElementFromCarts);
    
   },
@@ -70,6 +71,7 @@ function placeDmsData(data){
   $(data["dms"]).insertAfter($("tr.info_item_" + row_id).add("tr.item_" + row_id).last());
   insertGap(row_id, data["gap"]);
  }
+ processErrors(data.errors);
  $("#cart_store").remove();
  if(!/^\s*$/.test(data["cart"])){
   $(".cart-table .cart").html(data.cart);
