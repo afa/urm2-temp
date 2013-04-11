@@ -34,10 +34,6 @@
        %th.bold= t :avail_max
        %th.bold.double-last-cell MPQ
 
-     - if @items.empty?
-      %tr
-       %td{:colspan => 22}= t :items_not_found
-     - else
       = render :partial => "items_line", :collection => @items, :locals => {:need_links => true, :form => frm}
 
      - if @items.size > 5
