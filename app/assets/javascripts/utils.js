@@ -27,6 +27,7 @@ function renderErrors(arr){
   return;
  }
  $.each(arr, function(i, item){
+  alert(item)
   processErrors(item);
  });
 }
