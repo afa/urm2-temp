@@ -10,7 +10,7 @@ class AxaptaRequest < JsonRpcClient
    begin
     key = "json_rpc-#{Time.now.to_f}"
     strt = Stat::Event.create( :key => key, :name => name, :data => args.to_json){|ev| ev.type = "Stat::Before" }
-    rslt, err = super# || [{}, {}]
+    rslt, err = super(name, *args)# || [{}, {}]
     Stat::Event.create( :key => key, :name => name, :data => rslt.to_json){|ev| ev.type = "Stat::Done" }
     return rslt, err
    rescue JsonRpcClient::NotAService => e
@@ -18,7 +18,7 @@ class AxaptaRequest < JsonRpcClient
     begin
      strt = Stat::Event.create( :key => key, :name => name, :data => args.to_json){|ev| ev.type = "Stat::Rescue" }
      sleep 1
-     rslt, err = super# || [{}, {}]
+     rslt, err = super(name, *args)# || [{}, {}]
      Stat::Event.create( :key => key, :name => name, :data => rslt.to_json){|ev| ev.type = "Stat::Done" }
      return rslt, err
     rescue Exception => e
