@@ -433,7 +433,7 @@ class Axapta
     res, err = AxaptaRequest.send(method, *args)
     p "--err-asks", err
     
-    its = items && res ? res.send(items) : res
+    its = items && res ? res[items] : res
     AxaptaResults.new(its || [], parse_err(err))
    rescue Exception => e
     parse_exc(e.message, e.class.name)
@@ -445,7 +445,7 @@ class Axapta
    begin
     res, err = AxaptaRequest.send(method, *args)
     p "--err-ask_pages", err
-    its = items && res ? res.send(items) : res
+    its = items && res ? res[items] : res
     AxaptaPages.new(its || [], {:page => page}.merge(parse_err(err)))
    rescue Exception => e
     parse_exc(e.message, e.class.name)
