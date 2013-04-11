@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
 
  protected
   def mk_errors
-   @errors |= []
+   @errors ||= []
   end
 
   def chk_err(as)
