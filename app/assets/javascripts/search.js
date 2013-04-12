@@ -71,7 +71,7 @@ function placeDmsData(data){
   $(data["dms"]).insertAfter($("tr.info_item_" + row_id).add("tr.item_" + row_id).last());
   insertGap(row_id, data["gap"]);
  }
- renderErrors(data["error"]);
+ renderErrors(data.error);
  $("#cart_store").remove();
  if(!/^\s*$/.test(data["cart"])){
   $(".cart-table .cart").html(data.cart);
@@ -145,6 +145,7 @@ function showDms(evt){
 function queryAutoComplete(rq, callback){
  makeAjaxCall("/main/qnames.json?query=" + rq.term,
   function(data){
+   renderErrors(data.error);
    callback(data);
   },
   function(){}

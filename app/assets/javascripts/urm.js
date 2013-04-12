@@ -111,6 +111,7 @@ function toggleGap(after){
 function placeInfoData(data){
  var row_id = data["row_id"];
  var code = data["code"];
+ renderErrors(data.error);
  if(/^\s*$/.test(data["info"])){
   $(data["empty"]).insertAfter($("tr.item_" + row_id).last());
  } else {
@@ -203,6 +204,7 @@ function runAllowOrder(){
   $('#allow-order').hide();
   makeAjaxCall("/orders/new.json",
    function(data){
+    renderErrors(data.error);
     $("#order").html(data["order"]);
     initCalendar();
     $("#cart_store .icon").hide();

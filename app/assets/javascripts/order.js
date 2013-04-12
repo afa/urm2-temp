@@ -18,6 +18,7 @@ function ordersRenderCreate(){
  makeAjaxPost('/orders.json',
   frm,
   function(data, reply, xhr){
+   renderErrors(data.error);
    $("table.search-products").parents("form").show();
    $("table.search-products tr:has(td)").add("table.search-products tr.heading").remove();
    $("input#search_query_string").val('');
@@ -116,6 +117,7 @@ function showTrack(evt){
 
 function placeTrackData(data){
  var row_id = data["row_id"];
+ renderErrors(data.error);
  //var code = data["code"];
  //$("tr.item_" + row_id + " .icon .slider").hide();
  //$("tr.item_" + row_id + " .icon .track").show().addClass("active");

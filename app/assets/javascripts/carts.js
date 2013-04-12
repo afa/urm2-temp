@@ -18,6 +18,7 @@ function cartsAddElementToCart(){
  makeAjaxPost("/carts.json", 
   crts,
   function(data, reply, xhr){
+   renderErrors(data.error);
    $("#cart_store").remove();
    $.each(data.changes, function(idx, item){
     $('table.search-products tr input.item-cart[value="' + item[0] + '"]').val(item[1]);
@@ -64,6 +65,7 @@ function cartsAddElementToCart(){
 function cartsRemoveElementFromCarts(){
  makeAjaxDestroy(this.href,
   function(data, reply, xhr){
+   renderErrors(data.error);
    //-# $("#cart_store").replaceWith("#{escape_javascript(render :partial => "carts/cart_table", :locals => {:cart => @carts})}");
    $('table.search-products tr:has(td input.item-cart[value="' + data.deleted + '"])').find("td.input-in-cart").removeClass("exist speed");
    $('table.search-products tr:has(td input.item-cart[value="' + data.deleted + '"])').find("td.input-in-cart input").val("");
@@ -113,6 +115,7 @@ function cartsSaveCart(){
   "/carts/save.json",
   crt,
   function(data, reply, xhr){
+   renderErrors(data.error);
    $("#cart_store").remove();
    if (data.carts.length > 0){ //empty?
     $(".cart-table .cart").html(data.rendered);
