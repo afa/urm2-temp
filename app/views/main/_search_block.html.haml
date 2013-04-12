@@ -12,16 +12,13 @@
      %a{:href=>"#", :class => [@search.external_code.blank? ? "active" : nil]}
       %span
        %span Поиск по наименованию
-     %a{:href=>"#"}
-      %span
-       %span Дополнительные возможности
      %a{:href=>"#", :class => [@search.external_code.blank? ? nil : "active"]}
       %span
        %span Поиск по артикулу
-     -# %a{:href=>"#"}
+     %a{:href=>"#"}
       %span
-       %span По параметрам
-     %a.more{:href=>"#"} Еще
+       %span Загрузка списком
+     %a.more{:href=>"http://www.compel.ru/catalog/?utm_source=urm2&utm_medium=link&utm_term=null&utm_content=null&utm_campaign=urm-catalog"} Параметрический поиск
     -# .search-tab-block{:style=>"display:none;"}
      %form{:action=>" "}
       .field
@@ -80,7 +77,7 @@
         %a{:href=>"search_result_group.html"}
          %span Прогноз поставки
 
-    .search-tab-block{:style => "display: none;"}
+    -# .search-tab-block{:style => "display: none;"}
      = form_for :request, :url => manager_request_path do |f|
       .fields.splitted
        .field.request.long
