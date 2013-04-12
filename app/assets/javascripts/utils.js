@@ -13,12 +13,16 @@ function processErrors(hash){
  if(hash === undefined){
   return;
  }
- var els = {};
- //$each
+ var els = [];
+ var idx = 0;
+ for(var i in hash.keys){
+  els[idx] = $('<div class="flash ' + i + '">' + hash[i] +'</div>').appendTo("#flash_place");
+  idx += 1;
+ }
  var obj = {
-  elem: $('<div class="flash ' + hash.name + '">' + hash.value + '</div>').appendTo("#flash_place"),
+  elem: els,
   func: function(){
-   $(this.elem).remove();
+   $.each(this.elem, function(it, cur){ cur.remove();});
   }
  }
  setTimeout(function(){obj.func.call(obj)}, 10000);
@@ -29,7 +33,6 @@ function renderErrors(arr){
   return;
  }
  $.each(arr, function(i, item){
-  alert(item);
   processErrors(item);
  });
 }
