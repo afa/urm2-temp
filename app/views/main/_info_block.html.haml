@@ -1,7 +1,7 @@
 - prices = info_block.delete_field(:prices)
 - dates = info_block.delete_field(:dates)
-- keys = info_block.marshal_dump.inject({}){|r, (k, v)| (not (v.blank? || v.to_s == '0')) ? r.merge(k => v) : r }.keys
-- cnt = (keys.size/2.0).ceil
+-# - keys = info_block.marshal_dump.inject({}){|r, (k, v)| (not (v.blank? || v.to_s == '0')) ? r.merge(k => v) : r }.keys
+-# - cnt = (keys.size/2.0).ceil
 -# %tr.sub-row-block{:class => "info_item_#{after}"}
  %th.icons{:class=>"border-l"}
   .icon
@@ -11,7 +11,8 @@
    .item-f
     -# %a{:href=>"#"}Описание
     Описание
-- unless keys.empty?
+-# - unless keys.empty?
+-
  %tr.sub-row-block{:class => "info_item_#{after}"}
   %td.border-l &nbsp;
   %td.border-r{:colspan=>"17", :valign => "top"}
@@ -19,6 +20,28 @@
     %tr
      %td{:style => "border-bottom: 0;"}
       %table
+       %tr.sub-row-block
+        %th Товарный класс: 
+        %td= info_block.class_name
+       %tr.sub-row-block
+        %th Количество в упаковке:
+        %td= info_block.qty_in_pack
+       %tr.sub-row-block
+        %th Описание:
+        %td.italic= info_block.description
+       %tr.sub-row-block
+        %th Сегмент продукции:
+        %td= info_block.segment_rus
+       %tr.sub-row-block
+        %th Вид упаковки:
+        %td= info_block.packing_type
+       %tr.sub-row-block
+        %th Вес брутто:
+        %td= "#{info_block.weight} г."
+       %tr.sub-row-block
+        %th Объём:
+        %td= "#{info_block.volume} мм3"
+      -#
        - unless info_block.segment_rus.blank?
         %tr.sub-row-block
          %td{:style => "border-bottom: 0;"}
