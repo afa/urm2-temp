@@ -40,24 +40,23 @@
       %tr.sub-row-block
        %th Объём:
        %td= "#{info_block.volume} мм3"
-     -#
-      - unless info_block.segment_rus.blank?
+      -# - unless info_block.segment_rus.blank?
        %tr.sub-row-block
         %td{:style => "border-bottom: 0;"}
          .item
           = t(:segment_produkcii)
           %span.color-black= info_block.segment_rus
-      - if info_block.discontinued
+      -# - if info_block.discontinued
        %tr.sub-row-block
         %td{:style => "border-bottom: 0;"}
          .item{:style => "font-weight:bold;"}
           = t(:position_discontinued)
-      - unless info_block.description.blank?
+      -# - unless info_block.description.blank?
        %tr.sub-row-block
         %td{:style => "border-bottom: 0;"}
          .item{:style => "font-style:italic;"}
           = info_block.description
-      - unless info_block.qty_in_pack.blank?
+      -# - unless info_block.qty_in_pack.blank?
        %tr.sub-row-block
         %td{:style => "border-bottom: 0;"}
          .item
