@@ -18,7 +18,10 @@
      %a{:href=>"#"}
       %span
        %span Загрузка списком
-     %a{:href=>"http://www.compel.ru/catalog/?utm_source=urm2&utm_medium=link&utm_term=null&utm_content=null&utm_campaign=urm-catalog", :target => "_blank"} Параметрический поиск
+     - if User.current.current_account.business == 'КОМПЭЛ'
+      %a{:href=>"http://www.compel.ru/catalog/?utm_source=urm2&utm_medium=link&utm_term=null&utm_content=null&utm_campaign=urm-catalog", :target => "_blank"}
+       %span
+        %span Параметрический поиск
     -# .search-tab-block{:style=>"display:none;"}
      %form{:action=>" "}
       .field
