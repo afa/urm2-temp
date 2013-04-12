@@ -12,93 +12,93 @@
     -# %a{:href=>"#"}Описание
     Описание
  -# - unless keys.empty?
- %tr.sub-row-block{:class => "info_item_#{after}"}
-  %td.border-l &nbsp;
-  %td.border-r{:colspan=>"17", :valign => "top"}
-   %table
-    %tr
+%tr.sub-row-block{:class => "info_item_#{after}"}
+ %td.border-l &nbsp;
+ %td.border-r{:colspan=>"17", :valign => "top"}
+  %table
+   %tr
+    %td{:style => "border-bottom: 0;"}
+     %table
+      %tr.sub-row-block
+       %th Товарный класс: 
+       %td= info_block.class_name
+      %tr.sub-row-block
+       %th Количество в упаковке:
+       %td= info_block.qty_in_pack
+      %tr.sub-row-block
+       %th Описание:
+       %td.italic= info_block.description
+      %tr.sub-row-block
+       %th Сегмент продукции:
+       %td= info_block.segment_rus
+      %tr.sub-row-block
+       %th Вид упаковки:
+       %td= info_block.packing_type
+      %tr.sub-row-block
+       %th Вес брутто:
+       %td= "#{info_block.weight} г."
+      %tr.sub-row-block
+       %th Объём:
+       %td= "#{info_block.volume} мм3"
+     -#
+      - unless info_block.segment_rus.blank?
+       %tr.sub-row-block
+        %td{:style => "border-bottom: 0;"}
+         .item
+          = t(:segment_produkcii)
+          %span.color-black= info_block.segment_rus
+      - if info_block.discontinued
+       %tr.sub-row-block
+        %td{:style => "border-bottom: 0;"}
+         .item{:style => "font-weight:bold;"}
+          = t(:position_discontinued)
+      - unless info_block.description.blank?
+       %tr.sub-row-block
+        %td{:style => "border-bottom: 0;"}
+         .item{:style => "font-style:italic;"}
+          = info_block.description
+      - unless info_block.qty_in_pack.blank?
+       %tr.sub-row-block
+        %td{:style => "border-bottom: 0;"}
+         .item
+          = t(:qty_in_pack)
+          %span.color-black= info_block.qty_in_pack
+    -# - keys.each_slice(cnt) do |blk|
      %td{:style => "border-bottom: 0;"}
+      - blk.each do |key|
+       .item
+        = t(key.to_sym)
+        %span.color-black= info_block[key]
+    %td{:style => "border-bottom: 0;"}
+     - unless prices.blank?
       %table
-       %tr.sub-row-block
-        %th Товарный класс: 
-        %td= info_block.class_name
-       %tr.sub-row-block
-        %th Количество в упаковке:
-        %td= info_block.qty_in_pack
-       %tr.sub-row-block
-        %th Описание:
-        %td.italic= info_block.description
-       %tr.sub-row-block
-        %th Сегмент продукции:
-        %td= info_block.segment_rus
-       %tr.sub-row-block
-        %th Вид упаковки:
-        %td= info_block.packing_type
-       %tr.sub-row-block
-        %th Вес брутто:
-        %td= "#{info_block.weight} г."
-       %tr.sub-row-block
-        %th Объём:
-        %td= "#{info_block.volume} мм3"
-      -#
-       - unless info_block.segment_rus.blank?
-        %tr.sub-row-block
-         %td{:style => "border-bottom: 0;"}
-          .item
-           = t(:segment_produkcii)
-           %span.color-black= info_block.segment_rus
-       - if info_block.discontinued
-        %tr.sub-row-block
-         %td{:style => "border-bottom: 0;"}
-          .item{:style => "font-weight:bold;"}
-           = t(:position_discontinued)
-       - unless info_block.description.blank?
-        %tr.sub-row-block
-         %td{:style => "border-bottom: 0;"}
-          .item{:style => "font-style:italic;"}
-           = info_block.description
-       - unless info_block.qty_in_pack.blank?
-        %tr.sub-row-block
-         %td{:style => "border-bottom: 0;"}
-          .item
-           = t(:qty_in_pack)
-           %span.color-black= info_block.qty_in_pack
-     -# - keys.each_slice(cnt) do |blk|
-      %td{:style => "border-bottom: 0;"}
-       - blk.each do |key|
-        .item
-         = t(key.to_sym)
-         %span.color-black= info_block[key]
-     %td{:style => "border-bottom: 0;"}
-      - unless prices.blank?
-       %table
-        %tr
-         %th= t(:price1)
-         %th= t(:count2)
-         %th= t(:price2)
-         %th= t(:count3)
-         %th= t(:price3)
-         %th= t(:count4)
-         %th= t(:price4)
-        %tr
-         %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices["price1"])
-         %td{:style => "border-bottom: 0;"}= prices["count2"]
-         %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices["price2"])
-         %td{:style => "border-bottom: 0;"}= prices["count3"]
-         %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices["price3"])
-         %td{:style => "border-bottom: 0;"}= prices["count4"]
-         %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices["price4"])
-     %td{:style => "border-bottom: 0;"}
-      - unless dates.blank?
-       %table
-        %tr
-         %th К
-         %th Д
-        - dates.each do |k, r|
-         - unless r.empty?
+       %tr
+        %th= t(:price1)
+        %th= t(:count2)
+        %th= t(:price2)
+        %th= t(:count3)
+        %th= t(:price3)
+        %th= t(:count4)
+        %th= t(:price4)
+       %tr
+        %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices["price1"])
+        %td{:style => "border-bottom: 0;"}= prices["count2"]
+        %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices["price2"])
+        %td{:style => "border-bottom: 0;"}= prices["count3"]
+        %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices["price3"])
+        %td{:style => "border-bottom: 0;"}= prices["count4"]
+        %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices["price4"])
+    %td{:style => "border-bottom: 0;"}
+     - unless dates.blank?
+      %table
+       %tr
+        %th К
+        %th Д
+       - dates.each do |k, r|
+        - unless r.empty?
+         %tr
+          %td{:colspan => 2}= k
+         - r.each do |s|
           %tr
-           %td{:colspan => 2}= k
-          - r.each do |s|
-           %tr
-            %td{:style => "border-bottom: 0;"}= s.try(:[], :qty)
-            %td{:style => "border-bottom: 0;"}= s.try(:[], :date)
+           %td{:style => "border-bottom: 0;"}= s.try(:[], :qty)
+           %td{:style => "border-bottom: 0;"}= s.try(:[], :date)
