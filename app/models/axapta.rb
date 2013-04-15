@@ -446,7 +446,7 @@ class Axapta
     res, err = AxaptaRequest.send(method, *args)
     p "--err-ask_pages", err
     its = items && res ? res[items] : res
-    AxaptaPages.new(its || [], {:page => page}.merge(parse_err(err)))
+    AxaptaPages.new(its || [], {:page => page, :records => res["records"], :pages => res["pages"]}.merge(parse_err(err)))
    rescue Exception => e
     parse_exc(e.message, e.class.name)
     AxaptaPages.new([], {:type => AxaptaState::INVALID, :error => e.class.name, :message => get_last_exc["_error"]})
