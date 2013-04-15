@@ -56,7 +56,9 @@ function cartsAddElementToCart(){
    cartsProcessRadioPicks();
    $('#cart_store .icon a.delete').click(cartsRemoveElementFromCarts);
   },
-  function(){}
+  function(){
+   renderErrors({error: 'Ошибка связи'});
+  }
  );
  return false;
 }
@@ -92,7 +94,9 @@ function cartsRemoveElementFromCarts(){
    cartsProcessRadioPicks();
    $('#cart_store .icon a.delete').click(cartsRemoveElementFromCarts);
   },
-  function(data){}
+  function(data){
+   renderErrors({error: 'Ошибка связи'});
+  }
  );
  return false;
 }
@@ -135,7 +139,9 @@ function cartsSaveCart(){
    $('#cart_store .icon a.delete').click(cartsRemoveElementFromCarts);
 
   },
-  function(){}
+  function(){
+   renderErrors({error: 'Ошибка связи'});
+  }
  );
 
  //$('.form-hide .item').dropDown();

@@ -49,7 +49,9 @@ function ordersRenderCreate(){
     placeResults(data.results); //!!!!!
    }
   },
-  function(){}
+  function(){
+   renderErrors({error: 'Ошибка связи'});
+  }
  );
  return false;
 }
@@ -101,6 +103,7 @@ function showTrack(evt){
   makeAjaxCall(this.href,
    placeTrackData,
    function(data){
+   renderErrors({error: 'Ошибка связи'});
     //$("tr.item_" + row_id + " .icon .slider").hide();
     //$("tr.item_" + row_id + " .icon .dms").show().removeClass("active");
   });
