@@ -64,6 +64,7 @@
     %div{:style => "display:inline-block; float:left;"}
      = paginate(:page => @orders.page.to_i, :pages => @orders.pages.to_i, :derid => {:align => "left", :hide_empty => true})
     %div{:style => "display:inline-block; float:left;"}
+     - p "---ords-stat", @orders
      = render :partial => "shared/stat.html.haml", :locals => {:mode => :strings, :value => @orders.records.to_i}
 
 :javascript
