@@ -40,7 +40,7 @@ class MainController < ApplicationController
    gon.app_list = @app_list #TODO: clean gon
    @mandatory = @carts.detect{|c| c.application_area_mandatory }
    flash[:info] = t "errors.search.empty" if @items.empty?
-   #flash[:info] = t "errors.search.ambiq" if @items.empty?
+   flash[:info] = t "errors.search.ambiq" if @items.ambiq
   end
 
   def export
