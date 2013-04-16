@@ -424,7 +424,7 @@ class Axapta
     AxaptaResult.new(res.merge(parse_err(err)))
    rescue Exception => e
     parse_exc(e.message, e.class.name)
-    AxaptaResult.new({:type => AxaptaState::INVALID, :error => e.class.name, :message => get_last_exc["_error"]})
+    AxaptaResult.new({:type => AxaptaState::INVALID, :error => e.class.name, :message => "#{get_last_exc[:type]}:#{get_last_exc[:message]}"})
    end
   end
 
@@ -437,7 +437,7 @@ class Axapta
     AxaptaResults.new(its || [], parse_err(err))
    rescue Exception => e
     parse_exc(e.message, e.class.name)
-    AxaptaResults.new([], {:type => AxaptaState::INVALID, :error => e.class.name, :message => get_last_exc["_error"]})
+    AxaptaResults.new([], {:type => AxaptaState::INVALID, :error => e.class.name, :message => "#{get_last_exc[:type]}:#{get_last_exc[:message]}"})
    end
   end
 
@@ -449,7 +449,7 @@ class Axapta
     AxaptaPages.new(its || [], {:page => page, :records => res["records"], :pages => res["pages"]}.merge(parse_err(err)))
    rescue Exception => e
     parse_exc(e.message, e.class.name)
-    AxaptaPages.new([], {:type => AxaptaState::INVALID, :error => e.class.name, :message => get_last_exc["_error"]})
+    AxaptaPages.new([], {:type => AxaptaState::INVALID, :error => e.class.name, :message => "#{get_last_exc[:type]}:#{get_last_exc[:message]}"})
    end
    
   end

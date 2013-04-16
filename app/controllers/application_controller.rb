@@ -5,16 +5,16 @@ class ApplicationController < ActionController::Base
   # Rails.logger.info "resc auth #{e}"
   # rescue_action_without_handler(e)
   #end
-  rescue_from StandardError do |e|
-   Rails.logger.info "---+rescue: need redirect, #{e}, #{e.backtrace.first(3)}"
-  # if self.class.class_variable_defined?(:@@auth_redirect_on_failed) && self.class.auth_redirect_on_failed
-  #  redirect_to self.class.auth_redirect_on_failed
-  # elsif self.class.class_variable_defined?(:@@auth_redirect_on_failed_cb) && self.class.auth_redirect_on_failed_cb
-  #  redirect_to self.send(self.class.auth_redirect_on_failed_cb)
-  # else
-    raise
-  # end
-  end
+  #rescue_from StandardError do |e|
+  # Rails.logger.info "---+rescue: need redirect, #{e}, #{e.backtrace.first(3)}"
+  ## if self.class.class_variable_defined?(:@@auth_redirect_on_failed) && self.class.auth_redirect_on_failed
+  ##  redirect_to self.class.auth_redirect_on_failed
+  ## elsif self.class.class_variable_defined?(:@@auth_redirect_on_failed_cb) && self.class.auth_redirect_on_failed_cb
+  ##  redirect_to self.send(self.class.auth_redirect_on_failed_cb)
+  ## else
+  #  raise
+  ## end
+  #end
   remembered_cookie_name :user_remember_token
   user_model User
   auth_expired_in_days 1
