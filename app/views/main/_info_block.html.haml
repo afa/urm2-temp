@@ -44,27 +44,19 @@
      - unless dates.blank?
       %table
        %tr
-        %th К
-        %th Д
+        %th{:colspan => 3}= t(:del_prognoz)
        - dates.each do |k, r|
         - unless r.empty?
-         %tr
-          %td{:colspan => 2}= k
          - r.each do |s|
           %tr
            %td{:style => "border-bottom: 0;"}= s.try(:[], :qty)
            %td{:style => "border-bottom: 0;"}= s.try(:[], :date)
+           %td{:style => "border-bottom: 0;"}= k
     %td{:style => "border-bottom: 0;"}
      - unless prices.blank?
       %table
        %tr
-        %th= t(:price1)
-        %th= t(:count2)
-        %th= t(:price2)
-        %th= t(:count3)
-        %th= t(:price3)
-        %th= t(:count4)
-        %th= t(:price4)
+        %th{:colspan => 7}= t(:end_user_price)
        %tr
         %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices["price1"])
         %td{:style => "border-bottom: 0;"}= prices["count2"]
