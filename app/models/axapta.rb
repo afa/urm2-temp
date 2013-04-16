@@ -60,7 +60,7 @@ class AxaptaResults < Array
    self.clear
    self.concat(arr)
    self.type = parm.delete(:type) || parm.delete("type")
-   self.type = opts.delete(:ambiq) || opts.delete("ambiq")
+   self.type = parm.delete(:ambiq) || parm.delete("ambiq")
    self.error = parm.delete(:error) || parm.delete("error")
    self.message = parm.delete(:message) || parm.delete("message")
    self
