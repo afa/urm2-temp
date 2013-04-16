@@ -50,7 +50,7 @@ class AxaptaResults < Array
   attr_accessor :type, :error, :message, :ambiq
   def initialize(arr = [], opts = {})
    self.type = opts.delete(:type) || opts.delete("type")
-   self.type = opts.delete(:ambiq) || opts.delete("ambiq")
+   self.ambiq = opts.delete(:ambiq) || opts.delete("ambiq")
    self.error = opts.delete(:error) || opts.delete("error")
    self.message = opts.delete(:message) || opts.delete("message")
    super(arr.map{|i| OpenStruct.new(i.as_hash) })
@@ -60,7 +60,7 @@ class AxaptaResults < Array
    self.clear
    self.concat(arr)
    self.type = parm.delete(:type) || parm.delete("type")
-   self.type = parm.delete(:ambiq) || parm.delete("ambiq")
+   self.ambiq = parm.delete(:ambiq) || parm.delete("ambiq")
    self.error = parm.delete(:error) || parm.delete("error")
    self.message = parm.delete(:message) || parm.delete("message")
    self
