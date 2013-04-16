@@ -210,6 +210,8 @@ ru:
  tr_yes: Да
  tr_no: Нет
 
+ del_prognoz: Прогноз поставки
+ end_user_price: Цена конечного потребителя
 
  errors:
   search:

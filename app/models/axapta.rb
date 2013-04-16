@@ -47,9 +47,10 @@ class AxaptaResult < OpenStruct
 end
 
 class AxaptaResults < Array
-  attr_accessor :type, :error, :message
+  attr_accessor :type, :error, :message, :ambiq
   def initialize(arr = [], opts = {})
    self.type = opts.delete(:type) || opts.delete("type")
+   self.type = opts.delete(:ambiq) || opts.delete("ambiq")
    self.error = opts.delete(:error) || opts.delete("error")
    self.message = opts.delete(:message) || opts.delete("message")
    super(arr.map{|i| OpenStruct.new(i.as_hash) })
@@ -59,6 +60,7 @@ class AxaptaResults < Array
    self.clear
    self.concat(arr)
    self.type = parm.delete(:type) || parm.delete("type")
+   self.type = opts.delete(:ambiq) || opts.delete("ambiq")
    self.error = parm.delete(:error) || parm.delete("error")
    self.message = parm.delete(:message) || parm.delete("message")
    self
@@ -420,7 +422,6 @@ class Axapta
   def self.ask(method, *args)
    begin
     res, err = AxaptaRequest.send(method, *args)
-    p "--err-ask", err
     AxaptaResult.new(res.merge(parse_err(err)))
    rescue Exception => e
     parse_exc(e.message, e.class.name)
@@ -431,10 +432,9 @@ class Axapta
   def self.asks(method, items, *args)
    begin
     res, err = AxaptaRequest.send(method, *args)
-    p "--err-asks", err
     
     its = items && res ? res[items] : res
-    AxaptaResults.new(its || [], parse_err(err))
+    AxaptaResults.new(its || [], {:ambiq => "ambiguous_query"}.merge(parse_err(err)))
    rescue Exception => e
     parse_exc(e.message, e.class.name)
     AxaptaResults.new([], {:type => AxaptaState::INVALID, :error => e.class.name, :message => "#{get_last_exc[:type]}:#{get_last_exc[:message]}"})
@@ -444,7 +444,6 @@ class Axapta
   def self.ask_pages(method, page, items, *args)
    begin
     res, err = AxaptaRequest.send(method, *args)
-    p "--err-ask_pages", err
     its = items && res ? res[items] : res
     AxaptaPages.new(its || [], {:page => page, :records => res["records"], :pages => res["pages"]}.merge(parse_err(err)))
    rescue Exception => e
