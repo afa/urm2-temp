@@ -67,7 +67,7 @@ class AxaptaResults < Array
   end
 
   def params
-   {:type => type, :error => error, :message => message}
+   {:type => type, :error => error, :message => message, :ambiq => ambiq}
   end
 
   def run(&blk)
