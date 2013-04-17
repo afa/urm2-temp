@@ -29,6 +29,7 @@ function processErrors(hash){
 }
 
 function renderErrors(arr){
+ alert(arr);
  if(arr === undefined){
   return;
  }
