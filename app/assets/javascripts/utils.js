@@ -13,7 +13,6 @@ function processErrors(hash){
  if(hash === undefined){
   return;
  }
- alert(hash);
  var els = [];
  var idx = 0;
  for(var i in hash.keys){
@@ -34,6 +33,7 @@ function renderErrors(arr){
   return;
  }
  $.each(arr, function(i, item){
+  alert('' + i + item);
   processErrors(item);
  });
 }
