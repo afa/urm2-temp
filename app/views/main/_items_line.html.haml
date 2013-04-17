@@ -44,11 +44,11 @@
  %td.text-right.double-last-cell &nbsp;
  %td.with-icons{:class => "text-left"}
   = items_line.location_id
-  .icons 
-   .icon
-    - if items_line.forecast_available
+  - if items_line.forecast_available
+   .icons 
+    .icon
      = link_to "", info_main_index_path(:code => items_line.code, :after => line_code, :loc => items_line.location_id, :format => :json), :class => "info js delivery active"
-    - else
+    -# - else
      .delivery &nbsp;
  -# %td= items_line["prognoz"]
  %td.text-right
