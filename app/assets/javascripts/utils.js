@@ -15,7 +15,6 @@ function processErrors(hash){
  }
  var els = [];
  var idx = 0;
- alert('' + hash.keys);
  $.each(hash, function(key, val){
  //for(var i in hash.keys){
   els[idx] = $('<div class="flash ' + key + '">' + val +'</div>').appendTo("#flash_place");
