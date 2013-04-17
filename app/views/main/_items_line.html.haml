@@ -39,7 +39,7 @@
    -# %input{:type=>"text", :class=>"validate[custom[onlyNumber],max[#{items_line["max_qty"] || 0}]]"}
    %a.count{:href=>"#"}
  
- %td.double-first-cell.text-right= items_line.min_qty
+ %td.double-first-cell.text-right= items_line.min_qty > 1 ? items_line.min_qty : ''
  %td.text-right= items_line.max_qty
  %td.text-right.double-last-cell &nbsp;
  %td.with-icons
