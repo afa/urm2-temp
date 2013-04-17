@@ -1,7 +1,7 @@
 class Offer::Store < Offer::Base
 
  @signature_fields = @base_signature_fields + [:location_id]
- attr_accessor :location_id, :brend_name, :brend_url, :qtys, :prices, :counts, :need_more, :qty_in_pack, :segment_rus, :body_name, :analog_exists, :forecast_available, :min_qty, :max_qty, :raw_location, :vend_proposal_date, :alt_prices, :application_area_mandatory, :dlv_prognoses
+ attr_accessor :location_id, :brend_name, :brend_url, :qtys, :prices, :counts, :need_more, :qty_in_pack, :segment_rus, :body_name, :analog_exists, :forecast_available, :min_qty, :max_qty, :raw_location, :vend_proposal_date, :alt_prices, :application_area_mandatory, :dlv_prognoses, :pick_only
 
   def self.search(hsh)
    return AxaptaResults.new([], {:type => AxaptaState::WARN, :error => "not found", :message => I18n.t("errors.search.empty")}) if hsh.blank? || (hsh[:external_code].blank? && (hsh[:query_string].blank? || hsh[:query_string].size < 3))
@@ -23,6 +23,7 @@ class Offer::Store < Offer::Base
       n.brend_url = hsh.item_brend_url
       n.code = hsh.item_id
       n.rohs = hsh.rohs
+      n.pick_only = hsh.pick_only
       n.location_id = loc["location_id"]
       #n.vend_qty = prgnz["vend_qty"]
       n.qty_in_pack = loc["qty_in_pack"]
