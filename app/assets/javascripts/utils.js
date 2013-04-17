@@ -16,10 +16,11 @@ function processErrors(hash){
  var els = [];
  var idx = 0;
  alert('' + hash.keys);
- for(var i in hash.keys){
-  els[idx] = $('<div class="flash ' + i + '">' + hash[i] +'</div>').appendTo("#flash_place");
+ $.each(hash, function(key, val){
+ //for(var i in hash.keys){
+  els[idx] = $('<div class="flash ' + key + '">' + val +'</div>').appendTo("#flash_place");
   idx += 1;
- }
+ });
  var obj = {
   elem: els,
   func: function(){
