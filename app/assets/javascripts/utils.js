@@ -33,7 +33,7 @@ function renderErrors(arr){
   return;
  }
  $.each(arr, function(i, item){
-  alert('' + i + item.keys);
+  alert('' + i + item.info);
   processErrors(item);
  });
 }
