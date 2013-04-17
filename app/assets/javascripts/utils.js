@@ -15,6 +15,7 @@ function processErrors(hash){
  }
  var els = [];
  var idx = 0;
+ alert('' + hash.keys);
  for(var i in hash.keys){
   els[idx] = $('<div class="flash ' + i + '">' + hash[i] +'</div>').appendTo("#flash_place");
   idx += 1;
@@ -33,7 +34,6 @@ function renderErrors(arr){
   return;
  }
  $.each(arr, function(i, item){
-  alert('' + i + item.info);
   processErrors(item);
  });
 }
