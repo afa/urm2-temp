@@ -36,6 +36,8 @@
     %span
      %span &nbsp;
    %input{:type=>"text", :class=>["validate[custom[onlyNumber],max[10000]]", items_line.min_qty > 1 ? "with-critical" : nil], :name => "items[#{offer_code}][amount]", :value => offer_amount}
+   - if items_line.pick_only
+    = image_tag asset_path("image", 'warning.png')
    -# %input{:type=>"text", :class=>"validate[custom[onlyNumber],max[#{items_line["max_qty"] || 0}]]"}
    %a.count{:href=>"#"}
  
