@@ -19,7 +19,6 @@ function hide_dms_on_plus_click(obj_id){
 
 function load_dms_bundle(from_where, need_load){
  if(need_load){
-  //$.getJSON(from_where, "", function(data){
   makeAjaxCall(from_where, function(data){
    $("div.dms_loader").hide();
    for(var kk in data.dms){
