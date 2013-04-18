@@ -158,7 +158,7 @@ class MainController < ApplicationController
    @after = params[:after]
    @location = params[:loc]
    @code = params[:code]
-   locs = Axapta.search_names(:item_id_search => @code).first.locations.map{|l| l["location_id"] }
+   locs = Axapta.search_names(:item_id_search => @code).process{|n| n.first.locations.map{|l| l["location_id"] }}
    chk_err(locs)
    @data = Axapta.item_info({:item_id => @code})
    chk_err(@data)
