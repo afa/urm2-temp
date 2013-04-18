@@ -45,7 +45,7 @@ function load_dms_bundle(from_where, need_load){
   },
   function(){
    $("div.dms_loader").hide();
-   renderErrors({error: 'Ошибка связи'});
+   renderErrors([{error: 'Ошибка связи'}]);
   });
  }
 }
@@ -107,7 +107,7 @@ function showAnalog(evt){
   makeAjaxCall(this.href,    //"/main/info?code=" + code + "&after=" + row_id,
    placeAnalogData,
    function(data){
-   renderErrors({error: 'Ошибка связи'});
+   renderErrors([{error: 'Ошибка связи'}]);
     //$("tr.item_" + row_id + " .icon .slider").hide();
     //$("tr.item_" + row_id + " .icon .dms").show().removeClass("active");
   });
@@ -131,7 +131,7 @@ function showDms(evt){
   makeAjaxCall("/main/dms?code=" + code + "&after=" + row_id,
    placeDmsData,
    function(data){
-   renderErrors({error: 'Ошибка связи'});
+   renderErrors([{error: 'Ошибка связи'}]);
     $("tr.item_" + row_id + " .icon .slider").hide();
     $("tr.item_" + row_id + " .icon .dms").show().removeClass("active");
   });
@@ -152,7 +152,7 @@ function queryAutoComplete(rq, callback){
    callback(data);
   },
   function(){
-   renderErrors({error: 'Ошибка связи'});
+   renderErrors([{error: 'Ошибка связи'}]);
   }
  );
 }

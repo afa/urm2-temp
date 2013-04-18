@@ -131,7 +131,7 @@ function showInfo(evt){
   makeAjaxCall(this.href,    //"/main/info?code=" + code + "&after=" + row_id,
    placeInfoData,
    function(data){
-   renderErrors({error: 'Ошибка связи'});
+   renderErrors([{error: 'Ошибка связи'}]);
     //$("tr.item_" + row_id + " .icon .slider").hide();
     //$("tr.item_" + row_id + " .icon .dms").show().removeClass("active");
   });
@@ -226,7 +226,7 @@ function runAllowOrder(){
     });
    },
    function(data){
-   renderErrors({error: 'Ошибка связи'});
+   renderErrors([{error: 'Ошибка связи'}]);
     $("#order").hide();
     $("#allow-order").show();
   });

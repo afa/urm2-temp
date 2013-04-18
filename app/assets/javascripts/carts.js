@@ -57,7 +57,7 @@ function cartsAddElementToCart(){
    $('#cart_store .icon a.delete').click(cartsRemoveElementFromCarts);
   },
   function(){
-   renderErrors({error: 'Ошибка связи'});
+   renderErrors([{error: 'Ошибка связи'}]);
   }
  );
  return false;
@@ -95,7 +95,7 @@ function cartsRemoveElementFromCarts(){
    $('#cart_store .icon a.delete').click(cartsRemoveElementFromCarts);
   },
   function(data){
-   renderErrors({error: 'Ошибка связи'});
+   renderErrors([{error: 'Ошибка связи'}]);
   }
  );
  return false;
@@ -140,7 +140,7 @@ function cartsSaveCart(){
 
   },
   function(){
-   renderErrors({error: 'Ошибка связи'});
+   renderErrors([{error: 'Ошибка связи'}]);
   }
  );
 
