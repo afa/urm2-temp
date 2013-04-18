@@ -159,9 +159,16 @@ class MainController < ApplicationController
    @location = params[:loc]
    @code = params[:code]
    locs = Axapta.search_names(:item_id_search => @code).first.locations.map{|l| l["location_id"] }
+   chk_err(locs)
    @data = Axapta.item_info({:item_id => @code})
+   chk_err(@data)
    @data.prices = Axapta.retail_price(:item_id => @code)
-   @data.dates = locs.inject({}){|r, l| r.merge(Axapta.get_delivery_prognosis(@code, l))}
+   chk_err(@data)
+   @data.dates = locs.inject({}) do |r, l|
+    prg = Axapta.get_delivery_prognosis(@code, l)
+    chk_err(prg)
+    r.merge(prg)
+   end
    respond_with do |format|
     format.json { render :json => {:row_id => @after, :code => @code, :gap => render_to_string(:partial => "main/gap_line.html.haml", :locals => {:after => @after}), :info => render_to_string(:partial => "main/info_block.html.haml", :locals => {:after => @after, :info_block => @data})} }
    end
@@ -183,6 +190,7 @@ class MainController < ApplicationController
   def manager_request
    @request = OpenStruct.new(params[:request]) unless params[:request].blank?
    cart = CartRequest.create :user_id => User.current.id, :product_name => @request.request_string, :amount => @request.requested_count, :comment => @request.manager_comment
+   chk_err(cart)
    redirect_to :back
    # запросить 
   end
@@ -209,9 +217,11 @@ class MainController < ApplicationController
   end
 
   def qnames
+   nmes = Axapta.search_item_name_quick(params[:query])
+   chk_err(nmes)
    respond_with do |format|
     format.json do
-     render :json => Axapta.search_item_name_quick(params[:query])
+     render :json => nmes
     end
    end
    
