@@ -40,7 +40,6 @@ class MainController < ApplicationController
    gon.app_list = @app_list #TODO: clean gon
    @mandatory = @carts.detect{|c| c.application_area_mandatory }
    flash[:info] = t "errors.search.empty" if @items.empty?
-   p "---amb", @items.ambiq
    flash[:info] = t "errors.search.ambiq" if @items.ambiq
   end
 
@@ -68,11 +67,9 @@ class MainController < ApplicationController
    @errors << {:info => t("errors.search.ambiq")} if @items.ambiq
    respond_with do |format|
     format.json do
-     #render :json => {:dms => render_to_string( :partial => "main/dms_block.html", :locals => {:items => @items, :after => @after} ), :gap => render_to_string( :partial => "main/gap_line.html", :locals => {:after => @after}), :empty => render_to_string(:partial => "main/dms_empty.html", :locals => {:after => @after})}
      crt = render_to_string(:partial => "carts/cart_table.html.haml", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores})
      render :json => {:row_id => @after, :code => @code, :dms => render_to_string( :partial => "main/dms_block.html.haml", :locals => {:items => @items, :after => @after} ), :gap => render_to_string( :partial => "main/gap_line.html.haml", :locals => {:after => @after}), :empty => render_to_string(:partial => "main/dms_empty.html.haml", :locals => {:after => @after}), :cart => crt, :error => @errors}
     end
-    #format.js { render :layout => false }
     format.html do
      
      redirect_to root_path
@@ -122,7 +119,6 @@ class MainController < ApplicationController
     cart.line = render_to_string :partial => "carts/cart_line.html.haml", :locals => {:cart_line => cart, :app_list => @app_list}
     cart.offer_code = cart.signature
     cart.line_code = cart.base_signature
-    #cart.line = view_context.escape_javascript(render_to_string :partial => "carts/cart_line", :locals => {:cart_line => cart})
    end
    @rendered = render_to_string :partial => "carts/cart_table.html.haml", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores}
    respond_with do |format|

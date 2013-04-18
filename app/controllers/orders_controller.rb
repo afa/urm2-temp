@@ -14,13 +14,14 @@ class OrdersController < ApplicationController
    @reqs = @carts.partition{|i| i.is_a? CartRequest }[0]
    @nreqs = @carts.partition{|i| i.is_a? CartRequest }[1]
    @deliveries = User.current.deliveries
+   chk_err(@deliveries)
    @stores = @carts.map(&:location_link).uniq.compact.sort{|a, b| a == User.current.current_account.invent_location_id ? -1 : a <=> b }
    sales = Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000)
+   chk_err(sales)
    @sales_locs = sales.map{|s| [s.sales_id, s.location_id] }.as_hash
    @avail_sales = sales.map{|s| [s.sales_id, s.sales_id] }
    respond_with do |format|
-    #format.js { render :layout => false }
-    format.json { render :json => {:order => render_to_string(:partial => "main/order_edit.html.haml")} }
+    format.json { render :json => {:order => render_to_string(:partial => "main/order_edit.html.haml"), :error => @errors} }
     format.html do
      render
     end
@@ -31,22 +32,23 @@ class OrdersController < ApplicationController
   def create
    @changed = []
    @results = User.current.make_order(params[:date_picker], params[:delivery_type], :order_needed => params[:order_needed], :order_comment => params[:order_comment], :request_comment => params[:request_comment], :sales => params[:use_sale])
+   chk_err(@results)
    @carts = current_user.cart_items.unprocessed.in_cart.order("product_name, product_brend").all
    @carts.select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
    @stores = @carts.map(&:location_link).uniq.compact.sort{|a, b| a == User.current.current_account.invent_location_id ? -1 : a <=> b }
    @mandatory = @carts.detect{|i| i.application_area_mandatory }
-   @app_list = Axapta.application_area_list || []
+   @app_list = Axapta.application_area_list
+   chk_err(@app_list)
    #gon.app_list = @app_list
    @cart = render_to_string :partial => "carts/cart_table.html.haml", :locals => {:app_list => @app_list, :cart => @carts, :stores => @stores}
    res = []
    @results[0].each{|r| res << {:name => "info", :value => "#{t :created_orders} #{r}"} } if @results[0]
-   #@results[0].each{|r| res << {:name => "info", :value => "#{t :created_orders} #{r[0]}"} } if @results[0]
    res << {:name => "info", :value => "#{t :created_quotations} #{@results[1]}"} if @results[1]
    redirectto = quotation_path(@results[1]) if @results[1]
    redirectto = order_path(@results[0][0]) if @results[0] && @results[0][0]
    respond_with do |format|
     format.json do
-     render :json => {:app_list => @app_list, :carts => @cart, :results => res, :redirect_to => redirectto}
+     render :json => {:app_list => @app_list, :carts => @cart, :results => res, :redirect_to => redirectto, :error => @errors}
     end
    end
   end
@@ -56,6 +58,7 @@ class OrdersController < ApplicationController
    #@filter.date_from = 1.year.ago.strftime("%Y-%m-%d") if @filter.date_from.blank?
    #@filter_hash.merge!(:date_to => @filter.date_to, :date_from => @filter.date_from)
    @lines = Axapta.sales_lines_paged(@page, @filter_hash.merge(:only_open => true, :show_reserve_qty => true, :show_status_qty => true, :order_item_name => 'asc'))
+   chk_err(@lines)
   end
 
   def client_lines
@@ -63,28 +66,36 @@ class OrdersController < ApplicationController
    #@filter.date_from = 1.month.ago.strftime("%Y-%m-%d") if @filter.date_from.blank?
    #@filter_hash.merge!(:date_to => @filter.date_to, :date_from => @filter.date_from)
    @lines = Axapta.invoice_lines_paged(@page, @filter_hash)
+   chk_err(@lines)
   end
 
   def control
    @info = Axapta.custom_limits
+   chk_err(@info)
    @lines = Axapta.sales_lines_paged(@page, @filter_hash.merge(:only_reserve => true, :show_reserve_qty => true))
+   chk_err(@lines)
   end
 
   def show
    @close_reasons = Axapta.sales_close_reason_list
+   chk_err(@close_reasons)
    @order_info = Axapta.sales_info(:sales_id => params[:id], :show_external_invoice_num => true, :show_max_quotation_prognosis => true).first
+   chk_err(@order_info)
    if @order_info.nil?
     render :status => 404, :text => 'notfound'
     return
    end
    @lines = Axapta.sales_lines_paged(@page, :sales_id => params[:id], :show_reserve_qty => true, :show_status_qty => true, :only_open => true, :order_item_name => "asc")
+   chk_err(@lines)
    @mandatory = false
    unless @lines.select{|l| l.application_area_mandatory }.empty?
     @application_area_list = Axapta.application_area_list
+    chk_err(@application_area_list)
     @mandatory = true
    end
    p "---orsh", @lines
    @deliveries = current_user.deliveries
+   chk_err(@deliveries)
   end
 
   def save
@@ -101,8 +112,8 @@ class OrdersController < ApplicationController
    #@order = Axapta.sales_info(:sales_id => id.to_i)
    #@lines = Axapta.sales_lines(:sales_id => id.to_i)
    begin
-    Axapta.sales_handle_header(:comment => comment, :sales_id => id)
-    Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:line_id => k).merge(:requirements => v[:requirement]) }, :sales_id => id) #TODO fix line_id for line_id
+    chk_err(Axapta.sales_handle_header(:comment => comment, :sales_id => id))
+    chk_err(Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:line_id => k).merge(:requirements => v[:requirement]) }, :sales_id => id)) #TODO fix line_id for line_id
    rescue AxaptaError => e
     @err = Axapta.get_last_exc
    end
@@ -119,14 +130,14 @@ class OrdersController < ApplicationController
    end
    if [0, 2].include?(idx)
     begin
-     Axapta.create_invoice(id, idx == 2)
+     chk_err(Axapta.create_invoice(id, idx == 2))
     rescue AxaptaError
      redirect_to order_path(id), :flash =>{:error => Axapta.get_last_exc["_error"]["message"]}
      return
     end
    else
     begin
-     Axapta.invoice_paym(id, true)
+     chk_err(Axapta.invoice_paym(id, true))
     rescue AxaptaError
      redirect_to order_path(id), :flash =>{:error => Axapta.get_last_exc["_error"]["message"]}
      return
@@ -143,7 +154,7 @@ class OrdersController < ApplicationController
     return
    end
    begin
-    Axapta.sales_handle_header(:close_reason_id => reason, :sales_id => id)
+    chk_err(Axapta.sales_handle_header(:close_reason_id => reason, :sales_id => id))
    rescue AxaptaError
     redirect_to order_path(id), :flash =>{:error => Axapta.get_last_exc["_error"]["message"]}
     return
@@ -159,7 +170,7 @@ class OrdersController < ApplicationController
     return
    end
    begin
-    Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:line_id => k, :is_reserv => 1) }, :sales_id => id) #TODO fix line_id for line_id
+    chk_err(Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:line_id => k, :is_reserv => 1) }, :sales_id => id)) #TODO fix line_id for line_id
    rescue AxaptaError
     
     redirect_to order_path(id), :flash =>{:error => Axapta.get_last_exc["_error"]["message"]}
@@ -171,13 +182,14 @@ class OrdersController < ApplicationController
   def unreserve
    id = params[:id]
    lines = Axapta.sales_lines(:sales_id => id, :show_reserve_qty => true)#, :only_open => true)
+   chk_err(lines)
    #lines = params.try(:[], :order).try(:[], id).try(:[], :line) || []
    if lines.empty?
     redirect_to order_path(id), :flash => {:error => t(:empty_lines)}
     return
    end
    begin
-    Axapta.sales_handle_edit(:sales_lines => lines.select{|v| v.reserve_qty > 0 }.map{|v| {:line_id => v.line_id, :process_qty => -v.reserve_qty, :is_reserv => 1} }, :sales_id => id) #TODO fix line_id for line_id
+    chk_err(Axapta.sales_handle_edit(:sales_lines => lines.select{|v| v.reserve_qty > 0 }.map{|v| {:line_id => v.line_id, :process_qty => -v.reserve_qty, :is_reserv => 1} }, :sales_id => id)) #TODO fix line_id for line_id
    rescue AxaptaError
     redirect_to order_path(id), :flash =>{:error => Axapta.get_last_exc["_error"]["message"]}
     return
@@ -193,7 +205,7 @@ class OrdersController < ApplicationController
     return
    end
    begin
-    Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:line_id => k, :is_pick => 1) }, :sales_id => id, :date_dead_line => params.try(:[], :date_picker), :customer_delivery_type_id => params.try(:[], :delivery_type)) #TODO fix line_id for line_id
+    chk_err(Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:line_id => k, :is_pick => 1) }, :sales_id => id, :date_dead_line => params.try(:[], :date_picker), :customer_delivery_type_id => params.try(:[], :delivery_type))) #TODO fix line_id for line_id
    rescue AxaptaError
     redirect_to order_path(id), :flash =>{:error => Axapta.get_last_exc["_error"]["message"]}
     return
@@ -209,7 +221,7 @@ class OrdersController < ApplicationController
     return
    end
    begin
-    Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:line_id => k, :close_reason_id => params.try(:[], :order).try(:[], id).try(:[], :close_reason_id)) }, :sales_id => id) #TODO fix line_id for line_id
+    chk_err(Axapta.sales_handle_edit(:sales_lines => lines.map{|k, v| v.merge(:line_id => k, :close_reason_id => params.try(:[], :order).try(:[], id).try(:[], :close_reason_id)) }, :sales_id => id)) #TODO fix line_id for line_id
    rescue AxaptaError
     redirect_to order_path(id), :flash =>{:error => Axapta.get_last_exc["_error"]["message"]}
     return
@@ -259,19 +271,23 @@ class OrdersController < ApplicationController
   end
 
   def track
+   trk = Axapta.sales_tracking(:sales_id => params[:id])
+   chk_err(trk)
    respond_with do |format|
     format.json do
-     r = render_to_string(:partial => "orders/track.html.haml", :locals => {:tracks => Axapta.sales_tracking(:sales_id => params[:id]), :row_id => params[:id]})
-     render :json => {:rendered => r, :row_id => params[:id]}
+     r = render_to_string(:partial => "orders/track.html.haml", :locals => {:tracks => trk, :row_id => params[:id]})
+     render :json => {:rendered => r, :row_id => params[:id], :error => @errors}
     end
    end
   end
 
   def lines_track
+   trk = Axapta.sales_tracking(:line_id => params[:id])
+   chk_err(trk)
    respond_with do |format|
     format.json do
-     r = render_to_string(:partial => "orders/lines_track.html.haml", :locals => {:lines_tracks => Axapta.sales_tracking(:line_id => params[:id]), :row_id => params[:id]})
-     render :json => {:rendered => r, :row_id => params[:id]}
+     r = render_to_string(:partial => "orders/lines_track.html.haml", :locals => {:lines_tracks => trk, :row_id => params[:id]})
+     render :json => {:rendered => r, :row_id => params[:id], :error => @errors}
     end
    end
   end
