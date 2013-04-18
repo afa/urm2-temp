@@ -221,7 +221,7 @@ class MainController < ApplicationController
    chk_err(nmes)
    respond_with do |format|
     format.json do
-     render :json => nmes
+     render :json => nmes, :error => @errors
     end
    end
    
