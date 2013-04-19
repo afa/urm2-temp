@@ -383,7 +383,7 @@ class Axapta
   end
 
   def self.sales_close_reason_list
-   asks(:sales_close_reason_list, "reason_list", {:user_hash => axapta_hash}).map{|x| [x.close_reason_description, x.close_reason_id] } #return [[desc, id]]
+   asks(:sales_close_reason_list, "reason_list", {:user_hash => axapta_hash}).process{|r| r.map{|x| [x.close_reason_description, x.close_reason_id] }} #return [[desc, id]]
   end
 
   def self.info_cust_balance
