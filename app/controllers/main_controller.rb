@@ -39,6 +39,7 @@ class MainController < ApplicationController
    chk_err(@app_list)
    gon.app_list = @app_list #TODO: clean gon
    @mandatory = @carts.detect{|c| c.application_area_mandatory }
+   @ask_man = AxaptaResults.new.from_prepared([{:name => @search.query_string}], {}) unless @search.query_string.blank?
    flash[:info] = t "errors.search.empty" if @items.empty?
    flash[:info] = t "errors.search.ambiq" if @items.ambiq
   end
