@@ -1,2 +1,12 @@
-
-
+- require "web_utils"
+- line_code = ask_man_line.base_signature
+- offer_code = ask_man_line.signature
+- offer_amount = ask_man_line.amount.to_i > 0 ? ask_man_line.amount : ''
+%tr{:class => "item_#{line_code}"}
+ %td
+ %td= ask_man_line.name
+ %td{:colspan => 3}
+ %td.input-in-cart
+  %div
+   %input{:type=>"text", :class=>["validate[custom[onlyNumber],max[10000]]"], :name => "items[#{offer_code}][amount]", :value => offer_amount}
+ %td{:colspan => 11}

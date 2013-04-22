@@ -10,31 +10,31 @@
     = render :partial => "shared/button", :locals => {:title => t(:add_to_cart), :name => "items[commit]", :opts => {:class => (@items.empty? ? "disabled" : nil)}}
     .clear.padded
     %table.table-style{:class => "search-products"}
-     - unless @items.empty?
-      %tr
-       %th{:rowspan => 2} &nbsp;
-       %th.text-left{:rowspan => 2}= t :item_name
-       %th.text-left{:rowspan => 2}= t :item_brend
-       %th.text-left{:rowspan=>2}= t :body_name
-       %th{:rowspan => 2} ROHS
-       %th{:rowspan => 2}= t :to_cart
-       %th.double-cell{:colspan => 3}= t :avail
-       %th{:rowspan => 2}= t :location
-       %th{:rowspan => 2}= t :price1
-       %th{:rowspan => 2}= t :count2
-       %th{:rowspan => 2}= t :price2
-       %th{:rowspan => 2}= t :count3
-       %th{:rowspan => 2}= t :price3
-       %th{:rowspan => 2}= t :count4
-       %th{:rowspan => 2}= t :price4
-       -# %th{:rowspan => 2}= t :quantity
+     %tr
+      %th{:rowspan => 2} &nbsp;
+      %th.text-left{:rowspan => 2}= t :item_name
+      %th.text-left{:rowspan => 2}= t :item_brend
+      %th.text-left{:rowspan=>2}= t :body_name
+      %th{:rowspan => 2} ROHS
+      %th{:rowspan => 2}= t :to_cart
+      %th.double-cell{:colspan => 3}= t :avail
+      %th{:rowspan => 2}= t :location
+      %th{:rowspan => 2}= t :price1
+      %th{:rowspan => 2}= t :count2
+      %th{:rowspan => 2}= t :price2
+      %th{:rowspan => 2}= t :count3
+      %th{:rowspan => 2}= t :price3
+      %th{:rowspan => 2}= t :count4
+      %th{:rowspan => 2}= t :price4
+      -# %th{:rowspan => 2}= t :quantity
 
-      %tr
-       %th.bold.double-first-cell= t :avail_min
-       %th.bold= t :avail_max
-       %th.bold.double-last-cell MPQ
+     %tr
+      %th.bold.double-first-cell= t :avail_min
+      %th.bold= t :avail_max
+      %th.bold.double-last-cell MPQ
 
-      = render :partial => "items_line", :collection => @items, :locals => {:need_links => true, :form => frm}
+     = render :partial => "items_line", :collection => @items, :locals => {:need_links => true, :form => frm}
+     = render :partial => "ask_man_line", :collection => @ask_man
 
      - if @items.size > 5
       %tr.title-header-bottom
