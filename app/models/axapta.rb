@@ -204,7 +204,7 @@ class Axapta
    srch = args.first["item_id"]
    srch = args.first[:item_id] unless srch
    res = asks(:retail_price, "prices", args.as_hash.merge(:user_hash => axapta_hash))
-   a = AxaptaResult.new.from_prepared(res.params)
+   a = AxaptaResult.new.from_prepared({}, res.params)
    locs = res.sort_by{|l| l.min_qty }[0, 4]
    a.price1 = locs[0].price if locs[0]
    a.count1 = locs[0].min_qty if locs[0]
