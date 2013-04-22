@@ -292,8 +292,9 @@ class Axapta
   def self.get_delivery_prognosis(code, lc = nil) #TODO refactor && move to offer::store#fabricate
    locs = {}
    pp = {:location_id => lc}
-   rz = asks(:delivery_prognosis, "delivery_prognosis", (pp.merge(:invent_location_id => (lc.nil? ? User.current.current_account.invent_location_id : lc), :item_id => code, :user_hash => axapta_hash))).map{|i| {:date => i.delivery_date, :qty => i.delivery_qty} }
+   rz = asks(:delivery_prognosis, "delivery_prognosis", (pp.merge(:invent_location_id => (lc.nil? ? User.current.current_account.invent_location_id : lc), :item_id => code, :user_hash => axapta_hash))).process{|z| z.map{|i| {:date => i.delivery_date, :qty => i.delivery_qty} }}
    return { "#{lc.nil? ? User.current.current_account.invent_location_id : lc}" => rz }# unless rz.empty?
+=begin
    asks(:search_item_name_h, "items", pp.merge(:user_hash => axapta_hash, :item_id_search => code, :show_delivery_prognosis => true)).each do |loc|
     (loc.try(:[], "locations")||[]).each do |dl|
      locs[dl["location_id"]] ||= []
@@ -317,6 +318,7 @@ class Axapta
     r.delete_if{|k, v| v.nil? || v == 0 }
    end
    Hash[rez.map{|r| r.empty? ? nil : r }.compact]
+=end
   end
 
   def self.create_invoice(order, send = false)
