@@ -58,10 +58,10 @@
        %tr
         %th{:colspan => 7}= t(:end_user_price)
        %tr
-        %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices["price1"])
-        %td{:style => "border-bottom: 0;"}= prices["count2"]
-        %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices["price2"])
-        %td{:style => "border-bottom: 0;"}= prices["count3"]
-        %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices["price3"])
-        %td{:style => "border-bottom: 0;"}= prices["count4"]
-        %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices["price4"])
+        %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices.price1)
+        %td{:style => "border-bottom: 0;"}= prices.count2
+        %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices.price2)
+        %td{:style => "border-bottom: 0;"}= prices.count3
+        %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices.price3)
+        %td{:style => "border-bottom: 0;"}= prices.count4
+        %td{:style => "border-bottom: 0;"}= @usd_decor.decore(prices.price4)
