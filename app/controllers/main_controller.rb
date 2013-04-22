@@ -159,7 +159,7 @@ class MainController < ApplicationController
    @data = Axapta.item_info({:item_id => @code})
    chk_err(@data)
    @data.prices = Axapta.retail_price(:item_id => @code)
-   chk_err(@data)
+   chk_err(@data.prices)
    @data.dates = locs.inject({}) do |r, l|
     prg = Axapta.get_delivery_prognosis(@code, l)
     chk_err(prg)
