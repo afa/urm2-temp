@@ -296,7 +296,7 @@ class Axapta
   def self.get_delivery_prognosis(code, lc = nil) #TODO refactor && move to offer::store#fabricate
    pp = {:location_id => lc}
    rz = asks(:delivery_prognosis, "delivery_prognosis", (pp.merge(:invent_location_id => (lc.nil? ? User.current.current_account.invent_location_id : lc), :item_id => code, :user_hash => axapta_hash))).process{|z| z.map{|i| OpenStruct.new(:date => i.delivery_date, :qty => i.delivery_qty) }}
-   return AxaptaResult.new.from_prepared({"#{lc.nil? ? User.current.current_account.invent_location_id : lc}" => rz }, rz.params)# unless rz.empty?
+   return AxaptaResults.new.from_prepared([{"#{lc.nil? ? User.current.current_account.invent_location_id : lc}" => rz }], rz.params)# unless rz.empty?
 =begin
    asks(:search_item_name_h, "items", pp.merge(:user_hash => axapta_hash, :item_id_search => code, :show_delivery_prognosis => true)).each do |loc|
     (loc.try(:[], "locations")||[]).each do |dl|
