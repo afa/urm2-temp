@@ -49,8 +49,8 @@
         - unless r.empty?
          - r.each do |s|
           %tr
-           %td{:style => "border-bottom: 0;"}= s.try(:[], :qty)
-           %td{:style => "border-bottom: 0;"}= s.try(:[], :date)
+           %td{:style => "border-bottom: 0;"}= s.qty
+           %td{:style => "border-bottom: 0;"}= s.date
            %td{:style => "border-bottom: 0;"}= k
     %td{:style => "border-bottom: 0;"}
      - unless prices.blank?
