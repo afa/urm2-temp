@@ -13,7 +13,7 @@ class Offer::AskMan < Offer::Base
    rez = AxaptaResults.new.from_prepared([], arr)
    arr.each do |hsh|
     rez << self.new do |n|
-     n.name = hsh.item_name
+     n.name = hsh.name
      CartAskMan.prepare_code(n)
     end
    end
