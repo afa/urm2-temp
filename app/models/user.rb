@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
   def make_order(dead_line, delivery, *args)
    #, :order_needed => params[:order_needed], :order_comment => params[:order_comment], :request_comment => params[:request_comment]
    ar = {}.merge(*args) rescue {}
-   reqs = cart_items.unprocessed.in_cart.all.partition{|c| c.is_a?(CartRequest) }
+   reqs = cart_items.unprocessed.in_cart.all.partition{|c| c.is_a?(CartRequest) || c.is_a?(CartAskMan) }
    reqs[1].select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
    res = [[], nil]
    p "---makeorder-ors", reqs
