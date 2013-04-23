@@ -7,7 +7,7 @@
      = render :partial => "shared/submit_button", :locals => {:title => "Export", :name => "items[export]"}
 
    = form_for :cart_fields, :url => carts_path, :method => :post, :html=>{:class => "json"}, :remote => true do |frm|
-    = render :partial => "shared/button", :locals => {:title => t(:add_to_cart), :name => "items[commit]", :opts => {:class => (@items.empty? ? "disabled" : nil)}}
+    = render :partial => "shared/button", :locals => {:title => t(:add_to_cart), :name => "items[commit]"}
     .clear.padded
     %table.table-style{:class => "search-products"}
      %tr
@@ -60,7 +60,7 @@
       %tr.title-header-bottom
        %th.double-cell{:colspan => 3}= t :avail
     .padded
-    = render :partial => "shared/button", :locals => {:title => t(:add_to_cart), :name => "items[commit]", :opts => {:class => (@items.empty? ? "disabled" : nil)}}
+    = render :partial => "shared/button", :locals => {:title => t(:add_to_cart), :name => "items[commit]"}
  .clear.block-padded &nbsp;
  .cart-table.padded
   .cart= render :partial => "carts/cart_table.html.haml", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores}
