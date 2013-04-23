@@ -6,7 +6,7 @@
 %tr{:class => "ask_man_#{line_code}"}
  %td
   -# %input.item-code{:type => "hidden", :value => ask_man_line.code, :name => "items[#{offer_code}][code]", :id => "code_#{line_code}"}
-  %input.item-cart{:type => "hidden", :value => ask_man_line.cart_id, :name => "ask_man[#{offer_code}][cart]"}
+  %input.askman-cart{:type => "hidden", :value => ask_man_line.cart_id, :name => "ask_man[#{offer_code}][cart]"}
  %td.text-left= ask_man_line.name
  %td{:colspan => 3}
  %td.input-in-cart

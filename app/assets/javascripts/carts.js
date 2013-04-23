@@ -15,6 +15,10 @@ function cartsAddElementToCart(){
   takeValToHash(crts, "td.input-in-cart input", item);
   takeValToHash(crts, "input.analog-cart", item);
  });
+ $("table.search-products tr:has(input.askman-cart)").each(function(idx, item){
+  takeValToHash(crts, "td.input-in-cart input", item);
+  takeValToHash(crts, "input.askman-cart", item);
+ });
  makeAjaxPost("/carts.json", 
   crts,
   function(data, reply, xhr){
