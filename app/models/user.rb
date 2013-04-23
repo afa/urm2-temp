@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
    reqs = cart_items.unprocessed.in_cart.all.partition{|c| c.is_a?(CartRequest) || c.is_a?(CartAskMan) }
    reqs[0].select{|c| c.is_a?(CartAskMan) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
    reqs[1].select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
-   res = AxaptaResults.new.from_prepared([], {:type => AxaptaStatus::OK})
+   res = AxaptaResults.new.from_prepared([], {:type => AxaptaState::OK})
    p "---makeorder-ors", reqs
    unless reqs[1].empty?
     ors = []
