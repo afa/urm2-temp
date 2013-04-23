@@ -14,7 +14,7 @@ class Offer::AskMan < Offer::Base
    arr.each do |hsh|
     rez << self.new do |n|
      n.name = hsh.item_name
-     CartStore.prepare_code(n)
+     CartAskMan.prepare_code(n)
     end
    end
    rez
