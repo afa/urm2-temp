@@ -33,6 +33,7 @@ class CartsController < ApplicationController
    CartItem.uncached do
     @carts = User.current.cart_items.unprocessed.in_cart.order("product_name, product_brend")
     @carts.select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
+    @carts.select{|c| c.is_a?(CartAskMan) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
     @mandatory = @carts.detect{|i| i.application_area_mandatory }
     @app_list = Axapta.application_area_list
     chk_err(@app_list)
