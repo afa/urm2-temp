@@ -4,6 +4,10 @@ class CartAskMan < CartItem
    ::I18n::t :cart_ask_man
   end
 
+  def allowed_actions
+   %w()
+  end
+
   def self.prepare_code(search) #on find, chg search hash to offers array
    hsh = {:user_id => User.current.id, :product_name => search.name}
    fnd = CartItem.unprocessed.where( hsh ).order("updated_at desc").all
