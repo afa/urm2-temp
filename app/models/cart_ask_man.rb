@@ -8,6 +8,10 @@ class CartAskMan < CartItem
    %w()
   end
 
+  def to_sales_lines
+   super.merge(:invent_location => location_link)
+  end
+
   def self.prepare_code(search) #on find, chg search hash to offers array
    hsh = {:user_id => User.current.id, :product_name => search.name}
    fnd = CartItem.unprocessed.where( hsh ).order("updated_at desc").all
