@@ -25,6 +25,11 @@ class CartsController < ApplicationController
      @changed << [v[:cart], CartWorld.copy_on_write(v)]
     end
    end
+   if params[:ask_man]
+    params[:ask_man].reject{|k, v| v[:amount].blank? }.each do |k, v|
+     @changed << [v[:cart], CartAskMan.copy_on_write(v)]
+    end
+   end
    CartItem.uncached do
     @carts = User.current.cart_items.unprocessed.in_cart.order("product_name, product_brend")
     @carts.select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
