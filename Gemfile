@@ -53,6 +53,7 @@ gem "spreadsheet", "=0.7.6"
 #gem "gon", :git => 'git://github.com/afa/gon.git', :branch => "script_tag"
 #gem "sqlite3", :group => :test
 #gem "rails-backbone"
+gem "handlebars-rails"
 gem "emberjs-rails"
 group :development, :test, :staging do
  gem "capistrano-unicorn"
