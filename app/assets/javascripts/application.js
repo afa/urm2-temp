@@ -26,10 +26,10 @@
 //= require redactor
 //= require redactor_ru
 //= require redactor_toolbar_default
-//= require handlebars
-//= require ember
-//= require ember-data
-//= require_self
-//= require urm
-Urm = Ember.Application.create();
+// / / = require handlebars
+// / / = require ember
+// / / = require ember-data
+// / / = require_self
+// / / = require urm
+//Urm = Ember.Application.create();
 //= require_tree ./admin
