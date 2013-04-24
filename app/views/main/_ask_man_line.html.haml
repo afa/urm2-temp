@@ -1,9 +1,8 @@
 - require "web_utils"
-- p "---am", ask_man_line
 - line_code = ask_man_line.base_signature
 - offer_code = ask_man_line.signature
 - offer_amount = ask_man_line.amount.to_i > 0 ? ask_man_line.amount : ''
-%tr{:class => "ask_man_#{line_code}"}
+%tr{:class => "askman-#{line_code}"}
  %td
   -# %input.item-code{:type => "hidden", :value => ask_man_line.code, :name => "items[#{offer_code}][code]", :id => "code_#{line_code}"}
   %input.askman-cart{:type => "hidden", :value => ask_man_line.cart_id, :name => "ask_man[#{offer_code}][cart]"}
