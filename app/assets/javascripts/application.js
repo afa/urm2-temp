@@ -14,7 +14,7 @@
 //= require utils
 //= require date
 //= require jquery.ui.datepicker
-//= require urm
+//= require urm2
 //= require carts
 //= require search
 //= require order
@@ -26,4 +26,10 @@
 //= require redactor
 //= require redactor_ru
 //= require redactor_toolbar_default
+//= require handlebars
+//= require ember
+//= require ember-data
+//= require_self
+//= require urm
+Urm = Ember.Application.create();
 //= require_tree ./admin
