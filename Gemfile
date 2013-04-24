@@ -72,9 +72,9 @@ group :development, :test, :staging do
  gem "jasmine-headless-webkit"
  #gem "mustang"
  gem "headless"
- gem "execjs"
  gem "libv8-freebsd"#, "=3.3.10.4"
- gem "therubyracer-freebsd"
+ gem "therubyracer-freebsd", :require => 'v8'
+ gem "execjs", "1.2.13"
  #gem "therubyracer"
  #gem "capybara"
  #gem "selenium-webdriver"
