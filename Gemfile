@@ -73,7 +73,7 @@ group :development, :test, :staging do
  #gem "mustang"
  gem "headless"
  gem "execjs"
- gem "libv8"#, "=3.3.10.4"
+ gem "libv8-freebsd"#, "=3.3.10.4"
  gem "therubyracer-freebsd"
  #gem "therubyracer"
  #gem "capybara"
