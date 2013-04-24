@@ -53,7 +53,7 @@ gem "spreadsheet", "=0.7.6"
 #gem "gon", :git => 'git://github.com/afa/gon.git', :branch => "script_tag"
 #gem "sqlite3", :group => :test
 #gem "rails-backbone"
-gem "handlebars-rails"
+gem "handlebars_assets"
 #gem "emberjs-rails"
 group :development, :test, :staging, :work do
  gem "capistrano-unicorn"
@@ -72,9 +72,9 @@ group :development, :test, :staging, :work do
  gem "jasmine-headless-webkit"
  #gem "mustang"
  gem "headless"
- gem "libv8-freebsd"#, "=3.3.10.4"
- gem "therubyracer-freebsd", :require => 'v8'
- gem "execjs", "1.2.13"
+ #gem "libv8-freebsd"#, "=3.3.10.4"
+ #gem "therubyracer-freebsd" #, :require => 'v8'
+ #gem "execjs", "1.2.13"
  #gem "therubyracer"
  #gem "capybara"
  #gem "selenium-webdriver"
