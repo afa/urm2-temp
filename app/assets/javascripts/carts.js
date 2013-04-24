@@ -77,6 +77,8 @@ function cartsRemoveElementFromCarts(){
    //-# $("#cart_store").replaceWith("#{escape_javascript(render :partial => "carts/cart_table", :locals => {:cart => @carts})}");
    $('table.search-products tr:has(td input.item-cart[value="' + data.deleted + '"])').find("td.input-in-cart").removeClass("exist speed");
    $('table.search-products tr:has(td input.item-cart[value="' + data.deleted + '"])').find("td.input-in-cart input").val("");
+   $('table.search-products tr:has(td input.askman-cart[value="' + data.deleted + '"])').find("td.input-in-cart").removeClass("exist speed");
+   $('table.search-products tr:has(td input.askman-cart[value="' + data.deleted + '"])').find("td.input-in-cart input").val("");
    $('table.search-products tr:has(input.dms-cart[value="' + data.deleted + '"])').find("td.input-in-cart").removeClass("exist speed");
    $('table.search-products tr:has(input.dms-cart[value="' + data.deleted + '"])').find("td.input-in-cart input").val("");
    // need? $("table.search-products tr td input.item-cart[value=\"#{@old}\"]").val("#{@new}");
