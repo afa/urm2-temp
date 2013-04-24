@@ -54,8 +54,8 @@ gem "spreadsheet", "=0.7.6"
 #gem "sqlite3", :group => :test
 #gem "rails-backbone"
 gem "handlebars-rails"
-gem "emberjs-rails"
-group :development, :test, :staging do
+#gem "emberjs-rails"
+group :development, :test, :staging, :work do
  gem "capistrano-unicorn"
  gem "konacha"
  gem "sprockets"
