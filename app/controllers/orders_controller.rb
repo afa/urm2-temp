@@ -79,8 +79,9 @@ class OrdersController < ApplicationController
   def show
    @close_reasons = Axapta.sales_close_reason_list
    chk_err(@close_reasons)
-   @order_info = Axapta.sales_info(:sales_id => params[:id], :show_external_invoice_num => true, :show_max_quotation_prognosis => true).first
-   chk_err(@order_info)
+   ord_info = Axapta.sales_info(:sales_id => params[:id], :show_external_invoice_num => true, :show_max_quotation_prognosis => true).first
+   chk_err(ord_info)
+   @order_info = ord_info.first
    if @order_info.nil?
     render :status => 404, :text => 'notfound'
     return
@@ -93,7 +94,6 @@ class OrdersController < ApplicationController
     chk_err(@application_area_list)
     @mandatory = true
    end
-   p "---orsh", @lines
    @deliveries = current_user.deliveries
    chk_err(@deliveries)
   end
