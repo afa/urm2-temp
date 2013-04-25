@@ -22,9 +22,11 @@ class MainController < ApplicationController
    @items = Offer::Store.search(params[:search]).process{|i| i.sort{|a, b| a.name == b.name ? (a.brend == b.brend ? (a.body_name == b.body_name ? (a.rohs == b.rohs ? (a.location_id <=> b.location_id) : a.rohs <=> b.rohs) : a.body_name <=> b.body_name) : a.brend <=> b.brend) : a.name <=> b.name}}
    chk_err(@items)
    #@items = Offer::Store.search(params[:search]).sort_by{|i| i.location_id }.sort_by{|i| i.rohs }.sort_by{|i| i.body_name }.sort_by{|i| i.brend_name }.sort_by{|i| i.name}
+   @ask_man = Offer::AskMan.search({:query_string => @search.query_string}) unless @search.query_string.blank?
    CartItem.uncached do
     @carts = CartItem.where(:user_id => current_user.id).in_cart.unprocessed.order("product_name, product_brend").all
     @carts.select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
+    @carts.select{|c| c.is_a?(CartAskMan) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
    end
    @stores = @carts.map(&:location_link).uniq.compact
    @avail_sales = Axapta.sales_info_paged(1, :status_filter => 'backorder', :records_per_page => 64000).process{|sales|  [""] + sales.map{|s| [s.sales_id, s.sales_id] }}
@@ -39,7 +41,6 @@ class MainController < ApplicationController
    chk_err(@app_list)
    gon.app_list = @app_list #TODO: clean gon
    @mandatory = @carts.detect{|c| c.application_area_mandatory }
-   @ask_man = Offer::AskMan.search({:query_string => @search.query_string}) unless @search.query_string.blank?
    flash[:info] = t "errors.search.empty" if @items.empty?
    flash[:info] = t "errors.search.ambiq" if @items.ambiq
   end
