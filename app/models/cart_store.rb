@@ -1,6 +1,13 @@
 class CartStore < CartItem
 
  @signature_fields = @base_signature_fields + [:location_link]
+  before_validation :set_defaults, :on => :create
+
+  def set_defaults
+   if pick.nil? && reserve.nil?
+    reserve = true
+   end
+  end
 
   def action
    return "pick" if self.pick?
