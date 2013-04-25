@@ -18,7 +18,7 @@ class Offer::Store < Offer::Base
     hsh.locations.each do |loc|
      rez << self.new do |n|
       n.name = hsh.item_name
-      n.mpq = loc.mpq
+      n.mpq = loc["mpq"]
       n.brend = hsh.item_brend
       n.brend_name = hsh.item_brend_name
       n.brend_url = hsh.item_brend_url
