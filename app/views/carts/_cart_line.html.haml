@@ -13,9 +13,6 @@
      - if cart_line.allowed_actions.include?(act.to_s)
       %input.radio.line-type{:name => "cart_item[#{cart_line.id}][action]", :value => act.to_s, :type => "radio", :id => "radio_cart_item_#{cart_line.id}_#{act.to_s}", :checked => (act.to_s == cart_line.action)}
       %label{:for => "radio_cart_item_#{cart_line.id}_#{act.to_s}"}= t(act)
- %td.icons
-  .icon
-   = link_to "", cart_path(cart_line, :format => "json"), :class => ["delete", "delete-from-cart"]
  %td.text-left= cart_line.product_name
  %td.text-left= cart_line.product_brend
  %td.text-left= cart_line.product_rohs
@@ -36,3 +33,6 @@
   %input{:type => "text", :style => "height: 14px; padding: 2px 4px; border: 1px solid #9E9E9E", :id => "cart_item_#{cart_line.id}_comment", :name => "cart_item[#{cart_line.id}][comment]", :value => cart_line.comment}
  %td
   %input{:type => "text", :style => "height: 14px; padding: 2px 4px; border: 1px solid #9E9E9E", :id => "cart_item_#{cart_line.id}_requirement", :name => "cart_item[#{cart_line.id}][requirement]", :value => cart_line.requirement}
+ %td.icons
+  .icon
+   = link_to "", cart_path(cart_line, :format => "json"), :class => ["delete", "delete-from-cart"]
