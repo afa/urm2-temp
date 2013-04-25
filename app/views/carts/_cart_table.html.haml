@@ -4,20 +4,19 @@
 
   %table.table-style
    %tr
-    %th
-    %th= t :type
+    %th{:colspan => 3}= t :action
     %th= t :name
     %th= t :brend
     %th= t :rohs
-    %th= t :price
-    %th= t :amount
     %th= t :location
     %th= t :prognosis
-    %th= t :comment
-    %th= t :requirement
+    %th= t :amount
+    %th= t :price
     %th= t :user_price
     %th{:class => [@mandatory ? nil : "disabled"]}= t :application_mandatory
-    %th{:colspan => 3}= t :action
+    %th= t :comment
+    %th= t :requirement
+    %th
     -# %th
    = render :partial => "carts/cart_collection.html.haml", :locals => {:app_list => app_list, :stores => @stores, :cart => cart}
   .padded

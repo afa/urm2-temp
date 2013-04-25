@@ -1,28 +1,4 @@
 %tr{:id => "cart_str_#{cart_line.id.to_s}", :class => [cart_line.is_a?(CartWorld) ? "world" : nil, cart_line.is_a?(CartStore) ? "store" : nil, cart_line.is_a?(CartRequest) ? "request" : nil]}
- %td.icons
-  .icon
-   = link_to "", cart_path(cart_line, :format => "json"), :class => ["delete", "delete-from-cart"]
- %td.text-left= cart_line.type_name
- %td.text-left= cart_line.product_name
- %td.text-left= cart_line.product_brend
- %td.text-left= cart_line.product_rohs
- %td.text-right= @usd_decor.decore(cart_line.current_price)
- %td.text-right= cart_line.amount
- %td.text-left= cart_line.location_link
- %td.text-left= cart_line.prognosis
- %td
-  %input{:type => "text", :style => "height: 14px; padding: 2px 4px; border: 1px solid #9E9E9E", :id => "cart_item_#{cart_line.id}_comment", :name => "cart_item[#{cart_line.id}][comment]", :value => cart_line.comment}
- %td
-  %input{:type => "text", :style => "height: 14px; padding: 2px 4px; border: 1px solid #9E9E9E", :id => "cart_item_#{cart_line.id}_requirement", :name => "cart_item[#{cart_line.id}][requirement]", :value => cart_line.requirement}
- %td.price-user
-  - if cart_line.is_a?(CartRequest)
-   %input{:type => :text, :size => "9", :value => cart_line.user_price, :id => "cart_item_#{cart_line.id}_user_price", :name => "cart_item[#{cart_line.id}][user_price]"}
- %td{:class => [@mandatory ? nil : "disabled"]}
-  - if cart_line.application_area_mandatory?
-   %select{:id => "cart_item_#{cart_line.id}_application_area_id", :name => "cart_item[#{cart_line.id}][application_area_id]", :style => "max-width: 200px;"}
-    %option
-    - app_list.each do |app|
-     %option{:value => app.application_area_id, :selected => (app.application_area_id == cart_line.application_area_id)}= app.application_area_name
  - if cart_line.is_a?(CartWorld)
   %td &nbsp;
   %td &nbsp;
@@ -37,3 +13,26 @@
      - if cart_line.allowed_actions.include?(act.to_s)
       %input.radio.line-type{:name => "cart_item[#{cart_line.id}][action]", :value => act.to_s, :type => "radio", :id => "radio_cart_item_#{cart_line.id}_#{act.to_s}", :checked => (act.to_s == cart_line.action)}
       %label{:for => "radio_cart_item_#{cart_line.id}_#{act.to_s}"}= t(act)
+ %td.icons
+  .icon
+   = link_to "", cart_path(cart_line, :format => "json"), :class => ["delete", "delete-from-cart"]
+ %td.text-left= cart_line.product_name
+ %td.text-left= cart_line.product_brend
+ %td.text-left= cart_line.product_rohs
+ %td.text-left= cart_line.location_link
+ %td.text-left= cart_line.prognosis
+ %td.text-right= cart_line.amount
+ %td.text-right= @usd_decor.decore(cart_line.current_price)
+ %td.price-user
+  - if cart_line.is_a?(CartRequest)
+   %input{:type => :text, :size => "9", :value => cart_line.user_price, :id => "cart_item_#{cart_line.id}_user_price", :name => "cart_item[#{cart_line.id}][user_price]"}
+ %td{:class => [@mandatory ? nil : "disabled"]}
+  - if cart_line.application_area_mandatory?
+   %select{:id => "cart_item_#{cart_line.id}_application_area_id", :name => "cart_item[#{cart_line.id}][application_area_id]", :style => "max-width: 200px;"}
+    %option
+    - app_list.each do |app|
+     %option{:value => app.application_area_id, :selected => (app.application_area_id == cart_line.application_area_id)}= app.application_area_name
+ %td
+  %input{:type => "text", :style => "height: 14px; padding: 2px 4px; border: 1px solid #9E9E9E", :id => "cart_item_#{cart_line.id}_comment", :name => "cart_item[#{cart_line.id}][comment]", :value => cart_line.comment}
+ %td
+  %input{:type => "text", :style => "height: 14px; padding: 2px 4px; border: 1px solid #9E9E9E", :id => "cart_item_#{cart_line.id}_requirement", :name => "cart_item[#{cart_line.id}][requirement]", :value => cart_line.requirement}
