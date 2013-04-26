@@ -74,6 +74,7 @@ function cartsAddElementToCart(){
 
 //destroy
 function cartsRemoveElementFromCarts(){
+ $("#cart_loading").show();
  makeAjaxDestroy(this.href,
   function(data, reply, xhr){
    renderErrors(data.error);
@@ -104,9 +105,11 @@ function cartsRemoveElementFromCarts(){
    cartsHandleSaveOnFocusLost();
    cartsProcessRadioPicks();
    $('#cart_store .icon a.delete').click(cartsRemoveElementFromCarts);
+   $("#cart_loading").hide();
   },
   function(data){
    renderErrors([{error: 'Ошибка связи'}]);
+   $("#cart_loading").hide();
   }
  );
  return false;
@@ -114,6 +117,7 @@ function cartsRemoveElementFromCarts(){
 
 function cartsSaveCart(){
  var crt = {};
+ $("#cart_loading").show();
  takeValToHash(crt, "input[name=\"utf8\"]", $(this).parents("form"));
  takeValToHash(crt, "input[name=\"_method\"]", $(this).parents("form"));
  takeValToHash(crt, "input[name=\"authenticity_token\"]", $(this).parents("form"));
@@ -148,10 +152,12 @@ function cartsSaveCart(){
    cartsProcessRadioPicks();
    apply_hover_in_table_on_mmove();
    $('#cart_store .icon a.delete').click(cartsRemoveElementFromCarts);
+   $("#cart_loading").hide();
 
   },
   function(){
    renderErrors([{error: 'Ошибка связи'}]);
+   $("#cart_loading").hide();
   }
  );
 
