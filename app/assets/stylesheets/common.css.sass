@@ -738,6 +738,9 @@ div.ui-datepicker
 
 /* Стандартная кнопка
 
+.hover .button-style
+  color: #383838 !important
+
 .button-style
   position: relative
   white-space: nowrap
@@ -752,11 +755,6 @@ div.ui-datepicker
   cursor: pointer
   &:hover
     color: #383838 !important
-
-.hover .button-style
-  color: #383838 !important
-
-.button-style
   i
     position: absolute
     z-index: 3
@@ -885,6 +883,7 @@ div.ui-datepicker
 
 .button-style
   &.disabled
+    display: inline-block
     span
       border: 1px solid #CBCDCE
       padding: 5px 20px
