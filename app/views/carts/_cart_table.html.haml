@@ -1,5 +1,9 @@
 #cart_store
- %h3= t(:selected_positions)
+ %h3
+  = t(:selected_positions)
+  %span#cart_loading{:style => "display: none;"}
+   %img{:src => image_path('ajax-loader.gif')}
+   Обновление корзины...
  = form_for :cart_item, :html => {:class => 'js', :method => :put}, :url => save_carts_path, :remote => true do |ff|
 
   %table.table-style

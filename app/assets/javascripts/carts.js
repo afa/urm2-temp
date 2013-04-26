@@ -1,5 +1,6 @@
 function cartsAddElementToCart(){
  var crts = {};
+ $("#cart_loading").show();
  $("table.search-products tr:has(input.item-code)").each(function(idx, item){
   takeValToHash(crts, "input.item-code", item);
   takeValToHash(crts, "td.input-in-cart input", item);
@@ -61,9 +62,11 @@ function cartsAddElementToCart(){
    cartsHandleSaveOnFocusLost();
    cartsProcessRadioPicks();
    $('#cart_store .icon a.delete').click(cartsRemoveElementFromCarts);
+   $("#cart_loading").hide();
   },
   function(){
    renderErrors([{error: 'Ошибка связи'}]);
+   $("#cart_loading").hide();
   }
  );
  return false;
