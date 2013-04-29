@@ -70,6 +70,7 @@ function cartsAddElementToCart(){
   function(){
    renderErrors([{error: 'Ошибка связи'}]);
    $("#cart_loading").hide();
+   buttonEnable('form.json .button');
   }
  );
  return false;
@@ -78,6 +79,8 @@ function cartsAddElementToCart(){
 //destroy
 function cartsRemoveElementFromCarts(){
  $("#cart_loading").show();
+ buttonDisable('form.json .button');
+ buttonDisable($(this).parents('.button');
  makeAjaxDestroy(this.href,
   function(data, reply, xhr){
    renderErrors(data.error);
@@ -109,10 +112,14 @@ function cartsRemoveElementFromCarts(){
    cartsProcessRadioPicks();
    $('#cart_store .icon a.delete').click(cartsRemoveElementFromCarts);
    $("#cart_loading").hide();
+   buttonEnable('form.json .button');
+   buttonEnable($(this).parents('.button');
   },
   function(data){
    renderErrors([{error: 'Ошибка связи'}]);
    $("#cart_loading").hide();
+   buttonEnable('form.json .button');
+   buttonEnable($(this).parents('.button');
   }
  );
  return false;
