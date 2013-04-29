@@ -37,3 +37,17 @@ function renderErrors(arr){
   processErrors(item);
  });
 }
+
+function doNothing(){
+ event.preventDefaults();
+ return false;
+}
+
+function buttonDisable(nm){
+ $(nm).find("a.button-style").on("click", ".disableButton", doNothing).addClass("disabled");
+ 
+}
+
+function buttonEnable(nm){
+ $(nm).find("a.button-style").off("click", ".disableButton").removeClass("disabled");
+}

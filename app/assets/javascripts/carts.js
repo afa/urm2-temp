@@ -1,6 +1,7 @@
 function cartsAddElementToCart(){
  var crts = {};
  $("#cart_loading").show();
+ buttonDisable('form.json .button');
  //$("") !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  $("table.search-products tr:has(input.item-code)").each(function(idx, item){
   takeValToHash(crts, "input.item-code", item);
