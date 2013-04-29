@@ -171,9 +171,9 @@ function onSelectSendForm(obj){
 }
 
 function runAllowOrder(){
+ buttonDisable('#allow-order .button');
  $('#allow-order .button').click(function(){
   $('#order').show();
-  $('#allow-order').hide();
   makeAjaxCall("/orders/new.json",
    function(data){
     renderErrors(data.error);
@@ -193,13 +193,15 @@ function runAllowOrder(){
      $("#cart_store textarea").add("#cart_store input").add("#cart_store select").removeAttr("disabled");
      $('#allow-order').show();
      $("form:has(table.search-products)").show();
+     $('#allow-order').hide();
+     buttonEnable('#allow-order .button');
      event.preventDefault();
     });
    },
    function(data){
    renderErrors([{error: 'Ошибка связи'}]);
     $("#order").hide();
-    $("#allow-order").show();
+    buttonEnable('#allow-order .button');
   });
   event.preventDefault();
  });
