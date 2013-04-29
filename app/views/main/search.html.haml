@@ -66,16 +66,13 @@
   .cart= render :partial => "carts/cart_table.html.haml", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores}
  #allow-order{:class => [@carts.empty? ? "disabled" : nil]}= render :partial => 'shared/button', :locals => {:title => t(:start_edit_order)}
  #order
- -# #order= render :partial => "main/order_edit"
  .results
 
 :javascript
  $(document).ready(function(){
   $('.slider').hide();
-  //$('#order').hide();
   if(#{User.current.cart_items.unprocessed.in_cart.count} == 0){
    $('.cart-table').hide();
-   //$('.cart-table').add('.allow-order').hide();
   }
   initCalendar();
   search_icons_handle();
