@@ -46,35 +46,6 @@ function makeAjaxPost(ajaxUrl, dataHash, functionSuccess, functionFailure){
  });
 }
 
-function search_icons_handle(){
- var uniq = new Array();
- var ins = $(".icons input.item-code");
- $.each(ins, function(idx, val){
-  uniq.push($(val).val());
- });
- $.each(uniq.getUnique(), function(idx, val){
-  $(".icons input[value='" + val + "']:first").parents(".icons").find("div.dms-req:first").addClass("dms").addClass("js");
- });
- $(".dms-req").removeClass("dms-req");
- $('.js').bind('ajax:success', function(evt, xhr, status){
-  eval(xhr.responseText);
- });
- $('.js.replacement').add(".js.delivery").bind('ajax:complete', function(evt, xhr, status){
-  $(this).parents('.icon').find('.slider').hide();
-  $(this).parents('.icon').find('a').show();
- });
- $('.icon .js.replacement').add(".icon .js.delivery").bind('ajax:beforeSend', function(evt, xhr, status){
-  $(this).parents('.icon').find('a').hide();
-  $(this).parents('.icon').find('.slider').show();
- });
- $(".icon .dms.js").click(showDms);
- $(".icon a.replacement.js").click(showAnalog);
- $("a.info.js").click(showInfo);
- $('form.json .button a.button-style').click(cartsAddElementToCart);
- $('#cart_store .icon a.delete').click(cartsRemoveElementFromCarts);
- $('#make_order').click(ordersRenderCreate);
-}
-
 function apply_hover_in_table_on_mmove(){
  var table = $('.table-style');
  $('>tbody>tr:has(>td):not(.sub-row-line)',table).hover(function(){

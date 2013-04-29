@@ -39,7 +39,7 @@ function renderErrors(arr){
 }
 
 function doNothing(){
- event.preventDefaults();
+ event.preventDefault();
  return false;
 }
 
