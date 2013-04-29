@@ -65,6 +65,7 @@ function cartsAddElementToCart(){
    cartsProcessRadioPicks();
    $('#cart_store .icon a.delete').click(cartsRemoveElementFromCarts);
    $("#cart_loading").hide();
+   buttonEnable('form.json .button');
   },
   function(){
    renderErrors([{error: 'Ошибка связи'}]);
