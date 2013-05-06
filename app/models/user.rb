@@ -88,7 +88,7 @@ class User < ActiveRecord::Base
   def deliveries
    dels = Axapta.get_delivery_mode
    types = AxaptaResults.new.from_prepared(dels.customer_delivery_types, dels.params)
-   types.process{|types| types.map{|t| [t["customer_delivery_type_id"], [t["delivery_type"], t["address"]["city"]].join(' ')] }}
+   types.process{|types| types.map{|t| [t["customer_delivery_type_id"], [t["delivery_type"], t["address_full"], t["contact"]].join(' ')] }}
   end
  protected
 

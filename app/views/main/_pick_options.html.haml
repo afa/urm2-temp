@@ -1,13 +1,15 @@
 - pref = defined?(opts) ? (opts.try(:[], :prefix) || "") : ""
-%h3 Параметры бронирования
+- loc = defined?(opts) ? (opts.has_key?(:loc) ? "_#{opts[:loc]}" : "") : ""
+%h4 Бронирование
 -# p ":::deliv", @deliveries
 - unless @deliveries.empty?
- .padded
-  %span
-   -# %span{:style => "float: left;"}Способ поставки:
-   = render :partial => "shared/select_list.html.haml", :locals => {:list_items => @deliveries, :name => "#{pref}delivery_type", :title => t(:delivery_type), :opts => {:use_system => true} }
-   .clear
- .padded
+ .cbPickDelivery
+  = render :partial => "shared/select_list.html.haml", :locals => {:list_items => @deliveries, :name => "#{pref}delivery_type#{loc}", :title => t(:delivery_type), :opts => {:use_system => true, :id => "#{pref}delivery_type#{loc}"} }
+ .cbPickDate
   %span Дата готовности:
-  %input.calendar-input{:type => "text", :name => "#{pref}date_picker", :value => Date.today.strftime("%Y-%m-%d")}
-
+  %input.calendar-input{:type => "text", :name => "#{pref}date_picker#{loc}", :value => Date.today.strftime("%Y-%m-%d")}
+  .cbPickDateConso.switch
+   Ориентировочная дата консолидации
+   %a{:href=>"#"}
+    %span= 2013-04-29
+   .
