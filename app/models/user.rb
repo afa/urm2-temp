@@ -94,8 +94,8 @@ class User < ActiveRecord::Base
       t["customer_delivery_type_id"],
       [
        t["delivery_type"],
-       dels.adresses.detect({}){|x| x["address_id"] == t["address"]["address_id"] }["address_full"],
-       dels.adresses.detect({}){|x| x["address_id"] == t["address"]["address_id"] }["contact"]
+       dels.addresses.detect({}){|x| x["address_id"] == t["address"]["address_id"] }["address_full"],
+       dels.addresses.detect({}){|x| x["address_id"] == t["address"]["address_id"] }["contact"]
       ].join(' '),
       t["location_id"]
      ]
