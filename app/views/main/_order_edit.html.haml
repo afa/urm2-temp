@@ -17,17 +17,17 @@
      .name
       примечание к заказу
      .cbTextarea
-      %textarea{:name => "order_comment[#{store}]", :class => [@carts.detect{|c| not c.is_a?(CartRequest) } ? nil : "disabled"]}
+      %textarea{:name => "order_comment[#{store}]", :class => [@carts.select{|c| c.location_id == store }.detect{|c| not c.is_a?(CartRequest) } ? nil : "disabled"]}
    
-    - if @carts.detect{|c| c.is_a?(CartRequest) }
-     .cbPick
-      = render :partial => "main/pick_options.html.haml", :locals => {:opts => {:loc => store}}
-  .creatingBlock
-   %h3 Запрос
-   .cbComment
-    .name Примечание к запросу
-    .cbTextarea
-     %textarea{:name=>"comment"}
+    .cbPick
+     = render :partial => "main/pick_options.html.haml", :locals => {:opts => {:loc => store}}
+  - if @carts.detect{|c| c.is_a?(CartRequest) }
+   .creatingBlock
+    %h3 Запрос
+    .cbComment
+     .name Примечание к запросу
+     .cbTextarea
+      %textarea{:name=>"comment"}
  .clear
  = render :partial => "shared/button.html.haml", :locals => {:title => t(:make), :opts  => {:inner_style => "margin-right: 1em;", :id => "make_order"}}
 
