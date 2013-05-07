@@ -24,10 +24,10 @@
       = render :partial => "main/pick_options.html.haml", :locals => {:opts => {:loc => store}}
   .creatingBlock
    %h3 Запрос
-    .cbComment
-     .name Примечание к запросу
-     .cbTextarea
-      %textarea{:name=>"comment"}
+   .cbComment
+    .name Примечание к запросу
+    .cbTextarea
+     %textarea{:name=>"comment"}
  .clear
  = render :partial => "shared/button.html.haml", :locals => {:title => t(:make), :opts  => {:inner_style => "margin-right: 1em;", :id => "make_order"}}
 
