@@ -19,14 +19,15 @@
      .cbTextarea
       %textarea{:name => "order_comment[#{store}]", :class => [@carts.detect{|c| not c.is_a?(CartRequest) } ? nil : "disabled"]}
    
-    .cbPick
-     = render :partial => "main/pick_options.html.haml", :locals => {:opts => {:loc => store}}
-  -# - if @carts.detect{|c| c.is_a?(CartRequest) }
-  .item.request
-   .name
-    примечание к запросу
-   %div
-    %textarea{:name => "comment"}
+    - if @carts.detect{|c| c.is_a?(CartRequest) }
+     .cbPick
+      = render :partial => "main/pick_options.html.haml", :locals => {:opts => {:loc => store}}
+  .creatingBlock
+   %h3 Запрос
+    .cbComment
+     .name Примечание к запросу
+     .cbTextarea
+      %textarea{:name=>"comment"}
  .clear
  = render :partial => "shared/button.html.haml", :locals => {:title => t(:make), :opts  => {:inner_style => "margin-right: 1em;", :id => "make_order"}}
 
