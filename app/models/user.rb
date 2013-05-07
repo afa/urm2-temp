@@ -88,7 +88,19 @@ class User < ActiveRecord::Base
   def deliveries
    dels = Axapta.get_delivery_mode
    types = AxaptaResults.new.from_prepared(dels.customer_delivery_types, dels.params)
-   types.process{|types| types.map{|t| [t["customer_delivery_type_id"], [t["delivery_type"], dels.adresses.detect({}){|x| x["address_id"] == t["address"]["address_id"] }["address_full"], dels.adresses.detect({}){|x| x["address_id"] == t["address"]["address_id"] }["contact"]].join(' '), t["location_id"]] }}
+   types.process do |types|
+    types.map do |t|
+     [
+      t["customer_delivery_type_id"],
+      [
+       t["delivery_type"],
+       dels.adresses.detect({}){|x| x["address_id"] == t["address"]["address_id"] }["address_full"],
+       dels.adresses.detect({}){|x| x["address_id"] == t["address"]["address_id"] }["contact"]
+      ].join(' '),
+      t["location_id"]
+     ]
+    end
+   end
   end
  protected
 
