@@ -1,7 +1,8 @@
 %tr.sub-row-table{:class => "blue-back dms_item_#{after} heading"}
- %th.icons{:class => "border-l border-bn"}
+ %input.after{:type=>"hidden", :value => after}
+ %th.border-l.border-bn
+ -# .icons{:class => "border-l border-bn"}
   .icon
-   %input.after{:type=>"hidden", :value => after}
    %a.plus{:href=>"#", :class=>"hide"}
  %th.text-left{:class => "border-bn name", :colspan=>"2"} ДМС
  %th Корпус
