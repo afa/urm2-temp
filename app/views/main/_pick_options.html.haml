@@ -1,15 +1,16 @@
 - pref = defined?(opts) ? (opts.try(:[], :prefix) || "") : ""
-- loc = defined?(opts) ? (opts.has_key?(:loc) ? "_#{opts[:loc]}" : "") : ""
+- lc = defined?(opts) ? (opts.has_key?(:loc) ? "_#{opts[:loc]}" : "") : ""
+- loc = lc.blank? ? "" : "_#{lc}"
 %h4 Бронирование
 -# p ":::deliv", @deliveries
 - unless @deliveries.empty?
  .cbPickDelivery
-  = render :partial => "shared/select_list.html.haml", :locals => {:list_items => (loc.blank? ? @deliveries : @deliveries.select{|l| true }), :name => "#{pref}delivery_type[#{loc}]", :title => t(:delivery_type), :opts => {:use_system => true, :id => "#{pref}delivery_type#{loc}"} }
+  = render :partial => "shared/select_list.html.haml", :locals => {:list_items => (lc.blank? ? @deliveries : @deliveries.select{|l| l[2] == lc }), :name => "#{pref}delivery_type[#{lc}]", :title => t(:delivery_type), :opts => {:use_system => true, :id => "#{pref}delivery_type#{loc}"} }
  .cbPickDate
   %span Дата готовности:
-  %input.calendar-input{:type => "text", :name => "#{pref}date_picker[#{loc}]", :value => Date.today.strftime("%Y-%m-%d")}
+  %input.calendar-input{:type => "text", :name => "#{pref}date_picker[#{lc}]", :value => Date.today.strftime("%Y-%m-%d")}
   .cbPickDateConso.switch
    Ориентировочная дата консолидации
    %a{:href=>"#"}
-    %span= 2013-04-29
+    %span 2013-04-29
    = "."
