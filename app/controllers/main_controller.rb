@@ -163,8 +163,8 @@ class MainController < ApplicationController
    item = srch.detect{|i| i.location_id == @location && i.item_id == @code }
    chk_err(locs)
    @data = Axapta.item_info({:item_id => @code})
-   @data.qty_in_pack = srch.qty_in_pack
-   @data.segment_rus = srch.segment_rus
+   @data.qty_in_pack = item.qty_in_pack
+   @data.segment_rus = item.segment_rus
    chk_err(@data)
    @data.prices = Axapta.retail_price(:item_id => @code)
    chk_err(@data.prices)
