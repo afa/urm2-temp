@@ -18,28 +18,21 @@
   %table
    %tr
     %td{:style => "border-bottom: 0;"}
-     %table
-      %tr.sub-row-block
-       %th Товарный класс: 
-       %td= info_block.class_name
-      %tr.sub-row-block
-       %th Количество в упаковке:
-       %td= info_block.qty_in_pack
-      %tr.sub-row-block
-       %th Описание:
-       %td.italic= info_block.description
-      %tr.sub-row-block
-       %th Сегмент продукции:
-       %td= info_block.segment_rus
-      %tr.sub-row-block
-       %th Вид упаковки:
-       %td= info_block.packing_type
-      %tr.sub-row-block
-       %th Вес брутто:
-       %td= "#{info_block.weight} г."
-      %tr.sub-row-block
-       %th Объём:
-       %td= "#{info_block.volume} мм3"
+     %dl
+      %dt Товарный класс:
+      %dd= info_block.class_name
+      %dt Количество в упаковке:
+      %dd= info_block.qty_in_pack
+      %dt Описание:
+      %dd.italic= info_block.description
+      %dt Сегмент продукции:
+      %dd= info_block.segment_rus
+      %dt Вид упаковки:
+      %dd= info_block.packing_type
+      %dt Вес брутто, г:
+      %dd= info_block.weight
+      %dt Объём, мм3:
+      %dd= info_block.volume
     %td{:style => "border-bottom: 0;"}
      - unless dates.blank?
       %table
