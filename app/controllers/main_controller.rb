@@ -163,8 +163,8 @@ class MainController < ApplicationController
    locs = srch.process{|n| n.first.locations.map{|l| l["location_id"] }}
    chk_err(locs)
    @data = Axapta.item_info({:item_id => @code})
-   @data.qty_in_pack = srch.first.qty_in_pack
-   @data.segment_rus = srch.first.segment_rus
+   @data.qty_in_pack = item.qty_in_pack
+   @data.segment_rus = item.segment_rus
    chk_err(@data)
    @data.prices = Axapta.retail_price(:item_id => @code)
    chk_err(@data.prices)
