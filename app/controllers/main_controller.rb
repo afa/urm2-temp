@@ -159,7 +159,7 @@ class MainController < ApplicationController
    @location = params[:loc]
    @code = params[:code]
    srch = Axapta.search_names(:item_id_search => @code)
-   locs = srch.process{|n| n.first.locations.map{|l| l["location_id"] }}
+   locs = srch.run{|n| n.first.locations.map{|l| l["location_id"] }}
    item = srch.detect{|i| i.location_id == @location && i.item_id == @code }
    chk_err(locs)
    @data = Axapta.item_info({:item_id => @code})
