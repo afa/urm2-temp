@@ -12,7 +12,7 @@
     -# %a{:href=>"#"}Описание
     Описание
  -# - unless keys.empty?
-%tr.sub-row-block{:class => "info_item_#{after}"}
+%tr.info-data.sub-row-block{:class => "info_item_#{after}"}
  %td.border-l &nbsp;
  %td.border-r{:colspan=>"17", :valign => "top"}
   %table
@@ -21,16 +21,22 @@
      %dl
       %dt Товарный класс:
       %dd= info_block.class_name
+     %dl
       %dt Количество в упаковке:
       %dd= info_block.qty_in_pack
+     %dl
       %dt Описание:
       %dd.italic= info_block.description
+     %dl
       %dt Сегмент продукции:
       %dd= info_block.segment_rus
+     %dl
       %dt Вид упаковки:
       %dd= info_block.packing_type
+     %dl
       %dt Вес брутто, г:
       %dd= info_block.weight
+     %dl
       %dt Объём, мм3:
       %dd= info_block.volume
     %td{:style => "border-bottom: 0;"}
