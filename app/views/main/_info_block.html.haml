@@ -23,7 +23,7 @@
       %dd= info_block.class_name
      %dl
       %dt Количество в упаковке:
-      %dd= info_block.qty_in_pack
+      %dd #{info_block.qty_in_pack} штук
      %dl
       %dt Описание:
       %dd.italic= info_block.description
@@ -34,11 +34,13 @@
       %dt Вид упаковки:
       %dd= info_block.packing_type
      %dl
-      %dt Вес брутто, г:
-      %dd= info_block.weight
+      %dt Вес брутто:
+      %dd #{info_block.weight} г.
      %dl
       %dt Объём, мм3:
-      %dd= info_block.volume
+      %dd
+       #{info_block.volume} мм
+       %sup 3
     %td{:style => "border-bottom: 0;"}
      - unless dates.blank?
       %table
