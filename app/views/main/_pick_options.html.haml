@@ -1,5 +1,5 @@
 - pref = defined?(opts) ? (opts.try(:[], :prefix) || "") : ""
-- lc = defined?(opts) ? (opts.has_key?(:loc) ? "_#{opts[:loc]}" : "") : ""
+- lc = defined?(opts) && opts.has_key?(:loc) ? opts[:loc] : ""
 - loc = lc.blank? ? "" : "_#{lc}"
 %h4 Бронирование
 -# p ":::deliv", @deliveries
@@ -11,6 +11,6 @@
   %input.calendar-input{:type => "text", :name => "#{pref}date_picker[#{lc}]", :value => Date.today.strftime("%Y-%m-%d")}
   .cbPickDateConso.switch
    Ориентировочная дата консолидации
-   %a{:href=>"#"}
-    %span 2013-04-29
+   %a
+    %span 2013-04-29 и прочая хрень
    = "."
