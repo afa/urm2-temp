@@ -19,8 +19,9 @@
      .cbTextarea
       %textarea{:name => "order_comment[#{store}]", :class => [@carts.select{|c| c.location_link == store }.detect{|c| not c.is_a?(CartRequest) } ? nil : "disabled"]}
    
-    .cbPick
-     = render :partial => "main/pick_options.html.haml", :locals => {:opts => {:loc => store}}
+    - if @carts.select{|c| c.location_link == store }.detect{|c| c.pick? }
+     .cbPick
+      = render :partial => "main/pick_options.html.haml", :locals => {:opts => {:loc => store}}
   - if @carts.detect{|c| c.is_a?(CartRequest) }
    .creatingBlock
     %h3 Запрос
