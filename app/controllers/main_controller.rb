@@ -23,7 +23,7 @@ class MainController < ApplicationController
    chk_err(@items)
    #@items = Offer::Store.search(params[:search]).sort_by{|i| i.location_id }.sort_by{|i| i.rohs }.sort_by{|i| i.body_name }.sort_by{|i| i.brend_name }.sort_by{|i| i.name}
    if @search.query_string.length > 3 && !@items.detect{|i| i.name.downcase == @search.query_string.downcase }
-    @ask_man = Offer::AskMan.search({:query_string => @search.query_string}) unless @search.query_string.blank?
+    @ask_man = Offer::AskMan.search({:query_string => @search.query_string})
    end
    CartItem.uncached do
     @carts = CartItem.where(:user_id => current_user.id).in_cart.unprocessed.order("product_name, product_brend").all
