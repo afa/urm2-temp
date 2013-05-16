@@ -55,6 +55,9 @@ class CartWorld < CartItem
    return self.class
   end
 
+  def pick
+   true
+  end
   #def location_link
   # ::I18n.t :cart_world
   #end
