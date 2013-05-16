@@ -3,7 +3,7 @@
  - if cart.detect{|i| (not (i.is_a?(CartRequest) || i.is_a?(CartWorld))) && i.location_link == store }
   %tr
    %td{:colspan => 16}= store
-  = render :partial => "carts/cart_line.html.haml", :collection => cart.select{|i| (not i.is_a?(CartRequest)) && i.location_link == store }, :locals => {:app_list => app_list}
+  = render :partial => "carts/cart_line.html.haml", :collection => cart.select{|i| (not (i.is_a?(CartRequest) || i.is_a?(CartWorld))) && i.location_link == store }, :locals => {:app_list => app_list}
 - if cart.detect{|i| i.is_a?(CartWorld)}
  %tr
   %td{:colspan => 16}= t :cart_world
