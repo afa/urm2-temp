@@ -1,4 +1,5 @@
 - stores.each do |store|
+ - p "---crtcls", cart.map{|i| i.class.name }
  - if cart.detect{|i| (not (i.is_a?(CartRequest) || i.is_a?(CartWorld))) && i.location_link == store }
   %tr
    %td{:colspan => 16}= store
