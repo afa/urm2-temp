@@ -10,9 +10,9 @@
    %tr
     %th{:colspan => 3}
      = t :action
-     %a.order.action= t(:all_order)
-     %a.reserve.action= t(:all_reserve)
-     %a.pick.action= t(:all_pick)
+     %a.order.action{:href=>"#"}= t(:all_order)
+     %a.reserve.action{:href=>"#"}= t(:all_reserve)
+     %a.pick.action{:href=>"#"}= t(:all_pick)
     %th= t :name
     %th= t :brend
     %th= t :rohs
