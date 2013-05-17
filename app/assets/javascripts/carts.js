@@ -1,5 +1,4 @@
-function cartsAddElementToCart(){
- var crts = {};
+function cartsAddElementToCart(){ var crts = {};
  $("#cart_loading").show();
  buttonDisable('form.json .button');
  //$("") !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -230,25 +229,34 @@ function cartsHandleSaveOnFocusLost(){
 }
 
 function cartsHandleAllToOrder(){
- $("#cart_store a.radio.order").trigger("click");
+ while($("#cart_store input.radio.order").length() > 0){
+  $("#cart_store input.radio.order").triggerHandler("click");
+  sleep(100);
+ }
  event.preventDefault();
- //return false;
+ return false;
 }
 
 function cartsHandleAllToReserve(){
- $("#cart_store a.radio.reserve").trigger("click");
+ while($("#cart_store input.radio.reserve").length() > 0){
+  $("#cart_store input.radio.reserve").triggerHandler("click");
+  sleep(100);
+ }
  event.preventDefault();
- //return false;
+ return false;
 }
 
 function cartsHandleAllToPick(){
- $("#cart_store a.radio.pick").trigger("click");
+ while($("#cart_store input.radio.pick").length() > 0){
+  $("#cart_store input.radio.pick").triggerHandler("click");
+  sleep(100);
+ }
  event.preventDefault();
- //return false;
+ return false;
 }
 
 function cartsPrepareAllTo(){
- $("#cart_store input.order.action").on("click", cartsHandleAllToOrder);
- $("#cart_store input.reserve.action").on("click", cartsHandleAllToReserve);
- $("#cart_store input.pick.action").on("click", cartsHandleAllToPick);
+ $("#cart_store a.order.action").on("click", cartsHandleAllToOrder);
+ $("#cart_store a.reserve.action").on("click", cartsHandleAllToReserve);
+ $("#cart_store a.pick.action").on("click", cartsHandleAllToPick);
 }
