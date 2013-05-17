@@ -7,12 +7,12 @@
     %span
      %span= t :pick
  - else
-  - [:order, :reserve, :pick].each do |act|
+  - %w(order reserve pick).each do |act|
    %td
     %span
-     - if cart_line.allowed_actions.include?(act.to_s)
-      %input.radio.line-type{:name => "cart_item[#{cart_line.id}][action]", :value => act.to_s, :type => "radio", :id => "radio_cart_item_#{cart_line.id}_#{act.to_s}", :checked => (act.to_s == cart_line.action)}
-      %label{:for => "radio_cart_item_#{cart_line.id}_#{act.to_s}"}= t(act)
+     - if cart_line.allowed_actions.include?(act)
+      %input.radio.line-type{:class => act, :name => "cart_item[#{cart_line.id}][action]", :value => act, :type => "radio", :id => "radio_cart_item_#{cart_line.id}_#{act}", :checked => (act == cart_line.action)}
+      %label{:for => "radio_cart_item_#{cart_line.id}_#{act}"}= t(act.to_sym)
  %td.text-left= cart_line.product_name
  %td.text-left= cart_line.product_brend
  %td.text-left= cart_line.product_rohs

@@ -62,6 +62,7 @@ function cartsAddElementToCart(){
    $('.form-hide .item').dropDown();
    cartsHandleRadioPicks();
    cartsHandleSaveOnFocusLost();
+   cartsPrepareAllTo();
    cartsProcessRadioPicks();
    $('#cart_store .icon a.delete').click(cartsRemoveElementFromCarts);
    $("#cart_loading").hide();
@@ -108,6 +109,7 @@ function cartsRemoveElementFromCarts(){
    activateSearchCancelButton();
    //activateCommit();
    cartsHandleRadioPicks();
+   cartsPrepareAllTo();
    cartsHandleSaveOnFocusLost();
    cartsProcessRadioPicks();
    $('#cart_store .icon a.delete').click(cartsRemoveElementFromCarts);
@@ -160,6 +162,7 @@ function cartsSaveCart(){
    cartsHandleRadioPicks();
    cartsHandleSaveOnFocusLost();
    cartsProcessRadioPicks();
+   cartsPrepareAllTo();
    apply_hover_in_table_on_mmove();
    $('#cart_store .icon a.delete').click(cartsRemoveElementFromCarts);
    $("#cart_loading").hide();
@@ -226,4 +229,26 @@ function cartsHandleSaveOnFocusLost(){
  //});
 }
 
+function cartsHandleAllToOrder(){
+ $("#cart_store a.radio.order").click();
+ event.preventDefaults();
+ return false;
+}
 
+function cartsHandleAllToReserve(){
+ $("#cart_store a.radio.reserve").click();
+ event.preventDefaults();
+ return false;
+}
+
+function cartsHandleAllToPick(){
+ $("#cart_store a.radio.pick").click();
+ event.preventDefaults();
+ return false;
+}
+
+function cartsPrepareAllTo(){
+ $("#cart_store a.order.action").on("click", cartsHandleAllToOrder);
+ $("#cart_store a.reserve.action").on("click", cartsHandleAllToReserve);
+ $("#cart_store a.pick.action").on("click", cartsHandleAllToPick);
+}
