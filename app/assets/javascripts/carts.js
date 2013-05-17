@@ -229,8 +229,8 @@ function cartsHandleSaveOnFocusLost(){
 }
 
 function cartsHandleAllToOrder(){
- while($("#cart_store input.radio.order").length() > 0){
-  $("#cart_store input.radio.order").triggerHandler("click");
+ while($("#cart_store input.radio.order:not(:checked)").length() > 0){
+  $("#cart_store input.radio.order:not(:checked)").triggerHandler("click");
   sleep(100);
  }
  event.preventDefault();
@@ -238,7 +238,7 @@ function cartsHandleAllToOrder(){
 }
 
 function cartsHandleAllToReserve(){
- while($("#cart_store input.radio.reserve").length() > 0){
+ while($("#cart_store input.radio.reserve:not(:checked)").length() > 0){
   $("#cart_store input.radio.reserve").triggerHandler("click");
   sleep(100);
  }
@@ -247,8 +247,8 @@ function cartsHandleAllToReserve(){
 }
 
 function cartsHandleAllToPick(){
- while($("#cart_store input.radio.pick").length() > 0){
-  $("#cart_store input.radio.pick").triggerHandler("click");
+ while($("#cart_store input.radio.pick:not(:checked)").length() > 0){
+  $("#cart_store input.radio.pick:not(:checked)").triggerHandler("click");
   sleep(100);
  }
  event.preventDefault();
