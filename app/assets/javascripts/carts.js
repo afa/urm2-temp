@@ -231,20 +231,20 @@ function cartsHandleSaveOnFocusLost(){
 
 function cartsHandleAllToOrder(){
  $("#cart_store a.radio.order").trigger("click");
- //event.preventDefault();
- return false;
+ event.preventDefault();
+ //return false;
 }
 
 function cartsHandleAllToReserve(){
  $("#cart_store a.radio.reserve").trigger("click");
- //vent.preventDefault();
- return false;
+ event.preventDefault();
+ //return false;
 }
 
 function cartsHandleAllToPick(){
  $("#cart_store a.radio.pick").trigger("click");
- //vent.preventDefault();
- return false;
+ event.preventDefault();
+ //return false;
 }
 
 function cartsPrepareAllTo(){
