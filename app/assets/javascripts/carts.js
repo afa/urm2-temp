@@ -231,19 +231,19 @@ function cartsHandleSaveOnFocusLost(){
 
 function cartsHandleAllToOrder(){
  $("#cart_store a.radio.order").click();
- event.preventDefaults();
+ event.preventDefault();
  return false;
 }
 
 function cartsHandleAllToReserve(){
  $("#cart_store a.radio.reserve").click();
- event.preventDefaults();
+ event.preventDefault();
  return false;
 }
 
 function cartsHandleAllToPick(){
  $("#cart_store a.radio.pick").click();
- event.preventDefaults();
+ event.preventDefault();
  return false;
 }
 
