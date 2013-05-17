@@ -248,7 +248,7 @@ function cartsHandleAllToPick(){
 }
 
 function cartsPrepareAllTo(){
- $("#cart_store a.order.action").on("click", cartsHandleAllToOrder);
- $("#cart_store a.reserve.action").on("click", cartsHandleAllToReserve);
- $("#cart_store a.pick.action").on("click", cartsHandleAllToPick);
+ $("#cart_store input.order.action").on("click", cartsHandleAllToOrder);
+ $("#cart_store input.reserve.action").on("click", cartsHandleAllToReserve);
+ $("#cart_store input.pick.action").on("click", cartsHandleAllToPick);
 }
