@@ -23,7 +23,7 @@ class MainController < ApplicationController
    chk_err(@items)
    #@items = Offer::Store.search(params[:search]).sort_by{|i| i.location_id }.sort_by{|i| i.rohs }.sort_by{|i| i.body_name }.sort_by{|i| i.brend_name }.sort_by{|i| i.name}
    p "---ask-qs", @search.query_string.length > 3, !@items.detect{|i| i.name.downcase == @search.query_string.downcase }
-   if @search.query_string.length > 3 && !@items.detect{|i| i.name.downcase == @search.query_string.downcase }
+   if @search.query_string.length > 2 && !@items.detect{|i| i.name.downcase == @search.query_string.downcase }
     @ask_man = Offer::AskMan.search({:query_string => @search.query_string})
     p "---askm", @ask_man
    end
