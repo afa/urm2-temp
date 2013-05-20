@@ -22,7 +22,7 @@ class MainController < ApplicationController
    @items = Offer::Store.search(params[:search]).process{|i| i.sort{|a, b| a.name == b.name ? (a.brend == b.brend ? (a.body_name == b.body_name ? (a.rohs == b.rohs ? (a.location_id <=> b.location_id) : a.rohs <=> b.rohs) : a.body_name <=> b.body_name) : a.brend <=> b.brend) : a.name <=> b.name}}
    chk_err(@items)
    #@items = Offer::Store.search(params[:search]).sort_by{|i| i.location_id }.sort_by{|i| i.rohs }.sort_by{|i| i.body_name }.sort_by{|i| i.brend_name }.sort_by{|i| i.name}
-   p "---ask-qs", @items.map(&:name).map(&:downcase)
+   p "---ask-qs", @search.query_string.length > 3, !@items.detect{|i| i.name.downcase == @search.query_string.downcase }
    if @search.query_string.length > 3 && !@items.detect{|i| i.name.downcase == @search.query_string.downcase }
     @ask_man = Offer::AskMan.search({:query_string => @search.query_string})
     p "---askm", @ask_man
