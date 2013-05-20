@@ -5,9 +5,10 @@
  %input.analog-code{:type => "hidden", :value => analog_line.code, :name => "analog[#{offer_code}][code]", :id => "code_#{offer_code}"}
  %input.analog-cart{:type => "hidden", :value => analog_line.cart_id, :name => "analog[#{offer_code}][cart]"}
 
- %td.text-right.icons{:class => "border-l"}
+ %td.icons{:class => "border-l"}
   .icon
-   %span.bold{:title => analog_line.analog_description }= analog_line.analog_type
+  .icon
+   %span.pp.bold{:title => analog_line.analog_description }= analog_line.analog_type
  %td.text-left{:class => "name"}
   %a{:href => "#"}= analog_line.name
  %td.text-left{:class => "producer"}= analog_line.brend
