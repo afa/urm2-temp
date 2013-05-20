@@ -67,8 +67,8 @@ class MainController < ApplicationController
    @app_list = Axapta.application_area_list
    chk_err(@app_list)
    @stores = @carts.map(&:location_link).uniq.compact
-   @errors << {:info => t("errors.search.empty")} if @items.empty?
-   @errors << {:info => t("errors.search.ambiq")} if @items.ambiq
+   @errors << {:warn => t("errors.search.empty")} if @items.empty?
+   @errors << {:warn => t("errors.search.ambiq")} if @items.ambiq
    respond_with do |format|
     format.json do
      crt = render_to_string(:partial => "carts/cart_table.html.haml", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores})
