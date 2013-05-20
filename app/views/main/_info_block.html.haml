@@ -24,9 +24,10 @@
      %dl
       %dt Количество в упаковке:
       %dd #{info_block.qty_in_pack} штук
-     %dl
-      %dt Описание:
-      %dd.italic= info_block.description
+     - unless info_block.description.blank?
+      %dl
+       %dt Описание:
+       %dd.italic= info_block.description
      %dl
       %dt Сегмент продукции:
       %dd= info_block.segment_rus
