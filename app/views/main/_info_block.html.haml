@@ -55,7 +55,7 @@
            %td{:style => "border-bottom: 0;"}= s.date
            %td{:style => "border-bottom: 0;"}= k
     %td{:style => "border-bottom: 0;"}
-     - unless prices.count2.to_i + prices.count3.to_i + prices.count4.to_i + prices.price1 < 0.0001
+     - unless prices.count2.to_i + prices.count3.to_i + prices.count4.to_i + prices.price1.to_f < 0.0001
       %table
        %tr
         %th{:colspan => 7}= t(:end_user_price)
