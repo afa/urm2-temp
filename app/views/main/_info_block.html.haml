@@ -1,7 +1,6 @@
 - prices = info_block.delete_field(:prices)
-- prc = prices[@location]
 - dates = info_block.delete_field(:dates)
-- p "---dlvp", dates
+- p "---dlvp", dates[@location]
 -# - keys = info_block.marshal_dump.inject({}){|r, (k, v)| (not (v.blank? || v.to_s == '0')) ? r.merge(k => v) : r }.keys
 -# - cnt = (keys.size/2.0).ceil
 -# %tr.sub-row-block{:class => "info_item_#{after}"}
@@ -45,7 +44,7 @@
        #{info_block.volume} мм
        %sup 3
     %td{:style => "border-bottom: 0;"}
-     - unless dates.empty?
+     - unless dates.empty? || dates[@location].empty?
       %table
        %tr
         %th{:colspan => 3}= t(:del_prognoz)
