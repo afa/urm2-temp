@@ -439,7 +439,7 @@ class Axapta
     res, err = AxaptaRequest.send(method, *args)
     
     its = items && res ? res[items] : res
-    AxaptaResults.new(its || [], {:ambiq => res["ambiguous_query"]}.merge(parse_err(err)))
+    AxaptaResults.new(its || [], {:ambiq => res.try(:[], "ambiguous_query")}.merge(parse_err(err)))
    rescue Exception => e
     parse_exc(e.message, e.class.name)
     AxaptaResults.new([], {:type => AxaptaState::INVALID, :error => e.class.name, :message => "#{get_last_exc[:type]}:#{get_last_exc[:message]}"})
