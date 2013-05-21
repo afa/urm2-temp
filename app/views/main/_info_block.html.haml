@@ -43,7 +43,7 @@
        #{info_block.volume} мм
        %sup 3
     %td{:style => "border-bottom: 0;"}
-     - unless dates.blank?
+     - unless dates.empty?
       %table
        %tr
         %th{:colspan => 3}= t(:del_prognoz)
@@ -55,7 +55,7 @@
            %td{:style => "border-bottom: 0;"}= s.date
            %td{:style => "border-bottom: 0;"}= k
     %td{:style => "border-bottom: 0;"}
-     - unless prices.blank?
+     - unless prices.count2.to_i + prices.count3.to_i + prices.count4.to_i + prices.price1 < 0.0001
       %table
        %tr
         %th{:colspan => 7}= t(:end_user_price)
