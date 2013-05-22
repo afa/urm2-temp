@@ -92,11 +92,11 @@ class User < ActiveRecord::Base
     types.map do |t|
      [
       t["customer_delivery_type_id"],
-      [
+      t["external"].to_i == 1 ? [
        t["delivery_type"],
-       dels.addresses.detect(Hash.new){|x| x["address_id"] == t["address"]["address_id"] }["address_full"],
+        dels.addresses.detect(Hash.new){|x| x["address_id"] == t["address"]["address_id"] }["address_full"],
        dels.addresses.detect(Hash.new){|x| x["address_id"] == t["address"]["address_id"] }["contact"]
-      ].join(' '),
+      ].join(' ') : t["area_name"],
       t["location_id"]
      ]
     end
