@@ -22,7 +22,7 @@
     - if @carts.select{|c| c.location_link == store }.detect{|c| c.pick }
      .cbPick
       = render :partial => "main/pick_options.html.haml", :locals => {:opts => {:loc => store}}
-  - if @carts.detect{|c| c.is_a?(CartRequest) }
+  - if @carts.detect{|c| c.is_a?(CartRequest) || c.is_a?(CartAskMan) }
    .creatingBlock
     %h3 Запрос
     .cbComment
