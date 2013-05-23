@@ -232,7 +232,7 @@ function cartsHandleAllToOrder(){
  if ($("#cart_store input.radio.order:not(:checked)").length > 0){
   $("#cart_store input.radio.order:not(:checked)").each(function(idx, item){
    var p = $(item).parents("tr");
-   $("input.radio.pick:checked", p).add("input.radio.reserve:checked", p).prop("checked", true);
+   $("input.radio.order:not(:checked)", p).prop("checked", true);
   });
   cartsSaveCart();
  }
@@ -244,7 +244,7 @@ function cartsHandleAllToReserve(){
  if($("#cart_store input.radio.reserve:not(:checked)").length > 0){
   $("#cart_store input.radio.reserve:not(:checked)").each(function(idx, item){
    var p = $(item).parents("tr");
-   $("input.radio.order:checked", p).add("input.radio.pick:checked", p).prop("checked", true);
+   $("input.radio.reserve:not(:checked)", p).prop("checked", true);
   });
   cartsSaveCart();
  }
@@ -256,7 +256,7 @@ function cartsHandleAllToPick(){
  if($("#cart_store input.radio.pick:not(:checked)").length > 0){
   $("#cart_store input.radio.pick:not(:checked)").each(function(idx, item){
    var p = $(item).parents("tr");
-   $("input.radio.order:checked", p).add("input.radio.reserve:checked", p).prop("checked", true);
+   $("input.radio.pick:not(:checked)", p).prop("checked", true);
   });
   cartsSaveCart();
  }
