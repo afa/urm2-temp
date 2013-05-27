@@ -1,5 +1,4 @@
 - stores.each do |store|
- - p "---crtcls", cart.map{|i| i.class.name }
  - if cart.detect{|i| (not (i.is_a?(CartRequest) || i.is_a?(CartWorld))) && i.location_link == store }
   %tr
    %td{:colspan => 16}= store
@@ -11,5 +10,5 @@
 - if cart.detect{|i| i.is_a?(CartRequest) || i.is_a?(CartAskMan)}
  %tr
   %td{:colspan => 16}= t :requests
- = render :partial => "carts/cart_line.html.haml", :collection => cart.select{|i| i.is_a?(CartRequest) || i.is_a?(CartAskMan)}, :locals => {:app_list => app_list}
+ = render :partial => "carts/cart_line.html.haml", :collection => cart.select{|i| i.is_a?(CartRequest) || i.is_a?(CartAskMan)}, :locals => {:app_list => app_list, :opts => {:need_user_price => (defined?(opts) ? opts[:need_user_price] : false)}}
 
