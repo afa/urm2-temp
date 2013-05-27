@@ -1,3 +1,4 @@
+- need_price = defined?(opts) ? opts[:need_user_price] : false
 %tr{:id => "cart_str_#{cart_line.id.to_s}", :class => [cart_line.is_a?(CartWorld) ? "world" : nil, cart_line.is_a?(CartStore) ? "store" : nil, cart_line.is_a?(CartRequest) ? "request" : nil]}
  - if cart_line.is_a?(CartWorld)
   %td &nbsp;
@@ -20,9 +21,10 @@
  %td.text-left= cart_line.prognosis
  %td.text-right= cart_line.amount
  %td.text-right= @usd_decor.decore(cart_line.current_price)
- %td.price-user
-  - if cart_line.is_a?(CartRequest)
-   %input{:type => :text, :size => "9", :value => cart_line.user_price, :id => "cart_item_#{cart_line.id}_user_price", :name => "cart_item[#{cart_line.id}][user_price]"}
+ - if need_price
+  %td.price-user
+   - if cart_line.is_a?(CartRequest)
+    %input{:type => :text, :size => "9", :value => cart_line.user_price, :id => "cart_item_#{cart_line.id}_user_price", :name => "cart_item[#{cart_line.id}][user_price]"}
  %td{:class => [@mandatory ? nil : "disabled"]}
   - if cart_line.application_area_mandatory?
    %select{:id => "cart_item_#{cart_line.id}_application_area_id", :name => "cart_item[#{cart_line.id}][application_area_id]", :style => "max-width: 200px;"}
