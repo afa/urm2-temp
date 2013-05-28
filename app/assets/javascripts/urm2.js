@@ -171,7 +171,11 @@ function onSelectSendForm(obj){
 }
 
 function runAllowOrder(){
- //buttonDisable('#allow-order .button');
+ if($("#cart_store table.table-style tr:has(td)").length == 0){
+  $('#allow-order .button').hide();
+ } else{
+  $('#allow-order .button').show();
+ }
  $('#allow-order .button').click(function(){
   $('#order').show();
   makeAjaxCall("/orders/new.json",
