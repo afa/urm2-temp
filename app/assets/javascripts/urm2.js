@@ -178,6 +178,7 @@ function runAllowOrder(){
  }
  $('#allow-order .button').click(function(){
   $('#order').show();
+  disableButton("#allow-order .button");
   makeAjaxCall("/orders/new.json",
    function(data){
     renderErrors(data.error);
@@ -201,6 +202,7 @@ function runAllowOrder(){
      buttonEnable('#allow-order .button');
      event.preventDefault();
     });
+    $('#allow-order .button').hide();
    },
    function(data){
    renderErrors([{error: 'Ошибка связи'}]);
