@@ -85,7 +85,6 @@ class CartItem < ActiveRecord::Base
    raise CartParamRequired unless hsh.try(:[], :cart)
    old = CartItem.find_by_id(hsh[:cart])
    raise CartParamRequired unless old
-   puts "ammount #{hsh[:amount]} => #{old.amount}"
    new_hsh = old.to_hash
    new_hsh[:amount] = hsh[:amount].to_i
    ntype = old.setup_for(new_hsh)

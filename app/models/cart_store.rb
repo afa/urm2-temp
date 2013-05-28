@@ -49,7 +49,7 @@ class CartStore < CartItem
    carts.reject!{|i| i.amount.nil? or i.amount == 0 }
    amnt = carts.first.try(:amount)
    cart = carts.first
-   p_hsh = hsh.merge(:processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :offer_params => search.raw_location, :amount => amnt, :comment => cart.try(:comment), :application_area_id => cart.try(:application_area_id), :application_area_mandatory => search.application_area_mandatory, :reserve => cart.try(:reserve), :user_price => cart.try(:user_price), :pick => cart.try(:pick), :requirement => cart.try(:requirement))
+   p_hsh = hsh.merge(:processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :offer_params => search.raw_location, :amount => amnt, :comment => cart.try(:comment), :application_area_id => cart.try(:application_area_id), :application_area_mandatory => search.application_area_mandatory, :reserve => cart.try(:reserve), :user_price => cart.try(:user_price), :pick => cart.try(:pick), :requirement => cart.try(:requirement)).merge(cart.nil? ? {:reserve => true, :pick => false} : {})
    item = self.setup_for(p_hsh).create(p_hsh)
    item.offer_params.merge!(search.raw_location)
    item.amount = amnt
