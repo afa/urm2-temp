@@ -171,7 +171,7 @@ function onSelectSendForm(obj){
 }
 
 function runAllowOrder(){
- buttonDisable('#allow-order .button');
+ //buttonDisable('#allow-order .button');
  $('#allow-order .button').click(function(){
   $('#order').show();
   makeAjaxCall("/orders/new.json",
