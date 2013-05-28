@@ -66,7 +66,7 @@
  .clear.block-padded &nbsp;
  .cart-table.padded
   .cart= render :partial => "carts/cart_table.html.haml", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores}
- #allow-order{:class => [@carts.empty? ? "disabled" : nil]}= render :partial => 'shared/button', :locals => {:title => t(:start_edit_order)}
+ #allow-order{:style => "display: #{@carts.empty? ? "none" : "inline-block"};"}= render :partial => 'shared/button', :locals => {:title => t(:start_edit_order)}
  #order
  .results
 
