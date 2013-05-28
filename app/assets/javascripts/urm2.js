@@ -196,9 +196,8 @@ function runAllowOrder(){
      $("#order").empty();
      $("#cart_store .icon").show();
      $("#cart_store textarea").add("#cart_store input").add("#cart_store select").removeAttr("disabled");
-     $('#allow-order').show();
      $("form:has(table.search-products)").show();
-     $('#allow-order').hide();
+     $('#allow-order .button').show();
      buttonEnable('#allow-order .button');
      event.preventDefault();
     });
