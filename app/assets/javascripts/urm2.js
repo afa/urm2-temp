@@ -178,6 +178,7 @@ function runAllowOrder(){
  }
  $('#allow-order .button').click(function(){
   $('#order').show();
+  $("#order_loading").show();
   buttonDisable("#allow-order .button");
   makeAjaxCall("/orders/new.json",
    function(data){
@@ -201,11 +202,13 @@ function runAllowOrder(){
      buttonEnable('#allow-order .button');
      event.preventDefault();
     });
+    $("#order_loading").hide();
     $('#allow-order .button').hide();
    },
    function(data){
    renderErrors([{error: 'Ошибка связи'}]);
     $("#order").hide();
+    $("#order_loading").hide();
     buttonEnable('#allow-order .button');
   });
   event.preventDefault();

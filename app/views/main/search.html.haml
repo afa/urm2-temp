@@ -67,6 +67,9 @@
  .cart-table.padded
   .cart= render :partial => "carts/cart_table.html.haml", :locals => {:cart => @carts, :app_list => @app_list, :stores => @stores}
  #allow-order{:style => "display: #{@carts.empty? ? "none" : "inline-block"};"}= render :partial => 'shared/button', :locals => {:title => t(:start_edit_order)}
+ %span#order_loading{:style => "display: none;"}
+  %img{:src => image_path('ajax-loader.gif')}
+  Переход к оформлению заказа..
  #order
  .results
 
