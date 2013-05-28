@@ -178,7 +178,7 @@ function runAllowOrder(){
  }
  $('#allow-order .button').click(function(){
   $('#order').show();
-  disableButton("#allow-order .button");
+  buttonDisable("#allow-order .button");
   makeAjaxCall("/orders/new.json",
    function(data){
     renderErrors(data.error);
