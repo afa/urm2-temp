@@ -2,11 +2,11 @@
  - if cart.detect{|i| (not (i.is_a?(CartRequest) || i.is_a?(CartWorld))) && i.location_link == store }
   %tr
    %td{:colspan => (defined?(opts) && opts[:need_user_price] ? 16 : 15)}= store
-  = render :partial => "carts/cart_line.html.haml", :collection => cart.select{|i| (not (i.is_a?(CartRequest) || i.is_a?(CartWorld)|| i.is_a?(CartAskMan))) && i.location_link == store }, :locals => {:app_list => app_list}
+  = render :partial => "carts/cart_line.html.haml", :collection => cart.select{|i| (not (i.is_a?(CartRequest) || i.is_a?(CartWorld)|| i.is_a?(CartAskMan))) && i.location_link == store }, :locals => {:app_list => app_list, :opts => {:need_user_price => (defined?(opts) ? opts[:need_user_price] : false)}}
 - if cart.detect{|i| i.is_a?(CartWorld)}
  %tr
   %td{:colspan => (defined?(opts) && opts[:need_user_price] ? 16 : 15)}= t :cart_world
- = render :partial => "carts/cart_line.html.haml", :collection => cart.select{|i| i.is_a?(CartWorld)}, :locals => {:app_list => app_list}
+ = render :partial => "carts/cart_line.html.haml", :collection => cart.select{|i| i.is_a?(CartWorld)}, :locals => {:app_list => app_list, :opts => {:need_user_price => (defined?(opts) ? opts[:need_user_price] : false)}}
 - if cart.detect{|i| i.is_a?(CartRequest) || i.is_a?(CartAskMan)}
  %tr
   %td{:colspan => (defined?(opts) && opts[:need_user_price] ? 16 : 15)}= t :requests
