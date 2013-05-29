@@ -47,7 +47,9 @@
      - unless dates.empty? || dates[@location].empty?
       %table
        %tr
-        %th{:colspan => 3}= t(:del_prognoz)
+        %th{:colspan => 3}
+         = image_tag("zil130m.gif")
+         = t(:del_prognoz)
        - dates.each do |k, r|
         - unless r.empty?
          - r.each do |s|
