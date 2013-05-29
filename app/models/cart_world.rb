@@ -52,7 +52,12 @@ class CartWorld < CartItem
   end
 
   def setup_for(hash)
-   return self.class
+   self.class.setup_for(hash)
+  end
+
+  def self.setup_for(hash)
+   return self if hash[:amount].to_i <= hash[:max_amount].to_i
+   CartAskMan
   end
 
   def pick
