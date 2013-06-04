@@ -1,4 +1,4 @@
-module WorldStore
+module Cart::WorldStore
   def self.included(base)
    base.extend(ClassMethods)
    base.instance_eval do
