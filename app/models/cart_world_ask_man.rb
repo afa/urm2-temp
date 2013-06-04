@@ -1,4 +1,4 @@
-class CartWorldAskMan
+class CartWorldAskMan < CartItem
   include Cart::WorldStore
 
   def self.setup_for(hash)
