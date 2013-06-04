@@ -42,8 +42,9 @@ class User < ActiveRecord::Base
   def make_order(dead_line, delivery, *args)
    #, :order_needed => params[:order_needed], :order_comment => params[:order_comment], :request_comment => params[:request_comment]
    ar = {}.merge(*args) rescue {}
-   reqs = cart_items.unprocessed.in_cart.all.partition{|c| c.is_a?(CartRequest) || c.is_a?(CartAskMan) }
+   reqs = cart_items.unprocessed.in_cart.all.partition{|c| c.is_a?(CartRequest) || c.is_a?(CartAskMan) || c.is_a?(CartWorldAskMan)}
    reqs[0].select{|c| c.is_a?(CartAskMan) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
+   reqs[0].select{|c| c.is_a?(CartWorldAskMan) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
    reqs[1].select{|c| c.is_a?(CartWorld) }.each{|c| c.location_link = User.current.current_account.invent_location_id }
    res = AxaptaResults.new.from_prepared([], {:type => AxaptaState::OK})
    p "---makeorder-ors", reqs
