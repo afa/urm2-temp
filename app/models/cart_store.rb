@@ -53,6 +53,7 @@ class CartStore < CartItem
    rem = amnt % mpq == 0 ? amnt : amnt + mpq - (amnt % mpq)
    p_hsh = hsh.merge(:processed => false, :max_amount => search.max_qty, :min_amount => search.min_qty, :offer_params => search.raw_location, :amount => rem, :comment => cart.try(:comment), :application_area_id => cart.try(:application_area_id), :application_area_mandatory => search.application_area_mandatory, :reserve => cart.try(:reserve), :user_price => cart.try(:user_price), :pick => cart.try(:pick), :requirement => cart.try(:requirement)).merge(cart.nil? ? {:reserve => true, :pick => false} : {}).merge(amnt == rem ? {:pre_mpq => amnt} : {})
    item = self.setup_for(p_hsh).create(p_hsh)
+   p "---pc-itmpqamnt", item, mpq, amnt
    item.offer_params.merge!(search.raw_location)
    #item.amount = amnt
    item.save!
