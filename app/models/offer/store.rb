@@ -15,6 +15,7 @@ class Offer::Store < Offer::Base
   def self.fabricate(arr)
    rez = AxaptaResults.new.from_prepared([], arr)
    arr.each do |hsh|
+    p "---st-fab-hsh", hsh
     hsh.locations.each do |loc|
      rez << self.new do |n|
       n.name = hsh.item_name
