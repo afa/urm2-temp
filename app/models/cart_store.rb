@@ -47,7 +47,7 @@ class CartStore < CartItem
    fnd = CartItem.unprocessed.where( hsh ).order("updated_at desc").all
    carts = CartItem.unprocessed.in_cart.where(hsh).order("updated_at desc").all
    carts.reject!{|i| i.amount.nil? or i.amount == 0 }
-   amnt = carts.first.try(:amount)
+   amnt = carts.first.try(:amount).to_i
    cart = carts.first
    mpq = search.mpq.to_i < 1 ? 1 : search.mpq
    rem = amnt % mpq == 0 ? amnt : amnt + mpq - (amnt % mpq)
