@@ -43,6 +43,7 @@ class CartStore < CartItem
   end
 
   def self.prepare_code(search) #on find, chg search hash to offers array
+   p "---pc-s", search
    hsh = {:user_id => User.current.id, :product_link => search.code, :product_name => search.name, :product_rohs => search.rohs, :product_brend => search.brend, :location_link => search.location_id}
    fnd = CartItem.unprocessed.where( hsh ).order("updated_at desc").all
    carts = CartItem.unprocessed.in_cart.where(hsh).order("updated_at desc").all
